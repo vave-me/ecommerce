@@ -1,0 +1,110 @@
+.locationSuggestion {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border-radius: var(--radius-md, 8px);
+    margin: 2px 8px;
+    background: transparent;
+}
+
+.locationSuggestion:hover {
+    background: rgba(79, 70, 229, 0.08);
+}
+
+/* Dark theme for location suggestion hover */
+@media (prefers-color-scheme: dark) {
+    .locationSuggestion:hover {
+        background: rgba(59, 130, 246, 0.15);
+    }
+}
+
+.locationSuggestion.active {
+    background: rgba(79, 70, 229, 0.1);
+}
+
+/* Dark theme for location suggestion active */
+@media (prefers-color-scheme: dark) {
+    .locationSuggestion.active {
+        background: rgba(59, 130, 246, 0.2);
+    }
+}
+
+.locationIcon {
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+/* Dark theme for location icon */
+@media (prefers-color-scheme: dark) {
+    .locationIcon {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.locationDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.mainText {
+    font-weight: 500;
+    color: #1f2937;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Dark theme for main text */
+@media (prefers-color-scheme: dark) {
+    .mainText {
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.subText {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+/* Dark theme for sub text */
+@media (prefers-color-scheme: dark) {
+    .subText {
+        color: var(--gray-300, #d1d5db);
+    }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .locationSuggestion {
+        padding: 14px 16px;
+        margin: 1px 4px;
+    }
+
+    .mainText {
+        font-size: 15px;
+    }
+
+    .subText {
+        font-size: 13px;
+    }
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+    .locationSuggestion:hover,
+    .locationSuggestion.active {
+        border: 2px solid SelectedItem;
+    }
+} 

@@ -1,0 +1,101 @@
+{
+  "pageTitle": "API Documentation",
+  "subtitle": "Build powerful integrations with our RESTful API",
+  
+  "apiPlayground": "API Playground",
+  "downloadPostman": "Postman Collection",
+  
+  "uptime": "API Uptime",
+  "responseTime": "Avg Response",
+  "currentVersion": "Current Version",
+  
+  "quickStart": "Quick Start",
+  "step1": "Get your API key",
+  "step1Desc": "Generate an API key from your dashboard",
+  "step2": "Make your first request",
+  "step2Desc": "Use curl or your favorite HTTP client",
+  "step3": "Explore endpoints",
+  "step3Desc": "Check out our comprehensive API reference",
+  
+  "overview": "Overview",
+  "authentication": "Authentication",
+  "products": "Products",
+  "orders": "Orders",
+  "users": "Users",
+  "analytics": "Analytics",
+  "webhooks": "Webhooks",
+  "sdks": "SDKs & Libraries",
+  
+  "resources": "Resources",
+  "videoTutorials": "Video Tutorials",
+  "apiGuide": "API Best Practices",
+  "changelog": "API Changelog",
+  "status": "API Status",
+  
+  "apiOverview": "API Overview",
+  "overviewIntro": "Our API provides programmatic access to read and write platform data. Build custom integrations, automate workflows, and create powerful applications.",
+  
+  "secure": "Secure by Design",
+  "secureDesc": "OAuth 2.0 authentication, encrypted connections, and granular permissions",
+  "performant": "High Performance",
+  "performantDesc": "Optimized for speed with response times under 50ms",
+  "scalable": "Built to Scale",
+  "scalableDesc": "Handle millions of requests with our global infrastructure",
+  
+  "baseUrl": "Base URL",
+  "rateLimits": "Rate Limits",
+  "endpoint": "Endpoint",
+  "limit": "Limit",
+  "allEndpoints": "All endpoints",
+  "createEndpoints": "Create endpoints",
+  "analyticsEndpoints": "Analytics endpoints",
+  
+  "authenticationTitle": "Authentication",
+  "authIntro": "All API requests require authentication. We use API keys that you can generate from your dashboard.",
+  "usingApiKey": "Using your API key",
+  "apiKeyDesc": "Include your API key in the Authorization header:",
+  "securityNote": "Security Note",
+  "securityNoteDesc": "Keep your API keys secure. Never expose them in client-side code or public repositories.",
+  
+  "productsApi": "Products API",
+  "productsIntro": "Manage your product catalog programmatically. Create, update, and sync products across channels.",
+  
+  "listProductsDesc": "Retrieve a list of products",
+  "createProductDesc": "Create a new product",
+  "listOrdersDesc": "Retrieve a list of orders",
+  "updateOrderDesc": "Update order status",
+  
+  "parameters": "Parameters",
+  "name": "Name",
+  "type": "Type",
+  "description": "Description",
+  "example": "Example Request",
+  "response": "Example Response",
+  
+  "pageParam": "Page number (default: 1)",
+  "limitParam": "Items per page (default: 20, max: 100)",
+  "sortParam": "Sort by: created_at, price, name",
+  "categoryParam": "Filter by category ID",
+  "nameParam": "Product name",
+  "descParam": "Product description",
+  "priceParam": "Price in cents",
+  "stockParam": "Initial stock quantity",
+  "imagesParam": "Array of image URLs",
+  
+  "statusParam": "Filter by status: pending, processing, shipped, delivered",
+  "customerParam": "Filter by customer ID",
+  "dateFromParam": "Filter orders from date (ISO 8601)",
+  "dateToParam": "Filter orders to date (ISO 8601)",
+  "statusUpdateParam": "New order status",
+  "trackingParam": "Shipping tracking number",
+  "notesParam": "Internal notes",
+  
+  "sdksTitle": "SDKs & Libraries",
+  "sdksIntro": "Use our official SDKs to integrate faster with your favorite programming language.",
+  "viewDocs": "View Documentation",
+  
+  "ctaTitle": "Ready to Build?",
+  "ctaDesc": "Get your API key and start building amazing integrations today",
+  "getApiKey": "Get API Key",
+  "contactSupport": "Developer Support"
+}

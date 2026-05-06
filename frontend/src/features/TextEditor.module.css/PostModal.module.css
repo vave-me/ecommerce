@@ -1,0 +1,849 @@
+/* CreatePostModal.module.css */
+
+/* Keyframe for fade down animation */
+@keyframes fadeDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Overlay that darkens the background */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Modal container */
+.modalWrapper {
+    width: 100%;
+    max-width: 860px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    animation: fadeDown 0.35s ease-out;
+}
+
+/* Header */
+.modalHeader {
+    padding: 12px 20px;
+    border-bottom: 2px solid #e0e0e0;
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Title */
+.modalTitle {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Close Button */
+.closeButton {
+    background: transparent;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: transform 0.2s;
+}
+
+.closeButton:hover {
+    transform: rotate(90deg);
+}
+
+.closeButton img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Steps container */
+.stepsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+/* Single step circle - default (inactive) */
+.singleStep {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #ccc; /* inactive color */
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Active step circle */
+.singleStepActive {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #0061bb; /* active color */
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Line between steps */
+.stepLine {
+    width: 60px;
+    height: 2px;
+    background-color: #ddd;
+}
+
+/* Main content area */
+.contentArea {
+    padding: 24px;
+    flex: 1;
+}
+
+/* Error box */
+.errorBox {
+    background-color: #ffe6e6;
+    color: #c0392b;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+/* Step section wrapper */
+.stepBox {
+    background: #fff;
+    padding: 24px;
+    border-radius: 6px;
+    border: 1px solid #f2f2f2;
+}
+
+/* Step heading */
+.stepHeading {
+    margin-top: 0;
+    margin-bottom: 6px;
+    font-size: 18px;
+    color: #444;
+}
+
+/* Instructions text */
+.instruction {
+    margin-top: 0;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+/* Form styling */
+.styledForm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Row of form inputs */
+.formRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+/* Group label + input inside each row */
+.formGroup {
+    flex: 1;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup span {
+    color: #e74c3c; /* asterisk color */
+    margin-left: 4px;
+}
+
+/* Labels */
+.label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+/* Inputs */
+.textInput,
+.descriptionArea {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.textInput:focus,
+.descriptionArea:focus {
+    border-color: #0061bb;
+    outline: none;
+    background-color: #f0f8ff;
+}
+
+/* Textarea */
+.descriptionArea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* Button container */
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+/* Primary action button */
+.actionButton {
+    background: #0061bb;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.actionButton:hover {
+    background: #004c92;
+}
+
+.actionButton:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Tabs container */
+.toggleTabs {
+    display: flex;
+    margin-bottom: 16px;
+    border-bottom: 2px solid #f2f2f2;
+}
+
+/* Tab button */
+.tabButton {
+    background: #f7f7f7;
+    color: #666;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, border-bottom 0.2s;
+    border-bottom: none;
+}
+
+.tabButton:hover {
+    background: #f0f0f0;
+}
+
+/* Active tab button styles */
+.tabButtonActive {
+    background: #fff !important;
+    color: #0061bb !important;
+    border-bottom: 3px solid #0061bb;
+}
+
+/* Image grid */
+.imageGrid {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 12px;
+}
+
+/* Single image preview */
+.imagePreview {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    width: 100%;
+    height: 100px;
+}
+
+.imagePreview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Video preview */
+.videoPreview {
+    margin-top: 16px;
+    width: 320px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.videoPreview video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Placeholder (dashed area) */
+.placeholder {
+    padding: 16px;
+    background-color: #fafafa;
+    border: 2px dashed #ccc;
+    border-radius: 6px;
+    text-align: center;
+    color: #888;
+}
+/* Add these styles to your PostModal.module.css file */
+
+/* Rich Text Editor container */
+.editorContainer {
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+/* Style for the Quill editor to match your UI */
+.editorContainer :global(.quill) {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+}
+
+/* Style the toolbar */
+.editorContainer :global(.ql-toolbar) {
+    border: 1px solid #ccc;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Style the editor area */
+.editorContainer :global(.ql-container) {
+    border: 1px solid #ccc;
+    border-top: none;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background-color: #fff;
+    font-size: 14px;
+    flex-grow: 1;
+}
+
+/* Style when editor is focused */
+.editorContainer :global(.ql-container.ql-focus) {
+    border-color: #0061bb;
+    background-color: #f0f8ff;
+}
+
+/* Style for the editor content area */
+.editorContainer :global(.ql-editor) {
+    min-height: 120px;
+}
+
+/* Style for placeholder text */
+.editorContainer :global(.ql-editor.ql-blank::before) {
+    color: #aaa;
+    font-style: italic;
+}
+
+/* Custom toolbar button colors to match your UI */
+.editorContainer :global(.ql-snow .ql-stroke) {
+    stroke: #555;
+}
+
+.editorContainer :global(.ql-snow .ql-fill) {
+    fill: #555;
+}
+
+.editorContainer :global(.ql-snow .ql-picker) {
+    color: #555;
+}
+
+/* Active state for toolbar buttons */
+.editorContainer :global(.ql-snow .ql-active .ql-stroke) {
+    stroke: #0061bb;
+}
+
+.editorContainer :global(.ql-snow .ql-active .ql-fill) {
+    fill: #0061bb;
+}
+
+.editorContainer :global(.ql-snow .ql-active) {
+    color: #0061bb;
+}
+
+/* Add to your PostModal.module.css or create a new TextEditor.module.css file */
+
+.rich-text-editor {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+
+.menu-bar {
+    padding: 8px 10px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.menu-bar button {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #555;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 4px 8px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.menu-bar button:hover {
+    background-color: #f0f0f0;
+}
+
+.menu-bar button.is-active {
+    background-color: #0061bb;
+    border-color: #0061bb;
+    color: white;
+}
+
+.ProseMirror {
+    padding: 12px 15px;
+    min-height: 150px;
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: white;
+    outline: none;
+}
+
+.ProseMirror p {
+    margin: 0 0 0.8em 0;
+}
+
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3 {
+    margin: 1em 0 0.5em;
+    font-weight: 600;
+}
+
+.ProseMirror h1 {
+    font-size: 1.5em;
+}
+
+.ProseMirror h2 {
+    font-size: 1.3em;
+}
+
+.ProseMirror h3 {
+    font-size: 1.1em;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+    padding-left: 1.5em;
+    margin: 0.5em 0;
+}
+
+.ProseMirror blockquote {
+    border-left: 3px solid #0061bb;
+    padding-left: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    font-style: italic;
+    color: #666;
+}
+
+.ProseMirror a {
+    color: #0061bb;
+    text-decoration: underline;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+    color: #aaa;
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+}
+
+/* =================================================================
+   DARK THEME SUPPORT
+   ================================================================= */
+
+@media (prefers-color-scheme: dark) {
+    /* Modal Structure */
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .modalWrapper {
+        background-color: #1f2937;
+        border-color: #4b5563;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    .modalHeader {
+        background-color: #374151;
+        border-bottom-color: #4b5563;
+    }
+
+    .modalTitle {
+        color: #f3f4f6;
+    }
+
+    .closeButton {
+        color: #9ca3af;
+    }
+
+    .closeButton:hover {
+        color: #f3f4f6;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Steps Container */
+    .stepsContainer {
+        background-color: #374151;
+        border-right-color: #4b5563;
+    }
+
+    .singleStep {
+        background-color: #4b5563;
+        color: #d1d5db;
+    }
+
+    .singleStepActive {
+        background-color: #60a5fa;
+        color: #1f2937;
+    }
+
+    .stepLine {
+        background-color: #6b7280;
+    }
+
+    /* Content Area */
+    .contentArea {
+        background-color: #1f2937;
+    }
+
+    .errorBox {
+        background-color: rgba(239, 68, 68, 0.1);
+        border-color: rgba(239, 68, 68, 0.3);
+        color: #ef4444;
+    }
+
+    .stepBox {
+        background-color: #1f2937;
+    }
+
+    .stepHeading {
+        color: #f3f4f6;
+    }
+
+    .instruction {
+        color: #d1d5db;
+    }
+
+    /* Form Elements */
+    .formGroup span {
+        color: #d1d5db;
+    }
+
+    .label {
+        color: #f3f4f6;
+    }
+
+    .textInput,
+    .descriptionArea {
+        background-color: #374151;
+        border-color: #4b5563;
+        color: #f3f4f6;
+    }
+
+    .textInput:focus,
+    .descriptionArea:focus {
+        border-color: #60a5fa;
+        background-color: #4b5563;
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+    }
+
+    .textInput::placeholder,
+    .descriptionArea::placeholder {
+        color: #9ca3af;
+    }
+
+    /* Buttons */
+    .actionButton {
+        background-color: #60a5fa;
+        color: #1f2937;
+        box-shadow: 0 2px 4px rgba(96, 165, 250, 0.3);
+    }
+
+    .actionButton:hover {
+        background-color: #3b82f6;
+        box-shadow: 0 4px 8px rgba(96, 165, 250, 0.4);
+    }
+
+    .actionButton:disabled {
+        background-color: #6b7280;
+        color: #9ca3af;
+    }
+
+    /* Toggle Tabs */
+    .toggleTabs {
+        background-color: #374151;
+        border-color: #4b5563;
+    }
+
+    .tabButton {
+        background-color: #4b5563;
+        color: #d1d5db;
+        border-color: #6b7280;
+    }
+
+    .tabButton:hover {
+        background-color: #6b7280;
+        color: #f3f4f6;
+    }
+
+    .tabButtonActive {
+        background-color: #60a5fa;
+        color: #1f2937;
+        border-color: #60a5fa;
+    }
+
+    /* Image Grid */
+    .imagePreview {
+        border-color: #4b5563;
+        background-color: #374151;
+    }
+
+    .imagePreview:hover {
+        border-color: #60a5fa;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Video Preview */
+    .videoPreview {
+        border-color: #4b5563;
+        background-color: #374151;
+    }
+
+    /* Placeholder */
+    .placeholder {
+        background-color: #374151;
+        border-color: #6b7280;
+        color: #9ca3af;
+    }
+
+    /* Rich Text Editor */
+    .editorContainer :global(.quill) {
+        background-color: #1f2937;
+    }
+
+    .editorContainer :global(.ql-toolbar) {
+        background-color: #374151;
+        border-color: #4b5563;
+    }
+
+    .editorContainer :global(.ql-container) {
+        background-color: #1f2937;
+        border-color: #4b5563;
+        color: #f3f4f6;
+    }
+
+    .editorContainer :global(.ql-container.ql-focus) {
+        border-color: #60a5fa;
+        background-color: #374151;
+    }
+
+    .editorContainer :global(.ql-editor.ql-blank::before) {
+        color: #6b7280;
+    }
+
+    .editorContainer :global(.ql-snow .ql-stroke) {
+        stroke: #d1d5db;
+    }
+
+    .editorContainer :global(.ql-snow .ql-fill) {
+        fill: #d1d5db;
+    }
+
+    .editorContainer :global(.ql-snow .ql-picker) {
+        color: #d1d5db;
+    }
+
+    .editorContainer :global(.ql-snow .ql-active .ql-stroke) {
+        stroke: #60a5fa;
+    }
+
+    .editorContainer :global(.ql-snow .ql-active .ql-fill) {
+        fill: #60a5fa;
+    }
+
+    .editorContainer :global(.ql-snow .ql-active) {
+        color: #60a5fa;
+    }
+
+    /* TipTap Rich Text Editor */
+    .rich-text-editor {
+        border-color: #4b5563;
+    }
+
+    .menu-bar {
+        background-color: #374151;
+        border-bottom-color: #4b5563;
+    }
+
+    .menu-bar button {
+        background-color: #4b5563;
+        border-color: #6b7280;
+        color: #d1d5db;
+    }
+
+    .menu-bar button:hover {
+        background-color: rgba(96, 165, 250, 0.2);
+        border-color: #60a5fa;
+        color: #60a5fa;
+    }
+
+    .menu-bar button.is-active {
+        background-color: #60a5fa;
+        border-color: #60a5fa;
+        color: #1f2937;
+    }
+
+    .ProseMirror {
+        background-color: #1f2937;
+        color: #f3f4f6;
+    }
+
+    .ProseMirror h1,
+    .ProseMirror h2,
+    .ProseMirror h3 {
+        color: #f3f4f6;
+    }
+
+    .ProseMirror blockquote {
+        border-left-color: #60a5fa;
+        color: #d1d5db;
+        background-color: rgba(96, 165, 250, 0.1);
+    }
+
+    .ProseMirror a {
+        color: #60a5fa;
+    }
+
+    .ProseMirror a:hover {
+        color: #93c5fd;
+    }
+
+    .ProseMirror p.is-editor-empty:first-child::before {
+        color: #6b7280;
+    }
+}
+
+/* =================================================================
+   HIGH CONTRAST MODE FOR DARK THEME
+   ================================================================= */
+
+@media (prefers-color-scheme: dark) and (prefers-contrast: high) {
+    .modalWrapper {
+        border-width: 2px;
+        border-color: #6b7280;
+    }
+
+    .textInput,
+    .descriptionArea {
+        border-width: 2px;
+    }
+
+    .textInput:focus,
+    .descriptionArea:focus {
+        border-width: 3px;
+    }
+
+    .actionButton {
+        border: 2px solid #60a5fa;
+    }
+
+    .tabButton {
+        border-width: 2px;
+    }
+
+    .rich-text-editor {
+        border-width: 2px;
+    }
+
+    .editorContainer :global(.ql-toolbar),
+    .editorContainer :global(.ql-container) {
+        border-width: 2px;
+    }
+
+    .imagePreview,
+    .videoPreview {
+        border-width: 2px;
+    }
+
+    .placeholder {
+        border-width: 3px;
+    }
+}
+
+/* =================================================================
+   REDUCED MOTION SUPPORT FOR DARK THEME
+   ================================================================= */
+
+@media (prefers-color-scheme: dark) and (prefers-reduced-motion: reduce) {
+    .modalWrapper,
+    .closeButton,
+    .actionButton,
+    .tabButton,
+    .textInput,
+    .descriptionArea,
+    .imagePreview {
+        transition: none;
+    }
+
+    .overlay {
+        animation: none;
+    }
+
+    .modalWrapper {
+        animation: none;
+    }
+}

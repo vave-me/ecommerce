@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+package streamspb;
+
+option go_package = "middleman/streams/streamspb";
+
+import "google/protobuf/timestamp.proto";
+
+// Stream Events
+message StreamCreated {
+  string stream_id = 1;
+  string title = 2;
+  string description = 3;
+  string stream_type = 4;
+  string stream_url = 5;
+  string access_type = 6;
+  google.protobuf.Timestamp created_at = 7;
+}
+
+message StreamPublished {
+  string stream_id = 1;
+  google.protobuf.Timestamp published_at = 2;
+}
+
+message StreamArchived {
+  string stream_id = 1;
+  google.protobuf.Timestamp archived_at = 2;
+}
+
+message UserAccessGranted {
+  string stream_id = 1;
+  string user_id = 2;
+  string access_type = 3;
+  google.protobuf.Timestamp granted_at = 4;
+  google.protobuf.Timestamp expires_at = 5;
+}
+
+message UserAccessRevoked {
+  string stream_id = 1;
+  string user_id = 2;
+  google.protobuf.Timestamp revoked_at = 3;
+}
+
+message WatchProgressUpdated {
+  string stream_id = 1;
+  string user_id = 2;
+  int64 progress = 3;
+  bool completed = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+message StreamViewed {
+  string stream_id = 1;
+  string user_id = 2;
+  google.protobuf.Timestamp viewed_at = 3;
+}
+
+message StreamRated {
+  string stream_id = 1;
+  string user_id = 2;
+  int32 rating = 3;
+  bool is_like = 4;
+  google.protobuf.Timestamp rated_at = 5;
+}
+
+// Series Events
+message SeriesCreated {
+  string series_id = 1;
+  string title = 2;
+  string description = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
+
+message SeasonAdded {
+  string series_id = 1;
+  string season_id = 2;
+  int32 season_number = 3;
+  string title = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+message EpisodeAddedToSeason {
+  string series_id = 1;
+  string season_id = 2;
+  string episode_id = 3;
+  int32 episode_number = 4;
+  string stream_id = 5;
+  google.protobuf.Timestamp added_at = 6;
+}

@@ -1,0 +1,1670 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Newsletter Management API",
+    "description": "API for creating and managing newsletters, subscriptions, editions, and templates.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "NewslettersService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/editions/{editionId}/stats": {
+      "get": {
+        "summary": "Get edition statistics",
+        "operationId": "getEditionStats",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbGetEditionStatsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Analytics"
+        ]
+      }
+    },
+    "/api/editions/{id}": {
+      "get": {
+        "summary": "Get edition details",
+        "operationId": "getEdition",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbGetEditionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Edition"
+        ]
+      },
+      "patch": {
+        "summary": "Update edition content",
+        "operationId": "updateEdition",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbUpdateEditionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewslettersServiceUpdateEditionBody"
+            }
+          }
+        ],
+        "tags": [
+          "Edition"
+        ]
+      }
+    },
+    "/api/editions/{id}/preview": {
+      "post": {
+        "summary": "Preview edition before sending",
+        "operationId": "previewEdition",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbPreviewEditionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewslettersServicePreviewEditionBody"
+            }
+          }
+        ],
+        "tags": [
+          "Edition"
+        ]
+      }
+    },
+    "/api/editions/{id}/schedule": {
+      "post": {
+        "summary": "Schedule edition for sending",
+        "operationId": "scheduleEdition",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbScheduleEditionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewslettersServiceScheduleEditionBody"
+            }
+          }
+        ],
+        "tags": [
+          "Edition"
+        ]
+      }
+    },
+    "/api/editions/{id}/send": {
+      "post": {
+        "summary": "Send edition to subscribers",
+        "operationId": "sendEdition",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbSendEditionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewslettersServiceSendEditionBody"
+            }
+          }
+        ],
+        "tags": [
+          "Edition"
+        ]
+      }
+    },
+    "/api/newsletters": {
+      "get": {
+        "summary": "List all newsletters",
+        "operationId": "listNewsletters",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbListNewslettersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "Filter by owner",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "category",
+            "description": "Filter by category",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "activeOnly",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Newsletter"
+        ]
+      },
+      "post": {
+        "summary": "Create a new newsletter",
+        "operationId": "createNewsletter",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbCreateNewsletterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/newsletterspbCreateNewsletterRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Newsletter"
+        ]
+      }
+    },
+    "/api/newsletters/{id}": {
+      "get": {
+        "summary": "Get newsletter by ID",
+        "operationId": "getNewsletter",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbGetNewsletterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Newsletter"
+        ]
+      },
+      "delete": {
+        "summary": "Delete a newsletter",
+        "operationId": "deleteNewsletter",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Newsletter"
+        ]
+      },
+      "patch": {
+        "summary": "Update newsletter details",
+        "operationId": "updateNewsletter",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbUpdateNewsletterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewslettersServiceUpdateNewsletterBody"
+            }
+          }
+        ],
+        "tags": [
+          "Newsletter"
+        ]
+      }
+    },
+    "/api/newsletters/{newsletterId}/editions": {
+      "get": {
+        "summary": "List newsletter editions",
+        "operationId": "listEditions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbListEditionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "newsletterId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "description": "Filter by status",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Edition"
+        ]
+      },
+      "post": {
+        "summary": "Create a new edition",
+        "operationId": "createEdition",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbCreateEditionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "newsletterId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewslettersServiceCreateEditionBody"
+            }
+          }
+        ],
+        "tags": [
+          "Edition"
+        ]
+      }
+    },
+    "/api/newsletters/{newsletterId}/stats": {
+      "get": {
+        "summary": "Get newsletter statistics",
+        "operationId": "getNewsletterStats",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbGetNewsletterStatsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "newsletterId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "Analytics"
+        ]
+      }
+    },
+    "/api/subscriptions": {
+      "get": {
+        "summary": "List user subscriptions",
+        "operationId": "listSubscriptions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbListSubscriptionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "Subscriber",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "newsletterId",
+            "description": "Filter by newsletter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "description": "Filter by status",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Subscription"
+        ]
+      },
+      "post": {
+        "summary": "Subscribe to a newsletter",
+        "operationId": "subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbSubscribeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/newsletterspbSubscribeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Subscription"
+        ]
+      }
+    },
+    "/api/subscriptions/{id}": {
+      "get": {
+        "summary": "Get subscription details",
+        "operationId": "getSubscription",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbGetSubscriptionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Subscription"
+        ]
+      },
+      "patch": {
+        "summary": "Update subscription preferences",
+        "operationId": "updateSubscription",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbUpdateSubscriptionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewslettersServiceUpdateSubscriptionBody"
+            }
+          }
+        ],
+        "tags": [
+          "Subscription"
+        ]
+      }
+    },
+    "/api/subscriptions/{subscriptionId}": {
+      "delete": {
+        "summary": "Unsubscribe from a newsletter",
+        "operationId": "unsubscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reason",
+            "description": "Optional unsubscribe reason",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Subscription"
+        ]
+      }
+    },
+    "/api/templates": {
+      "get": {
+        "summary": "List available templates",
+        "operationId": "listTemplates",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbListTemplatesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "Filter by owner (empty for system templates)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "publicOnly",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Template"
+        ]
+      },
+      "post": {
+        "summary": "Create a new template",
+        "operationId": "createTemplate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbCreateTemplateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/newsletterspbCreateTemplateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Template"
+        ]
+      }
+    },
+    "/api/templates/{id}": {
+      "get": {
+        "summary": "Get template details",
+        "operationId": "getTemplate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbGetTemplateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Template"
+        ]
+      },
+      "delete": {
+        "summary": "Delete a template",
+        "operationId": "deleteTemplate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Template"
+        ]
+      },
+      "patch": {
+        "summary": "Update template content",
+        "operationId": "updateTemplate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/newsletterspbUpdateTemplateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewslettersServiceUpdateTemplateBody"
+            }
+          }
+        ],
+        "tags": [
+          "Template"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "NewslettersServiceCreateEditionBody": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "string"
+        },
+        "contentHtml": {
+          "type": "string"
+        },
+        "contentText": {
+          "type": "string"
+        },
+        "templateData": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "scheduledAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "Edition Management Requests/Responses"
+    },
+    "NewslettersServicePreviewEditionBody": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "title": "Send preview to this email"
+        }
+      }
+    },
+    "NewslettersServiceScheduleEditionBody": {
+      "type": "object",
+      "properties": {
+        "scheduledAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "NewslettersServiceSendEditionBody": {
+      "type": "object",
+      "properties": {
+        "testMode": {
+          "type": "boolean",
+          "title": "Send only to owner for testing"
+        }
+      }
+    },
+    "NewslettersServiceUpdateEditionBody": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "string"
+        },
+        "contentHtml": {
+          "type": "string"
+        },
+        "contentText": {
+          "type": "string"
+        },
+        "templateData": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "scheduledAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "NewslettersServiceUpdateNewsletterBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "frequency": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "templateId": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        }
+      }
+    },
+    "NewslettersServiceUpdateSubscriptionBody": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "preferences": {
+          "$ref": "#/definitions/newsletterspbSubscriptionPreferences"
+        }
+      }
+    },
+    "NewslettersServiceUpdateTemplateBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "htmlTemplate": {
+          "type": "string"
+        },
+        "textTemplate": {
+          "type": "string"
+        },
+        "variables": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "previewData": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "isPublic": {
+          "type": "boolean"
+        }
+      }
+    },
+    "newsletterspbCreateEditionResponse": {
+      "type": "object",
+      "properties": {
+        "edition": {
+          "$ref": "#/definitions/newsletterspbNewsletterEdition"
+        }
+      }
+    },
+    "newsletterspbCreateNewsletterRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "frequency": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "templateId": {
+          "type": "string"
+        }
+      },
+      "title": "Newsletter Management Requests/Responses"
+    },
+    "newsletterspbCreateNewsletterResponse": {
+      "type": "object",
+      "properties": {
+        "newsletter": {
+          "$ref": "#/definitions/newsletterspbNewsletter"
+        }
+      }
+    },
+    "newsletterspbCreateTemplateRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "htmlTemplate": {
+          "type": "string"
+        },
+        "textTemplate": {
+          "type": "string"
+        },
+        "variables": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "previewData": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "isPublic": {
+          "type": "boolean"
+        }
+      },
+      "title": "Template Management Requests/Responses"
+    },
+    "newsletterspbCreateTemplateResponse": {
+      "type": "object",
+      "properties": {
+        "template": {
+          "$ref": "#/definitions/newsletterspbNewsletterTemplate"
+        }
+      }
+    },
+    "newsletterspbGetEditionResponse": {
+      "type": "object",
+      "properties": {
+        "edition": {
+          "$ref": "#/definitions/newsletterspbNewsletterEdition"
+        }
+      }
+    },
+    "newsletterspbGetEditionStatsResponse": {
+      "type": "object",
+      "properties": {
+        "recipients": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "delivered": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "opened": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "clicked": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bounced": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "complaints": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "openRate": {
+          "type": "number",
+          "format": "float"
+        },
+        "clickRate": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "newsletterspbGetNewsletterResponse": {
+      "type": "object",
+      "properties": {
+        "newsletter": {
+          "$ref": "#/definitions/newsletterspbNewsletter"
+        }
+      }
+    },
+    "newsletterspbGetNewsletterStatsResponse": {
+      "type": "object",
+      "properties": {
+        "totalSubscribers": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "newSubscribers": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "unsubscribes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "editionsSent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "averageOpenRate": {
+          "type": "number",
+          "format": "float"
+        },
+        "averageClickRate": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "newsletterspbGetSubscriptionResponse": {
+      "type": "object",
+      "properties": {
+        "subscription": {
+          "$ref": "#/definitions/newsletterspbSubscription"
+        }
+      }
+    },
+    "newsletterspbGetTemplateResponse": {
+      "type": "object",
+      "properties": {
+        "template": {
+          "$ref": "#/definitions/newsletterspbNewsletterTemplate"
+        }
+      }
+    },
+    "newsletterspbListEditionsResponse": {
+      "type": "object",
+      "properties": {
+        "editions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/newsletterspbNewsletterEdition"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "newsletterspbListNewslettersResponse": {
+      "type": "object",
+      "properties": {
+        "newsletters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/newsletterspbNewsletter"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "newsletterspbListSubscriptionsResponse": {
+      "type": "object",
+      "properties": {
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/newsletterspbSubscription"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "newsletterspbListTemplatesResponse": {
+      "type": "object",
+      "properties": {
+        "templates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/newsletterspbNewsletterTemplate"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "newsletterspbNewsletter": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string",
+          "title": "Owner of the newsletter"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "frequency": {
+          "type": "string",
+          "title": "daily, weekly, monthly"
+        },
+        "category": {
+          "type": "string"
+        },
+        "templateId": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "subscriberCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Calculated field"
+        }
+      },
+      "title": "Newsletter represents a newsletter created by a user"
+    },
+    "newsletterspbNewsletterEdition": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "newsletterId": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "contentHtml": {
+          "type": "string"
+        },
+        "contentText": {
+          "type": "string"
+        },
+        "templateData": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "scheduledAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sentAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "title": "draft, scheduled, sending, sent"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "recipientCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Calculated field"
+        }
+      },
+      "title": "NewsletterEdition represents a single edition/issue of a newsletter"
+    },
+    "newsletterspbNewsletterTemplate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string",
+          "title": "NULL for system templates"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "htmlTemplate": {
+          "type": "string"
+        },
+        "textTemplate": {
+          "type": "string"
+        },
+        "variables": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "previewData": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "isPublic": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "NewsletterTemplate for reusable newsletter designs"
+    },
+    "newsletterspbPreviewEditionResponse": {
+      "type": "object",
+      "properties": {
+        "previewHtml": {
+          "type": "string"
+        },
+        "previewText": {
+          "type": "string"
+        }
+      }
+    },
+    "newsletterspbScheduleEditionResponse": {
+      "type": "object",
+      "properties": {
+        "edition": {
+          "$ref": "#/definitions/newsletterspbNewsletterEdition"
+        }
+      }
+    },
+    "newsletterspbSendEditionResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "recipientsQueued": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "newsletterspbSubscribeRequest": {
+      "type": "object",
+      "properties": {
+        "newsletterId": {
+          "type": "string"
+        },
+        "preferences": {
+          "$ref": "#/definitions/newsletterspbSubscriptionPreferences"
+        }
+      },
+      "title": "Subscription Management Requests/Responses"
+    },
+    "newsletterspbSubscribeResponse": {
+      "type": "object",
+      "properties": {
+        "subscription": {
+          "$ref": "#/definitions/newsletterspbSubscription"
+        }
+      }
+    },
+    "newsletterspbSubscription": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string",
+          "title": "Subscriber"
+        },
+        "newsletterId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "title": "active, paused, unsubscribed"
+        },
+        "preferences": {
+          "$ref": "#/definitions/newsletterspbSubscriptionPreferences"
+        },
+        "subscribedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "unsubscribedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "newsletter": {
+          "$ref": "#/definitions/newsletterspbNewsletter",
+          "title": "Populated in queries"
+        }
+      },
+      "title": "Subscription represents a user's subscription to a newsletter"
+    },
+    "newsletterspbSubscriptionPreferences": {
+      "type": "object",
+      "properties": {
+        "frequencyOverride": {
+          "type": "string",
+          "title": "Override newsletter frequency"
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Interested topics"
+        },
+        "format": {
+          "type": "string",
+          "title": "html, text, both"
+        }
+      },
+      "title": "SubscriptionPreferences for customizing subscription"
+    },
+    "newsletterspbUpdateEditionResponse": {
+      "type": "object",
+      "properties": {
+        "edition": {
+          "$ref": "#/definitions/newsletterspbNewsletterEdition"
+        }
+      }
+    },
+    "newsletterspbUpdateNewsletterResponse": {
+      "type": "object",
+      "properties": {
+        "newsletter": {
+          "$ref": "#/definitions/newsletterspbNewsletter"
+        }
+      }
+    },
+    "newsletterspbUpdateSubscriptionResponse": {
+      "type": "object",
+      "properties": {
+        "subscription": {
+          "$ref": "#/definitions/newsletterspbSubscription"
+        }
+      }
+    },
+    "newsletterspbUpdateTemplateResponse": {
+      "type": "object",
+      "properties": {
+        "template": {
+          "$ref": "#/definitions/newsletterspbNewsletterTemplate"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

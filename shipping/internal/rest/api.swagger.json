@@ -1,0 +1,1003 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Shipping Management",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "ShippingService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/shipping": {
+      "get": {
+        "operationId": "ShippingService_ListShipments",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/shippingpbListShipmentsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "productId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "carrierId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ShippingService"
+        ]
+      },
+      "post": {
+        "summary": "Create a new shipping",
+        "operationId": "createShipping",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/shippingpbCreateShippingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/shippingpbCreateShippingRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Shipping"
+        ]
+      }
+    },
+    "/api/shipping/rates": {
+      "post": {
+        "operationId": "ShippingService_GetRates",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/shippingpbGetRatesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/shippingpbGetRatesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ShippingService"
+        ]
+      }
+    },
+    "/api/shipping/track/{trackingNumber}": {
+      "get": {
+        "summary": "Track shipping",
+        "operationId": "trackShipping",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/shippingpbTrackShippingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "trackingNumber",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Shipping"
+        ]
+      }
+    },
+    "/api/shipping/{id}": {
+      "get": {
+        "summary": "Queries",
+        "operationId": "ShippingService_GetShipment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/shippingpbGetShipmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ShippingService"
+        ]
+      }
+    },
+    "/api/shipping/{id}/cancel": {
+      "post": {
+        "operationId": "ShippingService_CancelShipment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/shippingpbCancelShipmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShippingServiceCancelShipmentBody"
+            }
+          }
+        ],
+        "tags": [
+          "ShippingService"
+        ]
+      }
+    },
+    "/api/shipping/{id}/carrier": {
+      "patch": {
+        "operationId": "ShippingService_AssignCarrier",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/shippingpbAssignCarrierResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShippingServiceAssignCarrierBody"
+            }
+          }
+        ],
+        "tags": [
+          "ShippingService"
+        ]
+      }
+    },
+    "/api/shipping/{id}/delivered": {
+      "post": {
+        "operationId": "ShippingService_MarkShipmentAsDelivered",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/shippingpbMarkShipmentAsDeliveredResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShippingServiceMarkShipmentAsDeliveredBody"
+            }
+          }
+        ],
+        "tags": [
+          "ShippingService"
+        ]
+      }
+    },
+    "/api/shipping/{id}/history": {
+      "get": {
+        "operationId": "ShippingService_GetShipmentHistory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/shippingpbGetShipmentHistoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ShippingService"
+        ]
+      }
+    },
+    "/api/shipping/{id}/label": {
+      "get": {
+        "operationId": "ShippingService_GetLabel",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/shippingpbGetLabelResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "format",
+            "description": "pdf, png, zpl",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ShippingService"
+        ]
+      }
+    },
+    "/api/shipping/{id}/return": {
+      "post": {
+        "operationId": "ShippingService_ReturnShipment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/shippingpbReturnShipmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShippingServiceReturnShipmentBody"
+            }
+          }
+        ],
+        "tags": [
+          "ShippingService"
+        ]
+      }
+    },
+    "/api/shipping/{id}/schedule-pickup": {
+      "post": {
+        "operationId": "ShippingService_SchedulePickup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/shippingpbSchedulePickupResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShippingServiceSchedulePickupBody"
+            }
+          }
+        ],
+        "tags": [
+          "ShippingService"
+        ]
+      }
+    },
+    "/api/shipping/{id}/start": {
+      "post": {
+        "operationId": "ShippingService_StartShipment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/shippingpbStartShipmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShippingServiceStartShipmentBody"
+            }
+          }
+        ],
+        "tags": [
+          "ShippingService"
+        ]
+      }
+    },
+    "/api/shipping/{id}/status": {
+      "patch": {
+        "operationId": "ShippingService_UpdateShipmentStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/shippingpbUpdateShipmentStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShippingServiceUpdateShipmentStatusBody"
+            }
+          }
+        ],
+        "tags": [
+          "ShippingService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ShippingServiceAssignCarrierBody": {
+      "type": "object",
+      "properties": {
+        "carrierId": {
+          "type": "string"
+        },
+        "carrierName": {
+          "type": "string"
+        }
+      },
+      "title": "Assign Carrier"
+    },
+    "ShippingServiceCancelShipmentBody": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string"
+        }
+      },
+      "title": "Cancel Shipment"
+    },
+    "ShippingServiceMarkShipmentAsDeliveredBody": {
+      "type": "object",
+      "properties": {
+        "signedBy": {
+          "type": "string"
+        },
+        "deliveryTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "proofOfDeliveryUrl": {
+          "type": "string"
+        }
+      },
+      "title": "Mark as Delivered"
+    },
+    "ShippingServiceReturnShipmentBody": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string"
+        },
+        "returnTrackingNumber": {
+          "type": "string"
+        }
+      },
+      "title": "Return Shipment"
+    },
+    "ShippingServiceSchedulePickupBody": {
+      "type": "object",
+      "properties": {
+        "pickupTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "instructions": {
+          "type": "string"
+        }
+      },
+      "title": "Schedule Pickup"
+    },
+    "ShippingServiceStartShipmentBody": {
+      "type": "object",
+      "title": "Start Shipment"
+    },
+    "ShippingServiceUpdateShipmentStatusBody": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "title": "Update Shipment Status"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "shippingpbAssignCarrierResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "shippingpbCancelShipmentResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "shippingpbCreateShippingRequest": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string"
+        },
+        "orderId": {
+          "type": "string"
+        },
+        "basketId": {
+          "type": "string"
+        },
+        "trackingNumber": {
+          "type": "string"
+        },
+        "labelUrl": {
+          "type": "string"
+        },
+        "senderName": {
+          "type": "string"
+        },
+        "senderAddress": {
+          "type": "string"
+        },
+        "receiverName": {
+          "type": "string"
+        },
+        "receiverAddress": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "string"
+        },
+        "dimensions": {
+          "type": "string"
+        },
+        "serviceTypes": {
+          "type": "string"
+        }
+      }
+    },
+    "shippingpbCreateShippingResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "shippingpbGetLabelResponse": {
+      "type": "object",
+      "properties": {
+        "labelData": {
+          "type": "string",
+          "format": "byte"
+        },
+        "contentType": {
+          "type": "string"
+        }
+      }
+    },
+    "shippingpbGetRatesRequest": {
+      "type": "object",
+      "properties": {
+        "senderPostalCode": {
+          "type": "string"
+        },
+        "senderCountryCode": {
+          "type": "string"
+        },
+        "receiverPostalCode": {
+          "type": "string"
+        },
+        "receiverCountryCode": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "number",
+          "format": "float"
+        },
+        "length": {
+          "type": "number",
+          "format": "float"
+        },
+        "width": {
+          "type": "number",
+          "format": "float"
+        },
+        "height": {
+          "type": "number",
+          "format": "float"
+        },
+        "serviceType": {
+          "type": "string"
+        }
+      },
+      "title": "Get Rates"
+    },
+    "shippingpbGetRatesResponse": {
+      "type": "object",
+      "properties": {
+        "rates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/shippingpbRate"
+          }
+        }
+      }
+    },
+    "shippingpbGetShipmentHistoryResponse": {
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/shippingpbShipmentEvent"
+          }
+        }
+      }
+    },
+    "shippingpbGetShipmentResponse": {
+      "type": "object",
+      "properties": {
+        "shipping": {
+          "$ref": "#/definitions/shippingpbShipping"
+        }
+      }
+    },
+    "shippingpbListShipmentsResponse": {
+      "type": "object",
+      "properties": {
+        "shipments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/shippingpbShipping"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "shippingpbMarkShipmentAsDeliveredResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "shippingpbRate": {
+      "type": "object",
+      "properties": {
+        "serviceType": {
+          "type": "string"
+        },
+        "serviceName": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "float"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "estimatedDays": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "estimatedDelivery": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "shippingpbReturnShipmentResponse": {
+      "type": "object",
+      "properties": {
+        "returnShipmentId": {
+          "type": "string"
+        }
+      }
+    },
+    "shippingpbSchedulePickupResponse": {
+      "type": "object",
+      "properties": {
+        "pickupConfirmationNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "shippingpbShipmentEvent": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "shipmentId": {
+          "type": "string"
+        },
+        "eventType": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "Get Shipment History"
+    },
+    "shippingpbShipping": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "trackingNumber": {
+          "type": "string"
+        },
+        "labelUrl": {
+          "type": "string"
+        },
+        "senderName": {
+          "type": "string"
+        },
+        "senderAddress": {
+          "type": "string"
+        },
+        "receiverName": {
+          "type": "string"
+        },
+        "receiverAddress": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "string"
+        },
+        "dimensions": {
+          "type": "string"
+        },
+        "serviceType": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "carrierId": {
+          "type": "string"
+        },
+        "carrierName": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "pickupScheduledAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "deliveredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "cancelledAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "orderId": {
+          "type": "string"
+        },
+        "basketId": {
+          "type": "string"
+        }
+      }
+    },
+    "shippingpbStartShipmentResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "shippingpbTrackShippingResponse": {
+      "type": "object",
+      "properties": {
+        "shipping": {
+          "$ref": "#/definitions/shippingpbShipping"
+        }
+      }
+    },
+    "shippingpbUpdateShipmentStatusResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

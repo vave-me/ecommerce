@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nats-nodeport # Choose a descriptive name
+  namespace: messaging
+spec:
+  type: LoadBalancer
+  selector:
+    app: nats # Matches the label on your nats-0 pod
+  ports:
+    - name: client      # Standard NATS client port
+      port: 4222
+      targetPort: 4222  # Can target by number or name (from Pod spec)
+      protocol: TCP
+    - name: websocket   # NATS WebSocket port
+      port: 9222
+      targetPort: 9222
+      protocol: TCP
+    - name: monitoring # NATS monitoring port
+      port: 8222
+      targetPort: 8222
+      protocol: TCP

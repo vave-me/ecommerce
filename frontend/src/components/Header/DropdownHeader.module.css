@@ -1,0 +1,92 @@
+/* DropdownHeader.module.css */
+
+/* Mobile sheet header - consistent with other modals */
+.sheetHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border, #e5e7eb);
+    background-color: var(--surface-secondary, #f9fafb);
+    flex-shrink: 0;
+    position: relative;
+}
+
+/* Add drag handle for better UX */
+.sheetHeader::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 4px;
+    background-color: var(--border, #e5e7eb);
+    border-radius: 2px;
+}
+
+.sheetTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text, #374151);
+    margin: 0;
+}
+
+.sheetCloseButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--text-secondary, #6b7280);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.sheetCloseButton:hover,
+.sheetCloseButton:focus {
+    background-color: var(--surface-hover, #f3f4f6);
+    color: var(--text-primary, #1f2937);
+}
+
+.sheetCloseButton:focus-visible {
+    outline: 2px solid #9ca3af;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .sheetHeader {
+        background-color: var(--gray-800);
+        border-bottom-color: var(--gray-700);
+    }
+
+    .sheetHeader::before {
+        background-color: var(--gray-600);
+    }
+
+    .sheetTitle {
+        color: var(--gray-50);
+    }
+
+    .sheetCloseButton {
+        color: var(--gray-400);
+    }
+
+    .sheetCloseButton:hover,
+    .sheetCloseButton:focus {
+        background-color: var(--gray-700);
+        color: var(--gray-200);
+    }
+
+    .sheetCloseButton:focus-visible {
+        outline-color: var(--primary-color);
+    }
+}

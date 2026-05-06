@@ -1,0 +1,246 @@
+/* Loading States Styles */
+
+/* Spinner Container */
+.spinnerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.spinnerContainer.small {
+    gap: 0.5rem;
+}
+
+.spinnerContainer.large {
+    gap: 1.5rem;
+}
+
+/* Spinner */
+.spinner {
+    border: 3px solid #e5e7eb;
+    border-radius: 50%;
+    border-top-color: var(--primary-color, #2563eb);
+    animation: spin 1s linear infinite;
+}
+
+.spinner.primary {
+    border-top-color: var(--primary-color, #2563eb);
+}
+
+.spinner.secondary {
+    border-top-color: var(--secondary-color, #64748b);
+}
+
+.spinner.white {
+    border-color: rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+}
+
+/* Spinner Sizes */
+.small .spinner {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+}
+
+.medium .spinner {
+    width: 32px;
+    height: 32px;
+}
+
+.large .spinner {
+    width: 48px;
+    height: 48px;
+    border-width: 4px;
+}
+
+/* Loading Text */
+.loadingText {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+.small .loadingText {
+    font-size: 0.75rem;
+}
+
+.large .loadingText {
+    font-size: 1rem;
+}
+
+/* Skeleton Loader */
+.skeletonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 0.25rem;
+}
+
+/* Card Skeleton */
+.cardSkeletonContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.cardSkeleton {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.imageSkeleton {
+    height: 200px;
+    background: #f3f4f6;
+    animation: shimmer 1.5s infinite;
+}
+
+.contentSkeleton {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Page Loader */
+.pageLoader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 9999;
+}
+
+/* Inline Loader */
+.inlineLoader {
+    display: inline-flex;
+    gap: 0.25rem;
+    align-items: center;
+}
+
+.dot {
+    width: 4px;
+    height: 4px;
+    background: currentColor;
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.dot:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.dot:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+/* Progress Loader */
+.progressContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.progressBar {
+    flex: 1;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    background: var(--primary-color, #2563eb);
+    transition: width 0.3s ease;
+}
+
+.progressFill.primary {
+    background: var(--primary-color, #2563eb);
+}
+
+.progressFill.secondary {
+    background: var(--secondary-color, #64748b);
+}
+
+.progressFill.success {
+    background: #10b981;
+}
+
+.progressText {
+    font-size: 0.875rem;
+    color: #6b7280;
+    min-width: 3rem;
+    text-align: right;
+}
+
+/* Animations */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes bounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .spinner {
+        border-color: #374151;
+    }
+    
+    .loadingText {
+        color: #9ca3af;
+    }
+    
+    .skeleton {
+        background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+    }
+    
+    .cardSkeleton {
+        background: #1f2937;
+        border-color: #374151;
+    }
+    
+    .imageSkeleton {
+        background: #374151;
+    }
+    
+    .pageLoader {
+        background: rgba(17, 24, 39, 0.9);
+    }
+    
+    .progressBar {
+        background: #374151;
+    }
+    
+    .progressText {
+        color: #d1d5db;
+    }
+}

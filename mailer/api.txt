@@ -1,0 +1,138 @@
+// mailer_service.proto
+syntax = "proto3";
+
+package mailerService;
+
+import "google/protobuf/timestamp.proto";
+
+// Service definition for Mailer Management
+service MailerService {
+  // Generates a pre-signed URL for uploading a new mailer file (image or video)
+  rpc GeneratePresignedUploadURL (GeneratePresignedUploadURLRequest) returns (GeneratePresignedUploadURLResponse);
+
+  // Retrieves a mailer file by its unique identifier
+  rpc GetMailer (GetMailerRequest) returns (GetMailerResponse);
+
+  // Lists mailer files with pagination
+  rpc ListMailer (ListMailerRequest) returns (ListMailerResponse);
+
+  // Updates metadata of a specific mailer file
+  rpc UpdateMailer (UpdateMailerRequest) returns (UpdateMailerResponse);
+
+  // Deletes a specific mailer file by its unique identifier
+  rpc DeleteMailer (DeleteMailerRequest) returns (DeleteMailerResponse);
+
+  // Retrieves all mailer files associated with a specific entity
+  rpc GetMailerByEntity (GetMailerByEntityRequest) returns (GetMailerByEntityResponse);
+
+  // Retrieves aggregated statistics related to mailer uploads
+  rpc GetMailerStatistics (GetMailerStatisticsRequest) returns (GetMailerStatisticsResponse);
+}
+
+// Message representing Mailer Metadata
+message MailerMetadata {
+  string title = 1;                 // Title of the mailer
+  string description = 2;           // Description of the mailer
+  repeated string tags = 3;         // Tags associated with the mailer
+}
+
+// Request message for generating a pre-signed upload URL
+message GeneratePresignedUploadURLRequest {
+  string entity_type = 1;           // Type of the entity (e.g., product, user)
+  string entity_id = 2;             // Unique identifier of the entity
+  string mailer_type = 3;            // Type of mailer (image or video)
+  string file_name = 4;             // Name of the file to be uploaded
+}
+
+// Response message after generating a pre-signed upload URL
+message GeneratePresignedUploadURLResponse {
+  string mailer_id = 1;                       // Unique identifier for the mailer
+  string url = 2;                            // Pre-signed URL for uploading the mailer
+  google.protobuf.Timestamp created_at = 3;   // Timestamp of the mailer creation
+}
+
+// Request message for retrieving mailer by ID
+message GetMailerRequest {
+  string mailer_id = 1;                       // Unique identifier of the mailer to retrieve
+}
+
+// Response message containing mailer details
+message GetMailerResponse {
+  Mailer mailer = 1;                           // Details of the requested mailer
+}
+
+// Request message for listing mailer with pagination
+message ListMailerRequest {
+  int32 page = 1;                             // Current page number
+  int32 limit = 2;                            // Number of mailer items per page
+}
+
+// Response message containing a list of mailer
+message ListMailerResponse {
+  repeated Mailer mailer = 1;                  // List of mailer files
+  int32 total = 2;                            // Total number of mailer files
+  int32 page = 3;                             // Current page number
+  int32 limit = 4;                            // Number of mailer files per page
+}
+
+// Request message for updating mailer metadata
+message UpdateMailerRequest {
+  string mailer_id = 1;                        // Unique identifier of the mailer to update
+  MailerMetadata metadata = 2;                 // Updated metadata for the mailer
+}
+
+// Response message after updating mailer metadata
+message UpdateMailerResponse {
+  Mailer mailer = 1;                            // Updated mailer details
+}
+
+// Request message for deleting mailer
+message DeleteMailerRequest {
+  string mailer_id = 1;                        // Unique identifier of the mailer to delete
+}
+
+// Empty response message for delete operation
+message DeleteMailerResponse {}
+
+// Request message for retrieving mailer by entity
+message GetMailerByEntityRequest {
+  string entity_type = 1;                 // Type of the entity (e.g., product, user)
+  string entity_id = 2;                   // Unique identifier of the entity
+  int32 page = 3;                         // Current page number
+  int32 limit = 4;                        // Number of mailer items per page
+}
+
+// Response message containing mailer associated with an entity
+message GetMailerByEntityResponse {
+  repeated Mailer mailer = 1;                   // List of mailer files associated with the entity
+  int32 total = 2;                            // Total number of mailer files
+  int32 page = 3;                             // Current page number
+  int32 limit = 4;                            // Number of mailer files per page
+}
+
+// Request message for retrieving mailer statistics
+message GetMailerStatisticsRequest {}
+
+// Response message containing mailer statistics
+message GetMailerStatisticsResponse {
+  int32 total_uploads = 1;                              // Total number of mailer uploads
+  MailerTypeDistribution mailer_type_distribution = 2;     // Distribution of mailer types
+}
+
+// Message representing mailer statistics by type
+message MailerTypeDistribution {
+  int32 images = 1;                                      // Number of image uploads
+  int32 videos = 2;                                      // Number of video uploads
+  int32 others = 3;                                      // Number of other mailer uploads
+}
+
+// Mailer entity representing a mailer file
+message Mailer {
+  string mailer_id = 1;                                   // Unique identifier of the mailer
+  string entity_type = 2;                                // Type of the entity the mailer is associated with
+  string entity_id = 3;                                  // Unique identifier of the entity
+  string mailer_type = 4;                                 // Type of mailer (image or video)
+  string url = 5;                                        // URL to access the mailer
+  MailerMetadata metadata = 6;                            // Metadata associated with the mailer
+  bool is_public = 7;                                    // Indicates if the mailer is publicly accessible
+}

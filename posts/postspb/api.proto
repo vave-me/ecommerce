@@ -1,0 +1,225 @@
+syntax = "proto3";
+
+package postspb;
+import "google/protobuf/timestamp.proto";       // For timestamp fields
+
+service PostsService {
+  rpc AddPost(AddPostRequest) returns (AddPostResponse) {}
+  rpc GetPost(GetPostRequest) returns (GetPostResponse) {}
+  rpc GetPosts(GetPostsRequest) returns (GetPostsResponse) {}
+  rpc GetUserPosts(GetUserPostsRequest) returns (GetUserPostsResponse) {}
+  rpc GetPublicCatalog(GetPublicCatalogRequest) returns (GetPublicCatalogResponse) {}
+  rpc GetPostsByCategory(GetPostsByCategoryRequest) returns (GetPostsByCategoryResponse) {}
+  rpc GetPostsByCategorySlug(GetPostsByCategorySlugRequest) returns (GetPostsByCategorySlugResponse) {}
+  rpc ArchivePost(ArchivePostRequest) returns (ArchivePostResponse) {}
+  rpc RemovePost(RemovePostRequest) returns (RemovePostResponse) {}
+  rpc UpdatePost(UpdatePostRequest) returns (UpdatePostResponse) {}
+  rpc GetPostsWithFilters(GetPostsWithFiltersRequest) returns (GetPostsWithFiltersResponse) {}
+  rpc AddPostThumbnail(AddPostThumbnailRequest) returns(AddPostThumbnailResponse){}
+  rpc UpdatePostThumbnail(UpdatePostThumbnailRequest) returns(UpdatePostThumbnailResponse){}
+}
+
+// -------------------------------------------------------------
+// Response / Acknowledgement messages
+// -------------------------------------------------------------
+message RemovePostResponse {}
+
+message UpdatePostResponse {
+  string id = 1;  // The ID of the updated post
+}
+
+message ArchivePostResponse {
+  string post_id = 1;
+  bool archived = 2;  // true if successfully archived
+}
+
+message AddPostResponse {
+  string id = 1; // The newly created Post ID
+}
+
+message AddPostThumbnailRequest {
+  string post_id = 1;
+  string thumbnail = 2;  // true if successfully archived
+}
+
+message AddPostThumbnailResponse {
+  string id = 1; // The newly created Post ID
+}
+
+message UpdatePostThumbnailRequest {
+  string post_id = 1;
+  string thumbnail = 2;  // true if successfully archived
+}
+
+message UpdatePostThumbnailResponse {
+
+}
+// -------------------------------------------------------------
+// Primary Post message
+// -------------------------------------------------------------
+message Post {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string type_of_post = 4;
+  string user_id = 5;
+  string user_type = 6;
+  string category_id = 7;
+  string category_slug = 8;
+  repeated string tags = 9;
+  string status = 10;        // e.g. "DRAFT", "PUBLISHED", "ARCHIVED"
+  string thumbnail = 11;
+  float lat = 12;
+  float lng = 13;
+  google.protobuf.Timestamp created_at = 21;
+  google.protobuf.Timestamp updated_at = 22;
+}
+
+// -------------------------------------------------------------
+// Requests
+// -------------------------------------------------------------
+
+// AddPost
+message AddPostRequest {
+  string name = 1;
+  string description = 2;
+  string type_of_post = 3;
+  string user_type = 4;
+  string category_id =5;
+  string category_slug = 6;
+  repeated string tags = 7;
+  string status = 8;
+  string thumbnail = 9;
+  float lat = 10;
+  float lng = 11;
+}
+
+// UpdatePost
+message UpdatePostRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string type_of_post = 4;
+  string category_id = 5;
+  string category_slug = 6;
+  repeated string tags = 7;
+  string status = 8;
+  string thumbnail = 9;
+}
+
+// GetPost
+message GetPostRequest {
+  string id = 1;
+}
+
+message GetPostResponse {
+  Post post = 1;
+}
+
+// GetPosts
+message GetPostsRequest {
+  int64 page = 1;
+  int64 page_size = 2;
+  string sort_by = 3;    // e.g. "name", "created_at", etc.
+  string sort_order = 4; // "asc" or "desc"
+}
+
+message GetPostsResponse {
+  repeated Post posts = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+// GetUserPosts
+message GetUserPostsRequest {
+  string user_id = 1;
+  int64 page = 2;
+  int64 page_size = 3;
+  string sort_by = 4;    // e.g. "name", "created_at"
+  string sort_order = 5; // "asc" or "desc"
+}
+
+message GetUserPostsResponse {
+  repeated Post posts = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+message GetPublicCatalogRequest {
+  string user_id = 1;
+  int64 page = 2;
+  int64 page_size = 3;
+  string sort_by = 4;    // e.g. "name", "created_at"
+  string sort_order = 5; // "asc" or "desc"
+}
+
+message GetPublicCatalogResponse {
+  repeated Post posts = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+// ArchivePost
+message ArchivePostRequest {
+  string post_id = 1;
+}
+
+// RemovePost
+message RemovePostRequest {
+  string id = 1;
+}
+message GetPostsByCategoryRequest{
+  string category_id = 1;
+  int64 page = 2;
+  int64 page_size = 3;
+  string sort_by = 4;
+  string sort_order = 5;
+}
+
+message GetPostsByCategoryResponse{
+  repeated Post posts = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+message GetPostsByCategorySlugRequest{
+  string category_slug = 1;
+  int64 page = 2;
+  int64 page_size = 3;
+  string sort_by = 4;
+  string sort_order = 5;
+}
+message GetPostsByCategorySlugResponse{
+  repeated Post posts = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+message GetPostsWithFiltersRequest {
+  string name = 1;
+  string description = 2;
+  string type_of_post = 3;
+  string user_type = 4;
+  string category_id = 5;
+  string category_slug = 6;
+  repeated string tags = 7;
+  string status = 8;  // e.g. "DRAFT", "PUBLISHED", "ARCHIVED"
+  string thumbnail = 9;
+  float lat = 10;
+  float lng = 11;
+  float radius = 12;   // optional radius if you want location filtering
+  int64 page = 13;
+  int64 page_size = 14;
+  string sort_by = 15;
+  string sort_order = 16;
+}
+
+message GetPostsWithFiltersResponse {
+  repeated Post posts = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}

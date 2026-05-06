@@ -1,0 +1,123 @@
+syntax = "proto3";
+
+package managerspb;
+import "managerspb/common_manager.proto";
+
+// Event when manager is authorized
+message ManagerAuthorized {
+  string id = 1;
+}
+
+// Event when a new manager is created
+message ManagerCreated {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  bool active = 4;
+  string model = 5;
+  repeated ManagerCapability capabilities = 6;
+  double temperature = 7;
+  int32 max_tokens = 8;
+  string system_prompt = 9;
+  string user_id = 10;
+}
+
+// Event when an manager is activated
+message ManagerActivated {
+  string id = 1;        // Manager ID (UUID)
+  string timestamp = 2; // When the activation occurred
+}
+
+// Event when an manager is deactivated
+message ManagerDeactivated {
+  string id = 1;        // Manager ID (UUID)
+  string timestamp = 2; // When the deactivation occurred
+}
+
+// Event when an manager's configuration is updated
+message ManagerConfigurationUpdated {
+  string id = 1;           // Manager ID (UUID)
+  double temperature = 2;   // Updated temperature setting
+  int32 max_tokens = 3;     // Updated max tokens setting
+  string system_prompt = 4; // Updated system prompt
+  string updated_at = 5;    // When the update occurred
+}
+
+// Event when an manager processes a user request
+message ManagerRequestProcessed {
+  string id = 1;              // Manager ID (UUID)
+  string request_id = 2;      // Request ID
+  string user_id = 3;         // User ID who made the request
+  string message = 4;         // User's request message
+  map<string, string> context = 5; // Request context
+  string request_type = 6;    // Type of request
+  string response_id = 7;     // Response ID
+  string response_message = 8; // Manager's response
+  map<string, string> response_data = 9; // Response data
+  repeated ManagerAction actions = 10; // Actions performed
+  string timestamp = 11;      // When processing completed
+  string status = 12;         // Processing status
+  double confidence = 13;     // Confidence score
+}
+
+// Manager action definition for events
+
+// Event when a manager logs in
+message ManagerLoggedIn {
+  string id = 1;        // Manager ID (UUID)
+}
+
+// Event when a manager logs out
+message ManagerLoggedOut {
+  string id = 1;        // Manager ID (UUID)
+}
+
+// Event when a manager's participation in a service or activity is toggled
+message ManagerParticipationToggled {
+  string id = 1;        // Manager ID (UUID)
+  bool participating = 2;    // True if participating, False if not
+}
+
+// Event when a manager changes their name
+message ManagerRenamed {
+  string id = 1;        // Manager ID (UUID)
+  string name = 2;  // The updated name of the manager (renamed for clarity)
+}
+
+// Conversation Events
+
+// Event when a new conversation is created
+message ConversationCreated {
+  string conversation_id = 1;
+  string user_id = 2;
+  string manager_id = 3;
+  string created_at = 4;
+  map<string, string> context = 5;
+}
+
+// Event when a message is added to a conversation
+message MessageAdded {
+  string conversation_id = 1;
+  ConversationMessage message = 2;
+  string manager_id = 3;
+  string timestamp = 4;
+}
+
+// Event when conversation context is updated
+message ConversationContextUpdated {
+  string conversation_id = 1;
+  string manager_id = 2;
+  map<string, string> context = 3;
+  string updated_at = 4;
+}
+
+// Event when a conversation is archived
+message ConversationArchived {
+  string conversation_id = 1;
+  string manager_id = 2;
+  string archived_at = 3;
+}
+
+
+
+

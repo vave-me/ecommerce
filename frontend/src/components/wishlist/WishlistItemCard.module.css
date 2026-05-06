@@ -1,0 +1,465 @@
+/* ===== PREMIUM WISHLIST ITEM CARD - WCAG 2.1 COMPLIANT DESIGN ===== */
+
+/* ===== BASE CARD STYLES ===== */
+.wishlistCard {
+  background: var(--surface-primary);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--border-primary);
+  cursor: pointer;
+  transition: var(--transition-all);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+}
+
+.wishlistCard:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-secondary);
+}
+
+.wishlistCard:focus-visible {
+  outline: 3px solid var(--color-primary-500);
+  outline-offset: 2px;
+  border-radius: var(--radius-xl);
+}
+
+/* ===== WISHLIST HEADER ===== */
+.wishlistHeader {
+  padding: var(--space-2-5) var(--space-3-5);
+  background: var(--surface-secondary);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.wishlistNotes {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  font-weight: var(--font-weight-normal);
+  font-family: var(--font-family-primary);
+}
+
+.noteIcon {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+}
+
+/* ===== CARD WRAPPER ===== */
+.cardWrapper {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ===== REMOVE BUTTON OVERLAY ===== */
+.removeButton {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: var(--transition-all);
+  opacity: 0;
+}
+
+.wishlistCard:hover .removeButton,
+.wishlistCard:focus-within .removeButton {
+  opacity: 1;
+}
+
+.removeButton:hover:not(:disabled) {
+  background: var(--color-error-50);
+  border-color: var(--color-error-500);
+  color: var(--color-error-500);
+}
+
+.removeButton:focus-visible {
+  outline: 3px solid var(--color-error-500);
+  outline-offset: 2px;
+  opacity: 1;
+}
+
+.removeButton:active {
+  transform: scale(0.95);
+}
+
+.removeButton.removing {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===== WISHLIST FOOTER ===== */
+.wishlistFooter {
+  padding: var(--space-2) var(--space-3-5);
+  background: var(--surface-secondary);
+  border-top: 1px solid var(--border-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.addedDate {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  font-weight: var(--font-weight-normal);
+  font-family: var(--font-family-primary);
+}
+
+/* ===== LOADING STATES ===== */
+.wishlistCard.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12) var(--space-5);
+  text-align: center;
+  background: var(--surface-secondary);
+}
+
+.loadingSpinner {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--border-primary);
+  border-top: 2px solid var(--color-primary-500);
+  border-radius: var(--radius-full);
+  animation: spin 1s linear infinite;
+  margin-bottom: var(--space-3);
+}
+
+.removeSpinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--border-primary);
+  border-top: 2px solid var(--color-error-500);
+  border-radius: var(--radius-full);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loadingContainer p {
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  margin: 0;
+  font-weight: var(--font-weight-normal);
+  font-family: var(--font-family-primary);
+}
+
+/* ===== ERROR STATES ===== */
+.wishlistCard.errorCard {
+  border-color: var(--color-error-500);
+  background: var(--color-error-50);
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-8) var(--space-5);
+  gap: var(--space-3);
+}
+
+.errorIcon {
+  color: var(--color-error-500);
+  width: 32px;
+  height: 32px;
+}
+
+.errorContent h3 {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  margin: 0;
+  font-family: var(--font-family-primary);
+}
+
+.errorContent p {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin: var(--space-1) 0 0 0;
+  line-height: var(--line-height-normal);
+  max-width: 200px;
+  font-family: var(--font-family-primary);
+}
+
+.errorContent small {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  background: var(--surface-primary);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  margin-top: var(--space-2);
+  display: inline-block;
+  border: 1px solid var(--border-primary);
+  font-family: var(--font-family-primary);
+}
+
+/* ===== CARD LOADING STATE ===== */
+.cardLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-5);
+  background: var(--surface-secondary);
+}
+
+.cardLoading .loadingSpinner {
+  margin-bottom: 0;
+}
+
+/* ===== LAYOUT MODES ===== */
+
+/* Grid Layout - Modern card layout */
+.wishlistCard.grid {
+  height: auto;
+  min-height: 320px;
+  max-width: 100%;
+}
+
+/* List Layout - Horizontal modern layout */
+.wishlistCard.list {
+  min-height: 120px;
+  height: auto;
+}
+
+.wishlistCard.list .cardWrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.wishlistCard.list .wishlistHeader {
+  padding: 8px 12px;
+}
+
+.wishlistCard.list .wishlistFooter {
+  padding: 6px 12px;
+}
+
+.wishlistCard.list .removeButton {
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+}
+
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .wishlistCard {
+    border-radius: var(--radius-lg);
+  }
+
+  .wishlistCard.grid {
+    min-height: 280px;
+  }
+
+  .wishlistCard.list {
+    min-height: 100px;
+  }
+
+  .wishlistHeader,
+  .wishlistFooter {
+    padding: var(--space-2-5) var(--space-3-5);
+  }
+
+  .removeButton {
+    width: 36px;
+    height: 36px;
+    top: var(--space-2-5);
+    right: var(--space-2-5);
+  }
+
+  .wishlistCard.list .removeButton {
+    top: var(--space-1-5);
+    right: var(--space-1-5);
+    width: 32px;
+    height: 32px;
+  }
+
+  .loadingContainer,
+  .errorContainer {
+    padding: var(--space-7-5) var(--space-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .wishlistCard {
+    border-radius: var(--radius-md);
+  }
+
+  .wishlistCard.grid {
+    min-height: 260px;
+  }
+
+  .wishlistCard.list {
+    min-height: 90px;
+  }
+
+  .wishlistHeader,
+  .wishlistFooter {
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .wishlistNotes {
+    font-size: calc(var(--font-size-xs) * 0.9);
+  }
+
+  .addedDate {
+    font-size: calc(var(--font-size-xs) * 0.85);
+  }
+
+  .removeButton {
+    width: 32px;
+    height: 32px;
+    top: var(--space-2);
+    right: var(--space-2);
+  }
+
+  .wishlistCard.list .removeButton {
+    width: 28px;
+    height: 28px;
+  }
+
+  .loadingContainer,
+  .errorContainer {
+    padding: var(--space-6) var(--space-3);
+  }
+
+  .errorContent h3 {
+    font-size: var(--font-size-sm);
+  }
+
+  .errorContent p {
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  .wishlistCard,
+  .removeButton,
+  .cardWrapper::before,
+  .wishlistCard::before {
+    transition: none;
+    animation: none;
+  }
+
+  .wishlistCard:hover {
+    transform: none;
+  }
+
+  .removeButton:hover:not(:disabled) {
+    transform: scale(1.05);
+  }
+
+  .loadingSpinner,
+  .removeSpinner {
+    animation: none;
+  }
+
+  .wishlistCard.loading {
+    animation: none;
+  }
+
+  .removeButton.removing {
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .wishlistCard {
+    border: 3px solid #000000;
+    background: #ffffff;
+  }
+
+  .wishlistCard:hover {
+    border-color: #000000;
+    background: #f0f0f0;
+  }
+
+  .removeButton {
+    border: 2px solid #000000;
+    background: #ffffff;
+  }
+
+  .removeButton:hover:not(:disabled) {
+    background: #000000;
+    color: #ffffff;
+  }
+
+  .wishlistHeader,
+  .wishlistFooter {
+    background: #f0f0f0;
+    border-color: #000000;
+  }
+
+  .cardWrapper::before {
+    background: #000000;
+  }
+}
+
+/* ===== FOCUS STATES ===== */
+.removeButton:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.wishlistCard:focus-within .removeButton {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Dark mode is automatically handled by CSS variables in global.css */
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+.wishlistCard {
+  contain: layout style paint;
+}
+
+.cardWrapper {
+  contain: layout style paint;
+}
+
+/* ===== DEPRECATED STYLES CLEANUP ===== */
+.card,
+.card.grid,
+.card.list,
+.imageContainer,
+.itemImage,
+.entityBadge,
+.heartOverlay,
+.heartIcon,
+.contentContainer,
+.itemName,
+.price,
+.itemDescription,
+.notes,
+.metadata,
+.actions,
+.viewButton,
+.errorState {
+  display: none;
+} 

@@ -1,0 +1,80 @@
+openapiOptions:
+  file:
+    - file: "commentspb/api.proto"
+      option:
+        info:
+          title: Comment Management API
+          version: "1.0.0"
+          description: "API for managing comments and replies between users, including functionalities to add, approve, reject, edit, and retrieve comments and their replies."
+        basePath: /
+  method:
+    # Comment Operations
+    - method: commentspb.CommentsService.AddComment
+      option:
+        operationId: addComment
+        tags:
+          - Comment
+        summary: Add a new comment
+
+    - method: commentspb.CommentsService.ApproveComment
+      option:
+        operationId: approveComment
+        tags:
+          - Comment
+        summary: Approve a comment
+
+    - method: commentspb.CommentsService.RejectComment
+      option:
+        operationId: rejectComment
+        tags:
+          - Comment
+        summary: Reject a comment
+
+    - method: commentspb.CommentsService.EditComment
+      option:
+        operationId: editComment
+        tags:
+          - Comment
+        summary: Edit a comment
+
+    - method: commentspb.CommentsService.GetComment
+      option:
+        operationId: getComment
+        tags:
+          - Comment
+        summary: Get a comment
+
+    - method: commentspb.CommentsService.GetComments
+      option:
+        operationId: getComments
+        tags:
+          - Comment
+        summary: Get a list of comments
+
+    - method: commentspb.CommentsService.GetCommentsBySender
+      option:
+        operationId: getCommentsBySender
+        tags:
+          - Comment
+        summary: Get a list of comments
+
+    - method: commentspb.CommentsService.GetApprovedComments
+      option:
+        operationId: getApprovedComments
+        tags:
+          - Comment
+        summary: Get approved comments
+
+    - method: commentspb.CommentsService.GetMostCommented
+      option:
+        operationId: getMostCommented
+        tags:
+          - ItemCommentCount
+        summary: Get items count
+
+    - method: commentspb.CommentsService.GetMostCommentedByCategory
+      option:
+        operationId: getMostCommentedByCategory
+        tags:
+          - ItemCommentCount
+        summary: Get items count

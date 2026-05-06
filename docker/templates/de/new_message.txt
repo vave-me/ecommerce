@@ -1,0 +1,23 @@
+New Message Received on {{.AppName}}
+
+Hello {{.FirstName}},
+
+You've received a new message from {{.SenderName}}.
+
+MESSAGE PREVIEW:
+"{{.MessagePreview}}{{if .MessageTruncated}}...{{end}}"
+
+To view the full message, please visit:
+{{.MessageURL}}
+
+This notification was sent to you because you have enabled email notifications for new messages in your {{.AppName}} account settings.
+
+To manage your notification settings, visit your account settings:
+{{.SettingsURL}}
+
+Thanks,
+The {{.AppName}} Team
+
+---
+If you have any questions, contact our support team at {{.SupportEmail}}.
+© {{.CurrentYear}} {{.CompanyName}}. All rights reserved. 

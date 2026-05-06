@@ -1,0 +1,45 @@
+openapiOptions:
+  file:
+    - file: "geocodingpb/api.proto"
+      option:
+        info:
+          title: Geocoding
+          version: "1.0.0"
+        basePath: /
+  method:
+    - method: geocodingpb.GeocodingService.GeocodeAddress
+      option:
+        operationId: geocodeAddress
+        tags:
+          - Address
+        summary: Geocode address
+#    - method: geocodingpb.GeocodingService.GeocodingProductsWithFilters
+#      option:
+#        operationId: geocodingProductsWithFilters
+#        tags:
+#          - Products
+#        summary: Geocoding for products
+#    - method: geocodingpb.GeocodingService.GeocodingProductsWithTerm
+#      option:
+#        operationId: geocodingProductsWithTerm
+#        tags:
+#          - Products
+#        summary: Geocoding for products
+    - method: geocodingpb.GeocodingService.SuggestAddress
+      option:
+        operationId: suggestAddress
+        tags:
+          - Address
+        summary: Suggest Address
+    - method: geocodingpb.GeocodingService.SuggestCity
+      option:
+        operationId: suggestCity
+        tags:
+          - City
+        summary: Suggest City
+#    - method: geocodingpb.GeocodingService.GetOrder
+#      option:
+#        operationId: getOrder
+#        tags:
+#          - Order
+#        summary: Get an order

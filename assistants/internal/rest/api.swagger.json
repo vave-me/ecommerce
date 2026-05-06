@@ -1,0 +1,1677 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "assistantspb/common_assistant.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "AssistantsService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/assistants": {
+      "get": {
+        "summary": "Retrieve active assistants",
+        "operationId": "getAssistants",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbGetAssistantsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Assistant"
+        ]
+      }
+    },
+    "/api/assistants/chat": {
+      "post": {
+        "summary": "Chat within conversation context",
+        "operationId": "chatWithConversation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbChatWithConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/assistantspbChatWithConversationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Conversation"
+        ]
+      }
+    },
+    "/api/assistants/conversations": {
+      "get": {
+        "summary": "Get user conversations (user from JWT)",
+        "operationId": "getUserConversations",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbGetUserConversationsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "activeOnly",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Conversation"
+        ]
+      },
+      "post": {
+        "summary": "Create new conversation (user from JWT)",
+        "operationId": "createConversation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbCreateConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/assistantspbCreateConversationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Conversation"
+        ]
+      }
+    },
+    "/api/assistants/conversations/{conversationId}": {
+      "get": {
+        "summary": "Get conversation by ID",
+        "operationId": "getConversation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbGetConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Conversation"
+        ]
+      },
+      "delete": {
+        "summary": "Delete conversation",
+        "operationId": "deleteConversation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbDeleteConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Conversation"
+        ]
+      },
+      "put": {
+        "summary": "Update conversation",
+        "operationId": "updateConversation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbUpdateConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssistantsServiceUpdateConversationBody"
+            }
+          }
+        ],
+        "tags": [
+          "Conversation"
+        ]
+      }
+    },
+    "/api/assistants/conversations/{conversationId}/archive": {
+      "post": {
+        "summary": "Archive conversation",
+        "operationId": "archiveConversation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbArchiveConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssistantsServiceArchiveConversationBody"
+            }
+          }
+        ],
+        "tags": [
+          "Conversation"
+        ]
+      }
+    },
+    "/api/assistants/conversations/{conversationId}/context": {
+      "put": {
+        "summary": "Update conversation context",
+        "operationId": "updateConversationContext",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbUpdateConversationContextResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssistantsServiceUpdateConversationContextBody"
+            }
+          }
+        ],
+        "tags": [
+          "Conversation"
+        ]
+      }
+    },
+    "/api/assistants/conversations/{conversationId}/messages": {
+      "get": {
+        "summary": "Get conversation messages",
+        "operationId": "getConversationMessages",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbGetConversationMessagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Conversation"
+        ]
+      },
+      "post": {
+        "summary": "Add message to conversation",
+        "operationId": "addMessageToConversation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbAddMessageToConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssistantsServiceAddMessageToConversationBody"
+            }
+          }
+        ],
+        "tags": [
+          "Message"
+        ]
+      }
+    },
+    "/api/assistants/input/document": {
+      "post": {
+        "summary": "Process Document Input and Execute Document Analysis",
+        "operationId": "processDocumentInput",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbProcessDocumentInputResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/assistantspbProcessDocumentInputRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Input"
+        ]
+      }
+    },
+    "/api/assistants/input/image": {
+      "post": {
+        "summary": "Process Image Input and Execute Vision Analysis",
+        "operationId": "processImageInput",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbProcessImageInputResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/assistantspbProcessImageInputRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Input"
+        ]
+      }
+    },
+    "/api/assistants/input/speech": {
+      "post": {
+        "summary": "Process Speech Input and Execute Tools",
+        "operationId": "processSpeechInput",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbProcessSpeechInputResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/assistantspbProcessSpeechInputRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Input"
+        ]
+      }
+    },
+    "/api/assistants/input/text": {
+      "post": {
+        "summary": "Process User Text Input",
+        "operationId": "processUserInput",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbProcessUserInputResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/assistantspbProcessUserInputRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Input"
+        ]
+      }
+    },
+    "/api/assistants/process": {
+      "post": {
+        "summary": "Process advanced assistant request",
+        "operationId": "processAssistantRequestAdvanced",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbProcessAssistantRequestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/assistantspbProcessAssistantRequestRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Chat"
+        ]
+      }
+    },
+    "/api/assistants/stats": {
+      "get": {
+        "summary": "Get conversation statistics (user from JWT)",
+        "operationId": "getConversationStats",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbGetConversationStatsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Conversation"
+        ]
+      }
+    },
+    "/api/assistants/{id}": {
+      "get": {
+        "summary": "Retrieve a assistant by ID",
+        "operationId": "getAssistant",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbGetAssistantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Assistant"
+        ]
+      },
+      "put": {
+        "summary": "Update Assistant Configuration",
+        "operationId": "UpdateAssistantConfiguration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbUpdateAssistantConfigurationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssistantsServiceUpdateAssistantConfigurationBody"
+            }
+          }
+        ],
+        "tags": [
+          "Assistant"
+        ]
+      }
+    },
+    "/api/assistants/{id}/activate": {
+      "post": {
+        "summary": "Activate a new assistant",
+        "operationId": "activateAssistant",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbActivateAssistantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssistantsServiceActivateAssistantBody"
+            }
+          }
+        ],
+        "tags": [
+          "Assistant"
+        ]
+      }
+    },
+    "/api/assistants/{id}/deactivate": {
+      "post": {
+        "summary": "Deactivate active assistants",
+        "operationId": "deactivateAssistant",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/assistantspbDeactivateAssistantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssistantsServiceDeactivateAssistantBody"
+            }
+          }
+        ],
+        "tags": [
+          "Assistant"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "AssistantsServiceActivateAssistantBody": {
+      "type": "object"
+    },
+    "AssistantsServiceAddMessageToConversationBody": {
+      "type": "object",
+      "properties": {
+        "assistantId": {
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/definitions/assistantspbMessageRole"
+        },
+        "content": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "Add Message to Conversation"
+    },
+    "AssistantsServiceArchiveConversationBody": {
+      "type": "object",
+      "title": "Archive Conversation"
+    },
+    "AssistantsServiceDeactivateAssistantBody": {
+      "type": "object"
+    },
+    "AssistantsServiceUpdateAssistantConfigurationBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "double"
+        },
+        "maxTokens": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "systemPrompt": {
+          "type": "string"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/assistantspbAssistantCapability"
+          }
+        }
+      }
+    },
+    "AssistantsServiceUpdateConversationBody": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "Update Conversation (Frontend-expected endpoint)"
+    },
+    "AssistantsServiceUpdateConversationContextBody": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "Update Conversation Context"
+    },
+    "assistantspbActivateAssistantResponse": {
+      "type": "object"
+    },
+    "assistantspbAddMessageToConversationResponse": {
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "type": "string"
+        }
+      }
+    },
+    "assistantspbArchiveConversationResponse": {
+      "type": "object"
+    },
+    "assistantspbAssistant": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/assistantspbAssistantCapability"
+          }
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "model": {
+          "type": "string"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "double"
+        },
+        "maxTokens": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "systemPrompt": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/assistantspbAssistantType"
+        }
+      },
+      "title": "Assistant entity - shared between API and events"
+    },
+    "assistantspbAssistantAction": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "endpoint": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "title": "Common action message"
+    },
+    "assistantspbAssistantCapability": {
+      "type": "string",
+      "enum": [
+        "ASSISTANT_MANAGEMENT",
+        "USER_INTERACTION",
+        "DATA_ANALYSIS",
+        "LOCATION_SERVICES",
+        "AUTHENTICATION",
+        "PUBLIC_API_ACCESS",
+        "JAILBREAK_RESISTANT",
+        "SCOPE_ENFORCEMENT",
+        "DATA_RETRIEVAL",
+        "SEARCH_AND_FILTER",
+        "PRIVATE_API_ACCESS",
+        "USER_DATA_ACCESS",
+        "TOKEN_MANAGEMENT",
+        "DATA_MASKING",
+        "AUDIT_LOGGING",
+        "TEXT_GENERATION",
+        "CODE_GENERATION",
+        "WEB_SEARCH"
+      ],
+      "default": "ASSISTANT_MANAGEMENT"
+    },
+    "assistantspbAssistantType": {
+      "type": "string",
+      "enum": [
+        "STANDARD",
+        "ADMIN",
+        "BUSINESS",
+        "SUPPORT",
+        "SCHEDULER"
+      ],
+      "default": "STANDARD",
+      "title": "Assistant type enum"
+    },
+    "assistantspbChatWithConversationRequest": {
+      "type": "object",
+      "properties": {
+        "assistantId": {
+          "type": "string"
+        },
+        "conversationId": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "maxHistoryMessages": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Optional: limit history sent to LLM"
+        }
+      },
+      "title": "Chat with Conversation (Enhanced Chat with History)"
+    },
+    "assistantspbChatWithConversationResponse": {
+      "type": "object",
+      "properties": {
+        "response": {
+          "type": "string"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/assistantspbAssistantAction"
+          }
+        },
+        "confidence": {
+          "type": "number",
+          "format": "double"
+        },
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "messageId": {
+          "type": "string",
+          "title": "ID of the response message"
+        }
+      }
+    },
+    "assistantspbConversation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "assistantId": {
+          "type": "string"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/assistantspbConversationMessage"
+          }
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "Conversation entity - shared between API and events"
+    },
+    "assistantspbConversationMessage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "conversationId": {
+          "type": "string"
+        },
+        "assistantId": {
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/definitions/assistantspbMessageRole"
+        },
+        "content": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "actionsTaken": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/assistantspbAssistantAction"
+          }
+        }
+      },
+      "title": "Message in a conversation"
+    },
+    "assistantspbConversationStats": {
+      "type": "object",
+      "properties": {
+        "totalConversations": {
+          "type": "string",
+          "format": "int64"
+        },
+        "activeConversations": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalMessages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "messagesToday": {
+          "type": "string",
+          "format": "int64"
+        },
+        "messagesThisWeek": {
+          "type": "string",
+          "format": "int64"
+        },
+        "messagesThisMonth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "firstConversationAt": {
+          "type": "string"
+        },
+        "lastConversationAt": {
+          "type": "string"
+        },
+        "avgMessagesPerConversation": {
+          "type": "number",
+          "format": "double"
+        },
+        "mostUsedAssistantId": {
+          "type": "string"
+        }
+      },
+      "title": "Conversation Statistics - shared between API and events"
+    },
+    "assistantspbCreateConversationRequest": {
+      "type": "object",
+      "properties": {
+        "assistantId": {
+          "type": "string"
+        },
+        "initialContext": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "Create Conversation"
+    },
+    "assistantspbCreateConversationResponse": {
+      "type": "object",
+      "properties": {
+        "conversationId": {
+          "type": "string"
+        }
+      }
+    },
+    "assistantspbDeactivateAssistantResponse": {
+      "type": "object"
+    },
+    "assistantspbDeleteConversationResponse": {
+      "type": "object"
+    },
+    "assistantspbGetAssistantResponse": {
+      "type": "object",
+      "properties": {
+        "assistant": {
+          "$ref": "#/definitions/assistantspbAssistant"
+        }
+      }
+    },
+    "assistantspbGetAssistantsResponse": {
+      "type": "object",
+      "properties": {
+        "assistants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/assistantspbAssistant"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "assistantspbGetConversationMessagesResponse": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/assistantspbConversationMessage"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "assistantspbGetConversationResponse": {
+      "type": "object",
+      "properties": {
+        "conversation": {
+          "$ref": "#/definitions/assistantspbConversation"
+        }
+      }
+    },
+    "assistantspbGetConversationStatsResponse": {
+      "type": "object",
+      "properties": {
+        "stats": {
+          "$ref": "#/definitions/assistantspbConversationStats"
+        }
+      }
+    },
+    "assistantspbGetUserConversationsResponse": {
+      "type": "object",
+      "properties": {
+        "conversations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/assistantspbConversation"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "assistantspbMessageRole": {
+      "type": "string",
+      "enum": [
+        "USER",
+        "ASSISTANT",
+        "SYSTEM"
+      ],
+      "default": "USER",
+      "title": "Message role enum"
+    },
+    "assistantspbProcessAssistantRequestRequest": {
+      "type": "object",
+      "properties": {
+        "assistantId": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "assistantspbProcessAssistantRequestResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/assistantspbAssistantAction"
+          }
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "format": "double"
+        },
+        "assistantId": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "assistantspbProcessDocumentInputRequest": {
+      "type": "object",
+      "properties": {
+        "assistantId": {
+          "type": "string"
+        },
+        "documentData": {
+          "type": "string",
+          "format": "byte",
+          "description": "Raw document data (direct upload)",
+          "title": "Document input options - use either document_data OR document_url"
+        },
+        "documentUrl": {
+          "type": "string",
+          "title": "URL to document (public or signed URL)"
+        },
+        "documentFormat": {
+          "type": "string",
+          "description": "pdf, docx, csv, xlsx, txt, etc."
+        },
+        "analysisType": {
+          "type": "string",
+          "description": "extract_text, analyze_structure, summarize, etc."
+        },
+        "userPrompt": {
+          "type": "string",
+          "title": "User's specific request about the document"
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "requestType": {
+          "type": "string"
+        }
+      },
+      "title": "Process Document Input Request"
+    },
+    "assistantspbProcessDocumentInputResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "extractedContent": {
+          "type": "string",
+          "title": "Extracted text/data from document"
+        },
+        "analysisResult": {
+          "type": "string",
+          "title": "Analysis result summary"
+        },
+        "message": {
+          "type": "string",
+          "title": "AI assistant response"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Additional metadata (pages, size, etc.)"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/assistantspbAssistantAction"
+          }
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "format": "double"
+        },
+        "processingConfidence": {
+          "type": "number",
+          "format": "double",
+          "title": "Document processing confidence"
+        },
+        "wordCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Word count of extracted content"
+        },
+        "pageCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Number of pages (for documents)"
+        }
+      }
+    },
+    "assistantspbProcessImageInputRequest": {
+      "type": "object",
+      "properties": {
+        "assistantId": {
+          "type": "string"
+        },
+        "imageData": {
+          "type": "string",
+          "format": "byte",
+          "title": "Raw image data (direct upload)"
+        },
+        "imageUrl": {
+          "type": "string",
+          "title": "URL to image (public or signed URL)"
+        },
+        "imageFormat": {
+          "type": "string",
+          "description": "jpeg, png, webp, gif, etc."
+        },
+        "analysisType": {
+          "type": "string",
+          "description": "describe, ocr, objects, etc."
+        },
+        "userPrompt": {
+          "type": "string",
+          "title": "User's specific request about the image"
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "requestType": {
+          "type": "string"
+        }
+      },
+      "title": "Process Image Input Request"
+    },
+    "assistantspbProcessImageInputResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "analysisResult": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/assistantspbAssistantAction"
+          }
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "format": "double"
+        },
+        "analysisConfidence": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "assistantspbProcessSpeechInputRequest": {
+      "type": "object",
+      "properties": {
+        "assistantId": {
+          "type": "string"
+        },
+        "audioData": {
+          "type": "string",
+          "format": "byte"
+        },
+        "audioFormat": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "requestType": {
+          "type": "string"
+        }
+      },
+      "title": "Process Speech Input Request"
+    },
+    "assistantspbProcessSpeechInputResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "transcribedText": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/assistantspbAssistantAction"
+          }
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "format": "double"
+        },
+        "transcriptionConfidence": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "assistantspbProcessUserInputRequest": {
+      "type": "object",
+      "properties": {
+        "assistantId": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "requestType": {
+          "type": "string"
+        }
+      },
+      "title": "Process User Request"
+    },
+    "assistantspbProcessUserInputResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/assistantspbAssistantAction"
+          }
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "assistantspbUpdateAssistantConfigurationResponse": {
+      "type": "object"
+    },
+    "assistantspbUpdateConversationContextResponse": {
+      "type": "object"
+    },
+    "assistantspbUpdateConversationResponse": {
+      "type": "object",
+      "properties": {
+        "conversation": {
+          "$ref": "#/definitions/assistantspbConversation"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

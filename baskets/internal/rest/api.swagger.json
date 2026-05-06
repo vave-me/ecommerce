@@ -1,0 +1,781 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Shopping Basket API",
+    "description": "API for managing shopping baskets, including creating, updating, and processing baskets.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "BasketService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/baskets": {
+      "get": {
+        "summary": "List all baskets",
+        "operationId": "listBaskets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketspbListBasketsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "Filter baskets by user ID.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "basketStatus",
+            "description": "Filter baskets by status.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "description": "Page number for pagination.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "description": "Number of baskets per page.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Basket"
+        ]
+      },
+      "post": {
+        "summary": "Start a new shopping basket",
+        "operationId": "startBasket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketspbStartBasketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request message to start a new basket.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/basketspbStartBasketRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Basket"
+        ]
+      }
+    },
+    "/api/baskets/active": {
+      "get": {
+        "summary": "Retrieve active baskets",
+        "operationId": "getActiveBaskets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketspbGetActiveBasketsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Basket"
+        ]
+      }
+    },
+    "/api/baskets/current": {
+      "get": {
+        "summary": "Retrieve a shopping basket",
+        "operationId": "getCurrentBasket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketspbGetCurrentBasketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userCustomerId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Basket"
+        ]
+      }
+    },
+    "/api/baskets/{basketId}": {
+      "get": {
+        "summary": "Retrieve a shopping basket",
+        "operationId": "getBasket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketspbGetBasketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "basketId",
+            "description": "Unique identifier of the basket to retrieve.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Basket"
+        ]
+      },
+      "delete": {
+        "summary": "Cancel a shopping basket",
+        "operationId": "cancelBasket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketspbCancelBasketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "basketId",
+            "description": "Unique identifier of the basket to cancel.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reason",
+            "description": "Reason for canceling the basket.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Basket"
+        ]
+      }
+    },
+    "/api/baskets/{basketId}/addItem": {
+      "post": {
+        "summary": "Add an item to the basket",
+        "operationId": "addItem",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketspbAddItemResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "basketId",
+            "description": "Unique identifier of the basket.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BasketServiceAddItemBody"
+            }
+          }
+        ],
+        "tags": [
+          "Item"
+        ]
+      }
+    },
+    "/api/baskets/{basketId}/checkout": {
+      "post": {
+        "summary": "Checkout a shopping basket",
+        "operationId": "checkoutBasket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketspbCheckoutBasketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "basketId",
+            "description": "Unique identifier of the basket to checkout.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BasketServiceCheckoutBasketBody"
+            }
+          }
+        ],
+        "tags": [
+          "Basket"
+        ]
+      }
+    },
+    "/api/baskets/{basketId}/items/{itemId}": {
+      "patch": {
+        "summary": "Update item quantity in the basket",
+        "operationId": "updateItemQuantity",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketspbUpdateItemQuantityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "basketId",
+            "description": "Unique identifier of the basket.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemId",
+            "description": "Unique identifier of the item.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BasketServiceUpdateItemQuantityBody"
+            }
+          }
+        ],
+        "tags": [
+          "Item"
+        ]
+      }
+    },
+    "/api/baskets/{basketId}/removeItem": {
+      "delete": {
+        "summary": "Remove an item from the basket",
+        "operationId": "removeItem",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketspbRemoveItemResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "basketId",
+            "description": "Unique identifier of the basket.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemId",
+            "description": "Unique identifier of the item to remove.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "quantity",
+            "description": "Quantity of the item to remove.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Item"
+        ]
+      }
+    },
+    "/api/baskets/{basketId}/reopen": {
+      "post": {
+        "summary": "Reopens a checked out basket after a failed checkout.",
+        "operationId": "BasketService_ReopenBasket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketspbReopenBasketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "basketId",
+            "description": "ID of the basket to reopen.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BasketServiceReopenBasketBody"
+            }
+          }
+        ],
+        "tags": [
+          "BasketService"
+        ]
+      }
+    },
+    "/api/baskets/{basketId}/total": {
+      "get": {
+        "summary": "Retrieve a shopping basket amount to pay",
+        "operationId": "getTotalBasket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketspbGetTotalBasketAmountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "basketId",
+            "description": "Unique identifier of the basket to retrieve.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Basket"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "BasketServiceAddItemBody": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "description": "Unique identifier of the product to add."
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "description": "Quantity of the product to add."
+        }
+      },
+      "description": "Request message to add an item to the basket."
+    },
+    "BasketServiceCheckoutBasketBody": {
+      "type": "object",
+      "properties": {
+        "userCustomerId": {
+          "type": "string",
+          "description": "Unique identifier of the customer."
+        },
+        "paymentIntentId": {
+          "type": "string",
+          "description": "Stripe payment intent ID for this checkout."
+        }
+      },
+      "description": "Request message to checkout a basket."
+    },
+    "BasketServiceReopenBasketBody": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "description": "Reason for reopening the basket."
+        }
+      },
+      "description": "Request message to reopen a basket after failed checkout."
+    },
+    "BasketServiceUpdateItemQuantityBody": {
+      "type": "object",
+      "properties": {
+        "newQuantity": {
+          "type": "string",
+          "format": "int64",
+          "description": "New quantity for the item."
+        }
+      },
+      "description": "Request message to update the quantity of an item."
+    },
+    "basketspbAddItemResponse": {
+      "type": "object",
+      "properties": {
+        "basketId": {
+          "type": "string",
+          "description": "Unique identifier of the basket."
+        },
+        "itemId": {
+          "type": "string",
+          "description": "Unique identifier of the added item."
+        }
+      },
+      "description": "Response message after adding an item."
+    },
+    "basketspbBasket": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the basket."
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/basketspbItem"
+          },
+          "description": "List of items in the basket."
+        },
+        "basketStatus": {
+          "type": "string",
+          "description": "Current status of the basket."
+        }
+      },
+      "description": "Basket represents a shopping basket containing multiple items."
+    },
+    "basketspbCancelBasketResponse": {
+      "type": "object"
+    },
+    "basketspbCheckoutBasketResponse": {
+      "type": "object",
+      "properties": {
+        "basketId": {
+          "type": "string",
+          "description": "Unique identifier of the checked-out basket."
+        }
+      },
+      "description": "Response message after checking out a basket."
+    },
+    "basketspbGetActiveBasketsResponse": {
+      "type": "object",
+      "properties": {
+        "baskets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/basketspbBasket"
+          }
+        }
+      },
+      "description": "Response message for retrieving active baskets."
+    },
+    "basketspbGetBasketResponse": {
+      "type": "object",
+      "properties": {
+        "basket": {
+          "$ref": "#/definitions/basketspbBasket",
+          "description": "Details of the requested basket."
+        }
+      },
+      "description": "Response message for retrieving a basket."
+    },
+    "basketspbGetCurrentBasketResponse": {
+      "type": "object",
+      "properties": {
+        "basketId": {
+          "type": "string"
+        },
+        "basketStatus": {
+          "type": "string",
+          "description": "Unique identifier of the basket to retrieve.                // Details of the requested basket."
+        }
+      },
+      "description": "Response message for retrieving a basket."
+    },
+    "basketspbGetTotalBasketAmountResponse": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "format": "int64",
+          "description": "Details of the requested basket."
+        }
+      }
+    },
+    "basketspbItem": {
+      "type": "object",
+      "properties": {
+        "userSellerId": {
+          "type": "string",
+          "description": "Unique identifier of the user-seller."
+        },
+        "productId": {
+          "type": "string",
+          "description": "Unique identifier of the product."
+        },
+        "userSellerName": {
+          "type": "string",
+          "description": "Name of the user-seller."
+        },
+        "productName": {
+          "type": "string",
+          "description": "Name of the product."
+        },
+        "productPrice": {
+          "type": "string",
+          "format": "int64",
+          "description": "Price per unit of the product."
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "description": "Quantity of the product in the basket."
+        }
+      },
+      "description": "Item represents a product added to the basket."
+    },
+    "basketspbListBasketsResponse": {
+      "type": "object",
+      "properties": {
+        "baskets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/basketspbBasket"
+          },
+          "description": "List of baskets."
+        },
+        "total": {
+          "type": "string",
+          "format": "int64",
+          "description": "Total number of baskets available."
+        },
+        "page": {
+          "type": "string",
+          "format": "int64",
+          "description": "Current page number."
+        },
+        "limit": {
+          "type": "string",
+          "format": "int64",
+          "description": "Number of baskets per page."
+        }
+      },
+      "description": "Response message for listing baskets."
+    },
+    "basketspbRemoveItemResponse": {
+      "type": "object",
+      "properties": {
+        "basketId": {
+          "type": "string",
+          "description": "Unique identifier of the basket."
+        },
+        "itemId": {
+          "type": "string",
+          "description": "Unique identifier of the removed item."
+        }
+      },
+      "description": "Response message after removing an item."
+    },
+    "basketspbReopenBasketResponse": {
+      "type": "object",
+      "properties": {
+        "basketId": {
+          "type": "string",
+          "description": "ID of the reopened basket."
+        },
+        "basketStatus": {
+          "type": "string",
+          "description": "New status of the basket."
+        }
+      },
+      "description": "Response message for reopening a basket."
+    },
+    "basketspbStartBasketRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier of the user initiating the basket."
+        }
+      },
+      "description": "Request message to start a new basket."
+    },
+    "basketspbStartBasketResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the created basket."
+        }
+      },
+      "description": "Response message after starting a new basket."
+    },
+    "basketspbUpdateItemQuantityResponse": {
+      "type": "object",
+      "properties": {
+        "basketId": {
+          "type": "string",
+          "description": "Unique identifier of the basket."
+        },
+        "itemId": {
+          "type": "string",
+          "description": "Unique identifier of the item."
+        },
+        "newQuantity": {
+          "type": "string",
+          "format": "int64",
+          "description": "Updated quantity of the item."
+        }
+      },
+      "description": "Response message after updating item quantity."
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

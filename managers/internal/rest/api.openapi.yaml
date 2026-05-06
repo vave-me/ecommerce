@@ -1,0 +1,165 @@
+openapiOptions:
+  file:
+    - file: "managerspb/api.proto"
+      option:
+        info:
+          title: Managers API
+          version: "1.0.0"
+          description: "API for managing AI managers, conversations, and chat interactions. Uses JWT authentication - no user_id required in requests."
+        basePath: /
+
+  method:
+    # Manager Management Operations
+    - method: managerspb.ManagersService.ActivateManager
+      option:
+        operationId: activateManager
+        tags:
+          - Manager
+        summary: Activate a new manager
+
+
+    - method: managerspb.ManagersService.GetManager
+      option:
+        operationId: getManager
+        tags:
+          - Manager
+        summary: Retrieve a manager by ID
+
+    - method: managerspb.ManagersService.GetManagers
+      option:
+        operationId: getManagers
+        tags:
+          - Manager
+        summary: Retrieve active managers
+
+    - method: managerspb.ManagersService.DeactivateManager
+      option:
+        operationId: deactivateManager
+        tags:
+          - Manager
+        summary: Deactivate active managers
+
+    - method: managerspb.ManagersService.ProcessUserInput
+      option:
+        operationId: processUserInput
+        tags:
+          - Input
+        summary: Process User Text Input
+
+    - method: managerspb.ManagersService.ProcessSpeechInput
+      option:
+        operationId: processSpeechInput
+        tags:
+          - Input
+        summary: Process Speech Input and Execute Tools
+
+    - method: managerspb.ManagersService.ProcessImageInput
+      option:
+        operationId: processImageInput
+        tags:
+          - Input
+        summary: Process Image Input and Execute Vision Analysis
+
+    - method: managerspb.ManagersService.ProcessDocumentInput
+      option:
+        operationId: processDocumentInput
+        tags:
+          - Input
+        summary: Process Document Input and Execute Document Analysis
+
+    - method: managerspb.ManagersService.UpdateManagerConfiguration
+      option:
+        operationId: UpdateManagerConfiguration
+        tags:
+          - Manager
+        summary: Update Manager Configuration
+
+
+
+
+    - method: managerspb.ManagersService.ProcessManagerRequest
+      option:
+        operationId: processManagerRequestAdvanced
+        tags:
+          - Chat
+        summary: Process advanced manager request
+
+
+    # Conversation Management (JWT auth - no user_id in paths)
+    - method: managerspb.ManagersService.CreateConversation
+      option:
+        operationId: createConversation
+        tags:
+          - Conversation
+        summary: Create new conversation (user from JWT)
+
+    - method: managerspb.ManagersService.GetConversation
+      option:
+        operationId: getConversation
+        tags:
+          - Conversation
+        summary: Get conversation by ID
+
+    - method: managerspb.ManagersService.GetUserConversations
+      option:
+        operationId: getUserConversations
+        tags:
+          - Conversation
+        summary: Get user conversations (user from JWT)
+
+    - method: managerspb.ManagersService.GetConversationMessages
+      option:
+        operationId: getConversationMessages
+        tags:
+          - Conversation
+        summary: Get conversation messages
+
+    - method: managerspb.ManagersService.GetConversationStats
+      option:
+        operationId: getConversationStats
+        tags:
+          - Conversation
+        summary: Get conversation statistics (user from JWT)
+
+    - method: managerspb.ManagersService.ChatWithConversation
+      option:
+        operationId: chatWithConversation
+        tags:
+          - Conversation
+        summary: Chat within conversation context
+
+    - method: managerspb.ManagersService.UpdateConversation
+      option:
+        operationId: updateConversation
+        tags:
+          - Conversation
+        summary: Update conversation
+
+    - method: managerspb.ManagersService.UpdateConversationContext
+      option:
+        operationId: updateConversationContext
+        tags:
+          - Conversation
+        summary: Update conversation context
+
+    - method: managerspb.ManagersService.DeleteConversation
+      option:
+        operationId: deleteConversation
+        tags:
+          - Conversation
+        summary: Delete conversation
+
+    - method: managerspb.ManagersService.ArchiveConversation
+      option:
+        operationId: archiveConversation
+        tags:
+          - Conversation
+        summary: Archive conversation
+
+    # Message Management
+    - method: managerspb.ManagersService.AddMessageToConversation
+      option:
+        operationId: addMessageToConversation
+        tags:
+          - Message
+        summary: Add message to conversation

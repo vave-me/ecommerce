@@ -1,0 +1,127 @@
+type: google.api.Service
+config_version: 3
+name: offers.googleapis.com
+title: Offer Management API
+apis:
+  - name: offerspb.OffersService
+http:
+  rules:
+    # Create a New Offer
+    - selector: offerspb.OffersService.CreateOffer
+      post: /api/offers
+      body: "*"
+
+    # Get an Offer
+    - selector: offerspb.OffersService.GetOffer
+      get: /api/offers/{offer_id}
+
+    # List Offers
+    - selector: offerspb.OffersService.ListOffers
+      get: /api/offers
+
+    # ------------------------------------------------------------
+    # New Offer commands
+    # ------------------------------------------------------------
+
+    # Activate an Offer
+    - selector: offerspb.OffersService.ActivateOffer
+      post: /api/offers/{offer_id}/activate
+      body: "*"
+
+    # Close an Offer
+    - selector: offerspb.OffersService.CloseOffer
+      post: /api/offers/{offer_id}/close
+      body: "*"
+
+    # Accept an Offer
+    - selector: offerspb.OffersService.AcceptOffer
+      post: /api/offers/{offer_id}/accept
+      body: "*"
+
+    # ------------------------------------------------------------
+    # BuyNow aggregator endpoints
+    # ------------------------------------------------------------
+
+    # Create BuyNow aggregator for an existing offer
+    - selector: offerspb.OffersService.CreateBuyNow
+      post: /api/offers/buynow
+      body: "*"
+
+    # Confirm the BuyNow aggregator (final purchase)
+    - selector: offerspb.OffersService.ConfirmBuyNow
+      post: /api/offers/buynow/{buy_now_id}/confirm
+      body: "*"
+
+    # ------------------------------------------------------------
+    # Lease aggregator endpoints
+    # ------------------------------------------------------------
+
+    # Create Lease aggregator
+    - selector: offerspb.OffersService.CreateLease
+      post: /api/offers/lease
+      body: "*"
+
+    # Start a lease
+    - selector: offerspb.OffersService.StartLease
+      post: /api/offers/lease/{lease_id}/start
+      body: "*"
+
+    # Make a monthly payment on a lease
+    - selector: offerspb.OffersService.MakeLeasePayment
+      post: /api/offers/lease/{lease_id}/payment
+      body: "*"
+
+    # Execute a lease buyout
+    - selector: offerspb.OffersService.ExecuteLeaseBuyout
+      post: /api/offers/lease/{lease_id}/buyout
+      body: "*"
+
+    # End a lease normally
+    - selector: offerspb.OffersService.EndLease
+      post: /api/offers/lease/{lease_id}/end
+      body: "*"
+
+    # Default a lease
+    - selector: offerspb.OffersService.DefaultLease
+      post: /api/offers/lease/{lease_id}/default
+      body: "*"
+
+    # Create a BuyBack aggregator
+    - selector: offerspb.OffersService.CreateBuyBack
+      post: /api/offers/buyBack
+      body: "*"
+
+    # Redeem a BuyBack (the seller reclaims item)
+    - selector: offerspb.OffersService.RedeemBuyBack
+      post: /api/offers/buyBack/{buyBack_id}/redeem
+      body: "*"
+
+    # Expire a BuyBack (lock time ends, buyer obtains item)
+    - selector: offerspb.OffersService.ExpireBuyBack
+      post: /api/offers/buyBack/{buyBack_id}/expire
+      body: "*"
+
+    # Cancel a BuyBack (before lock or if domain rules allow)
+    - selector: offerspb.OffersService.CancelBuyBack
+      post: /api/offers/buyBack/{buyBack_id}/cancel
+      body: "*"
+
+    # Create a Reservation aggregator
+    - selector: offerspb.OffersService.CreateReservation
+      post: /api/offers/reservation
+      body: "*"
+
+    # Redeem a Reservation (the seller reclaims item)
+    - selector: offerspb.OffersService.RedeemReservation
+      post: /api/offers/reservation/{reservation_id}/redeem
+      body: "*"
+
+    # Expire a Reservation (lock time ends, buyer obtains item)
+    - selector: offerspb.OffersService.ExpireReservation
+      post: /api/offers/reservation/{reservation_id}/expire
+      body: "*"
+
+    # Cancel a Reservation (before lock or if domain rules allow)
+    - selector: offerspb.OffersService.CancelReservation
+      post: /api/offers/reservation/{reservation_id}/cancel
+      body: "*"

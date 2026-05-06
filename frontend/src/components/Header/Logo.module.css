@@ -1,0 +1,100 @@
+/* Logo.module.css – rebuilt from scratch (May 2025)
+   Lightweight, predictable sizing with CSS variables.
+   Classes: .logoContainer (wrapper), .logoLink (anchor), .logoImage (img)
+   Size modifiers added via props: .default, .small, .large, .aiMode
+*/
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+/* Remove any tweening on layout shifts */
+.logoLink {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.logoLink:hover { opacity: 0.9; }
+
+/* Adjust to natural dimensions, use CSS variables for sizing */
+.logoImageWrapper { 
+  height: auto; 
+  display: flex;
+  align-items: center;
+  width: var(--logo-width, 90px);
+}
+.logoImage { 
+  width: var(--logo-width, 90px);
+  height: auto;
+  object-fit: contain;
+}
+
+.logoLink:hover .logoImage { transform: scale(1.05); }
+
+/* Size presets - Professional & Proportional */
+.default { --logo-width: 90px; }
+.small   { --logo-width: 50px; }
+.large   { --logo-width: 110px; }
+.aiMode  { --logo-width: 80px; } /* Reduced from 200px for professional appearance */
+.mobile  { --logo-width: 65px; }
+
+/* Responsive tweaks (adjust widths down) */
+@media (max-width: 1024px) {
+  .default { --logo-width: 85px; }
+  .large { --logo-width: 105px; }
+  .aiMode { --logo-width: 75px; } /* Reduced for better proportion */
+}
+
+@media (max-width: 768px) {
+  .default { --logo-width: 70px; }
+  .large { --logo-width: 85px; }
+  .aiMode { --logo-width: 65px; } /* Compact mobile size */
+  .mobile { --logo-width: 55px; }
+}
+
+@media (max-width: 480px) {
+  .default { --logo-width: 60px; }
+  .large { --logo-width: 75px; }
+  .aiMode { --logo-width: 60px; } /* Professional mobile size */
+  .small  { --logo-width: 40px; }
+  .mobile { --logo-width: 50px; }
+}
+
+@media (max-width: 375px) {
+  .default { --logo-width: 50px; }
+  .large { --logo-width: 65px; }
+  .aiMode { --logo-width: 50px; } /* Consistent with default on small screens */
+  .mobile { --logo-width: 45px; }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .logoContainer {
+    background-color: transparent;
+  }
+
+  .logoLink {
+    color: var(--gray-200);
+  }
+
+  .logoLink:hover {
+    opacity: 0.8;
+    color: var(--primary-color);
+  }
+
+  .logoImage {
+    filter: brightness(1.1) contrast(1.05);
+  }
+
+  .logoLink:hover .logoImage {
+    filter: brightness(1.2) contrast(1.1);
+  }
+
+  .logoLink:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+}

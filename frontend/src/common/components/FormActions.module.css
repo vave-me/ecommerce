@@ -1,0 +1,132 @@
+/* src/common/components/FormActions.module.css */
+.formActions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* Primary action button */
+.primaryButton,
+.primaryAction {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.primaryButton:hover,
+.primaryAction:hover {
+    background-color: var(--primary-color-hover);
+}
+
+.primaryButton:disabled {
+    background-color: var(--primary-color-light);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.cancelButton {
+    padding: 0.625rem 1.25rem;
+    background-color: white;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+    background-color: var(--surface-hover);
+    color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+    .formActions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .cancelButton, .primaryButton {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ================================
+   DARK THEME SUPPORT
+================================ */
+
+@media (prefers-color-scheme: dark) {
+    /* ============= FORM ACTIONS CONTAINER ============= */
+    .formActions {
+        border-top-color: var(--gray-700);
+        background-color: var(--gray-800);
+    }
+
+    /* ============= PRIMARY BUTTONS ============= */
+    .primaryButton,
+    .primaryAction {
+        background-color: var(--primary-color);
+        color: var(--gray-50);
+        border: 1px solid var(--primary-color);
+    }
+
+    .primaryButton:hover,
+    .primaryAction:hover {
+        background-color: var(--primary-color-hover);
+        border-color: var(--primary-color-hover);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .primaryButton:disabled {
+        background-color: var(--gray-700);
+        color: var(--gray-400);
+        border-color: var(--gray-600);
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    /* ============= CANCEL BUTTON ============= */
+    .cancelButton {
+        background-color: var(--gray-700);
+        color: var(--gray-200);
+        border-color: var(--gray-600);
+    }
+
+    .cancelButton:hover {
+        background-color: var(--gray-600);
+        color: var(--gray-50);
+        border-color: var(--gray-500);
+    }
+
+    /* ============= MOBILE RESPONSIVE OVERRIDES ============= */
+    @media (max-width: 768px) {
+        .formActions {
+            border-top-color: var(--gray-700);
+            background-color: var(--gray-800);
+        }
+
+        .cancelButton, .primaryButton {
+            border-color: var(--gray-600);
+        }
+
+        .primaryButton,
+        .primaryAction {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .cancelButton {
+            background-color: var(--gray-700);
+            border-color: var(--gray-600);
+        }
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "feed_type": "trending",
+  "entity_types": ["product", "post", "deal"],
+  "page": 1,
+  "page_size": 30,
+  "lat": 40.7128,
+  "lng": -74.0060,
+  "radius": 25,
+  "user_id": "user123",
+  "filters": {
+    "category_ids": ["cat789"],
+    "created_after": "2023-06-01T00:00:00Z",
+    "tags": ["summer", "sale"]
+  }
+}

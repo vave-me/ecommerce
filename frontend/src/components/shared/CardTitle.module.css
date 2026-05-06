@@ -1,0 +1,150 @@
+/* CardTitle.module.css - Professional, Compact Title Component */
+
+.titleContainer {
+    width: 100%;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.titleLink {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: color var(--transition-fast) var(--ease-in-out);
+}
+
+@media (prefers-color-scheme: dark) {
+    .titleLink {
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+.titleLink:hover {
+    color: var(--primary-color);
+}
+
+@media (prefers-color-scheme: dark) {
+    .titleLink:hover {
+        color: var(--teal-400, #2dd4bf);
+    }
+}
+
+.titleLink:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+@media (prefers-color-scheme: dark) {
+    .titleLink:focus-visible {
+        outline-color: var(--teal-400, #2dd4bf);
+    }
+}
+
+.title {
+    /* Professional typography - LinkedIn/Twitter inspired */
+    font-size: var(--text-md); /* 15px - Twitter standard */
+    font-weight: var(--weight-semibold); /* 600 - professional emphasis */
+    line-height: var(--leading-snug); /* 1.3 - compact like Twitter */
+    font-family: var(--font-primary); /* Modern system font stack */
+    letter-spacing: var(--letter-tight); /* Slightly tighter for density */
+    
+    /* Colors and spacing */
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    
+    /* Text handling */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    
+    /* Interaction */
+    cursor: pointer;
+    transition: color var(--transition-fast) var(--ease-in-out);
+    
+    /* Modern text rendering for crisp appearance */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+@media (prefers-color-scheme: dark) {
+    .title {
+        color: var(--gray-100, #f3f4f6);
+    }
+}
+
+.truncated {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Precise height calculation: 15px * 1.3 * 2 lines = 39px */
+    max-height: calc(var(--text-md) * var(--leading-snug) * 2);
+}
+
+.title:hover {
+    color: var(--primary-color);
+}
+
+@media (prefers-color-scheme: dark) {
+    .title:hover {
+        color: var(--teal-400, #2dd4bf);
+    }
+}
+
+/* Mobile responsiveness - Professional scaling */
+@media (max-width: 768px) {
+
+    
+    .title {
+        font-size: var(--text-base); /* 14px - LinkedIn mobile standard */
+        line-height: var(--leading-snug); /* Keep compact line-height */
+    }
+    
+    .truncated {
+        /* Recalculate for mobile: 14px * 1.3 * 2 = 36.4px */
+        max-height: calc(var(--text-base) * var(--leading-snug) * 2);
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: var(--text-sm); /* 13px - very compact for small screens */
+        line-height: var(--leading-tight); /* 1.2 - ultra compact */
+    }
+    
+    .truncated {
+        /* Ultra compact: 13px * 1.2 * 2 = 31.2px */
+        max-height: calc(var(--text-sm) * var(--leading-tight) * 2);
+    }
+}
+
+/* High contrast accessibility */
+@media (prefers-contrast: high) {
+    .titleLink {
+        border: 1px solid transparent;
+    }
+    
+    .titleLink:hover {
+        border-color: currentColor;
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+}
+
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+    .titleLink:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: var(--gray-400, #9ca3af);
+    }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .titleLink,
+    .title {
+        transition: none;
+    }
+} 

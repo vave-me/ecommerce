@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - vave me</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .offline-container {
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .offline-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            min-width: 160px;
+            justify-content: center;
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.9);
+            color: #4f46e5;
+            border-color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .btn-primary:hover {
+            background: white;
+            color: #4338ca;
+        }
+        
+        .network-status {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .online-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ef4444;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-dot.online {
+            background: #10b981;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .features {
+            margin-top: 2rem;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .features h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .features ul {
+            list-style: none;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .features li:last-child {
+            border-bottom: none;
+        }
+        
+        .features li:before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .offline-icon {
+                width: 100px;
+                height: 100px;
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">
+            📱
+        </div>
+        
+        <h1>You're Offline</h1>
+        <p class="subtitle">
+            No internet connection detected. Some features may be limited, but you can still browse cached content.
+        </p>
+        
+        <div class="actions">
+            <button class="btn btn-primary" onclick="location.reload()">
+                🔄 Try Again
+            </button>
+            <a href="/" class="btn">
+                🏠 Go Home
+            </a>
+        </div>
+        
+        <div class="network-status">
+            <div class="online-indicator">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="connectionStatus">Checking connection...</span>
+            </div>
+        </div>
+        
+        <div class="features">
+            <h3>Available While Offline</h3>
+            <ul>
+                <li>Browse previously viewed listings</li>
+                <li>View cached property details</li>
+                <li>Access saved favorites</li>
+                <li>Compose messages (will send when online)</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Monitor network status
+        function updateConnectionStatus() {
+            const statusDot = document.getElementById('statusDot');
+            const connectionStatus = document.getElementById('connectionStatus');
+            
+            if (navigator.onLine) {
+                statusDot.classList.add('online');
+                connectionStatus.textContent = 'Connected - You can refresh now';
+                
+                // Auto-reload after a short delay when back online
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            } else {
+                statusDot.classList.remove('online');
+                connectionStatus.textContent = 'Offline - Check your internet connection';
+            }
+        }
+        
+        // Initial status check
+        updateConnectionStatus();
+        
+        // Listen for online/offline events
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+        
+        // Periodic connection check
+        setInterval(() => {
+            // Try to fetch a small resource to verify connection
+            fetch('/favicon.ico?t=' + Date.now(), { 
+                method: 'HEAD',
+                cache: 'no-cache'
+            })
+            .then(() => {
+                if (!navigator.onLine) {
+                    // Force online status update
+                    navigator.onLine = true;
+                    updateConnectionStatus();
+                }
+            })
+            .catch(() => {
+                // Connection failed
+                if (navigator.onLine) {
+                    navigator.onLine = false;
+                    updateConnectionStatus();
+                }
+            });
+        }, 5000);
+        
+        // Service Worker messaging
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.addEventListener('message', (event) => {
+                if (event.data && event.data.type === 'CACHE_UPDATED') {
+                    // Show notification that new content is available
+                    const notification = document.createElement('div');
+                    notification.style.cssText = `
+                        position: fixed;
+                        top: 20px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: rgba(16, 185, 129, 0.9);
+                        color: white;
+                        padding: 12px 20px;
+                        border-radius: 8px;
+                        font-size: 14px;
+                        z-index: 1000;
+                        backdrop-filter: blur(10px);
+                    `;
+                    notification.textContent = 'New content available offline!';
+                    document.body.appendChild(notification);
+                    
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 3000);
+                }
+            });
+        }
+    </script>
+</body>
+</html> 

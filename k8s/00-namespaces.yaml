@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: my-project
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: database
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: messaging
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: redis # Add if deploying Redis via K8s
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: minio # Add if deploying Minio via K8s
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nominatim # Add if deploying Minio via K8s
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: vectors # Vector database and services namespace
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: observability # Monitoring and tracing namespace
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: docker-registry # Container registry namespace
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jenkins # Add if deploying Minio via K8s

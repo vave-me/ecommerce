@@ -1,0 +1,230 @@
+/* Settings.module.css */
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    border-radius: 12px;
+    background-color: #f9fafb;
+}
+
+@media (prefers-color-scheme: dark) {
+    .container {
+        background-color: var(--gray-900, #111827);
+    }
+}
+
+.content {
+    display: flex;
+    gap: 1.5rem;
+    min-height: calc(100vh - 160px);
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Simplified shadow for performance */
+    overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+    .content {
+        background-color: var(--gray-800, #1f2937);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.sidebar {
+    width: 260px;
+    background-color: #f2f5f7;
+    padding: 1.5rem 1rem;
+    border-right: 1px solid #e5e7eb;
+    flex-shrink: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    .sidebar {
+        background-color: var(--gray-750, #2d3748);
+        border-right-color: var(--gray-700, #374151);
+    }
+}
+
+.settingsTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+    padding-left: 0.75rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .settingsTitle {
+        color: var(--gray-100, #f3f4f6);
+    }
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    padding: 0.875rem 1rem;
+    margin-bottom: 0.5rem;
+    border: none;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #4b5563;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+    .tab {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.tab:hover {
+    background-color: rgba(26, 168, 158, 0.08);
+    color: #1aa89e;
+}
+
+@media (prefers-color-scheme: dark) {
+    .tab:hover {
+        background-color: rgba(26, 168, 158, 0.15);
+        color: var(--teal-400, #2dd4bf);
+    }
+}
+
+.tab.active {
+    background-color: #1aa89e;
+    color: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+    .tab.active {
+        background-color: var(--teal-600, #0d9488);
+        color: var(--gray-50, #f9fafb);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.tabIcon {
+    font-size: 1.125rem;
+    margin-right: 0.75rem;
+    flex-shrink: 0;
+}
+
+.mainContent {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+    .mainContent {
+        background-color: var(--gray-800, #1f2937);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 960px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .content {
+        gap: 1rem;
+    }
+
+    .sidebar {
+        width: 220px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #e5e7eb;
+        padding: 1rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .sidebar {
+            border-bottom-color: var(--gray-700, #374151);
+        }
+    }
+
+    .settingsTitle {
+        margin-bottom: 1rem;
+    }
+
+    .tab {
+        padding: 0.75rem;
+        margin-bottom: 0.375rem;
+    }
+
+    .mainContent {
+        padding: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0.5rem;
+    }
+
+    .content {
+        border-radius: 8px;
+    }
+
+    .sidebar {
+        padding: 0.875rem;
+    }
+
+    .settingsTitle {
+        margin-bottom: 0.75rem;
+    }
+
+    .tabText {
+        font-size: 0.875rem;
+    }
+
+    .mainContent {
+        padding: 1rem;
+    }
+}
+
+/* Focus States for Accessibility */
+@media (prefers-color-scheme: dark) {
+    .tab:focus {
+        outline: 2px solid var(--teal-400, #2dd4bf);
+        outline-offset: 2px;
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+    .content {
+        border: 2px solid var(--gray-600, #4b5563);
+    }
+
+    .sidebar {
+        border-right-width: 2px;
+    }
+
+    .tab.active {
+        border: 2px solid var(--teal-400, #2dd4bf);
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .tab {
+        transition: none;
+    }
+}

@@ -1,0 +1,156 @@
+syntax = "proto3";
+
+package metricspb;
+
+
+service MetricsService {
+
+  rpc UpdateItemMetric(UpdateItemMetricRequest) returns (UpdateItemMetricResponse) {}
+  rpc ShareItem(ShareItemRequest) returns (ShareItemResponse) {}
+  rpc VisitItem(VisitItemRequest) returns (VisitItemResponse) {}
+  rpc UpdateUserMetric(UpdateUserMetricRequest) returns (UpdateUserMetricResponse) {}
+  rpc GetUserMetric(GetUserMetricRequest) returns (GetUserMetricResponse) {}
+  rpc GetItemMetric(GetItemMetricRequest) returns (GetItemMetricResponse) {}
+  rpc GetItemsMetric(GetItemsMetricRequest) returns (GetItemsMetricResponse) {}
+  rpc GetHighestMetricsByType(GetHighestMetricsByTypeRequest)returns(GetItemsMetricResponse){}
+  rpc GetLowestMetricsByType(GetLowestMetricsByTypeRequest)returns(GetItemsMetricResponse){}
+}
+
+message GetItemMetricRequest {
+  string item_id = 1;
+}
+message ShareItemRequest {
+  string item_id = 1;
+}
+message VisitItemRequest {
+  string item_id = 1;
+}
+message GetItemMetricResponse{
+  ItemMetric metric = 1;
+}
+message  ShareItemResponse{
+
+}
+message VisitItemResponse{
+  
+}
+message GetItemsMetricRequest {
+  repeated string item_ids = 1;
+  int32 limit = 2; // Optional limit, max 150 items
+}
+
+message GetItemsMetricResponse {
+  repeated ItemMetric metrics = 1;
+}
+message GetHighestMetricsByTypeRequest {
+  string metric_type = 1;
+  repeated string entity_types = 2;
+  string category_id = 3;
+  int64 min_price = 4;
+  int64 max_price = 5;
+  int32 limit = 6;
+  float lat = 7;
+  float lng = 8;
+  float radius = 9;
+  string created_from = 10;
+  string created_to = 11;
+}
+message GetLowestMetricsByTypeRequest {
+  string metric_type = 1;
+  repeated string entity_types = 2;
+  string category_id = 3;
+  int64 min_price = 4;
+  int64 max_price = 5;
+  int32 limit = 6;
+  float lat = 7;
+  float lng = 8;
+  float radius = 9;
+  string created_from = 10;
+  string created_to = 11;
+}
+
+message GetUserMetricRequest {
+  string user_id = 1;
+
+}
+message GetUserMetricResponse{
+  UserMetric metric = 1;
+}
+
+message  UpdateItemMetricResponse{
+  string item_id = 1;
+}
+message   UpdateUserMetricResponse{
+  string user_id = 1;
+}
+message UpdateUserMetricRequest {
+  string user_id = 1;
+  string metric_type = 2;
+  string metric_type_action = 3;
+}
+message UpdateItemMetricRequest {
+  string item_id = 1; // The newly created Post ID
+  string metric_type = 2;
+  string metric_type_action = 3;
+}
+message ItemMetric {
+  string item_id = 1;
+  string entity_type = 2;
+  int64 likes_count = 3;
+  int64 dislikes_count = 4;
+  int64 comments_count = 5;
+  int64 messages_count = 6;
+  int64 shared_count = 7;
+  int64 added_to_wishlist_count = 8;
+  int64 added_to_basket_count = 9;
+  int64 visited_count = 10;
+  int64 reported_count = 11;
+  int64 follower_count = 12;
+  int64 review_count = 13;
+  int64 rating_count = 14;
+  int64 videos_count = 15;
+  int64 images_count = 16;
+  int64 rating = 17;
+  string category = 18;
+  string category_id = 19;
+  string category_slug = 20;
+  int64 media_count = 21;
+  int64 price = 22;
+  float lat = 23;
+  float lng = 24;
+}
+
+message UserMetric {
+  string user_id = 1;
+  string entity_type = 2;
+  int64 likes_count = 3;
+  int64 dislikes_count = 4;
+  int64 comments_count = 5;
+  int64 messages_count = 6;
+  int64 shared_count = 7;
+  int64 added_to_wishlist_count = 8;
+  int64 added_to_basket_count = 9;
+  int64 visited_count = 10;
+  int64 reported_count = 11;
+  int64 follower_count = 12;
+  int64 review_count = 13;
+  int64 rating_count = 14;
+  int64 videos_count = 15;
+  int64 images_count = 16;
+  int64 rating = 17;
+  string category = 18;
+  string category_id = 19;
+  string category_slug = 20;
+  int64 media_added_count = 21;
+  int64 comment_added_count = 22;
+  int64 liked_count = 23;
+  int64 disliked_count = 24;
+  int64 products_added_count = 25;
+  int64 videos_added_count = 26;
+  int64 images_added_count = 27;
+  int64 series_added_count = 28;
+  int64 jobs_added_count = 29;
+  int64 posts_added_count = 30;
+  int64 vehicles_added_count = 31;
+  int64 properties_added_count = 32;
+}

@@ -1,0 +1,38 @@
+package tools
+
+import (
+	ai2 "middleman/internal/ai"
+)
+
+// CreateOpenAICompliantTools creates all available tool definitions for the AI assistant
+func CreateOpenAICompliantTools() []ai2.Tool {
+	tools := []ai2.Tool{}
+
+	// Add all tool categories
+	tools = append(tools, createActivityTools()...)
+	tools = append(tools, createBasketTools()...)
+	tools = append(tools, createCategoryTools()...)
+	tools = append(tools, createCommentTools()...)
+	tools = append(tools, createFollowingTools()...)
+	tools = append(tools, createGeocodingTools()...)
+	tools = append(tools, createMailerTools()...)
+	tools = append(tools, createMediaTools()...)
+	tools = append(tools, createMessageTools()...)
+	tools = append(tools, createMetricTools()...)
+	tools = append(tools, createNewsletterTools()...)
+	tools = append(tools, createNotificationTools()...)
+	tools = append(tools, createOfferTools()...)
+	tools = append(tools, createOrderTools()...)
+	tools = append(tools, createPaymentTools()...)
+	tools = append(tools, createPostTools()...)
+	tools = append(tools, createProductTools()...)
+	tools = append(tools, createReviewTools()...)
+	tools = append(tools, createServiceTools()...)
+	tools = append(tools, createShippingTools()...)
+	tools = append(tools, createSupportTools()...)
+	tools = append(tools, createUserTools()...)
+	tools = append(tools, createVectorTools()...)
+	tools = append(tools, createWishlistTools()...)
+
+	return tools
+}

@@ -1,0 +1,74 @@
+{
+  "name": "react-nats-messaging",
+  "version": "1.0.0",
+  "description": "A React library for NATS messaging with protobuf support",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src/proto"
+  ],
+  "scripts": {
+    "build": "rollup -c rollup.config.mjs",
+    "dev": "rollup -c rollup.config.mjs -w",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint src --ext .ts,.tsx",
+    "type-check": "tsc --noEmit",
+    "proto:generate": "pbjs -t static-module -w es6 -o src/proto/compiled.js src/proto/*.proto && pbts -o src/proto/compiled.d.ts src/proto/compiled.js",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0",
+    "nats.ws": "^1.0.0"
+  },
+  "dependencies": {
+    "protobufjs": "^7.2.5",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-terser": "^0.4.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@testing-library/jest-dom": "^6.0.0",
+    "@testing-library/react": "^14.0.0",
+    "@types/jest": "^29.5.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/uuid": "^9.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "eslint-plugin-react": "^7.33.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "nats.ws": "^1.0.0",
+    "protobufjs-cli": "^1.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup": "^3.20.0",
+    "rollup-plugin-dts": "^5.3.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "ts-jest": "^29.1.0",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/react-nats-messaging.git"
+  },
+  "keywords": [
+    "react",
+    "nats",
+    "messaging",
+    "websocket",
+    "protobuf",
+    "real-time"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

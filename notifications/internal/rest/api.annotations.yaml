@@ -1,0 +1,35 @@
+type: google.api.Service
+config_version: 3
+name: notifications.googleapis.com
+title: Notifications Management API
+apis:
+  - name: notificationspb.NotificationsService
+http:
+  rules:
+    - selector: notificationspb.NotificationsService.ListAlerts
+      get: /api/notifications/alerts
+
+    - selector: notificationspb.NotificationsService.GetAlertsByType
+      get: /api/notifications/alerts/type
+
+    - selector: notificationspb.NotificationsService.MarkAlertAsRead
+      put: /api/notifications/alerts/{alert_id}/read
+
+    - selector: notificationspb.NotificationsService.MarkAllAlertsAsRead
+      put: /api/notifications/alerts/read-all
+
+    - selector: notificationspb.NotificationsService.DeleteAlert
+      delete: /api/notifications/alerts/{alert_id}
+
+    - selector: notificationspb.NotificationsService.GetUnreadCount
+      get: /api/notifications/alerts/unread-count
+
+    - selector: notificationspb.NotificationsService.GetNotificationStats
+      get: /api/notifications/alerts/stats
+
+    - selector: notificationspb.NotificationsService.GetNotificationPreferences
+      get: /api/notifications/preferences
+
+    - selector: notificationspb.NotificationsService.UpdateNotificationPreferences
+      put: /api/notifications/preferences
+

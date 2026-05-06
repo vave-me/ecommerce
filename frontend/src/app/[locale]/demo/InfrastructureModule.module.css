@@ -1,0 +1,204 @@
+.section {
+  margin-bottom: 5rem;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1a202c;
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 2px;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.icon {
+  width: 36px;
+  height: 36px;
+  color: #667eea;
+}
+
+.costSavingContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.costSavingItem {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.costSavingContent {
+  flex: 1;
+}
+
+.costSavingTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 1rem;
+}
+
+.costSavingText {
+  font-size: 1.05rem;
+  color: #4a5568;
+  line-height: 1.7;
+}
+
+.savingsCard {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.savingsCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px rgba(102, 126, 234, 0.15);
+}
+
+.savingsLabel {
+  font-size: 0.95rem;
+  color: #4a5568;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.savingsAmount {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #059669;
+  margin-bottom: 0.5rem;
+}
+
+.savingsNote {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.performanceText {
+  font-size: 1.1rem;
+  color: #4a5568;
+  line-height: 1.8;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.performanceText strong {
+  color: #667eea;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .costSavingItem {
+    grid-template-columns: 1fr;
+  }
+  
+  .sectionTitle {
+    font-size: 2rem;
+  }
+  
+  .savingsAmount {
+    font-size: 2rem;
+  }
+}
+
+.relatedSection {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  padding: 3rem;
+  border-radius: 24px;
+  margin-top: 4rem;
+}
+
+.relatedTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.relatedLinks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.relatedLink {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+.relatedLink:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.relatedIcon {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.relatedLink h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin: 0 0 0.25rem;
+}
+
+.relatedLink p {
+  font-size: 0.9rem;
+  color: #4a5568;
+  margin: 0;
+  line-height: 1.4;
+}

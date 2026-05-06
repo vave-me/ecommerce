@@ -1,0 +1,140 @@
+# Manager Types Configuration
+# This file defines the default settings for each manager type
+
+manager_types:
+  standard:
+    name: "Vaver"
+    description: "AI-powered marketplace manager for intelligent search and recommendations"
+    temperature: 0.7
+    max_tokens: 4000
+    capabilities:
+      - user_interaction
+      - data_analysis
+      - search_and_filter
+      - data_retrieval
+      - public_api_access
+      - jailbreak_resistant
+      - scope_enforcement
+    
+  admin:
+    name: "Admin Manager"
+    description: "Administrative manager with full platform access for system management and moderation"
+    temperature: 0.3
+    max_tokens: 8000
+    capabilities:
+      - user_interaction
+      - data_analysis
+      - search_and_filter
+      - data_retrieval
+      - public_api_access
+      - jailbreak_resistant
+      - scope_enforcement
+      - private_api_access
+      - user_data_access
+      - token_management
+      - data_masking
+      - audit_logging
+      - manager_management
+      - authentication
+    
+  business:
+    name: "Business Manager"
+    description: "Vendor manager for managing products, orders, and customer relationships"
+    temperature: 0.7
+    max_tokens: 4000
+    capabilities:
+      - user_interaction
+      - data_analysis
+      - search_and_filter
+      - data_retrieval
+      - public_api_access
+      - jailbreak_resistant
+      - scope_enforcement
+      - text_generation
+    
+  support:
+    name: "Support Manager"
+    description: "Customer support manager for helping users with questions and issues"
+    temperature: 0.8
+    max_tokens: 2000
+    capabilities:
+      - user_interaction
+      - data_retrieval
+      - search_and_filter
+      - public_api_access
+      - jailbreak_resistant
+      - text_generation
+    
+  scheduler:
+    name: "Scheduler Manager"
+    description: "Automated manager for executing scheduled tasks and workflows"
+    temperature: 0.5
+    max_tokens: 4000
+    capabilities:
+      - user_interaction
+      - data_analysis
+      - search_and_filter
+      - data_retrieval
+      - public_api_access
+      - private_api_access
+      - jailbreak_resistant
+      - scope_enforcement
+      - text_generation
+
+# Permission rules for manager types
+permissions:
+  admin:
+    allowed_operations:
+      - "*"  # All operations allowed
+    
+  business:
+    allowed_operations:
+      - "products:add,update,remove,search"
+      - "orders:view,update,ship"
+      - "reviews:respond,flag"
+      - "messages:send,view"
+      - "metrics:view_own"
+    restricted_entities:
+      - "payments"
+    
+  support:
+    allowed_operations:
+      - "products:search,find,filter"
+      - "orders:track,get_status"
+      - "users:find,get_profile"
+      - "support:create_ticket,update_ticket"
+    restricted_entities:
+      - "payments"
+      - "shipping"
+      - "wishlists"
+    
+  scheduler:
+    # Can perform most operations in user context
+    restricted_operations:
+      - "delete"
+      - "remove"
+      - "force_delete"
+      - "ban"
+      - "suspend"
+    
+  standard:
+    # Default permissions for regular users
+    restricted_operations:
+      - "ban"
+      - "suspend"
+      - "moderate"
+      - "override"
+      - "force"
+      - "bulk"
+      - "admin"
+
+# Role mappings for automatic manager type selection
+role_mappings:
+  admin: admin
+  superadmin: admin
+  vendor: business
+  business: business
+  support: support
+  system: scheduler
+  user: standard
+  guest: standard

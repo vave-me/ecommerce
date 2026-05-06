@@ -1,0 +1,172 @@
+syntax = "proto3";
+
+package ticketspb;
+
+option go_package = "middleman/tickets/ticketspb";
+
+import "google/protobuf/timestamp.proto";
+
+// Match Events
+message MatchCreated {
+  string match_id = 1;
+  string home_team_id = 2;
+  string away_team_id = 3;
+  string stadium_id = 4;
+  google.protobuf.Timestamp match_date = 5;
+  string competition_type = 6;
+  string competition_name = 7;
+  google.protobuf.Timestamp created_at = 8;
+}
+
+message MatchScheduled {
+  string match_id = 1;
+  google.protobuf.Timestamp scheduled_date = 2;
+  google.protobuf.Timestamp sales_start_at = 3;
+  google.protobuf.Timestamp sales_end_at = 4;
+}
+
+message MatchSalesOpened {
+  string match_id = 1;
+  google.protobuf.Timestamp opened_at = 2;
+  int64 total_tickets = 3;
+}
+
+message MatchSalesClosed {
+  string match_id = 1;
+  google.protobuf.Timestamp closed_at = 2;
+  int64 tickets_sold = 3;
+  int64 tickets_remaining = 4;
+}
+
+message MatchCancelled {
+  string match_id = 1;
+  string reason = 2;
+  google.protobuf.Timestamp cancelled_at = 3;
+  bool refunds_issued = 4;
+}
+
+message MatchPostponed {
+  string match_id = 1;
+  google.protobuf.Timestamp original_date = 2;
+  google.protobuf.Timestamp new_date = 3;
+  string reason = 4;
+  google.protobuf.Timestamp postponed_at = 5;
+}
+
+message MatchCompleted {
+  string match_id = 1;
+  int32 home_score = 2;
+  int32 away_score = 3;
+  google.protobuf.Timestamp completed_at = 4;
+}
+
+// Sector Events
+message SectorPriceUpdated {
+  string match_id = 1;
+  string sector_id = 2;
+  int64 old_price = 3;
+  int64 new_price = 4;
+  string reason = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
+
+message SectorSoldOut {
+  string match_id = 1;
+  string sector_id = 2;
+  google.protobuf.Timestamp sold_out_at = 3;
+}
+
+// Ticket Events
+message TicketCreated {
+  string ticket_id = 1;
+  string match_id = 2;
+  string sector_id = 3;
+  string row_number = 4;
+  int32 seat_number = 5;
+  int64 price = 6;
+  google.protobuf.Timestamp created_at = 7;
+}
+
+message TicketReserved {
+  string ticket_id = 1;
+  string user_id = 2;
+  google.protobuf.Timestamp reserved_at = 3;
+  google.protobuf.Timestamp expires_at = 4;
+}
+
+message TicketPurchased {
+  string ticket_id = 1;
+  string user_id = 2;
+  string payment_id = 3;
+  int64 price_paid = 4;
+  google.protobuf.Timestamp purchased_at = 5;
+}
+
+message TicketTransferred {
+  string ticket_id = 1;
+  string from_user_id = 2;
+  string to_user_id = 3;
+  string reason = 4;
+  google.protobuf.Timestamp transferred_at = 5;
+}
+
+message TicketValidated {
+  string ticket_id = 1;
+  string gate_number = 2;
+  string validator_id = 3;
+  google.protobuf.Timestamp validated_at = 4;
+}
+
+message TicketCancelled {
+  string ticket_id = 1;
+  string reason = 2;
+  google.protobuf.Timestamp cancelled_at = 3;
+}
+
+message TicketRefunded {
+  string ticket_id = 1;
+  int64 refund_amount = 2;
+  string reason = 3;
+  google.protobuf.Timestamp refunded_at = 4;
+}
+
+message TicketResold {
+  string ticket_id = 1;
+  string original_owner_id = 2;
+  string new_owner_id = 3;
+  int64 resale_price = 4;
+  google.protobuf.Timestamp resold_at = 5;
+}
+
+// Season Ticket Events
+message SeasonTicketCreated {
+  string season_ticket_id = 1;
+  string owner_id = 2;
+  string team_id = 3;
+  string sector_id = 4;
+  string row_number = 5;
+  int32 seat_number = 6;
+  string season = 7;
+  google.protobuf.Timestamp created_at = 8;
+}
+
+message SeasonTicketRenewed {
+  string season_ticket_id = 1;
+  string new_season = 2;
+  int64 renewal_price = 3;
+  google.protobuf.Timestamp renewed_at = 4;
+}
+
+// Batch Events
+message BulkTicketsCreated {
+  string match_id = 1;
+  string sector_id = 2;
+  int32 ticket_count = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
+
+message ReservationExpired {
+  string ticket_id = 1;
+  string user_id = 2;
+  google.protobuf.Timestamp expired_at = 3;
+}

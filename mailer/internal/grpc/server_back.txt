@@ -1,0 +1,116 @@
+package grpc
+
+import (
+	"bytes"
+	"fmt"
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/s3"
+	"github.com/google/uuid"
+	"google.golang.org/protobuf/types/known/timestamppb"
+	"time"
+)
+
+package application
+
+import (
+"context"
+"fmt"
+"time"
+
+pb "mailer-service/proto"
+
+"github.com/google/uuid"
+"github.com/aws/aws-sdk-go/aws"
+"github.com/aws/aws-sdk-go/aws/session"
+"github.com/aws/aws-sdk-go/service/s3"
+)
+
+// MailerServiceServer implements pb.MailerServiceServer
+type MailerServiceServer struct {
+	pb.UnimplementedMailerServiceServer
+	S3Client *s3.S3
+	Bucket   string
+}
+
+// NewMailerServiceServer creates a new MailerServiceServer
+func NewMailerServiceServer(sess *session.Session, bucket string) *MailerServiceServer {
+	return &MailerServiceServer{
+		S3Client: s3.New(sess),
+		Bucket:   bucket,
+	}
+}
+
+// UploadMailer handles uploading of mailer files
+func (s *MailerServiceServer) UploadMailer(ctx context.Context, req *pb.UploadMailerRequest) (*pb.UploadMailerResponse, error) {
+	// Validate the request
+	if req.EntityType == pb.EntityType_ENTITY_TYPE_UNSPECIFIED || req.EntityId == "" {
+		return nil, fmt.Errorf("invalid entity type or entity ID")
+	}
+
+	if req.MailerType == pb.MailerType_MEDIA_TYPE_UNSPECIFIED {
+		return nil, fmt.Errorf("invalid mailer type")
+	}
+
+	if len(req.File) == 0 {
+		return nil, fmt.Errorf("file data is empty")
+	}
+
+	// Generate a unique mailer ID
+	mailerID := uuid.New().String()
+
+	// Define the S3 object key
+	objectKey := fmt.Sprintf("%s/%s/%s", req.EntityType.String(), req.EntityId, mailerID)
+
+	// Upload the file to S3
+	_, err := s.S3Client.PutObject(&s3.PutObjectInput{
+		Bucket:      aws.String(s.Bucket),
+		Key:         aws.String(objectKey),
+		Body:        bytes.NewReader(req.File),
+		ContentType: aws.String(getContentType(req.MailerType)),
+		ACL:         aws.String("private"), // Use "public-read" if mailer is public
+	})
+	if err != nil {
+		return nil, fmt.Errorf("failed to upload to S3: %w", err)
+	}
+
+	// Generate a pre-signed URL (optional)
+	presignedURL, err := s.generatePresignedURL(objectKey, 24*time.Hour)
+	if err != nil {
+		return nil, fmt.Errorf("failed to generate presigned URL: %w", err)
+	}
+
+	// Create response
+	resp := &pb.UploadMailerResponse{
+		MailerId:   mailerID,
+		Url:       presignedURL, // Or construct the S3 URL if public
+		CreatedAt: timestamppb.New(time.Now().UTC()),
+	}
+
+	return resp, nil
+}
+
+// Helper function to determine Content-Type based on MailerType
+func getContentType(mailerType pb.MailerType) string {
+	switch mailerType {
+	case pb.MailerType_IMAGE:
+		return "image/jpeg" // Adjust based on your needs or include in request
+	case pb.MailerType_VIDEO:
+		return "video/mp4" // Adjust accordingly
+	default:
+		return "application/octet-stream"
+	}
+}
+
+// Helper function to generate a pre-signed URL for accessing the mailer
+func (s *MailerServiceServer) generatePresignedURL(objectKey string, duration time.Duration) (string, error) {
+	req, _ := s.S3Client.GetObjectRequest(&s3.GetObjectInput{
+		Bucket: aws.String(s.Bucket),
+		Key:    aws.String(objectKey),
+	})
+	url, err := req.Presign(duration)
+	if err != nil {
+		return "", err
+	}
+	return url, nil
+}

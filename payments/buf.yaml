@@ -1,0 +1,12 @@
+version: v1
+name: buf.build/payments/paymentspb
+deps:
+  - buf.build/googleapis/googleapis
+lint:
+  enum_zero_value_suffix: _UNKNOWN
+  except:
+    - PACKAGE_VERSION_SUFFIX
+    - PACKAGE_DIRECTORY_MATCH
+breaking:
+  use:
+    - FILE

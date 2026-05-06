@@ -1,0 +1,100 @@
+type: google.api.Service
+config_version: 3
+name: tickets.googleapis.com
+title: Football Match Tickets API
+apis:
+  - name: ticketspb.TicketsService
+http:
+  rules:
+    # Match Management
+    - selector: ticketspb.TicketsService.CreateMatch
+      post: /api/matches
+      body: "*"
+    
+    - selector: ticketspb.TicketsService.GetMatch
+      get: /api/matches/{match_id}
+    
+    - selector: ticketspb.TicketsService.UpdateMatch
+      put: /api/matches/{match_id}
+      body: "*"
+    
+    - selector: ticketspb.TicketsService.OpenMatchSales
+      post: /api/matches/{match_id}/open-sales
+    
+    - selector: ticketspb.TicketsService.CloseMatchSales
+      post: /api/matches/{match_id}/close-sales
+    
+    - selector: ticketspb.TicketsService.CancelMatch
+      post: /api/matches/{match_id}/cancel
+      body: "*"
+    
+    - selector: ticketspb.TicketsService.PostponeMatch
+      post: /api/matches/{match_id}/postpone
+      body: "*"
+    
+    # Sector Management
+    - selector: ticketspb.TicketsService.UpdateSectorPricing
+      put: /api/matches/{match_id}/sectors/{sector_id}/pricing
+      body: "*"
+    
+    - selector: ticketspb.TicketsService.GetSectorAvailability
+      get: /api/matches/{match_id}/sectors/{sector_id}/availability
+    
+    # Ticket Operations
+    - selector: ticketspb.TicketsService.PurchaseTickets
+      post: /api/tickets/purchase
+      body: "*"
+    
+    - selector: ticketspb.TicketsService.ReserveTickets
+      post: /api/tickets/reserve
+      body: "*"
+    
+    - selector: ticketspb.TicketsService.GetTicket
+      get: /api/tickets/{ticket_id}
+    
+    - selector: ticketspb.TicketsService.TransferTicket
+      post: /api/tickets/{ticket_id}/transfer
+      body: "*"
+    
+    - selector: ticketspb.TicketsService.ValidateTicket
+      post: /api/tickets/validate
+      body: "*"
+    
+    - selector: ticketspb.TicketsService.CancelTicket
+      post: /api/tickets/{ticket_id}/cancel
+      body: "*"
+    
+    - selector: ticketspb.TicketsService.RefundTicket
+      post: /api/tickets/{ticket_id}/refund
+      body: "*"
+    
+    # User Tickets
+    - selector: ticketspb.TicketsService.GetUserTickets
+      get: /api/users/{user_id}/tickets
+    
+    - selector: ticketspb.TicketsService.GetUserUpcomingMatches
+      get: /api/users/{user_id}/matches/upcoming
+    
+    # Match Discovery
+    - selector: ticketspb.TicketsService.GetUpcomingMatches
+      get: /api/matches/upcoming
+    
+    - selector: ticketspb.TicketsService.SearchMatches
+      get: /api/matches/search
+    
+    # Season Tickets
+    - selector: ticketspb.TicketsService.CreateSeasonTicket
+      post: /api/season-tickets
+      body: "*"
+    
+    - selector: ticketspb.TicketsService.RenewSeasonTicket
+      post: /api/season-tickets/{season_ticket_id}/renew
+      body: "*"
+    
+    # Stadium Management
+    - selector: ticketspb.TicketsService.CreateStadium
+      post: /api/stadiums
+      body: "*"
+    
+    - selector: ticketspb.TicketsService.GetStadium
+      get: /api/stadiums/{stadium_id}

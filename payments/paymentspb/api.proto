@@ -1,0 +1,199 @@
+syntax = "proto3";
+
+package paymentspb;
+
+option go_package = "middleman/payments/paymentspb;paymentspb";
+
+import "google/api/annotations.proto";
+import "google/api/http.proto";
+import "google/api/httpbody.proto";
+import "google/protobuf/any.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+
+// ==========================================================================
+// PaymentsService
+// --------------------------------------------------------------------------
+// Provides functionalities related to payment authorizations and invoice
+// management.
+// ==========================================================================
+service PaymentsService {
+  // Authorize a payment for the given amount and customer.
+  rpc AuthorizePayment(AuthorizePaymentRequest) returns (AuthorizePaymentResponse) {
+  }
+
+  rpc ConfirmPayment(ConfirmPaymentRequest) returns (ConfirmPaymentResponse) {
+  }
+
+  rpc CreateInvoice(CreateInvoiceRequest) returns (CreateInvoiceResponse) {
+  }
+
+  // Adjust an existing invoice (e.g., changing the amount).
+  rpc AdjustInvoice(AdjustInvoiceRequest) returns (AdjustInvoiceResponse) {
+
+  }
+
+  // Pay an existing invoice with the specified payment method.
+  rpc PayInvoice(PayInvoiceRequest) returns (PayInvoiceResponse) {
+
+  }
+
+  // Cancel an existing invoice.
+  rpc CancelInvoice(CancelInvoiceRequest) returns (CancelInvoiceResponse) {
+  }
+
+  // Handle a webhook event (e.g., from Stripe).
+  // Note: If exact raw body is needed for signature verification,
+  // you might handle this route manually instead.
+  rpc HandleWebhook(HandleWebhookRequest) returns (HandleWebhookResponse) {
+    option (google.api.http) = {
+      post: "/api/payments/webhook"
+      body: "*"
+    };
+  }
+
+  // Capture a payment, possibly partially.
+  rpc CapturePayment(CapturePaymentRequest) returns (CapturePaymentResponse) {
+
+  }
+}
+
+// ==========================================================================
+// Webhook messages
+// ==========================================================================
+message HandleWebhookRequest {
+  // The raw body of the webhook payload.
+  string raw_body = 1;
+
+  // The signature header (e.g., Stripe-Signature).
+  string signature = 2;
+}
+
+message HandleWebhookResponse {
+  // Indicates if the webhook was handled successfully.
+  bool success = 1;
+
+  // Additional information about the handling result.
+  string message = 2;
+}
+
+// ==========================================================================
+// Payment capture messages
+// ==========================================================================
+message CapturePaymentRequest {
+  // The ID of the payment to capture.
+  string payment_id = 1;
+
+  // Optional partial capture amount; if omitted or zero, capture the full amount.
+  int64 amount_to_capture = 2;
+}
+
+message CapturePaymentResponse {
+
+  string payment_id = 1;
+  string payment_status = 2;
+}
+
+// ==========================================================================
+// Invoice cancellation
+// ==========================================================================
+message CancelInvoiceRequest {
+
+  string id = 1;
+
+  string reason = 2;
+}
+
+message CancelInvoiceResponse {
+
+}
+
+message AuthorizePaymentRequest {
+  string user_customer_id = 1;
+  int64 amount = 2;
+  string order_id = 3;
+  string basket_id = 4;
+}
+
+message AuthorizePaymentResponse {
+
+  string id = 1;
+  string client_secret = 3;
+}
+
+message ConfirmPaymentRequest {
+  string id = 1;
+  string payment_method_id = 2;
+}
+
+message ConfirmPaymentResponse {
+  string id = 1;
+  string payment_status = 2;
+}
+
+message CreateInvoiceRequest {
+
+  string order_id = 1;
+  string payment_id = 2;
+  int64 amount = 3;
+}
+
+message CreateInvoiceResponse {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+}
+
+message AdjustInvoiceRequest {
+
+  string id = 1;
+  int64 amount = 2;
+  string reason = 3;
+}
+
+message AdjustInvoiceResponse {
+
+  string id = 1;
+  google.protobuf.Timestamp adjusted_at = 2;
+  int64 new_amount = 3;
+}
+
+// ==========================================================================
+// Invoice payment messages
+// ==========================================================================
+message PayInvoiceRequest {
+  string id = 1;
+  string payment_method_id = 2;
+}
+
+message PayInvoiceResponse {
+
+  string id = 1;
+  google.protobuf.Timestamp paid_at = 2;
+  string payment_status = 3;
+}
+
+message Payment {
+
+  string id = 1;
+  string user_customer_id = 2;
+  int64 amount = 3;
+  string payment_method_id = 4;
+  string status = 5;
+}
+
+message Invoice {
+
+  string id = 1;
+  string order_id = 2;
+  string payment_id = 3;
+  int64 amount = 4;
+  string invoice_status = 5;
+}
+
+message ErrorResponse {
+
+  int32 code = 1;
+  string message = 2;
+  repeated string details = 3;
+}

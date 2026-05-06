@@ -1,0 +1,2793 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "supportpb/common.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "SupportService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/support/analytics/agents/{agentId}": {
+      "get": {
+        "summary": "Get agent performance metrics",
+        "operationId": "getAgentPerformance",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbGetAgentPerformanceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "agentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "Analytics"
+        ]
+      }
+    },
+    "/api/support/analytics/metrics": {
+      "get": {
+        "summary": "Get support performance metrics",
+        "operationId": "getSupportMetrics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbGetSupportMetricsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "startTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "channelIds",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Analytics"
+        ]
+      }
+    },
+    "/api/support/analytics/tickets": {
+      "get": {
+        "summary": "Get ticket analytics and trends",
+        "operationId": "getTicketAnalytics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbGetTicketAnalyticsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ticketIds",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Analytics"
+        ]
+      }
+    },
+    "/api/support/channels": {
+      "post": {
+        "summary": "Create a new support channel for a user",
+        "operationId": "createSupportChannel",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbCreateSupportChannelResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/supportpbCreateSupportChannelRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Support Channel"
+        ]
+      }
+    },
+    "/api/support/channels/{channelId}/ai/config": {
+      "put": {
+        "summary": "Configure AI assistant settings",
+        "operationId": "configureAIAssistant",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbConfigureAIAssistantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceConfigureAIAssistantBody"
+            }
+          }
+        ],
+        "tags": [
+          "AI Support"
+        ]
+      }
+    },
+    "/api/support/channels/{channelId}/ai/enable": {
+      "post": {
+        "summary": "Enable AI support for a channel",
+        "operationId": "enableAISupport",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbEnableAISupportResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceEnableAISupportBody"
+            }
+          }
+        ],
+        "tags": [
+          "AI Support"
+        ]
+      }
+    },
+    "/api/support/channels/{channelId}/tickets": {
+      "get": {
+        "summary": "List all tickets in a support channel",
+        "operationId": "getChannelTickets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbGetChannelTicketsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "statusFilter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "SUBMITTED",
+              "ASSIGNED",
+              "IN_PROGRESS",
+              "PENDING_CUSTOMER",
+              "RESOLVED",
+              "CLOSED",
+              "ESCALATED",
+              "REOPENED"
+            ],
+            "default": "DRAFT"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "descending",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/support/channels/{id}": {
+      "get": {
+        "summary": "Get support channel details",
+        "operationId": "getSupportChannel",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbGetSupportChannelResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Support Channel"
+        ]
+      }
+    },
+    "/api/support/channels/{id}/close": {
+      "post": {
+        "summary": "Close a support channel",
+        "operationId": "closeSupportChannel",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbCloseSupportChannelResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceCloseSupportChannelBody"
+            }
+          }
+        ],
+        "tags": [
+          "Support Channel"
+        ]
+      }
+    },
+    "/api/support/channels/{id}/reactivate": {
+      "post": {
+        "summary": "Reactivate a closed support channel",
+        "operationId": "reactivateSupportChannel",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbReactivateSupportChannelResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceReactivateSupportChannelBody"
+            }
+          }
+        ],
+        "tags": [
+          "Support Channel"
+        ]
+      }
+    },
+    "/api/support/channels/{id}/settings": {
+      "put": {
+        "summary": "Update support channel settings",
+        "operationId": "updateSupportChannelSettings",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbUpdateSupportChannelSettingsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceUpdateSupportChannelSettingsBody"
+            }
+          }
+        ],
+        "tags": [
+          "Support Channel"
+        ]
+      }
+    },
+    "/api/support/knowledge": {
+      "post": {
+        "summary": "Create a new knowledge article",
+        "operationId": "createKnowledgeArticle",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbCreateKnowledgeArticleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/supportpbCreateKnowledgeArticleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Knowledge Base"
+        ]
+      }
+    },
+    "/api/support/knowledge/search": {
+      "post": {
+        "summary": "Search knowledge base articles",
+        "operationId": "searchKnowledgeBase",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbSearchKnowledgeBaseResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/supportpbSearchKnowledgeBaseRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Knowledge Base"
+        ]
+      }
+    },
+    "/api/support/knowledge/{articleId}/rate": {
+      "post": {
+        "summary": "Rate a knowledge article",
+        "operationId": "rateArticle",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbRateArticleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceRateArticleBody"
+            }
+          }
+        ],
+        "tags": [
+          "Knowledge Base"
+        ]
+      }
+    },
+    "/api/support/knowledge/{id}": {
+      "get": {
+        "summary": "Get knowledge article details",
+        "operationId": "getKnowledgeArticle",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbGetKnowledgeArticleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Knowledge Base"
+        ]
+      }
+    },
+    "/api/support/tickets": {
+      "get": {
+        "operationId": "SupportService_ListTickets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbListTicketsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "supportId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "searchQuery",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "descending",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "SupportService"
+        ]
+      },
+      "post": {
+        "summary": "Create a new support ticket",
+        "operationId": "createTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbCreateTicketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/supportpbCreateTicketRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/support/tickets/batch": {
+      "post": {
+        "summary": "Get multiple tickets by IDs",
+        "operationId": "getTickets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbGetTicketsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/supportpbGetTicketsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/support/tickets/merge": {
+      "post": {
+        "summary": "Merge multiple tickets",
+        "operationId": "mergeTickets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbMergeTicketsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/supportpbMergeTicketsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/support/tickets/{id}": {
+      "get": {
+        "summary": "Get ticket details",
+        "operationId": "getTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbGetTicketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      },
+      "put": {
+        "summary": "Update ticket information",
+        "operationId": "updateTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbUpdateTicketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceUpdateTicketBody"
+            }
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/support/tickets/{id}/assign": {
+      "post": {
+        "summary": "Assign ticket to an agent or AI",
+        "operationId": "assignTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbAssignTicketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceAssignTicketBody"
+            }
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/support/tickets/{id}/close": {
+      "post": {
+        "summary": "Close a ticket",
+        "operationId": "closeTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbCloseTicketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceCloseTicketBody"
+            }
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/support/tickets/{id}/escalate": {
+      "post": {
+        "summary": "Escalate ticket to higher support tier",
+        "operationId": "escalateTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbEscalateTicketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceEscalateTicketBody"
+            }
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/support/tickets/{id}/priority": {
+      "put": {
+        "summary": "Update ticket priority",
+        "operationId": "updateTicketPriority",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbUpdateTicketPriorityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceUpdateTicketPriorityBody"
+            }
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/support/tickets/{id}/reopen": {
+      "post": {
+        "summary": "Reopen a resolved ticket",
+        "operationId": "reopenTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbReopenTicketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceReopenTicketBody"
+            }
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/support/tickets/{id}/resolve": {
+      "post": {
+        "summary": "Mark ticket as resolved",
+        "operationId": "resolveTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbResolveTicketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceResolveTicketBody"
+            }
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/support/tickets/{ticketId}/ai/suggestions": {
+      "get": {
+        "summary": "Get AI suggestions for ticket resolution",
+        "operationId": "getAISuggestions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbGetAISuggestionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "suggestionType",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "RESPONSE",
+              "KNOWLEDGE_ARTICLE",
+              "SIMILAR_TICKET",
+              "ESCALATION"
+            ],
+            "default": "RESPONSE"
+          }
+        ],
+        "tags": [
+          "AI Support"
+        ]
+      }
+    },
+    "/api/support/tickets/{ticketId}/articles": {
+      "post": {
+        "summary": "Link knowledge article to ticket",
+        "operationId": "linkArticleToTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbLinkArticleToTicketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceLinkArticleToTicketBody"
+            }
+          }
+        ],
+        "tags": [
+          "Knowledge Base"
+        ]
+      }
+    },
+    "/api/support/tickets/{ticketId}/communications": {
+      "get": {
+        "summary": "Get all communications for a ticket",
+        "operationId": "getTicketCommunications",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbGetTicketCommunicationsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "includeInternal",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Communication"
+        ]
+      }
+    },
+    "/api/support/tickets/{ticketId}/handoff/ai": {
+      "post": {
+        "summary": "Transfer ticket from human to AI",
+        "operationId": "handoffToAI",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbHandoffToAIResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceHandoffToAIBody"
+            }
+          }
+        ],
+        "tags": [
+          "AI Support"
+        ]
+      }
+    },
+    "/api/support/tickets/{ticketId}/handoff/human": {
+      "post": {
+        "summary": "Transfer ticket from AI to human agent",
+        "operationId": "handoffToHuman",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbHandoffToHumanResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceHandoffToHumanBody"
+            }
+          }
+        ],
+        "tags": [
+          "AI Support"
+        ]
+      }
+    },
+    "/api/support/tickets/{ticketId}/link": {
+      "post": {
+        "summary": "Link related tickets",
+        "operationId": "linkTickets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbLinkTicketsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceLinkTicketsBody"
+            }
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/support/tickets/{ticketId}/notes": {
+      "post": {
+        "summary": "Add an internal note to a ticket",
+        "operationId": "addInternalNote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbAddInternalNoteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceAddInternalNoteBody"
+            }
+          }
+        ],
+        "tags": [
+          "Communication"
+        ]
+      }
+    },
+    "/api/support/tickets/{ticketId}/replies": {
+      "post": {
+        "summary": "Add a reply to a ticket",
+        "operationId": "addTicketReply",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbAddTicketReplyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportServiceAddTicketReplyBody"
+            }
+          }
+        ],
+        "tags": [
+          "Communication"
+        ]
+      }
+    },
+    "/api/support/users/{userId}/channels": {
+      "get": {
+        "summary": "List all support channels for a user",
+        "operationId": "getUserSupportChannels",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/supportpbGetUserSupportChannelsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "activeOnly",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Support Channel"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "SupportServiceAddInternalNoteBody": {
+      "type": "object",
+      "properties": {
+        "authorId": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "mentionedUsers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SupportServiceAddTicketReplyBody": {
+      "type": "object",
+      "properties": {
+        "authorId": {
+          "type": "string"
+        },
+        "authorType": {
+          "$ref": "#/definitions/supportpbAuthorType"
+        },
+        "content": {
+          "type": "string"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/supportpbAttachment"
+          }
+        },
+        "isPublic": {
+          "type": "boolean"
+        }
+      },
+      "title": "Communication Messages"
+    },
+    "SupportServiceAssignTicketBody": {
+      "type": "object",
+      "properties": {
+        "assigneeId": {
+          "type": "string"
+        },
+        "assigneeType": {
+          "$ref": "#/definitions/supportpbAssigneeType"
+        },
+        "assignmentReason": {
+          "type": "string"
+        }
+      }
+    },
+    "SupportServiceCloseSupportChannelBody": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "SupportServiceCloseTicketBody": {
+      "type": "object",
+      "properties": {
+        "closureNotes": {
+          "type": "string"
+        },
+        "satisfaction": {
+          "$ref": "#/definitions/supportpbCustomerSatisfaction"
+        }
+      }
+    },
+    "SupportServiceConfigureAIAssistantBody": {
+      "type": "object",
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/supportpbAIConfiguration"
+        }
+      }
+    },
+    "SupportServiceEnableAISupportBody": {
+      "type": "object",
+      "properties": {
+        "assistantId": {
+          "type": "string"
+        },
+        "configuration": {
+          "$ref": "#/definitions/supportpbAIConfiguration"
+        }
+      },
+      "title": "AI Integration Messages"
+    },
+    "SupportServiceEscalateTicketBody": {
+      "type": "object",
+      "properties": {
+        "escalationTier": {
+          "$ref": "#/definitions/supportpbSupportTier"
+        },
+        "escalationReason": {
+          "type": "string"
+        },
+        "escalationNotes": {
+          "type": "string"
+        }
+      }
+    },
+    "SupportServiceHandoffToAIBody": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SupportServiceHandoffToHumanBody": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string"
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SupportServiceLinkArticleToTicketBody": {
+      "type": "object",
+      "properties": {
+        "articleId": {
+          "type": "string"
+        },
+        "helpedResolve": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SupportServiceLinkTicketsBody": {
+      "type": "object",
+      "properties": {
+        "relatedTicketIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relationshipType": {
+          "type": "string"
+        }
+      }
+    },
+    "SupportServiceRateArticleBody": {
+      "type": "object",
+      "properties": {
+        "rating": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "feedback": {
+          "type": "string"
+        }
+      }
+    },
+    "SupportServiceReactivateSupportChannelBody": {
+      "type": "object"
+    },
+    "SupportServiceReopenTicketBody": {
+      "type": "object",
+      "properties": {
+        "reopenReason": {
+          "type": "string"
+        }
+      }
+    },
+    "SupportServiceResolveTicketBody": {
+      "type": "object",
+      "properties": {
+        "resolution": {
+          "type": "string"
+        },
+        "appliedSolutions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SupportServiceUpdateSupportChannelSettingsBody": {
+      "type": "object",
+      "properties": {
+        "settings": {
+          "$ref": "#/definitions/supportpbSupportChannelSettings"
+        }
+      }
+    },
+    "SupportServiceUpdateTicketBody": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "category": {
+          "$ref": "#/definitions/supportpbTicketCategory"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SupportServiceUpdateTicketPriorityBody": {
+      "type": "object",
+      "properties": {
+        "priority": {
+          "$ref": "#/definitions/supportpbTicketPriority"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "supportpbAIConfiguration": {
+      "type": "object",
+      "properties": {
+        "assistantId": {
+          "type": "string"
+        },
+        "allowedActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "knowledgeBaseAccess": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "maxHandlingTier": {
+          "$ref": "#/definitions/supportpbSupportTier"
+        },
+        "canCloseTickets": {
+          "type": "boolean"
+        },
+        "canIssueRefunds": {
+          "type": "boolean"
+        },
+        "confidenceThreshold": {
+          "type": "number",
+          "format": "double"
+        },
+        "autoResponseCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maxTokens": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "supportpbAISuggestion": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/supportpbSuggestionType"
+        },
+        "content": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "format": "double"
+        },
+        "reasoning": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "supportpbAddInternalNoteResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "supportpbAddTicketReplyResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "supportpbAgentPerformance": {
+      "type": "object",
+      "properties": {
+        "agentId": {
+          "type": "string"
+        },
+        "agentName": {
+          "type": "string"
+        },
+        "ticketsHandled": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ticketsResolved": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "averageResolutionTimeHours": {
+          "type": "number",
+          "format": "double"
+        },
+        "averageFirstResponseTimeMinutes": {
+          "type": "number",
+          "format": "double"
+        },
+        "customerSatisfactionScore": {
+          "type": "number",
+          "format": "double"
+        },
+        "escalationsReceived": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "escalationsSent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ticketsByCategory": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "periodStart": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "periodEnd": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "supportpbAssignTicketResponse": {
+      "type": "object"
+    },
+    "supportpbAssigneeType": {
+      "type": "string",
+      "enum": [
+        "HUMAN_AGENT",
+        "AI_ASSISTANT",
+        "TEAM"
+      ],
+      "default": "HUMAN_AGENT"
+    },
+    "supportpbAttachment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "filename": {
+          "type": "string"
+        },
+        "contentType": {
+          "type": "string"
+        },
+        "sizeBytes": {
+          "type": "string",
+          "format": "int64"
+        },
+        "url": {
+          "type": "string"
+        },
+        "uploadedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "supportpbAuthorType": {
+      "type": "string",
+      "enum": [
+        "CUSTOMER",
+        "AGENT",
+        "AI",
+        "SYSTEM"
+      ],
+      "default": "CUSTOMER"
+    },
+    "supportpbCloseSupportChannelResponse": {
+      "type": "object"
+    },
+    "supportpbCloseTicketResponse": {
+      "type": "object"
+    },
+    "supportpbCommunication": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "ticketId": {
+          "type": "string"
+        },
+        "authorId": {
+          "type": "string"
+        },
+        "authorType": {
+          "$ref": "#/definitions/supportpbAuthorType"
+        },
+        "content": {
+          "type": "string"
+        },
+        "isPublic": {
+          "type": "boolean"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/supportpbAttachment"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "mentionedUsers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "supportpbConfigureAIAssistantResponse": {
+      "type": "object"
+    },
+    "supportpbCreateKnowledgeArticleRequest": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "public": {
+          "type": "boolean"
+        }
+      },
+      "title": "Knowledge Base Messages"
+    },
+    "supportpbCreateKnowledgeArticleResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "supportpbCreateSupportChannelRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "businessId": {
+          "type": "string"
+        },
+        "channelType": {
+          "$ref": "#/definitions/supportpbSupportChannelType"
+        },
+        "settings": {
+          "$ref": "#/definitions/supportpbSupportChannelSettings"
+        }
+      },
+      "title": "Support Channel Messages"
+    },
+    "supportpbCreateSupportChannelResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "supportpbCreateTicketRequest": {
+      "type": "object",
+      "properties": {
+        "channelId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "category": {
+          "$ref": "#/definitions/supportpbTicketCategory"
+        },
+        "priority": {
+          "$ref": "#/definitions/supportpbTicketPriority"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/supportpbAttachment"
+          }
+        }
+      },
+      "title": "Ticket Messages"
+    },
+    "supportpbCreateTicketResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "supportpbCustomerSatisfaction": {
+      "type": "string",
+      "enum": [
+        "VERY_DISSATISFIED",
+        "DISSATISFIED",
+        "NEUTRAL",
+        "SATISFIED",
+        "VERY_SATISFIED"
+      ],
+      "default": "VERY_DISSATISFIED"
+    },
+    "supportpbEnableAISupportResponse": {
+      "type": "object"
+    },
+    "supportpbEscalateTicketResponse": {
+      "type": "object"
+    },
+    "supportpbGetAISuggestionsResponse": {
+      "type": "object",
+      "properties": {
+        "suggestions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/supportpbAISuggestion"
+          }
+        }
+      }
+    },
+    "supportpbGetAgentPerformanceResponse": {
+      "type": "object",
+      "properties": {
+        "performance": {
+          "$ref": "#/definitions/supportpbAgentPerformance"
+        }
+      }
+    },
+    "supportpbGetChannelTicketsResponse": {
+      "type": "object",
+      "properties": {
+        "tickets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/supportpbTicket"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "supportpbGetKnowledgeArticleResponse": {
+      "type": "object",
+      "properties": {
+        "article": {
+          "$ref": "#/definitions/supportpbKnowledgeArticle"
+        }
+      }
+    },
+    "supportpbGetSupportChannelResponse": {
+      "type": "object",
+      "properties": {
+        "channel": {
+          "$ref": "#/definitions/supportpbSupportChannel"
+        }
+      }
+    },
+    "supportpbGetSupportMetricsResponse": {
+      "type": "object",
+      "properties": {
+        "metrics": {
+          "$ref": "#/definitions/supportpbSupportMetrics"
+        }
+      }
+    },
+    "supportpbGetTicketAnalyticsResponse": {
+      "type": "object",
+      "properties": {
+        "analytics": {
+          "$ref": "#/definitions/supportpbTicketAnalytics"
+        }
+      }
+    },
+    "supportpbGetTicketCommunicationsResponse": {
+      "type": "object",
+      "properties": {
+        "communications": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/supportpbCommunication"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "supportpbGetTicketResponse": {
+      "type": "object",
+      "properties": {
+        "ticket": {
+          "$ref": "#/definitions/supportpbTicket"
+        }
+      }
+    },
+    "supportpbGetTicketsRequest": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "supportpbGetTicketsResponse": {
+      "type": "object",
+      "properties": {
+        "tickets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/supportpbTicket"
+          }
+        }
+      }
+    },
+    "supportpbGetUserSupportChannelsResponse": {
+      "type": "object",
+      "properties": {
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/supportpbSupportChannel"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "supportpbHandoffToAIResponse": {
+      "type": "object"
+    },
+    "supportpbHandoffToHumanResponse": {
+      "type": "object",
+      "properties": {
+        "assignedAgentId": {
+          "type": "string"
+        }
+      }
+    },
+    "supportpbKnowledgeArticle": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "public": {
+          "type": "boolean"
+        },
+        "viewCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "averageRating": {
+          "type": "number",
+          "format": "double"
+        },
+        "ratingCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "relatedTicketIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "supportpbLinkArticleToTicketResponse": {
+      "type": "object"
+    },
+    "supportpbLinkTicketsResponse": {
+      "type": "object"
+    },
+    "supportpbListTicketsResponse": {
+      "type": "object",
+      "properties": {
+        "tickets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/supportpbTicket"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "supportpbMergeTicketsRequest": {
+      "type": "object",
+      "properties": {
+        "primaryTicketId": {
+          "type": "string"
+        },
+        "secondaryTicketIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mergeReason": {
+          "type": "string"
+        }
+      }
+    },
+    "supportpbMergeTicketsResponse": {
+      "type": "object",
+      "properties": {
+        "mergedTicketId": {
+          "type": "string"
+        }
+      }
+    },
+    "supportpbRateArticleResponse": {
+      "type": "object"
+    },
+    "supportpbReactivateSupportChannelResponse": {
+      "type": "object"
+    },
+    "supportpbReopenTicketResponse": {
+      "type": "object"
+    },
+    "supportpbResolveTicketResponse": {
+      "type": "object"
+    },
+    "supportpbSLASettings": {
+      "type": "object",
+      "properties": {
+        "firstResponseMinutes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "resolutionHours": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "priorityResponseTimes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "supportpbSearchKnowledgeBaseRequest": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "supportpbSearchKnowledgeBaseResponse": {
+      "type": "object",
+      "properties": {
+        "articles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/supportpbKnowledgeArticle"
+          }
+        }
+      }
+    },
+    "supportpbSuggestionType": {
+      "type": "string",
+      "enum": [
+        "RESPONSE",
+        "KNOWLEDGE_ARTICLE",
+        "SIMILAR_TICKET",
+        "ESCALATION"
+      ],
+      "default": "RESPONSE"
+    },
+    "supportpbSupportChannel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "businessId": {
+          "type": "string"
+        },
+        "channelType": {
+          "$ref": "#/definitions/supportpbSupportChannelType"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "settings": {
+          "$ref": "#/definitions/supportpbSupportChannelSettings"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "openTickets": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalTickets": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Common Messages"
+    },
+    "supportpbSupportChannelSettings": {
+      "type": "object",
+      "properties": {
+        "emailNotifications": {
+          "type": "boolean"
+        },
+        "smsNotifications": {
+          "type": "boolean"
+        },
+        "autoAssignTickets": {
+          "type": "boolean"
+        },
+        "preferredLanguage": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "notificationEmails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "slaSettings": {
+          "$ref": "#/definitions/supportpbSLASettings"
+        }
+      }
+    },
+    "supportpbSupportChannelType": {
+      "type": "string",
+      "enum": [
+        "GENERAL",
+        "TECHNICAL",
+        "BILLING",
+        "SALES",
+        "PRODUCT"
+      ],
+      "default": "GENERAL",
+      "title": "Enums"
+    },
+    "supportpbSupportMetrics": {
+      "type": "object",
+      "properties": {
+        "totalTickets": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "openTickets": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "resolvedTickets": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "escalatedTickets": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "averageResolutionTimeHours": {
+          "type": "number",
+          "format": "double"
+        },
+        "averageFirstResponseTimeMinutes": {
+          "type": "number",
+          "format": "double"
+        },
+        "customerSatisfactionScore": {
+          "type": "number",
+          "format": "double"
+        },
+        "ticketsByCategory": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "ticketsByPriority": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "ticketsByStatus": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "aiResolvedTickets": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "aiResolutionRate": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "supportpbSupportTier": {
+      "type": "string",
+      "enum": [
+        "TIER_1",
+        "TIER_2",
+        "TIER_3",
+        "MANAGEMENT"
+      ],
+      "default": "TIER_1"
+    },
+    "supportpbTicket": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "channelId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/supportpbTicketStatus"
+        },
+        "priority": {
+          "$ref": "#/definitions/supportpbTicketPriority"
+        },
+        "category": {
+          "$ref": "#/definitions/supportpbTicketCategory"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "assigneeId": {
+          "type": "string"
+        },
+        "assigneeType": {
+          "$ref": "#/definitions/supportpbAssigneeType"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "resolvedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "closedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "firstResponseAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "responseCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "reopenCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "currentTier": {
+          "$ref": "#/definitions/supportpbSupportTier"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/supportpbAttachment"
+          }
+        },
+        "satisfactionRating": {
+          "$ref": "#/definitions/supportpbCustomerSatisfaction"
+        },
+        "linkedTicketIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mergedTicketIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "supportpbTicketAnalytics": {
+      "type": "object",
+      "properties": {
+        "ticketId": {
+          "type": "string"
+        },
+        "timeToFirstResponseMinutes": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalResolutionTimeHours": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalCommunications": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agentCommunications": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "customerCommunications": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "aiCommunications": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "escalationCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "reopenCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agentsInvolved": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "timeInStatus": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      }
+    },
+    "supportpbTicketCategory": {
+      "type": "string",
+      "enum": [
+        "GENERAL_INQUIRY",
+        "TECHNICAL_ISSUE",
+        "BILLING_ISSUE",
+        "ACCOUNT_ISSUE",
+        "PRODUCT_QUESTION",
+        "FEATURE_REQUEST",
+        "COMPLAINT",
+        "REFUND_REQUEST",
+        "ORDER_ISSUE",
+        "SHIPPING_ISSUE"
+      ],
+      "default": "GENERAL_INQUIRY"
+    },
+    "supportpbTicketPriority": {
+      "type": "string",
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "URGENT",
+        "CRITICAL"
+      ],
+      "default": "LOW"
+    },
+    "supportpbTicketStatus": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "SUBMITTED",
+        "ASSIGNED",
+        "IN_PROGRESS",
+        "PENDING_CUSTOMER",
+        "RESOLVED",
+        "CLOSED",
+        "ESCALATED",
+        "REOPENED"
+      ],
+      "default": "DRAFT"
+    },
+    "supportpbUpdateSupportChannelSettingsResponse": {
+      "type": "object"
+    },
+    "supportpbUpdateTicketPriorityResponse": {
+      "type": "object"
+    },
+    "supportpbUpdateTicketResponse": {
+      "type": "object"
+    }
+  }
+}

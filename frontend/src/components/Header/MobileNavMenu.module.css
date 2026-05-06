@@ -1,0 +1,576 @@
+/* MobileNavMenu.module.css */
+/* No changes needed - CSS is well-structured and uses good practices */
+
+/* ----- Overlay ----- */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Standard overlay */
+    z-index: 999996; /* High z-index above navigation */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--duration-normal) var(--ease-out),
+    visibility var(--duration-normal) var(--ease-out);
+    /* Backdrop filter removed for performance */
+    will-change: opacity;
+    /* Ensure proper stacking */
+    isolation: isolate;
+}
+
+/* Dark theme for overlay */
+@media (prefers-color-scheme: dark) {
+    .overlay {
+        background: rgba(0, 0, 0, 0.7);
+    }
+}
+
+.overlayVisible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ----- Menu Wrapper ----- */
+.menuWrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 320px; /* Optimal width for mobile */
+    z-index: 1000;
+    pointer-events: none; /* Allow backdrop clicks */
+}
+
+/* ----- Menu Container ----- */
+.menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background: #ffffff;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+    /* Optimize for touch scrolling */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+
+/* Dark theme for menu */
+@media (prefers-color-scheme: dark) {
+    .menu {
+        background: var(--gray-800, #1f2937);
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* ----- Menu Header ----- */
+.menuHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f3f4f6;
+    background: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Dark theme for menu header */
+@media (prefers-color-scheme: dark) {
+    .menuHeader {
+        background: var(--gray-800, #1f2937);
+        border-bottom: 1px solid var(--gray-700, #374151);
+    }
+}
+
+.title {
+    font-size: 18px; /* Consider variable */
+    font-weight: 600;
+    color: var(--text);
+    margin: 0;
+}
+
+/* Dark theme for title */
+@media (prefers-color-scheme: dark) {
+    .title {
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.closeButton {
+    width: 44px; /* Minimum touch target */
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    color: #6b7280;
+    transition: background-color 0.2s ease;
+    /* Enhanced touch feedback */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+/* Dark theme for close button */
+@media (prefers-color-scheme: dark) {
+    .closeButton {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.closeButton:hover,
+.closeButton:focus-visible {
+    background-color: #f3f4f6;
+    color: #374151;
+}
+
+/* Dark theme for close button hover */
+@media (prefers-color-scheme: dark) {
+    .closeButton:hover,
+    .closeButton:focus-visible {
+        background-color: var(--gray-700, #374151);
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+.closeButton:active {
+    background-color: #e5e7eb;
+    transform: scale(0.95);
+}
+
+/* Dark theme for close button active */
+@media (prefers-color-scheme: dark) {
+    .closeButton:active {
+        background-color: var(--gray-600, #4b5563);
+    }
+}
+
+/* ----- User Section ----- */
+.userSection {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f3f4f6;
+    background: #f9fafb;
+}
+
+/* Dark theme for user section */
+@media (prefers-color-scheme: dark) {
+    .userSection {
+        background: var(--gray-900, #111827);
+        border-bottom: 1px solid var(--gray-700, #374151);
+    }
+}
+
+.userAvatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Dark theme for user avatar */
+@media (prefers-color-scheme: dark) {
+    .userAvatar {
+        background: var(--gray-600, #4b5563);
+    }
+}
+
+.userInfo {
+    flex: 1;
+    min-width: 0; /* Allow text truncation */
+}
+
+.userName {
+    font-weight: 600;
+    font-size: 16px;
+    color: #111827;
+    margin-bottom: 2px;
+    /* Handle long names */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Dark theme for user name */
+@media (prefers-color-scheme: dark) {
+    .userName {
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.userEmail {
+    font-size: 14px;
+    color: #6b7280;
+    /* Handle long emails */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Dark theme for user email */
+@media (prefers-color-scheme: dark) {
+    .userEmail {
+        color: var(--gray-300, #d1d5db);
+    }
+}
+
+/* ----- Navigation Section ----- */
+.navSection {
+    flex: 1; /* Allows this section to grow and scroll */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Enable vertical scroll */
+    overscroll-behavior: contain; /* Prevent scroll chaining */
+    padding: var(--space-4) 0; /* Vertical padding */
+    /* Custom scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+}
+
+.navSection::-webkit-scrollbar {
+    width: 4px;
+}
+
+.navSection::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.navSection::-webkit-scrollbar-thumb {
+    background-color: var(--border);
+    border-radius: 4px;
+}
+
+/* Dark theme for navigation section scrollbar */
+@media (prefers-color-scheme: dark) {
+    .navSection {
+        scrollbar-color: var(--gray-600, #4b5563) transparent;
+    }
+
+    .navSection::-webkit-scrollbar-thumb {
+        background-color: var(--gray-600, #4b5563);
+    }
+}
+
+.navGroup {
+    margin-bottom: var(--space-5); /* Space between groups */
+    padding: 0 var(--space-4); /* Horizontal padding for group content */
+}
+.navGroup:last-child {
+    margin-bottom: 0; /* No margin on last group */
+}
+
+.navGroupTitle {
+    margin: 0 0 var(--space-3);
+    padding: 0 4px; /* Small horizontal padding */
+    font-size: 12px; /* Consider variable */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+}
+
+/* Dark theme for nav group title */
+@media (prefers-color-scheme: dark) {
+    .navGroupTitle {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.navList {
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+    flex: 1;
+    overflow-y: auto;
+    /* Optimize scrolling performance */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+
+.navItem {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    color: #374151;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 2px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+
+/* Dark theme for nav item */
+@media (prefers-color-scheme: dark) {
+    .navItem {
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+.navItem:hover,
+.navItem:focus-visible {
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+
+/* Dark theme for nav item hover */
+@media (prefers-color-scheme: dark) {
+    .navItem:hover,
+    .navItem:focus-visible {
+        background-color: var(--gray-700, #374151);
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.navItem:active {
+    background-color: #e5e7eb;
+}
+
+/* Dark theme for nav item active */
+@media (prefers-color-scheme: dark) {
+    .navItem:active {
+        background-color: var(--gray-600, #4b5563);
+    }
+}
+
+.navItem.active {
+    background-color: var(--primary-light, #e0e7ff);
+    color: var(--primary-color, #4f46e5);
+}
+
+/* Dark theme for nav item active state */
+@media (prefers-color-scheme: dark) {
+    .navItem.active {
+        background-color: var(--gray-700, rgba(59, 130, 246, 0.2));
+        color: var(--primary-color, #60a5fa);
+    }
+}
+
+.navItemIcon {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    color: inherit;
+}
+
+.navItemLabel {
+    flex: 1;
+    font-weight: 500;
+    color: inherit;
+}
+
+.badge {
+    background-color: var(--danger, #ef4444);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+}
+
+/* Dark theme for badge */
+@media (prefers-color-scheme: dark) {
+    .badge {
+        background-color: var(--danger, #ef4444);
+    }
+}
+
+.actionButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px 16px;
+    margin: 8px 0;
+    background-color: var(--primary-color, #4f46e5);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* Dark theme for action button */
+@media (prefers-color-scheme: dark) {
+    .actionButton {
+        background-color: var(--primary-color, #3b82f6);
+    }
+}
+
+.actionButton:hover,
+.actionButton:focus-visible {
+    background-color: var(--primary-darker, #3730a3);
+    transform: translateY(-1px);
+}
+
+/* Dark theme for action button hover */
+@media (prefers-color-scheme: dark) {
+    .actionButton:hover,
+    .actionButton:focus-visible {
+        background-color: var(--primary-color, #2563eb);
+    }
+}
+
+.actionButton:active {
+    transform: translateY(0);
+}
+
+.actionButton.danger {
+    background-color: var(--danger, #ef4444);
+}
+
+.actionButton.danger:hover,
+.actionButton.danger:focus-visible {
+    background-color: var(--danger-darker, #dc2626);
+}
+
+/* Dark theme for danger button */
+@media (prefers-color-scheme: dark) {
+    .actionButton.danger {
+        background-color: var(--danger, #ef4444);
+    }
+
+    .actionButton.danger:hover,
+    .actionButton.danger:focus-visible {
+        background-color: var(--danger, #dc2626);
+    }
+}
+
+/* Animation classes for enter/exit */
+.menuEnter {
+    transform: translateX(100%);
+}
+
+.menuEnterActive {
+    transform: translateX(0);
+    transition: transform 300ms ease-out;
+}
+
+.menuExit {
+    transform: translateX(0);
+}
+
+.menuExitActive {
+    transform: translateX(100%);
+    transition: transform 250ms ease-in;
+}
+
+.noAnimation {
+    transition: none ;
+}
+
+/* Staggered animation for nav items */
+.navList > li {
+    animation: navItemFadeIn 0.3s ease forwards;
+    opacity: 0;
+}
+
+.navList > li:nth-child(1) { animation-delay: 0.05s; }
+.navList > li:nth-child(2) { animation-delay: 0.1s; }
+.navList > li:nth-child(3) { animation-delay: 0.15s; }
+.navList > li:nth-child(4) { animation-delay: 0.2s; }
+.navList > li:nth-child(5) { animation-delay: 0.25s; }
+
+/* Fade in animation for nav items */
+@keyframes navItemFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 480px) {
+    .menuWrapper {
+        max-width: 100%;
+    }
+
+    .menu {
+        width: 100%;
+    }
+
+    .menuHeader,
+    .userSection,
+    .navGroup {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    /* Safe area adjustments for devices with notches */
+    .menu {
+        padding-top: env(safe-area-inset-top, 0);
+        padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+
+    .header { padding-left: max(16px, env(safe-area-inset-left)); }
+    .userSection { padding-left: max(16px, env(safe-area-inset-left)); }
+    .navGroup { padding-left: max(16px, env(safe-area-inset-left)); }
+    .accountActions {
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
+    }
+}
+
+/* High contrast and forced colors support */
+@media (forced-colors: active) {
+    .menu { border: 2px solid ButtonText; }
+    .closeButton:focus-visible,
+    .navItem:focus-visible,
+    .actionButton:focus-visible {
+        outline: 2px solid ButtonText;
+        outline-offset: 2px;
+    }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .navList > li {
+        animation: none;
+        opacity: 1;
+    }
+
+    .menuEnterActive,
+    .menuExitActive {
+        transition: none;
+    }
+}
+
+/* Landscape orientation adjustments for short screens */
+@media (max-height: 500px) and (orientation: landscape) {
+    .menu {
+        overflow-y: auto;
+    }
+
+    .menuHeader {
+        padding: 12px 16px;
+    }
+}

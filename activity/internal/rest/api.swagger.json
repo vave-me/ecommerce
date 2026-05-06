@@ -1,0 +1,688 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Activity Management API",
+    "description": "API for managing user activities and interactions within the system.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "ActivityService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/activity": {
+      "get": {
+        "summary": "List all activities",
+        "operationId": "listActivities",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/activitypbGetActivitiesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "Filter activities by user ID (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Activity"
+        ]
+      },
+      "post": {
+        "summary": "Create a new activity",
+        "operationId": "createActivity",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/activitypbCreateActivityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request message to create a new activity.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/activitypbCreateActivityRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Activity"
+        ]
+      }
+    },
+    "/api/activity/interactions": {
+      "post": {
+        "summary": "Add a new interaction",
+        "operationId": "addInteraction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/activitypbAddInteractionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request message to add a new interaction.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/activitypbAddInteractionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Interaction"
+        ]
+      }
+    },
+    "/api/activity/interactions/disliked": {
+      "get": {
+        "summary": "List most disliked items by them type",
+        "operationId": "getMostDisliked",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/activitypbGetMostDislikedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "itemType",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ItemInteractionCount"
+        ]
+      }
+    },
+    "/api/activity/interactions/liked": {
+      "get": {
+        "summary": "List most liked items by them type",
+        "operationId": "getMostLiked",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/activitypbGetMostLikedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "itemType",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ItemInteractionCount"
+        ]
+      }
+    },
+    "/api/activity/interactions/{id}": {
+      "get": {
+        "summary": "Retrieve an interaction",
+        "operationId": "getInteraction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/activitypbGetInteractionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier of the interaction to retrieve.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Interaction"
+        ]
+      },
+      "delete": {
+        "summary": "Remove an interaction",
+        "operationId": "removeInteraction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/activitypbRemoveInteractionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier of the interaction to remove.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Interaction"
+        ]
+      }
+    },
+    "/api/activity/{activityId}/interactions": {
+      "get": {
+        "summary": "List all interactions for an activity",
+        "operationId": "listInteractions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/activitypbGetInteractionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "activityId",
+            "description": "Unique identifier of the activity.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actionType",
+            "description": "Filter interactions by action type (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Interaction"
+        ]
+      }
+    },
+    "/api/activity/{id}/archive": {
+      "put": {
+        "summary": "Archive an activity",
+        "operationId": "archiveActivity",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/activitypbArchiveActivityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier of the activity to archive.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActivityServiceArchiveActivityBody"
+            }
+          }
+        ],
+        "tags": [
+          "Activity"
+        ]
+      }
+    },
+    "/api/activity/{id}/restore": {
+      "put": {
+        "summary": "Restore an archived activity",
+        "operationId": "restoreActivity",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/activitypbRestoreActivityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier of the activity to restore.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActivityServiceRestoreActivityBody"
+            }
+          }
+        ],
+        "tags": [
+          "Activity"
+        ]
+      }
+    },
+    "/api/activity/{userId}": {
+      "get": {
+        "summary": "Retrieve an activity",
+        "operationId": "getActivity",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/activitypbGetActivityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "Unique identifier of the activity to retrieve.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Activity"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ActivityServiceArchiveActivityBody": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "description": "Reason for archiving the activity."
+        }
+      },
+      "description": "Request message to archive an activity."
+    },
+    "ActivityServiceRestoreActivityBody": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "description": "Reason for restoring the activity."
+        }
+      },
+      "description": "Request message to restore an archived activity."
+    },
+    "activitypbActivity": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the activity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier of the user associated with the activity."
+        },
+        "archived": {
+          "type": "boolean",
+          "description": "Indicates whether the activity is archived."
+        }
+      },
+      "description": "Activity represents a long-living aggregate associated with a user."
+    },
+    "activitypbAddInteractionRequest": {
+      "type": "object",
+      "properties": {
+        "activityId": {
+          "type": "string",
+          "description": "Unique identifier of the associated activity."
+        },
+        "itemId": {
+          "type": "string",
+          "description": "Unique identifier of the item being interacted with."
+        },
+        "itemType": {
+          "type": "string",
+          "description": "Type of the item."
+        },
+        "actionType": {
+          "type": "string",
+          "description": "Type of action (like or dislike)."
+        }
+      },
+      "description": "Request message to add a new interaction."
+    },
+    "activitypbAddInteractionResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the created interaction."
+        }
+      },
+      "description": "Response message after adding a new interaction."
+    },
+    "activitypbArchiveActivityResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the archived activity."
+        },
+        "archived": {
+          "type": "boolean",
+          "description": "Indicates whether the activity is archived."
+        }
+      },
+      "description": "Response message after archiving an activity."
+    },
+    "activitypbCreateActivityRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier of the user creating the activity."
+        }
+      },
+      "description": "Request message to create a new activity."
+    },
+    "activitypbCreateActivityResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the created activity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier of the user."
+        }
+      },
+      "description": "Response message after creating a new activity."
+    },
+    "activitypbGetActivitiesResponse": {
+      "type": "object",
+      "properties": {
+        "activities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/activitypbActivity"
+          },
+          "description": "List of activities."
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of activities available."
+        }
+      },
+      "description": "Response message for listing activities."
+    },
+    "activitypbGetActivityResponse": {
+      "type": "object",
+      "properties": {
+        "activityId": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Details of the requested activity."
+        }
+      },
+      "description": "Response message for retrieving an activity."
+    },
+    "activitypbGetInteractionResponse": {
+      "type": "object",
+      "properties": {
+        "interaction": {
+          "$ref": "#/definitions/activitypbInteraction",
+          "description": "Details of the requested interaction."
+        }
+      },
+      "description": "Response message for retrieving an interaction."
+    },
+    "activitypbGetInteractionsResponse": {
+      "type": "object",
+      "properties": {
+        "interactions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/activitypbInteraction"
+          },
+          "description": "List of interactions."
+        }
+      },
+      "description": "Response message for listing interactions."
+    },
+    "activitypbGetMostDislikedResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/activitypbMostReactionResult"
+          }
+        }
+      }
+    },
+    "activitypbGetMostLikedResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/activitypbMostReactionResult"
+          }
+        }
+      }
+    },
+    "activitypbInteraction": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the interaction."
+        },
+        "activityId": {
+          "type": "string",
+          "description": "Unique identifier of the associated activity."
+        },
+        "itemId": {
+          "type": "string",
+          "description": "Unique identifier of the item being interacted with."
+        },
+        "itemType": {
+          "type": "string",
+          "description": "Type of the item."
+        },
+        "actionType": {
+          "type": "string",
+          "description": "Type of action (like or dislike)."
+        }
+      },
+      "description": "Interaction represents a short-living aggregate associated with an activity."
+    },
+    "activitypbMostReactionResult": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string"
+        },
+        "itemType": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "count": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "activitypbRemoveInteractionResponse": {
+      "type": "object"
+    },
+    "activitypbRestoreActivityResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the restored activity."
+        },
+        "archived": {
+          "type": "boolean",
+          "description": "Indicates whether the activity is archived."
+        }
+      },
+      "description": "Response message after restoring an activity."
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

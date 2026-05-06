@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+package userspb;
+import "google/protobuf/timestamp.proto";
+
+
+// Event when user is authorized
+message UserAuthorized {
+  string id = 1;
+}
+// Event when a new user is created
+message UserCreated {
+  string id = 1;
+  string email = 2;          // User's email
+  string password = 3;
+  string user_name = 4;// User's password
+  string first_name = 5;     // User's first name
+  string last_name = 6;
+  string google_id = 7;
+  string location = 8;
+  bool enabled = 9;// User's location (could be city or country)
+  float lat = 10;
+  float lng = 11;
+  string thumbnail = 12;
+  string verification_token = 13;  // Token for email verification
+  string language = 14;
+  string role = 15;
+}
+message UserUpdated {
+  string id = 1;
+  string user_name = 2;// User's password
+  string first_name = 3;     // User's first name
+  string last_name = 4;
+  string bio = 5;
+  string background = 6;
+  string privacy = 7;
+  string location = 8;
+  float lat = 9;
+  float lng = 10;
+  string thumbnail = 11;
+  string language = 12;
+  string role =13;
+
+}
+// Event when a user logs in
+message UserLoggedIn {
+  string id = 1;// User ID (UUID)
+}
+
+// Event when a user logs out
+message UserLoggedOut {
+  string id = 1;        // User ID (UUID)
+}
+
+// Event when a user's enabled status is toggled
+message UserEnabledToggled {
+  string id = 1;        // User ID (UUID)
+  bool enabled = 2;    // True if enabled, False if not
+}
+
+// Event when a user changes their name
+message UserRenamed {
+  string id = 1;        // User ID (UUID)
+  string name = 2;  // The updated name of the user (renamed for clarity)
+}
+
+message UserPasswordForgotten{
+  string id = 1;
+}
+message UserPasswordReset{
+
+}
+
+message UserPasswordResetRequested{
+  string token = 1;
+  string email = 2;
+  google.protobuf.Timestamp expiration_time = 3;
+}
+
+// Event emitted when a user needs verification via email
+message UserVerificationRequested {
+  string id = 1;                 // User ID
+  string email = 2;              // User's email address
+  string verification_token = 3; // Token to be included in verification link
+  google.protobuf.Timestamp expiration_time = 4; // Token expiration time
+}
+
+// Event when a user's tokens are explicitly invalidated
+message UserTokenInvalidated {
+  string user_id = 1;        // User ID (UUID)
+  string token_id = 2;       // Partial token ID for tracking (not the full token)
+  google.protobuf.Timestamp invalidated_at = 3; // When the token was invalidated
+  string reason = 4;         // Reason for invalidation (e.g., "user logout", "security concern")
+}
+
+// Event when a user's tokens are refreshed
+message UserTokenRefreshed {
+  string user_id = 1;        // User ID (UUID)
+  string old_token_id = 2;   // Partial ID of the old token (not the full token)
+  string new_token_id = 3;   // Partial ID of the new token (not the full token)
+  google.protobuf.Timestamp refreshed_at = 4; // When the token was refreshed
+}

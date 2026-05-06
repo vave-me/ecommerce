@@ -1,0 +1,300 @@
+package tools
+
+import ai2 "middleman/internal/ai"
+
+func createOrderTools() []ai2.Tool {
+	return []ai2.Tool{
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "order_create",
+				Description: "Create a new customer order with items",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"order_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Unique identifier for the order",
+						},
+						"user_customer_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the customer placing the order",
+						},
+						"items": map[string]interface{}{
+							"type":        "array",
+							"description": "List of items in the order",
+							"items": map[string]interface{}{
+								"type": "object",
+								"properties": map[string]interface{}{
+									"user_seller_id": map[string]interface{}{
+										"type":        "string",
+										"description": "ID of the seller",
+									},
+									"product_id": map[string]interface{}{
+										"type":        "string",
+										"description": "ID of the product",
+									},
+									"user_seller_name": map[string]interface{}{
+										"type":        "string",
+										"description": "Name of the seller",
+									},
+									"product_name": map[string]interface{}{
+										"type":        "string",
+										"description": "Name of the product",
+									},
+									"price": map[string]interface{}{
+										"type":        "integer",
+										"description": "Price of the item in cents",
+									},
+									"quantity": map[string]interface{}{
+										"type":        "integer",
+										"description": "Quantity ordered",
+										"minimum":     1,
+									},
+								},
+								"required": []string{"product_id", "price", "quantity"},
+							},
+						},
+					},
+					"required": []string{"order_id", "user_customer_id", "items"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "order_get",
+				Description: "Get order details by order ID",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"order_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the order to retrieve",
+						},
+					},
+					"required": []string{"order_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "order_update",
+				Description: "Update order information",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"order_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the order to update",
+						},
+						"updates": map[string]interface{}{
+							"type":        "object",
+							"description": "Map of fields to update",
+							"additionalProperties": true,
+						},
+					},
+					"required": []string{"order_id", "updates"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "order_get_customer_history",
+				Description: "Get order history for a specific customer",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_customer_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the customer",
+						},
+					},
+					"required": []string{"user_customer_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "order_mark_ready",
+				Description: "Mark an order as ready for processing",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"order_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the order to mark as ready",
+						},
+					},
+					"required": []string{"order_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "order_cancel",
+				Description: "Cancel an order with a reason",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"order_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the order to cancel",
+						},
+						"reason": map[string]interface{}{
+							"type":        "string",
+							"description": "Reason for cancellation",
+						},
+					},
+					"required": []string{"order_id", "reason"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "order_complete",
+				Description: "Complete an order with invoice",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"order_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the order to complete",
+						},
+						"invoice_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the associated invoice",
+						},
+					},
+					"required": []string{"order_id", "invoice_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "order_approve",
+				Description: "Approve an order for shopping",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"order_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the order to approve",
+						},
+						"shopping_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the shopping session",
+						},
+					},
+					"required": []string{"order_id", "shopping_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "order_get_by_status",
+				Description: "Get orders filtered by status",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"status": map[string]interface{}{
+							"type":        "string",
+							"description": "Order status to filter by",
+							"enum":        []string{"pending", "processing", "shipped", "delivered", "cancelled", "refunded"},
+						},
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of results",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     50,
+						},
+					},
+					"required": []string{"status"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "order_reject",
+				Description: "Reject an order request",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"order_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the order to reject",
+						},
+					},
+					"required": []string{"order_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "order_ship",
+				Description: "Mark an order as shipped",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"order_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the order to mark as shipped",
+						},
+					},
+					"required": []string{"order_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "order_deliver",
+				Description: "Mark an order as delivered",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"order_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the order to mark as delivered",
+						},
+					},
+					"required": []string{"order_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "order_search",
+				Description: "Search orders by keyword",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"query": map[string]interface{}{
+							"type":        "string",
+							"description": "Search query keyword",
+						},
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of results",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     50,
+						},
+					},
+					"required": []string{"query"},
+				},
+			},
+		},
+	}
+}

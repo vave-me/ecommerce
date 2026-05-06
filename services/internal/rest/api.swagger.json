@@ -1,0 +1,1495 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "servicespb/common.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ServicesService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/services": {
+      "get": {
+        "summary": "Retrieve all services associated w",
+        "operationId": "getServices",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicespbGetServicesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Service"
+        ]
+      },
+      "post": {
+        "summary": "Add a New Service",
+        "operationId": "addService",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicespbAddServiceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/servicespbAddServiceRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Service"
+        ]
+      }
+    },
+    "/api/services/catalog": {
+      "get": {
+        "summary": "Retrieve all services associated with a user",
+        "operationId": "getCatalog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicespbGetCatalogResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Service"
+        ]
+      }
+    },
+    "/api/services/catalog/public": {
+      "get": {
+        "summary": "Retrieve all services associated with a user",
+        "operationId": "getPublicCatalog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicespbGetPublicCatalogResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Service"
+        ]
+      }
+    },
+    "/api/services/categories/{categoryId}": {
+      "get": {
+        "summary": "Retrieve all services with given category",
+        "operationId": "getServicesByCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicespbGetServicesByCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Service"
+        ]
+      }
+    },
+    "/api/services/filters": {
+      "post": {
+        "summary": "Retrieve all services associated w",
+        "operationId": "getServicesWithFilter",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicespbGetServicesWithFilterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/servicespbGetServicesWithFilterRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Service"
+        ]
+      }
+    },
+    "/api/services/update": {
+      "post": {
+        "summary": "Add a New Service",
+        "operationId": "updateService",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicespbUpdateServiceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/servicespbUpdateServiceRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Service"
+        ]
+      }
+    },
+    "/api/services/{id}": {
+      "get": {
+        "summary": "Retrieve a Specific Service",
+        "operationId": "getService",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicespbGetServiceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Service"
+        ]
+      },
+      "delete": {
+        "summary": "Remove a Service",
+        "operationId": "removeService",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicespbRemoveServiceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Service"
+        ]
+      }
+    },
+    "/api/services/{id}/price": {
+      "patch": {
+        "operationId": "ServicesService_UpdateServicePrice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicespbUpdateServicePriceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServicesServiceUpdateServicePriceBody"
+            }
+          }
+        ],
+        "tags": [
+          "ServicesService"
+        ]
+      }
+    },
+    "/api/services/{id}/rebrand": {
+      "patch": {
+        "summary": "Rebrand a Service",
+        "operationId": "rebrandService",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicespbRebrandServiceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServicesServiceRebrandServiceBody"
+            }
+          }
+        ],
+        "tags": [
+          "Service"
+        ]
+      }
+    },
+    "/api/services/{serviceId}/archive": {
+      "patch": {
+        "operationId": "ServicesService_ArchiveService",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicespbArchiveServiceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "serviceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServicesServiceArchiveServiceBody"
+            }
+          }
+        ],
+        "tags": [
+          "ServicesService"
+        ]
+      }
+    },
+    "/api/services/{serviceId}/lease": {
+      "patch": {
+        "operationId": "ServicesService_MarkServiceLeased",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicespbMarkServiceLeasedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "serviceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServicesServiceMarkServiceLeasedBody"
+            }
+          }
+        ],
+        "tags": [
+          "ServicesService"
+        ]
+      }
+    },
+    "/api/services/{serviceId}/sold": {
+      "patch": {
+        "operationId": "ServicesService_MarkServiceSold",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicespbMarkServiceSoldResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "serviceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServicesServiceMarkServiceSoldBody"
+            }
+          }
+        ],
+        "tags": [
+          "ServicesService"
+        ]
+      }
+    },
+    "/api/services/{serviceId}/stock": {
+      "patch": {
+        "operationId": "ServicesService_AdjustServiceStock",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/servicespbAdjustServiceStockResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "serviceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServicesServiceAdjustServiceStockBody"
+            }
+          }
+        ],
+        "tags": [
+          "ServicesService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ServicesServiceAdjustServiceStockBody": {
+      "type": "object",
+      "properties": {
+        "newStock": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ServicesServiceArchiveServiceBody": {
+      "type": "object"
+    },
+    "ServicesServiceMarkServiceLeasedBody": {
+      "type": "object",
+      "properties": {
+        "monthlyPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "leaseTermMonths": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ServicesServiceMarkServiceSoldBody": {
+      "type": "object"
+    },
+    "ServicesServiceRebrandServiceBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "basePrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pricing": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "availability": {
+          "type": "string"
+        },
+        "providerName": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "descriptionShort": {
+          "type": "string"
+        },
+        "descriptionLong": {
+          "type": "string"
+        },
+        "qualifications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contact": {
+          "type": "string"
+        },
+        "faq": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "shippingCost": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/servicespbAttribute"
+          }
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/servicespbOption"
+          }
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "ServicesServiceUpdateServicePriceBody": {
+      "type": "object",
+      "properties": {
+        "newPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "oldPrice": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "servicespbAddServiceRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "basePrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "serviceType": {
+          "type": "string"
+        },
+        "pricing": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "availability": {
+          "type": "string"
+        },
+        "providerName": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "descriptionShort": {
+          "type": "string"
+        },
+        "descriptionLong": {
+          "type": "string"
+        },
+        "qualifications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contact": {
+          "type": "string"
+        },
+        "faq": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "shippingCost": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/servicespbAttribute"
+          }
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/servicespbOption"
+          }
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "servicespbAddServiceResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "servicespbAdjustServiceStockResponse": {
+      "type": "object",
+      "properties": {
+        "serviceId": {
+          "type": "string"
+        },
+        "oldStock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "newStock": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "servicespbArchiveServiceResponse": {
+      "type": "object",
+      "properties": {
+        "serviceId": {
+          "type": "string"
+        },
+        "archived": {
+          "type": "boolean",
+          "title": "e.g. true if success"
+        }
+      }
+    },
+    "servicespbAttribute": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "servicespbDecreaseServicePriceResponse": {
+      "type": "object",
+      "properties": {
+        "serviceId": {
+          "type": "string"
+        },
+        "oldPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "newPrice": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "servicespbGetCatalogResponse": {
+      "type": "object",
+      "properties": {
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/servicespbService"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "servicespbGetPublicCatalogResponse": {
+      "type": "object",
+      "properties": {
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/servicespbService"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "servicespbGetServiceResponse": {
+      "type": "object",
+      "properties": {
+        "service": {
+          "$ref": "#/definitions/servicespbService"
+        }
+      }
+    },
+    "servicespbGetServicesByCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/servicespbService"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "servicespbGetServicesByCategorySlugResponse": {
+      "type": "object",
+      "properties": {
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/servicespbService"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "servicespbGetServicesResponse": {
+      "type": "object",
+      "properties": {
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/servicespbService"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "servicespbGetServicesWithFilterRequest": {
+      "type": "object",
+      "properties": {
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "serviceType": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "searchText": {
+          "type": "string"
+        },
+        "minPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "availableFrom": {
+          "type": "string",
+          "format": "int64"
+        },
+        "availableTo": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "qualifications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "page": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pageSize": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sortBy": {
+          "type": "string"
+        },
+        "sortOrder": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "radius": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "servicespbGetServicesWithFilterResponse": {
+      "type": "object",
+      "properties": {
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/servicespbService"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "servicespbIncreaseServicePriceResponse": {
+      "type": "object",
+      "properties": {
+        "serviceId": {
+          "type": "string"
+        },
+        "oldPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "newPrice": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "servicespbMarkServiceLeasedResponse": {
+      "type": "object",
+      "properties": {
+        "serviceId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "servicespbMarkServiceSoldResponse": {
+      "type": "object",
+      "properties": {
+        "serviceId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "servicespbOption": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "servicespbRebrandServiceResponse": {
+      "type": "object"
+    },
+    "servicespbRemoveServiceResponse": {
+      "type": "object"
+    },
+    "servicespbService": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "serviceType": {
+          "type": "string"
+        },
+        "basePrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pricing": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "availability": {
+          "type": "string"
+        },
+        "providerName": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "descriptionShort": {
+          "type": "string"
+        },
+        "descriptionLong": {
+          "type": "string"
+        },
+        "qualifications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contact": {
+          "type": "string"
+        },
+        "faq": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "shippingCost": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/servicespbAttribute"
+          }
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/servicespbOption"
+          }
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "servicespbUpdateServicePriceResponse": {
+      "type": "object"
+    },
+    "servicespbUpdateServiceRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "serviceType": {
+          "type": "string"
+        },
+        "basePrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pricing": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "availability": {
+          "type": "string"
+        },
+        "providerName": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "descriptionShort": {
+          "type": "string"
+        },
+        "descriptionLong": {
+          "type": "string"
+        },
+        "qualifications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contact": {
+          "type": "string"
+        },
+        "faq": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "shippingCost": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/servicespbAttribute"
+          }
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/servicespbOption"
+          }
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "servicespbUpdateServiceResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+# k8s/07-reverse-proxy/nginx-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reverse-proxy # Matches the service name expected by Jenkins logic
+  namespace: my-project # Ensure it's in the correct namespace
+  labels:
+    app: reverse-proxy # Standard label for selection
+spec:
+  replicas: 1 # Start with one replica, adjust if needed
+  selector:
+    matchLabels:
+      app: reverse-proxy # Connects Deployment to its Pods
+  template:
+    metadata:
+      labels:
+        app: reverse-proxy # Pods get this label
+    spec:
+      containers:
+        - name: proxy # Container name expected by Jenkins updateImageTag function
+          # Image path/name expected by Jenkins updateImageTag function.
+          # Jenkins will replace ':latest' with the correct build TAG (e.g., :104).
+          image: registry.sfx-markt.de/reverse-proxy:latest
+          imagePullPolicy: Always # Or IfNotPresent if using immutable tags
+          ports:
+            - containerPort: 8080 # Matches the 'listen' directive in your ConfigMap
+              name: http-proxy # Optional name
+          volumeMounts:
+            - name: nginx-config-volume
+              # Mount the specific config file into the location Nginx expects
+              mountPath: /etc/nginx/nginx.conf
+              # Specify the key from the ConfigMap to use as the content for the file at mountPath
+              subPath: nginx.conf
+          readinessProbe:
+            httpGet:
+              path: /nginx_status # Health check endpoint from ConfigMap
+              port: 8080
+            initialDelaySeconds: 10 # Give Nginx time to start
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /nginx_status # Health check endpoint from ConfigMap
+              port: 8080
+            initialDelaySeconds: 30 # Wait longer before first liveness check
+            periodSeconds: 20
+            timeoutSeconds: 3
+            failureThreshold: 3
+          # Define appropriate resource requests and limits
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "128Mi"
+      volumes:
+        - name: nginx-config-volume
+          configMap:
+            # This must match the name of the ConfigMap created by reverse-proxy-configmap-fixed.yaml
+            name: reverse-proxy-config
+            # Define which keys from the ConfigMap to make available in the volume
+            items:
+              - key: nginx.conf
+                # The filename that will appear inside the pod at the mountPath
+                path: nginx.conf

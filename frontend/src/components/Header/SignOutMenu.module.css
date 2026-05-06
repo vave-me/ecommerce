@@ -1,0 +1,664 @@
+/* SignOutMenu.module.css - Mobile-first design following app patterns */
+
+/* ============================================================================
+   BASE STYLES - Following design-tokens.css patterns
+   ============================================================================ */
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================================
+   MOBILE BOTTOM SHEET - Primary implementation
+   ============================================================================ */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999998;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.overlayClosing {
+  animation: fadeOut 0.2s ease-out;
+}
+
+.mobileMenu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--surface, #ffffff);
+  border-radius: 16px 16px 0 0;
+  z-index: 999999;
+  max-height: 85vh;
+  overflow: hidden;
+  animation: slideUp 0.3s var(--ease-out, ease-out);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  /* Safe area support */
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
+}
+
+.mobileMenuClosing {
+  animation: slideDown 0.2s ease-in;
+}
+
+/* Drag handle */
+.dragHandle {
+  width: 36px;
+  height: 4px;
+  background: var(--border, #e5e7eb);
+  border-radius: 2px;
+  margin: 12px auto 0;
+  flex-shrink: 0;
+}
+
+/* Close button */
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-hover, #f9fafb);
+  border: none;
+  border-radius: 50%;
+  color: var(--text-secondary, #6b7280);
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s) ease;
+  z-index: 10;
+}
+
+.closeButton:hover {
+  background: var(--surface-active, #f3f4f6);
+  color: var(--text-primary, #374151);
+}
+
+.closeButton:active {
+  transform: scale(0.95);
+}
+
+/* User section */
+.userSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--border, #e5e7eb);
+  margin-top: 16px;
+}
+
+.avatarWrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--primary-light, #e0e7ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.userIcon {
+  color: var(--primary, #2980b9);
+}
+
+.userInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.userName {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary, #111827);
+  margin: 0 0 2px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userEmail {
+  font-size: 14px;
+  color: var(--text-secondary, #6b7280);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Menu content */
+.menuContent {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.menuSection {
+  border-bottom: 1px solid var(--border-color-light, #f3f4f6);
+}
+
+.menuSection:last-child {
+  border-bottom: none;
+}
+
+.sectionTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-tertiary, #9ca3af);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 16px 20px 8px;
+  margin: 0;
+}
+
+.menuItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--transition-fast, 0.15s) ease;
+  /* Touch-optimized */
+  min-height: 56px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.menuItem:hover {
+  background: var(--surface-hover, #f9fafb);
+}
+
+.menuItem:active {
+  background: var(--surface-active, #f3f4f6);
+  transform: scale(0.98);
+}
+
+.menuIcon {
+  color: var(--text-secondary, #6b7280);
+  flex-shrink: 0;
+}
+
+.menuLabel {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary, #374151);
+  flex: 1;
+}
+
+/* Sign out section */
+.signOutSection {
+  border-top: 1px solid var(--border, #e5e7eb);
+  padding: 8px 0;
+}
+
+.signOutButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--transition-fast, 0.15s) ease;
+  min-height: 56px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.signOutButton:hover {
+  background: var(--danger-light, #fee2e2);
+}
+
+.signOutButton:active {
+  background: rgba(239, 68, 68, 0.1);
+  transform: scale(0.98);
+}
+
+.signOutIcon {
+  color: var(--danger, #ef4444);
+  flex-shrink: 0;
+}
+
+.signOutButton span {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--danger, #ef4444);
+}
+
+/* ============================================================================
+   DESKTOP DROPDOWN - Enhanced positioning system
+   ============================================================================ */
+
+.desktopOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999998;
+  background: transparent;
+}
+
+.desktopMenu {
+  position: fixed;
+  top: var(--menu-top, 70px);
+  right: var(--menu-right, 16px);
+  left: var(--menu-left, auto);
+  width: 280px;
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
+  z-index: 999999;
+  animation: slideDown 0.2s ease-out;
+  overflow: hidden;
+  
+  /* Prevent overflow beyond viewport */
+  max-width: calc(100vw - 32px);
+  
+  /* Smart positioning to prevent off-screen rendering */
+  transform-origin: top right;
+}
+
+.desktopMenuClosing {
+  animation: slideUp 0.15s ease-in;
+}
+
+.desktopUserSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  border-bottom: 1px solid var(--border, #e5e7eb);
+  background: var(--surface-secondary, #f9fafb);
+}
+
+.desktopUserSection .avatarWrapper {
+  width: 36px;
+  height: 36px;
+}
+
+.desktopUserSection .userName {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.desktopUserSection .userEmail {
+  font-size: 12px;
+}
+
+.desktopMenuContent {
+  max-height: 700px;
+  overflow-y: auto;
+}
+
+.desktopMenuSection {
+  border-bottom: 1px solid var(--border-color-light, #f3f4f6);
+}
+
+.desktopMenuSection:last-child {
+  border-bottom: none;
+}
+
+.desktopSectionTitle {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary, #9ca3af);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px 16px 6px;
+  margin: 0;
+}
+
+.desktopMenuItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--transition-fast, 0.15s) ease;
+  font-size: 14px;
+  color: var(--text-primary, #374151);
+}
+
+.desktopMenuItem:hover {
+  background: var(--surface-hover, #f9fafb);
+}
+
+.desktopMenuIcon {
+  color: var(--text-secondary, #6b7280);
+  flex-shrink: 0;
+}
+
+.desktopSignOutSection {
+  border-top: 1px solid var(--border, #e5e7eb);
+}
+
+.desktopSignOutButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--transition-fast, 0.15s) ease;
+  font-size: 14px;
+  color: var(--danger, #ef4444);
+}
+
+.desktopSignOutButton:hover {
+  background: var(--danger-light, #fee2e2);
+}
+
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+/* Desktop dropdown animations */
+.desktopMenu {
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .desktopMenu {
+    right: 12px;
+    width: 260px;
+  }
+}
+
+/* Large mobile screens */
+@media (max-width: 768px) and (min-width: 481px) {
+  .mobileMenu {
+    max-height: 80vh;
+  }
+  
+  .menuItem,
+  .signOutButton {
+    min-height: 52px;
+    padding: 14px 20px;
+  }
+}
+
+/* Small mobile screens */
+@media (max-width: 480px) {
+  .mobileMenu {
+    max-height: 90vh;
+    border-radius: 12px 12px 0 0;
+  }
+  
+  .userSection {
+    padding: 16px 16px 12px;
+  }
+  
+  .menuItem,
+  .signOutButton {
+    padding: 14px 16px;
+  }
+  
+  .sectionTitle {
+    padding: 12px 16px 6px;
+  }
+  
+  .closeButton {
+    top: 12px;
+    right: 12px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .userSection {
+    padding: 12px;
+  }
+  
+  .avatarWrapper {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .userName {
+    font-size: 15px;
+  }
+  
+  .userEmail {
+    font-size: 13px;
+  }
+}
+
+/* ============================================================================
+   ACCESSIBILITY & PREFERENCES
+   ============================================================================ */
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .mobileMenu,
+  .desktopMenu {
+    border: 2px solid var(--text-primary, #000000);
+  }
+  
+  .menuItem:focus,
+  .signOutButton:focus,
+  .desktopMenuItem:focus,
+  .desktopSignOutButton:focus {
+    outline: 2px solid var(--text-primary, #000000);
+    outline-offset: 2px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .mobileMenu,
+  .desktopMenu,
+  .overlay,
+  .menuItem,
+  .signOutButton,
+  .desktopMenuItem,
+  .desktopSignOutButton,
+  .closeButton {
+    animation-duration: 0.01ms ;
+    transition-duration: 0.01ms ;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  .mobileMenu,
+  .desktopMenu {
+    background: var(--gray-800);
+    border-color: var(--gray-700);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .dragHandle {
+    background-color: var(--gray-600);
+  }
+
+  .closeButton {
+    background: var(--gray-700);
+    color: var(--gray-400);
+  }
+
+  .closeButton:hover {
+    background: var(--gray-600);
+    color: var(--gray-200);
+  }
+
+  .userSection,
+  .desktopUserSection {
+    border-bottom-color: var(--gray-700);
+    background: var(--gray-700);
+  }
+
+  .avatarWrapper {
+    background: rgba(41, 128, 185, 0.2);
+  }
+
+  .userIcon {
+    color: var(--primary-color);
+  }
+
+  .userName {
+    color: var(--gray-50);
+  }
+
+  .userEmail {
+    color: var(--gray-400);
+  }
+
+  .sectionTitle,
+  .desktopSectionTitle {
+    color: var(--gray-400);
+  }
+
+  .menuItem,
+  .desktopMenuItem {
+    color: var(--gray-200);
+  }
+
+  .menuItem:hover,
+  .desktopMenuItem:hover {
+    background: var(--gray-700);
+    color: var(--gray-100);
+  }
+
+  .menuIcon,
+  .desktopMenuIcon {
+    color: var(--gray-400);
+  }
+
+  .menuItem:hover .menuIcon,
+  .desktopMenuItem:hover .desktopMenuIcon {
+    color: var(--gray-300);
+  }
+
+  .menuLabel {
+    color: inherit;
+  }
+
+  .signOutButton,
+  .desktopSignOutButton {
+    color: var(--danger);
+  }
+
+  .signOutButton:hover,
+  .desktopSignOutButton:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger);
+  }
+
+  .signOutIcon {
+    color: var(--danger);
+  }
+}
+
+/* Responsive positioning adjustments */
+@media (max-width: 1024px) {
+  .desktopMenu {
+    width: 260px;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktopMenu {
+    width: 240px;
+  }
+}
+
+/* Handle left-side positioning when menu would overflow */
+.desktopMenu[data-position="left"] {
+  transform-origin: top left;
+}
+
+/* Centered positioning for very small screens */
+.desktopMenu[data-position="center"] {
+  transform-origin: top center;
+}

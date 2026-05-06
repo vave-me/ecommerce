@@ -1,0 +1,349 @@
+/* ============================================================================
+   LOADING PLACEHOLDER - ATOMIC DESIGN SYSTEM
+   ============================================================================ */
+
+/* Uses Global Design Tokens from design-tokens.css */
+
+/* ============================================================================
+   CONTAINER - ORGANISM
+   ============================================================================ */
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ai-space-xl);
+  background: var(--ai-color-surface);
+  border-radius: var(--ai-radius-lg);
+  min-height: 200px;
+}
+
+.fullScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--ai-z-modal);
+  background: var(--ai-color-background);
+      /* backdrop-filter: blur(4px); - Removed for performance */
+  min-height: 100vh;
+}
+
+/* ============================================================================
+   CONTENT - MOLECULE
+   ============================================================================ */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ai-space-md);
+  text-align: center;
+}
+
+/* Size Variants */
+.sm {
+  gap: var(--ai-space-sm);
+}
+
+.md {
+  gap: var(--ai-space-md);
+}
+
+.lg {
+  gap: var(--ai-space-lg);
+}
+
+/* ============================================================================
+   SPINNER - ATOM
+   ============================================================================ */
+
+.spinnerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  color: var(--ai-color-primary);
+  animation: spin 1s linear infinite;
+}
+
+.spinnerSm {
+  width: 20px;
+  height: 20px;
+}
+
+.spinnerMd {
+  width: 32px;
+  height: 32px;
+}
+
+.spinnerLg {
+  width: 48px;
+  height: 48px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================================================
+   LABEL - ATOM
+   ============================================================================ */
+
+.label {
+  color: var(--ai-color-text-secondary);
+  font-size: var(--ai-text-base);
+  font-weight: var(--ai-font-weight-medium);
+  margin: 0;
+  line-height: var(--ai-line-height-normal);
+}
+
+/* Size-specific label styles */
+.sm .label {
+  font-size: var(--ai-text-sm);
+}
+
+.md .label {
+  font-size: var(--ai-text-base);
+}
+
+.lg .label {
+  font-size: var(--ai-text-lg);
+}
+
+/* ============================================================================
+   DARK THEME SUPPORT
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: var(--gray-800, #1f2937);
+    border: 1px solid var(--gray-700, #374151);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .fullScreen {
+    background: var(--gray-900, #111827);
+  }
+
+  .spinner {
+    color: var(--teal-400, #2dd4bf);
+  }
+
+  .label {
+    color: var(--gray-300, #d1d5db);
+  }
+}
+
+/* ============================================================================
+   ENHANCED INTERACTIVE STATES
+   ============================================================================ */
+
+.container:focus-within {
+  outline: 2px solid var(--teal-500, #14b8a6);
+  outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .container:focus-within {
+    outline-color: var(--teal-400, #2dd4bf);
+  }
+}
+
+/* ============================================================================
+   LOADING VARIANTS
+   ============================================================================ */
+
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.dots {
+  display: flex;
+  gap: 4px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ai-color-primary);
+  animation: dotPulse 1.4s ease-in-out infinite both;
+}
+
+.dot:nth-child(1) { animation-delay: -0.32s; }
+.dot:nth-child(2) { animation-delay: -0.16s; }
+.dot:nth-child(3) { animation-delay: 0s; }
+
+@keyframes dotPulse {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .dot {
+    background: var(--teal-400, #2dd4bf);
+  }
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - MOBILE FIRST
+   ============================================================================ */
+
+/* Mobile */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--ai-space-lg);
+    min-height: 150px;
+  }
+
+  .content {
+    gap: var(--ai-space-sm);
+  }
+
+  .spinnerMd {
+    width: 28px;
+    height: 28px;
+  }
+
+  .spinnerLg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .label {
+    font-size: var(--ai-text-sm);
+  }
+
+  .lg .label {
+    font-size: var(--ai-text-base);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .container {
+      border-width: 1px;
+    }
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .container {
+    padding: var(--ai-space-md);
+    min-height: 120px;
+    border-radius: var(--ai-radius-md);
+  }
+
+  .spinnerSm {
+    width: 16px;
+    height: 16px;
+  }
+
+  .spinnerMd {
+    width: 24px;
+    height: 24px;
+  }
+
+  .spinnerLg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .label {
+    font-size: var(--ai-text-xs);
+  }
+
+  .md .label {
+    font-size: var(--ai-text-sm);
+  }
+
+  .lg .label {
+    font-size: var(--ai-text-base);
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .dots {
+    gap: 3px;
+  }
+}
+
+/* ============================================================================
+   ACCESSIBILITY & MOTION
+   ============================================================================ */
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+
+  .pulse {
+    animation: none;
+  }
+
+  .dot {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+/* High Contrast */
+@media (prefers-contrast: high) {
+  .container {
+    border: 2px solid var(--ai-color-border);
+  }
+
+  .spinner {
+    color: var(--ai-color-text-primary);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .container {
+      border-color: var(--gray-400, #9ca3af);
+    }
+
+    .spinner {
+      color: var(--teal-300, #5eead4);
+    }
+
+    .label {
+      color: var(--gray-100, #f3f4f6);
+    }
+
+    .dot {
+      background: var(--teal-300, #5eead4);
+    }
+  }
+}
+
+/* Print Styles */
+@media print {
+  .container {
+    display: none;
+  }
+} 

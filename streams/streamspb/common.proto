@@ -1,0 +1,198 @@
+syntax = "proto3";
+
+package streamspb;
+
+option go_package = "middleman/streams/streamspb";
+
+import "google/protobuf/timestamp.proto";
+
+// Enums
+enum StreamType {
+  STREAM_TYPE_UNSPECIFIED = 0;
+  STREAM_TYPE_MOVIE = 1;
+  STREAM_TYPE_SERIES = 2;
+  STREAM_TYPE_DOCUMENTARY = 3;
+  STREAM_TYPE_LIVE = 4;
+  STREAM_TYPE_EDUCATIONAL = 5;
+  STREAM_TYPE_MUSIC = 6;
+  STREAM_TYPE_SPORTS = 7;
+}
+
+enum StreamStatus {
+  STREAM_STATUS_UNSPECIFIED = 0;
+  STREAM_STATUS_DRAFT = 1;
+  STREAM_STATUS_PROCESSING = 2;
+  STREAM_STATUS_PUBLISHED = 3;
+  STREAM_STATUS_ARCHIVED = 4;
+  STREAM_STATUS_DELETED = 5;
+}
+
+enum StreamQuality {
+  STREAM_QUALITY_UNSPECIFIED = 0;
+  STREAM_QUALITY_SD = 1;      // 480p
+  STREAM_QUALITY_HD = 2;      // 720p
+  STREAM_QUALITY_FULL_HD = 3; // 1080p
+  STREAM_QUALITY_4K = 4;      // 2160p
+}
+
+enum AccessType {
+  ACCESS_TYPE_UNSPECIFIED = 0;
+  ACCESS_TYPE_FREE = 1;
+  ACCESS_TYPE_SUBSCRIPTION = 2;
+  ACCESS_TYPE_RENTAL = 3;
+  ACCESS_TYPE_PURCHASE = 4;
+  ACCESS_TYPE_PPV = 5; // Pay per view
+}
+
+enum ContentRating {
+  CONTENT_RATING_UNSPECIFIED = 0;
+  CONTENT_RATING_G = 1;       // General audiences
+  CONTENT_RATING_PG = 2;      // Parental guidance
+  CONTENT_RATING_PG13 = 3;    // Parents strongly cautioned
+  CONTENT_RATING_R = 4;       // Restricted
+  CONTENT_RATING_NC17 = 5;    // Adults only
+  CONTENT_RATING_UNRATED = 6; // Not rated
+}
+
+// Main Messages
+message Stream {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  string synopsis = 4;
+  StreamType stream_type = 5;
+  StreamStatus status = 6;
+  
+  // Content Details
+  string stream_url = 7;
+  string thumbnail_url = 8;
+  string trailer_url = 9;
+  int64 duration = 10; // seconds
+  google.protobuf.Timestamp release_date = 11;
+  ContentRating content_rating = 12;
+  
+  // Technical Details
+  repeated StreamQuality available_qualities = 13;
+  StreamQuality default_quality = 14;
+  repeated Subtitle subtitles = 15;
+  repeated AudioTrack audio_tracks = 16;
+  
+  // Access Control
+  AccessType access_type = 17;
+  repeated string subscription_tiers = 18;
+  int64 rental_price = 19;
+  int64 rental_duration = 20; // hours
+  int64 purchase_price = 21;
+  int64 ppv_price = 22;
+  
+  // Metadata
+  repeated string genre = 23;
+  repeated string tags = 24;
+  repeated CastMember cast = 25;
+  repeated string directors = 26;
+  repeated string producers = 27;
+  string studio = 28;
+  string language = 29;
+  string country = 30;
+  
+  // Analytics
+  int64 view_count = 31;
+  int64 like_count = 32;
+  int64 dislike_count = 33;
+  double average_rating = 34;
+  int64 total_revenue = 35;
+  
+  // Series Information
+  string series_id = 36;
+  int32 season_number = 37;
+  int32 episode_number = 38;
+  
+  // Timestamps
+  google.protobuf.Timestamp created_at = 39;
+  google.protobuf.Timestamp updated_at = 40;
+  google.protobuf.Timestamp published_at = 41;
+}
+
+message StreamSummary {
+  string id = 1;
+  string title = 2;
+  string thumbnail_url = 3;
+  int64 duration = 4;
+  ContentRating content_rating = 5;
+  AccessType access_type = 6;
+  double rating = 7;
+  int64 view_count = 8;
+  int32 release_year = 9;
+  bool is_new = 10;
+  bool has_access = 11;
+}
+
+message Series {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  string thumbnail_url = 4;
+  repeated string genre = 5;
+  string studio = 6;
+  repeated Season seasons = 7;
+  int32 total_seasons = 8;
+  string status = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp updated_at = 11;
+}
+
+message Season {
+  string id = 1;
+  int32 season_number = 2;
+  string title = 3;
+  string description = 4;
+  string thumbnail_url = 5;
+  repeated Episode episodes = 6;
+  int32 total_episodes = 7;
+  google.protobuf.Timestamp created_at = 8;
+}
+
+message Episode {
+  string id = 1;
+  int32 episode_number = 2;
+  string stream_id = 3;
+  string title = 4;
+  int64 duration = 5;
+  google.protobuf.Timestamp air_date = 6;
+}
+
+message Subtitle {
+  string language = 1;
+  string url = 2;
+  bool default = 3;
+}
+
+message AudioTrack {
+  string language = 1;
+  string type = 2; // original, dubbed
+  bool default = 3;
+}
+
+message CastMember {
+  string name = 1;
+  string role = 2;
+  string character = 3;
+  string image_url = 4;
+}
+
+message Category {
+  string id = 1;
+  string name = 2;
+  string slug = 3;
+  int32 stream_count = 4;
+}
+
+message UserAccessInfo {
+  string user_id = 1;
+  AccessType access_type = 2;
+  google.protobuf.Timestamp granted_at = 3;
+  google.protobuf.Timestamp expires_at = 4;
+  google.protobuf.Timestamp last_watched_at = 5;
+  int64 watch_progress = 6; // seconds
+  bool completed = 7;
+}

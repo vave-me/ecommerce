@@ -1,0 +1,352 @@
+/**
+ * ERROR STATE STYLES
+ * Professional error display with dark theme support
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Size variants */
+.small {
+  padding: 1.5rem;
+  max-width: 350px;
+}
+
+.medium {
+  padding: 2rem;
+  max-width: 500px;
+}
+
+.large {
+  padding: 3rem;
+  max-width: 600px;
+}
+
+/* Variant styles */
+.default {
+  background: transparent;
+}
+
+.card {
+  background: var(--white, #ffffff);
+  border: 1px solid var(--gray-200, #e5e7eb);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: var(--gray-800, #1f2937);
+    border-color: var(--gray-700, #374151);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.highlight {
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .highlight {
+    background: rgba(248, 113, 113, 0.1);
+    border-color: var(--red-600, #dc2626);
+  }
+}
+
+/* Icon container */
+.iconContainer {
+  margin-bottom: 1.5rem;
+}
+
+.errorIcon {
+  color: var(--red-500, #ef4444);
+  width: 48px;
+  height: 48px;
+  stroke-width: 1.5;
+}
+
+@media (prefers-color-scheme: dark) {
+  .errorIcon {
+    color: var(--red-400, #f87171);
+  }
+}
+
+.small .errorIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.large .errorIcon {
+  width: 56px;
+  height: 56px;
+}
+
+/* Content */
+.content {
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--gray-900, #111827);
+  margin: 0 0 0.75rem 0;
+  line-height: 1.4;
+}
+
+@media (prefers-color-scheme: dark) {
+  .title {
+    color: var(--gray-100, #f3f4f6);
+  }
+}
+
+.small .title {
+  font-size: 1.125rem;
+}
+
+.large .title {
+  font-size: 1.5rem;
+}
+
+.message {
+  font-size: 1rem;
+  color: var(--gray-600, #4b5563);
+  margin: 0 0 0.75rem 0;
+  line-height: 1.6;
+}
+
+@media (prefers-color-scheme: dark) {
+  .message {
+    color: var(--gray-400, #9ca3af);
+  }
+}
+
+.small .message {
+  font-size: 0.875rem;
+}
+
+.large .message {
+  font-size: 1.125rem;
+}
+
+.errorCode {
+  font-size: 0.875rem;
+  color: var(--gray-500, #6b7280);
+  margin: 0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  background: var(--gray-100, #f3f4f6);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+@media (prefers-color-scheme: dark) {
+  .errorCode {
+    color: var(--gray-400, #9ca3af);
+    background: var(--gray-700, #374151);
+  }
+}
+
+.details {
+  font-size: 0.875rem;
+  color: var(--gray-500, #6b7280);
+  margin: 0.75rem 0 0 0;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+@media (prefers-color-scheme: dark) {
+  .details {
+    color: var(--gray-500, #6b7280);
+  }
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  text-decoration: none;
+  min-height: 40px;
+}
+
+.button:focus {
+  outline: 2px solid var(--red-500, #ef4444);
+  outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .button:focus {
+    outline-color: var(--red-400, #f87171);
+  }
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (prefers-color-scheme: dark) {
+  .button:disabled {
+    opacity: 0.5;
+  }
+}
+
+.primary {
+  background: var(--red-500, #ef4444);
+  color: white;
+  border-color: var(--red-500, #ef4444);
+}
+
+@media (prefers-color-scheme: dark) {
+  .primary {
+    background: var(--red-600, #dc2626);
+    color: var(--gray-50, #f9fafb);
+    border-color: var(--red-600, #dc2626);
+  }
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--red-600, #dc2626);
+  border-color: var(--red-600, #dc2626);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+@media (prefers-color-scheme: dark) {
+  .primary:hover:not(:disabled) {
+    background: var(--red-500, #ef4444);
+    border-color: var(--red-500, #ef4444);
+    box-shadow: 0 4px 12px rgba(248, 113, 113, 0.3);
+  }
+}
+
+.secondary {
+  background: transparent;
+  color: var(--gray-700, #374151);
+  border-color: var(--gray-300, #d1d5db);
+}
+
+@media (prefers-color-scheme: dark) {
+  .secondary {
+    color: var(--gray-300, #d1d5db);
+    border-color: var(--gray-600, #4b5563);
+  }
+}
+
+.secondary:hover:not(:disabled) {
+  background: var(--gray-50, #f9fafb);
+  border-color: var(--gray-400, #9ca3af);
+}
+
+@media (prefers-color-scheme: dark) {
+  .secondary:hover:not(:disabled) {
+    background: var(--gray-700, #374151);
+    border-color: var(--gray-500, #6b7280);
+    transform: translateY(-1px);
+  }
+}
+
+.buttonIcon {
+  flex-shrink: 0;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem;
+  }
+  
+  .actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .button {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .primary:hover:not(:disabled) {
+    transform: none;
+  }
+  
+  .secondary:hover:not(:disabled) {
+    transform: none;
+  }
+  
+  .button {
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+  .button {
+    border: 1px solid ButtonText;
+  }
+  
+  .primary {
+    background: ButtonFace;
+    color: ButtonText;
+  }
+  
+  .errorIcon {
+    color: ButtonText;
+  }
+}
+
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+  .card {
+    border-width: 2px;
+    border-color: var(--gray-500, #6b7280);
+  }
+  
+  .highlight {
+    border-width: 2px;
+    border-color: var(--red-400, #f87171);
+  }
+  
+  .button {
+    border-width: 2px;
+  }
+  
+  .primary {
+    border-color: var(--red-400, #f87171);
+  }
+  
+  .secondary {
+    border-color: var(--gray-400, #9ca3af);
+  }
+  
+  .errorIcon {
+    color: var(--red-300, #fca5a5);
+  }
+} 

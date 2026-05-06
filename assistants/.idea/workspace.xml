@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b7cb5abc-dd12-4de7-b514-3e33760c0bc3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/processor/data_analyzer.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/repository_translator.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/simplified_executors.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/TOOL_OPERATIONS.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/activity_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/activity_tools_full.go.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/basket_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/basket_tools_full.go.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/category_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/category_tools_full.go.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/comment_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/comment_tools_full.go.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/comprehensive_tool_registry.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/following_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/geocoding_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_activity.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_basket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_category.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_comment.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_following.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_geocoding.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_mailer.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_media.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_message.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_metric.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_newsletter.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_notification.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_offer.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_order.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_payment.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_post.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_product.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_review.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_shipping.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_support.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_user.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_vector.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/handlers_wishlist.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/mailer_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/mailer_tools_full.go.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/media_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/media_tools_full.go.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/message_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/metric_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/newsletter_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/newsletter_tools_full.go.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/notification_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/notification_tools_full.go.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/offer_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/openai_tool_converter.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/order_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/order_tools_full.go.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/payment_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/post_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/post_tools_full.go.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/product_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/product_tools_full.go.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/reduce_tools.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/review_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/service_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/service_tools_full.go.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/shipping_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/shipping_tools_full.go.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/support_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/tool_definitions.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/tool_definitions_full.go.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/tool_executor.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/tool_handlers.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/tool_registry.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/type_converter.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/user_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/user_tools_full.go.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/validation.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/vector_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/wishlist_tools.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/application/tools/wishlist_tools_full.go.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/constants/natural_language.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/constants/natural_language_enhanced.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/constants/system_prompt.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/processor/data_analyzer.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/processor/helpers.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/processor/llm_processor.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/processor/llm_processor_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/processor/openai_data_processor.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/processor/openai_document_processor.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/processor/openai_speech_processor.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../managers/internal/processor/openai_vision_processor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/ai_client_provider.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/ai_client_provider.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/ai_model_selector.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/ai_model_selector.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/application.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/application.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/performance_optimizer.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/performance_optimizer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/processor/helpers.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/processor/helpers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/processor/llm_processor.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/processor/llm_processor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/processor/openai_data_processor.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/processor/openai_data_processor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/processor/openai_document_processor.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/processor/openai_document_processor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/processor/openai_speech_processor.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/processor/openai_speech_processor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/processor/openai_vision_processor.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/processor/openai_vision_processor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/security_validator.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/security_validator.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/services/ai_repository_language_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/services/ai_repository_language_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/services/interfaces.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/services/interfaces.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/services/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/services/types.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/tools/helpers.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/tools/helpers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/tools/tool_types.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/tools/tool_types.go" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GOROOT" url="file://$USER_HOME$/go/pkg/mod/golang.org/redacted-email@example.com-amd64" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="30iptjTdZzl8BE0Otq8VinPkSBN" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "git-widget-placeholder": "sfc",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "/home/szymon/classified/assistants",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-gosdk-d297c17c1fbd-57c114c3cede-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-243.26053.20" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-GO-243.26053.20" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+</project>

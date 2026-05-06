@@ -1,0 +1,458 @@
+/* ============================================================================
+   LISTING CARD - ATOMIC DESIGN SYSTEM
+   ============================================================================ */
+
+/* Uses Global Design Tokens from design-tokens.css */
+
+/* ============================================================================
+   CARD CONTAINER - ORGANISM
+   ============================================================================ */
+
+.card {
+  background: var(--ai-color-surface);
+  border: 1px solid var(--ai-color-border);
+  border-radius: var(--ai-radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--ai-transition-colors);
+  box-shadow: var(--ai-shadow-sm);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:focus-visible {
+  outline: none;
+  box-shadow: var(--ai-shadow-focus);
+}
+
+/* ============================================================================
+   IMAGE SECTION - MOLECULE
+   ============================================================================ */
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: var(--ai-color-secondary-light);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--ai-transition-transform);
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ai-color-secondary-light);
+  color: var(--ai-color-text-muted);
+  font-size: var(--ai-text-sm);
+  font-weight: var(--ai-font-weight-medium);
+}
+
+/* ============================================================================
+   OVERLAY ELEMENTS - ATOMS
+   ============================================================================ */
+
+.favoriteButton {
+  position: absolute;
+  top: var(--ai-space-sm);
+  right: var(--ai-space-sm);
+  width: 32px;
+  height: 32px;
+  background: var(--ai-color-surface);
+  border: 1px solid var(--ai-color-border);
+  border-radius: var(--ai-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--ai-transition-colors);
+  color: var(--ai-color-text-secondary);
+  /* backdrop-filter: blur(4px); - Removed for performance */
+  z-index: var(--ai-z-overlay);
+}
+
+.favoriteButton:hover {
+  background: var(--ai-color-error-bg);
+  border-color: var(--ai-color-error);
+  color: var(--ai-color-error);
+      /* transform: scale(1.1); - Replaced with opacity for performance */
+    opacity: 0.8;
+}
+
+.favoriteButton.favorited {
+  background: var(--ai-color-error);
+  border-color: var(--ai-color-error);
+  color: var(--ai-color-surface);
+}
+
+.favoriteButton:focus-visible {
+  outline: none;
+  box-shadow: var(--ai-shadow-focus);
+}
+
+.typeBadge {
+  position: absolute;
+  top: var(--ai-space-sm);
+  left: var(--ai-space-sm);
+  padding: var(--ai-space-xs) var(--ai-space-sm);
+  background: var(--ai-color-primary);
+  color: var(--ai-color-surface);
+  border-radius: var(--ai-radius-sm);
+  font-size: var(--ai-text-xs);
+  font-weight: var(--ai-font-weight-semibold);
+  text-transform: capitalize;
+  /* backdrop-filter: blur(4px); - Removed for performance */
+  z-index: var(--ai-z-overlay);
+}
+
+/* ============================================================================
+   CONTENT SECTION - MOLECULE
+   ============================================================================ */
+
+.content {
+  padding: var(--ai-space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ai-space-sm);
+  flex: 1;
+}
+
+.title {
+  font-size: var(--ai-text-lg);
+  font-weight: var(--ai-font-weight-semibold);
+  color: var(--ai-color-text-primary);
+  margin: 0;
+  line-height: var(--ai-line-height-tight);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.description {
+  font-size: var(--ai-text-sm);
+  color: var(--ai-color-text-secondary);
+  margin: 0;
+  line-height: var(--ai-line-height-relaxed);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: var(--ai-space-xs);
+  color: var(--ai-color-text-muted);
+  font-size: var(--ai-text-sm);
+}
+
+.location span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ============================================================================
+   FOOTER SECTION - MOLECULE
+   ============================================================================ */
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: var(--ai-space-sm);
+  border-top: 1px solid var(--ai-color-border);
+}
+
+.price {
+  font-size: var(--ai-text-lg);
+  font-weight: var(--ai-font-weight-bold);
+  color: var(--ai-color-success);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: var(--ai-space-sm);
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: var(--ai-space-xs);
+  color: var(--ai-color-text-muted);
+  font-size: var(--ai-text-xs);
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - MOBILE FIRST
+   ============================================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .imageWrapper {
+    height: 180px;
+  }
+
+  .content {
+    padding: var(--ai-space-md);
+    gap: var(--ai-space-xs);
+  }
+
+  .title {
+    font-size: var(--ai-text-base);
+  }
+
+  .description {
+    font-size: var(--ai-text-xs);
+  }
+
+  .price {
+    font-size: var(--ai-text-base);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .card:hover {
+    transform: none;
+  }
+
+  .card:hover .image {
+    transform: none;
+  }
+
+  .imageWrapper {
+    height: 160px;
+  }
+
+  .content {
+    padding: var(--ai-space-sm);
+  }
+
+  .title {
+    font-size: var(--ai-text-base);
+    -webkit-line-clamp: 1;
+  }
+
+  .description {
+    -webkit-line-clamp: 1;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--ai-space-xs);
+  }
+
+  .meta {
+    align-self: stretch;
+    justify-content: space-between;
+  }
+
+  .favoriteButton {
+    width: 28px;
+    height: 28px;
+  }
+
+  .favoriteButton:hover {
+    transform: none;
+  }
+
+  .typeBadge {
+    font-size: var(--text-xs);
+    padding: 2px var(--ai-space-xs);
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .imageWrapper {
+    height: 140px;
+  }
+
+  .content {
+    padding: var(--ai-space-xs);
+  }
+
+  .title {
+    font-size: var(--ai-text-sm);
+  }
+
+  .description {
+    font-size: var(--text-xs);
+  }
+
+  .location {
+    font-size: var(--ai-text-xs);
+  }
+
+  .price {
+    font-size: var(--ai-text-sm);
+  }
+
+  .metaItem {
+    font-size: var(--text-xs);
+  }
+
+  .favoriteButton {
+    width: 24px;
+    height: 24px;
+    top: var(--ai-space-xs);
+    right: var(--ai-space-xs);
+  }
+
+  .typeBadge {
+    top: var(--ai-space-xs);
+    left: var(--ai-space-xs);
+  }
+}
+
+/* ============================================================================
+   ACCESSIBILITY & MOTION
+   ============================================================================ */
+
+/* Dark Theme */
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: var(--gray-800, #1f2937);
+    border: 1px solid var(--gray-700, #374151);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    border-color: var(--gray-600, #4b5563);
+  }
+
+  .imageWrapper {
+    background: var(--gray-700, #374151);
+  }
+
+  .imagePlaceholder {
+    background: var(--gray-700, #374151);
+    color: var(--gray-400, #9ca3af);
+  }
+
+  .favoriteButton {
+    background: var(--gray-800, #1f2937);
+    border: 1px solid var(--gray-600, #4b5563);
+    color: var(--gray-300, #d1d5db);
+  }
+
+  .favoriteButton:hover {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: var(--danger, #ef4444);
+    color: var(--danger, #ef4444);
+  }
+
+  .favoriteButton.favorited {
+    background: var(--danger, #ef4444);
+    border-color: var(--danger, #ef4444);
+    color: white;
+  }
+
+  .typeBadge {
+    background: var(--primary-color, #3b82f6);
+    color: white;
+  }
+
+  .title {
+    color: var(--gray-50, #f9fafb);
+  }
+
+  .description {
+    color: var(--gray-300, #d1d5db);
+  }
+
+  .location {
+    color: var(--gray-400, #9ca3af);
+  }
+
+  .footer {
+    border-top: 1px solid var(--gray-700, #374151);
+  }
+
+  .price {
+    color: var(--success, #10b981);
+  }
+
+  .metaItem {
+    color: var(--gray-400, #9ca3af);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .image,
+  .favoriteButton {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .card:hover .image {
+    transform: none;
+  }
+
+  .favoriteButton:hover {
+    transform: none;
+  }
+}
+
+/* High Contrast */
+@media (prefers-contrast: high) {
+  .card {
+    border-width: 2px;
+  }
+
+  .favoriteButton {
+    border-width: 2px;
+  }
+
+  .footer {
+    border-top-width: 2px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+
+  .favoriteButton {
+    display: none;
+  }
+
+  .typeBadge {
+    background: transparent ;
+    color: #000 ;
+    border: 1px solid #000;
+  }
+
+  .imageWrapper {
+    height: 120px;
+  }
+
+  .content {
+    padding: var(--ai-space-sm);
+  }
+} 

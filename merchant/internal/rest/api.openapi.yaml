@@ -1,0 +1,50 @@
+openapiOptions:
+  file:
+    - file: "merchantpb/api.proto"
+      option:
+        info:
+          title: Merchant Center Integration API
+          version: "1.0.0"
+          description: "API for managing Google Merchant Center product catalog synchronization."
+        basePath: /
+  method:
+    # Product Sync Operations
+    - method: merchantpb.MerchantService.SyncProduct
+      option:
+        operationId: syncProduct
+        tags:
+          - Products
+        summary: Sync a single product to Google Merchant Center
+        description: "Synchronizes a single product with Google Merchant Center. Creates new products or updates existing ones."
+
+    - method: merchantpb.MerchantService.BatchSyncProducts
+      option:
+        operationId: batchSyncProducts
+        tags:
+          - Products
+        summary: Sync multiple products to Google Merchant Center
+        description: "Synchronizes multiple products with Google Merchant Center in a single batch operation."
+
+    - method: merchantpb.MerchantService.RemoveProduct
+      option:
+        operationId: removeProduct
+        tags:
+          - Products
+        summary: Remove a product from Google Merchant Center
+        description: "Removes a product from Google Merchant Center and updates local sync status."
+
+    - method: merchantpb.MerchantService.GetProductStatus
+      option:
+        operationId: getProductStatus
+        tags:
+          - Products
+        summary: Get product synchronization status
+        description: "Retrieves the current synchronization status of a product including last sync time and any errors."
+
+    - method: merchantpb.MerchantService.ListProducts
+      option:
+        operationId: listProducts
+        tags:
+          - Products
+        summary: List all synchronized products
+        description: "Lists all products that have been synchronized with Google Merchant Center with pagination support."

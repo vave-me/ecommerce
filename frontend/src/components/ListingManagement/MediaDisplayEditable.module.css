@@ -1,0 +1,98 @@
+/*
+ * MediaDisplayEditable.module.css
+ * Styles for the media display component with edit capabilities
+ */
+
+.mediaContainer {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 4/3;
+    background-color: #fff;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+/* Dark theme for media container */
+@media (prefers-color-scheme: dark) {
+    .mediaContainer {
+        background-color: var(--gray-800, #1f2937);
+    }
+}
+
+.styledImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.thumbWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.blackThumbWrapper {
+    width: 100%;
+    height: 100%;
+    background: #000; /* black background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.videoThumb {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.videoWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border-radius: 6px;
+}
+
+.videoElement {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.playOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.playIcon {
+    color: #fff;
+    width: 50px;
+    height: 50px;
+}
+
+.pauseOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.pauseIcon {
+    color: #fff;
+    width: 48px;
+    height: 48px;
+} 

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e4a6c352-fcfd-419b-8d0f-ec9a75de8b23" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/internal/application/queries/get_most_commented.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/application/queries/get_most_commented_by_category.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/redis_repository/comment_replies_repository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/redis_repository/middleman_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/internal/domain/interaction.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/internal/domain/interaction.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/internal/domain/interaction_events.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/internal/domain/interaction_events.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commentsclient/comment/comment_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/commentsclient/comment/comment_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commentsclient/comment/get_comments_parameters.go" beforeDir="false" afterPath="$PROJECT_DIR$/commentsclient/comment/get_comments_parameters.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commentsclient/comment/get_comments_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/commentsclient/comment/get_comments_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commentsclient/models/commentspb_add_comment_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/commentsclient/models/commentspb_add_comment_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commentsclient/models/commentspb_comment.go" beforeDir="false" afterPath="$PROJECT_DIR$/commentsclient/models/commentspb_comment.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commentsclient/models/commentspb_reply.go" beforeDir="false" afterPath="$PROJECT_DIR$/commentsclient/models/commentspb_reply.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commentspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/commentspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commentspb/api.pb.gw.go" beforeDir="false" afterPath="$PROJECT_DIR$/commentspb/api.pb.gw.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commentspb/api.proto" beforeDir="false" afterPath="$PROJECT_DIR$/commentspb/api.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commentspb/events.go" beforeDir="false" afterPath="$PROJECT_DIR$/commentspb/events.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commentspb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/commentspb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commentspb/events.proto" beforeDir="false" afterPath="$PROJECT_DIR$/commentspb/events.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/application/application.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/application/application.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/application/commands/add_comment.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/application/commands/add_comment.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/application/queries/get_comment.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/application/queries/get_comment.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/constants/constants.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/constants/constants.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/comment.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/comment.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/comment_events.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/comment_events.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/comment_reply_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/comment_reply_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/middleman_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/middleman_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/mock_comment_replies_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/mock_comment_replies_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/mock_middleman_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/mock_middleman_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/grpc/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/grpc/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handlers/domain_events.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handlers/domain_events.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handlers/middleman.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handlers/middleman.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/postgres/middleman_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/postgres/middleman_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/rest/api.annotations.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/internal/rest/api.annotations.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/rest/api.swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/internal/rest/api.swagger.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module.go" beforeDir="false" afterPath="$PROJECT_DIR$/module.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/internal/constants/constants.go" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/internal/constants/constants.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/internal/handlers/websocket_events.go" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/internal/handlers/websocket_events.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/internal/handlers/websocket_events_transaction.go" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/internal/handlers/websocket_events_transaction.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/messagespb/api.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/messagespb/api.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/messagespb/events.go" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/messagespb/events.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/messagespb/events.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/messagespb/events.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/module.go" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/module.go" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GOROOT" url="file:///usr/local/go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2peiPAlnmxvnCzPuFiy6sUyKbqb" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "git-widget-placeholder": "main",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "/home/szymon/Desktop/middleman/comments",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-gosdk-5df93f7ad4aa-df9ad98b711f-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-242.23339.24" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-GO-242.23339.24" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+</project>

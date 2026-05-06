@@ -1,0 +1,33 @@
+{{.NewsletterTitle}} - {{.AppName}}
+
+Hello {{.FirstName}},
+
+{{.NewsletterIntro}}
+
+{{range .Articles}}
+------------------------------------------------
+{{.Title}}
+
+{{.Summary}}
+
+Read more: {{.ReadMoreURL}}
+------------------------------------------------
+{{end}}
+
+We hope you enjoyed this newsletter. Stay tuned for more updates!
+
+View all articles: {{.AllArticlesURL}}
+
+Best regards,
+The {{.AppName}} Team
+
+---
+Follow us on social media:
+Facebook: {{.FacebookURL}}
+Twitter: {{.TwitterURL}}
+Instagram: {{.InstagramURL}}
+
+You're receiving this newsletter because you subscribed to updates from {{.AppName}}.
+To update your preferences or unsubscribe, visit: {{.UnsubscribeURL}}
+
+© {{.CurrentYear}} {{.CompanyName}}. All rights reserved. 

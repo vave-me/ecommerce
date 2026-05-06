@@ -1,0 +1,207 @@
+syntax = "proto3";
+
+package messagespb;
+
+import "google/protobuf/empty.proto";         // For empty responses
+import "google/protobuf/timestamp.proto";     // For timestamp fields
+
+// MessagesService provides functionalities related to conversation and message management between user-sellers and user-customers.
+service MessagesService {
+
+  // Starts a new conversation between a sender and a recipient regarding a specific item.
+  rpc StartConversation(StartConversationRequest) returns (StartConversationResponse) {}
+
+  // Restores an archived conversation by its unique identifier.
+  rpc RestoreConversation(RestoreConversationRequest) returns (RestoreConversationResponse) {}
+
+  // Archives an active conversation by its unique identifier.
+  rpc ArchiveConversation(ArchiveConversationRequest) returns (ArchiveConversationResponse) {}
+
+  // Retrieves details of a specific conversation by its unique identifier.
+  rpc GetConversation(GetConversationRequest) returns (GetConversationResponse) {}
+
+  // Retrieves a list of all conversations associated with a specific user.
+  rpc GetConversations(GetConversationsRequest) returns (GetConversationsResponse) {}
+
+  // Retrieves a list of active conversations for a specific user.
+  rpc GetActiveConversations(GetActiveConversationsRequest) returns (GetActiveConversationsResponse) {}
+
+  // Sends a new message within a specific conversation.
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse) {}
+
+  // Deletes a specific message by its unique identifier.
+  rpc DeleteMessage(DeleteMessageRequest) returns (DeleteMessageResponse) {}
+
+  // Retrieves details of a specific message by its unique identifier.
+  rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) {}
+
+  // Retrieves a list of messages within a specific conversation.
+  rpc GetMessages(GetMessagesRequest) returns (GetMessagesResponse) {}
+}
+
+message DeleteMessageResponse{}
+// Conversation represents a dialogue between a user-seller and a user-customer regarding a specific item.
+message Conversation {
+  string id = 1;                          // Unique identifier of the conversation.
+  string sender_id = 2;                   // Unique identifier of the user-seller initiating the conversation.
+  string recipient_id = 3;                // Unique identifier of the user-customer receiving the conversation.
+  string item_id = 4;                  // Unique identifier of the item involved in the conversation.
+  string conversation_status = 5;          // Current status of the conversation.
+
+}
+
+// Message represents an individual message within a conversation.
+message Message {
+  string id = 1;                          // Unique identifier of the message.
+  string conversation_id = 2;             // Unique identifier of the conversation this message belongs to.
+  string sender_id = 3;                   // Unique identifier of the sender (user-seller or user-customer).
+  string recipient_id = 4;                // Unique identifier of the recipient.
+  string item_id = 5;                  // Unique identifier of the item involved.
+  string body = 6;                        // Content of the message.
+
+}
+
+// Enumeration of possible conversation statuses.
+enum ConversationStatus {
+  PENDING = 0;                            // Conversation is pending and awaiting responses.
+  ACTIVE = 1;                             // Conversation is active and ongoing.
+  ARCHIVED = 2;                           // Conversation has been archived.
+}
+
+// Enumeration of possible message statuses.
+enum MessageStatus {
+  SENT = 0;                               // Message has been sent.
+  EDITED = 1;                             // Message has been edited.
+  DELETED = 2;                            // Message has been deleted.
+}
+
+// Request message to start a new conversation.
+message StartConversationRequest {
+  string sender_id = 1;                   // Unique identifier of the user-seller initiating the conversation.
+  string recipient_id = 2;                // Unique identifier of the user-customer receiving the conversation.
+  string item_id = 3;                  // Unique identifier of the item involved in the conversation.
+}
+
+// Response message after starting a new conversation.
+message StartConversationResponse {
+  string id = 1;                          // Unique identifier of the created conversation.
+}
+
+// Request message to restore an archived conversation.
+message RestoreConversationRequest {
+  string id = 1;                          // Unique identifier of the conversation to restore.
+}
+
+// Response message after restoring a conversation.
+message RestoreConversationResponse {
+  string id = 1;                          // Unique identifier of the restored conversation.
+  string conversation_status = 2;          // Updated status of the conversation.
+
+}
+
+// Request message to archive an active conversation.
+message ArchiveConversationRequest {
+  string id = 1;                          // Unique identifier of the conversation to archive.
+}
+
+// Response message after archiving a conversation.
+message ArchiveConversationResponse {
+  string id = 1;                          // Unique identifier of the archived conversation.
+  string conversation_status = 2;          // Updated status of the conversation.
+}
+
+// Request message to retrieve a specific conversation.
+message GetConversationRequest {
+  string id = 1;                          // Unique identifier of the conversation to retrieve.
+}
+
+// Response message containing the details of the requested conversation.
+message GetConversationResponse {
+  Conversation conversation = 1;          // Details of the requested conversation.
+}
+
+// Request message to retrieve all conversations for a specific user.
+message GetConversationsRequest {
+  string user_id = 1;                     // Unique identifier of the user (either sender or recipient).
+  int32 page = 2;                         // Page number for pagination (optional).
+  int32 limit = 3;                        // Number of conversations per page (optional).
+}
+
+// Response message containing a list of conversations.
+message GetConversationsResponse {
+  repeated Conversation conversations = 1; // List of conversations.
+  int32 total = 2;                        // Total number of conversations available.
+  int32 page = 3;                         // Current page number.
+  int32 limit = 4;                        // Number of conversations per page.
+}
+
+// Request message to retrieve active conversations for a specific user.
+message GetActiveConversationsRequest {
+  string user_id = 1;                     // Unique identifier of the user.
+  int32 page = 2;                         // Page number for pagination (optional).
+  int32 limit = 3;                        // Number of conversations per page (optional).
+}
+
+// Response message containing a list of active conversations.
+message GetActiveConversationsResponse {
+  repeated Conversation conversations = 1; // List of active conversations.
+  int32 total = 2;                        // Total number of active conversations available.
+  int32 page = 3;                         // Current page number.
+  int32 limit = 4;                        // Number of conversations per page.
+}
+
+// Request message to send a new message within a conversation.
+message SendMessageRequest {
+  string conversation_id = 1;             // Unique identifier of the conversation.
+  string sender_id = 2;                   // Unique identifier of the sender.
+  string recipient_id = 3;                // Unique identifier of the recipient.
+  string item_id = 4;                  // Unique identifier of the item involved.
+  string body = 5;                        // Content of the message.
+}
+
+// Response message after sending a new message.
+message SendMessageResponse {
+  string id = 1;                          // Unique identifier of the sent message.
+  google.protobuf.Timestamp sent_at = 2;  // Timestamp when the message was sent.
+}
+
+// Request message to delete a specific message.
+message DeleteMessageRequest {
+  string id = 1;                          // Unique identifier of the message to delete.
+}
+
+// Request message to retrieve a specific message.
+message GetMessageRequest {
+  string id = 1;                          // Unique identifier of the message to retrieve.
+}
+
+// Response message containing the details of the requested message.
+message GetMessageResponse {
+  Message message = 1;                    // Details of the requested message.
+}
+
+// Request message to retrieve messages within a specific conversation.
+message GetMessagesRequest {
+  string conversation_id = 1;             // Unique identifier of the conversation.
+  int32 page = 2;                         // Page number for pagination (optional).
+  int32 limit = 3;                        // Number of messages per page (optional).
+}
+
+// Response message containing a list of messages within a conversation.
+message GetMessagesResponse {
+  repeated Message messages = 1;          // List of messages.
+  int32 total = 2;                        // Total number of messages available.
+  int32 page = 3;                         // Current page number.
+  int32 limit = 4;                        // Number of messages per page.
+}
+
+// -----------------------------
+// Shared Enumerations and Messages
+// -----------------------------
+
+// ErrorResponse provides a standardized error structure.
+message ErrorResponse {
+  int32 code = 1;                          // HTTP status code.
+  string message = 2;                      // Error message detailing what went wrong.
+  repeated string details = 3;             // Additional error details.
+}

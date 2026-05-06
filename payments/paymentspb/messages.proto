@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package paymentspb;
+// events
+
+message InvoicePaid {
+  string id = 1;
+  string order_id = 2;
+}
+
+message PaymentAuthorized {
+  string basket_id = 1;
+  string payment_intent_id = 2;
+  string user_customer_id = 3;
+  string order_id = 4;
+  int64 amount = 5;
+}
+
+message PaymentConfirmed {
+  string payment_id = 1;
+  string order_id = 2;
+  string shopping_id = 3;
+  int64 amount = 4;
+}
+// commands
+
+message ConfirmPayment {
+  string id = 1;
+  int64 amount = 2;
+  string order_id = 3;
+}

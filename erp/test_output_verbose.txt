@@ -1,0 +1,570 @@
++ BASE_URL=http://localhost:8080/api/erp
++ AUTH_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ3d3cuZXhhbXBsZS5jb20iLCJleHAiOjE3NTMzNDk4NDUsImlhdCI6MTc1MzM0NjI0NSwiaXNzIjoidXNlcnNfc2VydmljZSIsImxhdCI6MCwibG9uZyI6MCwibmFtZSI6InN0cmluZyBzdHJpbmciLCJyb2xlIjoiYWRtaW4iLCJzdWIiOiI3NmJlOTU2Ni1iOTk1LTRhZGItYmE1ZC1jZTJkODg4YTg5ZDUiLCJ1c2VybmFtZSI6InN0cmluZyJ9.QRDn5MFwWG2J6w-92l0o_KAuof1i0sx4VoaZdzZj66c
++ GREEN='\033[0;32m'
++ RED='\033[0;31m'
++ BLUE='\033[0;34m'
++ NC='\033[0m'
++ echo -e '\033[0;32mStarting ERP Service API Tests\033[0m'
+[0;32mStarting ERP Service API Tests[0m
++ echo -e '\n\033[0;32m1. Connector Management\033[0m'
+
+[0;32m1. Connector Management[0m
++ make_request GET /connectors
++ local method=GET
++ local endpoint=/connectors
++ local data=
++ echo -e '\n\033[0;34m=== Testing: GET /connectors ===\033[0m'
+
+[0;34m=== Testing: GET /connectors ===[0m
++ '[' -z '' ']'
++ curl -X GET http://localhost:8080/api/erp/connectors -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ3d3cuZXhhbXBsZS5jb20iLCJleHAiOjE3NTMzNDk4NDUsImlhdCI6MTc1MzM0NjI0NSwiaXNzIjoidXNlcnNfc2VydmljZSIsImxhdCI6MCwibG9uZyI6MCwibmFtZSI6InN0cmluZyBzdHJpbmciLCJyb2xlIjoiYWRtaW4iLCJzdWIiOiI3NmJlOTU2Ni1iOTk1LTRhZGItYmE1ZC1jZTJkODg4YTg5ZDUiLCJ1c2VybmFtZSI6InN0cmluZyJ9.QRDn5MFwWG2J6w-92l0o_KAuof1i0sx4VoaZdzZj66c' -H 'Content-Type: application/json' -w '\nHTTP Status: %{http_code}\n' -s
++ jq .
++ echo 'Response parsing failed'
+Response parsing failed
++ echo -e '\n\033[0;34mCreating NetSuite test connector...\033[0m'
+
+[0;34mCreating NetSuite test connector...[0m
++ NETSUITE_DATA='{
+  "name": "Test NetSuite Connector",
+  "type": "netsuite",
+  "environment": "sandbox",
+  "baseUrl": "https://test.netsuite.com",
+  "authType": "oauth1",
+  "authConfig": {
+    "consumer_key": "test_consumer_key",
+    "consumer_secret": "test_consumer_secret",
+    "token_id": "test_token_id",
+    "token_secret": "test_token_secret",
+    "account_id": "test_account"
+  },
+  "webhookEnabled": true,
+  "syncEnabled": true,
+  "syncIntervalSeconds": 300,
+  "batchSize": 100
+}'
+++ make_request POST /connectors/v2 '{
+  "name": "Test NetSuite Connector",
+  "type": "netsuite",
+  "environment": "sandbox",
+  "baseUrl": "https://test.netsuite.com",
+  "authType": "oauth1",
+  "authConfig": {
+    "consumer_key": "test_consumer_key",
+    "consumer_secret": "test_consumer_secret",
+    "token_id": "test_token_id",
+    "token_secret": "test_token_secret",
+    "account_id": "test_account"
+  },
+  "webhookEnabled": true,
+  "syncEnabled": true,
+  "syncIntervalSeconds": 300,
+  "batchSize": 100
+}'
+++ local method=POST
+++ local endpoint=/connectors/v2
+++ local 'data={
+  "name": "Test NetSuite Connector",
+  "type": "netsuite",
+  "environment": "sandbox",
+  "baseUrl": "https://test.netsuite.com",
+  "authType": "oauth1",
+  "authConfig": {
+    "consumer_key": "test_consumer_key",
+    "consumer_secret": "test_consumer_secret",
+    "token_id": "test_token_id",
+    "token_secret": "test_token_secret",
+    "account_id": "test_account"
+  },
+  "webhookEnabled": true,
+  "syncEnabled": true,
+  "syncIntervalSeconds": 300,
+  "batchSize": 100
+}'
+++ echo -e '\n\033[0;34m=== Testing: POST /connectors/v2 ===\033[0m'
+++ '[' -z '{
+  "name": "Test NetSuite Connector",
+  "type": "netsuite",
+  "environment": "sandbox",
+  "baseUrl": "https://test.netsuite.com",
+  "authType": "oauth1",
+  "authConfig": {
+    "consumer_key": "test_consumer_key",
+    "consumer_secret": "test_consumer_secret",
+    "token_id": "test_token_id",
+    "token_secret": "test_token_secret",
+    "account_id": "test_account"
+  },
+  "webhookEnabled": true,
+  "syncEnabled": true,
+  "syncIntervalSeconds": 300,
+  "batchSize": 100
+}' ']'
+++ curl -X POST http://localhost:8080/api/erp/connectors/v2 -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ3d3cuZXhhbXBsZS5jb20iLCJleHAiOjE3NTMzNDk4NDUsImlhdCI6MTc1MzM0NjI0NSwiaXNzIjoidXNlcnNfc2VydmljZSIsImxhdCI6MCwibG9uZyI6MCwibmFtZSI6InN0cmluZyBzdHJpbmciLCJyb2xlIjoiYWRtaW4iLCJzdWIiOiI3NmJlOTU2Ni1iOTk1LTRhZGItYmE1ZC1jZTJkODg4YTg5ZDUiLCJ1c2VybmFtZSI6InN0cmluZyJ9.QRDn5MFwWG2J6w-92l0o_KAuof1i0sx4VoaZdzZj66c' -H 'Content-Type: application/json' -d '{
+  "name": "Test NetSuite Connector",
+  "type": "netsuite",
+  "environment": "sandbox",
+  "baseUrl": "https://test.netsuite.com",
+  "authType": "oauth1",
+  "authConfig": {
+    "consumer_key": "test_consumer_key",
+    "consumer_secret": "test_consumer_secret",
+    "token_id": "test_token_id",
+    "token_secret": "test_token_secret",
+    "account_id": "test_account"
+  },
+  "webhookEnabled": true,
+  "syncEnabled": true,
+  "syncIntervalSeconds": 300,
+  "batchSize": 100
+}' -w '\nHTTP Status: %{http_code}\n' -s
+++ jq .
+++ echo 'Response parsing failed'
++ RESPONSE='
+[0;34m=== Testing: POST /connectors/v2 ===[0m
+Response parsing failed'
+++ echo '
+[0;34m=== Testing: POST /connectors/v2 ===[0m
+Response parsing failed'
+++ jq -r .connectorId
++ CONNECTOR_ID=
++ '[' '' '!=' null ']'
++ '[' -n '' ']'
++ echo -e '\n\033[0;34mCreating Odoo test connector...\033[0m'
+
+[0;34mCreating Odoo test connector...[0m
++ ODOO_DATA='{
+  "name": "Test Odoo Connector",
+  "type": "odoo",
+  "environment": "development",
+  "baseUrl": "https://demo.odoo.com",
+  "authType": "basic",
+  "authConfig": {
+    "username": "demo",
+    "password": "demo",
+    "database": "demo_db"
+  },
+  "webhookEnabled": false,
+  "syncEnabled": true,
+  "syncIntervalSeconds": 600,
+  "batchSize": 50
+}'
++ make_request POST /connectors/v2 '{
+  "name": "Test Odoo Connector",
+  "type": "odoo",
+  "environment": "development",
+  "baseUrl": "https://demo.odoo.com",
+  "authType": "basic",
+  "authConfig": {
+    "username": "demo",
+    "password": "demo",
+    "database": "demo_db"
+  },
+  "webhookEnabled": false,
+  "syncEnabled": true,
+  "syncIntervalSeconds": 600,
+  "batchSize": 50
+}'
++ local method=POST
++ local endpoint=/connectors/v2
++ local 'data={
+  "name": "Test Odoo Connector",
+  "type": "odoo",
+  "environment": "development",
+  "baseUrl": "https://demo.odoo.com",
+  "authType": "basic",
+  "authConfig": {
+    "username": "demo",
+    "password": "demo",
+    "database": "demo_db"
+  },
+  "webhookEnabled": false,
+  "syncEnabled": true,
+  "syncIntervalSeconds": 600,
+  "batchSize": 50
+}'
++ echo -e '\n\033[0;34m=== Testing: POST /connectors/v2 ===\033[0m'
+
+[0;34m=== Testing: POST /connectors/v2 ===[0m
++ '[' -z '{
+  "name": "Test Odoo Connector",
+  "type": "odoo",
+  "environment": "development",
+  "baseUrl": "https://demo.odoo.com",
+  "authType": "basic",
+  "authConfig": {
+    "username": "demo",
+    "password": "demo",
+    "database": "demo_db"
+  },
+  "webhookEnabled": false,
+  "syncEnabled": true,
+  "syncIntervalSeconds": 600,
+  "batchSize": 50
+}' ']'
++ curl -X POST http://localhost:8080/api/erp/connectors/v2 -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ3d3cuZXhhbXBsZS5jb20iLCJleHAiOjE3NTMzNDk4NDUsImlhdCI6MTc1MzM0NjI0NSwiaXNzIjoidXNlcnNfc2VydmljZSIsImxhdCI6MCwibG9uZyI6MCwibmFtZSI6InN0cmluZyBzdHJpbmciLCJyb2xlIjoiYWRtaW4iLCJzdWIiOiI3NmJlOTU2Ni1iOTk1LTRhZGItYmE1ZC1jZTJkODg4YTg5ZDUiLCJ1c2VybmFtZSI6InN0cmluZyJ9.QRDn5MFwWG2J6w-92l0o_KAuof1i0sx4VoaZdzZj66c' -H 'Content-Type: application/json' -d '{
+  "name": "Test Odoo Connector",
+  "type": "odoo",
+  "environment": "development",
+  "baseUrl": "https://demo.odoo.com",
+  "authType": "basic",
+  "authConfig": {
+    "username": "demo",
+    "password": "demo",
+    "database": "demo_db"
+  },
+  "webhookEnabled": false,
+  "syncEnabled": true,
+  "syncIntervalSeconds": 600,
+  "batchSize": 50
+}' -w '\nHTTP Status: %{http_code}\n' -s
++ jq .
++ echo 'Response parsing failed'
+Response parsing failed
++ make_request GET '/connectors?type=netsuite'
++ local method=GET
++ local 'endpoint=/connectors?type=netsuite'
++ local data=
++ echo -e '\n\033[0;34m=== Testing: GET /connectors?type=netsuite ===\033[0m'
+
+[0;34m=== Testing: GET /connectors?type=netsuite ===[0m
++ '[' -z '' ']'
++ curl -X GET 'http://localhost:8080/api/erp/connectors?type=netsuite' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ3d3cuZXhhbXBsZS5jb20iLCJleHAiOjE3NTMzNDk4NDUsImlhdCI6MTc1MzM0NjI0NSwiaXNzIjoidXNlcnNfc2VydmljZSIsImxhdCI6MCwibG9uZyI6MCwibmFtZSI6InN0cmluZyBzdHJpbmciLCJyb2xlIjoiYWRtaW4iLCJzdWIiOiI3NmJlOTU2Ni1iOTk1LTRhZGItYmE1ZC1jZTJkODg4YTg5ZDUiLCJ1c2VybmFtZSI6InN0cmluZyJ9.QRDn5MFwWG2J6w-92l0o_KAuof1i0sx4VoaZdzZj66c' -H 'Content-Type: application/json' -w '\nHTTP Status: %{http_code}\n' -s
++ jq .
++ echo 'Response parsing failed'
+Response parsing failed
++ make_request GET '/connectors?status=active'
++ local method=GET
++ local 'endpoint=/connectors?status=active'
++ local data=
++ echo -e '\n\033[0;34m=== Testing: GET /connectors?status=active ===\033[0m'
+
+[0;34m=== Testing: GET /connectors?status=active ===[0m
++ '[' -z '' ']'
++ curl -X GET 'http://localhost:8080/api/erp/connectors?status=active' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ3d3cuZXhhbXBsZS5jb20iLCJleHAiOjE3NTMzNDk4NDUsImlhdCI6MTc1MzM0NjI0NSwiaXNzIjoidXNlcnNfc2VydmljZSIsImxhdCI6MCwibG9uZyI6MCwibmFtZSI6InN0cmluZyBzdHJpbmciLCJyb2xlIjoiYWRtaW4iLCJzdWIiOiI3NmJlOTU2Ni1iOTk1LTRhZGItYmE1ZC1jZTJkODg4YTg5ZDUiLCJ1c2VybmFtZSI6InN0cmluZyJ9.QRDn5MFwWG2J6w-92l0o_KAuof1i0sx4VoaZdzZj66c' -H 'Content-Type: application/json' -w '\nHTTP Status: %{http_code}\n' -s
++ jq .
++ echo 'Response parsing failed'
+Response parsing failed
++ echo -e '\n\033[0;32m2. Synchronization Operations\033[0m'
+
+[0;32m2. Synchronization Operations[0m
++ '[' '' '!=' null ']'
++ '[' -n '' ']'
++ echo -e '\n\033[0;32m3. Invoice Management\033[0m'
+
+[0;32m3. Invoice Management[0m
++ INVOICE_DATA='{
+  "invoiceNumber": "INV-TEST-001",
+  "orderId": "ORD-123",
+  "customerId": "CUST-456",
+  "type": "standard",
+  "issueDate": "2024-01-24T00:00:00Z",
+  "dueDate": "2024-02-24T00:00:00Z",
+  "currency": "USD",
+  "lines": [
+    {
+      "description": "Test Product",
+      "quantity": 2,
+      "unitPrice": 50.00,
+      "amount": 100.00
+    }
+  ],
+  "subTotal": 100.00,
+  "taxAmount": 10.00,
+  "totalAmount": 110.00,
+  "paymentTerms": "Net 30",
+  "billingAddress": {
+    "street": "123 Test St",
+    "city": "Test City",
+    "state": "TS",
+    "postalCode": "12345",
+    "country": "US"
+  }
+}'
+++ make_request POST /invoices '{
+  "invoiceNumber": "INV-TEST-001",
+  "orderId": "ORD-123",
+  "customerId": "CUST-456",
+  "type": "standard",
+  "issueDate": "2024-01-24T00:00:00Z",
+  "dueDate": "2024-02-24T00:00:00Z",
+  "currency": "USD",
+  "lines": [
+    {
+      "description": "Test Product",
+      "quantity": 2,
+      "unitPrice": 50.00,
+      "amount": 100.00
+    }
+  ],
+  "subTotal": 100.00,
+  "taxAmount": 10.00,
+  "totalAmount": 110.00,
+  "paymentTerms": "Net 30",
+  "billingAddress": {
+    "street": "123 Test St",
+    "city": "Test City",
+    "state": "TS",
+    "postalCode": "12345",
+    "country": "US"
+  }
+}'
+++ local method=POST
+++ local endpoint=/invoices
+++ local 'data={
+  "invoiceNumber": "INV-TEST-001",
+  "orderId": "ORD-123",
+  "customerId": "CUST-456",
+  "type": "standard",
+  "issueDate": "2024-01-24T00:00:00Z",
+  "dueDate": "2024-02-24T00:00:00Z",
+  "currency": "USD",
+  "lines": [
+    {
+      "description": "Test Product",
+      "quantity": 2,
+      "unitPrice": 50.00,
+      "amount": 100.00
+    }
+  ],
+  "subTotal": 100.00,
+  "taxAmount": 10.00,
+  "totalAmount": 110.00,
+  "paymentTerms": "Net 30",
+  "billingAddress": {
+    "street": "123 Test St",
+    "city": "Test City",
+    "state": "TS",
+    "postalCode": "12345",
+    "country": "US"
+  }
+}'
+++ echo -e '\n\033[0;34m=== Testing: POST /invoices ===\033[0m'
+++ '[' -z '{
+  "invoiceNumber": "INV-TEST-001",
+  "orderId": "ORD-123",
+  "customerId": "CUST-456",
+  "type": "standard",
+  "issueDate": "2024-01-24T00:00:00Z",
+  "dueDate": "2024-02-24T00:00:00Z",
+  "currency": "USD",
+  "lines": [
+    {
+      "description": "Test Product",
+      "quantity": 2,
+      "unitPrice": 50.00,
+      "amount": 100.00
+    }
+  ],
+  "subTotal": 100.00,
+  "taxAmount": 10.00,
+  "totalAmount": 110.00,
+  "paymentTerms": "Net 30",
+  "billingAddress": {
+    "street": "123 Test St",
+    "city": "Test City",
+    "state": "TS",
+    "postalCode": "12345",
+    "country": "US"
+  }
+}' ']'
+++ curl -X POST http://localhost:8080/api/erp/invoices -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ3d3cuZXhhbXBsZS5jb20iLCJleHAiOjE3NTMzNDk4NDUsImlhdCI6MTc1MzM0NjI0NSwiaXNzIjoidXNlcnNfc2VydmljZSIsImxhdCI6MCwibG9uZyI6MCwibmFtZSI6InN0cmluZyBzdHJpbmciLCJyb2xlIjoiYWRtaW4iLCJzdWIiOiI3NmJlOTU2Ni1iOTk1LTRhZGItYmE1ZC1jZTJkODg4YTg5ZDUiLCJ1c2VybmFtZSI6InN0cmluZyJ9.QRDn5MFwWG2J6w-92l0o_KAuof1i0sx4VoaZdzZj66c' -H 'Content-Type: application/json' -d '{
+  "invoiceNumber": "INV-TEST-001",
+  "orderId": "ORD-123",
+  "customerId": "CUST-456",
+  "type": "standard",
+  "issueDate": "2024-01-24T00:00:00Z",
+  "dueDate": "2024-02-24T00:00:00Z",
+  "currency": "USD",
+  "lines": [
+    {
+      "description": "Test Product",
+      "quantity": 2,
+      "unitPrice": 50.00,
+      "amount": 100.00
+    }
+  ],
+  "subTotal": 100.00,
+  "taxAmount": 10.00,
+  "totalAmount": 110.00,
+  "paymentTerms": "Net 30",
+  "billingAddress": {
+    "street": "123 Test St",
+    "city": "Test City",
+    "state": "TS",
+    "postalCode": "12345",
+    "country": "US"
+  }
+}' -w '\nHTTP Status: %{http_code}\n' -s
+++ jq .
+++ echo 'Response parsing failed'
++ INVOICE_RESPONSE='
+[0;34m=== Testing: POST /invoices ===[0m
+Response parsing failed'
+++ echo '
+[0;34m=== Testing: POST /invoices ===[0m
+Response parsing failed'
+++ jq -r .invoiceId
++ INVOICE_ID=
++ '[' '' '!=' null ']'
++ '[' -n '' ']'
++ echo -e '\n\033[0;32m4. Return Management\033[0m'
+
+[0;32m4. Return Management[0m
++ RETURN_DATA='{
+  "returnNumber": "RET-TEST-001",
+  "orderId": "ORD-123",
+  "customerId": "CUST-456",
+  "reason": "defective",
+  "type": "exchange",
+  "items": [
+    {
+      "sku": "SKU001",
+      "quantity": 1,
+      "reason": "Defective product"
+    }
+  ],
+  "refundAmount": 55.00
+}'
+++ make_request POST /returns '{
+  "returnNumber": "RET-TEST-001",
+  "orderId": "ORD-123",
+  "customerId": "CUST-456",
+  "reason": "defective",
+  "type": "exchange",
+  "items": [
+    {
+      "sku": "SKU001",
+      "quantity": 1,
+      "reason": "Defective product"
+    }
+  ],
+  "refundAmount": 55.00
+}'
+++ local method=POST
+++ local endpoint=/returns
+++ local 'data={
+  "returnNumber": "RET-TEST-001",
+  "orderId": "ORD-123",
+  "customerId": "CUST-456",
+  "reason": "defective",
+  "type": "exchange",
+  "items": [
+    {
+      "sku": "SKU001",
+      "quantity": 1,
+      "reason": "Defective product"
+    }
+  ],
+  "refundAmount": 55.00
+}'
+++ echo -e '\n\033[0;34m=== Testing: POST /returns ===\033[0m'
+++ '[' -z '{
+  "returnNumber": "RET-TEST-001",
+  "orderId": "ORD-123",
+  "customerId": "CUST-456",
+  "reason": "defective",
+  "type": "exchange",
+  "items": [
+    {
+      "sku": "SKU001",
+      "quantity": 1,
+      "reason": "Defective product"
+    }
+  ],
+  "refundAmount": 55.00
+}' ']'
+++ curl -X POST http://localhost:8080/api/erp/returns -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ3d3cuZXhhbXBsZS5jb20iLCJleHAiOjE3NTMzNDk4NDUsImlhdCI6MTc1MzM0NjI0NSwiaXNzIjoidXNlcnNfc2VydmljZSIsImxhdCI6MCwibG9uZyI6MCwibmFtZSI6InN0cmluZyBzdHJpbmciLCJyb2xlIjoiYWRtaW4iLCJzdWIiOiI3NmJlOTU2Ni1iOTk1LTRhZGItYmE1ZC1jZTJkODg4YTg5ZDUiLCJ1c2VybmFtZSI6InN0cmluZyJ9.QRDn5MFwWG2J6w-92l0o_KAuof1i0sx4VoaZdzZj66c' -H 'Content-Type: application/json' -d '{
+  "returnNumber": "RET-TEST-001",
+  "orderId": "ORD-123",
+  "customerId": "CUST-456",
+  "reason": "defective",
+  "type": "exchange",
+  "items": [
+    {
+      "sku": "SKU001",
+      "quantity": 1,
+      "reason": "Defective product"
+    }
+  ],
+  "refundAmount": 55.00
+}' -w '\nHTTP Status: %{http_code}\n' -s
+++ jq .
+++ echo 'Response parsing failed'
++ RETURN_RESPONSE='
+[0;34m=== Testing: POST /returns ===[0m
+Response parsing failed'
+++ echo '
+[0;34m=== Testing: POST /returns ===[0m
+Response parsing failed'
+++ jq -r .returnId
++ RETURN_ID=
++ '[' '' '!=' null ']'
++ '[' -n '' ']'
++ echo -e '\n\033[0;32m5. Inventory Management\033[0m'
+
+[0;32m5. Inventory Management[0m
++ RESERVATION_DATA='{
+  "orderId": "ORD-789",
+  "sku": "SKU001",
+  "quantity": 5,
+  "warehouseId": "WAREHOUSE-1",
+  "type": "sales_order"
+}'
+++ make_request POST /inventory/reservations '{
+  "orderId": "ORD-789",
+  "sku": "SKU001",
+  "quantity": 5,
+  "warehouseId": "WAREHOUSE-1",
+  "type": "sales_order"
+}'
+++ local method=POST
+++ local endpoint=/inventory/reservations
+++ local 'data={
+  "orderId": "ORD-789",
+  "sku": "SKU001",
+  "quantity": 5,
+  "warehouseId": "WAREHOUSE-1",
+  "type": "sales_order"
+}'
+++ echo -e '\n\033[0;34m=== Testing: POST /inventory/reservations ===\033[0m'
+++ '[' -z '{
+  "orderId": "ORD-789",
+  "sku": "SKU001",
+  "quantity": 5,
+  "warehouseId": "WAREHOUSE-1",
+  "type": "sales_order"
+}' ']'
+++ curl -X POST http://localhost:8080/api/erp/inventory/reservations -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ3d3cuZXhhbXBsZS5jb20iLCJleHAiOjE3NTMzNDk4NDUsImlhdCI6MTc1MzM0NjI0NSwiaXNzIjoidXNlcnNfc2VydmljZSIsImxhdCI6MCwibG9uZyI6MCwibmFtZSI6InN0cmluZyBzdHJpbmciLCJyb2xlIjoiYWRtaW4iLCJzdWIiOiI3NmJlOTU2Ni1iOTk1LTRhZGItYmE1ZC1jZTJkODg4YTg5ZDUiLCJ1c2VybmFtZSI6InN0cmluZyJ9.QRDn5MFwWG2J6w-92l0o_KAuof1i0sx4VoaZdzZj66c' -H 'Content-Type: application/json' -d '{
+  "orderId": "ORD-789",
+  "sku": "SKU001",
+  "quantity": 5,
+  "warehouseId": "WAREHOUSE-1",
+  "type": "sales_order"
+}' -w '\nHTTP Status: %{http_code}\n' -s
+++ jq .
+++ echo 'Response parsing failed'
++ RESERVATION_RESPONSE='
+[0;34m=== Testing: POST /inventory/reservations ===[0m
+Response parsing failed'
+++ echo '
+[0;34m=== Testing: POST /inventory/reservations ===[0m
+Response parsing failed'
+++ jq -r .reservationId
++ RESERVATION_ID=
++ '[' '' '!=' null ']'
++ '[' -n '' ']'
++ echo -e '\n\033[0;32m6. Webhook Endpoint Test\033[0m'
+
+[0;32m6. Webhook Endpoint Test[0m
++ '[' '' '!=' null ']'
++ '[' -n '' ']'
++ echo -e '\n\033[0;32mCleanup (optional)\033[0m'
+
+[0;32mCleanup (optional)[0m
++ echo 'To remove test connectors, uncomment the following lines:'
+To remove test connectors, uncomment the following lines:
++ echo '# make_request DELETE "/connectors/?force=true"'
+# make_request DELETE "/connectors/?force=true"
++ echo -e '\n\033[0;32mERP Service API Tests Completed!\033[0m'
+
+[0;32mERP Service API Tests Completed![0m

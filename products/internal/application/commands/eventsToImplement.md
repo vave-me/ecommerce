@@ -1,0 +1,6 @@
+ProductOptionAdded
+ProductOptionRemoved
+ProductOptionUpdated
+ProductAttributeAdded
+ProductAttributeRemoved
+ProductAttributeUpdated

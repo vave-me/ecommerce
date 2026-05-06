@@ -1,0 +1,204 @@
+/* Unified Error Boundary Styles */
+
+.fallbackContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  margin: 1rem auto;
+  max-width: 600px;
+  min-height: 300px;
+  background-color: #ffffff;
+  border: 1px solid #fee2e2;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.errorIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  filter: grayscale(0.2);
+}
+
+.errorTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #dc2626;
+  margin: 0 0 0.75rem 0;
+  text-align: center;
+}
+
+.errorMessage {
+  font-size: 1rem;
+  color: #6b7280;
+  text-align: center;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.5;
+  max-width: 80%;
+}
+
+.errorDetails {
+  width: 100%;
+  margin: 1rem 0;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.errorSummary {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: #374151;
+  background-color: #f3f4f6;
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s;
+}
+
+.errorSummary:hover {
+  background-color: #e5e7eb;
+}
+
+.errorStack {
+  padding: 1rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+  color: #374151;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+}
+
+.errorStack strong {
+  color: #111827;
+}
+
+.errorStack pre {
+  margin: 0.5rem 0 0 0;
+  padding: 0.5rem;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  overflow-x: auto;
+}
+
+.errorActions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.primaryButton,
+.secondaryButton {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.primaryButton {
+  background-color: #3b82f6;
+  color: white;
+  border: 1px solid #3b82f6;
+}
+
+.primaryButton:hover {
+  background-color: #2563eb;
+  border-color: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.4);
+}
+
+.primaryButton:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.secondaryButton {
+  background-color: transparent;
+  color: #3b82f6;
+  border: 1px solid #3b82f6;
+}
+
+.secondaryButton:hover {
+  background-color: #eff6ff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.secondaryButton:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .fallbackContainer {
+    background-color: #1f2937;
+    border-color: #7f1d1d;
+  }
+
+  .errorTitle {
+    color: #ef4444;
+  }
+
+  .errorMessage {
+    color: #d1d5db;
+  }
+
+  .errorDetails {
+    background-color: #111827;
+    border-color: #374151;
+  }
+
+  .errorSummary {
+    color: #e5e7eb;
+    background-color: #1f2937;
+    border-color: #374151;
+  }
+
+  .errorSummary:hover {
+    background-color: #374151;
+  }
+
+  .errorStack {
+    color: #d1d5db;
+  }
+
+  .errorStack strong {
+    color: #f3f4f6;
+  }
+
+  .errorStack pre {
+    background-color: #1f2937;
+    border-color: #374151;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .fallbackContainer {
+    margin: 0.5rem;
+    padding: 1.5rem;
+  }
+
+  .errorMessage {
+    max-width: 100%;
+  }
+
+  .errorActions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+}

@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package shippingpb;
+
+message ShipmentCreated {
+  string id = 1;
+  string product_id = 2;
+  string tracking_number = 3;
+  string label_url = 4;
+  string sender_name = 5;
+  string sender_address = 6;
+  string receiver_name = 7;
+  string receiver_address = 8;
+  string weight = 9;
+  string dimensions = 10;
+  string service_types = 11;
+}
+
+// Command sent by Cosec saga to Shipping service to request shipment creation
+// It correlates the shipment to an Order and the originating Basket.
+// Schema kept minimal – additional parcel fields are filled later by Shipping.
+message CreateShipment {
+  string order_id = 1;  // Associated order
+  string basket_id = 2; // Basket that originated the order (for traceability)
+}
+
+message CarrierAssigned {
+  string shipment_id = 1;
+  string carrier_id = 2;
+  string carrier_name = 3;
+}
+
+message ShipmentStarted {
+  string shipment_id = 1;
+}
+
+message ShipmentStatusUpdated {
+  string shipment_id = 1;
+  string status = 2;
+  string location = 3;
+  string notes = 4;
+}
+
+message ShipmentCancelled {
+  string shipment_id = 1;
+  string reason = 2;
+}
+
+message ShipmentDelivered {
+  string shipment_id = 1;
+  string signed_by = 2;
+  string proof_of_delivery_url = 3;
+}
+
+message PickupScheduled {
+  string shipment_id = 1;
+  string pickup_time = 2;
+  string instructions = 3;
+}
+
+message ShipmentReturned {
+  string shipment_id = 1;
+  string reason = 2;
+  string return_tracking_number = 3;
+}
+

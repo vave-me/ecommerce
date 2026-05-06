@@ -1,0 +1,503 @@
+/* ============================================================================
+   LISTINGS FILTERS - ATOMIC DESIGN SYSTEM
+   ============================================================================ */
+
+/* Uses Global Design Tokens from design-tokens.css */
+
+/* ============================================================================
+   CONTAINER - ORGANISM
+   ============================================================================ */
+
+.container {
+  position: relative;
+  display: inline-block;
+}
+
+/* ============================================================================
+   TOGGLE BUTTON - ATOM
+   ============================================================================ */
+
+.toggleButton {
+  display: flex;
+  align-items: center;
+  gap: var(--ai-space-sm);
+  padding: var(--ai-space-sm) var(--ai-space-lg);
+  background: var(--ai-color-surface);
+  border: 1px solid var(--ai-color-border);
+  border-radius: var(--ai-radius-md);
+  color: var(--ai-color-text-primary);
+  font-size: var(--ai-text-sm);
+  font-weight: var(--ai-font-weight-medium);
+  cursor: pointer;
+  transition: var(--ai-transition-colors);
+  position: relative;
+}
+
+.toggleButton:hover {
+  background: var(--ai-color-secondary-light);
+  border-color: var(--ai-color-border-hover);
+}
+
+.toggleButton:focus-visible {
+  outline: none;
+  box-shadow: var(--ai-shadow-focus);
+}
+
+.toggleButton.active {
+  background: var(--ai-color-primary);
+  border-color: var(--ai-color-primary);
+  color: var(--ai-color-surface);
+}
+
+.activeIndicator {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background: var(--ai-color-error);
+  border-radius: var(--ai-radius-full);
+  border: 2px solid var(--ai-color-surface);
+}
+
+/* ============================================================================
+   FILTER PANEL - ORGANISM
+   ============================================================================ */
+
+.panel {
+  position: absolute;
+  top: calc(100% + var(--ai-space-sm));
+  left: 0;
+  width: 320px;
+  background: var(--ai-color-surface);
+  border: 1px solid var(--ai-color-border);
+  border-radius: var(--ai-radius-lg);
+  box-shadow: var(--ai-shadow-lg);
+  z-index: var(--ai-z-dropdown);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: var(--ai-transition-all);
+}
+
+.panel.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--ai-space-lg);
+  border-bottom: 1px solid var(--ai-color-border);
+}
+
+.panelTitle {
+  font-size: var(--ai-text-lg);
+  font-weight: var(--ai-font-weight-semibold);
+  color: var(--ai-color-text-primary);
+  margin: 0;
+}
+
+.closeButton {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  border-radius: var(--ai-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--ai-color-text-secondary);
+  transition: var(--ai-transition-colors);
+}
+
+.closeButton:hover {
+  background: var(--ai-color-secondary-light);
+  color: var(--ai-color-text-primary);
+}
+
+.closeButton:focus-visible {
+  outline: none;
+  box-shadow: var(--ai-shadow-focus);
+}
+
+/* ============================================================================
+   PANEL CONTENT - MOLECULE
+   ============================================================================ */
+
+.panelContent {
+  padding: var(--ai-space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ai-space-lg);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ai-space-sm);
+}
+
+.filterLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--ai-space-xs);
+  font-size: var(--ai-text-sm);
+  font-weight: var(--ai-font-weight-medium);
+  color: var(--ai-color-text-primary);
+}
+
+/* ============================================================================
+   FORM ELEMENTS - ATOMS
+   ============================================================================ */
+
+.filterInput {
+  width: 100%;
+  padding: var(--ai-space-sm);
+  background: var(--ai-color-background);
+  border: 1px solid var(--ai-color-border);
+  border-radius: var(--ai-radius-md);
+  font-size: var(--ai-text-sm);
+  color: var(--ai-color-text-primary);
+  transition: var(--ai-transition-colors);
+}
+
+.filterInput:focus {
+  outline: none;
+  border-color: var(--ai-color-primary);
+  box-shadow: var(--ai-shadow-focus);
+}
+
+.filterInput::placeholder {
+  color: var(--ai-color-text-muted);
+}
+
+.filterSelect {
+  width: 100%;
+  padding: var(--ai-space-sm);
+  background: var(--ai-color-background);
+  border: 1px solid var(--ai-color-border);
+  border-radius: var(--ai-radius-md);
+  font-size: var(--ai-text-sm);
+  color: var(--ai-color-text-primary);
+  cursor: pointer;
+  transition: var(--ai-transition-colors);
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: var(--ai-color-primary);
+  box-shadow: var(--ai-shadow-focus);
+}
+
+/* ============================================================================
+   PRICE RANGE - MOLECULE
+   ============================================================================ */
+
+.priceRange {
+  display: flex;
+  align-items: center;
+  gap: var(--ai-space-sm);
+}
+
+.priceRange .filterInput {
+  flex: 1;
+}
+
+.priceSeparator {
+  font-size: var(--ai-text-sm);
+  color: var(--ai-color-text-muted);
+  flex-shrink: 0;
+}
+
+/* ============================================================================
+   PANEL FOOTER - MOLECULE
+   ============================================================================ */
+
+.panelFooter {
+  padding: var(--ai-space-lg);
+  border-top: 1px solid var(--ai-color-border);
+}
+
+.clearButton {
+  width: 100%;
+  padding: var(--ai-space-sm);
+  background: transparent;
+  border: 1px solid var(--ai-color-border);
+  border-radius: var(--ai-radius-md);
+  color: var(--ai-color-text-secondary);
+  font-size: var(--ai-text-sm);
+  font-weight: var(--ai-font-weight-medium);
+  cursor: pointer;
+  transition: var(--ai-transition-colors);
+}
+
+.clearButton:hover:not(:disabled) {
+  background: var(--ai-color-error-bg);
+  border-color: var(--ai-color-error);
+  color: var(--ai-color-error);
+}
+
+.clearButton:focus-visible {
+  outline: none;
+  box-shadow: var(--ai-shadow-focus);
+}
+
+.clearButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+   OVERLAY - ATOM
+   ============================================================================ */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  z-index: var(--ai-z-overlay);
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - MOBILE FIRST
+   ============================================================================ */
+
+/* Mobile */
+@media (max-width: 768px) {
+  .panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+    transform: translateX(100%);
+  }
+
+  .panel.open {
+    transform: translateX(0);
+  }
+
+  .panelContent {
+    max-height: none;
+    flex: 1;
+    padding: var(--ai-space-md);
+  }
+
+  .panelHeader {
+    padding: var(--ai-space-md);
+  }
+
+  .panelFooter {
+    padding: var(--ai-space-md);
+  }
+
+  .toggleButton {
+    padding: var(--ai-space-xs) var(--ai-space-md);
+    font-size: var(--ai-text-xs);
+  }
+
+  .priceRange {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .priceSeparator {
+    text-align: center;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .panelContent {
+    gap: var(--ai-space-md);
+    padding: var(--ai-space-sm);
+  }
+
+  .panelHeader {
+    padding: var(--ai-space-sm);
+  }
+
+  .panelFooter {
+    padding: var(--ai-space-sm);
+  }
+
+  .panelTitle {
+    font-size: var(--ai-text-base);
+  }
+
+  .filterLabel {
+    font-size: var(--ai-text-xs);
+  }
+
+  .filterInput,
+  .filterSelect {
+    padding: var(--ai-space-xs);
+    font-size: var(--ai-text-xs);
+  }
+
+  .clearButton {
+    padding: var(--ai-space-xs);
+    font-size: var(--ai-text-xs);
+  }
+}
+
+/* ============================================================================
+   ACCESSIBILITY & MOTION
+   ============================================================================ */
+
+/* Dark Theme */
+@media (prefers-color-scheme: dark) {
+  .toggleButton {
+    background: var(--gray-700, #374151);
+    border: 1px solid var(--gray-600, #4b5563);
+    color: var(--gray-200, #e5e7eb);
+  }
+
+  .toggleButton:hover {
+    background: var(--gray-600, #4b5563);
+    border-color: var(--gray-500, #6b7280);
+  }
+
+  .toggleButton.active {
+    background: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color, #3b82f6);
+    color: white;
+  }
+
+  .activeIndicator {
+    background: var(--danger, #ef4444);
+    border: 2px solid var(--gray-800, #1f2937);
+  }
+
+  .panel {
+    background: var(--gray-800, #1f2937);
+    border: 1px solid var(--gray-700, #374151);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  }
+
+  .panelHeader {
+    border-bottom: 1px solid var(--gray-700, #374151);
+  }
+
+  .panelTitle {
+    color: var(--gray-50, #f9fafb);
+  }
+
+  .closeButton {
+    color: var(--gray-400, #9ca3af);
+  }
+
+  .closeButton:hover {
+    background: var(--gray-700, #374151);
+    color: var(--gray-200, #e5e7eb);
+  }
+
+  .filterLabel {
+    color: var(--gray-200, #e5e7eb);
+  }
+
+  .filterInput {
+    background: var(--gray-700, #374151);
+    border: 1px solid var(--gray-600, #4b5563);
+    color: var(--gray-50, #f9fafb);
+  }
+
+  .filterInput:focus {
+    border-color: var(--primary-color, #3b82f6);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  }
+
+  .filterInput::placeholder {
+    color: var(--gray-400, #9ca3af);
+  }
+
+  .filterSelect {
+    background: var(--gray-700, #374151);
+    border: 1px solid var(--gray-600, #4b5563);
+    color: var(--gray-50, #f9fafb);
+  }
+
+  .filterSelect:focus {
+    border-color: var(--primary-color, #3b82f6);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  }
+
+  .priceSeparator {
+    color: var(--gray-400, #9ca3af);
+  }
+
+  .panelFooter {
+    border-top: 1px solid var(--gray-700, #374151);
+  }
+
+  .clearButton {
+    background: transparent;
+    border: 1px solid var(--gray-600, #4b5563);
+    color: var(--gray-300, #d1d5db);
+  }
+
+  .clearButton:hover:not(:disabled) {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: var(--danger, #ef4444);
+    color: var(--danger, #ef4444);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    transition: none;
+  }
+
+  .toggleButton {
+    transition: none;
+  }
+
+  .filterInput,
+  .filterSelect,
+  .clearButton,
+  .closeButton {
+    transition: none;
+  }
+}
+
+/* High Contrast */
+@media (prefers-contrast: high) {
+  .panel {
+    border-width: 2px;
+  }
+
+  .toggleButton {
+    border-width: 2px;
+  }
+
+  .filterInput,
+  .filterSelect {
+    border-width: 2px;
+  }
+
+  .panelHeader,
+  .panelFooter {
+    border-width: 2px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .container {
+    display: none;
+  }
+} 

@@ -1,0 +1,199 @@
+/* ServicesPage.module.css */
+/* Base styles (apply to all screen sizes) */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.mainContent {
+    flex: 1;
+    width: 100%;
+    padding: 0;
+}
+
+.layoutGrid, .layoutListGrid {
+    display: block;
+    width: 100%;
+}
+
+.contentArea, .contentListArea {
+    width: 100%;
+}
+
+.serviceList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.serviceList li {
+    width: 100%;
+    margin-bottom: var(--space-sm);
+}
+
+.serviceListItem {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+/* Error state styling */
+.errorState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #e74c3c;
+    border-radius: 8px;
+    margin: 2rem auto;
+    max-width: 500px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .errorState {
+        background-color: var(--gray-800);
+        border: 1px solid var(--danger);
+    }
+}
+
+.errorState h2 {
+    color: #e74c3c;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .errorState h2 {
+        color: var(--danger);
+    }
+}
+
+.errorState p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+@media (prefers-color-scheme: dark) {
+    .errorState p {
+        color: var(--gray-400);
+    }
+}
+
+.errorState button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+    .errorState button {
+        background-color: var(--primary-color);
+        color: var(--gray-50);
+    }
+}
+
+.errorState button:hover {
+    background-color: #2980b9;
+}
+
+@media (prefers-color-scheme: dark) {
+    .errorState button:hover {
+        background-color: var(--primary-color-hover);
+    }
+}
+
+/* Enhanced empty state styling */
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+    margin: 2rem auto;
+    max-width: 500px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    .emptyState {
+        background-color: var(--gray-800);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.emptyState h2 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .emptyState h2 {
+        color: var(--gray-200);
+    }
+}
+
+.emptyState p {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+@media (prefers-color-scheme: dark) {
+    .emptyState p {
+        color: var(--gray-400);
+    }
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+    .mainContent {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--space-md);
+    }
+
+    .layoutGrid {
+        display: grid;
+        grid-template-areas: 'leftside contentarea rightside';
+        column-gap: 16px;
+    }
+
+    .layoutListGrid {
+        display: flex;
+        gap: 10px;
+    }
+
+    .contentArea {
+        grid-area: contentarea;
+    }
+
+    .contentListArea {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+}
+
+/* Small Mobile Optimizations */
+@media (max-width: 576px) {
+    .mainContent {
+        padding: 0;
+    }
+}

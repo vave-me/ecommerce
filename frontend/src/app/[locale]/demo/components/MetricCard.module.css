@@ -1,0 +1,56 @@
+.metricCard {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  position: relative;
+  transition: all 0.2s ease;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.metricCard:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.value {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-weight: 500;
+  margin-bottom: 0.375rem;
+}
+
+.number {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  display: block;
+  line-height: 1;
+  margin: 0.25rem 0;
+}
+
+.label {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.trend {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.trend.positive {
+  color: #10b981;
+}
+
+.trend.negative {
+  color: #ef4444;
+}

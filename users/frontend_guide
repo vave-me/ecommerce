@@ -1,0 +1,571 @@
+Frontend Implementation Guide: Authentication & Token Management
+ This guide provides concrete implementation steps for integrating with the users authentication API and correctly handling tokens in your frontend application.
+ 1. Setting Up Authentication Services
+ First, create core authentication utility files:
+ src/services/authService.js
+
+
+ import axios from 'axios';
+
+ const API_URL = '/api/users';
+
+ // Base axios instance for auth endpoints
+ const authApi = axios.create({
+   baseURL: API_URL,
+   headers: {
+     'Content-Type': 'application/json'
+   }
+ });
+
+ // Token storage keys
+ const TOKEN_KEY = 'access_token';
+ const REFRESH_TOKEN_KEY = 'refresh_token';
+ const USER_KEY = 'user_info';
+
+ // Get stored tokens
+ export const getAccessToken = () => localStorage.getItem(TOKEN_KEY);
+ export const getRefreshToken = () => localStorage.getItem(REFRESH_TOKEN_KEY);
+ export const getUser = () => {
+   const userJson = localStorage.getItem(USER_KEY);
+   return userJson ? JSON.parse(userJson) : null;
+ };
+
+ // Store authentication data
+ export const setAuthData = (accessToken, refreshToken, user) => {
+   localStorage.setItem(TOKEN_KEY, accessToken);
+   localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+   localStorage.setItem(USER_KEY, JSON.stringify(user));
+ };
+
+ // Clear all auth data
+ export const clearAuthData = () => {
+   localStorage.removeItem(TOKEN_KEY);
+   localStorage.removeItem(REFRESH_TOKEN_KEY);
+   localStorage.removeItem(USER_KEY);
+ };
+
+ // Check if user is authenticated
+ export const isAuthenticated = () => {
+   return !!getAccessToken();
+ };
+
+ // Authentication service methods
+ const authService = {
+   // Standard login with email/password
+   login: async (email, password) => {
+     try {
+       const response = await authApi.post('/login', { email, password });
+       const { token: accessToken, accessToken: refreshToken, userName } = response.data;
+
+       // Store tokens and basic user info
+       setAuthData(accessToken, refreshToken, {
+         id: extractUserIdFromToken(accessToken),
+         username: userName
+       });
+
+       return response.data;
+     } catch (error) {
+       throw error;
+     }
+   },
+
+   // Google login for web
+   loginWithGoogle: async (idToken) => {
+     try {
+       const response = await authApi.post('/google-login', { idToken });
+       const { token: accessToken, accessToken: refreshToken, userName } = response.data;
+
+       setAuthData(accessToken, refreshToken, {
+         id: extractUserIdFromToken(accessToken),
+         username: userName
+       });
+
+       return response.data;
+     } catch (error) {
+       throw error;
+     }
+   },
+
+   // Logout
+   logout: async () => {
+     const userId = getUser()?.id;
+     const accessToken = getAccessToken();
+     const refreshToken = getRefreshToken();
+
+     try {
+       await authApi.post('/logout', {
+         id: userId,
+         authToken: accessToken,
+         refreshToken: refreshToken
+       });
+     } catch (error) {
+       console.error('Logout error:', error);
+     } finally {
+       clearAuthData();
+     }
+   },
+
+   // Refresh token
+   refreshToken: async () => {
+     try {
+       const refreshToken = getRefreshToken();
+       const userId = getUser()?.id;
+
+       if (!refreshToken) {
+         throw new Error('No refresh token available');
+       }
+
+       const response = await authApi.post('/refresh-token', {
+         refreshToken,
+         userId
+       });
+
+       const { token: newAccessToken, refreshToken: newRefreshToken } = response.data;
+
+       // Update stored tokens
+       const user = getUser();
+       setAuthData(newAccessToken, newRefreshToken, user);
+
+       return {
+         accessToken: newAccessToken,
+         refreshToken: newRefreshToken
+       };
+     } catch (error) {
+       clearAuthData();
+       throw error;
+     }
+   },
+
+   // Explicitly clear tokens for security
+   clearTokens: async (reason = "security concern") => {
+     const userId = getUser()?.id;
+     const refreshToken = getRefreshToken();
+
+     try {
+       await authApi.post('/clear-tokens', {
+         userId,
+         refreshToken,
+         reason
+       });
+     } catch (error) {
+       console.error('Token invalidation error:', error);
+     } finally {
+       clearAuthData();
+     }
+   }
+ };
+
+ // Helper to extract user ID from JWT
+ function extractUserIdFromToken(token) {
+   try {
+     const base64Url = token.split('.')[1];
+     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+     const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => {
+       return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+     }).join(''));
+
+     return JSON.parse(jsonPayload).sub || JSON.parse(jsonPayload).id;
+   } catch (error) {
+     console.error('Failed to extract user ID from token:', error);
+     return null;
+   }
+ }
+
+ export default authService;
+
+
+ 2. 2. Configure API Client with Token Handling
+    Create an API client that handles authentication tokens automatically:
+    src/services/apiClient.js
+
+
+    import axios from 'axios';
+    import authService, { getAccessToken, isAuthenticated } from './authService';
+
+    // Create the axios instance
+    const apiClient = axios.create({
+      baseURL: '/api',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    // Request interceptor to add authentication token
+    apiClient.interceptors.request.use(
+      config => {
+        // Add token to requests if available
+        if (isAuthenticated()) {
+          config.headers.Authorization = `Bearer ${getAccessToken()}`;
+        }
+        return config;
+      },
+      error => Promise.reject(error)
+    );
+
+    // Response interceptor to handle token refresh
+    let isRefreshing = false;
+    let failedQueue = [];
+
+    const processQueue = (error, token = null) => {
+      failedQueue.forEach(prom => {
+        if (error) {
+          prom.reject(error);
+        } else {
+          prom.resolve(token);
+        }
+      });
+
+      failedQueue = [];
+    };
+
+    apiClient.interceptors.response.use(
+      response => response,
+      async error => {
+        const originalRequest = error.config;
+
+        // If error is not 401 or request already retried, reject
+        if (error.response?.status !== 401 || originalRequest._retry) {
+          return Promise.reject(error);
+        }
+
+        // Mark as retried to prevent infinite loops
+        originalRequest._retry = true;
+
+        // If already refreshing, queue this request
+        if (isRefreshing) {
+          return new Promise((resolve, reject) => {
+            failedQueue.push({ resolve, reject });
+          })
+            .then(token => {
+              originalRequest.headers.Authorization = `Bearer ${token}`;
+              return axios(originalRequest);
+            })
+            .catch(err => Promise.reject(err));
+        }
+
+        isRefreshing = true;
+
+        try {
+          // Attempt to refresh the token
+          const { accessToken } = await authService.refreshToken();
+
+          // Update the authorization header
+          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+
+          // Process any queued requests
+          processQueue(null, accessToken);
+
+          // Retry the original request
+          return axios(originalRequest);
+        } catch (refreshError) {
+          // Token refresh failed, redirect to login
+          processQueue(refreshError);
+
+          // Clear authentication data
+          authService.logout();
+
+          // Redirect to login if running in browser
+          if (typeof window !== 'undefined') {
+            window.location.href = '/login';
+          }
+
+          return Promise.reject(refreshError);
+        } finally {
+          isRefreshing = false;
+        }
+      }
+    );
+
+    export default apiClient;
+
+3. Implement Authentication Components
+Login Form Component
+
+import React, { useState } from 'react';
+import authService from '../services/authService';
+
+const LoginForm = ({ onLoginSuccess }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+      const result = await authService.login(email, password);
+      setLoading(false);
+      if (onLoginSuccess) onLoginSuccess(result);
+    } catch (error) {
+      setLoading(false);
+      setError(error.response?.data?.message || 'Login failed. Please check your credentials.');
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {error && <div className="error-message">{error}</div>}
+
+      <div className="form-group">
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </div>
+
+      <button type="submit" disabled={loading}>
+        {loading ? 'Logging in...' : 'Login'}
+      </button>
+    </form>
+  );
+};
+
+export default LoginForm;
+
+Google Login Component
+
+import React, { useEffect, useRef } from 'react';
+import authService from '../services/authService';
+
+const GoogleLogin = ({ onLoginSuccess }) => {
+  const googleButtonRef = useRef(null);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    // Load Google Sign-In API
+    const loadGoogleAuth = () => {
+      if (window.gapi) {
+        window.gapi.load('auth2', () => {
+          window.gapi.auth2.init({
+            client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID
+          }).then((auth2) => {
+            // Render Google Sign-In button
+            auth2.attachClickHandler(
+              googleButtonRef.current,
+              {},
+              async (googleUser) => {
+                // Get ID token
+                const idToken = googleUser.getAuthResponse().id_token;
+                try {
+                  const result = await authService.loginWithGoogle(idToken);
+                  if (onLoginSuccess) onLoginSuccess(result);
+                } catch (error) {
+                  setError('Google login failed. Please try again.');
+                  console.error('Google login error:', error);
+                }
+              },
+              (error) => {
+                setError('Google login failed. Please try again.');
+                console.error('Google sign-in error:', error);
+              }
+            );
+          });
+        });
+      }
+    };
+
+    // Add Google script if not present
+    if (!document.querySelector('script[src="https://apis.google.com/js/platform.js"]')) {
+      const script = document.createElement('script');
+      script.src = 'https://apis.google.com/js/platform.js';
+      script.async = true;
+      script.defer = true;
+      script.onload = loadGoogleAuth;
+      document.body.appendChild(script);
+    } else {
+      loadGoogleAuth();
+    }
+  }, []);
+
+  return (
+    <div>
+      {error && <div className="error-message">{error}</div>}
+      <div
+        ref={googleButtonRef}
+        className="google-sign-in-button"
+      >
+        Sign in with Google
+      </div>
+    </div>
+  );
+};
+
+export default GoogleLogin;
+
+4. Create Authentication Context/Provider
+To make authentication state available throughout your application:
+src/context/AuthContext.jsx
+
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import authService, { isAuthenticated, getUser } from '../services/authService';
+
+// Create context
+const AuthContext = createContext(null);
+
+// Provider component
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Initialize auth state on mount
+  useEffect(() => {
+    const initializeAuth = () => {
+      if (isAuthenticated()) {
+        setUser(getUser());
+      }
+      setLoading(false);
+    };
+
+    initializeAuth();
+  }, []);
+
+  // Login handler
+  const login = async (email, password) => {
+    const result = await authService.login(email, password);
+    setUser(getUser());
+    return result;
+  };
+
+  // Google login handler
+  const loginWithGoogle = async (idToken) => {
+    const result = await authService.loginWithGoogle(idToken);
+    setUser(getUser());
+    return result;
+  };
+
+  // Logout handler
+  const logout = async () => {
+    await authService.logout();
+    setUser(null);
+  };
+
+  // Security action - clear tokens
+  const clearTokens = async (reason) => {
+    await authService.clearTokens(reason);
+    setUser(null);
+  };
+
+  // Context value
+  const value = {
+    user,
+    isAuthenticated: !!user,
+    loading,
+    login,
+    loginWithGoogle,
+    logout,
+    clearTokens
+  };
+
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+// Custom hook for using auth context
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+
+5. Protected Routes Implementation
+Create a wrapper component for routes that require authentication:
+src/components/ProtectedRoute.jsx
+
+import React from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated, loading } = useAuth();
+  const location = useLocation();
+
+  // Show loading indicator while checking auth status
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  // Redirect to login if not authenticated
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  // Render children if authenticated
+  return children;
+};
+
+export default ProtectedRoute;
+
+
+6. Complete Application Integration
+Here's how to wire everything together in your main application file:
+src/App.jsx
+
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+
+// Pages
+import LoginPage from './pages/LoginPage';
+import DashboardPage from './pages/DashboardPage';
+import ProfilePage from './pages/ProfilePage';
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          {/* Public routes */}
+          <Route path="/login" element={<LoginPage />} />
+
+          {/* Protected routes */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Default redirect */}
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
+  );
+};
+
+export default App;

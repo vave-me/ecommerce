@@ -1,0 +1,123 @@
+syntax = "proto3";
+
+package geocodingpb;
+
+import "google/protobuf/timestamp.proto";
+
+
+service GeocodingService {
+
+  rpc BatchGeocodeAddress(BatchGeocodeAddressRequest) returns (BatchGeocodeAddressResponse) {}
+  rpc GeocodeAddress(GeocodeAddressRequest) returns (GeocodeAddressResponse) {}
+  rpc RefreshGeocodingCache(RefreshGeocodingCacheRequest)returns (RefreshGeocodingCacheResponse) {}
+  rpc ReverseGeocodeLocation(ReverseGeocodeLocationRequest)returns (ReverseGeocodeLocationResponse) {}
+  rpc ValidateAddress(ValidateAddressRequest) returns (ValidateAddressResponse) {}
+  rpc GetAddressForCoordinates(GetAddressForCoordinatesRequest) returns (GetAddressForCoordinatesResponse) {}
+  rpc GetCoordinatesForAddress(GetGeocodingDetailsRequest) returns (GetGeocodingDetailsResponse) {}
+  rpc GetGeocodingCache(GetGeocodingDetailsRequest) returns (GetGeocodingDetailsResponse) {}
+  rpc GetGeocodingDetails(GetGeocodingDetailsRequest) returns (GetGeocodingDetailsResponse) {}
+  rpc SuggestAddress(SuggestAddressRequest) returns (SuggestAddressResponse);
+  rpc SuggestCity(SuggestCityRequest) returns (SuggestCityResponse);
+}
+
+
+message Address {
+  string id = 1;
+  string address = 2;
+}
+
+message SuggestionAddress{
+  string suggested_address = 1;
+  float latitude = 2;
+  float longitude = 3;
+}
+message SuggestionCity{
+  string suggested_city = 1;
+  float latitude = 2;
+  float longitude = 3;
+}
+// GeocodingOrders allows filtering orders by various criteria (customer, date, etc.).
+message BatchGeocodeAddressRequest {
+
+}
+
+message BatchGeocodeAddressResponse {
+
+}
+
+message GeocodeAddressRequest {
+  string id = 1;
+  string address = 2;
+}
+
+message GeocodeAddressResponse {
+  string address = 1;
+  float latitude = 2;
+  float longitude = 3;
+}
+
+
+message RefreshGeocodingCacheRequest {
+
+}
+
+message RefreshGeocodingCacheResponse {
+
+}
+
+message ReverseGeocodeLocationRequest {
+
+}
+
+message ReverseGeocodeLocationResponse {
+
+}
+
+// Retrieve a single product by ID
+message ValidateAddressRequest {
+
+}
+
+message ValidateAddressResponse {
+
+}
+
+// Suggesting products (by name prefix)
+message SuggestAddressRequest {
+  string address = 1;
+}
+
+message SuggestAddressResponse {
+  repeated SuggestionAddress suggestion_address = 1;
+}
+
+message SuggestCityRequest {
+  string name = 1;
+}
+
+message SuggestCityResponse {
+  repeated SuggestionCity suggested_cities = 1;
+}
+message Location {
+
+}
+
+
+// Geocodinging users by name, email
+message GetAddressForCoordinatesRequest {
+
+}
+
+message GetAddressForCoordinatesResponse {
+
+}
+
+// Retrieve single user by ID
+message GetGeocodingDetailsRequest {
+
+}
+
+message GetGeocodingDetailsResponse {
+
+}
+

@@ -1,0 +1,239 @@
+# ag asyncapi.yaml @asyncapi/html-template --force-write
+asyncapi: '2.3.0'
+info:
+  title: User Management AsyncAPI
+  version: '1.0.1'
+
+defaultContentType: application/octet-stream
+
+channels:
+  middleman.users.events.User:
+    $ref: '#/components/channels/middleman.users.events.User'
+  middleman.users.events.Product:
+    $ref: '#/components/channels/middleman.users.events.Product'
+
+components:
+  channels:
+    middleman.users.events.User:
+      subscribe:
+        operationId: userAggregateEvents
+        message:
+          oneOf:
+            - $ref: '#/components/messages/usersapi.UserCreatedEvent'
+            - $ref: '#/components/messages/usersapi.UserEnabledToggledEvent'
+            - $ref: '#/components/messages/usersapi.UserRenamedEvent'
+            - $ref: '#/components/messages/usersapi.UserLoggedInEvent'
+            - $ref: '#/components/messages/usersapi.UserLoggedOutEvent'
+        tags:
+          - name: User
+      bindings:
+        nats:
+          queue: middleman.users.events.User
+          x-queue-constant: userspb.UserAggregateChannel
+    middleman.users.events.Product:
+      subscribe:
+        operationId: productAggregateEvents
+        message:
+          oneOf:
+            - $ref: '#/components/messages/usersapi.ProductAddedEvent'
+            - $ref: '#/components/messages/usersapi.ProductRebrandedEvent'
+            - $ref: '#/components/messages/usersapi.ProductPriceChangedEvent'
+            - $ref: '#/components/messages/usersapi.ProductRemovedEvent'
+        tags:
+          - name: Product
+      bindings:
+        nats:
+          queue: middleman.users.events.Product
+          x-queue-constant: userspb.ProductAggregateChannel
+
+  messages:
+    usersapi.UserCreatedEvent:
+      title: UserCreated
+      description: A new user has been created
+      x-name-constant: userspb.UserCreatedEvent
+      x-payload-type: '*userspb.UserCreated'
+      payload:
+        $ref: '#/components/schemas/userspb.UserCreated'
+      tags:
+        - name: User
+    usersapi.UserEnabledToggledEvent:
+      title: UserEnabledToggled
+      description: A user enabled status has changed
+      x-name-constant: userspb.UserEnabledToggledEvent
+      x-payload-type: '*userspb.UserEnabledToggled'
+      payload:
+        $ref: '#/components/schemas/userspb.UserEnabledToggled'
+      tags:
+        - name: User
+    usersapi.UserRenamedEvent:
+      title: UserRenamed
+      description: A user has changed their name
+      x-name-constant: userspb.UserRenamedEvent
+      x-payload-type: '*userspb.UserRenamed'
+      payload:
+        $ref: '#/components/schemas/userspb.UserRenamed'
+      tags:
+        - name: User
+    usersapi.UserLoggedInEvent:
+      title: UserLoggedIn
+      description: A user has logged in
+      x-name-constant: userspb.UserLoggedInEvent
+      x-payload-type: '*userspb.UserLoggedIn'
+      payload:
+        $ref: '#/components/schemas/userspb.UserLoggedIn'
+      tags:
+        - name: User
+    usersapi.UserLoggedOutEvent:
+      title: UserLoggedOut
+      description: A user has logged out
+      x-name-constant: userspb.UserLoggedOutEvent
+      x-payload-type: '*userspb.UserLoggedOut'
+      payload:
+        $ref: '#/components/schemas/userspb.UserLoggedOut'
+      tags:
+        - name: User
+
+    usersapi.ProductAddedEvent:
+      title: ProductAdded
+      description: A new product has been added
+      x-name-constant: userspb.ProductAddedEvent
+      x-payload-type: '*userspb.ProductAdded'
+      payload:
+        $ref: '#/components/schemas/userspb.ProductAdded'
+      tags:
+        - name: Product
+    usersapi.ProductRebrandedEvent:
+      title: ProductRebranded
+      description: A product has been rebranded
+      x-name-constant: userspb.ProductRebrandedEvent
+      x-payload-type: '*userspb.ProductRebranded'
+      payload:
+        $ref: '#/components/schemas/userspb.ProductRebranded'
+      tags:
+        - name: Product
+    usersapi.ProductPriceChangedEvent:
+      title: ProductPriceChanged
+      description: A product's price has changed
+      x-name-constant: userspb.ProductPriceChangedEvent
+      x-payload-type: '*userspb.ProductPriceChanged'
+      payload:
+        $ref: '#/components/schemas/userspb.ProductPriceChanged'
+      tags:
+        - name: Product
+    usersapi.ProductRemovedEvent:
+      title: ProductRemoved
+      description: A product has been removed
+      x-name-constant: userspb.ProductRemovedEvent
+      x-payload-type: '*userspb.ProductRemoved'
+      payload:
+        $ref: '#/components/schemas/userspb.ProductRemoved'
+      tags:
+        - name: Product
+
+  schemas:
+    UserId:
+      type: string
+      description: Identity of the user
+    ProductId:
+      type: string
+      description: Identity of the product
+
+    userspb.UserCreated:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/UserId'
+        email:
+          type: string
+          description: User's email
+        first_name:
+          type: string
+        last_name:
+          type: string
+
+    userspb.UserEnabledToggled:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/UserId'
+        enabled:
+          type: boolean
+          description: Whether the user is enabled in the service
+
+    userspb.UserRenamed:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/UserId'
+        new_user_name:
+          type: string
+          description: The new name of the user
+
+    userspb.UserLoggedIn:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/UserId'
+        authentication_token:
+          type: string
+          description: The user's authentication token
+
+    userspb.UserLoggedOut:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/UserId'
+        authentication_token:
+          type: string
+          description: The user's authentication token used for the session
+
+    userspb.ProductAdded:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/ProductId'
+        user_seller_id:
+          $ref: '#/components/schemas/UserId'
+        product_name:
+          type: string
+        product_description:
+          type: string
+        sku:
+          type: string
+        price:
+          type: number
+          format: double
+
+    userspb.ProductRebranded:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/ProductId'
+        name:
+          type: string
+        description:
+          type: string
+
+    userspb.ProductPriceChanged:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/ProductId'
+        price_change:
+          type: number
+          format: double
+
+    userspb.ProductRemoved:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/ProductId'

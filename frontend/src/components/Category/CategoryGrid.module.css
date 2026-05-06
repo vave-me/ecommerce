@@ -1,0 +1,208 @@
+/*
+  CategoryGrid.module.css
+  Responsive grid layout for displaying category cards
+*/
+
+.gridWrapper {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    padding: 16px 0;
+    width: 100%;
+}
+
+.categoryCard {
+    background-color: var(--surface, #ffffff);
+    border: 1px solid var(--border, #e5e7eb);
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+}
+
+.categoryCard:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+    border-color: var(--border-color, #d1d5db);
+}
+
+.imageWrapper {
+    width: 100%;
+    height: 140px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background-color: var(--surface-tertiary, #f3f4f6);
+}
+
+.imageWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.categoryCard:hover .imageWrapper img {
+    /* transform: scale(1.05); - Replaced with opacity for performance */
+    opacity: 0.9;
+}
+
+.categoryTitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text, #374151);
+    text-decoration: none;
+    margin-bottom: 4px;
+    display: inline-block;
+    transition: color 0.2s ease;
+}
+
+.categoryTitle:hover {
+    color: var(--primary-color, #2980b9);
+}
+
+.categoryDesc {
+    font-size: 14px;
+    color: var(--text-secondary, #6b7280);
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.tagsWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+}
+
+.tagItem {
+    font-size: 12px;
+    background-color: var(--primary-light, #e0e7ff);
+    color: var(--primary-color, #2980b9);
+    padding: 4px 8px;
+    border-radius: 9999px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.tagItem:hover {
+    background-color: rgba(79, 70, 229, 0.2);
+}
+
+.googleCat {
+    font-size: 12px;
+    color: var(--text-tertiary, #9ca3af);
+    margin-top: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .gridWrapper {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 12px;
+    }
+
+    .categoryCard {
+        padding: 12px;
+    }
+
+    .imageWrapper {
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gridWrapper {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 10px;
+    }
+
+    .categoryCard {
+        padding: 10px;
+    }
+
+    .imageWrapper {
+        height: 100px;
+    }
+
+    .categoryTitle {
+        font-size: 14px;
+    }
+
+    .categoryDesc {
+        font-size: 12px;
+    }
+}
+
+/* Focus states for accessibility */
+.categoryTitle:focus-visible {
+    outline: 2px solid var(--primary-color, #2980b9);
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+    .categoryCard {
+        border: 2px solid ButtonText;
+    }
+
+    .tagItem {
+        border: 1px solid ButtonText;
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .categoryCard,
+    .categoryCard:hover,
+    .imageWrapper img,
+    .categoryCard:hover .imageWrapper img {
+        transition: none;
+        transform: none;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .categoryCard {
+        background-color: var(--gray-800);
+        border-color: var(--gray-700);
+    }
+
+    .categoryCard:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        border-color: var(--gray-600);
+    }
+
+    .imageWrapper {
+        background-color: var(--gray-700);
+    }
+
+    .categoryTitle {
+        color: var(--gray-50);
+    }
+
+    .categoryTitle:hover {
+        color: var(--primary-color);
+    }
+
+    .categoryDesc {
+        color: var(--gray-300);
+    }
+
+    .tagItem {
+        background-color: rgba(41, 128, 185, 0.2);
+        color: var(--primary-color);
+    }
+
+    .tagItem:hover {
+        background-color: rgba(41, 128, 185, 0.3);
+    }
+
+    .googleCat {
+        color: var(--gray-400);
+    }
+}

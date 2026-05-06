@@ -1,0 +1,421 @@
+/* Container for each ReviewItem */
+.itemContainer {
+    display: flex;
+    align-items: flex-start;
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    transition: background-color 0.2s ease, border-left-color 0.2s ease;
+    border-left: 4px solid;
+}
+
+.itemContainer:hover {
+    background-color: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+    .itemContainer:hover {
+        background-color: var(--gray-700, #374151);
+    }
+}
+
+/* Status specific styles */
+.approved {
+    background-color: #e8f5e9;
+    border-left-color: #2e7d32;
+}
+
+@media (prefers-color-scheme: dark) {
+    .approved {
+        background-color: var(--green-900, #14532d);
+        border-left-color: var(--green-500, #10b981);
+    }
+}
+
+.pending {
+    background-color: #fff8e1;
+    border-left-color: #fbc02d;
+}
+
+@media (prefers-color-scheme: dark) {
+    .pending {
+        background-color: var(--yellow-900, #78350f);
+        border-left-color: var(--yellow-500, #f59e0b);
+    }
+}
+
+.rejected {
+    background-color: #ffebee;
+    border-left-color: #c62828;
+}
+
+@media (prefers-color-scheme: dark) {
+    .rejected {
+        background-color: var(--red-900, #7f1d1d);
+        border-left-color: var(--red-500, #ef4444);
+    }
+}
+
+@media (max-width: 768px) {
+    .itemContainer {
+        flex-direction: column;
+        padding: 10px 12px;
+    }
+}
+
+/* Reviewer Avatar */
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 12px;
+    border: 2px solid #1aa89e;
+}
+
+@media (prefers-color-scheme: dark) {
+    .avatar {
+        border-color: var(--primary-color, #3b82f6);
+    }
+}
+
+@media (max-width: 768px) {
+    .avatar {
+        margin-right: 0;
+        margin-bottom: 8px;
+        align-self: center;
+    }
+}
+
+/* Content Wrapper */
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Header containing reviewer name, rating, and status */
+.header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Reviewer Name */
+.reviewerName {
+    font-weight: 600;
+    font-size: 14px;
+    color: #34495e;
+}
+
+@media (prefers-color-scheme: dark) {
+    .reviewerName {
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+/* Rating */
+.rating {
+    font-size: 12px;
+    color: #7f8c8d;
+}
+
+@media (prefers-color-scheme: dark) {
+    .rating {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+/* Status Badge */
+.statusBadge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 6px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+.statusApproved {
+    background-color: #2e7d32;
+}
+
+@media (prefers-color-scheme: dark) {
+    .statusApproved {
+        background-color: var(--green-600, #059669);
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.statusPending {
+    background-color: #fbc02d;
+}
+
+@media (prefers-color-scheme: dark) {
+    .statusPending {
+        background-color: var(--yellow-600, #d97706);
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.statusRejected {
+    background-color: #c62828;
+}
+
+@media (prefers-color-scheme: dark) {
+    .statusRejected {
+        background-color: var(--red-600, #dc2626);
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.statusBadge svg {
+    font-size: 12px;
+}
+
+.spinner {
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Comment Section */
+.commentSection {
+    font-size: 13px;
+    color: #2c3e50;
+    line-height: 1.4;
+}
+
+@media (prefers-color-scheme: dark) {
+    .commentSection {
+        color: var(--gray-300, #d1d5db);
+    }
+}
+
+/* Editable Textarea */
+.editTextarea {
+    width: 100%;
+    min-height: 60px;
+    padding: 6px 8px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    resize: vertical;
+    font-size: 13px;
+    font-family: inherit;
+}
+
+@media (prefers-color-scheme: dark) {
+    .editTextarea {
+        background-color: var(--gray-700, #374151);
+        border-color: var(--gray-600, #4b5563);
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+.editTextarea:focus {
+    outline: none;
+    border-color: #1976d2;
+    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .editTextarea:focus {
+        border-color: var(--primary-color, #3b82f6);
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+    }
+}
+
+.editTextarea::placeholder {
+    color: #95a5a6;
+}
+
+@media (prefers-color-scheme: dark) {
+    .editTextarea::placeholder {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+/* Comment Text */
+.comment {
+    margin: 0;
+}
+
+/* Footer containing date and actions */
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Review Date */
+.reviewDate {
+    font-size: 11px;
+    color: #95a5a6;
+}
+
+@media (prefers-color-scheme: dark) {
+    .reviewDate {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+/* Actions Container */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Action Button */
+.actionButton {
+    background-color: #1976d2;
+    color: #ffffff;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+    .actionButton {
+        background-color: var(--primary-color, #3b82f6);
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.actionButton:hover {
+    background-color: #1565c0;
+    transform: translateY(-1px);
+}
+
+@media (prefers-color-scheme: dark) {
+    .actionButton:hover {
+        background-color: var(--primary-hover, #60a5fa);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+}
+
+.actionButton:focus {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .actionButton:focus {
+        outline-color: var(--gray-300, #d1d5db);
+    }
+}
+
+.actionButton:disabled {
+    background-color: #bdbdbd;
+    cursor: not-allowed;
+}
+
+@media (prefers-color-scheme: dark) {
+    .actionButton:disabled {
+        background-color: var(--gray-600, #4b5563);
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+/* Danger Button */
+.dangerButton {
+    background-color: #c62828;
+}
+
+@media (prefers-color-scheme: dark) {
+    .dangerButton {
+        background-color: var(--red-600, #dc2626);
+    }
+}
+
+.dangerButton:hover {
+    background-color: #b71c1c;
+}
+
+@media (prefers-color-scheme: dark) {
+    .dangerButton:hover {
+        background-color: var(--red-700, #b91c1c);
+        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    }
+}
+
+/* Delete Button */
+.deleteButton {
+    background-color: #c62828;
+}
+
+@media (prefers-color-scheme: dark) {
+    .deleteButton {
+        background-color: var(--red-600, #dc2626);
+    }
+}
+
+.deleteButton:hover {
+    background-color: #b71c1c;
+}
+
+@media (prefers-color-scheme: dark) {
+    .deleteButton:hover {
+        background-color: var(--red-700, #b91c1c);
+        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    }
+}
+
+/* Save Button */
+.saveButton {
+    background-color: #2e7d32;
+}
+
+@media (prefers-color-scheme: dark) {
+    .saveButton {
+        background-color: var(--green-600, #059669);
+    }
+}
+
+.saveButton:hover {
+    background-color: #1b5e20;
+}
+
+@media (prefers-color-scheme: dark) {
+    .saveButton:hover {
+        background-color: var(--green-700, #047857);
+        box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+    }
+}
+
+/* Cancel Button */
+.cancelButton {
+    background-color: #757575;
+}
+
+@media (prefers-color-scheme: dark) {
+    .cancelButton {
+        background-color: var(--gray-600, #4b5563);
+    }
+}
+
+.cancelButton:hover {
+    background-color: #616161;
+}
+
+@media (prefers-color-scheme: dark) {
+    .cancelButton:hover {
+        background-color: var(--gray-700, #374151);
+        box-shadow: 0 4px 12px rgba(75, 85, 99, 0.3);
+    }
+}

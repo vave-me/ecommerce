@@ -1,0 +1,159 @@
+/* Base styles for all variants */
+.floatingButton,
+.inlineButton,
+.minimalButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+/* Floating button variant */
+.floatingButton {
+  position: fixed;
+  z-index: 100;
+  background: var(--primary-color, #1d9bf0);
+  color: white;
+  border-radius: 28px;
+  padding: 14px 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.floatingButton:hover {
+  background: var(--primary-hover, #1a8cd8);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.floatingButton:active {
+  transform: translateY(0);
+}
+
+.floatingText {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .floatingText {
+    display: inline;
+  }
+}
+
+/* Position variants for floating button */
+.bottom-right {
+  bottom: 24px;
+  right: 24px;
+}
+
+.bottom-left {
+  bottom: 24px;
+  left: 24px;
+}
+
+.top-right {
+  top: 24px;
+  right: 24px;
+}
+
+.top-left {
+  top: 24px;
+  left: 24px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .floatingButton {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    padding: 0;
+  }
+  
+  .bottom-right,
+  .bottom-left {
+    bottom: 16px;
+  }
+  
+  .bottom-right {
+    right: 16px;
+  }
+  
+  .bottom-left {
+    left: 16px;
+  }
+}
+
+/* Inline button variant */
+.inlineButton {
+  background: var(--primary-color, #1d9bf0);
+  color: white;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.inlineButton:hover {
+  background: var(--primary-hover, #1a8cd8);
+}
+
+.inlineButton:active {
+  transform: scale(0.98);
+}
+
+/* Minimal button variant */
+.minimalButton {
+  background: transparent;
+  color: var(--primary-color, #1d9bf0);
+  border-radius: 50%;
+  padding: 8px;
+  width: 36px;
+  height: 36px;
+}
+
+.minimalButton:hover {
+  background: rgba(29, 155, 240, 0.1);
+}
+
+.minimalButton:active {
+  transform: scale(0.95);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .floatingButton {
+    background: var(--primary-color, #1d9bf0);
+    color: white;
+  }
+  
+  .inlineButton {
+    background: var(--primary-color, #1d9bf0);
+    color: white;
+  }
+  
+  .minimalButton {
+    color: var(--primary-color, #1d9bf0);
+  }
+  
+  .minimalButton:hover {
+    background: rgba(29, 155, 240, 0.2);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .floatingButton,
+  .inlineButton,
+  .minimalButton {
+    transition: none;
+  }
+}

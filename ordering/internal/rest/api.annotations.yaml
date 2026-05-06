@@ -1,0 +1,66 @@
+type: google.api.Service
+config_version: 3
+http:
+  rules:
+    # Create a New Order
+    - selector: orderingpb.OrderingService.CreateOrder
+      post: /api/ordering
+      body: "*"
+
+    # Get an Existing Order
+    - selector: orderingpb.OrderingService.GetOrder
+      get: /api/ordering/{id}
+      # Security Requirement
+
+    # Cancel an Existing Order
+    - selector: orderingpb.OrderingService.CancelOrder
+      delete: /api/ordering/{id}
+      # Security Requirement
+
+    # Ready an Order
+    - selector: orderingpb.OrderingService.ReadyOrder
+      post: /api/ordering/{id}/ready
+      body: "*"
+
+    # Complete an Order
+    - selector: orderingpb.OrderingService.CompleteOrder
+      post: /api/ordering/{id}/complete
+      body: "*"
+      
+    # List All Orders
+    - selector: orderingpb.OrderingService.ListOrders
+      get: /api/ordering
+      
+    # Get Orders By Customer
+    - selector: orderingpb.OrderingService.GetOrdersByCustomer
+      get: /api/ordering/customer/{user_customer_id}
+      
+    # Get Orders By Status
+    - selector: orderingpb.OrderingService.GetOrdersByStatus
+      get: /api/ordering/status/{status}
+      
+    # Approve an Order
+    - selector: orderingpb.OrderingService.ApproveOrder
+      post: /api/ordering/{id}/approve
+      body: "*"
+      
+    # Reject an Order
+    - selector: orderingpb.OrderingService.RejectOrder
+      post: /api/ordering/{id}/reject
+      body: "*"
+      
+    # Ship an Order
+    - selector: orderingpb.OrderingService.ShipOrder
+      post: /api/ordering/{id}/ship
+      body: "*"
+      
+    # Deliver an Order
+    - selector: orderingpb.OrderingService.DeliverOrder
+      post: /api/ordering/{id}/deliver
+      body: "*"
+      
+    # Update Order Status
+    - selector: orderingpb.OrderingService.UpdateOrderStatus
+      put: /api/ordering/{id}/status
+      body: "*"
+

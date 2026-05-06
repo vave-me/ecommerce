@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.mainContent {
+    flex: 1;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.layoutGrid {
+    display: grid;
+    grid-template-areas: 'leftside contentarea rightside';
+    grid-template-columns: 0.5fr 3fr 0.5fr;
+    column-gap: 16px;
+    padding: 0 8px;
+}
+
+.contentArea {
+    grid-area: contentarea;
+    width: 100%;
+}
+
+/* Dark Theme Support */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background-color: var(--gray-900);
+        color: var(--gray-50);
+    }
+
+    .mainContent {
+        background-color: var(--gray-900);
+    }
+}

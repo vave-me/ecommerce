@@ -1,0 +1,80 @@
+type: google.api.Service
+config_version: 3
+http:
+  rules:
+    - selector: searchpb.SearchService.UnifiedSearch
+      post: /api/search/unified
+      body: "*"
+
+    - selector: searchpb.SearchService.UnifiedFeed
+      post: /api/search/feed
+      body: "*"
+    - selector: searchpb.SearchService.GetCatalog
+      get: /api/search/{user_id}/catalog
+
+
+    - selector: searchpb.SearchService.SearchOrders
+      post: /api/search/orders
+      body: "*"
+    - selector: searchpb.SearchService.GetOrder
+      get: /api/search/orders/{id}
+
+    - selector: searchpb.SearchService.SearchProductsWithFilters
+      post: /api/search/search-products
+      body: "*"
+
+    - selector: searchpb.SearchService.SearchProductsWithCategorySlug
+      get: /api/search/products/category/slug/{category_slug}
+
+    - selector: searchpb.SearchService.SearchProductsWithCategory
+      get: /api/search/products/category/{category_id}
+
+    - selector: searchpb.SearchService.SearchProductsWithTerm
+      post: /api/search
+      body: "*"
+
+    - selector: searchpb.SearchService.SuggestProducts
+      get: /api/search/suggest/{name}
+
+    - selector: searchpb.SearchService.GetProduct
+      get: /api/search/products/{id}
+
+    - selector: searchpb.SearchService.SearchPostsWithFilters
+      post: /api/search/search-posts
+      body: "*"
+
+    - selector: searchpb.SearchService.SearchPostsWithCategorySlug
+      get: /api/search/posts/category/slug/{category_slug}
+
+    - selector: searchpb.SearchService.SearchPostsWithCategory
+      get: /api/search/posts/category/{category_id}
+
+    - selector: searchpb.SearchService.SearchPostsWithTerm
+      post: /api/search/posts
+      body: "*"
+
+    - selector: searchpb.SearchService.SuggestPosts
+      get: /api/search/suggest/posts/{name}
+
+    - selector: searchpb.SearchService.GetPost
+      get: /api/search/posts/{id}
+
+    - selector: searchpb.SearchService.SearchServicesWithFilters
+      post: /api/search/search-services
+      body: "*"
+
+    - selector: searchpb.SearchService.SearchServicesWithCategorySlug
+      get: /api/search/services/category/slug/{category_slug}
+
+    - selector: searchpb.SearchService.SearchServicesWithCategory
+      get: /api/search/services/category/{category_id}
+
+    - selector: searchpb.SearchService.SearchServicesWithTerm
+      post: /api/search/services
+      body: "*"
+
+    - selector: searchpb.SearchService.SuggestServices
+      get: /api/search/suggest/services/{name}
+
+    - selector: searchpb.SearchService.GetService
+      get: /api/search/services/{id}

@@ -1,0 +1,91 @@
+/*
+  The top-level container that organizes everything
+  (header, main, optional bottom nav).
+*/
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* Optimized for better layout performance */
+    position: relative;
+    z-index: 0;
+}
+
+/*
+  The main content area with default top padding
+  for a pinned header, and optional bottom padding for nav.
+*/
+.mainContent {
+    /* Enough top padding for pinned header (70px on desktop, 60px on mobile). */
+    padding-bottom: 0;
+    flex: 1;
+    background-color: var(--surface, var(--color-background, #ffffff));
+}
+
+/* Remove or reduce top padding on narrower screens if the header is smaller. */
+@media (max-width: 768px) {
+
+}
+
+/*
+  If bottom nav is displayed, add extra bottom padding
+  so content doesn't hide behind the pinned bottom nav.
+*/
+.withBottomNav {
+    padding-bottom: 52px !important; /* EXACT BottomNav height */
+}
+
+/*
+  If we skip the header on mobile, remove the top padding entirely.
+  (header is not pinned -> no need for offset).
+*/
+.noHeader {
+    padding-top: 0 !important;
+}
+
+/*
+  The main content area
+*/
+.content {
+    flex: 1;
+    background-color: var(--surface, var(--color-background, #ffffff));
+    position: relative;
+    z-index: 1;
+    /* MOBILE VIEWPORT FIX - Account for bottom navigation */
+    padding-bottom: 52px; /* Match BottomNav height exactly */
+    min-height: calc(100vh - 200px); /* Adjust for header and footer */
+}
+
+/* ===================== */
+/* Dark Theme Support */
+/* ===================== */
+@media (prefers-color-scheme: dark) {
+    /* Top-level layout container */
+    .layout {
+        background-color: var(--gray-900);
+        color: var(--gray-50);
+    }
+
+    /* Main content area */
+    .mainContent {
+        background-color: var(--gray-900);
+        color: var(--gray-50);
+    }
+
+    /* Content area */
+    .content {
+        background-color: var(--gray-900);
+        color: var(--gray-50);
+    }
+
+    /* Bottom navigation adjustments */
+    .withBottomNav {
+        background-color: var(--gray-900);
+    }
+
+    /* No header state */
+    .noHeader {
+        background-color: var(--gray-900);
+    }
+}

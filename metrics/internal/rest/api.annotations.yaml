@@ -1,0 +1,24 @@
+type: google.api.Service
+config_version: 3
+http:
+  rules:
+    - selector: metricspb.MetricsService.GetUserMetric
+      get: /api/metrics/user/{user_id}
+
+    - selector: metricspb.MetricsService.GetItemMetric
+      get: /api/metrics/item/{item_id}
+    - selector: metricspb.MetricsService.GetItemsMetric
+      post: /api/metrics/items
+      body: "*"
+    - selector: metricspb.MetricsService.ShareItem
+      post: /api/metrics/{item_id}/share
+      body: "*"
+    - selector: metricspb.MetricsService.VisitItem
+      post: /api/metrics/{item_id}/visit
+      body: "*"
+    - selector: metricspb.MetricsService.GetHighestMetricsByType
+      post: /api/metrics/items/{metric_type}/highest
+      body: "*"
+    - selector: metricspb.MetricsService.GetLowestMetricsByType
+      post: /api/metrics/items/{metric_type}/lowest
+      body: "*"

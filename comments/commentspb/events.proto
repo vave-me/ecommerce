@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package commentspb;
+
+
+//Command
+message AddComment{
+  string id = 1;
+  string sender_id = 2;
+  string item_id = 3;
+  string item_type = 4;
+  string content = 5;
+  string category_id = 6;
+  string parent_id = 7;
+}
+
+
+message CommentAdded{
+  string id = 1;
+  string sender_id = 2;
+  string item_id = 3;
+  string item_type = 4;
+  string content = 5;
+  string category_id = 6;
+  string parent_id = 7;
+}
+
+message CommentApproved {
+  string id = 1;
+  bool approve = 2;
+}
+message CommentRemoved {
+  string id = 1;
+}
+message CommentFlagged {
+  string id = 1;
+  bool flagged = 2;
+}
+message CommentRejected {
+  string id = 1;
+  bool approved = 2;
+}
+message CommentEdited {
+  string id = 1;
+  string content = 2;
+}
+

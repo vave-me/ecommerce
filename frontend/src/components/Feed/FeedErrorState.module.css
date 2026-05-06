@@ -1,0 +1,156 @@
+.errorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  padding: 48px 24px;
+  background-color: var(--background-secondary, #f9fafb);
+  border-radius: 12px;
+  margin: 16px 0;
+}
+
+.errorContent {
+  text-align: center;
+  max-width: 420px;
+}
+
+.iconWrapper {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.errorIcon {
+  color: var(--error-color, #ef4444);
+  opacity: 0.8;
+}
+
+.errorTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary, #111827);
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+.errorMessage {
+  font-size: 1rem;
+  color: var(--text-secondary, #6b7280);
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+}
+
+.retryButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: var(--primary-color, #3b82f6);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 24px;
+}
+
+.retryButton:hover {
+  background-color: var(--primary-hover, #2563eb);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.retryButton:active {
+  transform: translateY(0);
+}
+
+.retryButton svg {
+  transition: transform 0.3s ease;
+}
+
+.retryButton:hover svg {
+  transform: rotate(180deg);
+}
+
+.helpText {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color, #e5e7eb);
+}
+
+.helpText p {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #6b7280);
+  margin: 0 0 12px 0;
+}
+
+.helpText ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  display: inline-block;
+}
+
+.helpText li {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #6b7280);
+  margin: 4px 0;
+  position: relative;
+  padding-left: 20px;
+}
+
+.helpText li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary-color, #3b82f6);
+  font-weight: bold;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .errorContainer {
+    background-color: var(--gray-800, #1f2937);
+  }
+  
+  .errorTitle {
+    color: var(--gray-50, #f9fafb);
+  }
+  
+  .errorMessage {
+    color: var(--gray-300, #d1d5db);
+  }
+  
+  .helpText p,
+  .helpText li {
+    color: var(--gray-400, #9ca3af);
+  }
+  
+  .helpText {
+    border-top-color: var(--gray-700, #374151);
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .errorContainer {
+    padding: 32px 16px;
+    min-height: 300px;
+  }
+  
+  .errorTitle {
+    font-size: 1.25rem;
+  }
+  
+  .errorMessage {
+    font-size: 0.9375rem;
+  }
+  
+  .retryButton {
+    font-size: 0.9375rem;
+    padding: 8px 16px;
+  }
+}

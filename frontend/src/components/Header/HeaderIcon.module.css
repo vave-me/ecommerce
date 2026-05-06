@@ -1,0 +1,114 @@
+/* HeaderIcon.module.css - Unified icon styling for header with WCAG 2.1 compliance */
+
+.iconButton {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: var(--space-2);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    color: var(--text-tertiary);
+    transition: var(--transition-colors);
+    
+    /* Touch target size for WCAG 2.1 */
+    min-width: 44px;
+    min-height: 44px;
+}
+
+.iconButton:hover {
+    background-color: var(--surface-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-primary);
+}
+
+.iconButton:active {
+    transform: scale(0.95);
+}
+
+.iconButton:focus-visible {
+    outline: 3px solid var(--border-focused);
+    outline-offset: 2px;
+    border-radius: var(--radius-lg);
+}
+
+/* Disabled state */
+.iconButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: var(--text-disabled);
+}
+
+.iconButton:disabled:hover {
+    background-color: transparent;
+    color: var(--text-disabled);
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+/* Badge for count */
+.badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 var(--space-1);
+    background-color: var(--color-error-500);
+    color: var(--text-inverse);
+    font-size: 11px;
+    font-weight: var(--font-weight-semibold);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    font-family: var(--font-family-primary);
+    
+    /* Ensure badge is readable */
+    box-shadow: 0 0 0 2px var(--surface-primary);
+}
+
+/* Ensure minimum touch target size on mobile */
+@media (max-width: 768px) {
+    .iconButton {
+        min-width: 48px;
+        min-height: 48px;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .iconButton {
+        border: 2px solid currentColor;
+    }
+    
+    .iconButton:hover {
+        background-color: var(--text-primary);
+        color: var(--text-inverse);
+    }
+    
+    .badge {
+        box-shadow: 0 0 0 3px var(--surface-primary);
+        font-weight: var(--font-weight-bold);
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .iconButton {
+        transition: none;
+    }
+    
+    .iconButton:active {
+        transform: none;
+    }
+}

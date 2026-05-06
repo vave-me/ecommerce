@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package activitypb;
+
+
+message ActivityCreated {
+  string id = 1;
+  string user_id = 2;
+}
+
+message InteractionAdded{
+  string id = 1;
+  string activity_id = 2;
+  string item_id = 3;
+  string item_type = 4;
+  string action_type = 5;
+}
+
+message InteractionRemoved{
+  string id = 1;
+  string activity_id = 2;
+  string item_id = 3;
+  string item_type = 4;
+  string action_type = 5;
+}
+
+message InteractionUpdated{
+  string id = 1;
+  string activity_id = 2;
+  string item_id = 3;
+  string item_type = 4;
+  string action_type = 5;
+}

@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package reviewspb;
+
+
+//Command
+message AddReview{
+  string id = 1;
+  string sender_id = 2;
+  string item_id = 3;
+  string item_type = 4;
+  string content = 5;
+  string category_id = 6;
+  string parent_id = 7;
+}
+
+
+message ReviewAdded{
+  string id = 1;
+  string sender_id = 2;
+  string item_id = 3;
+  string item_type = 4;
+  string content = 5;
+  string category_id = 6;
+  string parent_id = 7;
+}
+
+message ReviewApproved {
+  string id = 1;
+  bool approve = 2;
+}
+message ReviewRemoved {
+  string id = 1;
+}
+message ReviewFlagged {
+  string id = 1;
+  bool flagged = 2;
+}
+message ReviewRejected {
+  string id = 1;
+  bool approved = 2;
+}
+message ReviewEdited {
+  string id = 1;
+  string content = 2;
+}
+

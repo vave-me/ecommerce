@@ -1,0 +1,260 @@
+openapiOptions:
+  file:
+    - file: "supportpb/api.proto"
+      option:
+        info:
+          title: Support Management API
+          version: "1.0.0"
+          description: "API for managing user support channels, tickets, and knowledge base."
+        basePath: /
+  method:
+    # Support Channel Management
+    - method: supportpb.SupportService.CreateSupportChannel
+      option:
+        operationId: createSupportChannel
+        tags:
+          - Support Channel
+        summary: Create a new support channel for a user
+    
+    - method: supportpb.SupportService.GetSupportChannel
+      option:
+        operationId: getSupportChannel
+        tags:
+          - Support Channel
+        summary: Get support channel details
+    
+    - method: supportpb.SupportService.GetUserSupportChannels
+      option:
+        operationId: getUserSupportChannels
+        tags:
+          - Support Channel
+        summary: List all support channels for a user
+    
+    - method: supportpb.SupportService.UpdateSupportChannelSettings
+      option:
+        operationId: updateSupportChannelSettings
+        tags:
+          - Support Channel
+        summary: Update support channel settings
+    
+    - method: supportpb.SupportService.CloseSupportChannel
+      option:
+        operationId: closeSupportChannel
+        tags:
+          - Support Channel
+        summary: Close a support channel
+    
+    - method: supportpb.SupportService.ReactivateSupportChannel
+      option:
+        operationId: reactivateSupportChannel
+        tags:
+          - Support Channel
+        summary: Reactivate a closed support channel
+
+    # Ticket Management
+    - method: supportpb.SupportService.CreateTicket
+      option:
+        operationId: createTicket
+        tags:
+          - Ticket
+        summary: Create a new support ticket
+    
+    - method: supportpb.SupportService.GetTicket
+      option:
+        operationId: getTicket
+        tags:
+          - Ticket
+        summary: Get ticket details
+    
+    - method: supportpb.SupportService.GetTickets
+      option:
+        operationId: getTickets
+        tags:
+          - Ticket
+        summary: Get multiple tickets by IDs
+    
+    - method: supportpb.SupportService.GetChannelTickets
+      option:
+        operationId: getChannelTickets
+        tags:
+          - Ticket
+        summary: List all tickets in a support channel
+    
+    - method: supportpb.SupportService.UpdateTicket
+      option:
+        operationId: updateTicket
+        tags:
+          - Ticket
+        summary: Update ticket information
+    
+    - method: supportpb.SupportService.AssignTicket
+      option:
+        operationId: assignTicket
+        tags:
+          - Ticket
+        summary: Assign ticket to an agent or AI
+    
+    - method: supportpb.SupportService.UpdateTicketPriority
+      option:
+        operationId: updateTicketPriority
+        tags:
+          - Ticket
+        summary: Update ticket priority
+    
+    - method: supportpb.SupportService.EscalateTicket
+      option:
+        operationId: escalateTicket
+        tags:
+          - Ticket
+        summary: Escalate ticket to higher support tier
+    
+    - method: supportpb.SupportService.ResolveTicket
+      option:
+        operationId: resolveTicket
+        tags:
+          - Ticket
+        summary: Mark ticket as resolved
+    
+    - method: supportpb.SupportService.ReopenTicket
+      option:
+        operationId: reopenTicket
+        tags:
+          - Ticket
+        summary: Reopen a resolved ticket
+    
+    - method: supportpb.SupportService.CloseTicket
+      option:
+        operationId: closeTicket
+        tags:
+          - Ticket
+        summary: Close a ticket
+    
+    - method: supportpb.SupportService.MergeTickets
+      option:
+        operationId: mergeTickets
+        tags:
+          - Ticket
+        summary: Merge multiple tickets
+    
+    - method: supportpb.SupportService.LinkTickets
+      option:
+        operationId: linkTickets
+        tags:
+          - Ticket
+        summary: Link related tickets
+
+    # Communication
+    - method: supportpb.SupportService.AddTicketReply
+      option:
+        operationId: addTicketReply
+        tags:
+          - Communication
+        summary: Add a reply to a ticket
+    
+    - method: supportpb.SupportService.AddInternalNote
+      option:
+        operationId: addInternalNote
+        tags:
+          - Communication
+        summary: Add an internal note to a ticket
+    
+    - method: supportpb.SupportService.GetTicketCommunications
+      option:
+        operationId: getTicketCommunications
+        tags:
+          - Communication
+        summary: Get all communications for a ticket
+
+    # AI Integration
+    - method: supportpb.SupportService.EnableAISupport
+      option:
+        operationId: enableAISupport
+        tags:
+          - AI Support
+        summary: Enable AI support for a channel
+    
+    - method: supportpb.SupportService.ConfigureAIAssistant
+      option:
+        operationId: configureAIAssistant
+        tags:
+          - AI Support
+        summary: Configure AI assistant settings
+    
+    - method: supportpb.SupportService.HandoffToHuman
+      option:
+        operationId: handoffToHuman
+        tags:
+          - AI Support
+        summary: Transfer ticket from AI to human agent
+    
+    - method: supportpb.SupportService.HandoffToAI
+      option:
+        operationId: handoffToAI
+        tags:
+          - AI Support
+        summary: Transfer ticket from human to AI
+    
+    - method: supportpb.SupportService.GetAISuggestions
+      option:
+        operationId: getAISuggestions
+        tags:
+          - AI Support
+        summary: Get AI suggestions for ticket resolution
+
+    # Knowledge Base
+    - method: supportpb.SupportService.CreateKnowledgeArticle
+      option:
+        operationId: createKnowledgeArticle
+        tags:
+          - Knowledge Base
+        summary: Create a new knowledge article
+    
+    - method: supportpb.SupportService.GetKnowledgeArticle
+      option:
+        operationId: getKnowledgeArticle
+        tags:
+          - Knowledge Base
+        summary: Get knowledge article details
+    
+    - method: supportpb.SupportService.SearchKnowledgeBase
+      option:
+        operationId: searchKnowledgeBase
+        tags:
+          - Knowledge Base
+        summary: Search knowledge base articles
+    
+    - method: supportpb.SupportService.LinkArticleToTicket
+      option:
+        operationId: linkArticleToTicket
+        tags:
+          - Knowledge Base
+        summary: Link knowledge article to ticket
+    
+    - method: supportpb.SupportService.RateArticle
+      option:
+        operationId: rateArticle
+        tags:
+          - Knowledge Base
+        summary: Rate a knowledge article
+
+    # Analytics
+    - method: supportpb.SupportService.GetSupportMetrics
+      option:
+        operationId: getSupportMetrics
+        tags:
+          - Analytics
+        summary: Get support performance metrics
+    
+    - method: supportpb.SupportService.GetAgentPerformance
+      option:
+        operationId: getAgentPerformance
+        tags:
+          - Analytics
+        summary: Get agent performance metrics
+    
+    - method: supportpb.SupportService.GetTicketAnalytics
+      option:
+        operationId: getTicketAnalytics
+        tags:
+          - Analytics
+        summary: Get ticket analytics and trends

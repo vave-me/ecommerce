@@ -1,0 +1,390 @@
+/* UnifiedModal.module.css - WCAG 2.1 Compliant Modal Component */
+
+/* =================================================================
+   MODAL OVERLAY & CONTAINER
+   ================================================================= */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--surface-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+  padding: var(--space-4);
+  animation: fadeIn var(--transition-fast) ease-out;
+  backdrop-filter: blur(4px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  background: var(--surface-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-2xl);
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+  position: relative;
+  animation: slideUp var(--transition-base) ease-out;
+  border: 1px solid var(--border-primary);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =================================================================
+   MODAL HEADER
+   ================================================================= */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--border-primary);
+  background: var(--surface-primary);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  line-height: var(--line-height-normal);
+  font-family: var(--font-family-primary);
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px; /* WCAG 2.1 minimum touch target */
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: var(--transition-colors);
+}
+
+.closeButton:hover {
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+}
+
+.closeButton:focus-visible {
+  outline: 3px solid var(--border-focused);
+  outline-offset: 2px;
+}
+
+/* =================================================================
+   MODAL BODY
+   ================================================================= */
+
+.body {
+  padding: var(--space-6);
+  max-height: 60vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-secondary) transparent;
+  color: var(--text-primary);
+  font-family: var(--font-family-primary);
+}
+
+.body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.body::-webkit-scrollbar-thumb {
+  background-color: var(--border-secondary);
+  border-radius: var(--radius-sm);
+}
+
+.body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--border-primary);
+}
+
+/* =================================================================
+   MODAL FOOTER
+   ================================================================= */
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  border-top: 1px solid var(--border-primary);
+  background: var(--surface-secondary);
+}
+
+.button {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-family-primary);
+  cursor: pointer;
+  transition: var(--transition-colors);
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px; /* WCAG 2.1 touch target */
+}
+
+.buttonPrimary {
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  border-color: var(--button-primary-bg);
+}
+
+.buttonPrimary:hover {
+  background: var(--button-primary-bg-hover);
+  border-color: var(--button-primary-bg-hover);
+}
+
+.buttonPrimary:focus-visible {
+  outline: 3px solid var(--button-primary-bg);
+  outline-offset: 2px;
+}
+
+.buttonSecondary {
+  background: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+  border-color: var(--button-secondary-border);
+}
+
+.buttonSecondary:hover {
+  background: var(--button-secondary-bg-hover);
+  border-color: var(--border-secondary);
+}
+
+.buttonSecondary:focus-visible {
+  outline: 3px solid var(--border-focused);
+  outline-offset: 2px;
+}
+
+.buttonDanger {
+  background: var(--color-error-500);
+  color: var(--text-inverse);
+  border-color: var(--color-error-500);
+}
+
+.buttonDanger:hover {
+  background: var(--color-error-600);
+  border-color: var(--color-error-600);
+}
+
+.buttonDanger:focus-visible {
+  outline: 3px solid var(--color-error-500);
+  outline-offset: 2px;
+}
+
+/* =================================================================
+   MODAL SIZES
+   ================================================================= */
+
+.modalSmall {
+  max-width: 400px;
+}
+
+.modalMedium {
+  max-width: 600px;
+}
+
+.modalLarge {
+  max-width: 800px;
+}
+
+.modalFullWidth {
+  max-width: 95vw;
+}
+
+/* =================================================================
+   LOADING STATE
+   ================================================================= */
+
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* =================================================================
+   RESPONSIVE DESIGN
+   ================================================================= */
+
+@media (max-width: 768px) {
+  .overlay {
+    padding: 12px;
+  }
+  
+  .modal {
+    max-width: 100%;
+    margin: 0;
+    border-radius: 8px;
+  }
+  
+  .header {
+    padding: 16px 20px;
+  }
+  
+  .title {
+    font-size: 16px;
+  }
+  
+  .body {
+    padding: 20px;
+    max-height: 50vh;
+  }
+  
+  .footer {
+    padding: 12px 20px;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .overlay {
+    padding: 8px;
+  }
+  
+  .modal {
+    border-radius: 6px;
+  }
+  
+  .header {
+    padding: 12px 16px;
+  }
+  
+  .body {
+    padding: 16px;
+  }
+  
+  .footer {
+    padding: 12px 16px;
+  }
+}
+
+/* Dark mode is automatically handled by CSS variables in global.css */
+
+/* =================================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .modal,
+  .closeButton,
+  .button {
+    animation: none;
+    transition: none;
+  }
+  
+  .spinner {
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .modal {
+    border-width: 2px;
+  }
+  
+  .header {
+    border-bottom-width: 2px;
+  }
+  
+  .footer {
+    border-top-width: 2px;
+  }
+  
+  .button {
+    border-width: 2px;
+  }
+  
+  .closeButton:focus-visible,
+  .button:focus-visible {
+    outline-width: 4px;
+    outline-offset: 2px;
+  }
+}
+
+/* =================================================================
+   PRINT STYLES
+   ================================================================= */
+
+@media print {
+  .overlay {
+    position: static;
+    background: transparent;
+    padding: 0;
+  }
+  
+  .modal {
+    box-shadow: none;
+    border: 1px solid #000000;
+    border-radius: 0;
+    max-width: 100%;
+    max-height: none;
+  }
+  
+  .header {
+    background: white;
+    border-bottom: 1px solid #000000;
+  }
+  
+  .closeButton {
+    display: none;
+  }
+  
+  .footer {
+    display: none;
+  }
+  
+  .body {
+    max-height: none;
+    overflow: visible;
+  }
+} 

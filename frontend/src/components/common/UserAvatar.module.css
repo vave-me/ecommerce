@@ -1,0 +1,84 @@
+/* Unified User Avatar Styles */
+
+.avatarWrapper {
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--avatar-bg, #f3f4f6);
+  flex-shrink: 0;
+}
+
+.avatar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Size variants */
+.small {
+  width: 32px;
+  height: 32px;
+}
+
+.medium {
+  width: 40px;
+  height: 40px;
+}
+
+.large {
+  width: 56px;
+  height: 56px;
+}
+
+.xlarge {
+  width: 80px;
+  height: 80px;
+}
+
+/* Clickable state */
+.clickable {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.clickable:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 2px var(--primary-color, #3b82f6);
+}
+
+.clickable:active {
+  transform: scale(0.98);
+}
+
+/* Loading state */
+.avatarWrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.avatarWrapper.loading::before {
+  animation: shimmer 1.5s infinite;
+  opacity: 1;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .avatarWrapper {
+    --avatar-bg: #374151;
+  }
+}

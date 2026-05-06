@@ -1,0 +1,173 @@
+.settingsContainer {
+    margin-bottom: 20px;
+}
+
+.settingsTitle {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+/* Dark theme for settings title */
+@media (prefers-color-scheme: dark) {
+    .settingsTitle {
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.settingsList {
+    list-style: none;
+    padding: 0;
+}
+
+.settingsItem {
+    margin-bottom: 8px;
+}
+
+.label {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    color: #34495e;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+/* Dark theme for label */
+@media (prefers-color-scheme: dark) {
+    .label {
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+.label:hover {
+    color: #2c3e50;
+}
+
+/* Dark theme for label hover */
+@media (prefers-color-scheme: dark) {
+    .label:hover {
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.checkbox {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #bdc3c7;
+    border-radius: 3px;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Dark theme for checkbox */
+@media (prefers-color-scheme: dark) {
+    .checkbox {
+        border: 2px solid var(--gray-600, #4b5563);
+        background-color: var(--gray-700, #374151);
+    }
+}
+
+.checkbox:checked {
+    background-color: #1aa89e;
+    border-color: #1aa89e;
+}
+
+/* Dark theme for checked checkbox */
+@media (prefers-color-scheme: dark) {
+    .checkbox:checked {
+        background-color: var(--primary-color, #3b82f6);
+        border-color: var(--primary-color, #3b82f6);
+    }
+}
+
+.checkbox:hover {
+    border-color: #1aa89e;
+}
+
+/* Dark theme for checkbox hover */
+@media (prefers-color-scheme: dark) {
+    .checkbox:hover {
+        border-color: var(--primary-color, #3b82f6);
+    }
+}
+
+.checkbox:focus {
+    outline: 2px solid rgba(26, 168, 158, 0.3);
+    outline-offset: 2px;
+}
+
+/* Dark theme for checkbox focus */
+@media (prefers-color-scheme: dark) {
+    .checkbox:focus {
+        outline: 2px solid rgba(59, 130, 246, 0.3);
+    }
+}
+
+.saveButton {
+    background-color: #1aa89e;
+    color: #ffffff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(26, 168, 158, 0.2);
+}
+
+/* Dark theme for save button */
+@media (prefers-color-scheme: dark) {
+    .saveButton {
+        background-color: var(--primary-color, #3b82f6);
+        box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+    }
+}
+
+.saveButton:hover {
+    background-color: #178f7a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(26, 168, 158, 0.3);
+}
+
+/* Dark theme for save button hover */
+@media (prefers-color-scheme: dark) {
+    .saveButton:hover {
+        background-color: var(--primary-color, #2563eb);
+        box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+    }
+}
+
+.saveButton:focus {
+    outline: 2px solid rgba(26, 168, 158, 0.3);
+    outline-offset: 2px;
+}
+
+/* Dark theme for save button focus */
+@media (prefers-color-scheme: dark) {
+    .saveButton:focus {
+        outline: 2px solid rgba(59, 130, 246, 0.3);
+    }
+}
+
+.saveButton:active {
+    transform: translateY(0);
+}
+
+.saveButton:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Dark theme for save button disabled */
+@media (prefers-color-scheme: dark) {
+    .saveButton:disabled {
+        background-color: var(--gray-600, #4b5563);
+    }
+}

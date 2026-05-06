@@ -1,0 +1,45 @@
+.detailPageContainer {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.errorContainer {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.errorTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.errorMessage {
+  color: #666;
+}
+
+/* Dark Theme Support */
+@media (prefers-color-scheme: dark) {
+  .detailPageContainer {
+    background-color: var(--gray-900);
+    color: var(--gray-50);
+  }
+
+  .errorContainer {
+    background-color: var(--gray-800);
+    color: var(--gray-50);
+  }
+
+  .errorTitle {
+    color: var(--gray-50);
+  }
+
+  .errorMessage {
+    color: var(--gray-300);
+  }
+} 

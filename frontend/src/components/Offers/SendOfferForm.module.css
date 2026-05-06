@@ -1,0 +1,308 @@
+/* ------------------------------------------
+   CSS Module for SendOfferForm
+------------------------------------------ */
+
+.formContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 16px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    gap: 12px;
+    transition: all 0.2s ease;
+}
+
+/* Dark theme for form container */
+@media (prefers-color-scheme: dark) {
+    .formContainer {
+        background-color: var(--gray-700, #374151);
+        border: 1px solid var(--gray-600, #4b5563);
+    }
+}
+
+.formContainer:hover {
+    border-color: #1aa89e;
+    box-shadow: 0 2px 4px rgba(26, 168, 158, 0.1);
+}
+
+/* Dark theme for form container hover */
+@media (prefers-color-scheme: dark) {
+    .formContainer:hover {
+        border-color: var(--primary-color, #3b82f6);
+        box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+    }
+}
+
+.itemDetails {
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+/* Dark theme for item details */
+@media (prefers-color-scheme: dark) {
+    .itemDetails {
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+.itemName {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 4px;
+}
+
+/* Dark theme for item name */
+@media (prefers-color-scheme: dark) {
+    .itemName {
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.itemPrice {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+/* Dark theme for item price */
+@media (prefers-color-scheme: dark) {
+    .itemPrice {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.inputGroup {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.amountInput {
+    width: 100px;
+    margin-right: 8px;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #2c3e50;
+    transition: all 0.2s ease;
+    text-align: right;
+    font-weight: 500;
+}
+
+/* Dark theme for amount input */
+@media (prefers-color-scheme: dark) {
+    .amountInput {
+        background-color: var(--gray-600, #4b5563);
+        border: 1px solid var(--gray-500, #6b7280);
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.amountInput:focus {
+    outline: none;
+    border-color: #1aa89e;
+    box-shadow: 0 0 0 3px rgba(26, 168, 158, 0.1);
+}
+
+/* Dark theme for amount input focus */
+@media (prefers-color-scheme: dark) {
+    .amountInput:focus {
+        border-color: var(--primary-color, #3b82f6);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+}
+
+.amountInput:invalid {
+    border-color: #dc3545;
+}
+
+/* Dark theme for amount input invalid */
+@media (prefers-color-scheme: dark) {
+    .amountInput:invalid {
+        border-color: var(--danger, #ef4444);
+    }
+}
+
+.currencyLabel {
+    font-size: 14px;
+    color: #6c757d;
+    font-weight: 500;
+    margin-right: 8px;
+}
+
+/* Dark theme for currency label */
+@media (prefers-color-scheme: dark) {
+    .currencyLabel {
+        color: var(--gray-300, #d1d5db);
+    }
+}
+
+.submitButton {
+    background-color: #1aa89e;
+    color: #fff;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 4px rgba(26, 168, 158, 0.2);
+}
+
+/* Dark theme for submit button */
+@media (prefers-color-scheme: dark) {
+    .submitButton {
+        background-color: var(--primary-color, #3b82f6);
+        box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+    }
+}
+
+.submitButton:hover {
+    background-color: #178f7a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(26, 168, 158, 0.3);
+}
+
+/* Dark theme for submit button hover */
+@media (prefers-color-scheme: dark) {
+    .submitButton:hover {
+        background-color: var(--primary-color, #2563eb);
+        box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+    }
+}
+
+.submitButton:focus {
+    outline: 2px solid rgba(26, 168, 158, 0.3);
+    outline-offset: 2px;
+}
+
+/* Dark theme for submit button focus */
+@media (prefers-color-scheme: dark) {
+    .submitButton:focus {
+        outline: 2px solid rgba(59, 130, 246, 0.3);
+    }
+}
+
+.submitButton:active {
+    transform: translateY(0);
+}
+
+.submitButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+/* Dark theme for submit button disabled */
+@media (prefers-color-scheme: dark) {
+    .submitButton:disabled {
+        background-color: var(--gray-600, #4b5563);
+    }
+}
+
+/* Loading state */
+.submitButton.loading {
+    pointer-events: none;
+}
+
+.loadingSpinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error message */
+.errorMessage {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+/* Dark theme for error message */
+@media (prefers-color-scheme: dark) {
+    .errorMessage {
+        color: var(--danger, #ef4444);
+    }
+}
+
+/* Success message */
+.successMessage {
+    color: #28a745;
+    font-size: 12px;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+/* Dark theme for success message */
+@media (prefers-color-scheme: dark) {
+    .successMessage {
+        color: var(--success, #10b981);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .formContainer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .inputGroup {
+        justify-content: space-between;
+    }
+
+    .amountInput {
+        margin-right: 0;
+        flex: 1;
+        max-width: 120px;
+    }
+
+    .submitButton {
+        padding: 8px 16px;
+        align-self: stretch;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .formContainer {
+        padding: 12px;
+    }
+
+    .itemDetails {
+        font-size: 13px;
+    }
+
+    .amountInput {
+        width: 80px;
+        padding: 6px;
+        font-size: 13px;
+    }
+
+    .submitButton {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+}

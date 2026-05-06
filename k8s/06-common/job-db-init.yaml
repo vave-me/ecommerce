@@ -1,0 +1,323 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-scripts
+  namespace: my-project
+data:
+  init_db.psql: |
+    CREATE DATABASE commondb TEMPLATE template0;
+    \c commondb
+    CREATE OR REPLACE FUNCTION created_at_trigger() RETURNS TRIGGER AS $$
+    BEGIN NEW.created_at := OLD.created_at; RETURN NEW; END;
+    $$ LANGUAGE 'plpgsql';
+    CREATE OR REPLACE FUNCTION updated_at_trigger() RETURNS TRIGGER AS $$
+    BEGIN
+      IF row(NEW.*) IS DISTINCT FROM row(OLD.*) THEN
+        NEW.updated_at = NOW(); RETURN NEW;
+      ELSE RETURN OLD; END IF;
+    END;
+    $$ LANGUAGE 'plpgsql';
+    GRANT EXECUTE ON FUNCTION created_at_trigger() TO public;
+    GRANT EXECUTE ON FUNCTION updated_at_trigger() TO public;
+
+  init_service_db.psql: |
+    CREATE DATABASE :"db" TEMPLATE commondb;
+    CREATE USER :"user" WITH ENCRYPTED PASSWORD :'pass';
+    GRANT CREATE, CONNECT ON DATABASE :"db" TO :"user";
+    \c :"db"
+    GRANT CONNECT ON DATABASE :"db" TO postgres;
+    CREATE SCHEMA IF NOT EXISTS :"db";
+    GRANT CREATE, USAGE ON SCHEMA :"db" TO :"user";
+    \if :{?needs_postgis}
+      \if :needs_postgis
+        \echo 'Ensuring PostGIS extension exists in database ':"db"'...'
+        CREATE EXTENSION IF NOT EXISTS postgis;
+        GRANT SELECT, INSERT, UPDATE, DELETE ON geometry_columns TO :"user";
+        GRANT SELECT, INSERT, UPDATE, DELETE ON spatial_ref_sys TO :"user";
+        GRANT SELECT, INSERT, UPDATE, DELETE ON geography_columns TO :"user";
+      \endif
+    \endif
+    GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA :"db" TO :"user";
+    GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA :"db" TO :"user";
+    GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA :"db" TO :"user";
+    ALTER SCHEMA :"db" OWNER TO :"user";
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: service-db-passwords
+  namespace: my-project
+type: Opaque
+data:
+  ACTIVITY_PASS: REDACTED
+  USERS_PASS: REDACTED
+  PRODUCTS_PASS: REDACTED
+  BASKETS_PASS: REDACTED
+  CATEGORIES_PASS: REDACTED
+  COMMENTS_PASS: REDACTED
+  GEOCODING_PASS: REDACTED
+  MAILER_PASS: REDACTED
+  MEDIA_PASS: REDACTED
+  MESSAGES_PASS: REDACTED
+  NEWSLETTERS_PASS: REDACTED
+  NOTIFICATIONS_PASS: REDACTED
+  OFFERS_PASS: REDACTED
+  ORDERING_PASS: REDACTED
+  PAYMENTS_PASS: REDACTED
+  SEARCH_PASS: REDACTED
+  POSTS_PASS: REDACTED
+  SHIPPING_PASS: REDACTED
+  SUPPORT_PASS: REDACTED
+  WISHLISTS_PASS: REDACTED
+  REVIEWS_PASS: REDACTED
+  FOLLOWING_PASS: REDACTED
+  ASSISTANTS_PASS: REDACTED
+  METRICS_PASS: REDACTED
+  COSEC_PASS: REDACTED
+  SERVICES_PASS: REDACTED
+  ERP_PASS: REDACTED
+  SCHEDULER_PASS: REDACTED
+  MERCHANT_PASS: REDACTED
+  MANAGERS_PASS: REDACTED
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-admin-secret-copy
+  namespace: my-project
+type: Opaque
+data:
+  POSTGRES_PASSWORD: REDACTED
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: init-databases-job
+  namespace: my-project
+spec:
+  backoffLimit: 5
+  template:
+    spec:
+      restartPolicy: OnFailure
+      initContainers:
+        - name: wait-for-postgres
+          image: postgres:16-alpine
+          command: [ 'sh', '-c' ]
+          args:
+            - |
+              set -e
+              echo "Waiting for postgres service (postgres.database.svc.cluster.local:5432) to be fully ready..."
+              until psql -h postgres.database.svc.cluster.local -U postgres -c "SELECT 1;" > /dev/null 2>&1; do
+                echo "Postgres not ready yet, sleeping for 3 seconds..."
+                sleep 3
+              done
+              echo "Postgres service is ready!"
+          env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-admin-secret-copy
+                  key: POSTGRES_PASSWORD
+          resources:
+            requests:
+              cpu: "25m"
+              memory: "32Mi"
+            limits:
+              cpu: "100m"
+              memory: "64Mi"
+      containers:
+        - name: db-initializer
+          image: postgis/postgis:16-3.5-alpine
+          command: [ "/bin/sh", "-cex" ]
+          args:
+            - |
+              set -e
+              echo "Starting database initialization process..."
+
+              check_db_exists() { psql -q -U postgres -h postgres.database.svc.cluster.local -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname='$1'" 2>/dev/null || echo "0"; }
+              check_user_exists() { psql -q -U postgres -h postgres.database.svc.cluster.local -d postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='$1'" 2>/dev/null || echo "0"; }
+
+              echo "[Step 1] Ensuring 'commondb' database exists..."
+              if [ "$(check_db_exists commondb)" = "1" ]; then
+                  echo "'commondb' already exists. Skipping creation."
+              else
+                  echo "Creating 'commondb' database and common functions..."
+                  psql -v ON_ERROR_STOP=1 -U postgres -h postgres.database.svc.cluster.local -d postgres --file /scripts/init_db.psql \
+                    || { echo "[ERROR] Failed to initialize commondb"; exit 1; }
+                  echo "'commondb' creation executed successfully."
+              fi
+
+              echo "[Step 2] Initializing service databases..."
+              SERVICES_POSTGIS="
+              activity:ACTIVITY_PASS:false
+              users:USERS_PASS:true
+              products:PRODUCTS_PASS:true
+              baskets:BASKETS_PASS:false
+              categories:CATEGORIES_PASS:false
+              comments:COMMENTS_PASS:false
+              geocoding:GEOCODING_PASS:true
+              mailer:MAILER_PASS:false
+              media:MEDIA_PASS:false
+              messages:MESSAGES_PASS:false
+              newsletters:NEWSLETTERS_PASS:false
+              notifications:NOTIFICATIONS_PASS:false
+              offers:OFFERS_PASS:false
+              ordering:ORDERING_PASS:false
+              payments:PAYMENTS_PASS:false
+              search:SEARCH_PASS:false
+              posts:POSTS_PASS:true
+              services:SERVICES_PASS:true
+              shipping:SHIPPING_PASS:false
+              support:SUPPORT_PASS:false
+              wishlists:WISHLISTS_PASS:false
+              reviews:REVIEWS_PASS:false
+              following:FOLLOWING_PASS:false
+              metrics:METRICS_PASS:true
+              assistants:ASSISTANTS_PASS:false
+              cosec:COSEC_PASS:false
+              erp:ERP_PASS:false
+              merchant:MERCHANT_PAS:false
+              scheduler:SCHEDULER_PASS:false
+              managers:MANAGERS_PASS:false
+              "
+              echo "$SERVICES_POSTGIS" | while IFS= read -r service_info || [ -n "$service_info" ]; do
+                [ -z "$service_info" ] && continue
+              
+                _OLD_IFS="$IFS"
+                IFS=':'
+                set -f # Disable globbing
+                set -- $service_info # Split $service_info by ':' into $1, $2, $3
+                set +f # Re-enable globbing (if it was enabled)
+              
+                db_name="$1"
+                pass_var_name="$2"
+                postgis_needed="$3"
+                IFS="$_OLD_IFS" # Restore original IFS
+
+                user_name="${db_name}_user"
+                eval pass_val=\$$pass_var_name
+
+                if [ -z "$db_name" ] || [ -z "$pass_var_name" ] || [ -z "$postgis_needed" ] || [ -z "$pass_val" ]; then
+                  echo "[ERROR] Invalid service definition or missing password ENV VAR ('$pass_var_name' for db '$db_name'). Parsed: db_name='$db_name', pass_var_name='$pass_var_name', postgis_needed='$postgis_needed'. Full line: '$service_info'. Skipping."
+                  continue
+                fi
+
+                echo "--- Processing service: $db_name (User: $user_name, PostGIS: $postgis_needed) ---"
+                db_exists=$(check_db_exists "$db_name")
+                if [ "$db_exists" = "1" ]; then
+                    echo "Database '$db_name' already exists. Verifying user and extensions..."
+                    user_exists=$(check_user_exists "$user_name")
+                    if [ "$user_exists" != "1" ]; then
+                       echo "[ERROR] Database '$db_name' exists but expected user '$user_name' does NOT! Manual check required."
+                    else
+                       echo "User '$user_name' already exists."
+                       if [ "$postgis_needed" = "true" ]; then
+                           echo "Ensuring PostGIS extension exists in '$db_name'..."
+                           psql -q -v ON_ERROR_STOP=1 -U postgres -h postgres.database.svc.cluster.local -d "$db_name" \
+                                -c "CREATE EXTENSION IF NOT EXISTS postgis;" || echo "[WARN] Failed attempt to ensure PostGIS extension for $db_name."
+                       fi
+                    fi
+                else
+                    echo "Creating database '$db_name' and user '$user_name' using TEMPLATE commondb..."
+                    psql -v ON_ERROR_STOP=1 \
+                      -U postgres \
+                      -h postgres.database.svc.cluster.local \
+                      -d postgres \
+                      -v db="$db_name" \
+                      -v user="$user_name" \
+                      -v pass="$pass_val" \
+                      -v needs_postgis="$postgis_needed" \
+                      --file /scripts/init_service_db.psql || { echo "[ERROR] Failed to initialize database $db_name"; exit 1; }
+                    echo "Database '$db_name' and user '$user_name' creation executed successfully."
+                fi
+                echo "--- Finished processing service: $db_name ---"
+              done
+
+              echo "Database initialization job completed successfully."
+          env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-admin-secret-copy
+                  key: POSTGRES_PASSWORD
+            - name: ACTIVITY_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: ACTIVITY_PASS } }
+            - name: USERS_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: USERS_PASS } }
+            - name: PRODUCTS_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: PRODUCTS_PASS } }
+            - name: BASKETS_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: BASKETS_PASS } }
+            - name: CATEGORIES_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: CATEGORIES_PASS } }
+            - name: COMMENTS_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: COMMENTS_PASS } }
+            - name: GEOCODING_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: GEOCODING_PASS } }
+            - name: MAILER_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: MAILER_PASS } }
+            - name: MEDIA_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: MEDIA_PASS } }
+            - name: MESSAGES_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: MESSAGES_PASS } }
+            - name: NEWSLETTERS_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: NEWSLETTERS_PASS } }
+            - name: NOTIFICATIONS_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: NOTIFICATIONS_PASS } }
+            - name: OFFERS_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: OFFERS_PASS } }
+            - name: ORDERING_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: ORDERING_PASS } }
+            - name: PAYMENTS_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: PAYMENTS_PASS } }
+            - name: SEARCH_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: SEARCH_PASS } }
+            - name: POSTS_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: POSTS_PASS } }
+            - name: SERVICES_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: SERVICES_PASS } }
+            - name: SHIPPING_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: SHIPPING_PASS } }
+            - name: SUPPORT_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: SUPPORT_PASS } }
+            - name: WISHLISTS_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: WISHLISTS_PASS } }
+            - name: REVIEWS_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: REVIEWS_PASS } }
+            - name: FOLLOWING_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: FOLLOWING_PASS } }
+            - name: ASSISTANTS_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: ASSISTANTS_PASS } }
+            - name: METRICS_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: METRICS_PASS } }
+            - name: COSEC_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: COSEC_PASS } }
+            - name: ERP_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: ERP_PASS } }
+            - name: SCHEDULER_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: SCHEDULER_PASS } }
+            - name: MERCHANT_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: MERCHANT_PASS } }
+            - name: MANAGERS_PASS
+              valueFrom: { secretKeyRef: { name: service-db-passwords, key: MANAGERS_PASS } }
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+          volumeMounts:
+            - name: sql-scripts
+              mountPath: /scripts
+              readOnly: true
+      volumes:
+        - name: sql-scripts
+          configMap:
+            name: db-scripts
+            items:
+              - key: init_db.psql
+                path: init_db.psql
+              - key: init_service_db.psql
+                path: init_service_db.psql
+            defaultMode: 0644

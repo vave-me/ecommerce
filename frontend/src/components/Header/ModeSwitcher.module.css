@@ -1,0 +1,200 @@
+/* ModeSwitcher - Elegant, Professional, Compact Design */
+
+.compactButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 40px;
+    min-width: 120px;
+    max-width: 160px;
+    padding: 0 20px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: #475569;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    
+    /* Subtle shadow for depth */
+    box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.08),
+        0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* Hover state - elegant lift effect */
+.compactButton:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.07),
+        0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* Active state - pressed effect */
+.compactButton:active {
+    transform: translateY(0);
+    box-shadow: 
+        0 1px 2px rgba(0, 0, 0, 0.06),
+        0 1px 1px rgba(0, 0, 0, 0.03);
+}
+
+/* Focus state for accessibility */
+.compactButton:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Button text styling */
+.buttonText {
+    font-size: 14px;
+    font-weight: 500;
+    color: inherit;
+    transition: color 0.2s ease;
+}
+
+/* Icon styling - same size for both modes */
+.compactButton svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2;
+    transition: transform 0.2s ease;
+}
+
+/* Subtle icon animation on hover */
+.compactButton:hover svg {
+    transform: scale(1.05);
+}
+
+/* AI Mode specific styling - blue accent */
+.aiMode {
+    color: #2563eb;
+    background: #eff6ff;
+    border-color: #dbeafe;
+}
+
+.aiMode:hover {
+    background: #dbeafe;
+    border-color: #bfdbfe;
+    color: #1d4ed8;
+}
+
+/* Classic Mode specific styling - neutral */
+.classicMode {
+    color: #475569;
+    background: #ffffff;
+    border-color: #e2e8f0;
+}
+
+.classicMode:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    color: #334155;
+}
+
+/* Disabled state */
+.compactButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.compactButton:disabled:hover {
+    background: #ffffff;
+    border-color: #e2e8f0;
+    transform: none;
+    box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.08),
+        0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* Loading/transitioning state */
+.transitioning {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .compactButton {
+        height: 36px;
+        min-width: 110px;
+        padding: 0 16px;
+        font-size: 13px;
+    }
+    
+    .compactButton svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .buttonText {
+        font-size: 13px;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .compactButton {
+        border-width: 2px;
+    }
+    
+    .compactButton:focus-visible {
+        outline-width: 3px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .compactButton,
+    .compactButton svg {
+        transition: none;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .compactButton {
+        background: #1e293b;
+        border-color: #334155;
+        color: #e2e8f0;
+    }
+    
+    .compactButton:hover {
+        background: #334155;
+        border-color: #475569;
+        color: #f1f5f9;
+    }
+    
+    .aiMode {
+        background: #1e3a8a;
+        border-color: #2563eb;
+        color: #dbeafe;
+    }
+    
+    .aiMode:hover {
+        background: #2563eb;
+        border-color: #3b82f6;
+        color: #eff6ff;
+    }
+    
+    .classicMode {
+        background: #1e293b;
+        border-color: #334155;
+        color: #e2e8f0;
+    }
+    
+    .classicMode:hover {
+        background: #334155;
+        border-color: #475569;
+        color: #f1f5f9;
+    }
+}

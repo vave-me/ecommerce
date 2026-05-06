@@ -1,0 +1,173 @@
+package handlers
+
+import (
+	"context"
+	"middleman/internal/am"
+	"middleman/internal/ddd"
+	"middleman/internal/errorsotel"
+	"middleman/ordering/internal/domain"
+	"middleman/ordering/orderingpb"
+	"time"
+
+	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/trace"
+)
+
+type domainHandlers[T ddd.Event] struct {
+	publisher am.EventPublisher
+}
+
+func NewDomainEventHandlers(publisher am.EventPublisher) ddd.EventHandler[ddd.Event] {
+	return domainHandlers[ddd.Event]{publisher: publisher}
+}
+
+func RegisterDomainEventHandlers(subscriber ddd.EventSubscriber[ddd.Event], handlers ddd.EventHandler[ddd.Event]) {
+	subscriber.Subscribe(handlers,
+		domain.OrderCreatedEvent,
+		domain.OrderRejectedEvent,
+		domain.OrderApprovedEvent,
+		domain.OrderReadiedEvent,
+		domain.OrderCanceledEvent,
+		domain.OrderShippedEvent,
+		domain.OrderDeliveredEvent,
+		domain.OrderCompletedEvent,
+	)
+}
+
+func (h domainHandlers[T]) HandleEvent(ctx context.Context, event T) (err error) {
+	span := trace.SpanFromContext(ctx)
+	defer func(started time.Time) {
+		if err != nil {
+			span.AddEvent(
+				"Encountered an error handling domain event",
+				trace.WithAttributes(errorsotel.ErrAttrs(err)...),
+			)
+		}
+		span.AddEvent("Handled domain event", trace.WithAttributes(
+			attribute.Int64("TookMS", time.Since(started).Milliseconds()),
+		))
+	}(time.Now())
+
+	span.AddEvent("Handling domain event", trace.WithAttributes(
+		attribute.String("Event", event.EventName()),
+	))
+
+	switch event.EventName() {
+	case domain.OrderCreatedEvent:
+		return h.onOrderCreated(ctx, event)
+	case domain.OrderRejectedEvent:
+		return h.onOrderRejected(ctx, event)
+	case domain.OrderApprovedEvent:
+		return h.onOrderApproved(ctx, event)
+	case domain.OrderReadiedEvent:
+		return h.onOrderReadied(ctx, event)
+	case domain.OrderCanceledEvent:
+		return h.onOrderCanceled(ctx, event)
+	case domain.OrderShippedEvent:
+		return h.onOrderShipped(ctx, event)
+	case domain.OrderDeliveredEvent:
+		return h.onOrderDelivered(ctx, event)
+	case domain.OrderCompletedEvent:
+		return h.onOrderCompleted(ctx, event)
+	}
+	return nil
+}
+
+func (h domainHandlers[T]) onOrderCreated(ctx context.Context, event ddd.Event) error {
+	payload := event.Payload().(*domain.Order)
+	items := make([]*orderingpb.OrderCreated_Item, len(payload.Items))
+	for i, item := range payload.Items {
+		items[i] = &orderingpb.OrderCreated_Item{
+			ProductId:    item.ProductID,
+			UserSellerId: item.UserSellerID,
+			Price:        item.Price,
+			Quantity:     item.Quantity,
+		}
+	}
+	return h.publisher.Publish(ctx, orderingpb.OrderAggregateChannel,
+		ddd.NewEvent(orderingpb.OrderCreatedEvent, &orderingpb.OrderCreated{
+			Id:             payload.ID(),
+			UserCustomerId: payload.UserCustomerID,
+			ShoppingId:     payload.ShoppingID,
+			BasketId:       payload.BasketID,
+			Items:          items,
+		}),
+	)
+}
+
+func (h domainHandlers[T]) onOrderRejected(ctx context.Context, event ddd.Event) error {
+	payload := event.Payload().(*domain.Order)
+	return h.publisher.Publish(ctx, orderingpb.OrderAggregateChannel,
+		ddd.NewEvent(orderingpb.OrderRejectedEvent, &orderingpb.OrderRejected{
+			Id:              payload.ID(),
+			UserCustomerId:  payload.UserCustomerID,
+			PaymentMethodId: payload.PaymentMethodID,
+		}),
+	)
+}
+
+func (h domainHandlers[T]) onOrderApproved(ctx context.Context, event ddd.Event) error {
+	payload := event.Payload().(*domain.Order)
+	return h.publisher.Publish(ctx, orderingpb.OrderAggregateChannel,
+		ddd.NewEvent(orderingpb.OrderApprovedEvent, &orderingpb.OrderApproved{
+			Id:              payload.ID(),
+			UserCustomerId:  payload.UserCustomerID,
+			PaymentMethodId: payload.PaymentMethodID,
+			ShoppingId:      payload.ShoppingID,
+		}),
+	)
+}
+
+func (h domainHandlers[T]) onOrderReadied(ctx context.Context, event ddd.Event) error {
+	payload := event.Payload().(*domain.Order)
+	return h.publisher.Publish(ctx, orderingpb.OrderAggregateChannel,
+		ddd.NewEvent(orderingpb.OrderReadiedEvent, &orderingpb.OrderReadied{
+			Id:              payload.ID(),
+			UserCustomerId:  payload.UserCustomerID,
+			PaymentMethodId: payload.PaymentMethodID,
+			Total:           payload.GetTotal(),
+		}),
+	)
+}
+
+func (h domainHandlers[T]) onOrderCanceled(ctx context.Context, event ddd.Event) error {
+	payload := event.Payload().(*domain.Order)
+	return h.publisher.Publish(ctx, orderingpb.OrderAggregateChannel,
+		ddd.NewEvent(orderingpb.OrderCanceledEvent, &orderingpb.OrderCanceled{
+			Id:              payload.ID(),
+			UserCustomerId:  payload.UserCustomerID,
+			PaymentMethodId: payload.PaymentMethodID,
+		}),
+	)
+}
+
+func (h domainHandlers[T]) onOrderShipped(ctx context.Context, event ddd.Event) error {
+	payload := event.Payload().(*domain.Order)
+	return h.publisher.Publish(ctx, orderingpb.OrderAggregateChannel,
+		ddd.NewEvent(orderingpb.OrderShippedEvent, &orderingpb.OrderShipped{
+			Id:             payload.ID(),
+			UserCustomerId: payload.UserCustomerID,
+		}),
+	)
+}
+
+func (h domainHandlers[T]) onOrderDelivered(ctx context.Context, event ddd.Event) error {
+	payload := event.Payload().(*domain.Order)
+	return h.publisher.Publish(ctx, orderingpb.OrderAggregateChannel,
+		ddd.NewEvent(orderingpb.OrderDeliveredEvent, &orderingpb.OrderDelivered{
+			Id:             payload.ID(),
+			UserCustomerId: payload.UserCustomerID,
+		}),
+	)
+}
+
+func (h domainHandlers[T]) onOrderCompleted(ctx context.Context, event ddd.Event) error {
+	payload := event.Payload().(*domain.Order)
+	return h.publisher.Publish(ctx, orderingpb.OrderAggregateChannel,
+		ddd.NewEvent(orderingpb.OrderCompletedEvent, &orderingpb.OrderCompleted{
+			Id:             payload.ID(),
+			UserCustomerId: payload.UserCustomerID,
+			InvoiceId:      payload.InvoiceID,
+		}),
+	)
+}

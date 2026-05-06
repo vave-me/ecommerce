@@ -1,0 +1,309 @@
+package tools
+
+import ai2 "middleman/internal/ai"
+
+func createCategoryTools() []ai2.Tool {
+	return []ai2.Tool{
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "category_find",
+				Description: "Find a category by its ID",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"category_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The unique identifier of the category",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"category_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "category_add",
+				Description: "Add a new category to the catalog",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"name": map[string]interface{}{
+							"type":        "string",
+							"description": "Category name",
+							"minLength":   1,
+							"maxLength":   100,
+						},
+						"slug": map[string]interface{}{
+							"type":        "string",
+							"description": "URL-friendly category identifier",
+							"pattern":     "^[a-z0-9-]+$",
+							"minLength":   1,
+							"maxLength":   100,
+						},
+						"parent_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Parent category ID (empty for root categories)",
+						},
+						"order": map[string]interface{}{
+							"type":        "integer",
+							"description": "Display order within parent category",
+							"minimum":     0,
+							"default":     0,
+						},
+						"status": map[string]interface{}{
+							"type":        "string",
+							"description": "Category status",
+							"enum":        []string{"ACTIVE", "INACTIVE"},
+							"default":     "ACTIVE",
+						},
+						"images": map[string]interface{}{
+							"type":        "array",
+							"description": "Category images",
+							"items": map[string]interface{}{
+								"type":   "string",
+								"format": "uri",
+							},
+						},
+						"icon": map[string]interface{}{
+							"type":        "string",
+							"description": "Category icon URL",
+							"format":      "uri",
+						},
+						"meta_title": map[string]interface{}{
+							"type":        "string",
+							"description": "SEO meta title",
+							"maxLength":   200,
+						},
+						"meta_description": map[string]interface{}{
+							"type":        "string",
+							"description": "SEO meta description",
+							"maxLength":   500,
+						},
+						"meta_keywords": map[string]interface{}{
+							"type":        "string",
+							"description": "SEO meta keywords",
+							"maxLength":   500,
+						},
+					},
+					"required": []string{"name", "slug"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "category_update",
+				Description: "Update an existing category",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"category_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Category ID to update",
+							"minLength":   1,
+						},
+						"name": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated category name",
+							"minLength":   1,
+							"maxLength":   100,
+						},
+						"slug": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated URL-friendly identifier",
+							"pattern":     "^[a-z0-9-]+$",
+							"minLength":   1,
+							"maxLength":   100,
+						},
+						"parent_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated parent category ID",
+						},
+						"order": map[string]interface{}{
+							"type":        "integer",
+							"description": "Updated display order",
+							"minimum":     0,
+						},
+						"status": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated category status",
+							"enum":        []string{"ACTIVE", "INACTIVE"},
+						},
+						"images": map[string]interface{}{
+							"type":        "array",
+							"description": "Updated category images",
+							"items": map[string]interface{}{
+								"type":   "string",
+								"format": "uri",
+							},
+						},
+						"icon": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated category icon URL",
+							"format":      "uri",
+						},
+						"meta_title": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated SEO meta title",
+							"maxLength":   200,
+						},
+						"meta_description": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated SEO meta description",
+							"maxLength":   500,
+						},
+						"meta_keywords": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated SEO meta keywords",
+							"maxLength":   500,
+						},
+					},
+					"required": []string{"category_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "category_remove",
+				Description: "Remove a category from the catalog",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"category_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Category ID to remove",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"category_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "category_get_paginated",
+				Description: "Get categories with pagination",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+						"status": map[string]interface{}{
+							"type":        "string",
+							"description": "Filter by status",
+							"enum":        []string{"ACTIVE", "INACTIVE", "ALL"},
+							"default":     "ACTIVE",
+						},
+					},
+					"required": []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "category_get_all",
+				Description: "Get all categories without pagination",
+				Parameters: map[string]interface{}{
+					"type":       "object",
+					"properties": map[string]interface{}{},
+					"required":   []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "category_get_by_parent",
+				Description: "Get all child categories of a parent category",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"parent_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Parent category ID",
+							"minLength":   1,
+						},
+						"include_inactive": map[string]interface{}{
+							"type":        "boolean",
+							"description": "Include inactive categories",
+							"default":     false,
+						},
+					},
+					"required": []string{"parent_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "category_get_root",
+				Description: "Get all root-level categories",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"include_inactive": map[string]interface{}{
+							"type":        "boolean",
+							"description": "Include inactive categories",
+							"default":     false,
+						},
+					},
+					"required": []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "category_search",
+				Description: "Search categories by name or description",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"query": map[string]interface{}{
+							"type":        "string",
+							"description": "Search query",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"query"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "category_get_by_slug",
+				Description: "Get a category by its slug",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"slug": map[string]interface{}{
+							"type":        "string",
+							"description": "Category slug",
+							"pattern":     "^[a-z0-9-]+$",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"slug"},
+				},
+			},
+		},
+	}
+}

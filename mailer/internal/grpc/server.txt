@@ -1,0 +1,106 @@
+package grpc
+
+import (
+	"context"
+	"middleman/internal/errorsotel"
+	"middleman/mailer/internal/application"
+	"middleman/mailer/internal/application/commands"
+	"middleman/mailer/internal/domain"
+	"middleman/mailer/mailerpb"
+
+	"github.com/google/uuid"
+	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/codes"
+	"go.opentelemetry.io/otel/trace"
+	"google.golang.org/grpc"
+)
+
+type server struct {
+	app application.App
+	mailerpb.UnimplementedMailerServiceServer
+}
+
+var _ mailerpb.MailerServiceServer = (*server)(nil)
+
+func RegisterServer(_ context.Context, app application.App, registrar grpc.ServiceRegistrar) error {
+	mailerpb.RegisterMailerServiceServer(registrar, server{app: app})
+	return nil
+}
+
+func (s server) CreateMailer(ctx context.Context, request *mailerpb.CreateMailerRequest) (*mailerpb.CreateMailerResponse, error) {
+	span := trace.SpanFromContext(ctx)
+
+	mailerID := uuid.New().String()
+
+	span.SetAttributes(
+		attribute.String("MailerID", mailerID),
+	)
+
+	err := s.app.CreateMailer(ctx, commands.CreateMailer{
+		ID:       mailerID,
+		ItemID:   request.GetItemId(),
+		ItemType: domain.ItemType(request.GetItemType()),
+		UserID:   request.GetUserId(),
+	})
+	if err != nil {
+		span.RecordError(err, trace.WithAttributes(errorsotel.ErrAttrs(err)...))
+		span.SetStatus(codes.Error, err.Error())
+		return nil, err
+	}
+
+	return &mailerpb.CreateMailerResponse{
+		Id: mailerID,
+	}, nil
+}
+
+func (s server) AddImage(ctx context.Context, request *mailerpb.AddImageRequest) (*mailerpb.AddImageResponse, error) {
+	span := trace.SpanFromContext(ctx)
+
+	id := uuid.New().String()
+
+	span.SetAttributes(
+		attribute.String("ImageID", id),
+	)
+
+	err := s.app.AddImage(ctx, commands.AddImage{
+		ID:           id,
+		MailerID:      request.GetMailerId(),
+		DisplayOrder: int(request.GetDisplayOrder()),
+		IsMain:       request.GetIsMain(),
+		Url:          request.GetUrl(),
+		Metadata:     request.GetMetadata(),
+	})
+	if err != nil {
+		span.RecordError(err, trace.WithAttributes(errorsotel.ErrAttrs(err)...))
+		span.SetStatus(codes.Error, err.Error())
+		return nil, err
+	}
+
+	return &mailerpb.AddImageResponse{Url: id}, nil
+}
+
+func (s server) AddVideo(ctx context.Context, request *mailerpb.AddVideoRequest) (*mailerpb.AddVideoResponse, error) {
+	span := trace.SpanFromContext(ctx)
+
+	id := uuid.New().String()
+
+	span.SetAttributes(
+		attribute.String("VideoID", id),
+	)
+
+	err := s.app.AddVideo(ctx, commands.AddVideo{
+		ID:           id,
+		MailerID:      request.GetMailerId(),
+		DisplayOrder: int(request.GetDisplayOrder()),
+		IsMain:       request.GetIsMain(),
+		Url:          request.GetUrl(),
+		Metadata:     request.GetMetadata(),
+	})
+	if err != nil {
+		span.RecordError(err, trace.WithAttributes(errorsotel.ErrAttrs(err)...))
+		span.SetStatus(codes.Error, err.Error())
+		return nil, err
+	}
+
+	return &mailerpb.AddVideoResponse{Url: id}, nil
+}

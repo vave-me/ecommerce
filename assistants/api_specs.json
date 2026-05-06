@@ -1,0 +1,925 @@
+{
+    "getProducts": {
+        "path": "/api/products",
+        "method": "GET",
+        "summary": "Retrieve all products",
+        "operationId": "getProducts",
+        "parameters": [
+            {"name": "page", "in": "query", "type": "string", "format": "int64"},
+            {"name": "pageSize", "in": "query", "type": "string", "format": "int64"},
+            {"name": "sortBy", "in": "query", "type": "string"},
+            {"name": "sortOrder", "in": "query", "type": "string"}
+        ],
+        "tags": ["Product"]
+    },
+    "getProductsWithFilters": {
+        "path": "/api/products/filters",
+        "method": "GET",
+        "summary": "Retrieve products with filters",
+        "operationId": "getProductsWithFilters",
+        "parameters": [
+            {"name": "name", "in": "query", "type": "string"},
+            {"name": "category", "in": "query", "type": "string"},
+            {"name": "minPrice", "in": "query", "type": "string", "format": "int64"},
+            {"name": "maxPrice", "in": "query", "type": "string", "format": "int64"},
+            {"name": "brand", "in": "query", "type": "string"},
+            {"name": "condition", "in": "query", "type": "string"},
+            {"name": "lat", "in": "query", "type": "number", "format": "float"},
+            {"name": "lng", "in": "query", "type": "number", "format": "float"},
+            {"name": "radius", "in": "query", "type": "number", "format": "float"},
+            {"name": "page", "in": "query", "type": "string", "format": "int64"},
+            {"name": "pageSize", "in": "query", "type": "string", "format": "int64"}
+        ],
+        "tags": ["Product"]
+    },
+    "getProductsByCategory": {
+        "path": "/api/products/categories/{categoryId}",
+        "method": "GET",
+        "summary": "Retrieve products by category ID",
+        "operationId": "getProductsByCategory",
+        "parameters": [
+            {"name": "categoryId", "in": "path", "type": "string", "required": true},
+            {"name": "page", "in": "query", "type": "string", "format": "int64"},
+            {"name": "pageSize", "in": "query", "type": "string", "format": "int64"}
+        ],
+        "tags": ["Product"]
+    },
+    "getProductsByCategorySlug": {
+        "path": "/api/products/categories/slug/{categorySlug}",
+        "method": "GET",
+        "summary": "Retrieve products by category slug",
+        "operationId": "getProductsByCategorySlug",
+        "parameters": [
+            {"name": "categorySlug", "in": "path", "type": "string", "required": true},
+            {"name": "page", "in": "query", "type": "string", "format": "int64"},
+            {"name": "pageSize", "in": "query", "type": "string", "format": "int64"}
+        ],
+        "tags": ["Product"]
+    },
+    "getProduct": {
+        "path": "/api/products/{id}",
+        "method": "GET",
+        "summary": "Retrieve a specific product",
+        "operationId": "getProduct",
+        "parameters": [
+            {"name": "id", "in": "path", "type": "string", "required": true},
+            {"name": "userId", "in": "query", "type": "string"}
+        ],
+        "tags": ["Product"]
+    },
+    "getCatalog": {
+        "path": "/api/products/catalog",
+        "method": "GET",
+        "summary": "Get user products catalog",
+        "operationId": "getCatalog",
+        "parameters": [
+            {"name": "userId", "in": "query", "type": "string"},
+            {"name": "page", "in": "query", "type": "string", "format": "int64"},
+            {"name": "pageSize", "in": "query", "type": "string", "format": "int64"}
+        ],
+        "tags": ["Product"]
+    },
+    "getPublicCatalog": {
+        "path": "/api/products/{userId}/catalog",
+        "method": "GET",
+        "summary": "Get public user catalog",
+        "operationId": "getPublicCatalog",
+        "parameters": [
+            {"name": "userId", "in": "path", "type": "string", "required": true},
+            {"name": "page", "in": "query", "type": "string", "format": "int64"},
+            {"name": "pageSize", "in": "query", "type": "string", "format": "int64"}
+        ],
+        "tags": ["Product"]
+    },
+    "addProduct": {
+        "path": "/api/products",
+        "method": "POST",
+        "summary": "Add a new product",
+        "operationId": "addProduct",
+        "requestBody": {
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string"},
+                    "description": {"type": "string"},
+                    "basePrice": {"type": "string", "format": "int64"},
+                    "userSellerId": {"type": "string"},
+                    "categoryId": {"type": "string"},
+                    "categorySlug": {"type": "string"},
+                    "brand": {"type": "string"},
+                    "condition": {"type": "string"}
+                }
+            }
+        },
+        "tags": ["Product"]
+    },
+    "getVehicles": {
+        "path": "/api/vehicles",
+        "method": "GET",
+        "summary": "Retrieve all vehicles",
+        "operationId": "getVehicles",
+        "parameters": [
+            {"name": "page", "in": "query", "type": "string", "format": "int64"},
+            {"name": "pageSize", "in": "query", "type": "string", "format": "int64"},
+            {"name": "sortBy", "in": "query", "type": "string"},
+            {"name": "sortOrder", "in": "query", "type": "string"}
+        ],
+        "tags": ["Vehicle"]
+    },
+    "getVehiclesWithFilter": {
+        "path": "/api/vehicles/filters",
+        "method": "GET",
+        "summary": "Retrieve vehicles with specific filters",
+        "operationId": "getVehiclesWithFilter",
+        "parameters": [
+            {"name": "name", "in": "query", "type": "string"},
+            {"name": "category", "in": "query", "type": "string"},
+            {"name": "minPrice", "in": "query", "type": "string", "format": "int64"},
+            {"name": "maxPrice", "in": "query", "type": "string", "format": "int64"},
+            {"name": "brand", "in": "query", "type": "string"},
+            {"name": "model", "in": "query", "type": "string"},
+            {"name": "condition", "in": "query", "type": "string"},
+            {"name": "fuelType", "in": "query", "type": "string"},
+            {"name": "transmissionType", "in": "query", "type": "string"},
+            {"name": "minYear", "in": "query", "type": "string", "format": "int32"},
+            {"name": "maxYear", "in": "query", "type": "string", "format": "int32"},
+            {"name": "minMileage", "in": "query", "type": "string", "format": "int64"},
+            {"name": "maxMileage", "in": "query", "type": "string", "format": "int64"},
+            {"name": "accidentFree", "in": "query", "type": "boolean"},
+            {"name": "vin", "in": "query", "type": "string"},
+            {"name": "lat", "in": "query", "type": "number", "format": "float"},
+            {"name": "lng", "in": "query", "type": "number", "format": "float"},
+            {"name": "radius", "in": "query", "type": "number", "format": "float"},
+            {"name": "page", "in": "query", "type": "string", "format": "int64"},
+            {"name": "pageSize", "in": "query", "type": "string", "format": "int64"}
+        ],
+        "tags": ["Vehicle"]
+    },
+    "getVehicle": {
+        "path": "/api/vehicles/{id}",
+        "method": "GET",
+        "summary": "Retrieve a specific vehicle",
+        "operationId": "getVehicle",
+        "parameters": [
+            {"name": "id", "in": "path", "type": "string", "required": true},
+            {"name": "userId", "in": "query", "type": "string"}
+        ],
+        "tags": ["Vehicle"]
+    },
+    "addVehicle": {
+        "path": "/api/vehicles",
+        "method": "POST",
+        "summary": "Add a new vehicle",
+        "operationId": "addVehicle",
+        "requestBody": {
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string"},
+                    "description": {"type": "string"},
+                    "basePrice": {"type": "string", "format": "int64"},
+                    "brand": {"type": "string"},
+                    "model": {"type": "string"},
+                    "year": {"type": "string", "format": "int32"},
+                    "mileage": {"type": "string", "format": "int64"},
+                    "fuelType": {"type": "string"},
+                    "transmissionType": {"type": "string"},
+                    "condition": {"type": "string"},
+                    "vin": {"type": "string"}
+                }
+            }
+        },
+        "tags": ["Vehicle"]
+    },
+    "getDeals": {
+        "path": "/api/deals",
+        "method": "GET",
+        "summary": "Retrieve all deals",
+        "operationId": "getDeals",
+        "parameters": [
+            {"name": "page", "in": "query", "type": "string", "format": "int64"},
+            {"name": "pageSize", "in": "query", "type": "string", "format": "int64"},
+            {"name": "sortBy", "in": "query", "type": "string"},
+            {"name": "sortOrder", "in": "query", "type": "string"}
+        ],
+        "tags": ["Deal"]
+    },
+    "addDeal": {
+        "path": "/api/deals",
+        "method": "POST",
+        "summary": "Add a new deal",
+        "operationId": "addDeal",
+        "requestBody": {
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string"},
+                    "description": {"type": "string"},
+                    "basePrice": {"type": "string", "format": "int64"},
+                    "dealPrice": {"type": "string", "format": "int64"},
+                    "dealDuration": {"type": "string"},
+                    "rabatt": {"type": "string"},
+                    "dealType": {"type": "string"},
+                    "userId": {"type": "string"},
+                    "dealUrl": {"type": "string"},
+                    "categoryId": {"type": "string"},
+                    "categorySlug": {"type": "string"},
+                    "brand": {"type": "string"},
+                    "condition": {"type": "string"},
+                    "model": {"type": "string"},
+                    "tags": {"type": "array", "items": {"type": "string"}},
+                    "manageStocks": {"type": "boolean"},
+                    "stock": {"type": "integer"},
+                    "sku": {"type": "string"},
+                    "attributes": {"type": "object"},
+                    "weight": {"type": "number"},
+                    "height": {"type": "number"},
+                    "width": {"type": "number"},
+                    "depth": {"type": "number"},
+                    "status": {"type": "string"},
+                    "negotiable": {"type": "boolean"},
+                    "userType": {"type": "string"},
+                    "merchantName": {"type": "string"},
+                    "shippingCost": {"type": "string", "format": "int64"},
+                    "hasVariants": {"type": "boolean"},
+                    "thumbnail": {"type": "string"},
+                    "lat": {"type": "number", "format": "float"},
+                    "lng": {"type": "number", "format": "float"}
+                }
+            }
+        },
+        "tags": ["Deal"]
+    },
+    "getDealsWithFilters": {
+        "path": "/api/deals/filters",
+        "method": "GET",
+        "summary": "Retrieve deals with advanced filters",
+        "operationId": "getDealsWithFilters",
+        "parameters": [
+            {"name": "name", "in": "query", "type": "string"},
+            {"name": "category", "in": "query", "type": "string"},
+            {"name": "minPrice", "in": "query", "type": "string", "format": "int64"},
+            {"name": "maxPrice", "in": "query", "type": "string", "format": "int64"},
+            {"name": "brand", "in": "query", "type": "string"},
+            {"name": "condition", "in": "query", "type": "string"},
+            {"name": "model", "in": "query", "type": "string"},
+            {"name": "tags", "in": "query", "type": "array", "items": {"type": "string"}},
+            {"name": "manageStock", "in": "query", "type": "boolean"},
+            {"name": "minStock", "in": "query", "type": "integer"},
+            {"name": "maxStock", "in": "query", "type": "integer"},
+            {"name": "sku", "in": "query", "type": "string"},
+            {"name": "status", "in": "query", "type": "string"},
+            {"name": "negotiable", "in": "query", "type": "boolean"},
+            {"name": "userType", "in": "query", "type": "string"},
+            {"name": "hasVariants", "in": "query", "type": "boolean"},
+            {"name": "shippingCost", "in": "query", "type": "string", "format": "int64"},
+            {"name": "minWeight", "in": "query", "type": "number"},
+            {"name": "maxWeight", "in": "query", "type": "number"},
+            {"name": "minHeight", "in": "query", "type": "number"},
+            {"name": "maxHeight", "in": "query", "type": "number"},
+            {"name": "minWidth", "in": "query", "type": "number"},
+            {"name": "maxWidth", "in": "query", "type": "number"},
+            {"name": "minDepth", "in": "query", "type": "number"},
+            {"name": "maxDepth", "in": "query", "type": "number"},
+            {"name": "lat", "in": "query", "type": "number", "format": "float"},
+            {"name": "lng", "in": "query", "type": "number", "format": "float"},
+            {"name": "radius", "in": "query", "type": "number", "format": "float"},
+            {"name": "page", "in": "query", "type": "string", "format": "int64"},
+            {"name": "pageSize", "in": "query", "type": "string", "format": "int64"},
+            {"name": "sortBy", "in": "query", "type": "string"},
+            {"name": "sortOrder", "in": "query", "type": "string"}
+        ],
+        "tags": ["Deal"]
+    },
+    "getDealsByCategory": {
+        "path": "/api/deals/categories/{categoryId}",
+        "method": "GET",
+        "summary": "Retrieve deals by category ID",
+        "operationId": "getDealsByCategory",
+        "parameters": [
+            {"name": "categoryId", "in": "path", "type": "string", "required": true},
+            {"name": "page", "in": "query", "type": "string", "format": "int64"},
+            {"name": "pageSize", "in": "query", "type": "string", "format": "int64"},
+            {"name": "sortBy", "in": "query", "type": "string"},
+            {"name": "sortOrder", "in": "query", "type": "string"}
+        ],
+        "tags": ["Deal"]
+    },
+    "getDeal": {
+        "path": "/api/deals/{id}",
+        "method": "GET",
+        "summary": "Retrieve a specific deal",
+        "operationId": "getDeal",
+        "parameters": [
+            {"name": "id", "in": "path", "type": "string", "required": true},
+            {"name": "userId", "in": "query", "type": "string"}
+        ],
+        "tags": ["Deal"]
+    },
+    "updateDeal": {
+        "path": "/api/deals/update",
+        "method": "POST",
+        "summary": "Update deal information",
+        "operationId": "updateDeal",
+        "requestBody": {
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "id": {"type": "string", "description": "ID of the deal to update"},
+                    "name": {"type": "string"},
+                    "description": {"type": "string"},
+                    "basePrice": {"type": "string", "format": "int64"},
+                    "dealPrice": {"type": "string", "format": "int64"},
+                    "rabatt": {"type": "string"},
+                    "dealDuration": {"type": "string"},
+                    "dealType": {"type": "string"},
+                    "userId": {"type": "string"},
+                    "dealUrl": {"type": "string"},
+                    "categoryId": {"type": "string"},
+                    "categorySlug": {"type": "string"},
+                    "brand": {"type": "string"},
+                    "condition": {"type": "string"},
+                    "model": {"type": "string"},
+                    "tags": {"type": "array", "items": {"type": "string"}},
+                    "manageStocks": {"type": "boolean"},
+                    "stock": {"type": "integer"},
+                    "sku": {"type": "string"},
+                    "attributes": {"type": "object"},
+                    "weight": {"type": "number"},
+                    "height": {"type": "number"},
+                    "width": {"type": "number"},
+                    "depth": {"type": "number"},
+                    "status": {"type": "string"},
+                    "negotiable": {"type": "boolean"},
+                    "userType": {"type": "string"},
+                    "merchantName": {"type": "string"},
+                    "shippingCost": {"type": "string", "format": "int64"},
+                    "hasVariants": {"type": "boolean"},
+                    "thumbnail": {"type": "string"},
+                    "lat": {"type": "number", "format": "float"},
+                    "lng": {"type": "number", "format": "float"}
+                }
+            }
+        },
+        "tags": ["Deal"]
+    },
+    "removeDeal": {
+        "path": "/api/deals/{id}",
+        "method": "DELETE",
+        "summary": "Remove a deal",
+        "operationId": "removeDeal",
+        "parameters": [
+            {"name": "id", "in": "path", "type": "string", "required": true},
+            {"name": "userId", "in": "query", "type": "string"}
+        ],
+        "tags": ["Deal"]
+    },
+    "getDealCatalog": {
+        "path": "/api/deals/catalog",
+        "method": "GET",
+        "summary": "Get user's deal catalog",
+        "operationId": "getDealCatalog",
+        "parameters": [
+            {"name": "userId", "in": "query", "type": "string", "required": true},
+            {"name": "page", "in": "query", "type": "string", "format": "int64"},
+            {"name": "pageSize", "in": "query", "type": "string", "format": "int64"},
+            {"name": "sortBy", "in": "query", "type": "string"},
+            {"name": "sortOrder", "in": "query", "type": "string"}
+        ],
+        "tags": ["Deal"]
+    },
+    "getPublicDealCatalog": {
+        "path": "/api/deals/{userId}/catalog",
+        "method": "GET",
+        "summary": "Get public user deal catalog",
+        "operationId": "getPublicDealCatalog",
+        "parameters": [
+            {"name": "userId", "in": "path", "type": "string", "required": true},
+            {"name": "page", "in": "query", "type": "string", "format": "int64"},
+            {"name": "pageSize", "in": "query", "type": "string", "format": "int64"},
+            {"name": "sortBy", "in": "query", "type": "string"},
+            {"name": "sortOrder", "in": "query", "type": "string"}
+        ],
+        "tags": ["Deal"]
+    },
+    "updateDealPrice": {
+        "path": "/api/deals/{id}/price",
+        "method": "PATCH",
+        "summary": "Update deal price",
+        "operationId": "updateDealPrice",
+        "parameters": [
+            {"name": "id", "in": "path", "type": "string", "required": true}
+        ],
+        "requestBody": {
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "userId": {"type": "string"},
+                    "newPrice": {"type": "string", "format": "int64"},
+                    "oldPrice": {"type": "string", "format": "int64"}
+                }
+            }
+        },
+        "tags": ["Deal"]
+    },
+    "rebrandDeal": {
+        "path": "/api/deals/{id}/rebrand",
+        "method": "PATCH",
+        "summary": "Rebrand/rename a deal",
+        "operationId": "rebrandDeal",
+        "parameters": [
+            {"name": "id", "in": "path", "type": "string", "required": true}
+        ],
+        "requestBody": {
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string"},
+                    "description": {"type": "string"},
+                    "basePrice": {"type": "string", "format": "int64"},
+                    "dealPrice": {"type": "string", "format": "int64"},
+                    "dealDuration": {"type": "string"},
+                    "dealType": {"type": "string"},
+                    "userId": {"type": "string"},
+                    "dealUrl": {"type": "string"},
+                    "categoryId": {"type": "string"},
+                    "categorySlug": {"type": "string"},
+                    "brand": {"type": "string"},
+                    "condition": {"type": "string"},
+                    "model": {"type": "string"},
+                    "tags": {"type": "array", "items": {"type": "string"}},
+                    "manageStocks": {"type": "boolean"},
+                    "stock": {"type": "integer"},
+                    "sku": {"type": "string"},
+                    "attributes": {"type": "object"},
+                    "weight": {"type": "number"},
+                    "height": {"type": "number"},
+                    "width": {"type": "number"},
+                    "depth": {"type": "number"},
+                    "status": {"type": "string"},
+                    "negotiable": {"type": "boolean"},
+                    "userType": {"type": "string"},
+                    "shippingCost": {"type": "string", "format": "int64"},
+                    "hasVariants": {"type": "boolean"}
+                }
+            }
+        },
+        "tags": ["Deal"]
+    },
+    "archiveDeal": {
+        "path": "/api/deals/{dealId}/archive",
+        "method": "PATCH",
+        "summary": "Archive a deal",
+        "operationId": "archiveDeal",
+        "parameters": [
+            {"name": "dealId", "in": "path", "type": "string", "required": true}
+        ],
+        "requestBody": {
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "userId": {"type": "string"}
+                }
+            }
+        },
+        "tags": ["Deal"]
+    },
+    "adjustDealStock": {
+        "path": "/api/deals/{dealId}/stock",
+        "method": "PATCH",
+        "summary": "Adjust deal stock/inventory",
+        "operationId": "adjustDealStock",
+        "parameters": [
+            {"name": "dealId", "in": "path", "type": "string", "required": true}
+        ],
+        "requestBody": {
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "userId": {"type": "string"},
+                    "newStock": {"type": "integer"}
+                }
+            }
+        },
+        "tags": ["Deal"]
+    },
+    "createWishlist": {
+        "path": "/api/wishlist/{userId}",
+        "method": "GET",
+        "summary": "Get user's wishlists",
+        "operationId": "getWishlists",
+        "parameters": [
+            {"name": "userId", "in": "path", "type": "string", "required": true}
+        ],
+        "tags": ["Wishlist"]
+    },
+    "getWishlist": {
+        "path": "/api/wishlist",
+        "method": "POST",
+        "summary": "Create a new wishlist",
+        "operationId": "createWishlist",
+        "requestBody": {
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "userId": {"type": "string"},
+                    "name": {"type": "string"}
+                }
+            }
+        },
+        "tags": ["Wishlist"]
+    },
+    "getWishlists": {
+        "path": "/api/wishlist/{userId}/{name}",
+        "method": "GET",
+        "summary": "Get a specific wishlist by name",
+        "operationId": "getWishlist",
+        "parameters": [
+            {"name": "userId", "in": "path", "type": "string", "required": true},
+            {"name": "name", "in": "path", "type": "string", "required": true}
+        ],
+        "tags": ["Wishlist"]
+    },
+    "removeWishlist": {
+        "path": "/api/wishlist/remove",
+        "method": "PATCH",
+        "summary": "Remove/delete a wishlist",
+        "operationId": "removeWishlist",
+        "requestBody": {
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "id": {"type": "string"}
+                }
+            }
+        },
+        "tags": ["Wishlist"]
+    },
+    "addWishlistItem": {
+        "path": "/api/wishlist/items",
+        "method": "POST",
+        "summary": "Add item to wishlist",
+        "operationId": "addWishlistItem",
+        "requestBody": {
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "wishlistId": {"type": "string"},
+                    "itemId": {"type": "string"},
+                    "entityType": {"type": "string"}
+                }
+            }
+        },
+        "tags": ["Wishlist"]
+    },
+    "removeWishlistItem": {
+        "path": "/api/wishlist/items/remove",
+        "method": "POST",
+        "summary": "Remove item from wishlist",
+        "operationId": "removeWishlistItem",
+        "requestBody": {
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "id": {"type": "string"}
+                }
+            }
+        },
+        "tags": ["Wishlist"]
+    },
+    "getWishlistItems": {
+        "path": "/api/wishlist/items/{wishlistId}",
+        "method": "GET",
+        "summary": "Get all items in a wishlist",
+        "operationId": "getWishlistItems",
+        "parameters": [
+            {"name": "wishlistId", "in": "path", "type": "string", "required": true}
+        ],
+        "tags": ["Wishlist"]
+    },
+    "getWishlistItem": {
+        "path": "/api/wishlist/{wishlistId}/items/{id}",
+        "method": "GET",
+        "summary": "Get specific wishlist item",
+        "operationId": "getWishlistItem",
+        "parameters": [
+            {"name": "wishlistId", "in": "path", "type": "string", "required": true},
+            {"name": "id", "in": "path", "type": "string", "required": true},
+            {"name": "itemId", "in": "query", "type": "string"}
+        ],
+        "tags": ["Wishlist"]
+    },
+    "addComment": {
+        "path": "/api/comments",
+        "method": "POST",
+        "summary": "Add a new comment",
+        "operationId": "addComment",
+        "requestBody": {
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "senderId": {"type": "string"},
+                    "itemId": {"type": "string"},
+                    "itemType": {"type": "string"},
+                    "content": {"type": "string"},
+                    "categoryId": {"type": "string"},
+                    "parentId": {"type": "string"}
+                }
+            }
+        },
+        "tags": ["Comment"]
+    },
+    "getApprovedComments": {
+        "path": "/api/comments/approved",
+        "method": "GET",
+        "summary": "Get approved comments",
+        "operationId": "getApprovedComments",
+        "parameters": [],
+        "tags": ["Comment"]
+    },
+    "getMostCommented": {
+        "path": "/api/comments/most",
+        "method": "GET",
+        "summary": "Get most commented items",
+        "operationId": "getMostCommented",
+        "parameters": [],
+        "tags": ["Comment"]
+    },
+    "getMostCommentedByCategory": {
+        "path": "/api/comments/most/{categoryId}",
+        "method": "GET",
+        "summary": "Get most commented by category",
+        "operationId": "getMostCommentedByCategory",
+        "parameters": [
+            {"name": "categoryId", "in": "path", "type": "string", "required": true},
+            {"name": "offset", "in": "query", "type": "integer"},
+            {"name": "limit", "in": "query", "type": "integer"}
+        ],
+        "tags": ["Comment"]
+    },
+    "getCommentsBySender": {
+        "path": "/api/comments/sender/{senderId}",
+        "method": "GET",
+        "summary": "Get comments by sender/user",
+        "operationId": "getCommentsBySender",
+        "parameters": [
+            {"name": "senderId", "in": "path", "type": "string", "required": true}
+        ],
+        "tags": ["Comment"]
+    },
+    "getComments": {
+        "path": "/api/comments/{itemId}/all",
+        "method": "GET",
+        "summary": "Get all comments for an item",
+        "operationId": "getComments",
+        "parameters": [
+            {"name": "itemId", "in": "path", "type": "string", "required": true}
+        ],
+        "tags": ["Comment"]
+    },
+    "getComment": {
+        "path": "/api/comments/{id}",
+        "method": "GET",
+        "summary": "Get specific comment details",
+        "operationId": "getComment",
+        "parameters": [
+            {"name": "id", "in": "path", "type": "string", "required": true}
+        ],
+        "tags": ["Comment"]
+    },
+    "editComment": {
+        "path": "/api/comments/{id}",
+        "method": "PUT",
+        "summary": "Edit a comment",
+        "operationId": "editComment",
+        "parameters": [
+            {"name": "id", "in": "path", "type": "string", "required": true}
+        ],
+        "requestBody": {
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "content": {"type": "string"}
+                }
+            }
+        },
+        "tags": ["Comment"]
+    },
+    "approveComment": {
+        "path": "/api/comments/{id}/approve",
+        "method": "PUT",
+        "summary": "Approve a comment",
+        "operationId": "approveComment",
+        "parameters": [
+            {"name": "id", "in": "path", "type": "string", "required": true}
+        ],
+        "requestBody": {
+            "required": false, 
+            "schema": {
+                "type": "object"
+            }
+        },
+        "tags": ["Comment"]
+    },
+    "rejectComment": {
+        "path": "/api/comments/{id}/reject",
+        "method": "DELETE",
+        "summary": "Reject/delete a comment",
+        "operationId": "rejectComment",
+        "parameters": [
+            {"name": "id", "in": "path", "type": "string", "required": true}
+        ],
+        "tags": ["Comment"]
+    },
+    "getCategories": {
+        "path": "/api/categories",
+        "method": "GET",
+        "summary": "Retrieve all categories",
+        "operationId": "getCategories",
+        "parameters": [
+            {"name": "page", "in": "query", "type": "string", "format": "int64"},
+            {"name": "lang", "in": "query", "type": "string"},
+            {"name": "categoryType", "in": "query", "type": "string"},
+            {"name": "pageSize", "in": "query", "type": "string", "format": "int64"},
+            {"name": "sortBy", "in": "query", "type": "string"},
+            {"name": "sortOrder", "in": "query", "type": "string"}
+        ],
+        "tags": ["Category"]
+    },
+    "addCategory": {
+        "path": "/api/categories",
+        "method": "POST",
+        "summary": "Add a new category",
+        "operationId": "addCategory",
+        "requestBody": {
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "description": {"type": "string"},
+                    "parentId": {"type": "string"},
+                    "googleCategoryId": {"type": "string"},
+                    "tags": {"type": "array", "items": {"type": "string"}},
+                    "slug": {"type": "string"},
+                    "isActive": {"type": "boolean"},
+                    "seoTitle": {"type": "string"},
+                    "seoKeywords": {"type": "string"},
+                    "seoDesc": {"type": "string"},
+                    "categoryType": {"type": "string"},
+                    "lang": {"type": "string"}
+                }
+            }
+        },
+        "tags": ["Category"]
+    },
+    "getAllMainCategories": {
+        "path": "/api/categories/all",
+        "method": "GET",
+        "summary": "Retrieve all main categories",
+        "operationId": "getAllMainCategories",
+        "parameters": [
+            {"name": "page", "in": "query", "type": "string", "format": "int64"},
+            {"name": "lang", "in": "query", "type": "string"},
+            {"name": "pageSize", "in": "query", "type": "string", "format": "int64"},
+            {"name": "sortBy", "in": "query", "type": "string"},
+            {"name": "sortOrder", "in": "query", "type": "string"}
+        ],
+        "tags": ["Category"]
+    },
+    "getMainCategories": {
+        "path": "/api/categories/main",
+        "method": "GET",
+        "summary": "Retrieve main categories with filtering",
+        "operationId": "getMainCategories",
+        "parameters": [
+            {"name": "page", "in": "query", "type": "string", "format": "int64"},
+            {"name": "lang", "in": "query", "type": "string"},
+            {"name": "categoryType", "in": "query", "type": "string"},
+            {"name": "pageSize", "in": "query", "type": "string", "format": "int64"},
+            {"name": "sortBy", "in": "query", "type": "string"},
+            {"name": "sortOrder", "in": "query", "type": "string"}
+        ],
+        "tags": ["Category"]
+    },
+    "getSubCategories": {
+        "path": "/api/categories/subcategory",
+        "method": "GET",
+        "summary": "Retrieve subcategories",
+        "operationId": "getSubCategories",
+        "parameters": [
+            {"name": "parentCategoryId", "in": "query", "type": "string", "required": true},
+            {"name": "lang", "in": "query", "type": "string"},
+            {"name": "page", "in": "query", "type": "string", "format": "int64"},
+            {"name": "pageSize", "in": "query", "type": "string", "format": "int64"},
+            {"name": "sortBy", "in": "query", "type": "string"},
+            {"name": "sortOrder", "in": "query", "type": "string"}
+        ],
+        "tags": ["Category"]
+    },
+    "getCategory": {
+        "path": "/api/categories/{id}",
+        "method": "GET",
+        "summary": "Retrieve a specific category",
+        "operationId": "getCategory",
+        "parameters": [
+            {"name": "id", "in": "path", "type": "string", "required": true},
+            {"name": "lang", "in": "query", "type": "string"},
+            {"name": "userId", "in": "query", "type": "string"}
+        ],
+        "tags": ["Category"]
+    },
+    "removeCategory": {
+        "path": "/api/categories/{id}",
+        "method": "DELETE",
+        "summary": "Remove a category",
+        "operationId": "removeCategory",
+        "parameters": [
+            {"name": "id", "in": "path", "type": "string", "required": true},
+            {"name": "userId", "in": "query", "type": "string"}
+        ],
+        "tags": ["Category"]
+    },
+    "updateCategory": {
+        "path": "/api/categories/{id}",
+        "method": "PATCH",
+        "summary": "Update category information",
+        "operationId": "updateCategory",
+        "parameters": [
+            {"name": "id", "in": "path", "type": "string", "required": true}
+        ],
+        "requestBody": {
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "description": {"type": "string"},
+                    "parentId": {"type": "string"},
+                    "googleCategoryId": {"type": "string"},
+                    "tags": {"type": "array", "items": {"type": "string"}},
+                    "slug": {"type": "string"},
+                    "isActive": {"type": "boolean"},
+                    "seoTitle": {"type": "string"},
+                    "seoKeywords": {"type": "string"},
+                    "seoDesc": {"type": "string"},
+                    "categoryType": {"type": "string"},
+                    "lang": {"type": "string"}
+                }
+            }
+        },
+        "tags": ["Category"]
+    },
+    "archiveCategory": {
+        "path": "/api/categories/{id}/archive",
+        "method": "PATCH",
+        "summary": "Archive a category",
+        "operationId": "archiveCategory",
+        "parameters": [
+            {"name": "id", "in": "path", "type": "string", "required": true}
+        ],
+        "requestBody": {
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "userId": {"type": "string"}
+                }
+            }
+        },
+        "tags": ["Category"]
+    },
+    "rebrandCategory": {
+        "path": "/api/categories/{id}/rebrand",
+        "method": "PATCH",
+        "summary": "Rebrand a category",
+        "operationId": "rebrandCategory",
+        "parameters": [
+            {"name": "id", "in": "path", "type": "string", "required": true}
+        ],
+        "requestBody": {
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "newSlug": {"type": "string"},
+                    "newDesc": {"type": "string"},
+                    "userId": {"type": "string"}
+                }
+            }
+        },
+        "tags": ["Category"]
+    }
+} 

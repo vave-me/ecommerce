@@ -1,0 +1,433 @@
+.container {
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #1a1f36 0%, #2d3561 100%);
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.heroContent {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.heroTitle {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.heroSubtitle {
+  font-size: 18px;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* Main Content */
+.mainContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+}
+
+/* Form Section */
+.formSection {
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.formHeader {
+  margin-bottom: 32px;
+}
+
+.formHeader h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #1a1f36;
+}
+
+.formHeader p {
+  color: #666;
+  font-size: 14px;
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formGroup label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  padding: 10px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: #00A396;
+}
+
+.formGroup textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.interestsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.interestItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.interestItem input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.submitButton {
+  background: #00A396;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.2s;
+  margin-top: 16px;
+}
+
+.submitButton:hover {
+  background: #008c81;
+}
+
+.submitButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Sidebar Section */
+.sidebarSection {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.benefitsCard,
+.contactCard,
+.scheduleCard {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.benefitsCard h3,
+.contactCard h3,
+.scheduleCard h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #1a1f36;
+}
+
+.benefitsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.benefitItem {
+  display: flex;
+  gap: 12px;
+}
+
+.benefitIcon {
+  width: 24px;
+  height: 24px;
+  color: #00A396;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.benefitItem h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+.benefitItem p {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.contactItem {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.contactItem:last-child {
+  margin-bottom: 0;
+}
+
+.contactIcon {
+  width: 20px;
+  height: 20px;
+  color: #00A396;
+  flex-shrink: 0;
+}
+
+.contactLabel {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.contactItem a {
+  color: #1a1f36;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.contactItem a:hover {
+  color: #00A396;
+}
+
+.scheduleCard {
+  text-align: center;
+}
+
+.scheduleIcon {
+  width: 48px;
+  height: 48px;
+  color: #00A396;
+  margin: 0 auto 16px;
+}
+
+.scheduleCard p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.scheduleButton {
+  width: 100%;
+  background: transparent;
+  color: #00A396;
+  padding: 10px 20px;
+  border: 2px solid #00A396;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.scheduleButton:hover {
+  background: #00A396;
+  color: white;
+}
+
+/* Office Locations */
+.offices {
+  background: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.sectionTitle {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 40px;
+  color: #1a1f36;
+}
+
+.officesGrid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
+
+.officeCard {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+}
+
+.officeIcon {
+  width: 32px;
+  height: 32px;
+  color: #00A396;
+  margin: 0 auto 16px;
+}
+
+.officeCard h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #1a1f36;
+}
+
+.officeCard p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.officeCard a {
+  display: block;
+  color: #00A396;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.officeCard a:hover {
+  text-decoration: underline;
+}
+
+/* Success Message */
+.successMessage {
+  background: white;
+  border-radius: 12px;
+  padding: 80px 40px;
+  text-align: center;
+  max-width: 600px;
+  margin: 100px auto;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.successIcon {
+  width: 64px;
+  height: 64px;
+  color: #00A396;
+  margin: 0 auto 24px;
+}
+
+.successMessage h1 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #1a1f36;
+}
+
+.successMessage p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.primaryButton {
+  background: #00A396;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s;
+}
+
+.primaryButton:hover {
+  background: #008c81;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .mainContent {
+    grid-template-columns: 1fr;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+
+  .interestsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 28px;
+  }
+
+  .heroSubtitle {
+    font-size: 16px;
+  }
+
+  .formSection {
+    padding: 24px;
+  }
+
+  .officesGrid {
+    grid-template-columns: 1fr;
+  }
+}

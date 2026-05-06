@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package messagespb;
+
+//Commands
+
+message SendMessage{
+  string id = 1;
+  string conversation_id = 2;
+  string sender_id = 3;
+  string recipient_id = 4;
+  string item_id = 5;
+  string body = 6;
+  bool  is_read = 7;
+}
+
+//Events
+message ConversationStarted {
+  string id = 1;
+  string sender_id = 2;
+  string recipient_id = 3;
+  string item_id = 4;
+}
+
+message ConversationActiveToggled {
+  string id = 1;
+  bool participating = 2;
+}
+
+message MessageSent {
+  string id = 1;
+  string conversation_id = 2;
+  string sender_id = 3;
+  string recipient_id = 4;
+  string item_id = 5;
+  string body = 6;
+  bool  is_read = 7;
+}
+
+message MessageDeleted {
+  string id = 1;
+}
+
+message WebSocketMessage{
+  string text = 1;
+}
+
+
+message MessageReceived {
+  string message_id = 1;
+  string receiver_id = 2;
+}

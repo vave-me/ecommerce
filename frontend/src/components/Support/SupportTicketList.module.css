@@ -1,0 +1,43 @@
+/* File: src/components/SupportTicketList.module.css */
+
+.listContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 0 30px 20px 30px;
+    gap: 15px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .listContainer {
+        background-color: transparent;
+    }
+}
+
+@media (max-width: 768px) {
+    .listContainer {
+        padding: 0 20px 15px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .listContainer {
+        padding: 0 15px 10px 15px;
+        gap: 10px;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+    .listContainer {
+        border: 1px solid var(--gray-500, #6b7280);
+        border-radius: 8px;
+        padding: 20px 30px;
+    }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .listContainer {
+        transition: none;
+    }
+}

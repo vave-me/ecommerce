@@ -1,0 +1,138 @@
+/*
+  ActivityFilter.module.css
+  Filter controls for the Activity component
+*/
+
+.filterContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex: 1;
+}
+
+.filterOption {
+    padding: 6px 12px;
+    border: 1px solid var(--border, #e5e7eb);
+    border-radius: 20px;
+    background-color: var(--surface, #ffffff);
+    color: var(--text-secondary, #6b7280);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filterOption:hover {
+    background-color: var(--surface-hover, #f9fafb);
+    color: var(--primary-color, #2980b9);
+    border-color: var(--border-color-light, #d1d5db);
+    transform: translateY(-1px);
+}
+
+.active {
+    background-color: var(--primary-light, #e0e7ff);
+    color: var(--primary-color, #2980b9);
+    border-color: var(--primary-light, #e0e7ff);
+}
+
+.active:hover {
+    background-color: var(--primary-light, #e0e7ff);
+    color: var(--primary-hover, #2980b9);
+}
+
+/* Focus states for accessibility */
+.filterOption:focus-visible {
+    outline: 2px solid var(--primary-color, #2980b9);
+    outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .filterContainer {
+        overflow-x: auto;
+        padding-bottom: 8px;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    .filterContainer::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    }
+
+    .filterOption {
+        flex-shrink: 0;
+        font-size: 13px;
+        padding: 5px 10px;
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .filterOption:hover {
+        transform: none;
+    }
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+    .filterOption {
+        border: 1px solid ButtonText;
+    }
+
+    .active {
+        border: 2px solid Highlight;
+    }
+}
+
+/* ================================
+   DARK THEME SUPPORT
+================================ */
+
+@media (prefers-color-scheme: dark) {
+    /* ============= FILTER OPTIONS ============= */
+    .filterOption {
+        background-color: var(--gray-800);
+        color: var(--gray-300);
+        border-color: var(--gray-600);
+    }
+
+    .filterOption:hover {
+        background-color: var(--gray-700);
+        color: var(--primary-color);
+        border-color: var(--gray-500);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ============= ACTIVE STATE ============= */
+    .active {
+        background-color: rgba(var(--primary-color-rgb, 59, 130, 246), 0.2);
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .active:hover {
+        background-color: rgba(var(--primary-color-rgb, 59, 130, 246), 0.3);
+        color: var(--primary-color-hover);
+        border-color: var(--primary-color-hover);
+    }
+
+    /* ============= FOCUS STATES ============= */
+    .filterOption:focus-visible {
+        outline-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb, 59, 130, 246), 0.2);
+    }
+
+    /* ============= MOBILE RESPONSIVE OVERRIDES ============= */
+    @media (max-width: 768px) {
+        .filterOption {
+            background-color: var(--gray-800);
+            border-color: var(--gray-600);
+            color: var(--gray-300);
+        }
+
+        .active {
+            background-color: rgba(var(--primary-color-rgb, 59, 130, 246), 0.2);
+            border-color: var(--primary-color);
+        }
+    }
+}

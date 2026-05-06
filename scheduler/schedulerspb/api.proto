@@ -1,0 +1,219 @@
+syntax = "proto3";
+
+package schedulerspb;
+
+import "google/protobuf/timestamp.proto";     // For timestamp fields
+import "google/protobuf/empty.proto";         // For empty responses
+
+// SchedulerService provides functionalities for scheduling natural language tasks.
+service SchedulerService {
+
+  // Creates a new scheduler for a user.
+  rpc CreateScheduler(CreateSchedulerRequest) returns (CreateSchedulerResponse) {}
+
+  // Retrieves details of an existing scheduler by its ID.
+  rpc GetScheduler(GetSchedulerRequest) returns (GetSchedulerResponse) {}
+
+  // Lists all schedulers with optional filtering and pagination.
+  rpc GetSchedulers(GetSchedulersRequest) returns (GetSchedulersResponse) {}
+
+  // Adds a new scheduled action to a scheduler.
+  rpc AddAction(AddActionRequest) returns (AddActionResponse) {}
+
+  // Retrieves details of a specific action by its ID.
+  rpc GetAction(GetActionRequest) returns (GetActionResponse) {}
+
+  // Lists all actions for a specific scheduler.
+  rpc GetActions(GetActionsRequest) returns (GetActionsResponse) {}
+
+  // Removes an existing action by its ID.
+  rpc RemoveAction(RemoveActionRequest) returns (RemoveActionResponse) {}
+
+  // Schedules a task for a manager (used by managers service)
+  rpc ScheduleTask(ScheduleTaskRequest) returns (ScheduleTaskResponse) {}
+
+  // Cancels a scheduled task
+  rpc CancelTask(CancelTaskRequest) returns (CancelTaskResponse) {}
+
+  // Gets scheduled tasks for a manager
+  rpc GetScheduledTasks(GetScheduledTasksRequest) returns (GetScheduledTasksResponse) {}
+
+  // Updates a scheduled task
+  rpc UpdateTask(UpdateTaskRequest) returns (UpdateTaskResponse) {}
+}
+
+message RemoveActionResponse{}
+// Scheduler represents a long-living aggregate associated with a user.
+message Scheduler {
+  string id = 1;                             // Unique identifier of the scheduler.
+  string user_id = 2;                        // Unique identifier of the user associated with the scheduler.
+  bool archived = 3;                         // Indicates whether the scheduler is archived.
+
+}
+
+// Action represents a scheduled natural language task.
+message Action {
+  string id = 1;                                      // Unique identifier of the action.
+  string scheduler_id = 2;                            // Unique identifier of the associated scheduler.
+  string natural_language_task = 3;                   // Natural language description of the task.
+  google.protobuf.Timestamp execution_time = 4;       // When to execute the task.
+  string status = 5;                                  // Status: pending, executing, completed, failed.
+  google.protobuf.Timestamp created_at = 6;           // When the action was created.
+  google.protobuf.Timestamp executed_at = 7;          // When the action was executed.
+  string result = 8;                                  // Result from LLM/Assistant service.
+  string error_message = 9;                           // Error message if failed.
+}
+
+// Request message to create a new scheduler.
+message CreateSchedulerRequest {
+  string user_id = 1;                        // Unique identifier of the user creating the scheduler.
+}
+
+// Response message after creating a new scheduler.
+message CreateSchedulerResponse {
+  string id = 1;                             // Unique identifier of the created scheduler.
+  string user_id = 2;                        // Unique identifier of the user.
+
+}
+
+// Request message to retrieve an existing scheduler.
+message GetSchedulerRequest {
+  string user_id = 1;                             // Unique identifier of the scheduler to retrieve.
+}
+
+// Response message for retrieving an scheduler.
+message GetSchedulerResponse {
+  string scheduler_id = 1;
+  string user_id = 2;// Details of the requested scheduler.
+}
+
+// Request message to list all activities.
+message GetSchedulersRequest {
+  string user_id = 1;                        // Filter activities by user ID (optional).
+  // Number of activities per page (optional).
+}
+
+// Response message for listing activities.
+message GetSchedulersResponse {
+  repeated Scheduler activities = 1;           // List of activities.
+  int32 total = 2;                            // Total number of activities available.
+  // Number of activities per page.
+}
+
+
+// Request message to add a new scheduled action.
+message AddActionRequest {
+  string scheduler_id = 1;                           // Unique identifier of the associated scheduler.
+  string natural_language_task = 2;                  // Natural language description of the task.
+  google.protobuf.Timestamp execution_time = 3;      // When to execute the task.
+}
+
+// Response message after adding a new interaction.
+message AddActionResponse {
+  string id = 1;                             // Unique identifier of the created interaction.
+}
+
+// Request message to retrieve a specific interaction.
+message GetActionRequest {
+  string id = 1;                             // Unique identifier of the interaction to retrieve.
+}
+
+// Response message for retrieving an action.
+message GetActionResponse {
+  Action action = 1;               // Details of the requested action.
+}
+
+// Request message to list actions for a scheduler.
+message GetActionsRequest {
+  string scheduler_id = 1;                    // Unique identifier of the scheduler.
+}
+
+// Response message for listing actions.
+message GetActionsResponse {
+  repeated Action actions = 1;     // List of actions.
+}
+
+// Request message to remove an interaction.
+message RemoveActionRequest {
+  string id = 1;                             // Unique identifier of the interaction to remove.
+}
+
+// Note: RemoveActionResponse is replaced with google.protobuf.Empty
+
+// Task status enum for manager tasks
+enum TaskStatus {
+  TASK_STATUS_UNSPECIFIED = 0;
+  PENDING = 1;
+  RUNNING = 2;
+  COMPLETED = 3;
+  FAILED = 4;
+  CANCELLED = 5;
+}
+
+// Task represents a scheduled task for managers
+message Task {
+  string id = 1;                               // Unique identifier of the task
+  string manager_id = 2;                       // Manager ID that scheduled this task
+  string task_type = 3;                        // Type of task to execute
+  int64 scheduled_at = 4;                      // Unix timestamp when to execute
+  map<string, string> payload = 5;             // Task parameters
+  TaskStatus status = 6;                       // Current status of the task
+  int64 created_at = 7;                        // Unix timestamp when created
+  int64 updated_at = 8;                        // Unix timestamp when last updated
+  int64 executed_at = 9;                       // Unix timestamp when executed
+  string result = 10;                          // Result of execution
+  string error = 11;                           // Error message if failed
+}
+
+// Request to schedule a task
+message ScheduleTaskRequest {
+  string manager_id = 1;                       // Manager scheduling the task
+  string task_type = 2;                        // Type of task to execute
+  int64 scheduled_at = 3;                      // Unix timestamp when to execute
+  map<string, string> payload = 4;             // Task parameters
+}
+
+// Response after scheduling a task
+message ScheduleTaskResponse {
+  string task_id = 1;                          // ID of the scheduled task
+}
+
+// Request to cancel a task
+message CancelTaskRequest {
+  string task_id = 1;                          // ID of the task to cancel
+}
+
+// Response after cancelling a task
+message CancelTaskResponse {
+  bool success = 1;                            // Whether cancellation was successful
+}
+
+// Request to get scheduled tasks
+message GetScheduledTasksRequest {
+  string manager_id = 1;                       // Manager ID to filter by
+  TaskStatus status = 2;                       // Optional status filter
+  int32 limit = 3;                             // Max number of tasks to return
+  int64 scheduled_after = 4;                   // Unix timestamp to filter tasks scheduled after
+  int64 scheduled_before = 5;                  // Unix timestamp to filter tasks scheduled before
+}
+
+// Response with scheduled tasks
+message GetScheduledTasksResponse {
+  repeated Task tasks = 1;                     // List of scheduled tasks
+  int32 total = 2;                             // Total count of matching tasks
+}
+
+// Request to update a task
+message UpdateTaskRequest {
+  string task_id = 1;                          // ID of the task to update
+  int64 scheduled_at = 2;                      // New scheduled time (optional)
+  map<string, string> payload = 3;             // New payload (optional)
+  TaskStatus status = 4;                       // New status (optional)
+  string result = 5;                           // Execution result (optional)
+  string error = 6;                            // Error message (optional)
+}
+
+// Response after updating a task
+message UpdateTaskResponse {
+  Task task = 1;                               // Updated task details
+}

@@ -1,0 +1,28 @@
+# --- Common Configuration for Microservices ---
+# Provides shared environment settings accessible to multiple services via envFrom.
+# IMPORTANT: Sensitive data (API Keys, specific service passwords) should be in Secrets, not here.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: common-config
+  namespace: my-project # Ensure this matches the namespace of services using this config
+data:
+  ENVIRONMENT: "production" # Or "staging", "development", etc.
+  NATS_URL: "nats.messaging.svc.cluster.local:4222"
+  NATS_WEBSOCKET: "ws://nats.messaging.svc.cluster.local:9222" # CORRECT FQDN
+  REDIS_HOST: "redis-master.redis.svc.cluster.local"
+  REDIS_PORT: "6379"
+  POSTGRES_HOST: "postgres.database.svc.cluster.local"
+  POSTGRES_PORT: "5432"
+  POSTGRES_DB: "commondb"
+  _POSTGRES_DEFAULT_USER: "postgres"
+  MINIO_ENDPOINT: "http://minio.sfx-markt.de:9000" # Internal cluster URL (HTTP)
+  MINIO_USE_SSL: "false" # Set to "true" only if MinIO service has internal TLS configured
+  MINIO_BUCKET: "media-bucket" # Default bucket name
+  WEB_PORT: ":80"    # Default HTTP port applications should listen on inside container
+  RPC_PORT: ":9000"   # Default gRPC port applications should listen on inside container
+  DOMAIN: "sfx-markt.de" # Base domain name used elsewhere
+  COOKIE_DOMAIN: "sfx-markt.de" # Domain scope for cookies
+  JWT_ISSUER: "users_service" # Example issuer name for JWTs
+  JWT_AUDIENCE: "www.sfx-markt.de" # Example audience for JWTs
+

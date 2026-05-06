@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: nats-ws-certificate
+  namespace: messaging # Must be in the same namespace as the Ingress (or use ClusterIssuer)
+spec:
+  secretName: nats-ws-tls-secret # K8s secret where the TLS cert will be stored
+  issuerRef:
+    name: letsencrypt-production # Use staging first! Change to letsencrypt-prod later
+    kind: ClusterIssuer # Or Issuer
+  commonName: nats-ws.sfx-markt.de
+  dnsNames:
+    - nats-ws.sfx-markt.de

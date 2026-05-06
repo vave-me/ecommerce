@@ -1,0 +1,543 @@
+/* ===== USER PROFILE PAGE - ELEGANT MINIMAL DESIGN ===== */
+/* Aligned with Header, HorizontalFilters, and AI Composer - light and professional */
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 16px;
+    min-height: 100vh;
+    background: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ===== TABS CONTAINER ===== */
+.tabsContainer {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 12px 16px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 10;
+}
+
+/* Sticky behavior when scrolled */
+.stickyTabs {
+    position: sticky;
+    top: 16px;
+    z-index: 20;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+    animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-4px);
+        opacity: 0.95;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ===== TABS NAVIGATION ===== */
+.tabs {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.tabs::-webkit-scrollbar {
+    display: none;
+}
+
+/* ===== TAB BUTTONS - ELEGANT & MINIMAL ===== */
+.tabButton {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: #6b7280;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+    position: relative;
+    min-height: 36px;
+}
+
+.tabButton:hover {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.tabButton:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 1px;
+}
+
+/* Active tab - subtle and elegant */
+.activeTab {
+    background: #f8fafc;
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+.activeTab:hover {
+    background: #f1f5f9;
+    color: #2563eb;
+}
+
+/* Tab icons */
+.tabIcon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.tabLabel {
+    font-size: 13px;
+    line-height: 1.2;
+}
+
+/* ===== CONTENT AREA ===== */
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ===== SECTION STYLING - CLEAN & MINIMAL ===== */
+.section {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s ease;
+}
+
+.section:hover {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== SECTION HEADER - COMPACT ===== */
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.sectionTitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.sectionCount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 500;
+    min-width: 24px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 10px;
+    line-height: 1;
+}
+
+/* ===== EMPTY STATES ===== */
+.emptyState {
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.emptyStateContent {
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+}
+
+.emptyStateIcon {
+    width: 48px;
+    height: 48px;
+    color: #9ca3af;
+    margin-bottom: 4px;
+}
+
+.emptyState h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+}
+
+.emptyState p {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* ===== ERROR STATE ===== */
+.errorState {
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.errorState h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #dc2626;
+    margin: 0 0 8px 0;
+}
+
+.errorState p {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+}
+
+.errorState pre {
+    background: #fef2f2;
+    color: #b91c1c;
+    padding: 12px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 12px;
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+    .container {
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .section {
+        padding: 16px;
+    }
+
+    .sectionHeader {
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .tabsContainer {
+        padding: 8px 12px;
+        margin: 0;
+        border-radius: 8px;
+    }
+
+    .stickyTabs {
+        top: 0;
+        border-radius: 0;
+        margin: 0 -12px;
+    }
+
+    .tabs {
+        gap: 2px;
+    }
+
+    .tabButton {
+        padding: 6px 8px;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 64px;
+        min-height: 44px;
+    }
+
+    .tabIcon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .tabLabel {
+        font-size: 11px;
+        line-height: 1.1;
+    }
+
+    .section {
+        padding: 16px;
+        margin: 0;
+    }
+
+    .sectionHeader {
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+    }
+
+    .sectionTitle {
+        font-size: 15px;
+    }
+
+    .sectionCount {
+        min-width: 22px;
+        height: 18px;
+        font-size: 11px;
+    }
+
+    .emptyState,
+    .errorState {
+        padding: 32px 16px;
+        min-height: 30vh;
+    }
+
+    .emptyStateIcon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .emptyState h2,
+    .errorState h2 {
+        font-size: 16px;
+    }
+
+    .emptyState p,
+    .errorState p {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 8px;
+    }
+
+    .tabsContainer {
+        padding: 6px 8px;
+    }
+
+    .tabButton {
+        padding: 4px 6px;
+        min-width: 60px;
+        min-height: 40px;
+    }
+
+    .tabIcon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .tabLabel {
+        font-size: 10px;
+    }
+
+    .section {
+        padding: 12px;
+    }
+
+    .sectionTitle {
+        font-size: 14px;
+    }
+
+    .emptyState,
+    .errorState {
+        padding: 24px 12px;
+    }
+}
+
+/* ===== ANIMATIONS - SUBTLE ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section {
+    animation: fadeIn 0.2s ease forwards;
+}
+
+/* Minimal stagger for elegance */
+.section:nth-child(1) { animation-delay: 0ms; }
+.section:nth-child(2) { animation-delay: 25ms; }
+.section:nth-child(3) { animation-delay: 50ms; }
+.section:nth-child(4) { animation-delay: 75ms; }
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+    .tabsContainer,
+    .section,
+    .tabButton,
+    .stickyTabs {
+        animation: none;
+        transition: none;
+    }
+
+    .section:hover {
+        transform: none;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .container,
+    .tabsContainer,
+    .section {
+        border: 1px solid #000000;
+    }
+
+    .activeTab {
+        border: 1px solid #000000;
+    }
+}
+
+/* ===== DARK THEME SUPPORT - ELEGANT ===== */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background: #111827;
+    }
+
+    .tabsContainer,
+    .section,
+    .emptyState {
+        background: #1f2937;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .section:hover {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .stickyTabs {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .tabButton {
+        color: #d1d5db;
+    }
+
+    .tabButton:hover {
+        background: #374151;
+        color: #f3f4f6;
+    }
+
+    .activeTab {
+        background: #374151;
+        color: #60a5fa;
+    }
+
+    .activeTab:hover {
+        background: #4b5563;
+        color: #93c5fd;
+    }
+
+    .sectionHeader {
+        border-bottom-color: #374151;
+    }
+
+    .sectionTitle,
+    .emptyState h2 {
+        color: #f3f4f6;
+    }
+
+    .sectionCount {
+        background: #374151;
+        color: #d1d5db;
+    }
+
+    .emptyStateIcon {
+        color: #6b7280;
+    }
+
+    .emptyState p {
+        color: #9ca3af;
+    }
+
+    .errorState {
+        background: #1f2937;
+    }
+
+    .errorState h2 {
+        color: #f87171;
+    }
+
+    .errorState p {
+        color: #9ca3af;
+    }
+
+    .errorState pre {
+        background: #111827;
+        color: #f87171;
+    }
+}
+
+/* ===== FOCUS MANAGEMENT - MINIMAL ===== */
+.tabs:focus-within {
+    outline: 1px solid #3b82f6;
+    outline-offset: 1px;
+    border-radius: 6px;
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+.tabsContainer,
+.section {
+    contain: layout;
+}
+
+.container {
+    contain: layout style;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.visuallyHidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

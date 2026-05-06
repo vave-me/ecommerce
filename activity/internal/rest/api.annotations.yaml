@@ -1,0 +1,57 @@
+type: google.api.Service
+config_version: 3
+name: activity.googleapis.com
+title: Activity Management API
+apis:
+  - name: activitypb.ActivityService
+http:
+  rules:
+    # Create a New Activity
+    - selector: activitypb.ActivityService.CreateActivity
+      post: /api/activity
+      body: "*"
+
+    # Retrieve an Existing Activity
+    - selector: activitypb.ActivityService.GetActivity
+      get: /api/activity/{user_id}
+
+    # List All Activities
+    - selector: activitypb.ActivityService.GetActivities
+      get: /api/activity
+
+    # Add a New Interaction
+    - selector: activitypb.ActivityService.AddInteraction
+      post: /api/activity/interactions
+      body: "*"
+
+    # Retrieve a Specific Interaction
+    - selector: activitypb.ActivityService.GetInteraction
+      get: /api/activity/interactions/{id}
+
+    # List All Interactions for an Activity
+    - selector: activitypb.ActivityService.GetInteractions
+      get: /api/activity/{activity_id}/interactions
+
+    # List All Interactions for an Activity
+    - selector: activitypb.ActivityService.GetMostLiked
+      get: /api/activity/interactions/liked
+
+    # List All Interactions for an Activity
+    - selector: activitypb.ActivityService.GetMostDisliked
+      get: /api/activity/interactions/disliked
+
+    # Remove an Interaction
+    - selector: activitypb.ActivityService.RemoveInteraction
+      delete: /api/activity/interactions/{id}
+
+    # Restore an Activity
+    - selector: activitypb.ActivityService.RestoreActivity
+      put: /api/activity/{id}/restore
+      body: "*"
+
+    # Archive an Activity
+    - selector: activitypb.ActivityService.ArchiveActivity
+      put: /api/activity/{id}/archive
+      body: "*"
+
+

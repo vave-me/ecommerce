@@ -1,0 +1,595 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Comment Management API",
+    "description": "API for managing comments and replies between users, including functionalities to add, approve, reject, edit, and retrieve comments and their replies.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "CommentsService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/comments": {
+      "post": {
+        "summary": "Add a new comment",
+        "operationId": "addComment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commentspbAddCommentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request message to add a new comment.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/commentspbAddCommentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Comment"
+        ]
+      }
+    },
+    "/api/comments/approved": {
+      "get": {
+        "summary": "Get approved comments",
+        "operationId": "getApprovedComments",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commentspbGetApprovedCommentsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Comment"
+        ]
+      }
+    },
+    "/api/comments/most": {
+      "get": {
+        "summary": "Get items count",
+        "operationId": "getMostCommented",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commentspbGetMostCommentedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "ItemCommentCount"
+        ]
+      }
+    },
+    "/api/comments/most/{categoryId}": {
+      "get": {
+        "summary": "Get items count",
+        "operationId": "getMostCommentedByCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commentspbGetMostCommentedByCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ItemCommentCount"
+        ]
+      }
+    },
+    "/api/comments/sender": {
+      "get": {
+        "summary": "Get a list of comments",
+        "operationId": "getCommentsBySender",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commentspbGetCommentsBySenderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Comment"
+        ]
+      }
+    },
+    "/api/comments/{id}": {
+      "get": {
+        "summary": "Get a comment",
+        "operationId": "getComment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commentspbGetCommentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier of the comment to retrieve.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Comment"
+        ]
+      },
+      "put": {
+        "summary": "Edit a comment",
+        "operationId": "editComment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commentspbEditCommentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommentsServiceEditCommentBody"
+            }
+          }
+        ],
+        "tags": [
+          "Comment"
+        ]
+      }
+    },
+    "/api/comments/{id}/approve": {
+      "put": {
+        "summary": "Approve a comment",
+        "operationId": "approveComment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commentspbApproveCommentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommentsServiceApproveCommentBody"
+            }
+          }
+        ],
+        "tags": [
+          "Comment"
+        ]
+      }
+    },
+    "/api/comments/{id}/reject": {
+      "delete": {
+        "summary": "Reject a comment",
+        "operationId": "rejectComment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commentspbRejectCommentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Comment"
+        ]
+      }
+    },
+    "/api/comments/{itemId}/all": {
+      "get": {
+        "summary": "Get a list of comments",
+        "operationId": "getComments",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commentspbGetCommentsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Comment"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CommentsServiceApproveCommentBody": {
+      "type": "object"
+    },
+    "CommentsServiceEditCommentBody": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+    "commentspbAddCommentRequest": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string"
+        },
+        "itemType": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "string"
+        }
+      },
+      "description": "Request message to add a new comment."
+    },
+    "commentspbAddCommentResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the created comment."
+        }
+      },
+      "description": "Response message after adding a new comment."
+    },
+    "commentspbApproveCommentResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "commentStatus": {
+          "type": "string"
+        },
+        "approvedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "commentspbComment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the comment."
+        },
+        "senderId": {
+          "type": "string",
+          "description": "Unique identifier of the user who made the comment."
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "itemType": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string",
+          "description": "Unique identifier of the item being commented on."
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "commentStatus": {
+          "type": "string",
+          "description": "Current status of the comment."
+        },
+        "flagged": {
+          "type": "boolean",
+          "description": "Indicates if the comment has been flagged."
+        }
+      },
+      "description": "Comment represents a user's comment on a item."
+    },
+    "commentspbEditCommentResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+    "commentspbFlagCommentResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "flagged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "commentspbGetApprovedCommentsResponse": {
+      "type": "object",
+      "properties": {
+        "comments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/commentspbComment"
+          },
+          "description": "List of approved comments."
+        }
+      },
+      "description": "Response message for retrieving approved comments."
+    },
+    "commentspbGetCommentResponse": {
+      "type": "object",
+      "properties": {
+        "comment": {
+          "$ref": "#/definitions/commentspbComment",
+          "description": "Details of the requested comment."
+        }
+      },
+      "description": "Response message for retrieving a comment."
+    },
+    "commentspbGetCommentsBySenderResponse": {
+      "type": "object",
+      "properties": {
+        "comments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/commentspbComment"
+          },
+          "description": "List of comments."
+        }
+      }
+    },
+    "commentspbGetCommentsResponse": {
+      "type": "object",
+      "properties": {
+        "comments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/commentspbComment"
+          },
+          "description": "List of comments."
+        }
+      },
+      "description": "Response message for retrieving a list of comments."
+    },
+    "commentspbGetMostCommentedByCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "itemCommentCount": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/commentspbItemCommentCount"
+          },
+          "description": "Number of comments per page."
+        }
+      },
+      "description": "Response message for retrieving a list of comments."
+    },
+    "commentspbGetMostCommentedResponse": {
+      "type": "object",
+      "properties": {
+        "itemCommentCount": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/commentspbItemCommentCount"
+          },
+          "description": "List of comments."
+        }
+      },
+      "description": "Response message for retrieving a list of comments."
+    },
+    "commentspbItemCommentCount": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "commentsCount": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "commentspbRejectCommentResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "commentStatus": {
+          "type": "string"
+        }
+      }
+    },
+    "commentspbRemoveCommentResponse": {
+      "type": "object"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

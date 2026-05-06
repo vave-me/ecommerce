@@ -1,0 +1,181 @@
+openapiOptions:
+  file:
+    - file: "searchpb/api.proto"
+      option:
+        info:
+          title: Search
+          version: "1.0.0"
+        basePath: /
+  method:
+    - method: searchpb.SearchService.UnifiedSearch
+      option:
+        operationId: unifiedSearch
+        tags:
+          - Unified
+        summary: Search across all entity types
+
+    - method: searchpb.SearchService.UnifiedFeed
+      option:
+        operationId: unifiedFeed
+        tags:
+          - Unified
+        summary: Get a unified feed of items
+
+    - method: searchpb.SearchService.GetCatalog
+      option:
+        operationId: getCatalog
+        tags:
+          - Unified
+        summary: Get a unified feed of items
+
+    - method: searchpb.SearchService.SearchOrders
+      option:
+        operationId: searchOrders
+        tags:
+          - Orders
+        summary: Search for orders
+
+    - method: searchpb.SearchService.SearchProductsWithFilters
+      option:
+        operationId: searchProductsWithFilters
+        tags:
+          - Products
+        summary: Search for products
+
+    - method: searchpb.SearchService.SearchProductsWithTerm
+      option:
+        operationId: searchProductsWithTerm
+        tags:
+          - Products
+        summary: Search for products
+
+    - method: searchpb.SearchService.SearchProductsWithCategorySlug
+      option:
+        operationId: searchProductsWithCategorySlug
+        tags:
+          - Products
+        summary: Search for products by category slug
+
+    - method: searchpb.SearchService.SearchProductsWithCategory
+      option:
+        operationId: searchProductsWithCategory
+        tags:
+          - Products
+        summary: Search for products by category
+
+    - method: searchpb.SearchService.SuggestProducts
+      option:
+        operationId: suggestProducts
+        tags:
+          - Products
+        summary: Suggest products
+
+    - method: searchpb.SearchService.GetOrder
+      option:
+        operationId: getOrder
+        tags:
+          - Order
+        summary: Get an order
+
+    - method: searchpb.SearchService.GetProduct
+      option:
+        operationId: getProduct
+        tags:
+          - Products
+        summary: Get a product by ID
+
+    - method: searchpb.SearchService.SearchPostsWithFilters
+      option:
+        operationId: searchPostsWithFilters
+        tags:
+          - Posts
+        summary: Search for posts
+
+    - method: searchpb.SearchService.SearchPostsWithTerm
+      option:
+        operationId: searchPostsWithTerm
+        tags:
+          - Posts
+        summary: Search for posts
+
+    - method: searchpb.SearchService.SearchPostsWithCategorySlug
+      option:
+        operationId: searchPostsWithCategorySlug
+        tags:
+          - Posts
+        summary: Search for posts by category slug
+
+    - method: searchpb.SearchService.SearchPostsWithCategory
+      option:
+        operationId: searchPostsWithCategory
+        tags:
+          - Posts
+        summary: Search for posts by category
+
+    - method: searchpb.SearchService.SuggestPosts
+      option:
+        operationId: suggestPosts
+        tags:
+          - Posts
+        summary: Suggest posts
+
+    - method: searchpb.SearchService.GetPost
+      option:
+        operationId: getPost
+        tags:
+          - Posts
+        summary: Get a post by ID
+    - method: searchpb.SearchService.SearchServicesWithFilters
+      option:
+        operationId: searchServicesWithFilters
+        tags:
+          - Services
+        summary: Search for services
+
+    - method: searchpb.SearchService.SearchServicesWithTerm
+      option:
+        operationId: searchServicesWithTerm
+        tags:
+          - Services
+        summary: Search for services
+
+    - method: searchpb.SearchService.SearchServicesWithCategorySlug
+      option:
+        operationId: searchServicesWithCategorySlug
+        tags:
+          - Services
+        summary: Search for services by category slug
+
+    - method: searchpb.SearchService.SearchServicesWithCategory
+      option:
+        operationId: searchServicesWithCategory
+        tags:
+          - Services
+        summary: Search for services by category
+
+    - method: searchpb.SearchService.SuggestServices
+      option:
+        operationId: suggestServices
+        tags:
+          - Services
+        summary: Suggest services
+
+    - method: searchpb.SearchService.GetService
+      option:
+        operationId: getService
+        tags:
+          - Services
+        summary: Get a service by ID
+    - method: searchpb.SearchService.GetUser
+      option:
+        operationId: getUser
+        tags:
+          - Users
+        summary: Get a user by ID
+
+    - method: searchpb.SearchService.SearchUsers
+      option:
+        operationId: searchUsers
+        tags:
+          - Users
+        summary: Search for users

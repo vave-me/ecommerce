@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package wishlistspb;
+
+message WishlistCreated {
+  string id = 1;
+  string user_id = 2;
+
+}
+
+message WishlistRemoved {
+  string id = 1;
+}
+message WishlistItemAdded {
+  string id = 1;
+  string wishlist_id = 2;
+  string item_id = 3;
+  string entity_type = 4;
+
+}
+
+message WishlistItemRemoved {
+  string id = 1;
+}

@@ -1,0 +1,208 @@
+package tools
+
+import ai2 "middleman/internal/ai"
+
+func createCommentTools() []ai2.Tool {
+	return []ai2.Tool{{
+		Type: "function",
+		Function: ai2.FunctionDef{
+			Name:        "comment_create_new",
+			Description: "Create a new comment on an item",
+			Parameters: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"item_id": map[string]interface{}{
+						"type":        "string",
+						"description": "ID of the item being commented on",
+					},
+					"item_type": map[string]interface{}{
+						"type":        "string",
+						"description": "Type of the item (product, post, service, etc.)",
+					},
+					"content": map[string]interface{}{
+						"type":        "string",
+						"description": "Content of the comment",
+					},
+					"category_id": map[string]interface{}{
+						"type":        "string",
+						"description": "Category ID for categorizing the comment",
+					},
+					"parent_id": map[string]interface{}{
+						"type":        "string",
+						"description": "Parent comment ID for nested comments",
+					},
+				},
+				"required": []string{"item_id", "item_type", "content"},
+			},
+		},
+	},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "comment_get_all_for_item",
+				Description: "Get all comments for a specific item",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the item to get comments for",
+						},
+					},
+					"required": []string{"item_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "comment_edit_content",
+				Description: "Edit the content of an existing comment",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"comment_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the comment to edit",
+						},
+						"content": map[string]interface{}{
+							"type":        "string",
+							"description": "New content for the comment",
+						},
+					},
+					"required": []string{"comment_id", "content"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "comment_delete_by_id",
+				Description: "Delete a comment by its ID",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"comment_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the comment to delete",
+						},
+					},
+					"required": []string{"comment_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "comment_get_by_id",
+				Description: "Get a specific comment by its ID",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"comment_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the comment to retrieve",
+						},
+					},
+					"required": []string{"comment_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "comment_approve_by_id",
+				Description: "Approve a comment for public display",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"comment_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the comment to approve",
+						},
+					},
+					"required": []string{"comment_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "comment_reject_by_id",
+				Description: "Reject a comment from public display",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"comment_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the comment to reject",
+						},
+					},
+					"required": []string{"comment_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "comment_flag_as_inappropriate",
+				Description: "Flag a comment as inappropriate",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"comment_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the comment to flag",
+						},
+					},
+					"required": []string{"comment_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "comment_get_most_commented_items",
+				Description: "Get items with the most comments",
+				Parameters: map[string]interface{}{
+					"type":       "object",
+					"properties": map[string]interface{}{},
+					"required":   []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "comment_search_by_keyword",
+				Description: "Search comments by keyword",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"keyword": map[string]interface{}{
+							"type":        "string",
+							"description": "Keyword to search for in comments",
+						},
+					},
+					"required": []string{"keyword"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "comment_get_child_comments",
+				Description: "Get all child comments for a parent comment",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"parent_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the parent comment",
+						},
+					},
+					"required": []string{"parent_id"},
+				},
+			},
+		}}
+}

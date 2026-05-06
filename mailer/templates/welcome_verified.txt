@@ -1,0 +1,38 @@
+Welcome to {{.AppName}}!
+
+Hello {{.FirstName}},
+
+Thank you for verifying your email address. Your account is now fully activated and ready to use!
+
+We're thrilled to have you join our community. Here's how to get started:
+
+GETTING STARTED:
+
+1. Complete Your Profile
+   Add a profile picture and fill in your personal details to help others connect with you.
+
+2. Explore {{.AppName}}
+   Discover all the features and services available to you as a member.
+
+3. Connect with Others
+   Start building your network by finding friends and colleagues who are already using {{.AppName}}.
+
+To access your dashboard, visit:
+{{.DashboardURL}}
+
+If you have any questions or need assistance, our support team is always ready to help.
+
+Enjoy using {{.AppName}}!
+
+Best regards,
+The {{.AppName}} Team
+
+---
+Need help? Contact our support team at {{.SupportEmail}}
+
+Follow us on social media:
+Facebook: {{.FacebookURL}}
+Twitter: {{.TwitterURL}}
+Instagram: {{.InstagramURL}}
+
+© {{.CurrentYear}} {{.CompanyName}}. All rights reserved. 

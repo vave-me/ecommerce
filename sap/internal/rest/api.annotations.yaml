@@ -1,0 +1,124 @@
+type: google.api.Service
+config_version: 3
+name: products.googleapis.com
+title: Products Management API
+apis:
+  - name: productspb.ProductsService
+http:
+  rules:
+    # Create a New Product
+    - selector: productspb.ProductsService.AddProduct
+      post: /api/products
+      body: "*"
+
+    # Retrieve a Specific Product
+    - selector: productspb.ProductsService.GetProduct
+      get: /api/products/{id}
+
+    # List All Products for a User with Optional Filtering and Pagination
+    - selector: productspb.ProductsService.GetProducts
+      get: /api/products
+
+    # Update a Product's Details
+    - selector: productspb.ProductsService.UpdateProduct
+      post: /api/products/{id}
+      body: "*"
+
+    # Delete a Product
+    - selector: productspb.ProductsService.RemoveProduct
+      delete: /api/products/{id}
+    # Delete a Product
+    - selector: productspb.ProductsService.AddProductThumbnail
+      post: /api/products/{product_id}/thumbnail/add
+      body: "*"
+    # Delete a Product
+    - selector: productspb.ProductsService.UpdateProductThumbnail
+      post: /api/products/{product_id}/thumbnail/update
+      body: "*"
+
+    # Rebrand a Product
+    - selector: productspb.ProductsService.RebrandProduct
+      patch: /api/products/{id}/rebrand
+      body: "*"
+
+    - selector: productspb.ProductsService.GetProductsByCategory
+      get: /api/products/categories/{category_id}
+
+    - selector: productspb.ProductsService.GetProductsByCategorySlug
+      get: /api/products/categories/slug/{category_slug}
+
+    - selector: productspb.ProductsService.GetProductsWithFilters
+      post: /api/products/filters
+      body: "*"
+
+    - selector: productspb.ProductsService.GetCatalog
+      get: /api/products/catalog
+
+    - selector: productspb.ProductsService.GetPublicCatalog
+      get: /api/products/catalog/public
+
+    # Update a Product's Price
+    - selector: productspb.ProductsService.UpdateProductPrice
+      patch: /api/products/{id}/price
+      body: "*"
+
+    # Adjust a Product's Stock
+    - selector: productspb.ProductsService.AdjustProductStock
+      patch: /api/products/{product_id}/stock
+      body: "*"
+
+    # Archive a Product (mark it inactive)
+    - selector: productspb.ProductsService.ArchiveProduct
+      patch: /api/products/{product_id}/archive
+      body: "*"
+
+    # Mark a Product as Sold
+    - selector: productspb.ProductsService.MarkProductSold
+      patch: /api/products/{product_id}/sold
+      body: "*"
+
+    # Mark a Product as Leased
+    - selector: productspb.ProductsService.MarkProductLeased
+      patch: /api/products/{product_id}/lease
+      body: "*"
+
+    # Mark a Product as Pawned
+    - selector: productspb.ProductsService.MarkProductPawned
+      patch: /api/products/{product_id}/pawn
+      body: "*"
+
+    - selector: productspb.ProductsService.AddVariant
+      post: /api/products/variants
+      body: "*"
+
+    # Retrieve a Single Variant by ID
+    - selector: productspb.ProductsService.GetVariant
+      get: /api/products/variants/{variant_id}
+
+    # List Variants (optionally filtered by product_id)
+    - selector: productspb.ProductsService.GetVariants
+      get: /api/products/{product_id}/variants
+
+    # Increase a Variant's Price
+    - selector: productspb.ProductsService.IncreaseVariantPrice
+      patch: /api/products/variants/{variant_id}/increasePrice
+      body: "*"
+
+    # Decrease a Variant's Price
+    - selector: productspb.ProductsService.DecreaseVariantPrice
+      patch: /api/products/variants/{variant_id}/decreasePrice
+      body: "*"
+
+    # Adjust a Variant's Stock
+    - selector: productspb.ProductsService.AdjustVariantStock
+      patch: /api/products/variants/{variant_id}/stock
+      body: "*"
+
+    # Archive a Variant (mark it unavailable)
+    - selector: productspb.ProductsService.ArchiveVariant
+      patch: /api/products/variants/{variant_id}/archive
+      body: "*"
+
+    # Remove a Variant
+    - selector: productspb.ProductsService.RemoveVariant
+      delete: /api/products/variants/{variant_id}

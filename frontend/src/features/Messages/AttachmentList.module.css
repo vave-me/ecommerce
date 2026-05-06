@@ -1,0 +1,354 @@
+/* AttachmentList.module.css - Light Mode Only */
+.attachmentListContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.attachmentListTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+    margin: 0 0 4px 0;
+}
+
+.attachmentList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.attachmentItem {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    width: calc(25% - 9px);
+    min-width: 80px;
+    max-width: 140px;
+    transition: transform 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.attachmentItem:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 640px) {
+    .attachmentItem {
+        width: calc(33.333% - 8px);
+    }
+}
+
+/* Image attachment */
+.imagePreview {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    background-color: #f1f5f9;
+    display: block;
+}
+
+/* Document attachment */
+.documentPreview {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8fafc;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.documentIcon {
+    font-size: 24px;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.documentType {
+    font-size: 12px;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.documentPreview.pdf .documentIcon {
+    color: #ef4444;
+}
+
+.documentPreview.doc .documentIcon {
+    color: #3b82f6;
+}
+
+/* Attachment controls */
+.attachmentControls {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    background: rgba(0, 0, 0, 0);
+    border-radius: 0 0 0 8px;
+    transition: background 0.2s ease;
+}
+
+.attachmentItem:hover .attachmentControls {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.attachmentButton {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: #ffffff;
+    color: #64748b;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 0;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.attachmentButton:hover {
+    /* transform: scale(1.1); - Replaced with opacity for performance */
+    opacity: 0.9;
+}
+
+.removeButton {
+    background: #ffffff;
+    color: #ef4444;
+}
+
+.removeButton:hover {
+    background: #ef4444;
+    color: #ffffff;
+}
+
+.viewButton {
+    background: #ffffff;
+    color: #0ea5e9;
+}
+
+.viewButton:hover {
+    background: #0ea5e9;
+    color: #ffffff;
+}
+
+/* Attachment details */
+.attachmentName {
+    font-size: 12px;
+    color: #475569;
+    margin-top: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 4px;
+}
+
+.attachmentSize {
+    font-size: 10px;
+    color: #64748b;
+    margin-top: 2px;
+    padding: 0 4px;
+}
+
+/* Upload progress indicator */
+.uploadProgress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.uploadProgressBar {
+    height: 100%;
+    background: #0ea5e9;
+    transition: width 0.3s ease;
+}
+
+/* Empty state */
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    color: #64748b;
+}
+
+.emptyStateIcon {
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: #94a3b8;
+}
+
+.emptyStateText {
+    font-size: 14px;
+    text-align: center;
+}
+
+/* =================================================================
+   DARK THEME SUPPORT
+   ================================================================= */
+
+@media (prefers-color-scheme: dark) {
+    .attachmentListContainer {
+        background-color: #111827;
+    }
+
+    .attachmentListTitle {
+        color: #d1d5db;
+    }
+
+    .attachmentItem {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .attachmentItem:hover {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Image attachment */
+    .imagePreview {
+        background-color: #374151;
+    }
+
+    /* Document attachment */
+    .documentPreview {
+        background-color: #374151;
+    }
+
+    .documentIcon {
+        color: #9ca3af;
+    }
+
+    .documentType {
+        color: #9ca3af;
+    }
+
+    .documentPreview.pdf .documentIcon {
+        color: #ef4444;
+    }
+
+    .documentPreview.doc .documentIcon {
+        color: #60a5fa;
+    }
+
+    /* Attachment controls */
+    .attachmentControls {
+        background: rgba(0, 0, 0, 0);
+    }
+
+    .attachmentItem:hover .attachmentControls {
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    .attachmentButton {
+        background: #374151;
+        color: #d1d5db;
+    }
+
+    .removeButton {
+        background: #374151;
+        color: #ef4444;
+    }
+
+    .removeButton:hover {
+        background: #ef4444;
+        color: #f3f4f6;
+    }
+
+    .viewButton {
+        background: #374151;
+        color: #60a5fa;
+    }
+
+    .viewButton:hover {
+        background: #60a5fa;
+        color: #f3f4f6;
+    }
+
+    /* Attachment details */
+    .attachmentName {
+        color: #d1d5db;
+    }
+
+    .attachmentSize {
+        color: #9ca3af;
+    }
+
+    /* Upload progress indicator */
+    .uploadProgress {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .uploadProgressBar {
+        background: #60a5fa;
+    }
+
+    /* Empty state */
+    .emptyState {
+        background: #374151;
+        border-color: #4b5563;
+        color: #9ca3af;
+    }
+
+    .emptyStateIcon {
+        color: #6b7280;
+    }
+
+    .emptyStateText {
+        color: #9ca3af;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+    .attachmentItem {
+        border: 1px solid #60a5fa;
+    }
+
+    .attachmentButton {
+        border: 1px solid #60a5fa;
+    }
+
+    .emptyState {
+        border-width: 2px;
+        border-color: #60a5fa;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .attachmentItem,
+    .attachmentButton,
+    .attachmentControls,
+    .uploadProgressBar {
+        transition: none;
+    }
+
+    .attachmentItem:hover {
+        transform: none;
+    }
+
+    .attachmentButton:hover {
+        transform: none;
+    }
+}

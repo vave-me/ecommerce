@@ -1,0 +1,98 @@
+type: google.api.Service
+config_version: 3
+http:
+  rules:
+    # ===========================================
+    # CHAT ENDPOINT
+    # ===========================================
+    - selector: assistantspb.AssistantsService.ChatWithConversation
+      post: /api/assistants/chat
+      body: "*"
+
+    # ===========================================
+    # INPUT PROCESSING ENDPOINTS
+    # ===========================================
+    - selector: assistantspb.AssistantsService.ProcessUserInput
+      post: /api/assistants/input/text
+      body: "*"
+
+    - selector: assistantspb.AssistantsService.ProcessSpeechInput
+      post: /api/assistants/input/speech
+      body: "*"
+
+    - selector: assistantspb.AssistantsService.ProcessImageInput
+      post: /api/assistants/input/image
+      body: "*"
+
+    - selector: assistantspb.AssistantsService.ProcessDocumentInput
+      post: /api/assistants/input/document
+      body: "*"
+
+    - selector: assistantspb.AssistantsService.ProcessAssistantRequest
+      post: /api/assistants/process
+      body: "*"
+
+    # ===========================================
+    # ASSISTANT MANAGEMENT
+    # ===========================================
+    - selector: assistantspb.AssistantsService.GetAssistants
+      get: /api/assistants
+      
+    - selector: assistantspb.AssistantsService.GetAssistant
+      get: /api/assistants/{id}
+
+    - selector: assistantspb.AssistantsService.UpdateAssistantConfiguration
+      put: /api/assistants/{id}
+      body: "*"
+
+    - selector: assistantspb.AssistantsService.ActivateAssistant
+      post: /api/assistants/{id}/activate
+      body: "*"
+
+    - selector: assistantspb.AssistantsService.DeactivateAssistant
+      post: /api/assistants/{id}/deactivate
+      body: "*"
+
+    # ===========================================
+    # CONVERSATION MANAGEMENT
+    # ===========================================
+    - selector: assistantspb.AssistantsService.CreateConversation
+      post: /api/assistants/conversations
+      body: "*"
+
+    - selector: assistantspb.AssistantsService.GetConversation
+      get: /api/assistants/conversations/{conversation_id}
+
+    - selector: assistantspb.AssistantsService.GetUserConversations
+      get: /api/assistants/conversations
+
+    - selector: assistantspb.AssistantsService.UpdateConversation
+      put: /api/assistants/conversations/{conversation_id}
+      body: "*"
+
+    - selector: assistantspb.AssistantsService.UpdateConversationContext
+      put: /api/assistants/conversations/{conversation_id}/context
+      body: "*"
+
+    - selector: assistantspb.AssistantsService.DeleteConversation
+      delete: /api/assistants/conversations/{conversation_id}
+
+    - selector: assistantspb.AssistantsService.ArchiveConversation
+      post: /api/assistants/conversations/{conversation_id}/archive
+      body: "*"
+
+    # ===========================================
+    # MESSAGE MANAGEMENT
+    # ===========================================
+    - selector: assistantspb.AssistantsService.GetConversationMessages
+      get: /api/assistants/conversations/{conversation_id}/messages
+
+    - selector: assistantspb.AssistantsService.AddMessageToConversation
+      post: /api/assistants/conversations/{conversation_id}/messages
+      body: "*"
+
+    # ===========================================
+    # STATISTICS
+    # ===========================================
+    - selector: assistantspb.AssistantsService.GetConversationStats
+      get: /api/assistants/stats

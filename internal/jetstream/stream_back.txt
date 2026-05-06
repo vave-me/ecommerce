@@ -1,0 +1,282 @@
+package jetstream
+
+import (
+	"context"
+	"encoding/json"
+	"github.com/nats-io/nats.go"
+	"github.com/rs/zerolog"
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/structpb"
+	"google.golang.org/protobuf/types/known/timestamppb"
+	"middleman/internal/am"
+	"sync"
+	"time"
+)
+
+const maxRetries = 5
+
+type Stream struct {
+	streamName string
+	js         nats.JetStreamContext
+	mu         sync.Mutex
+	subs       []*nats.Subscription
+	logger     zerolog.Logger
+}
+
+var _ am.MessageStream = (*Stream)(nil)
+
+func NewStream(streamName string, js nats.JetStreamContext, logger zerolog.Logger) *Stream {
+	logger.Info().Msgf("Initializing new Stream: %s", streamName)
+	return &Stream{
+		streamName: streamName,
+		js:         js,
+		logger:     logger,
+	}
+}
+
+func (s *Stream) Publish(ctx context.Context, topicName string, rawMsg am.Message) (err error) {
+	s.logger.Info().Msgf("Publishing message to topic '%s'", topicName)
+
+	var data []byte
+
+	metadata, err := structpb.NewStruct(rawMsg.Metadata())
+	if err != nil {
+		s.logger.Error().Err(err).Msg("Failed to convert metadata to Struct")
+		return err
+	}
+
+	s.logger.Debug().Msg("Marshalling StreamMessage to Protobuf")
+	data, err = proto.Marshal(&StreamMessage{
+		Id:       rawMsg.ID(),
+		Name:     rawMsg.MessageName(),
+		Data:     rawMsg.Data(),
+		Metadata: metadata,
+		SentAt:   timestamppb.New(rawMsg.SentAt()),
+	})
+	if err != nil {
+		s.logger.Error().Err(err).Msg("Failed to marshal StreamMessage")
+		return err
+	}
+
+	s.logger.Debug().Msgf("Publishing message with ID '%s'", rawMsg.ID())
+	p, err := s.js.PublishMsgAsync(&nats.Msg{
+		Subject: rawMsg.Subject(),
+		Data:    data,
+	}, nats.MsgId(rawMsg.ID()))
+	if err != nil {
+		s.logger.Error().Err(err).Msg("Failed to publish message asynchronously")
+		return err
+	}
+
+	// Retry a handful of times to publish the messages
+	go func(future nats.PubAckFuture, tries int) {
+		var err error
+
+		for {
+			select {
+			case <-future.Ok(): // Publish acknowledged
+				s.logger.Info().Msgf("Message with ID '%s' acknowledged by NATS", future.Msg().Header.Get(nats.MsgIdHdr))
+				return
+			case <-future.Err(): // Error ignored; try again
+				tries--
+				s.logger.Warn().Msgf("Publish not acknowledged, retrying... (%d tries left)", tries)
+				if tries <= 0 {
+					s.logger.Error().Msgf("Unable to publish message after %d tries", maxRetries)
+					return
+				}
+				future, err = s.js.PublishMsgAsync(future.Msg())
+				if err != nil {
+					s.logger.Error().Err(err).Msg("Failed to re-publish message")
+					return
+				}
+			}
+		}
+	}(p, maxRetries)
+
+	return nil
+}
+
+func (s *Stream) Subscribe(topicName string, handler am.MessageHandler, options ...am.SubscriberOption) (am.Subscription, error) {
+	s.logger.Info().Msgf("Subscribing to topic '%s'", topicName)
+
+	var err error
+
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	subCfg := am.NewSubscriberConfig(options)
+	s.logger.Debug().Msgf("Subscriber configuration: %+v", subCfg)
+
+	opts := []nats.SubOpt{
+		nats.MaxDeliver(subCfg.MaxRedeliver()),
+	}
+	cfg := &nats.ConsumerConfig{
+		MaxDeliver:     subCfg.MaxRedeliver(),
+		DeliverSubject: topicName,
+		FilterSubject:  topicName,
+	}
+	if groupName := subCfg.GroupName(); groupName != "" {
+		cfg.DeliverSubject = groupName
+		cfg.DeliverGroup = groupName
+		cfg.Durable = groupName
+
+		opts = append(opts, nats.Bind(s.streamName, groupName), nats.Durable(groupName))
+		s.logger.Info().Msgf("Using group name '%s' for subscription", groupName)
+	}
+
+	if ackType := subCfg.AckType(); ackType != am.AckTypeAuto {
+		ackWait := subCfg.AckWait()
+
+		cfg.AckPolicy = nats.AckExplicitPolicy
+		cfg.AckWait = ackWait
+
+		opts = append(opts, nats.AckExplicit(), nats.AckWait(ackWait))
+		s.logger.Debug().Msg("Subscriber configured for explicit acknowledgments")
+	} else {
+		cfg.AckPolicy = nats.AckNonePolicy
+		opts = append(opts, nats.AckNone())
+		s.logger.Debug().Msg("Subscriber configured for auto acknowledgments")
+	}
+
+	s.logger.Debug().Msg("Adding consumer to JetStream")
+	_, err = s.js.AddConsumer(s.streamName, cfg)
+	if err != nil {
+		s.logger.Error().Err(err).Msg("Failed to add consumer to JetStream")
+		return nil, err
+	}
+
+	var sub *nats.Subscription
+
+	if groupName := subCfg.GroupName(); groupName == "" {
+		s.logger.Debug().Msg("Creating subscription without group")
+		sub, err = s.js.Subscribe(topicName, s.handleMsg(subCfg, handler), opts...)
+	} else {
+		s.logger.Debug().Msgf("Creating queue subscription with group '%s'", groupName)
+		sub, err = s.js.QueueSubscribe(topicName, groupName, s.handleMsg(subCfg, handler), opts...)
+	}
+
+	if err != nil {
+		s.logger.Error().Err(err).Msg("Failed to create subscription")
+		return nil, err
+	}
+
+	s.subs = append(s.subs, sub)
+	s.logger.Info().Msg("Subscription created successfully")
+
+	return subscription{sub}, nil
+}
+
+func (s *Stream) Unsubscribe() error {
+	s.logger.Info().Msg("Unsubscribing from all subscriptions")
+	for _, sub := range s.subs {
+		if !sub.IsValid() {
+			s.logger.Warn().Msg("Subscription is not valid, skipping")
+			continue
+		}
+		err := sub.Drain()
+		if err != nil {
+			s.logger.Error().Err(err).Msg("Failed to drain subscription")
+			return err
+		}
+		s.logger.Info().Msg("Subscription drained successfully")
+	}
+	return nil
+}
+
+func (s *Stream) handleMsg(cfg am.SubscriberConfig, handler am.MessageHandler) func(*nats.Msg) {
+	var filters map[string]struct{}
+	if len(cfg.MessageFilters()) > 0 {
+		filters = make(map[string]struct{})
+		for _, key := range cfg.MessageFilters() {
+			filters[key] = struct{}{}
+		}
+		s.logger.Debug().Msgf("Message filters applied: %v", cfg.MessageFilters())
+	}
+
+	return func(natsMsg *nats.Msg) {
+		s.logger.Debug().Msgf("Received message on subject '%s'", natsMsg.Subject)
+		var err error
+		m := &StreamMessage{}
+
+		if cfg.GroupName() == "messenger" {
+			s.logger.Debug().Msg("Attempting to unmarshal message using JSON")
+			err = json.Unmarshal(natsMsg.Data, m)
+			if err != nil {
+				s.logger.Warn().Err(err).Msg("Failed to unmarshal the *nats.Msg with JSON")
+				return
+			}
+			s.logger.Debug().Msg("Message unmarshalled successfully using JSON")
+		} else {
+			s.logger.Debug().Msg("Attempting to unmarshal message using Protobuf")
+			err = proto.Unmarshal(natsMsg.Data, m)
+			if err != nil {
+				s.logger.Warn().Err(err).Msg("Failed to unmarshal the *nats.Msg with Protobuf")
+				return
+			}
+			s.logger.Debug().Msg("Message unmarshalled successfully using Protobuf")
+		}
+
+		if filters != nil {
+			if _, exists := filters[m.GetName()]; !exists {
+				s.logger.Debug().Msgf("Message '%s' does not match filters, acknowledging and skipping", m.GetName())
+				err = natsMsg.Ack()
+				if err != nil {
+					s.logger.Warn().Err(err).Msg("Failed to Ack a filtered message")
+				}
+				return
+			}
+		}
+
+		msg := &rawMessage{
+			id:         m.GetId(),
+			name:       m.GetName(),
+			subject:    natsMsg.Subject,
+			data:       m.GetData(),
+			metadata:   m.GetMetadata().AsMap(),
+			sentAt:     m.SentAt.AsTime(),
+			receivedAt: time.Now(),
+			acked:      false,
+			ackFn:      func() error { return natsMsg.Ack() },
+			nackFn:     func() error { return natsMsg.Nak() },
+			extendFn:   func() error { return natsMsg.InProgress() },
+			killFn:     func() error { return natsMsg.Term() },
+		}
+
+		s.logger.Debug().Msgf("Processing message with ID '%s' and name '%s'", msg.id, msg.name)
+
+		wCtx, cancel := context.WithTimeout(context.Background(), cfg.AckWait())
+		defer cancel()
+
+		errc := make(chan error)
+		go func() {
+			s.logger.Debug().Msg("Invoking message handler")
+			errc <- handler.HandleMessage(wCtx, msg)
+		}()
+
+		if cfg.AckType() == am.AckTypeAuto {
+			s.logger.Debug().Msg("Auto-acknowledging message")
+			err = msg.Ack()
+			if err != nil {
+				s.logger.Warn().Err(err).Msg("Failed to auto-Ack a message")
+			}
+		}
+
+		select {
+		case err = <-errc:
+			if err == nil {
+				s.logger.Info().Msgf("Message with ID '%s' processed successfully", msg.id)
+				if ackErr := msg.Ack(); ackErr != nil {
+					s.logger.Warn().Err(ackErr).Msg("Failed to Ack a message")
+				}
+				return
+			}
+			s.logger.Error().Err(err).Msg("Error while handling message")
+			if nakErr := msg.NAck(); nakErr != nil {
+				s.logger.Warn().Err(nakErr).Msg("Failed to Nack a message")
+			}
+		case <-wCtx.Done():
+			s.logger.Warn().Msg("Message handling context done before completion")
+			return
+		}
+	}
+}

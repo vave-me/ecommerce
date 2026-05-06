@@ -1,0 +1,405 @@
+syntax = "proto3";
+
+package supportpb;
+
+import "google/protobuf/timestamp.proto";
+import "supportpb/common.proto";
+
+// SupportService provides comprehensive customer support functionality
+service SupportService {
+  // Support Channel Management
+  rpc CreateSupportChannel(CreateSupportChannelRequest) returns (CreateSupportChannelResponse) {}
+  rpc GetSupportChannel(GetSupportChannelRequest) returns (GetSupportChannelResponse) {}
+  rpc GetUserSupportChannels(GetUserSupportChannelsRequest) returns (GetUserSupportChannelsResponse) {}
+  rpc UpdateSupportChannelSettings(UpdateSupportChannelSettingsRequest) returns (UpdateSupportChannelSettingsResponse) {}
+  rpc CloseSupportChannel(CloseSupportChannelRequest) returns (CloseSupportChannelResponse) {}
+  rpc ReactivateSupportChannel(ReactivateSupportChannelRequest) returns (ReactivateSupportChannelResponse) {}
+  
+  // Ticket Management
+  rpc CreateTicket(CreateTicketRequest) returns (CreateTicketResponse) {}
+  rpc GetTicket(GetTicketRequest) returns (GetTicketResponse) {}
+  rpc GetTickets(GetTicketsRequest) returns (GetTicketsResponse) {}
+  rpc GetChannelTickets(GetChannelTicketsRequest) returns (GetChannelTicketsResponse) {}
+  rpc ListTickets(ListTicketsRequest) returns (ListTicketsResponse) {}
+  rpc UpdateTicket(UpdateTicketRequest) returns (UpdateTicketResponse) {}
+  rpc AssignTicket(AssignTicketRequest) returns (AssignTicketResponse) {}
+  rpc UpdateTicketPriority(UpdateTicketPriorityRequest) returns (UpdateTicketPriorityResponse) {}
+  rpc EscalateTicket(EscalateTicketRequest) returns (EscalateTicketResponse) {}
+  rpc ResolveTicket(ResolveTicketRequest) returns (ResolveTicketResponse) {}
+  rpc ReopenTicket(ReopenTicketRequest) returns (ReopenTicketResponse) {}
+  rpc CloseTicket(CloseTicketRequest) returns (CloseTicketResponse) {}
+  rpc MergeTickets(MergeTicketsRequest) returns (MergeTicketsResponse) {}
+  rpc LinkTickets(LinkTicketsRequest) returns (LinkTicketsResponse) {}
+  
+  // Communication
+  rpc AddTicketReply(AddTicketReplyRequest) returns (AddTicketReplyResponse) {}
+  rpc AddInternalNote(AddInternalNoteRequest) returns (AddInternalNoteResponse) {}
+  rpc GetTicketCommunications(GetTicketCommunicationsRequest) returns (GetTicketCommunicationsResponse) {}
+  
+  // AI Integration
+  rpc EnableAISupport(EnableAISupportRequest) returns (EnableAISupportResponse) {}
+  rpc ConfigureAIAssistant(ConfigureAIAssistantRequest) returns (ConfigureAIAssistantResponse) {}
+  rpc HandoffToHuman(HandoffToHumanRequest) returns (HandoffToHumanResponse) {}
+  rpc HandoffToAI(HandoffToAIRequest) returns (HandoffToAIResponse) {}
+  rpc GetAISuggestions(GetAISuggestionsRequest) returns (GetAISuggestionsResponse) {}
+  
+  // Knowledge Base
+  rpc CreateKnowledgeArticle(CreateKnowledgeArticleRequest) returns (CreateKnowledgeArticleResponse) {}
+  rpc GetKnowledgeArticle(GetKnowledgeArticleRequest) returns (GetKnowledgeArticleResponse) {}
+  rpc SearchKnowledgeBase(SearchKnowledgeBaseRequest) returns (SearchKnowledgeBaseResponse) {}
+  rpc LinkArticleToTicket(LinkArticleToTicketRequest) returns (LinkArticleToTicketResponse) {}
+  rpc RateArticle(RateArticleRequest) returns (RateArticleResponse) {}
+  
+  // Analytics
+  rpc GetSupportMetrics(GetSupportMetricsRequest) returns (GetSupportMetricsResponse) {}
+  rpc GetAgentPerformance(GetAgentPerformanceRequest) returns (GetAgentPerformanceResponse) {}
+  rpc GetTicketAnalytics(GetTicketAnalyticsRequest) returns (GetTicketAnalyticsResponse) {}
+}
+
+// Support Channel Messages
+message CreateSupportChannelRequest {
+  string user_id = 1;
+  string business_id = 2;
+  SupportChannelType channel_type = 3;
+  SupportChannelSettings settings = 4;
+}
+
+message CreateSupportChannelResponse {
+  string id = 1;
+}
+
+message GetSupportChannelRequest {
+  string id = 1;
+}
+
+message GetSupportChannelResponse {
+  SupportChannel channel = 1;
+}
+
+message GetUserSupportChannelsRequest {
+  string user_id = 1;
+  bool active_only = 2;
+  int32 page = 3;
+  int32 limit = 4;
+}
+
+message GetUserSupportChannelsResponse {
+  repeated SupportChannel channels = 1;
+  int32 total_count = 2;
+}
+
+message UpdateSupportChannelSettingsRequest {
+  string id = 1;
+  SupportChannelSettings settings = 2;
+}
+
+message UpdateSupportChannelSettingsResponse {}
+
+message CloseSupportChannelRequest {
+  string id = 1;
+  string reason = 2;
+}
+
+message CloseSupportChannelResponse {}
+
+message ReactivateSupportChannelRequest {
+  string id = 1;
+}
+
+message ReactivateSupportChannelResponse {}
+
+// Ticket Messages
+message CreateTicketRequest {
+  string channel_id = 1;
+  string title = 2;
+  string description = 3;
+  TicketCategory category = 4;
+  TicketPriority priority = 5;
+  repeated string tags = 6;
+  map<string, string> metadata = 7;
+  repeated Attachment attachments = 8;
+}
+
+message CreateTicketResponse {
+  string id = 1;
+}
+
+message GetTicketRequest {
+  string id = 1;
+}
+
+message GetTicketResponse {
+  Ticket ticket = 1;
+}
+
+message GetTicketsRequest {
+  repeated string ids = 1;
+}
+
+message GetTicketsResponse {
+  repeated Ticket tickets = 1;
+}
+
+message GetChannelTicketsRequest {
+  string channel_id = 1;
+  TicketStatus status_filter = 2;
+  int32 page = 3;
+  int32 limit = 4;
+  string sort_by = 5;
+  bool descending = 6;
+}
+
+message GetChannelTicketsResponse {
+  repeated Ticket tickets = 1;
+  int32 total_count = 2;
+}
+
+message ListTicketsRequest {
+  string support_id = 1;
+  int32 page = 2;
+  int32 limit = 3;
+  string search_query = 4;
+  map<string, string> filters = 5;
+  string sort_by = 6;
+  bool descending = 7;
+}
+
+message ListTicketsResponse {
+  repeated Ticket tickets = 1;
+  int32 total_count = 2;
+  int32 page = 3;
+  int32 total_pages = 4;
+}
+
+message UpdateTicketRequest {
+  string id = 1;
+  optional string title = 2;
+  optional string description = 3;
+  optional TicketCategory category = 4;
+  repeated string tags = 5;
+  map<string, string> metadata = 6;
+}
+
+message UpdateTicketResponse {}
+
+message AssignTicketRequest {
+  string id = 1;
+  string assignee_id = 2;
+  AssigneeType assignee_type = 3;
+  string assignment_reason = 4;
+}
+
+message AssignTicketResponse {}
+
+message UpdateTicketPriorityRequest {
+  string id = 1;
+  TicketPriority priority = 2;
+  string reason = 3;
+}
+
+message UpdateTicketPriorityResponse {}
+
+message EscalateTicketRequest {
+  string id = 1;
+  SupportTier escalation_tier = 2;
+  string escalation_reason = 3;
+  string escalation_notes = 4;
+}
+
+message EscalateTicketResponse {}
+
+message ResolveTicketRequest {
+  string id = 1;
+  string resolution = 2;
+  repeated string applied_solutions = 3;
+}
+
+message ResolveTicketResponse {}
+
+message ReopenTicketRequest {
+  string id = 1;
+  string reopen_reason = 2;
+}
+
+message ReopenTicketResponse {}
+
+message CloseTicketRequest {
+  string id = 1;
+  string closure_notes = 2;
+  CustomerSatisfaction satisfaction = 3;
+}
+
+message CloseTicketResponse {}
+
+message MergeTicketsRequest {
+  string primary_ticket_id = 1;
+  repeated string secondary_ticket_ids = 2;
+  string merge_reason = 3;
+}
+
+message MergeTicketsResponse {
+  string merged_ticket_id = 1;
+}
+
+message LinkTicketsRequest {
+  string ticket_id = 1;
+  repeated string related_ticket_ids = 2;
+  string relationship_type = 3;
+}
+
+message LinkTicketsResponse {}
+
+// Communication Messages
+message AddTicketReplyRequest {
+  string ticket_id = 1;
+  string author_id = 2;
+  AuthorType author_type = 3;
+  string content = 4;
+  repeated Attachment attachments = 5;
+  bool is_public = 6;
+}
+
+message AddTicketReplyResponse {
+  string id = 1;
+}
+
+message AddInternalNoteRequest {
+  string ticket_id = 1;
+  string author_id = 2;
+  string content = 3;
+  repeated string mentioned_users = 4;
+}
+
+message AddInternalNoteResponse {
+  string id = 1;
+}
+
+message GetTicketCommunicationsRequest {
+  string ticket_id = 1;
+  bool include_internal = 2;
+  int32 page = 3;
+  int32 limit = 4;
+}
+
+message GetTicketCommunicationsResponse {
+  repeated Communication communications = 1;
+  int32 total_count = 2;
+}
+
+// AI Integration Messages
+message EnableAISupportRequest {
+  string channel_id = 1;
+  string assistant_id = 2;
+  AIConfiguration configuration = 3;
+}
+
+message EnableAISupportResponse {}
+
+message ConfigureAIAssistantRequest {
+  string channel_id = 1;
+  AIConfiguration configuration = 2;
+}
+
+message ConfigureAIAssistantResponse {}
+
+message HandoffToHumanRequest {
+  string ticket_id = 1;
+  string reason = 2;
+  map<string, string> context = 3;
+}
+
+message HandoffToHumanResponse {
+  string assigned_agent_id = 1;
+}
+
+message HandoffToAIRequest {
+  string ticket_id = 1;
+  map<string, string> context = 2;
+}
+
+message HandoffToAIResponse {}
+
+message GetAISuggestionsRequest {
+  string ticket_id = 1;
+  SuggestionType suggestion_type = 2;
+}
+
+message GetAISuggestionsResponse {
+  repeated AISuggestion suggestions = 1;
+}
+
+// Knowledge Base Messages
+message CreateKnowledgeArticleRequest {
+  string title = 1;
+  string content = 2;
+  repeated string categories = 3;
+  repeated string tags = 4;
+  bool public = 5;
+}
+
+message CreateKnowledgeArticleResponse {
+  string id = 1;
+}
+
+message GetKnowledgeArticleRequest {
+  string id = 1;
+}
+
+message GetKnowledgeArticleResponse {
+  KnowledgeArticle article = 1;
+}
+
+message SearchKnowledgeBaseRequest {
+  string query = 1;
+  repeated string categories = 2;
+  int32 limit = 3;
+}
+
+message SearchKnowledgeBaseResponse {
+  repeated KnowledgeArticle articles = 1;
+}
+
+message LinkArticleToTicketRequest {
+  string ticket_id = 1;
+  string article_id = 2;
+  bool helped_resolve = 3;
+}
+
+message LinkArticleToTicketResponse {}
+
+message RateArticleRequest {
+  string article_id = 1;
+  int32 rating = 2;
+  string feedback = 3;
+}
+
+message RateArticleResponse {}
+
+// Analytics Messages
+message GetSupportMetricsRequest {
+  google.protobuf.Timestamp start_time = 1;
+  google.protobuf.Timestamp end_time = 2;
+  repeated string channel_ids = 3;
+}
+
+message GetSupportMetricsResponse {
+  SupportMetrics metrics = 1;
+}
+
+message GetAgentPerformanceRequest {
+  string agent_id = 1;
+  google.protobuf.Timestamp start_time = 2;
+  google.protobuf.Timestamp end_time = 3;
+}
+
+message GetAgentPerformanceResponse {
+  AgentPerformance performance = 1;
+}
+
+message GetTicketAnalyticsRequest {
+  repeated string ticket_ids = 1;
+}
+
+message GetTicketAnalyticsResponse {
+  TicketAnalytics analytics = 1;
+}

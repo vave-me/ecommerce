@@ -1,0 +1,531 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Notifications Management API",
+    "description": "API for managing notifications and notifications related to products, transactions, users, stores, and more.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "NotificationsService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/notifications/alerts": {
+      "get": {
+        "summary": "List All alerts for a user",
+        "operationId": "listAlerts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notificationspbListAlertsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "type",
+            "description": "Filter notifications by type (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "isRead",
+            "description": "Filter notifications by read status (optional).",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "limit",
+            "description": "Number of notifications per page (optional, default 50).",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "offset",
+            "description": "Offset for pagination (optional).",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Alert"
+        ]
+      }
+    },
+    "/api/notifications/alerts/read-all": {
+      "put": {
+        "operationId": "NotificationsService_MarkAllAlertsAsRead",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "type",
+            "description": "Optional: mark all alerts of specific type as read.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "NotificationsService"
+        ]
+      }
+    },
+    "/api/notifications/alerts/stats": {
+      "get": {
+        "operationId": "NotificationsService_GetNotificationStats",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notificationspbGetNotificationStatsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "NotificationsService"
+        ]
+      }
+    },
+    "/api/notifications/alerts/type": {
+      "get": {
+        "summary": "Retrieve Alerts by Type for a User",
+        "operationId": "getAlertsByType",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notificationspbGetAlertsByTypeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "type",
+            "description": "Type of notifications to retrieve.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "isRead",
+            "description": "Filter by read status (optional).",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "limit",
+            "description": "Number of notifications per page (optional, default 50).",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "offset",
+            "description": "Offset for pagination (optional).",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Alert"
+        ]
+      }
+    },
+    "/api/notifications/alerts/unread-count": {
+      "get": {
+        "operationId": "NotificationsService_GetUnreadCount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notificationspbGetUnreadCountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "NotificationsService"
+        ]
+      }
+    },
+    "/api/notifications/alerts/{alertId}": {
+      "delete": {
+        "operationId": "NotificationsService_DeleteAlert",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "alertId",
+            "description": "ID of the alert to delete.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "NotificationsService"
+        ]
+      }
+    },
+    "/api/notifications/alerts/{alertId}/read": {
+      "put": {
+        "operationId": "NotificationsService_MarkAlertAsRead",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "alertId",
+            "description": "ID of the alert to mark as read.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "NotificationsService"
+        ]
+      }
+    },
+    "/api/notifications/preferences": {
+      "get": {
+        "operationId": "NotificationsService_GetNotificationPreferences",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notificationspbGetNotificationPreferencesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "NotificationsService"
+        ]
+      },
+      "put": {
+        "operationId": "NotificationsService_UpdateNotificationPreferences",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "globalEnabled",
+            "description": "Global on/off switch.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "emailEnabled",
+            "description": "Global email notifications.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "pushEnabled",
+            "description": "Global push notifications.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "NotificationsService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "notificationspbAlert": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the notification."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier of the user."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the notification."
+        },
+        "message": {
+          "type": "string",
+          "description": "Content of the notification message."
+        },
+        "payload": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Additional data related to the notification."
+        },
+        "isRead": {
+          "type": "boolean",
+          "description": "Indicates whether the notification has been read."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the notification was created."
+        }
+      }
+    },
+    "notificationspbGetAlertsByTypeResponse": {
+      "type": "object",
+      "properties": {
+        "alerts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/notificationspbAlert"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of notifications."
+        },
+        "hasMore": {
+          "type": "boolean",
+          "description": "Whether there are more notifications."
+        }
+      }
+    },
+    "notificationspbGetNotificationPreferencesResponse": {
+      "type": "object",
+      "properties": {
+        "preferences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/notificationspbNotificationPreference"
+          }
+        },
+        "globalEnabled": {
+          "type": "boolean",
+          "description": "Global on/off switch."
+        },
+        "emailEnabled": {
+          "type": "boolean",
+          "description": "Global email notifications."
+        },
+        "pushEnabled": {
+          "type": "boolean",
+          "description": "Global push notifications."
+        }
+      }
+    },
+    "notificationspbGetNotificationStatsResponse": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of notifications."
+        },
+        "unreadCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of unread notifications."
+        },
+        "countByType": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "Count of notifications by type."
+        },
+        "lastReadAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of last read notification."
+        }
+      }
+    },
+    "notificationspbGetUnreadCountResponse": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of unread notifications."
+        }
+      }
+    },
+    "notificationspbListAlertsResponse": {
+      "type": "object",
+      "properties": {
+        "alerts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/notificationspbAlert"
+          },
+          "description": "List of notifications."
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of notifications."
+        },
+        "hasMore": {
+          "type": "boolean",
+          "description": "Whether there are more notifications."
+        }
+      }
+    },
+    "notificationspbNotificationPreference": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Notification type."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether this type is enabled."
+        },
+        "emailEnabled": {
+          "type": "boolean",
+          "description": "Whether email notifications are enabled."
+        },
+        "pushEnabled": {
+          "type": "boolean",
+          "description": "Whether push notifications are enabled."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

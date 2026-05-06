@@ -1,0 +1,290 @@
+/* src/features/Orders/components/CheckoutForm.module.css */
+
+.checkoutForm {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme for checkout form */
+@media (prefers-color-scheme: dark) {
+    .checkoutForm {
+        background-color: var(--gray-800, #1f2937);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+/* Dark theme for section */
+@media (prefers-color-scheme: dark) {
+    .section {
+        background-color: var(--gray-700, #374151);
+        border: 1px solid var(--gray-600, #4b5563);
+    }
+}
+
+.section h3 {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Dark theme for section headings */
+@media (prefers-color-scheme: dark) {
+    .section h3 {
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.fieldRow {
+    display: flex;
+    gap: 16px;
+}
+
+@media (max-width: 768px) {
+    .fieldRow {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.field label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+}
+
+/* Dark theme for field labels */
+@media (prefers-color-scheme: dark) {
+    .field label {
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+.field input,
+.field select {
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #374151;
+    transition: all 0.2s ease;
+}
+
+/* Dark theme for form inputs */
+@media (prefers-color-scheme: dark) {
+    .field input,
+    .field select {
+        background-color: var(--gray-600, #4b5563);
+        border: 1px solid var(--gray-500, #6b7280);
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.field input:focus,
+.field select:focus {
+    outline: none;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+}
+
+/* Dark theme for form input focus */
+@media (prefers-color-scheme: dark) {
+    .field input:focus,
+    .field select:focus {
+        border-color: var(--primary-color, #3b82f6);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+}
+
+.field input:invalid {
+    border-color: #dc3545;
+}
+
+/* Dark theme for invalid inputs */
+@media (prefers-color-scheme: dark) {
+    .field input:invalid {
+        border-color: var(--danger, #ef4444);
+    }
+}
+
+.submitButton {
+    background: #0d6efd;
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    border: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(13, 110, 253, 0.2);
+}
+
+/* Dark theme for submit button */
+@media (prefers-color-scheme: dark) {
+    .submitButton {
+        background: var(--primary-color, #3b82f6);
+        box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+    }
+}
+
+.submitButton:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
+}
+
+/* Dark theme for submit button hover */
+@media (prefers-color-scheme: dark) {
+    .submitButton:hover {
+        background-color: var(--primary-color, #2563eb);
+        box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+    }
+}
+
+.submitButton:focus {
+    outline: 2px solid rgba(13, 110, 253, 0.3);
+    outline-offset: 2px;
+}
+
+/* Dark theme for submit button focus */
+@media (prefers-color-scheme: dark) {
+    .submitButton:focus {
+        outline: 2px solid rgba(59, 130, 246, 0.3);
+    }
+}
+
+.submitButton:active {
+    transform: translateY(0);
+}
+
+.submitButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.loadingSpinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.message {
+    color: #dc3545;
+    margin-top: 15px;
+    font-size: 14px;
+    padding: 12px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+}
+
+/* Dark theme for error message */
+@media (prefers-color-scheme: dark) {
+    .message {
+        color: var(--danger, #ef4444);
+        background-color: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+}
+
+.successMessage {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+/* Dark theme for success message */
+@media (prefers-color-scheme: dark) {
+    .successMessage {
+        color: var(--success, #10b981);
+        background-color: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .checkoutForm {
+        padding: 16px;
+        margin: 16px;
+    }
+
+    .section {
+        padding: 16px;
+    }
+
+    .submitButton {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .checkoutForm {
+        padding: 12px;
+        margin: 8px;
+    }
+
+    .section {
+        padding: 12px;
+    }
+
+    .field input,
+    .field select {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    .submitButton {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+}

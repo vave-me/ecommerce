@@ -1,0 +1,23 @@
+Email Address Change Confirmation for {{.AppName}}
+
+Hello {{.FirstName}},
+
+We're sending this message to confirm that you've requested to change your email address for your {{.AppName}} account.
+
+NEW EMAIL ADDRESS: {{.NewEmail}}
+PREVIOUS EMAIL ADDRESS: {{.OldEmail}}
+
+To confirm this change, please click on the link below or copy and paste it into your web browser:
+
+{{.VerificationURL}}
+
+This email change link will expire in 24 hours for security reasons.
+
+IMPORTANT: If you didn't request this change, please contact our support team immediately as someone may be attempting to access your account.
+
+Thanks,
+The {{.AppName}} Team
+
+---
+Need help? Contact our support team at {{.SupportEmail}}
+© {{.CurrentYear}} {{.CompanyName}}. All rights reserved. 

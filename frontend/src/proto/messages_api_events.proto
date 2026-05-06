@@ -1,0 +1,14 @@
+syntax = "proto3";
+package mes;
+
+//Command
+
+message SendMessage {
+  string id = 1;
+  string conversation_id = 2;
+  string sender_id = 3;
+  string recipient_id = 4;
+  string item_id = 5;
+  string body = 6;
+  bool  is_read = 7;
+}

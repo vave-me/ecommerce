@@ -1,0 +1,295 @@
+syntax = "proto3";
+
+package mediapb;
+
+
+service MediaService {
+  rpc CreateMedia(CreateMediaRequest) returns (CreateMediaResponse) {};
+  rpc UpdateMedia(UpdateMediaRequest) returns (UpdateMediaResponse) {};
+  rpc AddImage(AddImageRequest) returns (AddImageResponse){};
+  rpc AddVideo(AddVideoRequest) returns (AddVideoResponse){};
+  rpc RemoveMedia(RemoveMediaRequest) returns(RemoveMediaResponse){};
+  rpc RemoveImage(RemoveImageRequest) returns(RemoveImageResponse){};
+  rpc RemoveVideo(RemoveVideoRequest) returns(RemoveVideoResponse){};
+  rpc GetMedia(GetMediaRequest) returns(GetMediaResponse){};
+  rpc GetMediaByItem(GetMediaByItemRequest) returns(GetMediaByItemResponse){};
+  rpc GetAllItemImages(GetAllItemImagesRequest) returns(GetAllItemImagesResponse){};
+  rpc GetAllItemVideos(GetAllItemVideosRequest) returns(GetAllItemVideosResponse){};
+  rpc GetAllVideos(GetAllVideosRequest) returns(GetAllVideosResponse){};
+  rpc GetAllVideosByAuthor(GetAllVideosByAuthorRequest) returns(GetAllVideosByAuthorResponse){};
+  rpc GetAllImagesByAuthor(GetAllImagesByAuthorRequest) returns(GetAllImagesByAuthorResponse){};
+  rpc GetAllMediaVideos(GetAllMediaVideosRequest) returns(GetAllMediaVideosResponse){};
+  rpc GetAllMediaImages(GetAllMediaImagesRequest) returns(GetAllMediaImagesResponse){};
+  rpc StartBulkImport(StartBulkImportRequest) returns (ImportSession);
+  rpc AddImportBatch(AddImportBatchRequest) returns (BatchResult);
+  rpc GetImportStatus(GetImportStatusRequest) returns (ImportStatus);
+  rpc CancelImport(CancelImportRequest) returns (Empty);
+}
+
+message MediaOrder{
+  string  media_item_id = 1;
+  string  url = 2;
+}
+message Media{
+  string id = 1;
+  string item_id = 2;
+  string item_type = 3;
+  string user_id = 4;
+  string file_type = 5;
+  repeated MediaOrder mediaOrder = 6;
+}
+
+message Image{
+  string id = 1;
+  string media_id = 2;
+  int32  display_order = 3;
+  bool is_main = 4;
+  string url = 5;
+  string metadata = 6;
+  string file_type = 7;
+  string thumbnail = 8;
+  string user_id = 9;
+}
+
+message Video{
+  string id = 1;
+  string media_id = 2;
+  int32  display_order = 3;
+  bool is_main = 4;
+  string url = 5;
+  string metadata = 6;
+  string file_type = 7;
+  string thumbnail = 8;
+  string user_id = 9;
+}
+message GetAllItemImagesRequest {
+  string item_id = 1;
+
+}
+message GetAllItemImagesResponse{
+  repeated Image images = 1;
+}
+message GetAllMediaImagesRequest {
+  string media_id = 1;
+}
+message GetAllMediaImagesResponse{
+  repeated Image images = 1;
+}
+
+message GetMediaRequest {
+  string media_id = 1;
+}
+
+message GetMediaResponse {
+  Media media = 1;
+}
+message GetMediaByItemRequest {
+  string item_id = 1;
+
+}
+
+message GetMediaByItemResponse {
+  Media media = 1;
+
+}
+
+message GetAllItemVideosRequest {
+  string item_id = 1;
+
+}
+message GetAllItemVideosResponse{
+  repeated Video videos = 1;
+}
+message GetAllVideosRequest {
+  int64 page = 1;
+  int64  page_size = 2;
+  string sort_by = 3;
+  string sort_order = 4;
+}
+message GetAllVideosResponse{
+  repeated Video videos = 1;
+  int64 total_count = 2;
+  int64 current_page = 3;
+  int64 total_pages = 4;
+}
+
+message GetAllVideosByAuthorRequest {
+  string user_id = 1;
+  int64 page = 2;
+  int64  page_size = 3;
+  string sort_by = 4;
+  string sort_order = 5;
+}
+message GetAllVideosByAuthorResponse{
+  repeated Video videos = 1;
+  int64 total_count = 2;
+  int64 current_page = 3;
+  int64 total_pages = 4;
+}
+message GetAllImagesByAuthorRequest {
+  string user_id = 1;
+  int64 page = 2;
+  int64  page_size = 3;
+  string sort_by = 4;
+  string sort_order = 5;
+}
+message GetAllImagesByAuthorResponse{
+  repeated Image images = 1;
+  int64 total_count = 2;
+  int64 current_page = 3;
+  int64 total_pages = 4;
+}
+
+message GetAllMediaVideosRequest {
+  string media_id = 1;
+}
+message GetAllMediaVideosResponse{
+  repeated Video videos = 1;
+}
+
+message RemoveMediaRequest{
+  string media_id = 1;
+  string item_id = 2;
+}
+
+message RemoveMediaResponse{
+  string id = 1;
+}
+message RemoveImageRequest{
+  string media_id = 1;
+  string image_id = 2;
+
+}
+message RemoveImageResponse{
+  string id = 1;
+}
+message RemoveVideoRequest{
+  string media_id = 1;
+  string video_id = 2;
+
+}
+message RemoveVideoResponse{
+  string id = 1;
+}
+
+
+
+message CreateMediaRequest{
+  string item_id = 1;
+  string item_type = 2;
+  string status = 3;
+}
+
+message CreateMediaResponse{
+  string id = 1;
+}
+message UpdateMediaRequest{
+  string id = 1;
+  string item_id = 2;
+  string item_type = 3;
+  string user_id = 4;
+}
+
+message UpdateMediaResponse{
+  string id = 1;
+}
+
+message AddImageRequest{
+  string media_id = 1;
+  int32 display_order = 2;
+  bool is_main = 3;
+  string url = 4;
+  string metadata = 5;
+  string file_type = 6;
+  string thumbnail = 7;
+}
+
+message AddImageResponse{
+  string url = 1;
+  string viewUrl = 2;
+}
+
+message AddVideoRequest{
+  string media_id = 1;
+  int32  display_order = 2;
+  bool is_main = 3;
+  string url = 4;
+  string metadata = 5;
+  string file_type = 6;
+  string thumbnail = 7;
+}
+
+message AddVideoResponse{
+  string url = 1;
+  string viewUrl = 2;
+}
+
+// Bulk Import Messages
+message StartBulkImportRequest {
+  string external_system_id = 1;
+  string external_system_type = 2;
+  int32 estimated_count = 3;
+  map<string, string> options = 4;
+}
+
+message ImportSession {
+  string id = 1;
+  string external_system_id = 2;
+  string external_system_type = 3;
+  int32 total_images = 4;
+  int32 processed_images = 5;
+  int32 failed_images = 6;
+  string status = 7;
+  int64 started_at = 8;
+  int64 completed_at = 9;
+  map<string, string> metadata = 10;
+}
+
+message ImportItem {
+  string external_id = 1;
+  string sku = 2;
+  string image_url = 3;
+  map<string, string> metadata = 4;
+  int32 display_order = 5;
+}
+
+message AddImportBatchRequest {
+  string session_id = 1;
+  repeated ImportItem items = 2;
+}
+
+message BatchResult {
+  string session_id = 1;
+  int32 accepted_items = 2;
+  int32 rejected_items = 3;
+  repeated ImportError errors = 4;
+}
+
+message ImportError {
+  string external_id = 1;
+  string error_code = 2;
+  string error_message = 3;
+}
+
+message GetImportStatusRequest {
+  string session_id = 1;
+}
+
+message ImportStatus {
+  string session_id = 1;
+  string status = 2;
+  int32 total_images = 3;
+  int32 processed_images = 4;
+  int32 failed_images = 5;
+  repeated ImportError recent_errors = 6;
+  float progress_percentage = 7;
+  int64 estimated_completion_time = 8;
+}
+
+message CancelImportRequest {
+  string session_id = 1;
+  string reason = 2;
+}
+
+message Empty {
+}

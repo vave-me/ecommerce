@@ -1,0 +1,4273 @@
+{
+  "DealsPage": {
+    "metaTitle": "Offerte e Promozioni",
+    "metaDescription": "Trova le migliori offerte e promozioni disponibili oggi.",
+    "title": "Offerte e Promozioni",
+    "empty": "Nessuna offerta trovata."
+  },
+  "ProductsPage": {
+    "metaTitle": "Prodotti | Vaveme",
+    "metaDescription": "Sfoglia la nostra selezione di prodotti di alta qualità e offerte su Vaveme.",
+    "jsonLdListName": "Tutti i Prodotti",
+    "jsonLdListDescription": "Elenco dei prodotti disponibili su Vaveme.",
+    "loading": "Caricamento prodotti...",
+    "errorTitle": "Errore nel Caricamento Prodotti",
+    "errorMessage": "Non siamo riusciti a caricare i prodotti ora. Riprova più tardi.",
+    "errorDetailPrefix": "Errore:",
+    "empty": "Nessun prodotto trovato che corrisponda ai tuoi criteri.",
+    "categoryEmpty": "Nessun prodotto trovato in questa categoria."
+  },
+  "HomePage": {
+    "browseCategories": "Sfoglia Categorie",
+    "viewAllCategories": "Visualizza Tutte le Categorie",
+    "featuredProducts": "Prodotti in Evidenza",
+    "trendingItems": "Articoli di Tendenza",
+    "mostLikedItems": "Articoli Più Apprezzati",
+    "mostCommented": "Più Commentati",
+    "hottestItems": "Articoli Più Caldi",
+    "recentlyViewed": "Visualizzati di Recente",
+    "recommendedForYou": "Consigliati per Te",
+    "sfxMarketIntroTitle": "Marketplace social specializzato",
+    "sfxMarketIntroText": "SFX Markt unisce transazioni marketplace e social engagement in un unico modello operativo.",
+    "sfxMarketIntroCta": "Apri SFX site",
+    "showMore": "mostra altro",
+    "help": "Aiuto",
+    "contact": "Contatti",
+    "about": "Chi Siamo",
+    "terms": "Termini di Servizio",
+    "privacy": "Informativa sulla Privacy",
+    "copyright": "© 2025 MyApp. Tutti i diritti riservati.",
+    "allRightsReserved": "Tutti i Diritti Riservati"
+  },
+  "Seo": {
+    "title": "sfx markt – Marketplace  Live",
+    "description": "sfx markt è il marketplace live che ti permette di comprare, vendere e connetterti con la tua comunità in tempo reale. Chatta istantaneamente, paga in sicurezza con deposito cauzionale in-app e scopri offerte di tendenza intorno a te.",
+    "keywords": "sfx markt, marketplace, comprare e vendere localmente, chat in tempo reale, deposito cauzionale SafePay, lavori vicino a me, servizi, offerte di seconda mano"
+  },
+  "ActivityPage": {
+    "title": "Attività",
+    "markAllAsRead": "Segna Tutto come Letto",
+    "loading": "Caricamento Attività...",
+    "empty": "Nessuna attività da visualizzare.",
+    "filter": {
+      "all": "Tutte"
+    }
+  },
+  "TagContainer": {
+    "classic": {
+      "primary": "AI in un posto. Connetti, condividi, guadagna.",
+      "secondary": "Esplora le possibilità sul nostro portale. Cambia modalità in AI"
+    },
+    "ai": {
+      "primary": "Alimentato da AI",
+      "secondary": "Raccomandazioni intelligenti e ricerca intelligente a portata di mano"
+    },
+    "stats": {
+      "users": "utenti attivi",
+      "listings": "annunci",
+      "categories": "categorie"
+    }
+  },
+  "LoginForm": {
+    "createAccount": "Crea il Tuo Account",
+    "welcomeBack": "Bentornato",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Conferma Password",
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "userName": "Nome Utente",
+    "address": "Indirizzo",
+    "signIn": "Accedi",
+    "signUp": "Registrati",
+    "alreadyHaveAccount": "Hai già un account?",
+    "dontHaveAccount": "Non hai un account?",
+    "or": "o",
+    "forgotPassword": "Password dimenticata?",
+    "errors": {
+      "invalidEmail": "Indirizzo email non valido",
+      "required": "Questo campo è obbligatorio",
+      "passwordsMustMatch": "Le password devono corrispondere",
+      "authFailed": "Autenticazione fallita"
+    },
+    "placeholders": {
+      "email": "Inserisci la tua email",
+      "password": "Inserisci la tua password",
+      "confirmPassword": "Conferma la tua password",
+      "firstName": "Inserisci il tuo nome",
+      "lastName": "Inserisci il tuo cognome",
+      "userName": "Inserisci il tuo nome utente",
+      "address": "Inserisci il tuo indirizzo"
+    }
+  },
+  "ForgotPassword": {
+    "title": "Password Dimenticata?",
+    "description": "Inserisci il tuo indirizzo email qui sotto e ti invieremo un link per reimpostare la password.",
+    "emailLabel": "Indirizzo Email",
+    "emailPlaceholder": "Inserisci il tuo indirizzo email",
+    "resetButton": "Invia Link di Reset",
+    "backToLogin": "Torna al Login",
+    "checkEmail": "Link di reset password inviato!",
+    "checkSpam": "Se non lo vedi nella tua casella di posta, controlla la cartella spam.",
+    "processing": "Invio in corso...",
+    "genericError": "Qualcosa è andato storto. Riprova."
+  },
+  "ResetPassword": {
+    "title": "Reimposta la Tua Password",
+    "description": "Crea una nuova password sicura per il tuo account.",
+    "newPassword": "Nuova Password",
+    "newPasswordPlaceholder": "Inserisci la tua nuova password",
+    "confirmPassword": "Conferma Password",
+    "confirmPasswordPlaceholder": "Reinserisci la password",
+    "resetButton": "Reimposta Password",
+    "backToLogin": "Torna al Login",
+    "passwordResetSuccess": "Password reimpostata con successo!",
+    "loginWithNewPassword": "Ora puoi accedere con la tua nuova password.",
+    "goToLogin": "Vai al Login",
+    "processing": "Reimpostazione...",
+    "invalidLink": "Questo link di reset password non è valido o è scaduto.",
+    "requestNewLink": "Richiedi un nuovo link di reset",
+    "passwordsDoNotMatch": "Le password non corrispondono.",
+    "passwordTooShort": "La password deve essere lunga almeno 8 caratteri.",
+    "genericError": "Qualcosa è andato storto. Riprova.",
+    "passwordStrength": "Forza della password",
+    "veryWeak": "Molto Debole",
+    "weak": "Debole",
+    "medium": "Media",
+    "strong": "Forte",
+    "veryStrong": "Molto Forte"
+  },
+  "BasketPage": {
+    "loading": "Caricamento carrello…",
+    "empty": "Il tuo carrello è vuoto.",
+    "emptyDescription": "Aggiungi alcuni articoli al tuo carrello per iniziare a fare acquisti.",
+    "continueShopping": "Continua a fare acquisti",
+    "heading": "Il Tuo Carrello",
+    "labels": {
+      "subtotal": "Subtotale Articoli:",
+      "shipping": "Spedizione:",
+      "discount": "Sconto:",
+      "total": "Totale Ordine:"
+    },
+    "actions": {
+      "refresh": "Aggiorna Carrello",
+      "checkout": "Procedi al Checkout",
+      "remove": "Rimuovi"
+    },
+    "quantity": "Quantità:",
+    "sku": "SKU: {sku}",
+    "aria": {
+      "quantityFor": "Quantità per {name}"
+    },
+    "toasts": {
+      "minQuantity": "La quantità non può essere inferiore a 1."
+    }
+  },
+  "CategoryPage": {
+    "title": "Prodotti {slug}",
+    "empty": "Nessun prodotto trovato in questa categoria."
+  },
+  "Wishlist": {
+    "title": "La Mia Lista Desideri",
+    "loading": "Caricamento lista desideri...",
+    "empty": "La tua lista desideri è vuota.",
+    "refresh": "Aggiorna Lista Desideri",
+    "noActiveRefresh": "Nessuna lista desideri attiva da aggiornare.",
+    "couldNotLoad": "Impossibile caricare la lista desideri.",
+    "couldNotRefresh": "Impossibile aggiornare la lista desideri.",
+    "noActiveFound": "Nessuna lista desideri attiva trovata. Aggiorna.",
+    "removed": "Articolo rimosso dalla lista desideri.",
+    "failedRemove": "Impossibile rimuovere l'articolo.",
+    "myWishlists": "Le Mie Liste Desideri",
+    "createNewWishlist": "Crea Nuova Lista Desideri",
+    "wishlistNamePlaceholder": "Nome Lista Desideri",
+    "create": "Crea",
+    "cancel": "Annulla",
+    "delete": "Elimina",
+    "noWishlists": "Non hai ancora liste desideri. Creane una per iniziare a salvare articoli.",
+    "loadError": "Impossibile caricare i dati della lista desideri",
+    "pleaseLogin": "Accedi per visualizzare le tue liste desideri",
+    "nameRequired": "Inserisci un nome per la tua lista desideri",
+    "confirmDelete": "Sei sicuro di voler eliminare la lista desideri: {name}?",
+    "noDescription": "Nessuna descrizione",
+    "wishlist": "Lista Desideri",
+    "backToWishlists": "Torna alle Liste Desideri",
+    "refreshed": "Lista desideri aggiornata",
+    "refreshError": "Impossibile aggiornare la lista desideri",
+    "emptyWishlist": "Questa lista desideri è vuota",
+    "loadingItem": "Caricamento articolo...",
+    "itemNotFound": "Articolo Non Trovato",
+    "itemMayBeRemoved": "Questo articolo potrebbe essere stato rimosso o non è più disponibile",
+    "removeFromWishlist": "Rimuovi dalla Lista Desideri",
+    "notes": "Note",
+    "wishlistItem": "Articolo Lista Desideri",
+    "unnamed": "Articolo Senza Nome",
+    "view": "Visualizza Dettagli",
+    "loginRequired": "Login Richiesto",
+    "loginMessage": "Accedi per visualizzare e gestire le tue liste desideri",
+    "login": "Login",
+    "searchItems": "Cerca articoli nella lista desideri...",
+    "gridView": "Vista Griglia",
+    "listView": "Vista Lista",
+    "noSearchResults": "Nessun articolo trovato",
+    "noSearchResultsMessage": "Prova ad aggiustare i termini di ricerca o sfoglia tutti gli articoli",
+    "clearSearch": "Cancella Ricerca",
+    "emptyWishlistMessage": "Inizia ad aggiungere articoli alla tua lista desideri per vederli qui",
+    "startShopping": "Inizia a Fare Shopping",
+    "errorTitle": "Qualcosa è andato storto",
+    "retry": "Riprova",
+    "addToWishlist": "Aggiungi alla Lista Desideri",
+    "addedToWishlist": "Aggiunto alla Lista Desideri",
+    "checking": "Controllo...",
+    "selectWishlist": "Seleziona Lista Desideri",
+    "selectWishlistAriaLabel": "Seleziona una lista desideri",
+    "wishlistCount": "{count, plural, =0 {0 liste desideri} one {# lista desideri} other {# liste desideri}}",
+    "selectWishlistDescription": "Scegli a quale lista desideri aggiungere questo articolo",
+    "createNewWishlistInModal": "Crea nuova lista desideri",
+    "addItemToWishlist": "Aggiungi a {name}",
+    "removeItemFromWishlist": "Rimuovi da {name}",
+    "deleteWishlist": "Elimina \"{name}\"",
+    "deleteWishlistAriaLabel": "Elimina lista desideri {name}",
+    "confirmDeleteTitle": "Conferma Eliminazione",
+    "confirmDeleteMessage": "Sei sicuro di voler eliminare la lista desideri \"{name}\"? Questa azione non può essere annullata.",
+    "noWishlistsAvailable": "Nessuna lista desideri disponibile",
+    "alreadyInWishlist": "Questo articolo è già in una delle tue liste desideri",
+    "addedSuccessfully": "Articolo aggiunto alla lista desideri con successo",
+    "removedSuccessfully": "Articolo rimosso dalla lista desideri con successo",
+    "failedToAdd": "Impossibile aggiungere l'articolo alla lista desideri",
+    "failedToRemove": "Impossibile rimuovere l'articolo dalla lista desideri",
+    "createSuccess": "Lista desideri creata con successo",
+    "createFailed": "Impossibile creare la lista desideri",
+    "deleteSuccess": "Lista desideri eliminata con successo",
+    "deleteFailed": "Impossibile eliminare la lista desideri",
+    "createNew": "Crea Nuova",
+    "sortNewest": "Prima i Più Recenti",
+    "sortOldest": "Prima i Più Vecchi",
+    "sortName": "Ordina per Nome",
+    "noWishlistsMessage": "Crea la tua prima lista desideri per iniziare a salvare articoli che ami",
+    "selectWishlistMessage": "Scegli una lista desideri dal menu a tendina per visualizzare i suoi articoli",
+    "errorBoundaryTitle": "[IT] Error Boundary Title",
+    "errorBoundaryMessage": "[IT] Error Boundary Message",
+    "errorDetails": "[IT] Error Details",
+    "tryAgain": "Riprova",
+    "selectWishlistForItem": "[IT] Select Wishlist For Item"
+  },
+  "VideosPage": {
+    "errorTitle": "Errore",
+    "noVideos": "Nessun video trovato.",
+    "unmute": "Riattiva Audio",
+    "mute": "Disattiva Audio",
+    "untitledVideo": "Video Senza Titolo - ID: {{id}}",
+    "unknownCreator": "Creatore Sconosciuto"
+  },
+  "UserProfile": {
+    "noProfileTitle": "Profilo Non Disponibile",
+    "noProfileMsg": "Accedi per visualizzare le informazioni del tuo profilo.",
+    "loading": "Caricamento profilo...",
+    "loadingDesc": "Attendere prego mentre carichiamo le informazioni del tuo profilo.",
+    "authChecking": "Controllo autenticazione...",
+    "errorTitle": "Errore profilo",
+    "errorUserData": "Impossibile caricare i dati del profilo. Prova ad aggiornare la pagina.",
+    "refresh": "Aggiorna pagina",
+    "redirectingToProfile": "Reindirizzamento al tuo profilo...",
+    "redirectingDesc": "Ti stiamo portando alla tua pagina del profilo personale.",
+    "profileAccessTitle": "Accedi al tuo profilo",
+    "profileAccessDesc": "Accedi per visualizzare e gestire il tuo profilo, annunci e impostazioni dell'account.",
+    "signIn": "Accedi",
+    "createAccount": "Crea account",
+    "profileHelpText": "Cerchi il profilo di qualcun altro? Usa /profile/nomeutente",
+    "itemsCount": "Numero articoli",
+    "commentsCount": "Numero commenti",
+    "reviewsCount": "Numero recensioni",
+    "tabsAriaLabel": "Tab del profilo utente",
+    "tabs": {
+      "listings": "Annunci",
+      "posts": "Post",
+      "comments": "Commenti",
+      "reviews": "Recensioni",
+      "contact": "Contatti",
+      "gallery": "Galleria",
+      "jobs": "Lavori",
+      "vehicles": "Veicoli",
+      "services": "Servizi",
+      "videos": "Video",
+      "deals": "Offerte"
+    },
+    "section": {
+      "listedItems": "Articoli in Vendita",
+      "posts": "Post",
+      "comments": "Commenti",
+      "reviews": "Recensioni",
+      "contactInfo": "Informazioni di Contatto",
+      "gallery": "Galleria",
+      "jobs": "Annunci di Lavoro",
+      "vehicles": "Veicoli",
+      "services": "Servizi",
+      "videos": "Video",
+      "deals": "Offerte"
+    }
+  },
+  "Support": {
+    "pageTitle": "Centro Assistenza",
+    "pageSubtitle": "Ottieni aiuto e gestisci i tuoi ticket di supporto - Totale: {total}",
+    "refreshButton": "Aggiorna",
+    "createTicketButton": "Crea Ticket",
+    "searchPlaceholder": "Cerca ticket...",
+    "stats": {
+      "total": "Totale",
+      "open": "Aperti",
+      "pending": "In Attesa",
+      "closed": "Chiusi",
+      "unread": "Non Letti"
+    },
+    "filter": {
+      "all": "Tutti",
+      "open": "Aperti",
+      "pending": "In Attesa",
+      "closed": "Chiusi"
+    },
+    "emptyStateTitle": "Nessun Ticket di Supporto",
+    "emptyStateText": "Non hai ancora creato ticket di supporto. Clicca il pulsante qui sotto per iniziare.",
+    "createFirstTicket": "Crea il Tuo Primo Ticket",
+    "markAllAsRead": "Segna Tutti come Letti",
+    "loading": "Caricamento ticket di supporto...",
+    "empty": "Nessun ticket di supporto trovato.",
+    "noResultsTitle": "Nessun Risultato Trovato",
+    "noResultsText": "Nessun ticket corrisponde alla tua ricerca per '{query}' con filtro '{filter}'",
+    "clearFilters": "Cancella Filtri",
+    "refreshAriaLabel": "Aggiorna ticket di supporto",
+    "searchAriaLabel": "Cerca ticket di supporto",
+    "filterAriaLabel": "Filtra ticket per stato",
+    "markAllReadAriaLabel": "Segna tutti i ticket come letti",
+    "refreshSuccess": "Ticket di supporto aggiornati con successo",
+    "refreshError": "Impossibile aggiornare i ticket di supporto",
+    "infoMarkedAllRead": "Tutti i ticket segnati come letti",
+    "errorTitle": "Errore nel Caricamento Supporto",
+    "errorInitialize": "Impossibile inizializzare il canale di supporto: {message}",
+    "errorNoSupportId": "Canale di supporto non disponibile",
+    "successTicketCreated": "Ticket di supporto creato con successo",
+    "loadingMessage": "Caricamento dei tuoi ticket di supporto...",
+    "retryButton": "Riprova"
+  },
+  "SellerProfile": {
+    "loading": "Caricamento dati venditore...",
+    "loadingDesc": "Attendere prego mentre recuperiamo le informazioni del profilo.",
+    "errorTitle": "Profilo non trovato",
+    "errorNoSellerId": "Nessun utente specificato",
+    "errorSellerNotFound": "Utente non trovato",
+    "errorLoadingFailed": "Impossibile caricare il profilo",
+    "userNotFoundDesc": "L'utente che stai cercando non esiste o è stato rimosso.",
+    "goBack": "Torna indietro",
+    "tryAgain": "Riprova",
+    "goHome": "Vai alla home",
+    "section": {
+      "listedItems": "Articoli in Vendita",
+      "posts": "Post",
+      "comments": "Commenti",
+      "reviews": "Recensioni",
+      "contact": "Informazioni di Contatto",
+      "gallery": "Galleria"
+    }
+  },
+  "ActivityItem": {
+    "markAsRead": "Segna come Letto",
+    "markAsUnread": "Segna come Non Letto",
+    "aria": {
+      "markAsRead": "Segna come letto",
+      "markAsUnread": "Segna come non letto",
+      "deleteActivity": "Elimina attività"
+    }
+  },
+  "ReactionButtons": {
+    "like": "Mi Piace",
+    "love": "Amo",
+    "haha": "Haha",
+    "sad": "Triste",
+    "angry": "Arrabbiato"
+  },
+  "ActivityFilter": {
+    "all": "Tutte",
+    "likes": "Mi Piace",
+    "disliked": "Non Mi Piace",
+    "visited": "Visitati",
+    "commented": "Commentati",
+    "shared": "Condivisi",
+    "followed": "Seguiti",
+    "aria": "Filtra per {label}"
+  },
+  "CategoryBar": {
+    "loading": "Caricamento categorie...",
+    "error": "Errore nel caricamento delle categorie. Riprova più tardi.",
+    "empty": "Nessuna categoria trovata.",
+    "ariaCategory": "Categoria: {categoryName}",
+    "showLess": "Mostra Meno",
+    "showMore": "Mostra Altro (+{count})"
+  },
+  "CategoryGrid": {
+    "empty": "Nessuna categoria disponibile.",
+    "unnamedCategory": "Categoria Senza Nome",
+    "googleCategoryPrefix": "Categoria Google: {googleCategoryId}"
+  },
+  "CategorySelectionArea": {
+    "clearSelectionAria": "Cancella selezione",
+    "instructionSelect": "Seleziona una categoria:",
+    "unnamedCategoryFallback": "Categoria Senza Nome"
+  },
+  "CategoryTree": {
+    "unnamedCategory": "Categoria Senza Nome",
+    "errorLoading": "Impossibile caricare le categorie. Riprova.",
+    "loading": "Caricamento categorie...",
+    "retry": "Riprova",
+    "empty": "Nessuna categoria disponibile",
+    "searchPlaceholder": "Cerca categorie...",
+    "clearSearchAria": "Cancella ricerca",
+    "noResults": "Nessuna categoria corrisponde a \"{query}\""
+  },
+  "DrillDownCategory": {
+    "noRootCategory": "Nessuna categoria fornita. Configura una categoria di partenza."
+  },
+  "DrillDownCategoryPanel": {
+    "fallbackRootName": "Tutte le Categorie",
+    "backButton": "Indietro",
+    "backButtonAria": "Torna a {parentName}",
+    "loading": "Caricamento sottocategorie...",
+    "errorLoading": "Impossibile caricare le sottocategorie. Riprova.",
+    "noSubcategories": "Nessuna sottocategoria disponibile.",
+    "selectSubcategoryAria": "Seleziona categoria {subcategoryName}"
+  },
+  "AddDropdown": {
+    "ariaLabel": "Opzioni Aggiungi",
+    "title": "Crea Nuovo Contenuto",
+    "section_frequent_title": "Usati di frequente",
+    "item_product_label": "Prodotto",
+    "item_product_desc": "Aggiungi un nuovo prodotto",
+    "item_post_label": "Post",
+    "item_post_desc": "Crea un nuovo post",
+    "item_video_label": "Video",
+    "item_video_desc": "Carica un nuovo video",
+    "item_service_label": "Servizio",
+    "item_service_desc": "Offri un servizio"
+  },
+  "AddOptionsSheet": {
+    "ariaLabel": "Opzioni aggiungi contenuto",
+    "title": "Crea Nuovo",
+    "navitem_alerts_tooltip": "Visualizza Avvisi",
+    "navitem_cart_label": "Carrello",
+    "navitem_cart_tooltip": "Il Tuo Carrello",
+    "content_deal_label": "Offerta",
+    "content_deal_desc": "Condividi un'ottima offerta o sconto",
+    "content_post_label": "Post",
+    "content_post_desc": "Condividi pensieri o foto",
+    "content_video_label": "Video",
+    "content_video_desc": "Condividi un video clip",
+    "content_property_label": "Immobile",
+    "content_property_desc": "Elenca immobili in vendita o affitto",
+    "content_vehicle_label": "Veicolo",
+    "content_vehicle_desc": "Vendi o elenca un veicolo",
+    "content_service_label": "Servizio",
+    "content_service_desc": "Offri servizi professionali",
+    "content_job_label": "Lavoro",
+    "content_job_desc": "Pubblica un'offerta di lavoro"
+  },
+  "BottomNav": {
+    "navAriaLabel": "Navigazione Mobile",
+    "badgeAriaLabel": "{count, plural, =0 {nessun nuovo elemento} one {# nuovo elemento} other {# nuovi elementi}}",
+    "additem_product_label": "Prodotto",
+    "additem_product_desc": "Aggiungi un nuovo prodotto",
+    "additem_post_label": "Post",
+    "additem_post_desc": "Crea un nuovo post",
+    "additem_video_label": "Video",
+    "additem_video_desc": "Carica un nuovo video",
+    "additem_vehicle_label": "Veicolo",
+    "additem_vehicle_desc": "Elenca un veicolo",
+    "additem_deal_label": "Offerta",
+    "additem_deal_desc": "Crea una nuova offerta",
+    "additem_property_label": "Immobile",
+    "additem_property_desc": "Elenca un immobile",
+    "additem_service_label": "Servizio",
+    "additem_service_desc": "Offri un servizio",
+    "additem_job_label": "Lavoro",
+    "additem_job_desc": "Pubblica un annuncio di lavoro",
+    "nav_home_label": "Home",
+    "nav_home_tooltip": "Vai alla pagina principale",
+    "nav_alerts_label": "Avvisi",
+    "nav_alerts_tooltip": "Visualizza notifiche",
+    "nav_add_label": "Aggiungi",
+    "nav_add_tooltip_default": "Crea nuovo contenuto",
+    "nav_wishlist_label": "Lista desideri",
+    "nav_wishlist_tooltip": "Visualizza la tua lista desideri",
+    "nav_cart_label": "Carrello",
+    "nav_cart_tooltip": "Visualizza carrello della spesa"
+  },
+  "LocationFilter": {
+    "locationLabel": "Posizione",
+    "placeholder": "Inserisci posizione...",
+    "ariaLabel": "Filtro posizione",
+    "clearLocation": "Cancella posizione",
+    "useCurrentLocation": "Usa posizione attuale",
+    "suggestionsLabel": "Suggerimenti posizione",
+    "radiusLabel": "Raggio di ricerca",
+    "radiusInputPlaceholder": "Distanza in km",
+    "radiusInputAriaLabel": "Raggio di ricerca in chilometri",
+    "radiusQuickSelectAriaLabel": "Imposta raggio a {value} chilometri",
+    "errorFetchingSuggestions": "Errore nel recupero dei suggerimenti di posizione",
+    "errorLocationPermission": "Permesso di posizione negato",
+    "errorLocationUnavailable": "Posizione non disponibile",
+    "errorLocationTimeout": "Timeout posizione",
+    "errorGettingLocation": "Errore nel recupero della posizione"
+  },
+  "shared": {
+    "services": "Servizi",
+    "vehicles": "Veicoli",
+    "deals": "Offerte",
+    "properties": "Immobili",
+    "jobs": "Lavoro",
+    "videos": "Video",
+    "posts": "Post",
+    "wishlist": "Lista desideri",
+    "messages": "Messaggi",
+    "notifications": "Notifiche",
+    "cart": "Carrello",
+    "home": "Home",
+    "profile": "Profilo",
+    "settings": "Impostazioni",
+    "activity": "Attività",
+    "commerce": "Commercio",
+    "social": "Sociale",
+    "intelligence": "Intelligenza",
+    "infrastructure": "Infrastruttura",
+    "learnMore": "Scopri di più",
+    "requestDemo": "Richiedi demo",
+    "startBuilding": "Inizia a costruire",
+    "contactSales": "Contatta le vendite"
+  },
+  "contactSales": {
+    "heroTitle": "Parla con il nostro team vendite enterprise",
+    "heroSubtitle": "Scopri come la nostra piattaforma può trasformare la tua azienda con soluzioni personalizzate su misura per le tue esigenze",
+    "formTitle": "Richiedi una demo",
+    "formSubtitle": "Compila il modulo sottostante e il nostro team ti contatterà a breve",
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "email": "Email aziendale",
+    "phone": "Numero di telefono",
+    "company": "Nome dell'azienda",
+    "title": "Titolo professionale",
+    "companySize": "Dimensione dell'azienda",
+    "industry": "Settore",
+    "country": "Paese",
+    "interests": "Aree di interesse",
+    "message": "Raccontaci del tuo progetto",
+    "messagePlaceholder": "Descrivi le tue esigenze aziendali e i tuoi obiettivi...",
+    "selectSize": "Seleziona dimensione dell'azienda",
+    "selectIndustry": "Seleziona settore",
+    "employees": "dipendenti",
+    "retail": "Vendita al dettaglio ed E-commerce",
+    "manufacturing": "Manifatturiero",
+    "technology": "Tecnologia",
+    "healthcare": "Sanità",
+    "finance": "Finanza",
+    "energy": "Energia e servizi pubblici",
+    "other": "Altro",
+    "platformdevelopment": "Sviluppo piattaforma",
+    "apiintegration": "Integrazione API",
+    "customsolutions": "Soluzioni personalizzate",
+    "ai/mlfeatures": "Funzionalità AI/ML",
+    "security&compliance": "Sicurezza e conformità",
+    "migrationservices": "Servizi di migrazione",
+    "submit": "Richiedi demo",
+    "submitting": "Invio in corso...",
+    "successTitle": "Grazie per il tuo interesse!",
+    "successMessage": "Il nostro team vendite enterprise ti contatterà entro 24 ore.",
+    "downloadWhitepaper": "Scarica whitepaper",
+    "whyChooseUs": "Perché scegliere la nostra piattaforma",
+    "benefit1Title": "Implementazione fulminea",
+    "benefit1Desc": "Operativo in settimane, non mesi",
+    "benefit2Title": "Sicurezza enterprise",
+    "benefit2Desc": "Sicurezza di livello bancario con conformità SOC2",
+    "benefit3Title": "Scala globale",
+    "benefit3Desc": "Infrastruttura che cresce con la tua azienda",
+    "benefit4Title": "Supporto dedicato",
+    "benefit4Desc": "Supporto tecnico 24/7 con garanzie SLA",
+    "contactInfo": "Contatto diretto",
+    "callUs": "Chiamaci",
+    "emailUs": "Inviaci un'email",
+    "businessHours": "Orari di lavoro",
+    "hours": "Lun-Ven 9:00-18:00 CET",
+    "scheduleCall": "Programma una chiamata",
+    "scheduleDesc": "Prenota una consultazione di 30 minuti con i nostri esperti",
+    "bookMeeting": "Prenota riunione",
+    "officesTitle": "I nostri uffici",
+    "office1Location": "Berlino, Germania",
+    "office1Address": "Friedrichstraße 123, 10117 Berlin",
+    "office1Phone": "+49 30 1234 5678",
+    "office2Location": "Milano, Italia",
+    "office2Address": "Via Monte Napoleone 8, 20121 Milano",
+    "office2Phone": "+39 02 1234 5678",
+    "office3Location": "Varsavia, Polonia",
+    "office3Address": "ul. Marszałkowska 111, 00-102 Warszawa",
+    "office3Phone": "+48 22 1234 5678"
+  },
+  "common": {
+    "loading": "Caricamento...",
+    "error": "Errore",
+    "success": "Successo",
+    "cancel": "Annulla",
+    "save": "Salva",
+    "delete": "Elimina",
+    "edit": "Modifica",
+    "create": "Crea",
+    "update": "Aggiorna",
+    "search": "Cerca",
+    "filter": "Filtra",
+    "sort": "Ordina",
+    "close": "Chiudi",
+    "back": "Indietro",
+    "next": "Avanti",
+    "previous": "Precedente",
+    "submit": "Invia",
+    "confirm": "Conferma",
+    "yes": "Sì",
+    "no": "No",
+    "or": "o",
+    "and": "e"
+  },
+  "Header": {
+    "mainNavAriaLabel": "Navigazione Principale",
+    "notificationsButtonAriaLabel": "{count, plural, =0 {Notifiche, nessun nuovo avviso} one {Notifiche, # nuovo avviso} other {Notifiche, # nuovi avvisi}}",
+    "messagesButtonAriaLabel": "{count, plural, =0 {Messaggi, nessun nuovo messaggio} one {Messaggi, # nuovo messaggio} other {Messaggi, # nuovi messaggi}}",
+    "wishlistButtonAriaLabel": "{count, plural, =0 {Le tue liste desideri, nessun nuovo articolo} one {Le tue liste desideri, # nuovo articolo} other {Le tue liste desideri, # nuovi articoli}}",
+    "cartButtonAriaLabel": "Visualizza carrello",
+    "createContentAriaLabel": "Crea nuovo contenuto",
+    "searchAriaLabel": "Cerca",
+    "loginButton": "Accedi",
+    "loginButtonAriaLabel": "Accedi al tuo account",
+    "aiAssistantMode": "Modalità Assistente AI",
+    "aiAssistantModeTooltip": "Passa alla modalità Assistente AI",
+    "messages": "Messaggi",
+    "wishlist": "Lista dei desideri",
+    "notifications": "Notifiche",
+    "createButtonTooltip": "Crea nuovo contenuto",
+    "login": "Accedi",
+    "searchPlaceholder": "Cerca prodotti, marchi o categorie..."
+  },
+  "MinNav": {
+    "navAriaLabel": "Navigazione Principale",
+    "item_back_label": "Indietro",
+    "item_back_tooltip": "Torna indietro",
+    "item_home_label": "Home",
+    "item_home_tooltip": "Vai alla pagina principale",
+    "item_news_label": "Notizie",
+    "item_news_tooltip": "Visualizza le ultime notizie",
+    "item_deals_label": "Offerte",
+    "item_deals_tooltip": "Sfoglia offerte e promozioni",
+    "item_shop_label": "Negozio",
+    "item_shop_tooltip": "Sfoglia prodotti",
+    "item_videos_label": "Video",
+    "item_videos_tooltip": "Guarda video",
+    "item_vehicles_label": "Veicoli",
+    "item_vehicles_tooltip": "Sfoglia veicoli e auto",
+    "item_saved_label": "Salvati",
+    "item_saved_tooltip": "I tuoi articoli salvati e lista desideri",
+    "item_messages_label": "Messaggi",
+    "item_messages_tooltip": "Visualizza i tuoi messaggi",
+    "item_alerts_label": "Avvisi",
+    "item_alerts_tooltip": "Visualizza notifiche e avvisi"
+  },
+  "MinNavItem": {
+    "badgeAriaLabel": "{count, plural, =0 {} one {# nuovo articolo} other {# nuovi articoli}}"
+  },
+  "MobileNavMenu": {
+    "menuAriaLabel": "Menu di Navigazione Mobile",
+    "menuTitle": "Menu",
+    "closeMenuAriaLabel": "Chiudi Menu",
+    "userFallbackName": "Utente",
+    "navigationGroupTitle": "Navigazione",
+    "mainNavAriaLabel": "Navigazione Principale",
+    "actionsGroupTitle": "Azioni",
+    "actionsListAriaLabel": "Azioni",
+    "nav_home_label": "Home",
+    "nav_home_tooltip": "Vai alla home page",
+    "nav_explore_label": "Esplora",
+    "nav_explore_tooltip": "Scopri categorie e annunci",
+    "nav_filtered_feed_label": "Feed filtrato",
+    "nav_filtered_feed_tooltip": "Apri il feed filtrato personalizzato",
+    "nav_sfx_site_label": "Sito SFX",
+    "nav_sfx_site_tooltip": "Apri la pagina marketplace specializzata SFX",
+    "nav_wishlist_label": "Lista desideri",
+    "nav_wishlist_tooltip": "Visualizza la tua lista desideri",
+    "nav_messages_label": "Messaggi",
+    "nav_messages_tooltip": "Apri la tua casella messaggi",
+    "nav_notifications_label": "Notifiche",
+    "nav_notifications_tooltip": "Visualizza gli ultimi avvisi",
+    "nav_cart_label": "Carrello",
+    "nav_cart_tooltip": "Visualizza il carrello",
+    "postDealButtonText": "Pubblica un'Offerta",
+    "postDealButtonAriaLabel": "Pubblica un'Offerta",
+    "signOutButton": "Disconnetti"
+  },
+  "NavItem": {
+    "badgeAriaLabel": "{count, plural, =0 {} one {# nuovo {label}} other {# nuovi {label}}}"
+  },
+  "Settings": {
+    "pageTitle": "Impostazioni",
+    "pageDesc": "Gestisci le preferenze del tuo account e la configurazione",
+    "authenticating": "Autenticazione...",
+    "authenticatingDesc": "Attendere mentre verifichiamo il tuo stato di accesso",
+    "loading": "Caricamento impostazioni...",
+    "loadingDesc": "Recupero delle impostazioni di configurazione",
+    "refresh": "Aggiorna",
+    "toggleMenu": "Attiva/disattiva menu impostazioni",
+    "tabAriaLabel": "Vai alle impostazioni {tabName}",
+    "tabs": {
+      "account": "Account",
+      "accountDesc": "Informazioni personali e impostazioni profilo",
+      "notifications": "Notifiche",
+      "notificationsDesc": "Preferenze email e notifiche push",
+      "privacy": "Privacy",
+      "privacyDesc": "Controlli condivisione dati e privacy",
+      "security": "Sicurezza",
+      "securityDesc": "Password e autenticazione a due fattori",
+      "display": "Visualizzazione",
+      "displayDesc": "Tema, lingua e opzioni aspetto",
+      "subscriptions": "Abbonamenti",
+      "subscriptionsDesc": "Gestione fatturazione e abbonamenti"
+    }
+  },
+  "NotificationSettings": {
+    "pageTitle": "Preferenze Notifiche",
+    "pageDescription": "Gestisci come ricevi notifiche e aggiornamenti",
+    "essentialTitle": "Notifiche Essenziali",
+    "essentialDescription": "Avvisi importanti sulla sicurezza del tuo account e aggiornamenti critici",
+    "securityAlertsTitle": "Avvisi di Sicurezza",
+    "securityAlertsDescription": "Tentativi di accesso, modifiche password e attività sospette",
+    "systemUpdatesTitle": "Aggiornamenti di Sistema",
+    "systemUpdatesDescription": "Manutenzione servizi, interruzioni e aggiornamenti piattaforma",
+    "communicationTitle": "Preferenze Comunicazione",
+    "communicationDescription": "Scegli come vuoi ricevere diversi tipi di notifiche",
+    "emailNotificationsTitle": "Notifiche Email",
+    "emailNotificationsDescription": "Aggiornamenti generali, riassunti attività e modifiche account",
+    "pushNotificationsTitle": "Notifiche Push",
+    "pushNotificationsDescription": "Avvisi in tempo reale su desktop e dispositivi mobili",
+    "smsNotificationsTitle": "Notifiche SMS",
+    "smsNotificationsDescription": "Avvisi urgenti e notifiche sensibili al tempo via SMS",
+    "marketingTitle": "Marketing e Contenuti",
+    "marketingDescription": "Comunicazioni opzionali su prodotti, funzionalità e contenuti",
+    "marketingEmailsTitle": "Email Marketing",
+    "marketingEmailsDescription": "Annunci prodotti, promozioni e offerte speciali",
+    "newsletterTitle": "Newsletter",
+    "newsletterDescription": "Digest settimanale con contenuti curati e aggiornamenti community",
+    "enabled": "Abilitato",
+    "disabled": "Disabilitato",
+    "subscribed": "Iscritto",
+    "unsubscribed": "Non iscritto",
+    "saveAllPreferences": "Salva Tutte le Preferenze",
+    "savingPreferences": "Salvataggio Preferenze...",
+    "preferencesUpdated": "Preferenze notifiche salvate con successo!"
+  },
+  "Verify": {
+    "title": "Verifica Account",
+    "verifying": "Verifica del Tuo Account",
+    "verifyingMessage": "Attendere prego mentre verifichiamo il tuo account...",
+    "success": "Account Verificato!",
+    "successMessage": "Il tuo account è stato verificato con successo. Ora puoi accedere con le tue credenziali.",
+    "error": "Verifica Fallita",
+    "missingInfo": "Informazioni di verifica mancanti. Controlla il link nella tua email.",
+    "unexpectedError": "Si è verificato un errore imprevisto.",
+    "goToLogin": "Vai al Login"
+  },
+  "CreateVideoModal": {
+    "errorTitleMinLength": "Il titolo deve essere di almeno {minLength} caratteri.",
+    "step2Name": "Video",
+    "step3Name": "Impostazioni Opzionali",
+    "step4Name": "Finalizza",
+    "basicInfoTitle": "Informazioni Video",
+    "basicInfoDescription": "Inserisci le informazioni di base per il tuo video.",
+    "basicInfoTitleLabel": "Titolo",
+    "basicInfoTitlePlaceholder": "Inserisci un titolo descrittivo",
+    "successTitle": "Video Creato!",
+    "successMessage": "Il tuo video è stato creato con successo ed è ora disponibile.",
+    "successCloseButton": "Chiudi"
+  },
+  "CreateProductModal": {
+    "step2Name": "Dettagli",
+    "step3Name": "Media",
+    "step4Name": "Finalizza",
+    "basicInfoTitle": "Informazioni Prodotto",
+    "basicInfoDescription": "Fornisci informazioni di base sul tuo prodotto."
+  },
+  "ModeSwitcher": {
+    "aiModeLabel": "Passa alla Modalità AI",
+    "aiModeTooltip": "Passa all'interfaccia AI con assistenza intelligente e navigazione minimale",
+    "switchToAiMode": "Passa alla Modalità AI"
+  },
+  "AccountSettings": {
+    "pageTitle": "Impostazioni Account",
+    "pageDescription": "Aggiorna i dettagli del tuo account e gestisci i servizi collegati.",
+    "loading": "Caricamento informazioni account...",
+    "errorTitle": "Errore Caricamento Account",
+    "retry": "Riprova",
+    "profileTitle": "Informazioni Personali",
+    "profileUsernameLabel": "Nome Utente",
+    "profileEmailLabel": "Indirizzo Email",
+    "profileFirstNameLabel": "Nome",
+    "profileLastNameLabel": "Cognome",
+    "profileBioLabel": "Bio",
+    "profileLocationLabel": "Posizione",
+    "emailChangeDisabled": "Contatta l'assistenza per cambiare il tuo indirizzo email",
+    "profileSaveButton": "Salva Modifiche",
+    "profileSaving": "Salvataggio...",
+    "passwordTitle": "Cambia Password",
+    "passwordCurrentLabel": "Password Attuale",
+    "passwordNewLabel": "Nuova Password",
+    "passwordConfirmLabel": "Conferma Password",
+    "passwordChangeButton": "Aggiorna Password",
+    "passwordChanging": "Aggiornamento..."
+  },
+  "AI": {
+    "login": "Accedi",
+    "loginRequired": "Accesso richiesto",
+    "authRequired": "Autenticazione richiesta",
+    "or": "o",
+    "delete": "Elimina",
+    "features": {
+      "title": "In cosa posso aiutarti:"
+    },
+    "quickActions": {
+      "findProduct": "Trova Prodotti",
+      "findProductDesc": "Cerca prodotti nel marketplace",
+      "createListing": "Crea Annuncio",
+      "createListingDesc": "Pubblica un nuovo prodotto con assistenza AI",
+      "writePost": "Scrivi Post",
+      "writePostDesc": "Crea contenuti coinvolgenti",
+      "findService": "Trova Servizi",
+      "findServiceDesc": "Scopri servizi vicino a te"
+    },
+    "greeting": "Ciao! Come posso aiutarti a filtrare i nostri prodotti oggi?",
+    "error": "Mi dispiace, ma ho riscontrato un errore. Per favore riprova.",
+    "placeholder": "Digita la tua richiesta...",
+    "aiAssistant": "Assistente AI",
+    "selectAssistant": "Seleziona Assistente",
+    "clearChat": "Cancella Chat",
+    "welcome": "Benvenuto nell'Assistente AI",
+    "welcomeDesc": "Posso aiutarti a trovare prodotti, creare annunci, scrivere contenuti e altro. Come posso aiutarti oggi?",
+    "messagePlaceholder": "Scrivi un messaggio...",
+    "conversations": "Conversazioni",
+    "you": "Tu",
+    "typing": "L'AI sta scrivendo",
+    "copy": "Copia",
+    "regenerate": "Rigenera",
+    "like": "Mi piace",
+    "dislike": "Non mi piace",
+    "share": "Condividi",
+    "dismiss": "Chiudi",
+    "messageCopied": "Messaggio copiato negli appunti",
+    "authGreeting": "Pronto per un'assistenza intelligente?",
+    "authSubtext": "Basta accedere per sbloccare il tuo assistente AI personale – richiede solo un momento",
+    "loginAction": "Accedi",
+    "registerAction": "Registrati",
+    "loadingTitle": "Caricamento Assistente AI...",
+    "loadingDescription": "Attendere mentre ci connettiamo al servizio",
+    "newChat": "Nuova Chat",
+    "loadingAssistants": "Caricamento assistenti AI..."
+  },
+  "AccountSettings": {
+    "pageTitle": "Impostazioni Account",
+    "pageDescription": "Gestisci i dettagli del tuo account, le impostazioni di privacy e i servizi collegati",
+    "profileTitle": "Aggiorna Profilo",
+    "profileDescription": "Gestisci le tue informazioni personali e i dettagli del profilo",
+    "profileNameLabel": "Nome Completo",
+    "profileEmailLabel": "Indirizzo Email",
+    "profilePhoneLabel": "Numero di Telefono",
+    "profileBioLabel": "Bio",
+    "profileLocationLabel": "Posizione",
+    "profileSaveButton": "Salva Modifiche",
+    "profileUpdated": "Profilo aggiornato con successo!",
+    "profileUpdateError": "Impossibile aggiornare il profilo. Riprova.",
+    "passwordTitle": "Cambia Password",
+    "passwordDescription": "Aggiorna la tua password per mantenere il tuo account sicuro",
+    "passwordCurrentLabel": "Password Attuale",
+    "passwordNewLabel": "Nuova Password",
+    "passwordConfirmLabel": "Conferma Nuova Password",
+    "passwordChangeButton": "Cambia Password",
+    "passwordChanged": "Password cambiata con successo!",
+    "passwordChangeError": "Impossibile cambiare la password. Riprova.",
+    "passwordMismatch": "Le password non corrispondono",
+    "passwordTooShort": "La password deve essere di almeno 8 caratteri",
+    "accountsTitle": "Account Collegati",
+    "accountsDescription": "Gestisci i tuoi account social media e esterni collegati",
+    "platform_google": "Google",
+    "platform_facebook": "Facebook",
+    "platform_apple": "Apple",
+    "platform_twitter": "Twitter",
+    "status_connected": "Collegato",
+    "status_disconnected": "Non Collegato",
+    "connectButton": "Collega",
+    "disconnectButton": "Scollega",
+    "disconnectAriaLabel": "Scollega da {platformName}",
+    "connectSuccess": "Account {platformName} collegato con successo!",
+    "disconnectSuccess": "Account {platformName} scollegato con successo!",
+    "connectError": "Impossibile collegare l'account {platformName}",
+    "disconnectError": "Impossibile scollegare l'account {platformName}",
+    "noAccountsMessage": "Nessun account collegato. Collega i tuoi account per un accesso più facile.",
+    "connectNewButton": "Collega Nuovo Account",
+    "fetchError": "Impossibile caricare i dati dell'account",
+    "saving": "Salvataggio...",
+    "loading": "Caricamento..."
+  },
+  "SecuritySettings": {
+    "pageTitle": "Impostazioni Sicurezza",
+    "pageDescription": "Gestisci la sicurezza del tuo account, le sessioni e le opzioni di reset password",
+    "passwordResetTitle": "Reset Password",
+    "passwordResetDescription": "Invia un link di reset password al tuo indirizzo email",
+    "emailLabel": "Indirizzo Email",
+    "emailPlaceholder": "Inserisci il tuo indirizzo email",
+    "sendResetLink": "Invia Link di Reset",
+    "resetLinkSent": "Link di reset password inviato alla tua email",
+    "resetLinkError": "Impossibile inviare il link di reset. Riprova.",
+    "activeSessions": "Sessioni Attive",
+    "activeSessionsDescription": "Rivedi e gestisci le tue sessioni attive su diversi dispositivi",
+    "currentSession": "Sessione Corrente",
+    "sessionDevice": "Dispositivo",
+    "sessionLocation": "Posizione",
+    "sessionTime": "Ultimo Accesso",
+    "logoutSession": "Termina Sessione",
+    "logoutOtherSessions": "Termina Altre Sessioni",
+    "logoutAllSessions": "Termina Tutte le Sessioni",
+    "confirmLogoutAll": "Sei sicuro di voler terminare tutte le sessioni? Verrai disconnesso.",
+    "logoutSessionsSuccess": "Altre sessioni terminate con successo",
+    "logoutSessionsError": "Impossibile terminare le sessioni. Riprova.",
+    "twoFactorTitle": "Autenticazione a Due Fattori",
+    "twoFactorDescription": "Aggiungi un livello extra di sicurezza al tuo account",
+    "twoFactorEnabled": "L'autenticazione a due fattori è abilitata",
+    "twoFactorDisabled": "L'autenticazione a due fattori è disabilitata",
+    "enableTwoFactor": "Abilita 2FA",
+    "disableTwoFactor": "Disabilita 2FA",
+    "securityKeys": "Chiavi di Sicurezza",
+    "securityKeysDescription": "Chiavi di sicurezza hardware per protezione migliorata",
+    "addSecurityKey": "Aggiungi Chiave di Sicurezza",
+    "removeSecurityKey": "Rimuovi Chiave di Sicurezza"
+  },
+  "PrivacySettings": {
+    "pageTitle": "Impostazioni Privacy",
+    "pageDescription": "Controlla la condivisione dei dati, la visibilità del profilo e le preferenze di privacy",
+    "visibilityTitle": "Visibilità Profilo",
+    "visibilityDescription": "Scegli chi può vedere il tuo profilo e le tue informazioni",
+    "visibilityPublic": "Pubblico",
+    "visibilityFriends": "Solo Amici",
+    "visibilityPrivate": "Privato",
+    "dataSharingTitle": "Condivisione Dati",
+    "dataSharingDescription": "Controlla come i tuoi dati vengono utilizzati e condivisi",
+    "dataSharingEnabled": "Condivisione dati abilitata",
+    "dataSharingDisabled": "Condivisione dati disabilitata",
+    "blockedUsersTitle": "Utenti Bloccati",
+    "blockedUsersDescription": "Gestisci gli utenti che hai bloccato",
+    "blockUser": "Blocca Utente",
+    "unblockUser": "Sblocca",
+    "addBlockedUser": "Aggiungi Utente da Bloccare",
+    "blockUserPlaceholder": "Inserisci nome utente o email",
+    "userBlocked": "Utente bloccato con successo",
+    "userUnblocked": "Utente sbloccato con successo",
+    "blockError": "Impossibile bloccare l'utente",
+    "unblockError": "Impossibile sbloccare l'utente",
+    "noBlockedUsers": "Nessun utente bloccato",
+    "visibilityChanged": "Visibilità profilo aggiornata",
+    "dataSharingChanged": "Preferenze condivisione dati aggiornate",
+    "cookiesTitle": "Preferenze Cookie",
+    "cookiesDescription": "Gestisci le tue preferenze cookie e tracking",
+    "essentialCookies": "Cookie Essenziali",
+    "analyticsCookies": "Cookie Analitici",
+    "marketingCookies": "Cookie Marketing",
+    "cookiesEnabled": "Abilitato",
+    "cookiesDisabled": "Disabilitato"
+  },
+  "DisplaySettings": {
+    "pageTitle": "Impostazioni Display",
+    "pageDescription": "Personalizza la tua esperienza visiva e le preferenze dell'interfaccia",
+    "themeTitle": "Preferenza Tema",
+    "themeDescription": "Scegli il tuo schema di colori preferito",
+    "theme_light": "Chiaro",
+    "theme_dark": "Scuro",
+    "theme_system": "Predefinito Sistema",
+    "fontSizeTitle": "Dimensione Font",
+    "fontSizeDescription": "Regola la dimensione del testo per una migliore leggibilità",
+    "fontSize_small": "Piccolo",
+    "fontSize_medium": "Medio",
+    "fontSize_large": "Grande",
+    "layoutTitle": "Preferenza Layout",
+    "layoutDescription": "Scegli il layout di pagina preferito",
+    "layout_default": "Predefinito",
+    "layout_compact": "Compatto",
+    "layout_spacious": "Spazioso",
+    "accessibilityTitle": "Opzioni Accessibilità",
+    "accessibilityDescription": "Impostazioni per migliorare l'accessibilità",
+    "setting_reduceMotion": "Riduci Movimento",
+    "setting_highContrast": "Alto Contrasto",
+    "languageTitle": "Lingua",
+    "languageDescription": "Scegli la tua lingua preferita",
+    "feedbackThemeLight": "Passaggio al tema chiaro",
+    "feedbackThemeDark": "Passaggio al tema scuro",
+    "feedbackThemeSystem": "Utilizzo delle preferenze tema di sistema",
+    "feedbackFontSizeChange": "Dimensione font cambiata a {value}",
+    "feedbackLayoutChange": "Layout cambiato a {value}",
+    "feedbackToggleEnabled": "{settingName} abilitato",
+    "feedbackToggleDisabled": "{settingName} disabilitato",
+    "feedbackSaveSuccess": "Impostazioni display salvate con successo",
+    "saveSettings": "Salva Impostazioni",
+    "resetSettings": "Ripristina Predefinite"
+  },
+  "SubscriptionSettings": {
+    "currentPlan": "Piano Corrente",
+    "proPlan": "Piano Pro",
+    "monthlyPrice": "{price}/mese",
+    "nextBillingDate": "Prossima data di fatturazione",
+    "paymentMethod": "Metodo di pagamento",
+    "billingHistory": "Cronologia Fatturazione",
+    "updatePlan": "Aggiorna Piano",
+    "newsletterSubscriptions": "Abbonamenti Newsletter",
+    "subscribed": "Abbonato",
+    "notSubscribed": "Non abbonato",
+    "addCustomNewsletter": "Aggiungi Newsletter Personalizzata",
+    "additionalInfo": "Informazioni Aggiuntive",
+    "communicationCenterInfo": "Puoi gestire la frequenza dettagliata delle email, le preferenze di contenuto e i canali di comunicazione nel tuo",
+    "savePreferences": "Salva Preferenze Abbonamento",
+    "pageTitle": "Gestione Abbonamenti",
+    "pageDescription": "Gestisci i tuoi piani di abbonamento, informazioni di fatturazione e preferenze newsletter",
+    "planTitle": "Abbonamento Corrente",
+    "planDescription": "Visualizza e gestisci il tuo piano di abbonamento attuale e i dettagli di fatturazione",
+    "billingTitle": "Informazioni di Fatturazione",
+    "billingDescription": "Aggiorna il tuo metodo di pagamento e visualizza la cronologia di fatturazione",
+    "newsletterTitle": "Abbonamenti Newsletter",
+    "newsletterDescription": "Gestisci i tuoi abbonamenti newsletter e le preferenze di comunicazione",
+    "updatePlanButton": "Aggiorna Piano",
+    "viewBillingHistory": "Visualizza Cronologia Fatturazione",
+    "managePaymentMethod": "Gestisci Metodo di Pagamento",
+    "subscriptionActive": "Attivo",
+    "subscriptionExpired": "Scaduto",
+    "renewSubscription": "Rinnova Abbonamento",
+    "cancelSubscription": "Annulla Abbonamento",
+    "freePlan": "Piano Gratuito",
+    "basicPlan": "Piano Base",
+    "enterprisePlan": "Piano Enterprise",
+    "monthly": "Mensile",
+    "yearly": "Annuale",
+    "lifetime": "A Vita",
+    "weeklyDigest": "Riassunto Settimanale",
+    "weeklyDigestDesc": "Ricevi un riassunto settimanale degli aggiornamenti più importanti e contenuti in evidenza.",
+    "productUpdates": "Aggiornamenti Prodotto",
+    "productUpdatesDesc": "Sii il primo a conoscere le nuove funzionalità, miglioramenti e rilasci.",
+    "securityAlerts": "Avvisi di Sicurezza",
+    "securityAlertsDesc": "Notifiche di sicurezza importanti, consigli e migliori pratiche per il tuo account."
+  },
+  "Share": {
+    "nativeShare": "Condividi",
+    "copied": "Copiato!",
+    "copyLink": "Copia Link",
+    "shareOnFacebook": "Facebook",
+    "shareOnX": "X",
+    "shareOnLinkedIn": "LinkedIn",
+    "shareOnWhatsApp": "WhatsApp",
+    "shareOnTelegram": "Telegram",
+    "shareOnMessenger": "Messenger",
+    "shareViaEmail": "Email",
+    "share": "Condividi",
+    "shareContent": "Condividi questo contenuto",
+    "loginToShare": "Accedi per condividere",
+    "shareThis": "Condividi questo"
+  },
+  "Topics": {
+    "categories": "Categorie",
+    "subcategories": "Sottocategorie",
+    "errorLoadingCategories": "Errore nel caricamento delle categorie",
+    "subcategoriesOf": "Sottocategorie di {category}",
+    "loadingCategories": "caricamento categorie",
+    "noCategoriesFound": "nessuna categoria trovata",
+    "category_all_label": "Tutte le Categorie",
+    "topic_news_info_label": "Notizie",
+    "backToCategories": "Torna alle categorie",
+    "topicsAriaLabel": "Argomenti",
+    "topic_property_label": "Immobili",
+    "topic_social_content_label": "Social",
+    "dropdownAriaLabel": "Categorie {topicLabel}",
+    "categoriesTitle": "Categorie",
+    "viewAllButton": "Visualizza tutti {topicLabel}",
+    "closeButtonAriaLabel": "Chiudi",
+    "topic_dashboard_label": "Dashboard",
+    "dashboard_badge": "24 k+",
+    "topic_marketplace_label": "Marketplace",
+    "marketplace_badge": "Hot",
+    "topic_news_label": "Notizie",
+    "news_badge": "Nuovo",
+    "topic_jobs_label": "Lavori",
+    "topic_properties_label": "Immobili",
+    "topic_videos_label": "Video",
+    "topic_cars_label": "Auto",
+    "topic_automotive_label": "Auto",
+    "topic_deals_label": "Offerte",
+    "cars_badge": "3.8 k",
+    "topic_services_label": "Servizi",
+    "topic_led_lighting_label": "Illuminazione LED",
+    "topic_smart_lighting_systems_label": "Sistemi di Illuminazione Intelligenti",
+    "topic_solar_&_photovoltaic_systems_label": "Sistemi Solari e Fotovoltaici",
+    "topic_ev_charging_solutions_label": "Soluzioni di Ricarica per Veicoli Elettrici",
+    "topic_energy_management_systems_label": "Sistemi di Gestione Energetica",
+    "topic_professional_lighting_equipment_label": "Attrezzature per Illuminazione Professionale",
+    "category_dashboard_all_label": "Tutte le Notizie",
+    "category_dashboard_featured_label": "Selezioni di Oggi",
+    "category_dashboard_sport_label": "Sport",
+    "category_dashboard_trend_label": "Tendenze",
+    "category_dashboard_politics_label": "Politica",
+    "category_marketplace_all_label": "Tutti i Prodotti",
+    "category_marketplace_clothing_label": "Abbigliamento",
+    "category_marketplace_electronics_label": "Elettronica",
+    "category_marketplace_furniture_label": "Mobili",
+    "category_marketplace_phones_label": "Telefoni Cellulari",
+    "category_news_all_label": "Tutte le Notizie",
+    "category_news_breaking_label": "Ultime Notizie",
+    "category_news_business_label": "Business",
+    "category_news_tech_label": "Tecnologia",
+    "category_news_ent_label": "Intrattenimento",
+    "category_jobs_all_label": "Tutti i Lavori",
+    "category_jobs_fulltime_label": "Tempo Pieno",
+    "category_jobs_remote_label": "Remoto",
+    "category_jobs_parttime_label": "Part-time",
+    "category_jobs_intern_label": "Stage",
+    "category_properties_all_label": "Tutti",
+    "category_properties_sale_label": "In Vendita",
+    "category_properties_rent_label": "In Affitto",
+    "category_properties_comm_label": "Commerciale",
+    "category_properties_land_label": "Terreni",
+    "category_videos_all_label": "Tutti i Video",
+    "category_videos_popular_label": "Popolari",
+    "category_videos_tutorials_label": "Tutorial",
+    "category_videos_news_label": "Notizie",
+    "category_videos_fun_label": "Divertimento",
+    "category_cars_all_label": "Tutti i Veicoli",
+    "category_cars_new_label": "Auto Nuove",
+    "category_cars_used_label": "Auto Usate",
+    "category_cars_parts_label": "Ricambi",
+    "category_services_all_label": "Tutti i Servizi",
+    "category_services_home_label": "Casa e Giardino",
+    "category_services_health_label": "Salute e Bellezza",
+    "category_services_edu_label": "Educazione",
+    "category_services_pro_label": "Professionale"
+  },
+  "PaymentsPage": {
+    "loading": {
+      "title": "Caricamento Sistema di Pagamento",
+      "description": "Attendere mentre inizializziamo la sessione di pagamento..."
+    },
+    "navigation": {
+      "back": "Indietro"
+    },
+    "title": {
+      "checkout": "Checkout",
+      "payments": "Pagamenti"
+    },
+    "subtitle": {
+      "checkout": "Completa il tuo acquisto in sicurezza",
+      "payments": "Gestisci i tuoi pagamenti e la cronologia"
+    },
+    "tabs": {
+      "payment": "Pagamento",
+      "history": "Cronologia"
+    },
+    "empty": {
+      "title": "Nessun Pagamento Richiesto",
+      "description": "Non ci sono articoli nel carrello da pagare.",
+      "goToCart": "Vai al Carrello"
+    },
+    "security": {
+      "message": "Le tue informazioni di pagamento sono crittografate e sicure"
+    }
+  },
+  "PaymentForm": {
+    "loading": {
+      "title": "Configurazione Pagamento",
+      "message": "Attendere mentre prepariamo il modulo di pagamento..."
+    },
+    "errors": {
+      "title": "Errore Configurazione Pagamento",
+      "missingData": "Informazioni di pagamento mancanti. Riprova.",
+      "paymentSetup": "Configurazione pagamento fallita. Riprova.",
+      "paymentFailed": "Pagamento fallito. Riprova.",
+      "retry": "Riprova"
+    },
+    "summary": {
+      "title": "Riepilogo Pagamento",
+      "total": "Importo Totale",
+      "currency": "Valuta"
+    },
+    "form": {
+      "title": "Metodo di Pagamento",
+      "description": "Scegli il tuo metodo di pagamento preferito e inserisci i dettagli."
+    },
+    "security": {
+      "notice": "Le tue informazioni di pagamento sono crittografate e sicure"
+    }
+  },
+  "CheckoutForm": {
+    "button": {
+      "processing": "Elaborazione...",
+      "payAmount": "Paga €{amount}",
+      "payNow": "Paga Ora"
+    },
+    "info": {
+      "securePayment": "Il tuo pagamento è protetto con crittografia SSL",
+      "encryptedData": "Tutti i dati di pagamento sono crittografati e protetti",
+      "paymentProcessing": "Il tuo pagamento è in elaborazione. Attendere...",
+      "additionalActionRequired": "Autenticazione aggiuntiva richiesta. Segui le istruzioni."
+    },
+    "success": {
+      "paymentCompleted": "Pagamento completato con successo!"
+    },
+    "errors": {
+      "stripeNotLoaded": "Sistema di pagamento non caricato. Aggiorna la pagina.",
+      "paymentFailed": "Pagamento fallito. Riprova.",
+      "authenticationFailed": "Autenticazione pagamento fallita. Riprova.",
+      "rateLimitExceeded": "Troppi tentativi di pagamento. Riprova più tardi.",
+      "connectionError": "Errore di connessione. Controlla la connessione internet.",
+      "serverError": "Errore del server. Riprova più tardi.",
+      "unexpectedStatus": "Stato pagamento inaspettato. Contatta il supporto.",
+      "unexpectedError": "Si è verificato un errore inaspettato. Riprova."
+    }
+  },
+  "PaymentHistory": {
+    "loading": {
+      "title": "Caricamento Cronologia Pagamenti",
+      "message": "Attendere mentre recuperiamo la cronologia pagamenti..."
+    },
+    "error": {
+      "title": "Errore Caricamento Cronologia",
+      "retry": "Riprova"
+    },
+    "empty": {
+      "title": "Nessuna Cronologia Pagamenti",
+      "message": "Non hai ancora effettuato pagamenti."
+    },
+    "errors": {
+      "fetchFailed": "Caricamento cronologia pagamenti fallito"
+    },
+    "filters": {
+      "all": "Tutti i Pagamenti",
+      "completed": "Completati",
+      "pending": "In Attesa",
+      "failed": "Falliti"
+    },
+    "sort": {
+      "dateDesc": "Più Recenti Prima",
+      "dateAsc": "Più Vecchi Prima",
+      "amountDesc": "Importo Più Alto",
+      "amountAsc": "Importo Più Basso",
+      "statusAsc": "Stato A-Z"
+    },
+    "actions": {
+      "viewDetails": "Visualizza Dettagli",
+      "downloadReceipt": "Scarica Ricevuta"
+    }
+  },
+  "PaymentComplete": {
+    "errors": {
+      "noPaymentInfo": "Informazioni pagamento non trovate",
+      "noPaymentIntent": "Intento di pagamento non trovato",
+      "statusCheckFailed": "Controllo stato pagamento fallito"
+    },
+    "status": {
+      "loading": {
+        "title": "Controllo Stato Pagamento",
+        "message": "Attendere mentre verifichiamo il pagamento..."
+      },
+      "succeeded": {
+        "title": "Pagamento Riuscito!",
+        "message": "Il tuo pagamento è stato elaborato con successo. Sarai reindirizzato alla conferma ordine.",
+        "badge": "Completato"
+      },
+      "processing": {
+        "title": "Elaborazione Pagamento",
+        "message": "Il tuo pagamento è in elaborazione. Potrebbe richiedere alcuni momenti.",
+        "badge": "Elaborazione"
+      },
+      "failed": {
+        "title": "Pagamento Fallito",
+        "message": "Il tuo pagamento non è stato elaborato. Riprova.",
+        "badge": "Fallito"
+      },
+      "requiresAction": {
+        "title": "Azione Richiesta",
+        "message": "Autenticazione aggiuntiva richiesta per completare il pagamento.",
+        "badge": "Azione Richiesta"
+      },
+      "noInfo": {
+        "title": "Nessuna Informazione Pagamento",
+        "message": "Non siamo riusciti a trovare le informazioni del pagamento. Riprova."
+      },
+      "error": {
+        "title": "Errore Pagamento",
+        "message": "Si è verificato un errore durante l'elaborazione del pagamento."
+      }
+    },
+    "details": {
+      "paymentId": "ID Pagamento",
+      "amount": "Importo",
+      "status": "Stato"
+    },
+    "redirect": {
+      "message": "Sarai reindirizzato alla conferma ordine a breve..."
+    },
+    "actions": {
+      "retryPayment": "Riprova Pagamento",
+      "goHome": "Vai alla Home"
+    }
+  },
+  "OrderConfirmation": {
+    "errors": {
+      "missingData": "Informazioni ordine mancanti",
+      "orderCreationFailed": "Creazione ordine fallita"
+    },
+    "status": {
+      "processing": {
+        "title": "Creazione del Tuo Ordine",
+        "message": "Attendere mentre finalizziamo il tuo ordine..."
+      },
+      "completed": {
+        "title": "Ordine Creato con Successo!",
+        "message": "Il tuo ordine è stato creato e riceverai un'email di conferma a breve."
+      },
+      "error": {
+        "title": "Errore Creazione Ordine",
+        "message": "Si è verificato un errore nella creazione dell'ordine. Contatta il supporto."
+      }
+    },
+    "details": {
+      "title": "Dettagli Ordine",
+      "orderId": "ID Ordine",
+      "paymentId": "ID Pagamento",
+      "status": "Stato",
+      "statusCompleted": "Completato",
+      "date": "Data"
+    },
+    "redirect": {
+      "message": "Sarai reindirizzato alla pagina di successo a breve..."
+    },
+    "actions": {
+      "viewOrder": "Visualizza Ordine",
+      "continueShopping": "Continua Shopping",
+      "retry": "Riprova",
+      "goHome": "Vai alla Home"
+    },
+    "success": {
+      "banner": "Ordine creato con successo!"
+    }
+  },
+  "AdminDashboard": {
+    "title": "Dashboard Admin",
+    "subtitle": "Panoramica completa della piattaforma e gestione",
+    "stats": {
+      "totalUsers": "Utenti Totali",
+      "activeUsers": "Utenti Attivi",
+      "totalProducts": "Prodotti Totali",
+      "totalOrders": "Ordini Totali",
+      "revenue": "Entrate",
+      "pageViews": "Visualizzazioni Pagina"
+    },
+    "recentActivity": "Attività Recenti",
+    "adminActions": "Azioni Admin",
+    "categories": {
+      "userManagement": "Gestione Utenti e Attività",
+      "contentManagement": "Gestione Contenuti",
+      "operations": "Operazioni e Commercio",
+      "customerSupport": "Supporto Clienti",
+      "analytics": "Analisi e Approfondimenti",
+      "marketing": "Marketing e Comunicazione",
+      "system": "Amministrazione Sistema"
+    },
+    "actions": {
+      "manageUsers": "Gestisci Utenti",
+      "manageUsersDesc": "Visualizza, modifica e gestisci account utente",
+      "addAdmin": "Aggiungi Utente Admin",
+      "addAdminDesc": "Crea nuovi account amministratore",
+      "userActivity": "Log Attività Utenti",
+      "userActivityDesc": "Monitora attività e interazioni utenti",
+      "manageProducts": "Gestisci Prodotti",
+      "manageProductsDesc": "Rivedi e modera inserzioni prodotti",
+      "manageCategories": "Gestisci Categorie",
+      "manageCategoriesDesc": "Crea e organizza categorie prodotti",
+      "moderateReviews": "Modera Recensioni",
+      "moderateReviewsDesc": "Approva o rifiuta recensioni utenti",
+      "moderateComments": "Modera Commenti",
+      "moderateCommentsDesc": "Approva o rifiuta commenti utenti",
+      "managePosts": "Gestisci Post",
+      "managePostsDesc": "Gestisci post del blog e contenuti",
+      "bulkUpload": "Caricamento Prodotti in Massa",
+      "bulkUploadDesc": "Carica più prodotti tramite CSV",
+      "manageOrders": "Gestisci Ordini",
+      "manageOrdersDesc": "Traccia e aggiorna stati ordini",
+      "manageOffers": "Gestisci Offerte",
+      "manageOffersDesc": "Monitora offerte di acquisto, noleggio, pegno",
+      "paymentTransactions": "Transazioni di Pagamento",
+      "paymentTransactionsDesc": "Visualizza e gestisci record pagamenti",
+      "shippingManagement": "Analisi Spedizioni",
+      "shippingManagementDesc": "Monitora spedizioni e consegne",
+      "supportTickets": "Ticket di Supporto",
+      "supportTicketsDesc": "Gestisci richieste supporto clienti",
+      "messages": "Messaggi Utenti",
+      "messagesDesc": "Monitora sistema messaggi utenti",
+      "reportedContent": "Contenuti Segnalati",
+      "reportedContentDesc": "Rivedi elementi e utenti segnalati",
+      "platformAnalytics": "Analisi Piattaforma",
+      "platformAnalyticsDesc": "Visualizza metriche dettagliate piattaforma",
+      "searchAnalytics": "Analisi Ricerche",
+      "searchAnalyticsDesc": "Monitora tendenze e modelli di ricerca",
+      "trendingItems": "Elementi di Tendenza",
+      "trendingItemsDesc": "Visualizza prodotti e contenuti più popolari",
+      "userMetrics": "Metriche Utenti",
+      "userMetricsDesc": "Analizza metriche coinvolgimento utenti",
+      "newsletters": "Gestione Newsletter",
+      "newslettersDesc": "Gestisci iscrizioni e campagne newsletter",
+      "notifications": "Invia Notifiche",
+      "notificationsDesc": "Invia annunci a tutto il sistema",
+      "systemSettings": "Impostazioni Sistema",
+      "systemSettingsDesc": "Configura impostazioni piattaforma",
+      "mediaLibrary": "Libreria Media",
+      "mediaLibraryDesc": "Gestisci file multimediali caricati"
+    }
+  },
+  "AdminActivity": {
+    "title": "Monitoraggio Attività",
+    "subtitle": "Traccia interazioni utenti e attività piattaforma",
+    "totalActivities": "Attività Totali",
+    "trendingItems": "Elementi di Tendenza",
+    "activeUsers": "Utenti Attivi",
+    "pageViews": "Visualizzazioni Pagina",
+    "recentActivity": "Attività Recente",
+    "loading": "Caricamento...",
+    "noActivity": "Nessuna attività recente",
+    "popularContent": "Contenuti Popolari",
+    "mostLiked": "Più Apprezzati",
+    "noData": "Nessun dato disponibile"
+  },
+  "DatabaseTools": {
+    "title": "Strumenti Database",
+    "subtitle": "Strumenti di manutenzione e ottimizzazione del database",
+    "accessDenied": "Accesso Negato",
+    "adminRequired": "Hai bisogno dei privilegi di amministratore per accedere agli strumenti del database.",
+    "currentRole": "Ruolo attuale",
+    "notLoggedIn": "Non connesso",
+    "loadingTitle": "Caricamento Strumenti Database...",
+    "loadingMessage": "Attendere mentre recuperiamo le informazioni del database.",
+    "backToDashboard": "Torna alla Dashboard",
+    "refresh": "Aggiorna",
+    "databaseHealthy": "Il database funziona senza problemi",
+    "databaseWarning": "Il database richiede attenzione",
+    "databaseCritical": "Il database necessita di attenzione immediata",
+    "diskUsage": "Utilizzo Disco",
+    "connections": "Connessioni Attive",
+    "databaseSize": "Dimensione Database",
+    "slowQueries": "Query Lente",
+    "uptime": "Tempo di Attività",
+    "queriesPerSecond": "Query/sec",
+    "operations": "Operazioni Database",
+    "runMaintenance": "Esegui Manutenzione",
+    "maintenanceDesc": "Analizza tabelle, ricostruisci indici e aggiorna statistiche",
+    "optimizeDatabase": "Ottimizza Database",
+    "optimizeDesc": "Deframmenta tabelle e ottimizza le prestazioni delle query",
+    "createBackup": "Crea Backup",
+    "backupDesc": "Crea un backup completo del database per il disaster recovery",
+    "cleanupOldData": "Pulisci Dati Vecchi",
+    "cleanupDesc": "Rimuovi log scaduti e dati temporanei",
+    "recentBackups": "Backup Recenti",
+    "noBackups": "Nessun backup recente trovato",
+    "noSlowQueries": "Nessuna query lenta rilevata",
+    "loadingQueries": "Caricamento query..."
+  },
+  "MerchantCenter": {
+    "title": "Google Merchant Center",
+    "subtitle": "Gestisci la sincronizzazione prodotti con Google Merchant Center",
+    "accessDenied": "Accesso Negato",
+    "adminRequired": "È necessario avere privilegi di amministratore per accedere alla gestione Merchant Center.",
+    "currentRole": "Ruolo attuale",
+    "notLoggedIn": "Non autenticato",
+    "loadingTitle": "Caricamento Merchant Center...",
+    "loadingMessage": "Attendere mentre recuperiamo i dati di sincronizzazione più recenti.",
+    "backToDashboard": "Torna alla Dashboard",
+    "settings": "Impostazioni",
+    "syncing": "Sincronizzazione in corso...",
+    "syncAll": "Sincronizza Tutto",
+    "syncedProducts": "Prodotti Sincronizzati",
+    "successfullySync": "Sincronizzato con successo",
+    "pendingSync": "Sincronizzazione in Attesa",
+    "waitingInQueue": "In attesa nella coda",
+    "failedSync": "Sincronizzazione Fallita",
+    "requiresAttention": "Richiede attenzione",
+    "successRate": "Tasso di Successo",
+    "last30Days": "Ultimi 30 giorni",
+    "syncStatus": "Stato Sincronizzazione",
+    "unknown": "Sconosciuto",
+    "lastSync": "Ultima sincronizzazione",
+    "never": "Mai",
+    "retryFailed": "Riprova Falliti",
+    "bulkUpload": "Caricamento di Massa",
+    "exportReport": "Esporta Report",
+    "recentSynchronizations": "Sincronizzazioni Recenti",
+    "searchProducts": "Cerca prodotti...",
+    "allStatuses": "Tutti gli Stati",
+    "synced": "Sincronizzato",
+    "pending": "In Attesa",
+    "failed": "Fallito",
+    "syncErrors": "Errori di Sincronizzazione",
+    "viewAll": "Visualizza Tutto",
+    "avgSyncTime": "Tempo Medio di Sincronizzazione",
+    "totalErrors": "Errori Totali",
+    "warnings": "Avvisi",
+    "apiCallsToday": "Chiamate API Oggi",
+    "analytics": {
+      "title": "Analytics Commerciali",
+      "subtitle": "Analytics Google Merchant Center e insight sulle prestazioni",
+      "performance": "Prestazioni",
+      "insights": "Insight",
+      "reports": "Report",
+      "dashboard": "Dashboard Analytics",
+      "overview": "Panoramica Prestazioni",
+      "metrics": "Metriche Chiave",
+      "trends": "Tendenze",
+      "clickThroughRate": "Tasso di Click-through",
+      "impressions": "Impressioni",
+      "clicks": "Click",
+      "conversionRate": "Tasso di Conversione",
+      "revenue": "Ricavi",
+      "topProducts": "Prodotti Top Performance",
+      "productPerformance": "Prestazioni Prodotti",
+      "categoryPerformance": "Prestazioni Categorie",
+      "timeRange": "Intervallo Temporale",
+      "last7Days": "Ultimi 7 Giorni",
+      "last30Days": "Ultimi 30 Giorni",
+      "last90Days": "Ultimi 90 Giorni",
+      "customRange": "Intervallo Personalizzato",
+      "exportData": "Esporta Dati",
+      "downloadReport": "Scarica Report",
+      "noDataAvailable": "Nessun dato analytics disponibile",
+      "loadingAnalytics": "Caricamento dati analytics..."
+    }
+  },
+  "UserManagement": {
+    "title": "Gestione Utenti",
+    "subtitle": "Gestisci account utente e permessi",
+    "export": "Esporta",
+    "totalUsers": "Utenti Totali",
+    "activeUsers": "Attivi",
+    "inactiveUsers": "Inattivi",
+    "searchPlaceholder": "Cerca utenti...",
+    "filters": "Filtri",
+    "filterByRole": "Ruolo",
+    "filterByStatus": "Stato",
+    "allRoles": "Tutti i Ruoli",
+    "allStatuses": "Tutti gli Stati",
+    "customer": "Cliente",
+    "business": "Business",
+    "admin": "Admin",
+    "active": "Attivo",
+    "inactive": "Inattivo",
+    "user": "Utente",
+    "role": "Ruolo",
+    "status": "Stato",
+    "joined": "Iscritto",
+    "lastActive": "Ultimo Accesso",
+    "actions": "Azioni",
+    "pageInfo": "Pagina {{current}} di {{total}}"
+  },
+  "OrdersManagement": {
+    "title": "Gestione Ordini",
+    "subtitle": "Visualizza e gestisci gli ordini dei clienti",
+    "searchPlaceholder": "Cerca ordini per ID, cliente...",
+    "filterByStatus": "Filtra per Stato",
+    "allStatuses": "Tutti gli Stati",
+    "processing": "In Elaborazione",
+    "sortBy": "Ordina per",
+    "status": "Stato",
+    "newest": "Più Recenti",
+    "oldest": "Più Vecchi",
+    "customer": "Cliente",
+    "payment": "Pagamento",
+    "actions": "Azioni",
+    "totalOrders": "Ordini Totali",
+    "pendingOrders": "Ordini in Attesa",
+    "totalRevenue": "Ricavi Totali"
+  },
+  "ProductManagement": {
+    "title": "Gestione Prodotti",
+    "subtitle": "Gestisci l'inventario e i prezzi dei prodotti",
+    "add": "Aggiungi",
+    "upload": "Carica",
+    "searchPlaceholder": "Cerca prodotti...",
+    "filters": "Filtri",
+    "filterByCategory": "Categoria",
+    "filterByStatus": "Stato",
+    "filterByBrand": "Marca",
+    "filterByCondition": "Condizione",
+    "negotiable": "Negoziabile",
+    "middleman": "Intermediario",
+    "sortBy": "Ordina per",
+    "sortOrder": "Ordine"
+  },
+  "ServiceManagement": {
+    "title": "Gestione Servizi",
+    "subtitle": "Gestisci i tuoi servizi, fornitori e disponibilità",
+    "add": "Aggiungi Servizio",
+    "searchPlaceholder": "Cerca servizi...",
+    "filters": "Filtri",
+    "filterByCategory": "Categoria",
+    "filterByStatus": "Stato",
+    "filterByServiceType": "Tipo di Servizio",
+    "filterByUserType": "Tipo di Fornitore",
+    "negotiable": "Negoziabile",
+    "middleman": "Intermediario",
+    "sortBy": "Ordina per",
+    "sortOrder": "Ordine"
+  },
+  "PostsManagement": {
+    "title": "Gestione Post",
+    "subtitle": "Gestisci i tuoi post del blog e contenuti",
+    "add": "Nuovo Post",
+    "searchPlaceholder": "Cerca post...",
+    "filters": "Filtri",
+    "filterByCategory": "Categoria",
+    "filterByStatus": "Stato",
+    "filterByAuthor": "Autore",
+    "sortBy": "Ordina per",
+    "sortOrder": "Ordine"
+  },
+  "ReviewManagement": {
+    "title": "Gestione Recensioni",
+    "subtitle": "Modera e gestisci le recensioni dei prodotti",
+    "searchPlaceholder": "Cerca recensioni...",
+    "filters": "Filtri",
+    "filterByStatus": "Stato",
+    "filterByRating": "Valutazione",
+    "filterByCategory": "Categoria",
+    "sortBy": "Ordina per",
+    "sortOrder": "Ordine"
+  },
+  "AddAdminManagement": {
+    "title": "Aggiungi Amministratore",
+    "subtitle": "Crea un nuovo account amministratore con permessi specifici"
+  },
+  "CategoryManagement": {
+    "title": "Gestione Categorie",
+    "subtitle": "Organizza le tue categorie e sottocategorie di prodotti",
+    "createCategory": "Crea Categoria",
+    "searchPlaceholder": "Cerca categorie...",
+    "noCategories": "Ancora nessuna categoria",
+    "noCategoriesDesc": "Crea la tua prima categoria per iniziare",
+    "noCategoriesFound": "Nessuna categoria trovata",
+    "adjustSearchTerm": "Prova a modificare il termine di ricerca"
+  },
+  "AdminNewsletters": {
+    "title": "Gestione Newsletter",
+    "subtitle": "Gestisci iscritti e invia campagne",
+    "tabs": {
+      "subscribers": "Iscritti",
+      "campaigns": "Campagne"
+    },
+    "totalSubscribers": "Totale Iscritti",
+    "loading": "Caricamento...",
+    "subscribersPlaceholder": "L'interfaccia di gestione degli iscritti verrà visualizzata qui",
+    "createCampaign": "Crea Campagna",
+    "campaignsPlaceholder": "L'interfaccia di creazione e gestione delle campagne verrà visualizzata qui"
+  },
+  "PlatformAnalytics": {
+    "title": "Analitiche Piattaforma",
+    "subtitle": "Monitora prestazioni e comportamento utenti",
+    "last7Days": "Ultimi 7 giorni",
+    "last30Days": "Ultimi 30 giorni",
+    "last90Days": "Ultimi 90 giorni",
+    "export": "Esporta",
+    "totalRevenue": "Entrate Totali",
+    "activeUsers": "Utenti Attivi",
+    "totalOrders": "Ordini Totali",
+    "conversionRate": "Tasso Conversione",
+    "avgOrderValue": "Valore Medio Ordine",
+    "pageViews": "Visualizzazioni",
+    "topProducts": "Prodotti Top",
+    "userActivity": "Attività Utenti",
+    "newUsers": "Nuovi Utenti",
+    "returningUsers": "Utenti di Ritorno",
+    "avgSession": "Sessione Media",
+    "bounceRate": "Frequenza Rimbalzo",
+    "revenueByCategory": "Entrate per Categoria"
+  },
+  "Categories": {
+    "scrollLeft": "Scorri a sinistra",
+    "scrollRight": "Scorri a destra",
+    "allCategories": "Tutte le categorie"
+  },
+  "Filters": {
+    "floatingButtonAriaLabel": "Apri filtri",
+    "floatingButtonText": "Filtri",
+    "sidebarTitle": "Filtri",
+    "close": "Chiudi",
+    "closeButtonAriaLabel": "Chiudi filtri",
+    "viewModeLabel": "Modalità Vista",
+    "viewModeMobile": "Layout Card Mobile",
+    "viewModeList": "Layout Lista",
+    "sortByLabel": "Ordina Per",
+    "sortByDefault": "Predefinito",
+    "sortByLikesHigh": "Più Apprezzati",
+    "sortByLikesLow": "Meno Apprezzati",
+    "sortByCommentsHigh": "Più Commentati",
+    "sortByCommentsLow": "Meno Commentati",
+    "sortByVisitedHigh": "Più Visitati",
+    "sortByVisitedLow": "Meno Visitati",
+    "sortByRatingHigh": "Valutazione Più Alta",
+    "sortByRatingLow": "Valutazione Più Bassa",
+    "sortByPopularityHigh": "Più Popolari",
+    "sortByTrendingHigh": "In Tendenza",
+    "sortByCheapest": "Più Economici",
+    "sortByMostExpensive": "Più Costosi",
+    "sortByNewest": "Più Recenti",
+    "locationLabel": "Posizione",
+    "locationPlaceholder": "Inserisci posizione...",
+    "clearLocationAriaLabel": "Cancella Posizione",
+    "radiusLabel": "Raggio di Ricerca",
+    "radiusSelectAriaLabel": "Raggio di Ricerca",
+    "radiusInputPlaceholder": "Inserisci raggio in km",
+    "radiusInputAriaLabel": "Raggio di ricerca in chilometri",
+    "radiusQuickSelectAriaLabel": "Imposta raggio a {value} chilometri",
+    "priceRangeLabel": "Fascia di Prezzo (€)",
+    "minPlaceholder": "Min",
+    "maxPlaceholder": "Max",
+    "minPriceAriaLabel": "Prezzo Minimo",
+    "maxPriceAriaLabel": "Prezzo Massimo",
+    "conditionLabel": "Condizione",
+    "conditionAny": "Qualsiasi",
+    "conditionNew": "Nuovo",
+    "conditionUsed": "Usato",
+    "conditionRefurbished": "Ricondizionato",
+    "tagsLabel": "Tag",
+    "tagsPlaceholder": "Inserisci tag...",
+    "userTypeLabel": "Tipo Venditore",
+    "userTypeAny": "Qualsiasi",
+    "userTypePrivate": "Privato",
+    "userTypeBusiness": "Business",
+    "userTypeWholesale": "Ingrosso",
+    "userTypeVerified": "Verificato",
+    "userTypeAll": "Tutti i Venditori",
+    "contentTypeLabel": "Tipo di Contenuto",
+    "contentTypeAll": "Tutti i Contenuti",
+    "contentTypeVideos": "Video",
+    "contentTypeTweets": "Tweet",
+    "contentTypeJobs": "Lavori",
+    "contentTypeServices": "Servizi",
+    "contentTypeDeals": "Offerte",
+    "contentTypeShorts": "Shorts",
+    "contentTypeVehicles": "Veicoli",
+    "contentTypeProperties": "Proprietà",
+    "contentTypeNews": "Notizie",
+    "hideAdvancedFilters": "Nascondi Filtri Avanzati",
+    "showAdvancedFilters": "Mostra Filtri Avanzati",
+    "showAdvanced": "Mostra Avanzati",
+    "hideAdvanced": "Nascondi Avanzati",
+    "clearButton": "Cancella",
+    "applyButton": "Applica",
+    "applying": "Applicando...",
+    "error_minMaxPrice": "Il prezzo minimo non può superare il prezzo massimo.",
+    "error_minMaxShipping": "La spedizione minima non può superare la spedizione massima.",
+    "error_minMaxWeight": "Il peso minimo non può superare il peso massimo.",
+    "error_minMaxHeight": "L'altezza minima non può superare l'altezza massima.",
+    "error_minMaxWidth": "La larghezza minima non può superare la larghezza massima.",
+    "error_minMaxDepth": "La profondità minima non può superare la profondità massima.",
+    "filters": "Filtri",
+    "apply": "Applica",
+    "applyFilters": "Applica Filtri",
+    "clearAll": "Cancella Tutto",
+    "subcategories": "Sottocategorie",
+    "categories": "Categorie",
+    "price": "Fascia di prezzo",
+    "brands": "Marchi",
+    "condition": "Condizione",
+    "new": "Nuovo",
+    "used": "Usato",
+    "refurbished": "Ricondizionato",
+    "userTypeProfessional": "Professionale",
+    "minPrice": "Prezzo Minimo",
+    "maxPrice": "Prezzo Massimo",
+    "toggleFilters": "Attiva/disattiva pannello filtri",
+    "openFilters": "Apri filtri",
+    "basicFilters": "Filtri di base",
+    "videosFilters": "Filtri video",
+    "tweetsFilters": "Filtri tweet",
+    "jobsFilters": "Filtri lavoro",
+    "servicesFilters": "Filtri servizi",
+    "dealsFilters": "Filtri offerte",
+    "shortsFilters": "Filtri shorts",
+    "vehiclesFilters": "Filtri veicoli",
+    "propertiesFilters": "Filtri proprietà",
+    "newsFilters": "Filtri notizie",
+    "clear": "Cancella",
+    "activeFilters": "Filtri attivi",
+    "removeFilter": "Rimuovi filtro",
+    "advancedFilters": "Filtri avanzati",
+    "contentType_videos": "Video",
+    "contentType_tweets": "Tweet",
+    "contentType_jobs": "Lavori",
+    "contentType_services": "Servizi",
+    "contentType_deals": "Offerte",
+    "contentType_shorts": "Shorts",
+    "contentType_vehicles": "Veicoli",
+    "contentType_properties": "Proprietà",
+    "contentType_news": "Notizie",
+    "sortBy": "Ordina per",
+    "sortByPopular": "Più popolari",
+    "sortByRating": "Valutazione più alta",
+    "allCategories": "Tutte le categorie",
+    "loadingCategories": "Caricamento categorie...",
+    "loadingSubcategories": "Caricamento sottocategorie...",
+    "categoryLabel": "Categoria",
+    "mobileDescription": "Configura filtri di ricerca",
+    "currentFilters": "Filtri correnti:",
+    "noFiltersSelected": "Nessun filtro selezionato",
+    "sortBy_likes_high": "Più apprezzati",
+    "sortBy_comments_high": "Più commentati",
+    "sortBy_visited_high": "Più visitati",
+    "sortBy_rating_high": "Valutazione più alta",
+    "sortBy_popularity_high": "Più popolari",
+    "sortBy_trending_high": "Di tendenza",
+    "sortBy_price_low": "Più economici",
+    "price": "Prezzo",
+    "brand": "Marca",
+    "condition": "Condizione",
+    "rating": "Valutazione",
+    "location": "Posizione",
+    "moreFilters": "Altri filtri",
+    "condition_new": "Nuovo",
+    "condition_like-new": "Come nuovo",
+    "condition_good": "Buono",
+    "condition_fair": "Discreto",
+    "condition_refurbished": "Ricondizionato",
+    "up": "in su",
+    "enterLocation": "Inserisci posizione...",
+    "radius": "Raggio",
+    "applyLocation": "Applica",
+    "negotiablePrice": "Prezzo trattabile",
+    "freeShipping": "Spedizione gratuita",
+    "pickupOnly": "Solo ritiro",
+    "verifiedSeller": "Venditore verificato",
+    "onlineService": "Servizio online",
+    "hasPortfolio": "Ha portfolio",
+    "sortByRelevance": "Ordina per: Rilevanza",
+    "sortByPriceLow": "Ordina per: Prezzo (crescente)",
+    "sortByPriceHigh": "Ordina per: Prezzo (decrescente)",
+    "openAiCopilot": "Apri Co-pilota AI",
+    "active": "Attivo",
+    "aiCopilot": "Co-pilota AI",
+    "closeAiCopilot": "Chiudi Co-pilota AI",
+    "marketplace": "Marketplace",
+    "services": "Servizi",
+    "posts": "Post",
+    "all": "TUTTO",
+    "showLess": "Mostra meno",
+    "more": "altro",
+    "categories": "Categorie",
+    "sortBy_price_high": "Più costosi",
+    "sortBy_date_new": "Più recenti",
+    "contentType_all": "Tutti",
+    "userType_verified": "Verificato",
+    "userType_business": "Business",
+    "userType_private": "Privato",
+    "sortByEngagement": "[IT] Sort By Engagement",
+    "sortEngagementDesc": "[IT] Sort Engagement Desc",
+    "popularityHigh": "[IT] Popularity High",
+    "trendingHigh": "[IT] Trending High",
+    "likesHigh": "[IT] Likes High",
+    "likesLow": "[IT] Likes Low",
+    "commentsHigh": "[IT] Comments High",
+    "commentsLow": "[IT] Comments Low",
+    "backToCategories": "Torna alle categorie"
+  },
+  "UserMenu": {
+    "menuAriaLabel": "Opzioni menu utente",
+    "userFallbackName": "Utente",
+    "userAccount": "Account Utente",
+    "userMenuTitle": "Menu di {userName}",
+    "section_account_title": "Account",
+    "section_support_title": "Supporto e Attività",
+    "item_support_label": "Supporto",
+    "item_activity_label": "Attività",
+    "item_reviews_label": "Recensioni",
+    "section_preferences_title": "Preferenze",
+    "item_payments_label": "Pagamenti",
+    "item_newsletters_label": "Newsletter",
+    "item_signOut_label": "Disconnetti",
+    "userMenuAriaLabel": "Menu di {userName}",
+    "fallbackMenuAriaLabel": "Menu utente",
+    "section_admin_title": "Strumenti Admin",
+    "section_business_title": "Strumenti Business"
+  },
+  "TopicMenu": {
+    "toggleButtonAriaLabel": "Menu Categorie",
+    "dropdownAriaLabel": "Navigazione Categorie",
+    "dropdownTitle": "Categorie",
+    "closeButtonAriaLabel": "Chiudi menu"
+  },
+  "BusinessDashboard": {
+    "title": "Dashboard Business",
+    "subtitle": "Gestisci i tuoi prodotti e monitora le prestazioni",
+    "metrics": {
+      "totalProducts": "Prodotti Totali",
+      "totalOrders": "Ordini Totali",
+      "revenue": "Entrate",
+      "views": "Visualizzazioni Totali",
+      "likes": "Mi Piace Totali",
+      "rating": "Valutazione Media"
+    },
+    "actions": {
+      "addProduct": "Aggiungi Prodotto",
+      "addProductDesc": "Inserisci un nuovo prodotto",
+      "manageProducts": "Gestisci Prodotti",
+      "manageProductsDesc": "Visualizza e modifica i tuoi annunci",
+      "viewOrders": "Visualizza Ordini",
+      "viewOrdersDesc": "Traccia ordini clienti",
+      "manageOffers": "Gestisci Offerte",
+      "manageOffersDesc": "Visualizza offerte di acquisto, noleggio, pegno",
+      "createInvoice": "Crea Fattura",
+      "createInvoiceDesc": "Genera fatture per i clienti",
+      "shippingLabels": "Etichette di Spedizione",
+      "shippingLabelsDesc": "Crea etichette di spedizione",
+      "analytics": "Analisi",
+      "analyticsDesc": "Visualizza approfondimenti dettagliati",
+      "managePosts": "Gestisci Post",
+      "managePostsDesc": "Crea e gestisci post del blog"
+    },
+    "tabs": {
+      "overview": "Panoramica",
+      "products": "Prodotti",
+      "orders": "Ordini Recenti"
+    },
+    "table": {
+      "product": "Prodotto",
+      "status": "Stato",
+      "price": "Prezzo",
+      "stock": "Scorte",
+      "views": "Visualizzazioni",
+      "sales": "Vendite",
+      "actions": "Azioni"
+    },
+    "performance": {
+      "title": "Panoramica Prestazioni",
+      "placeholder": "Grafici prestazioni in arrivo"
+    },
+    "activity": {
+      "title": "Attività Recenti",
+      "empty": "Nessuna attività recente"
+    },
+    "products": {
+      "empty": "Nessun prodotto trovato"
+    },
+    "orders": {
+      "empty": "Nessun ordine recente"
+    }
+  },
+  "shared": {
+    "services": "Servizi",
+    "vehicles": "Veicoli",
+    "deals": "Offerte",
+    "properties": "Immobili",
+    "jobs": "Lavoro",
+    "videos": "Video",
+    "posts": "Post",
+    "wishlist": "Lista dei desideri",
+    "messages": "Messaggi",
+    "notifications": "Notifiche",
+    "cart": "Carrello",
+    "home": "Home",
+    "profile": "Profilo",
+    "settings": "Impostazioni",
+    "activity": "Attività",
+    "commerce": "Commercio",
+    "social": "Social",
+    "intelligence": "Intelligenza",
+    "infrastructure": "Infrastruttura",
+    "learnMore": "Scopri di più",
+    "requestDemo": "Richiedi una demo",
+    "startBuilding": "Inizia a costruire",
+    "contactSales": "Contatta le vendite",
+    "socialPage": {
+      "features": {
+        "messaging": {
+          "description": "[IT] Description - Please add translation"
+        }
+      }
+    }
+  },
+  "Demo": {
+    "breadcrumb": {
+      "demo": "Demo",
+      "commerceEngine": "Motore commerciale",
+      "socialLayer": "Livello sociale",
+      "intelligenceModule": "Modulo intelligenza",
+      "infrastructureModule": "Modulo infrastruttura",
+      "verticalsModule": "Modulo verticali",
+      "technicalOverview": "Panoramica tecnica"
+    },
+    "mainPage": {
+      "title": "Il motore Headless per marketplace basati su AI",
+      "subtitle": "Lancia un marketplace multi-vendor scalabile con un Co-Pilota AI integrato, coinvolgimento sociale dal vivo e moduli di commercio componibili. La tua visione, alimentata dalla nostra infrastruttura.",
+      "platformTitle": "Una piattaforma componibile per il commercio moderno",
+      "platformDescription": "Cinque moduli potenti che lavorano insieme senza soluzione di continuità per creare l'esperienza marketplace definitiva.",
+      "technicalCta": "Panoramica tecnica"
+    },
+    "modules": {
+      "commerce": {
+        "title": "Motore commerciale",
+        "description": "Un nucleo transazionale completo per marketplace multi-vendor. Gestisci pagamenti, ordini, spedizioni e modelli avanzati come leasing e prenotazioni.",
+        "badge": "Core"
+      },
+      "social": {
+        "title": "Livello sociale",
+        "description": "Trasforma le transazioni in conversazioni con messaggistica dal vivo, commenti, recensioni e following degli utenti per costruire una comunità vivace e coinvolta.",
+        "badge": "Coinvolgimento"
+      },
+      "verticals": {
+        "title": "Verticali specializzate",
+        "description": "Vai oltre le semplici categorie. Implementa verticali ricche di funzionalità per Auto, Immobili, Lavoro, Servizi e altro, ciascuna con la propria logica e schema dati unici.",
+        "badge": "Flessibile"
+      },
+      "intelligence": {
+        "title": "Co-Pilota AI",
+        "description": "Il nucleo intelligente della tua piattaforma. Abilita comandi vocali, creazione di annunci da immagini e agenti autonomi 24/7 per i tuoi utenti e venditori.",
+        "badge": "AI-Nativo"
+      },
+      "infrastructure": {
+        "title": "Infrastruttura",
+        "description": "Una base ad alte prestazioni costruita su microservizi e Kubernetes. Ottieni scalabilità di livello enterprise e risparmia sui costi con le nostre soluzioni proprietarie per media e geocoding.",
+        "badge": "Enterprise"
+      }
+    },
+    "commercePage": {
+      "title": "Motore commerciale",
+      "subtitle": "Un nucleo transazionale completo per marketplace multi-vendor. Gestisci pagamenti, ordini, spedizioni e modelli avanzati come leasing e prenotazioni.",
+      "coreCapabilities": "Capacità commerciali principali",
+      "features": {
+        "multiVendor": {
+          "title": "Marketplace multi-vendor",
+          "description": "Infrastruttura marketplace completa con gestione venditori, cataloghi prodotti e divisione automatica delle commissioni. Supporto per prodotti fisici, digitali e basati su servizi."
+        },
+        "payment": {
+          "title": "Elaborazione pagamenti avanzata",
+          "description": "Integrazione Stripe Connect incorporata per divisione dei pagamenti senza soluzione di continuità, deposito a garanzia e pagamenti automatici. Supporto per abbonamenti, prenotazioni e flussi di pagamento personalizzati."
+        },
+        "order": {
+          "title": "Gestione ordini e adempimento",
+          "description": "Gestione ordini sofisticata con flussi di lavoro multi-step, integrazioni di spedizione e tracciamento in tempo reale. Gestione di scenari complessi come adempimento parziale e resi."
+        }
+      },
+      "metrics": {
+        "title": "Metriche di prestazione commerciale",
+        "checkoutTime": "Tempo di risposta checkout",
+        "successRate": "Tasso di successo pagamenti",
+        "transactions": "Transazioni simultanee",
+        "pciCompliance": "Onere conformità PCI"
+      },
+      "models": {
+        "title": "Modelli commerciali avanzati",
+        "leasing": {
+          "title": "Leasing e noleggi",
+          "description": "Supporto per noleggi basati sul tempo con calendari di disponibilità, depositi cauzionali e calcolo automatico delle penali per ritardo."
+        },
+        "reservations": {
+          "title": "Prenotazioni e booking",
+          "description": "Abilita prenotazioni di servizi con gestione slot, limiti di capacità e notifiche promemoria automatiche."
+        },
+        "subscription": {
+          "title": "Commercio in abbonamento",
+          "description": "Fatturazione ricorrente con periodi di prova, modifiche del piano e solleciti automatici per pagamenti non riusciti."
+        },
+        "auction": {
+          "title": "Aste e offerte",
+          "description": "Funzionalità asta in tempo reale con incrementi automatici delle offerte, prezzi di riserva e opzioni compralo subito."
+        }
+      },
+      "relatedModules": "Moduli correlati",
+      "relatedSocial": "Aggiungi recensioni e messaggistica alla tua piattaforma commerciale",
+      "relatedIntelligence": "Abilita shopping vocale e raccomandazioni intelligenti"
+    },
+    "socialPage": {
+      "title": "Livello sociale",
+      "subtitle": "Trasforma le transazioni in conversazioni con messaggistica dal vivo, commenti, recensioni e following degli utenti per costruire una comunità vivace e coinvolta.",
+      "features": {
+        "title": "Funzionalità di coinvolgimento sociale",
+        "messaging": {
+          "title": "Messaggistica in tempo reale",
+          "description": "Costruito su NATS WebSocket per comunicazione istantanea. Supporto per messaggi diretti, chat di gruppo e conversazioni venditore-cliente con indicatori di digitazione e conferme di lettura."
+        },
+        "feeds": {
+          "title": "Feed di attività",
+          "description": "Feed personalizzati con filtraggio complesso, scorrimento infinito e aggiornamenti in tempo reale. Mostra annunci di prodotti, attività degli utenti e contenuti promossi in un flusso unificato."
+        },
+        "following": {
+          "title": "Segui e connettiti",
+          "description": "Costruisci comunità attorno a venditori e utenti. Abilita il following di venditori, marchi o categorie preferiti con notifiche istantanee per nuovi annunci o attività."
+        },
+        "reviews": {
+          "title": "Recensioni e valutazioni",
+          "description": "Sistema di recensioni completo con badge di acquisto verificato, caricamento foto e tracciamento voti utili. Costruisci fiducia con feedback utente autentico."
+        }
+      },
+      "metrics": {
+        "title": "Metriche di coinvolgimento sociale",
+        "messageDelivery": "Tempo di consegna messaggi",
+        "connections": "Connessioni simultanee",
+        "engagement": "Aumento coinvolgimento utenti",
+        "retention": "Tasso di retention utenti"
+      },
+      "tools": {
+        "title": "Strumenti per costruire comunità",
+        "comments": {
+          "title": "Commenti dal vivo",
+          "description": "Commenti in tempo reale sugli annunci con discussioni threaded, menzioni e strumenti di moderazione.",
+          "features": {
+            "nested": "Risposte annidate",
+            "mentions": "@menzioni con notifiche",
+            "spam": "Rilevamento spam",
+            "moderation": "Controlli moderatore"
+          }
+        },
+        "profiles": {
+          "title": "Profili utente",
+          "description": "Profili utente ricchi che mostrano attività, annunci, recensioni e connessioni sociali.",
+          "features": {
+            "timeline": "Timeline attività",
+            "portfolio": "Vetrina portfolio",
+            "verification": "Badge di verifica",
+            "bio": "Bio e link personalizzati"
+          }
+        },
+        "notifications": {
+          "description": "Sistema di notifiche intelligente con preferenze personalizzabili e notifiche push in tempo reale.",
+          "features": {
+            "inApp": "Notifiche in-app",
+            "email": "Digest email",
+            "push": "Notifiche push",
+            "preferences": "Preferenze personalizzate"
+          }
+        }
+      },
+      "enhance": "Migliora la tua piattaforma sociale",
+      "relatedCommerce": "Abilita il commercio sociale con funzionalità di shopping integrate",
+      "relatedIntelligence": "Aggiungi moderazione contenuti intelligente e algoritmi di raccomandazione",
+      "relatedVerticals": "Personalizza le funzionalità sociali per segmenti di mercato specifici"
+    },
+    "intelligencePage": {
+      "title": "Il Co-Pilota AI proattivo",
+      "subtitle": "Il nostro livello di intelligenza non è solo una funzionalità; è il fondamento dell'esperienza utente. Trasforma la tua piattaforma da uno strumento statico in un partner dinamico e conversazionale che comprende gli obiettivi, automatizza le attività e fornisce insight.",
+      "capabilities": {
+        "title": "Capacità AI principali",
+        "autonomous": {
+          "title": "L'agente autonomo 24/7",
+          "description": "Il Co-Pilota AI è proattivo. I tuoi utenti possono delegare e programmare attività complesse e multi-step che l'AI esegue automaticamente. Questo trasforma la tua piattaforma in uno strumento di produttività indispensabile.",
+          "example": {
+            "comment": "Esempio comando utente:",
+            "command": "vave, ogni venerdì alle 17:00, analizza le mie vendite e crea una newsletter per i miei follower evidenziando il mio prodotto più venduto."
+          }
+        },
+        "multiModal": {
+          "title": "Interazione multimodale",
+          "description": "Semplifica radicalmente la creazione di contenuti. Gli utenti possono interagire con la tua piattaforma utilizzando il metodo più naturale per loro.",
+          "features": {
+            "image": "Immagine-ad-annuncio: Carica una foto e l'AI identificherà l'articolo, scriverà una descrizione e suggerirà un prezzo.",
+            "voice": "Comandi vocali: Gli utenti possono creare post, cercare e gestire il loro account completamente a mani libere."
+          }
+        },
+        "conversational": {
+          "title": "Commercio conversazionale e supporto",
+          "description": "Consenti agli utenti di interagire con la tua piattaforma attraverso il linguaggio naturale. I nostri agenti di supporto AI dedicati possono gestire le domande comuni dei clienti, risolvere problemi e fornire assistenza istantanea, 24/7. Per dati sensibili, sfruttiamo modelli focalizzati sulla privacy come Anthropic."
+        },
+        "analytics": {
+          "title": "Analisi e insight basati su AI",
+          "description": "L'AI non agisce solo; comprende. I tuoi venditori possono chiedere insight aziendali in linguaggio semplice e ricevere report azionabili, aiutandoli a vendere in modo più intelligente e far crescere il loro business sulla tua piattaforma.",
+          "example": {
+            "comment": "Esempio query venditore:",
+            "query": "vave, qual è stato il mio articolo più visualizzato questo mese e quali termini di ricerca hanno portato gli utenti ad esso?"
+          }
+        }
+      },
+      "differentiator": {
+        "title": "Il differenziatore principale: consapevolezza contestuale",
+        "description": "Il vero potere della nostra AI deriva dalla sua profonda integrazione con le verticali modulari della piattaforma. Non è un chatbot generico. Comprende che un \"Lavoro\" ha uno \"stipendio\" e un'\"Auto\" ha un \"chilometraggio\". Questa consapevolezza contestuale le permette di fornire assistenza più intelligente, accurata e davvero utile, creando un'esperienza utente impossibile da replicare per piattaforme monolitiche con AI aggiunta."
+      },
+      "integration": "Integrazione AI tra i moduli",
+      "relatedCommerce": "Shopping vocale e raccomandazioni di prodotti intelligenti",
+      "relatedSocial": "Moderazione contenuti basata su AI e notifiche intelligenti",
+      "relatedVerticals": "AI consapevole del contesto che comprende le esigenze uniche di ogni verticale"
+    },
+    "infrastructurePage": {
+      "title": "Infrastruttura di livello Enterprise",
+      "subtitle": "La base della nostra piattaforma è un asset strategico progettato per le esigenze dei moderni marketplace digitali ad alto traffico. Forniamo la sicurezza, le prestazioni e l'efficienza dei costi senza pari di cui hai bisogno per scalare con fiducia.",
+      "pillars": {
+        "title": "Pilastri architetturali principali",
+        "microservices": {
+          "title": "Architettura a microservizi",
+          "description": "La piattaforma è una collezione di servizi piccoli e indipendenti scritti principalmente in Go. Questo previene guasti a cascata e consente aggiornamenti rapidi e isolati senza rischiare la stabilità della piattaforma."
+        },
+        "apiFirst": {
+          "title": "API-First e Headless",
+          "description": "Ogni funzione è esposta tramite API robuste, con gRPC ad alta velocità per la comunicazione interna. Questo ti dà la massima libertà di costruire qualsiasi frontend o integrare qualsiasi servizio di cui hai bisogno."
+        },
+        "kubernetes": {
+          "title": "Scalabilità basata su Kubernetes",
+          "description": "Usiamo Kubernetes per orchestrare i nostri servizi. Questo abilita la scalabilità orizzontale automatica su richiesta. Ancora più importante, scaliamo le verticali indipendentemente per massime prestazioni ed efficienza dei costi."
+        }
+      },
+      "costSavings": {
+        "title": "Il tuo vantaggio infrastrutturale integrato",
+        "media": {
+          "title": "Gestione media proprietaria",
+          "description": "Smetti di pagare tariffe esorbitanti e ricorrenti ai provider cloud per l'hosting di immagini e video. La nostra soluzione di gestione media self-hosted è costruita per un alto throughput a una frazione del costo, dandoti un vantaggio finanziario permanente.",
+          "savings": "Risparmio mensile tipico vs. AWS S3",
+          "note": "Basato su 100.000 immagini e traffico moderato."
+        },
+        "geocoding": {
+          "title": "Servizio di geocoding proprietario",
+          "description": "La verifica degli indirizzi e i dati delle mappe sono essenziali per i marketplace multi-vendor ma costosi su base per-chiamata. Il nostro servizio di geocoding self-hosted elimina questo costo imprevedibile, indipendentemente da quanti venditori o utenti hai.",
+          "savings": "Risparmio mensile tipico vs. Google Maps API",
+          "note": "Basato su 10.000-15.000 chiamate API al mese."
+        }
+      },
+      "performance": {
+        "title": "Le prestazioni come funzionalità",
+        "description": "La nostra architettura snella, il backend Go compilato e la comunicazione gRPC efficiente risultano in una piattaforma fino a 10 volte più veloce dei sistemi monolitici comparabili costruiti su Shopify o Magento. Un sito più veloce significa migliore coinvolgimento degli utenti, tassi di conversione più alti e ranking SEO superiori.",
+        "metrics": {
+          "speed": "Più veloce dei sistemi monolitici",
+          "uptime": "Garanzia di uptime",
+          "response": "Tempo di risposta medio"
+        }
+      },
+      "powers": "L'infrastruttura alimenta tutto",
+      "relatedTechnical": "Approfondimento sulla nostra architettura e stack tecnologico",
+      "relatedVerticals": "Scopri come l'infrastruttura abilita la scalabilità indipendente delle verticali"
+    },
+    "verticalsPage": {
+      "title": "Una piattaforma di verticali specializzate",
+      "subtitle": "Vai oltre le semplici categorie. Il nostro Composable Commerce Engine è costruito su una base di verticali distinte e ricche di funzionalità. Ognuna è un'applicazione completa e specializzata progettata per adattarsi perfettamente alle esigenze uniche di un dominio di mercato specifico.",
+      "available": "Verticali disponibili e in arrivo",
+      "verticals": {
+        "auto": {
+          "title": "Auto/Moto",
+          "description": "Una soluzione completa per marketplace di veicoli. Gestisci annunci per auto, moto e altri veicoli con punti dati specifici e rilevanti.",
+          "fields": "Marca, Modello, Anno, Chilometraggio, Tipo motore, Condizione, Opzioni leasing"
+        },
+        "property": {
+          "description": "Alimenta il tuo business immobiliare o di affitti con una verticale progettata per le proprietà. Include geolocalizzazione e gestione dettagliata degli attributi.",
+          "fields": "Indirizzo, Metri quadri, N. di stanze, In vendita/In affitto, Servizi, Politica animali"
+        },
+        "jobs": {
+          "description": "Lancia una bacheca lavoro sofisticata. Gestisci annunci da recruiter e permetti ai candidati di cercare con criteri altamente specifici.",
+          "fields": "Range salariale, Tipo di impiego (Tempo pieno, Contratto), Livello esperienza, Competenze richieste"
+        },
+        "deals": {
+          "description": "Crea un hub per offerte locali o online. Questa verticale è ottimizzata per offerte a tempo limitato, sconti e promozioni.",
+          "fields": "Percentuale sconto, Prezzo originale, Data scadenza, Codice coupon, Quantità stock"
+        },
+        "services": {
+          "description": "Perfetto per freelancer, consulenti e aziende locali. Questa verticale è progettata per la generazione di lead, concentrandosi su descrizioni dettagliate piuttosto che prezzi fissi.",
+          "fields": "Area servizio, Link portfolio, Prenotazione consulenza, Opzione \"Contatta per preventivo\""
+        },
+        "streams": {
+          "title": "Stream",
+          "description": "Coinvolgi il tuo pubblico con video dal vivo. Ospita demo di prodotti, sessioni Q&A o tutorial direttamente sulla tua piattaforma per aumentare le vendite e costruire community in tempo reale.",
+          "fields": "Titolo stream, Orario programmato, Profilo host, Chat interattiva, Tagging prodotti",
+          "badge": "In arrivo"
+        },
+        "custom": {
+          "title": "La tua verticale personalizzata",
+          "description": "La nostra architettura è costruita per l'estensione. Possiamo lavorare con te per progettare e implementare una nuova verticale su misura precisamente per la tua nicchia di mercato unica.",
+          "fields": "Qualunque cosa il tuo business necessiti per avere successo."
+        }
+      },
+      "specializedFields": "Campi specializzati:",
+      "advantages": {
+        "title": "Il vantaggio strategico",
+        "subtitle": "Questa architettura modulare è più di un dettaglio tecnico: è il tuo vantaggio competitivo principale.",
+        "agility": {
+          "title": "Agilità aziendale senza pari",
+          "description": "Il mercato cambia. Con la nostra piattaforma, puoi cambiare con esso. Possiamo aggiungere rapidamente nuove verticali di tendenza o rimuovere quelle non riuscite (come gli NFT) senza reingegnerizzare l'intero sistema. Questo assicura che tu sia sempre posizionato per cogliere nuove opportunità."
+        },
+        "scaling": {
+          "title": "Scalabilità efficiente e indipendente",
+          "description": "Un picco di traffico sulla tua bacheca Lavoro non dovrebbe rallentare i tuoi annunci Immobiliari. Ogni verticale può essere scalata indipendentemente, garantendo un'esperienza utente impeccabile e ottimizzando i costi dell'infrastruttura allocando risorse solo dove necessario."
+        },
+        "contextAware": {
+          "title": "AI consapevole del contesto",
+          "description": "Il nostro Co-Pilota AI comprende il contesto unico di ogni verticale. Sa di cercare \"stipendio\" in Lavoro e \"chilometraggio\" in Auto. Questa comprensione contestuale profonda gli permette di fornire risultati di ricerca più intelligenti e assistenza più utile per i tuoi utenti."
+        }
+      }
+    },
+    "technicalPage": {
+      "title": "Il backend AI-nativo per marketplace moderni",
+      "subtitle": "Sfrutta i nostri microservizi basati su Go, agenti NLP proattivi e API in tempo reale per lanciare una piattaforma commerce multi-vendor ad alte prestazioni in una frazione del tempo e del costo.",
+      "cta": {
+        "demo": "Richiedi una demo tecnica",
+        "engineer": "Parla con un ingegnere"
+      },
+      "architecture": {
+        "title": "Perché la nostra architettura vince",
+        "subtitle": "Abbiamo costruito la base potente e flessibile che hai sempre desiderato. Non è un vincolo monolitico; è un acceleratore strategico.",
+        "performance": {
+          "title": "Progettato per le prestazioni",
+          "description": "Il nostro backend è costruito in Go (Golang) con gRPC ad alta velocità per la comunicazione interna, risultando in un'applicazione leggera e compilata che è fino a 10 volte più veloce delle piattaforme tradizionali basate su PHP o Ruby."
+        },
+        "aiNative": {
+          "title": "Core AI-nativo con NLU",
+          "description": "Non è un chatbot aggiunto. La nostra piattaforma presenta un motore stateful di Natural Language Understanding (NLU) che gestisce il riconoscimento degli intenti e input multimodali (testo, voce, immagine) per un'esperienza utente veramente conversazionale."
+        },
+        "cloudNative": {
+          "title": "Scalabilità cloud-native",
+          "description": "Orchestrati da Kubernetes, i nostri microservizi scalano orizzontalmente e indipendentemente. Un picco nella tua verticale 'Lavoro' non impatterà il tuo servizio 'Pagamenti', garantendo prestazioni impeccabili e massima efficienza dei costi."
+        }
+      },
+      "techStack": {
+        "go": "Backend Go",
+        "kubernetes": "Kubernetes",
+        "grpc": "gRPC",
+        "react": "React / Next.js",
+        "stripe": "Stripe Connect"
+      },
+      "platform": {
+        "title": "Una piattaforma componibile per il commercio moderno",
+        "modules": {
+          "commerce": {
+            "title": "Motore commerciale",
+            "description": "Un motore headless, multi-vendor con Stripe Connect integrato. Gestisci transazioni complesse come leasing e prenotazioni tramite le nostre API robuste.",
+            "link": "Esplora Commerce API →"
+          },
+          "social": {
+            "title": "Livello sociale in tempo reale",
+            "description": "Implementa coinvolgimento in tempo reale con messaggistica dal vivo e stream di commenti alimentati da WebSocket/gRPC. Costruisci community con le nostre API Follower e Recensioni.",
+            "link": "Esplora Social API →"
+          },
+          "verticals": {
+            "title": "Verticali componibili",
+            "description": "Un'architettura componibile con schemi predefiniti per Lavoro, Immobili, Auto e altro. Estendi o crea nuove verticali con il nostro design flessibile basato sul dominio.",
+            "link": "Esplora verticali →"
+          },
+          "intelligence": {
+            "title": "Livello intelligenza (NLP)",
+            "description": "Implementa un Co-Pilota AI stateful alimentato dal nostro motore di elaborazione del linguaggio naturale. Vai oltre i chatbot con agenti proattivi e input multimodali.",
+            "link": "Esplora livello AI →"
+          },
+          "infrastructure": {
+            "title": "Infrastruttura proprietaria",
+            "description": "Beneficia del nostro stack ad alte prestazioni e dei microservizi proprietari che risparmiano costi per la gestione media e il geocoding, eliminando le tariffe API ricorrenti.",
+            "link": "Esplora infrastruttura →"
+          }
+        }
+      },
+      "ready": {
+        "title": "Pronto a costruire su una base migliore?",
+        "subtitle": "Discutiamo i tuoi requisiti tecnici e vediamo come la piattaforma vaveme può accelerare la tua roadmap."
+      }
+    },
+    "compactAd": {
+      "headline": "Costruisci il tuo ecosistema e-commerce e sociale perfetto basato su AI",
+      "badge": "PIATTAFORMA MODULARE",
+      "modules": {
+        "commerce": "Marketplace • Pagamenti • Ordini • Spedizione",
+        "social": "Feed • Messaggistica dal vivo • Recensioni • Following • Commenti dal vivo",
+        "classified": "Auto/Moto • Immobili • Lavoro • Offerte • Servizi",
+        "intelligence": "Assistente AI • Elaborazione voce e immagini • Analisi • Conversazione • Agenti supporto AI",
+        "infrastructure": "Multi-tenant • API • Scalabile • Alte prestazioni • Gestione media • Geocoding"
+      }
+    }
+  },
+  "Offers": {
+    "makeOffer": "Fai un'offerta",
+    "buyNow": "Compra ora",
+    "buyNowDesc": "Acquista immediatamente al prezzo offerto",
+    "lease": "Noleggia",
+    "leaseDesc": "Noleggia il servizio per un periodo specifico",
+    "reservation": "Prenotazione",
+    "reservationDesc": "Prenota il servizio per un uso successivo",
+    "buyBack": "Riacquisto",
+    "buyBackDesc": "Offerta di riacquisto dopo un periodo",
+    "loginRequired": "Accedi per inviare un'offerta",
+    "selectType": "Seleziona un tipo di offerta",
+    "invalidAmount": "Inserisci un importo valido",
+    "sendError": "Impossibile inviare l'offerta. Riprova.",
+    "selectOfferType": "Seleziona il tipo di offerta:",
+    "typeDescription": "Scegli l'opzione che fa per te",
+    "recommended": "Consigliato",
+    "change": "Cambia",
+    "finalPrice": "Prezzo finale",
+    "monthlyPrice": "Prezzo mensile",
+    "leaseTerm": "Durata noleggio (mesi)",
+    "includeBuyout": "Includi opzione di acquisto",
+    "buyoutPrice": "Prezzo di acquisto",
+    "reservationFee": "Tariffa di prenotazione",
+    "lockedPrice": "Prezzo bloccato",
+    "duration": "Durata (giorni)",
+    "redemptionFee": "Tariffa di riscatto",
+    "back": "Indietro",
+    "continue": "Continua",
+    "confirmOffer": "Conferma offerta",
+    "reviewDetails": "Controlla i tuoi dati",
+    "offerType": "Tipo di offerta",
+    "days": "giorni",
+    "months": "mesi",
+    "sendOffer": "Invia offerta",
+    "sending": "Invio in corso...",
+    "offerSent": "Offerta inviata con successo!",
+    "offerError": "Errore nell'invio dell'offerta",
+    "offerAmount": "Importo dell'offerta",
+    "validUntil": "Valido fino a",
+    "message": "Messaggio",
+    "optional": "opzionale",
+    "messagePlaceholder": "Aggiungi un messaggio al venditore...",
+    "cancel": "Annulla",
+    "suggestedTerm": "Termine suggerito",
+    "suggestedDiscount": "Sconto suggerito",
+    "suggestedDays": "Giorni suggeriti",
+    "leaseTermMonths": "Durata noleggio",
+    "lockDurationDays": "Durata blocco",
+    "hasBuyout": "Ha opzione acquisto",
+    "yes": "Sì",
+    "no": "No"
+  },
+  "UtilityBar": {
+    "location": "Germania",
+    "sell": "Vendi",
+    "sfxSite": "Sito SFX",
+    "help": "Aiuto",
+    "changeLanguage": "Cambia lingua"
+  },
+  "unsupportedType": "[IT] Unsupported Type",
+  "renderError": "[IT] Render Error",
+  "addedOn": "[IT] Added On",
+  "tryAgain": "[IT] Try Again",
+  "added": "[IT] Added",
+  "inWishlist": "[IT] In Wishlist",
+  "itemInWishlistAriaLabel": "Item In Wishlist Aria Label",
+  "addToWishlistAriaLabel": "Add To Wishlist Aria Label",
+  "noContentAvailable": "[IT] No Content Available",
+  "postNotFound": "[IT] Post Not Found",
+  "compactAd": {
+    "headline": "[IT] Headline",
+    "badge": "[IT] Badge",
+    "modules": {
+      "commerce": "[IT] Commerce",
+      "social": "[IT] Social",
+      "classified": "[IT] Classified",
+      "intelligence": "[IT] Intelligence",
+      "infrastructure": "[IT] Infrastructure"
+    }
+  },
+  "modules": {
+    "commerce": {
+      "title": "[IT] Title"
+    },
+    "social": {
+      "title": "[IT] Title"
+    },
+    "verticals": {
+      "title": "[IT] Title",
+      "badge": "[IT] Badge"
+    },
+    "intelligence": {
+      "title": "[IT] Title",
+      "description": "[IT] Description - Please add translation",
+      "badge": "[IT] Badge"
+    },
+    "infrastructure": {
+      "title": "[IT] Title",
+      "description": "[IT] Description - Please add translation",
+      "badge": "[IT] Badge"
+    }
+  },
+  "deleteConfirmTitle": "[IT] Delete Confirm Title",
+  "deleteConfirmMessage": "[IT] Delete Confirm Message",
+  "viewTicketAriaLabel": "View Ticket Aria Label",
+  "statusAriaLabel": "Status Aria Label",
+  "unreadAriaLabel": "Unread Aria Label",
+  "unreadLabel": "Unread Label",
+  "createdLabel": "Created Label",
+  "moreActionsAriaLabel": "More Actions Aria Label",
+  "viewAction": "[IT] View Action",
+  "copyIdAction": "[IT] Copy Id Action",
+  "deleteAction": "[IT] Delete Action",
+  "lastUpdatedLabel": "Last Updated Label",
+  "statusLabel": "Status Label",
+  "ticketIdLabel": "Ticket Id Label",
+  "updatedLabel": "Updated Label",
+  "confirmLogoutAll": "[IT] Confirm Logout All",
+  "passwordResetTitle": "[IT] Password Reset Title",
+  "passwordResetDescription": "[IT] Password Reset Description - Please add translation",
+  "sendingLink": "[IT] Sending Link",
+  "sendResetLink": "[IT] Send Reset Link",
+  "activeSessions": "[IT] Active Sessions",
+  "activeSessionsDescription": "[IT] Active Sessions Description - Please add translation",
+  "currentSession": "[IT] Current Session",
+  "loggingOut": "[IT] Logging Out",
+  "logoutOtherSessions": "[IT] Logout Other Sessions",
+  "logoutAllSessions": "[IT] Logout All Sessions",
+  "dangerZoneTitle": "[IT] Danger Zone Title",
+  "dangerZoneDescription": "[IT] Danger Zone Description - Please add translation",
+  "disableAccount": "[IT] Disable Account",
+  "disableAccountDescription": "[IT] Disable Account Description - Please add translation",
+  "disableAccountButton": "Disable Account Button",
+  "deleteAccount": "[IT] Delete Account",
+  "deleteAccountDescription": "[IT] Delete Account Description - Please add translation",
+  "deleteAccountButton": "Delete Account Button",
+  "errorLoadingFailed": "[IT] Error Loading Failed",
+  "errorSellerNotFound": "[IT] Error Seller Not Found",
+  "section": {
+    "listedItems": "[IT] Listed Items",
+    "reviews": "[IT] Reviews",
+    "gallery": "[IT] Gallery",
+    "posts": "[IT] Posts",
+    "comments": "[IT] Comments",
+    "contactInfo": "[IT] Contact Info"
+  },
+  "errors": {
+    "fetchFailed": "[IT] Fetch Failed",
+    "missingData": "[IT] Missing Data",
+    "paymentSetup": "[IT] Payment Setup",
+    "paymentFailed": "[IT] Payment Failed",
+    "title": "[IT] Title",
+    "retry": "[IT] Retry",
+    "authenticationFailed": "[IT] Authentication Failed",
+    "rateLimitExceeded": "[IT] Rate Limit Exceeded",
+    "connectionError": "[IT] Connection Error",
+    "serverError": "[IT] Server Error",
+    "unexpectedStatus": "[IT] Unexpected Status",
+    "unexpectedError": "[IT] Unexpected Error",
+    "orderCreationFailed": "[IT] Order Creation Failed",
+    "noPaymentIntent": "[IT] No Payment Intent",
+    "statusCheckFailed": "[IT] Status Check Failed",
+    "passwordsMustMatch": "[IT] Passwords Must Match",
+    "required": "[IT] Required",
+    "authFailed": "[IT] Auth Failed"
+  },
+  "loading": {
+    "title": "[IT] Title",
+    "message": "[IT] Message",
+    "description": "[IT] Description - Please add translation"
+  },
+  "error": {
+    "title": "[IT] Title",
+    "retry": "[IT] Retry"
+  },
+  "empty": {
+    "title": "[IT] Title",
+    "message": "[IT] Message",
+    "description": "[IT] Description - Please add translation",
+    "goToCart": "[IT] Go To Cart"
+  },
+  "filters": {
+    "all": "[IT] All",
+    "completed": "[IT] Completed",
+    "pending": "[IT] Pending",
+    "failed": "[IT] Failed"
+  },
+  "sort": {
+    "dateDesc": "[IT] Date Desc",
+    "dateAsc": "[IT] Date Asc",
+    "amountDesc": "[IT] Amount Desc",
+    "amountAsc": "[IT] Amount Asc",
+    "statusAsc": "[IT] Status Asc"
+  },
+  "actions": {
+    "viewDetails": "[IT] View Details",
+    "downloadReceipt": "[IT] Download Receipt",
+    "viewOrder": "[IT] View Order",
+    "continueShopping": "[IT] Continue Shopping",
+    "retry": "[IT] Retry",
+    "goHome": "[IT] Go Home",
+    "retryPayment": "[IT] Retry Payment",
+    "viewOrders": "[IT] View Orders",
+    "backToPayment": "[IT] Back To Payment",
+    "refresh": "[IT] Refresh",
+    "checkout": "[IT] Checkout",
+    "loginToCheckout": "[IT] Login To Checkout",
+    "remove": "[IT] Remove",
+    "addProduct": "[IT] Add Product",
+    "addProductDesc": "[IT] Add Product Desc",
+    "manageProducts": "[IT] Manage Products",
+    "manageProductsDesc": "[IT] Manage Products Desc",
+    "viewOrdersDesc": "[IT] View Orders Desc",
+    "manageOffers": "[IT] Manage Offers",
+    "manageOffersDesc": "[IT] Manage Offers Desc",
+    "createInvoice": "[IT] Create Invoice",
+    "createInvoiceDesc": "[IT] Create Invoice Desc",
+    "shippingLabels": "Shipping Labels",
+    "shippingLabelsDesc": "Shipping Labels Desc",
+    "analytics": "[IT] Analytics",
+    "analyticsDesc": "[IT] Analytics Desc",
+    "managePosts": "[IT] Manage Posts",
+    "managePostsDesc": "[IT] Manage Posts Desc",
+    "manageUsers": "[IT] Manage Users",
+    "manageUsersDesc": "[IT] Manage Users Desc",
+    "addAdmin": "[IT] Add Admin",
+    "addAdminDesc": "[IT] Add Admin Desc",
+    "userActivity": "[IT] User Activity",
+    "userActivityDesc": "[IT] User Activity Desc",
+    "manageCategories": "[IT] Manage Categories",
+    "manageCategoriesDesc": "[IT] Manage Categories Desc",
+    "moderateReviews": "[IT] Moderate Reviews",
+    "moderateReviewsDesc": "[IT] Moderate Reviews Desc",
+    "moderateComments": "[IT] Moderate Comments",
+    "moderateCommentsDesc": "[IT] Moderate Comments Desc",
+    "bulkUpload": "[IT] Bulk Upload",
+    "bulkUploadDesc": "[IT] Bulk Upload Desc",
+    "manageOrders": "[IT] Manage Orders",
+    "manageOrdersDesc": "[IT] Manage Orders Desc",
+    "paymentTransactions": "[IT] Payment Transactions",
+    "paymentTransactionsDesc": "[IT] Payment Transactions Desc",
+    "shippingManagement": "[IT] Shipping Management",
+    "shippingManagementDesc": "[IT] Shipping Management Desc",
+    "supportTickets": "[IT] Support Tickets",
+    "supportTicketsDesc": "[IT] Support Tickets Desc",
+    "messages": "[IT] Messages",
+    "messagesDesc": "[IT] Messages Desc",
+    "reportedContent": "[IT] Reported Content",
+    "reportedContentDesc": "[IT] Reported Content Desc",
+    "platformAnalytics": "[IT] Platform Analytics",
+    "platformAnalyticsDesc": "[IT] Platform Analytics Desc",
+    "searchAnalytics": "[IT] Search Analytics",
+    "searchAnalyticsDesc": "[IT] Search Analytics Desc",
+    "trendingItems": "[IT] Trending Items",
+    "trendingItemsDesc": "[IT] Trending Items Desc",
+    "userMetrics": "[IT] User Metrics",
+    "userMetricsDesc": "[IT] User Metrics Desc",
+    "newsletters": "[IT] Newsletters",
+    "newslettersDesc": "[IT] Newsletters Desc",
+    "notifications": "[IT] Notifications",
+    "notificationsDesc": "[IT] Notifications Desc",
+    "systemSettings": "[IT] System Settings",
+    "systemSettingsDesc": "[IT] System Settings Desc",
+    "mediaLibrary": "[IT] Media Library",
+    "mediaLibraryDesc": "[IT] Media Library Desc"
+  },
+  "summary": {
+    "title": "[IT] Title",
+    "total": "[IT] Total",
+    "currency": "[IT] Currency"
+  },
+  "form": {
+    "title": "[IT] Title",
+    "description": "[IT] Description - Please add translation",
+    "success": "[IT] Success",
+    "error": "[IT] Error",
+    "name": "[IT] Name",
+    "email": "[IT] Email",
+    "subject": "[IT] Subject",
+    "message": "[IT] Message",
+    "submit": "[IT] Submit"
+  },
+  "security": {
+    "notice": "[IT] Notice",
+    "message": "[IT] Message",
+    "title": "[IT] Title",
+    "twoFactorAuth": "[IT] Two Factor Auth",
+    "passwordMinLength": "[IT] Password Min Length",
+    "sessionTimeout": "[IT] Session Timeout",
+    "sessionTimeoutHint": "[IT] Session Timeout Hint",
+    "maxLoginAttempts": "[IT] Max Login Attempts",
+    "content": "[IT] Content"
+  },
+  "success": {
+    "paymentCompleted": "[IT] Payment Completed",
+    "banner": "[IT] Banner",
+    "continueShopping": "[IT] Continue Shopping"
+  },
+  "info": {
+    "paymentProcessing": "[IT] Payment Processing",
+    "additionalActionRequired": "[IT] Additional Action Required",
+    "securePayment": "[IT] Secure Payment",
+    "encryptedData": "[IT] Encrypted Data",
+    "email": {
+      "title": "[IT] Title",
+      "content": "[IT] Content"
+    },
+    "phone": {
+      "title": "[IT] Title",
+      "content": "[IT] Content"
+    },
+    "address": {
+      "title": "[IT] Title",
+      "content": "[IT] Content"
+    },
+    "hours": {
+      "title": "[IT] Title",
+      "content": "[IT] Content"
+    }
+  },
+  "button": {
+    "processing": "[IT] Processing",
+    "payAmount": "[IT] Pay Amount",
+    "payNow": "[IT] Pay Now"
+  },
+  "contactInformation": "[IT] Contact Information",
+  "shippingAddress": "[IT] Shipping Address",
+  "creditCard": "[IT] Credit Card",
+  "paypal": "[IT] Paypal",
+  "bankTransfer": "[IT] Bank Transfer",
+  "placeOrder": "[IT] Place Order",
+  "sortByActivity": "[IT] Sort By Activity",
+  "sortActivityDesc": "[IT] Sort Activity Desc",
+  "visitedHigh": "[IT] Visited High",
+  "visitedLow": "[IT] Visited Low",
+  "sortByQuality": "[IT] Sort By Quality",
+  "sortQualityDesc": "[IT] Sort Quality Desc",
+  "ratingHigh": "[IT] Rating High",
+  "ratingLow": "[IT] Rating Low",
+  "sortByTime": "[IT] Sort By Time",
+  "sortTimeDesc": "[IT] Sort Time Desc",
+  "sortByPrice": "[IT] Sort By Price",
+  "sortPriceDesc": "[IT] Sort Price Desc",
+  "priceHigh": "[IT] Price High",
+  "priceLow": "[IT] Price Low",
+  "sortRelevanceDesc": "[IT] Sort Relevance Desc",
+  "relevance": "[IT] Relevance",
+  "presetTrending": "[IT] Preset Trending",
+  "presetTrendingDesc": "[IT] Preset Trending Desc",
+  "presetPopular": "[IT] Preset Popular",
+  "presetPopularDesc": "[IT] Preset Popular Desc",
+  "presetDiscussed": "[IT] Preset Discussed",
+  "presetDiscussedDesc": "[IT] Preset Discussed Desc",
+  "presetTopRated": "[IT] Preset Top Rated",
+  "presetTopRatedDesc": "[IT] Preset Top Rated Desc",
+  "presetNewest": "[IT] Preset Newest",
+  "presetNewestDesc": "[IT] Preset Newest Desc",
+  "presetCustom": "[IT] Preset Custom",
+  "presetCustomDesc": "[IT] Preset Custom Desc",
+  "quickSort": "[IT] Quick Sort",
+  "advancedSort": "[IT] Advanced Sort",
+  "descending": "[IT] Descending",
+  "ascending": "[IT] Ascending",
+  "currentSort": "[IT] Current Sort",
+  "VideoFilters": {
+    "videoTypeLabel": "Video Type Label",
+    "videoTypeAll": "[IT] Video Type All",
+    "videoTypeTutorial": "[IT] Video Type Tutorial",
+    "videoTypeReview": "[IT] Video Type Review",
+    "videoTypeEntertainment": "[IT] Video Type Entertainment",
+    "videoTypeDocumentary": "[IT] Video Type Documentary",
+    "videoTypeMusic": "[IT] Video Type Music",
+    "videoTypeSports": "[IT] Video Type Sports",
+    "videoTypeNews": "[IT] Video Type News"
+  },
+  "videoTypeGaming": "[IT] Video Type Gaming",
+  "quality720p": "[IT] Quality720p",
+  "quality1080p": "[IT] Quality1080p",
+  "quality4k": "[IT] Quality4k",
+  "uploadDateLabel": "Upload Date Label",
+  "uploadDateAll": "[IT] Upload Date All",
+  "uploadDateToday": "[IT] Upload Date Today",
+  "uploadDateThisWeek": "[IT] Upload Date This Week",
+  "uploadDateThisMonth": "[IT] Upload Date This Month",
+  "uploadDateThisYear": "[IT] Upload Date This Year",
+  "hdOnly": "[IT] Hd Only",
+  "VehicleFilters": {
+    "vehicleTypeLabel": "Vehicle Type Label",
+    "vehicleTypeAll": "[IT] Vehicle Type All",
+    "vehicleTypeCar": "[IT] Vehicle Type Car",
+    "vehicleTypeMotorcycle": "[IT] Vehicle Type Motorcycle",
+    "vehicleTypeTruck": "[IT] Vehicle Type Truck",
+    "vehicleTypeBoat": "[IT] Vehicle Type Boat",
+    "priceRangeLabel": "Price Range Label"
+  },
+  "minPricePlaceholder": "[IT] Min Price Placeholder",
+  "maxPricePlaceholder": "[IT] Max Price Placeholder",
+  "yearRangeLabel": "Year Range Label",
+  "minYearPlaceholder": "[IT] Min Year Placeholder",
+  "maxYearPlaceholder": "[IT] Max Year Placeholder",
+  "mileageRangeLabel": "Mileage Range Label",
+  "minMileagePlaceholder": "[IT] Min Mileage Placeholder",
+  "maxMileagePlaceholder": "[IT] Max Mileage Placeholder",
+  "newOnly": "[IT] New Only",
+  "dealerOnly": "[IT] Dealer Only",
+  "fuelTypeLabel": "Fuel Type Label",
+  "fuelTypeAny": "[IT] Fuel Type Any",
+  "fuelTypePetrol": "[IT] Fuel Type Petrol",
+  "fuelTypeDiesel": "[IT] Fuel Type Diesel",
+  "fuelTypeElectric": "[IT] Fuel Type Electric",
+  "fuelTypeHybrid": "[IT] Fuel Type Hybrid",
+  "TweetFilters": {
+    "tweetTypeLabel": "Tweet Type Label",
+    "tweetTypeAll": "[IT] Tweet Type All",
+    "tweetTypeOriginal": "[IT] Tweet Type Original",
+    "tweetTypeRetweet": "[IT] Tweet Type Retweet",
+    "tweetTypeReply": "[IT] Tweet Type Reply",
+    "tweetTypeThread": "[IT] Tweet Type Thread",
+    "languageLabel": "Language Label"
+  },
+  "languageAll": "[IT] Language All",
+  "languageEn": "[IT] Language En",
+  "languageDe": "[IT] Language De",
+  "languagePl": "[IT] Language Pl",
+  "hasMedia": "[IT] Has Media",
+  "hasLinks": "[IT] Has Links",
+  "hasMentions": "[IT] Has Mentions",
+  "verifiedOnly": "[IT] Verified Only",
+  "ServiceFilters": {
+    "serviceTypeLabel": "Service Type Label",
+    "serviceTypeAll": "[IT] Service Type All",
+    "serviceTypeHome": "[IT] Service Type Home",
+    "serviceTypeProfessional": "[IT] Service Type Professional",
+    "serviceTypeMaintenance": "[IT] Service Type Maintenance",
+    "serviceTypeConsulting": "[IT] Service Type Consulting",
+    "serviceTypeOther": "[IT] Service Type Other"
+  },
+  "categoryIT": "[IT] Category I T",
+  "categoryHealth": "[IT] Category Health",
+  "categoryEducation": "[IT] Category Education",
+  "categoryLegal": "[IT] Category Legal",
+  "categoryConsulting": "[IT] Category Consulting",
+  "remoteOnly": "[IT] Remote Only",
+  "verifiedProvider": "[IT] Verified Provider",
+  "experienceLabel": "Experience Label",
+  "experienceAny": "[IT] Experience Any",
+  "experienceBeginner": "[IT] Experience Beginner",
+  "experienceIntermediate": "[IT] Experience Intermediate",
+  "experienceExpert": "[IT] Experience Expert",
+  "PropertyFilters": {
+    "propertyTypeLabel": "Property Type Label",
+    "propertyTypeAll": "[IT] Property Type All",
+    "propertyTypeHouse": "[IT] Property Type House",
+    "propertyTypeApartment": "[IT] Property Type Apartment",
+    "propertyTypeCondo": "[IT] Property Type Condo",
+    "propertyTypeLand": "[IT] Property Type Land",
+    "propertyTypeCommercial": "[IT] Property Type Commercial"
+  },
+  "bedroomsLabel": "Bedrooms Label",
+  "minBedroomsPlaceholder": "[IT] Min Bedrooms Placeholder",
+  "maxBedroomsPlaceholder": "[IT] Max Bedrooms Placeholder",
+  "bathroomsLabel": "Bathrooms Label",
+  "minBathroomsPlaceholder": "[IT] Min Bathrooms Placeholder",
+  "maxBathroomsPlaceholder": "[IT] Max Bathrooms Placeholder",
+  "areaLabel": "Area Label",
+  "minAreaPlaceholder": "[IT] Min Area Placeholder",
+  "maxAreaPlaceholder": "[IT] Max Area Placeholder",
+  "hasParking": "[IT] Has Parking",
+  "isFurnished": "[IT] Is Furnished",
+  "petsAllowed": "[IT] Pets Allowed",
+  "NewsFilters": {
+    "newsCategoryLabel": "News Category Label",
+    "newsCategoryAll": "[IT] News Category All",
+    "newsCategoryBusiness": "[IT] News Category Business",
+    "newsCategoryTechnology": "[IT] News Category Technology",
+    "newsCategorySports": "[IT] News Category Sports",
+    "newsCategoryEntertainment": "[IT] News Category Entertainment",
+    "newsCategoryPolitics": "[IT] News Category Politics",
+    "newsCategoryHealth": "[IT] News Category Health",
+    "newsCategoryScience": "[IT] News Category Science",
+    "newsCategoryLocal": "[IT] News Category Local"
+  },
+  "timePeriodToday": "[IT] Time Period Today",
+  "timePeriodThisWeek": "[IT] Time Period This Week",
+  "timePeriodThisMonth": "[IT] Time Period This Month",
+  "timePeriodThisYear": "[IT] Time Period This Year",
+  "sourceTypeMedia": "[IT] Source Type Media",
+  "sourceTypeBlog": "[IT] Source Type Blog",
+  "sourceTypeSocial": "[IT] Source Type Social",
+  "verifiedSource": "[IT] Verified Source",
+  "JobFilters": {
+    "jobTypeLabel": "Job Type Label",
+    "jobTypeAll": "[IT] Job Type All",
+    "jobTypeFullTime": "[IT] Job Type Full Time",
+    "jobTypePartTime": "[IT] Job Type Part Time",
+    "jobTypeContract": "[IT] Job Type Contract",
+    "jobTypeFreelance": "[IT] Job Type Freelance",
+    "jobTypeInternship": "[IT] Job Type Internship"
+  },
+  "salaryRangeLabel": "Salary Range Label",
+  "minSalaryPlaceholder": "[IT] Min Salary Placeholder",
+  "maxSalaryPlaceholder": "[IT] Max Salary Placeholder",
+  "experienceLevelLabel": "Experience Level Label",
+  "experienceLevelAll": "[IT] Experience Level All",
+  "experienceLevelEntry": "[IT] Experience Level Entry",
+  "experienceLevelJunior": "[IT] Experience Level Junior",
+  "experienceLevelMid": "[IT] Experience Level Mid",
+  "experienceLevelSenior": "[IT] Experience Level Senior",
+  "experienceLevelLead": "[IT] Experience Level Lead",
+  "workLocationLabel": "Work Location Label",
+  "workLocationAll": "[IT] Work Location All",
+  "workLocationRemote": "[IT] Work Location Remote",
+  "workLocationOnsite": "[IT] Work Location Onsite",
+  "workLocationHybrid": "[IT] Work Location Hybrid",
+  "industryLabel": "Industry Label",
+  "industryPlaceholder": "[IT] Industry Placeholder",
+  "skillsLabel": "Skills Label",
+  "skillsPlaceholder": "[IT] Skills Placeholder",
+  "benefitsIncluded": "[IT] Benefits Included",
+  "urgentHiring": "[IT] Urgent Hiring",
+  "DealFilters": {
+    "dealTypeLabel": "Deal Type Label",
+    "dealTypeAll": "[IT] Deal Type All",
+    "dealTypeFlashSale": "[IT] Deal Type Flash Sale",
+    "dealTypeDiscount": "[IT] Deal Type Discount",
+    "dealTypeClearance": "[IT] Deal Type Clearance",
+    "dealTypeBundle": "[IT] Deal Type Bundle",
+    "priceRangeLabel": "Price Range Label"
+  },
+  "discountRangeLabel": "Discount Range Label",
+  "minDiscountPlaceholder": "[IT] Min Discount Placeholder",
+  "maxDiscountPlaceholder": "[IT] Max Discount Placeholder",
+  "activeOnly": "[IT] Active Only",
+  "expiringSoon": "[IT] Expiring Soon",
+  "stats": {
+    "users": "[IT] Users",
+    "listings": "[IT] Listings",
+    "total": "[IT] Total",
+    "open": "[IT] Open",
+    "pending": "[IT] Pending",
+    "closed": "[IT] Closed",
+    "unread": "[IT] Unread",
+    "totalUsers": "[IT] Total Users",
+    "activeUsers": "[IT] Active Users",
+    "totalProducts": "[IT] Total Products",
+    "totalOrders": "[IT] Total Orders",
+    "revenue": "[IT] Revenue",
+    "pageViews": "[IT] Page Views"
+  },
+  "unsupportedContentType": "[IT] Unsupported Content Type",
+  "aria": {
+    "markAsUnread": "[IT] Mark As Unread",
+    "markAsRead": "[IT] Mark As Read",
+    "deleteActivity": "[IT] Delete Activity",
+    "quantityFor": "[IT] Quantity For"
+  },
+  "errorCreateTicket": "[IT] Error Create Ticket",
+  "successTicketUpdated": "[IT] Success Ticket Updated",
+  "errorUpdateTicket": "[IT] Error Update Ticket",
+  "confirmDeleteTicket": "[IT] Confirm Delete Ticket",
+  "successTicketDeleted": "[IT] Success Ticket Deleted",
+  "errorDeleteTicket": "[IT] Error Delete Ticket",
+  "filter": {
+    "all": "[IT] All",
+    "open": "[IT] Open",
+    "pending": "[IT] Pending",
+    "closed": "[IT] Closed",
+    "inProgress": "[IT] In Progress",
+    "resolved": "[IT] Resolved"
+  },
+  "tabs": {
+    "notifications": "[IT] Notifications",
+    "notificationsDesc": "[IT] Notifications Desc",
+    "privacy": "[IT] Privacy",
+    "privacyDesc": "[IT] Privacy Desc",
+    "security": "[IT] Security",
+    "securityDesc": "[IT] Security Desc",
+    "display": "[IT] Display",
+    "displayDesc": "[IT] Display Desc",
+    "subscriptions": "[IT] Subscriptions",
+    "subscriptionsDesc": "[IT] Subscriptions Desc",
+    "payment": "[IT] Payment",
+    "history": "[IT] History",
+    "overview": "[IT] Overview",
+    "products": "[IT] Products",
+    "orders": "[IT] Orders",
+    "general": "[IT] General",
+    "features": "[IT] Features",
+    "email": "[IT] Email",
+    "payments": "[IT] Payments",
+    "subscribers": "[IT] Subscribers",
+    "campaigns": "[IT] Campaigns"
+  },
+  "errorFetchingServices": "[IT] Error Fetching Services",
+  "allServices": "[IT] All Services",
+  "errorFetchingCategoryServices": "[IT] Error Fetching Category Services",
+  "errorFetchingProducts": "[IT] Error Fetching Products",
+  "categoryLoadError": "[IT] Category Load Error",
+  "userRights": {
+    "content": "[IT] Content"
+  },
+  "dataStorage": {
+    "title": "[IT] Title",
+    "content": "[IT] Content"
+  },
+  "communications": {
+    "title": "[IT] Title",
+    "content": "[IT] Content"
+  },
+  "policyUpdates": {
+    "title": "[IT] Title",
+    "content": "[IT] Content"
+  },
+  "dataDeletion": {
+    "title": "[IT] Title",
+    "content": "[IT] Content"
+  },
+  "contact": {
+    "title": "[IT] Title",
+    "content": "[IT] Content",
+    "description": "[IT] Description - Please add translation",
+    "button": "Button"
+  },
+  "postCard": {
+    "unnamedPost": "[IT] Unnamed Post",
+    "defaultAuthor": "[IT] Default Author"
+  },
+  "errorLoadingPost": "[IT] Error Loading Post",
+  "navigation": {
+    "back": "[IT] Back"
+  },
+  "title": {
+    "checkout": "[IT] Checkout",
+    "payments": "[IT] Payments"
+  },
+  "subtitle": {
+    "checkout": "[IT] Checkout",
+    "payments": "[IT] Payments"
+  },
+  "status": {
+    "processing": {
+      "title": "[IT] Title",
+      "message": "[IT] Message"
+    },
+    "completed": {
+      "title": "[IT] Title",
+      "message": "[IT] Message"
+    },
+    "error": {
+      "title": "[IT] Title",
+      "message": "[IT] Message"
+    },
+    "succeeded": {
+      "title": "[IT] Title",
+      "message": "[IT] Message"
+    },
+    "failed": {
+      "title": "[IT] Title",
+      "message": "[IT] Message"
+    },
+    "requiresAction": {
+      "title": "[IT] Title",
+      "message": "[IT] Message"
+    },
+    "noInfo": {
+      "title": "[IT] Title",
+      "message": "[IT] Message"
+    },
+    "loading": {
+      "title": "[IT] Title",
+      "message": "[IT] Message"
+    }
+  },
+  "details": {
+    "title": "[IT] Title",
+    "orderId": "[IT] Order Id",
+    "paymentId": "[IT] Payment Id",
+    "status": "[IT] Status",
+    "statusCompleted": "[IT] Status Completed",
+    "date": "[IT] Date",
+    "amount": "[IT] Amount"
+  },
+  "redirect": {
+    "message": "[IT] Message"
+  },
+  "errorFetchingNews": "[IT] Error Fetching News",
+  "newsCard": {
+    "unnamedNews": "[IT] Unnamed News",
+    "defaultAuthor": "[IT] Default Author"
+  },
+  "errorFetchingNewsCategory": "[IT] Error Fetching News Category",
+  "placeholders": {
+    "firstName": "[IT] First Name",
+    "lastName": "[IT] Last Name",
+    "userName": "[IT] User Name",
+    "address": "[IT] Address",
+    "email": "[IT] Email",
+    "password": "[IT] Password",
+    "confirmPassword": "[IT] Confirm Password"
+  },
+  "Help": {
+    "pageTitle": "Centro Assistenza",
+    "pageDescription": "Trova risposte alle tue domande e ricevi supporto per i nostri servizi",
+    "searchPlaceholder": "Cosa stai cercando?",
+    "categories": {
+      "general": {
+        "title": "Informazioni Generali",
+        "description": "Informazioni di base sull'utilizzo della nostra piattaforma e primi passi"
+      },
+      "account": {
+        "title": "Gestione Account",
+        "description": "Gestisci il tuo profilo, impostazioni e preferenze dell'account"
+      },
+      "payments": {
+        "title": "Pagamenti e Fatturazione",
+        "description": "Metodi di pagamento, fatture e informazioni di fatturazione"
+      },
+      "security": {
+        "title": "Sicurezza e Privacy",
+        "description": "Impostazioni di sicurezza e politiche sulla privacy"
+      },
+      "communication": {
+        "title": "Comunicazione",
+        "description": "Messaggi, notifiche e opzioni di contatto"
+      },
+      "technical": {
+        "title": "Supporto Tecnico",
+        "description": "Problemi tecnici e requisiti di sistema"
+      }
+    },
+    "faqTitle": "Domande Frequenti",
+    "faq": {
+      "howToCreateAccount": {
+        "question": "Come creo un nuovo account?",
+        "answer": "Per creare un nuovo account, clicca sul pulsante 'Registrati' nella homepage e compila i tuoi dati inclusi email, password e informazioni di base. Riceverai un'email di verifica per completare il processo di registrazione."
+      },
+      "howToResetPassword": {
+        "question": "Come posso reimpostare la mia password?",
+        "answer": "Se hai dimenticato la password, clicca 'Password dimenticata' nella pagina di accesso. Inserisci il tuo indirizzo email e ti invieremo un link sicuro per reimpostare la password. Segui le istruzioni nell'email per creare una nuova password."
+      },
+      "paymentMethods": {
+        "question": "Quali metodi di pagamento sono accettati?",
+        "answer": "Accettiamo le principali carte di credito (Visa, MasterCard, American Express), PayPal, bonifici bancari e vari metodi di pagamento locali a seconda della regione. Tutti i pagamenti sono elaborati in modo sicuro tramite connessioni crittografate."
+      },
+      "securityMeasures": {
+        "question": "Come viene garantita la sicurezza dei miei dati?",
+        "answer": "Utilizziamo crittografia standard del settore, server sicuri e audit di sicurezza regolari per proteggere i tuoi dati. Le tue informazioni personali non vengono mai condivise con terze parti senza il tuo consenso e tutte le transazioni sono protette da crittografia SSL."
+      },
+      "contactSupport": {
+        "question": "Come contatto il servizio clienti?",
+        "answer": "Puoi contattare il nostro team di supporto attraverso la pagina Contatti, inviarci un'email a redacted-email@example.com o utilizzare la chat dal vivo disponibile 24/7. Rispondiamo tipicamente entro 24 ore."
+      },
+      "technicalIssues": {
+        "question": "Cosa fare in caso di problemi tecnici?",
+        "answer": "Per problemi tecnici, prova ad aggiornare il browser, cancellare la cache o utilizzare un browser diverso. Se i problemi persistono, contatta il nostro team di supporto tecnico con dettagli sul tuo dispositivo, browser e il problema specifico che stai riscontrando."
+      }
+    },
+    "contact": {
+      "title": "Contatto e Supporto",
+      "description": "Il nostro team di supporto è qui per aiutarti con qualsiasi domanda",
+      "button": "Contatta il Supporto"
+    }
+  },
+  "categories": {
+    "security": {
+      "title": "Sicurezza e Privacy",
+      "description": "Impostazioni di sicurezza e politiche sulla privacy"
+    },
+    "communication": {
+      "title": "Comunicazione",
+      "description": "Messaggi, notifiche e opzioni di contatto"
+    },
+    "technical": {
+      "title": "Supporto Tecnico",
+      "description": "Problemi tecnici e requisiti di sistema"
+    },
+    "userManagement": "Gestione Utenti",
+    "contentManagement": "Gestione Contenuti",
+    "operations": "Operazioni",
+    "customerSupport": "Supporto Clienti",
+    "analytics": "Analitiche",
+    "marketing": "Marketing",
+    "system": "Sistema"
+  },
+  "faq": {
+    "howToCreateAccount": {
+      "question": "Come creo un nuovo account?",
+      "answer": "Per creare un nuovo account, clicca sul pulsante 'Registrati' nella homepage e compila i tuoi dati inclusi email, password e informazioni di base. Riceverai un'email di verifica per completare il processo di registrazione."
+    },
+    "howToResetPassword": {
+      "question": "Come posso reimpostare la mia password?",
+      "answer": "Se hai dimenticato la password, clicca 'Password dimenticata' nella pagina di accesso. Inserisci il tuo indirizzo email e ti invieremo un link sicuro per reimpostare la password. Segui le istruzioni nell'email per creare una nuova password."
+    },
+    "paymentMethods": {
+      "question": "Quali metodi di pagamento sono accettati?",
+      "answer": "Accettiamo le principali carte di credito (Visa, MasterCard, American Express), PayPal, bonifici bancari e vari metodi di pagamento locali a seconda della regione. Tutti i pagamenti sono elaborati in modo sicuro tramite connessioni crittografate."
+    },
+    "securityMeasures": {
+      "question": "Come viene garantita la sicurezza dei miei dati?",
+      "answer": "Utilizziamo crittografia standard del settore, server sicuri e audit di sicurezza regolari per proteggere i tuoi dati. Le tue informazioni personali non vengono mai condivise con terze parti senza il tuo consenso e tutte le transazioni sono protette da crittografia SSL."
+    },
+    "contactSupport": {
+      "question": "Come contatto il servizio clienti?",
+      "answer": "Puoi contattare il nostro team di supporto attraverso la pagina Contatti, inviarci un'email a redacted-email@example.com o utilizzare la chat dal vivo disponibile 24/7. Rispondiamo tipicamente entro 24 ore."
+    },
+    "technicalIssues": {
+      "question": "Cosa fare in caso di problemi tecnici?",
+      "answer": "Per problemi tecnici, prova ad aggiornare il browser, cancellare la cache o utilizzare un browser diverso. Se i problemi persistono, contatta il nostro team di supporto tecnico con dettagli sul tuo dispositivo, browser e il problema specifico che stai riscontrando."
+    }
+  },
+  "faqTitle": "Domande Frequenti",
+  "verticalsPage": {
+    "verticals": {
+      "jobs": {
+        "description": "[IT] Description - Please add translation",
+        "fields": "[IT] Fields"
+      },
+      "deals": {
+        "description": "[IT] Description - Please add translation",
+        "fields": "[IT] Fields"
+      },
+      "services": {
+        "description": "[IT] Description - Please add translation",
+        "fields": "[IT] Fields"
+      },
+      "streams": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation",
+        "fields": "[IT] Fields",
+        "badge": "[IT] Badge"
+      },
+      "custom": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation",
+        "fields": "[IT] Fields"
+      }
+    },
+    "advantages": {
+      "agility": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation"
+      },
+      "scaling": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation"
+      },
+      "contextAware": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation"
+      },
+      "title": "[IT] Title",
+      "subtitle": "[IT] Subtitle"
+    },
+    "title": "[IT] Title",
+    "subtitle": "[IT] Subtitle",
+    "available": "[IT] Available",
+    "specializedFields": "[IT] Specialized Fields"
+  },
+  "technicalPage": {
+    "architecture": {
+      "performance": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation"
+      },
+      "aiNative": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation"
+      },
+      "cloudNative": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation"
+      }
+    },
+    "techStack": {
+      "go": "[IT] Go",
+      "kubernetes": "[IT] Kubernetes",
+      "grpc": "[IT] Grpc",
+      "react": "[IT] React",
+      "stripe": "[IT] Stripe"
+    },
+    "platform": {
+      "title": "[IT] Title",
+      "modules": {
+        "commerce": {
+          "title": "[IT] Title",
+          "description": "[IT] Description - Please add translation",
+          "link": "[IT] Link"
+        },
+        "social": {
+          "title": "[IT] Title",
+          "description": "[IT] Description - Please add translation",
+          "link": "[IT] Link"
+        },
+        "verticals": {
+          "title": "[IT] Title",
+          "description": "[IT] Description - Please add translation",
+          "link": "[IT] Link"
+        },
+        "intelligence": {
+          "title": "[IT] Title",
+          "description": "[IT] Description - Please add translation",
+          "link": "[IT] Link"
+        },
+        "infrastructure": {
+          "title": "[IT] Title",
+          "description": "[IT] Description - Please add translation",
+          "link": "[IT] Link"
+        }
+      }
+    },
+    "ready": {
+      "title": "[IT] Title",
+      "subtitle": "[IT] Subtitle"
+    },
+    "cta": {
+      "engineer": "[IT] Engineer"
+    }
+  },
+  "mainPage": {
+    "title": "[IT] Title",
+    "subtitle": "[IT] Subtitle",
+    "technicalCta": "[IT] Technical Cta",
+    "platformTitle": "[IT] Platform Title",
+    "platformDescription": "[IT] Platform Description - Please add translation"
+  },
+  "intelligencePage": {
+    "capabilities": {
+      "autonomous": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation",
+        "example": {
+          "comment": "[IT] Comment",
+          "command": "[IT] Command"
+        }
+      },
+      "multiModal": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation",
+        "features": {
+          "image": "[IT] Image",
+          "voice": "[IT] Voice"
+        }
+      },
+      "conversational": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation"
+      },
+      "analytics": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation",
+        "example": {
+          "comment": "[IT] Comment",
+          "query": "[IT] Query"
+        }
+      }
+    },
+    "differentiator": {
+      "title": "[IT] Title",
+      "description": "[IT] Description - Please add translation"
+    },
+    "integration": "[IT] Integration",
+    "relatedCommerce": "[IT] Related Commerce",
+    "relatedSocial": "[IT] Related Social",
+    "relatedVerticals": "[IT] Related Verticals"
+  },
+  "infrastructurePage": {
+    "pillars": {
+      "apiFirst": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation"
+      },
+      "kubernetes": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation"
+      }
+    },
+    "costSavings": {
+      "title": "[IT] Title",
+      "media": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation",
+        "savings": "[IT] Savings",
+        "note": "[IT] Note"
+      },
+      "geocoding": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation",
+        "savings": "[IT] Savings",
+        "note": "[IT] Note"
+      }
+    },
+    "performance": {
+      "title": "[IT] Title",
+      "metrics": {
+        "speed": "[IT] Speed",
+        "uptime": "[IT] Uptime",
+        "response": "[IT] Response"
+      },
+      "description": "[IT] Description - Please add translation"
+    },
+    "powers": "[IT] Powers",
+    "relatedTechnical": "[IT] Related Technical",
+    "relatedVerticals": "[IT] Related Verticals"
+  },
+  "breadcrumb": {
+    "technicalOverview": "[IT] Technical Overview"
+  },
+  "socialPage": {
+    "features": {
+      "feeds": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation"
+      },
+      "following": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation"
+      },
+      "reviews": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation"
+      }
+    },
+    "metrics": {
+      "title": "[IT] Title",
+      "messageDelivery": "[IT] Message Delivery",
+      "connections": "[IT] Connections",
+      "engagement": "[IT] Engagement",
+      "retention": "[IT] Retention"
+    },
+    "tools": {
+      "title": "[IT] Title",
+      "comments": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation",
+        "features": {
+          "nested": "[IT] Nested",
+          "mentions": "[IT] Mentions",
+          "spam": "[IT] Spam",
+          "moderation": "[IT] Moderation"
+        }
+      },
+      "profiles": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation",
+        "features": {
+          "timeline": "[IT] Timeline",
+          "portfolio": "[IT] Portfolio",
+          "verification": "[IT] Verification",
+          "bio": "[IT] Bio"
+        }
+      },
+      "notifications": {
+        "description": "[IT] Description - Please add translation",
+        "features": {
+          "inApp": "[IT] In App",
+          "email": "[IT] Email",
+          "push": "[IT] Push",
+          "preferences": "[IT] Preferences"
+        }
+      }
+    },
+    "enhance": "[IT] Enhance",
+    "relatedCommerce": "[IT] Related Commerce",
+    "relatedIntelligence": "[IT] Related Intelligence",
+    "relatedVerticals": "[IT] Related Verticals"
+  },
+  "commercePage": {
+    "features": {
+      "payment": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation"
+      },
+      "order": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation"
+      }
+    },
+    "metrics": {
+      "title": "[IT] Title",
+      "checkoutTime": "[IT] Checkout Time",
+      "successRate": "[IT] Success Rate",
+      "transactions": "[IT] Transactions",
+      "pciCompliance": "[IT] Pci Compliance"
+    },
+    "models": {
+      "title": "[IT] Title",
+      "leasing": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation"
+      },
+      "reservations": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation"
+      },
+      "subscription": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation"
+      },
+      "auction": {
+        "title": "[IT] Title",
+        "description": "[IT] Description - Please add translation"
+      }
+    },
+    "relatedModules": "[IT] Related Modules",
+    "relatedSocial": "[IT] Related Social",
+    "relatedIntelligence": "[IT] Related Intelligence"
+  },
+  "likeButtonLabel": "Like Button Label",
+  "dislikeButtonLabel": "Dislike Button Label",
+  "commentButtonLabel": "Comment Button Label",
+  "shareButtonLabel": "Share Button Label",
+  "saveButtonLabel": "Save Button Label",
+  "reportButtonLabel": "Report Button Label",
+  "viewModes": {
+    "grid": "[IT] Grid",
+    "list": "[IT] List",
+    "map": "[IT] Map"
+  },
+  "toasts": {
+    "minQuantity": "[IT] Min Quantity"
+  },
+  "syncingItems": "[IT] Syncing Items",
+  "emptyDescriptionOffline": "[IT] Empty Description Offline - Please add translation",
+  "offlineMode": "[IT] Offline Mode",
+  "offlineNotice": "[IT] Offline Notice",
+  "labels": {
+    "subtotal": "[IT] Subtotal",
+    "shipping": "[IT] Shipping",
+    "discount": "[IT] Discount",
+    "total": "[IT] Total"
+  },
+  "metrics": {
+    "totalProducts": "[IT] Total Products",
+    "totalOrders": "[IT] Total Orders",
+    "revenue": "[IT] Revenue",
+    "views": "[IT] Views",
+    "likes": "[IT] Likes",
+    "rating": "[IT] Rating"
+  },
+  "performance": {
+    "title": "[IT] Title",
+    "placeholder": "[IT] Placeholder"
+  },
+  "activity": {
+    "title": "[IT] Title",
+    "empty": "[IT] Empty"
+  },
+  "table": {
+    "product": "[IT] Product",
+    "status": "[IT] Status",
+    "price": "[IT] Price",
+    "stock": "[IT] Stock",
+    "views": "[IT] Views",
+    "sales": "[IT] Sales",
+    "actions": "[IT] Actions"
+  },
+  "products": {
+    "empty": "[IT] Empty"
+  },
+  "orders": {
+    "empty": "[IT] Empty"
+  },
+  "quickActions": {
+    "findProduct": "[IT] Find Product",
+    "findProductDesc": "[IT] Find Product Desc",
+    "createListing": "[IT] Create Listing",
+    "createListingDesc": "[IT] Create Listing Desc",
+    "writePost": "[IT] Write Post",
+    "writePostDesc": "[IT] Write Post Desc",
+    "findService": "[IT] Find Service",
+    "findServiceDesc": "[IT] Find Service Desc"
+  },
+  "messageCopied": "[IT] Message Copied",
+  "aiAssistant": "[IT] Ai Assistant",
+  "selectAssistant": "[IT] Select Assistant",
+  "conversations": "[IT] Conversations",
+  "clearChat": "[IT] Clear Chat",
+  "welcome": "[IT] Welcome",
+  "welcomeDesc": "[IT] Welcome Desc",
+  "you": "[IT] You",
+  "copy": "[IT] Copy",
+  "regenerate": "[IT] Regenerate",
+  "typing": "[IT] Typing",
+  "dismiss": "[IT] Dismiss",
+  "AdminSupport": {
+    "title": "[IT] Title",
+    "subtitle": "[IT] Subtitle"
+  },
+  "noTickets": "[IT] No Tickets",
+      "saveSuccess": "Impostazioni salvate con successo",
+    "saveError": "Errore nel salvare le impostazioni",
+  "general": {
+    "title": "[IT] Title",
+    "siteName": "[IT] Site Name",
+    "siteUrl": "[IT] Site Url",
+    "supportEmail": "[IT] Support Email",
+    "defaultLanguage": "[IT] Default Language",
+    "maintenanceMode": "[IT] Maintenance Mode"
+  },
+  "features": {
+    "title": "[IT] Title"
+  },
+  "email": {
+    "title": "[IT] Title",
+    "smtpHost": "[IT] Smtp Host",
+    "smtpPort": "[IT] Smtp Port",
+    "smtpUser": "[IT] Smtp User",
+    "smtpSecure": "[IT] Smtp Secure"
+  },
+  "notifications": {
+    "title": "[IT] Title"
+  },
+  "payments": {
+    "title": "[IT] Title",
+    "stripeEnabled": "[IT] Stripe Enabled",
+    "paypalEnabled": "[IT] Paypal Enabled",
+    "transactionFee": "[IT] Transaction Fee",
+    "minOrderAmount": "[IT] Min Order Amount"
+  },
+  "save": "[IT] Save",
+  "filterByRating": "[IT] Filter By Rating",
+  "deleteError": "[IT] Delete Error",
+  "confirmBulkDelete": "[IT] Confirm Bulk Delete",
+  "uploadNew": "[IT] Upload New",
+  "filterAll": "[IT] Filter All",
+  "filterImages": "[IT] Filter Images",
+  "filterVideos": "[IT] Filter Videos",
+  "filterDocuments": "[IT] Filter Documents",
+  "selected": "[IT] Selected",
+  "deleteSelected": "[IT] Delete Selected",
+  "download": "[IT] Download",
+  "noMedia": "[IT] No Media",
+  "totalActivities": "[IT] Total Activities",
+  "noActivity": "[IT] No Activity",
+  "popularContent": "[IT] Popular Content",
+  "mostLiked": "[IT] Most Liked",
+  "noData": "[IT] No Data",
+  "global": {
+    "title": "[IT] Title",
+    "content": "[IT] Content"
+  },
+  "support": {
+    "title": "[IT] Title",
+    "content": "[IT] Content"
+  },
+  "achievements": {
+    "title": "[IT] Title",
+    "content": "[IT] Content"
+  },
+  "future": {
+    "title": "[IT] Title",
+    "content": "[IT] Content"
+  },
+  "sell": {
+    "pageTitle": "Piattaforma Ecosistema Business",
+    "heroTitle": "La Tua Piattaforma Business Completa: Vendi, Connetti, Cresci",
+    "heroSubtitle": "Unisciti a migliaia di aziende - da imprenditori individuali a marchi globali. Vendi prodotti, offri servizi, pubblica contenuti e costruisci la tua community. Nessuna dipendenza, nessun intermediario - solo crescita diretta del business.",
+    "startSelling": "Inizia Ora",
+    "learnMore": "Scopri di Più",
+    "scheduleCall": "Prenota Consulenza",
+    "activeSellers": "Aziende Attive",
+    "monthlyUsers": "Utenti Attivi Mensili",
+    "satisfaction": "Messaggi Giornalieri",
+    "gmv": "Valutazione Venditori",
+
+    "whoCanJoinTitle": "Ogni Business Ha il Suo Posto Qui",
+    "whoCanJoinSubtitle": "Non importa la dimensione o il settore - se hai qualcosa da offrire, appartieni qui",
+    
+    "businessType1": "Venditori e Distributori",
+    "businessType1Desc": "Che tu abbia 1 prodotto o 10.000 - da boutique a grandi catene",
+    "businessType1Examples": "Negozi online • Negozi fisici • Distributori • Grossisti",
+    
+    "businessType2": "Fornitori di Servizi",
+    "businessType2Desc": "Offri la tua competenza e servizi direttamente ad aziende e consumatori",
+    "businessType2Examples": "Installatori • Consulenti • Assistenza • Supporto tecnico",
+    
+    "businessType3": "Creatori di Contenuti",
+    "businessType3Desc": "Condividi conoscenze, costruisci pubblico e monetizza la tua expertise",
+    "businessType3Examples": "Blogger • Educatori • Influencer • Esperti del settore",
+    
+    "businessType4": "Produttori",
+    "businessType4Desc": "Connettiti direttamente con i tuoi clienti B2B e B2C",
+    "businessType4Examples": "Produttori • Artigiani • Produttori su misura • Fornitori OEM",
+    
+    "ecosystemTitle": "Più di un Marketplace - Un Ecosistema Business Completo",
+    "ecosystemSubtitle": "Tutto ciò di cui hai bisogno per gestire, far crescere e scalare il tuo business in una piattaforma",
+    
+    "ecosystem1Title": "Chat e Messaggi Live",
+    "ecosystem1Desc": "Conversazioni in tempo reale con i clienti, notifiche istantanee e assistente chat AI disponibile 24/7",
+    
+    "ecosystem2Title": "Costruisci la Tua Community",
+    "ecosystem2Desc": "Guadagna follower, crea programmi fedeltà e costruisci relazioni durature con i clienti",
+    
+    "ecosystem3Title": "Piattaforma Publishing Contenuti",
+    "ecosystem3Desc": "Condividi blog, articoli, video, tutorial - educa il tuo pubblico e migliora il posizionamento SEO",
+    
+    "ecosystem4Title": "Recensioni e Prova Sociale",
+    "ecosystem4Desc": "Raccogli recensioni autentiche, mostra testimonianze e costruisci fiducia attraverso la validazione sociale",
+    
+    "ecosystem5Title": "Newsletter e Marketing",
+    "ecosystem5Desc": "Invia newsletter mirate ai tuoi follower, annuncia nuovi prodotti e condividi offerte esclusive",
+    
+    "ecosystem6Title": "Live Streaming e Video",
+    "ecosystem6Desc": "Organizza demo prodotto live, sessioni Q&A e condividi contenuti video con il tuo pubblico",
+    
+    "ecosystem7Title": "Notifiche Intelligenti",
+    "ecosystem7Desc": "Mantieni i clienti coinvolti con aggiornamenti personalizzati su prodotti, contenuti e offerte speciali",
+    
+    "ecosystem8Title": "Integrazione Social Commerce",
+    "ecosystem8Desc": "Connettiti con piattaforme social, abilita condivisione social e funzionalità di marketing virale",
+
+    "whyJoinTitle": "Perché le Aziende Scelgono la Nostra Piattaforma",
+    "whyJoinSubtitle": "Unisciti a un ecosistema fiorente progettato per il successo business moderno",
+    
+    "reason1Title": "Nessuna Dipendenza da Piattaforme",
+    "reason1": "Vendi direttamente senza dipendere da marketplace esterni - mantieni le tue relazioni clienti",
+    
+    "reason2Title": "Inizia Piccolo, Scala Grande",
+    "reason2": "Che tu abbia 1 prodotto o 10.000 - cresci al tuo ritmo con piani flessibili",
+    
+    "reason3Title": "Base Clienti Integrata",
+    "reason3": "Accesso a milioni di acquirenti attivi che cercano prodotti e servizi nella tua categoria",
+    
+    "reason4Title": "Suite Marketing Completa",
+    "reason4": "Tutto ciò di cui hai bisogno per promuovere il tuo business - da strumenti SEO a funzionalità social",
+    
+    "reason5Title": "Unisciti a un Ecosistema Fiorente",
+    "reason5": "Connettiti con altre aziende, condividi conoscenze e cresci insieme",
+    
+    "reason6Title": "Tecnologia del Futuro",
+    "reason6": "Strumenti basati su AI, automazione e innovazione continua della piattaforma",
+
+    "processTitle": "Inizia il Tuo Viaggio in Pochi Minuti",
+    "processSubtitle": "Processo di onboarding semplice - sii online in meno di 24 ore",
+    
+    "step1Title": "Registrazione Rapida",
+    "step1Desc": "Registra la tua azienda in pochi minuti - imprenditore individuale o azienda, tutti sono benvenuti",
+    
+    "step2Title": "Costruisci la Tua Presenza",
+    "step2Desc": "Crea il tuo negozio, aggiungi prodotti/servizi, pubblica contenuti, personalizza il tuo brand",
+    
+    "step3Title": "Coinvolgi e Connetti",
+    "step3Desc": "Inizia conversazioni, guadagna follower, condividi expertise, costruisci la tua community",
+    
+    "step4Title": "Fai Crescere il Tuo Business",
+    "step4Desc": "Usa strumenti AI, analytics e funzionalità marketing per scalare il tuo successo",
+
+    "pricingTitle": "Piani Tariffari",
+    "customPricing": "Prezzi flessibili adattati alle tue esigenze",
+    
+    "planStarter": "Starter",
+    "planStarterPrice": "GRATIS",
+    "planStarterCommission": "+ 8% commissione transazione",
+    
+    "planProfessional": "Professional",
+    "planProfessionalPrice": "49€/mese",
+    "planProfessionalCommission": "+ 5% commissione transazione",
+    
+    "planEnterprise": "Enterprise",
+    "planEnterprisePrice": "Personalizzato",
+    "planEnterpriseCommission": "Dal 3% commissione transazione",
+
+    "feature1": "Fino a 100 prodotti/servizi",
+    "feature2": "Personalizzazione negozio base",
+    "feature3": "Chat e messaggi live",
+    "feature4": "Blog e pubblicazione contenuti",
+    "feature5": "Supporto email",
+    "feature6": "Analytics base",
+    "feature7": "Funzionalità social",
+    
+    "feature8": "Fino a 1000 prodotti/servizi",
+    "feature9": "Personalizzazione avanzata",
+    "feature10": "Assistente AI e automazione",
+    "feature11": "Newsletter a 5000 contatti",
+    "feature12": "Supporto prioritario",
+    "feature13": "Analytics avanzate",
+    "feature14": "Accesso API",
+    "feature15": "Rimozione branding piattaforma",
+    
+    "feature16": "Prodotti/servizi illimitati",
+    "feature17": "Soluzione white-label",
+    "feature18": "Infrastruttura dedicata",
+    "feature19": "Integrazioni personalizzate",
+    "feature20": "Newsletter illimitate",
+    "feature21": "Account manager dedicato",
+    "feature22": "Supporto telefonico 24/7",
+    "feature23": "Garanzie SLA",
+    "feature24": "Sviluppo personalizzato",
+
+    "starterCta": "Inizia Gratis",
+    "proCta": "Inizia Trial 14 giorni",
+    "enterpriseCta": "Contatta Vendite",
+
+    "servicesTitle": "Servizi Professionali e Supporto",
+    
+    "service1": "Sviluppo Piattaforma",
+    "service1Desc": "Microservizi personalizzati, sviluppo API, componenti frontend e integrazioni sistemi",
+    
+    "service2": "DevOps e Infrastruttura",
+    "service2Desc": "Setup Kubernetes, pipeline CI/CD, monitoring, auto-scaling e disaster recovery",
+    
+    "service3": "Soluzioni AI/ML",
+    "service3Desc": "Training modelli personalizzati, implementazioni NLP, motori raccomandazione e analytics predittive",
+    
+    "service4": "Sicurezza e Compliance",
+    "service4Desc": "Audit sicurezza, penetration testing, implementazione compliance e incident response",
+    
+    "service5": "Data Engineering",
+    "service5Desc": "Pipeline dati, processi ETL, analytics tempo reale e design data warehouse",
+    
+    "service6": "Supporto Tecnico 24/7",
+    "service6Desc": "Monitoring 24/7, gestione incidenti, ottimizzazione performance e garanzie SLA",
+
+    "cert1": "ISO 27001:2013",
+    "cert2": "SOC 2 Type II",
+    "cert3": "PCI DSS Level 1",
+    "cert4": "Conforme GDPR",
+    "cert5": "Conforme CCPA",
+    "cert6": "Pronto HIPAA",
+
+    "ctaTitle": "Pronto a Portare il Tuo Business al Livello Successivo?",
+    "ctaSubtitle": "Unisciti a migliaia di aziende già in crescita con la nostra piattaforma",
+    "scheduleDemo": "Inizia Ora",
+    "downloadBrochure": "Scopri di Più",
+
+    "trustTitle": "Fidato dai Leader del Settore",
+    "clientTestimonial1": "L'integrazione SAP senza interruzioni ci ha fatto risparmiare mesi di lavoro e ridotto i costi operativi del 40%.",
+    "clientName1": "CTO, Leader Produzione Globale",
+    "clientTestimonial2": "Migliore documentazione API e supporto. Abbiamo migrato oltre 1 milione SKU senza downtime.",
+    "clientName2": "Capo E-commerce, Retail Moda",
+    
+    "technicalCapabilitiesTitle": "Capacità Tecniche Avanzate",
+    
+    "cicdTitle": "CI/CD e DevOps",
+    "cicdDesc": "GitHub Actions/GitLab CI, testing automatizzato, deployment blue-green, canary releases e infrastructure as code con Terraform",
+    
+    "monitoringTitle": "Stack Observability",
+    "monitoringDesc": "Metriche Prometheus, dashboard Grafana, tracing distribuito Jaeger, stack ELK per logs e regole alert personalizzate",
+    
+    "authTitle": "Autenticazione e Autorizzazione",
+    "authDesc": "OAuth2/OIDC, SAML, autenticazione multi-fattore, controllo accesso basato su ruoli (RBAC) e gestione chiavi API",
+    
+    "cdnTitle": "CDN e Edge Computing",
+    "cdnDesc": "Integrazione Cloudflare/Fastly, edge workers, delivery contenuti globale, protezione DDoS e regole WAF",
+    
+    "messagingTitle": "Architettura Event-Driven",
+    "messagingDesc": "Stream Apache Kafka, messaging RabbitMQ/NATS, event sourcing, pattern CQRS e orchestrazione saga",
+
+    "performanceTitle": "Performance Piattaforma Ineguagliabile",
+    "performanceSubtitle": "Progettata per velocità, costruita per scala - supera piattaforme tradizionali",
+
+    "metric1Label": "Tempo Risposta API",
+    "metric1Value": "<50ms",
+    "metric2Label": "Uptime Piattaforma",
+    "metric2Value": "99,99%",
+    "metric3Label": "Transazioni Giornaliere",
+    "metric3Value": "10M+",
+    "metric4Label": "Regioni Globali",
+    "metric4Value": "12",
+
+    "erpIntegrationTitle": "Architettura Microservizi",
+    "erpIntegrationDesc": "Microservizi basati su Kubernetes con service mesh, auto-scaling e tracing distribuito. Containerizzazione Docker con pipeline CI/CD",
+    
+    "apiPlatformTitle": "API Gateway e Management",
+    "apiPlatformDesc": "Kong/AWS API Gateway con rate limiting, OAuth2/JWT auth, GraphQL federation, gestione webhook e documentazione OpenAPI",
+    
+    "dataLakeTitle": "Infrastruttura Dati",
+    "dataLakeDesc": "Cluster PostgreSQL, caching Redis, Elasticsearch, streaming Apache Kafka, TimescaleDB per time-series e storage oggetti compatibile S3",
+    
+    "aiTitle": "Piattaforma AI/ML",
+    "aiDesc": "Modelli TensorFlow/PyTorch, integrazione API GPT-4/Claude, database vettoriali (Pinecone/Weaviate), pipeline ML con Kubeflow",
+    
+    "securityTitle": "Infrastruttura Sicurezza",
+    "securityDesc": "Architettura zero-trust, HashiCorp Vault, mTLS, integrazione SIEM, penetration testing e scansione sicurezza automatizzata",
+    
+    "cloudNativeTitle": "Stack Cloud-Native",
+    "cloudNativeDesc": "Supporto multi-cloud (AWS/GCP/Azure), Terraform IaC, GitOps con ArgoCD, monitoring Prometheus/Grafana e stack ELK",
+    
+    "realtimeTitle": "Engine Real-Time",
+    "realtimeDesc": "Infrastruttura WebSocket, Server-Sent Events, messaging NATS/RabbitMQ, Redis Pub/Sub e WebRTC per video/audio",
+    
+    "devToolsTitle": "Developer Experience",
+    "devToolsDesc": "Librerie SDK (Node.js, Python, Go, Java), strumenti CLI, collezioni Postman, ambienti sandbox e documentazione completa",
+
+    "faqLinkText": "Visualizza FAQ Aziende",
+    "legalLinkText": "Legale e Compliance",
+    "privacyLinkText": "Accordo Trattamento Dati",
+    "slaLinkText": "Accordo Livello Servizio"
+  },
+  "VendorsFAQ": {
+    "categoryAll": "Tutti",
+    "categoryGettingStarted": "Primi passi",
+    "categoryPayments": "Pagamenti e commissioni",
+    "categoryProducts": "Prodotti e offerte",
+    "categoryShipping": "Spedizione e logistica",
+    "categoryAI": "Strumenti AI",
+    "categoryMarketing": "Marketing e promozione",
+    "categoryAnalytics": "Analytics",
+    "categoryLegal": "Legale e compliance",
+    "categorySupport": "Supporto",
+    "backToSell": "Indietro",
+    "pageTitle": "Centro assistenza venditori",
+    "pageSubtitle": "Trova risposte alle domande più frequenti",
+    "searchPlaceholder": "Cerca nelle domande...",
+    "noResults": "Nessun risultato trovato",
+    "tryDifferentSearch": "Prova parole chiave diverse",
+    "gs1Question": "Quanto tempo richiede il processo di verifica dell'applicazione?",
+    "gs1Answer": "Il processo di verifica richiede tipicamente 24-48 ore lavorative. Durante periodi di traffico elevato, questo può estendersi fino a 72 ore. Riceverai notifiche email ad ogni fase del processo.",
+    "gs2Question": "Quali documenti sono richiesti per la registrazione?",
+    "gs2Answer": "Hai bisogno di: 1) Certificato di registrazione aziendale attuale, 2) Certificato numero identificazione fiscale, 3) Conferma conto bancario aziendale, 4) Assicurazione responsabilità professionale (opzionale ma raccomandata), 5) Certificati qualità prodotti (se applicabile).",
+    "gs3Question": "Posso vendere come privato?",
+    "gs3Answer": "No, la nostra piattaforma è esclusivamente per aziende registrate. Questo richiede avere una licenza aziendale, numero fiscale e capacità di emettere fatture IVA.",
+    "gs4Question": "Come configuro il mio primo negozio?",
+    "gs4Answer": "Dopo l'approvazione dell'applicazione, otterrai accesso alla dashboard venditore con una guida passo-passo. Il nostro manager onboarding dedicato ti aiuterà con: configurazione profilo aziendale, aggiunta primi prodotti, configurazione pagamento e spedizione, e configurazione assistente AI.",
+    "pay1Question": "Come funzionano le commissioni di vendita?",
+    "pay1Answer": "La commissione viene automaticamente detratta da ogni transazione. Tariffe: Piano Starter - 8%, Piano Professional - 5%, Piano Enterprise - dal 3% (negoziabile). La commissione copre elaborazione pagamenti, hosting e tutte le funzionalità piattaforma.",
+    "pay2Question": "Quando riceverò il pagamento per i prodotti venduti?",
+    "pay2Answer": "Il ciclo pagamento standard è 7 giorni lavorativi dalla consegna prodotto. Per venditori con storico 6+ mesi, offriamo pagamenti accelerati (2-3 giorni). I pagamenti vengono elaborati automaticamente sul tuo conto aziendale.",
+    "pay3Question": "Quali metodi di pagamento sono supportati?",
+    "pay3Answer": "Accettiamo: carte credito/debito (Visa, Mastercard, American Express), PayPal, bonifici bancari, BLIK, Google Pay, Apple Pay, pagamenti rateali (Klarna, PayPo) e criptovalute (Bitcoin, Ethereum).",
+    "pay4Question": "Ci sono commissioni aggiuntive oltre alla commissione?",
+    "pay4Answer": "Il Piano Starter non ha commissioni mensili. Il Piano Professional costa 99€/mese. Non addebitiamo per: inserzioni prodotti, aggiornamenti, supporto tecnico, hosting foto, certificato SSL. Servizi aggiuntivi (es. fotografia professionale) sono prezzati separatamente.",
+    "prod1Question": "Quanti prodotti posso inserire?",
+    "prod1Answer": "I limiti dipendono dal piano: Starter - fino a 100 prodotti, Professional - fino a 1000 prodotti, Enterprise - illimitati. Ogni prodotto può avere fino a 10 foto e varianti illimitate (taglie, colori).",
+    "prod2Question": "Come funziona il sistema gestione offerte e promozioni?",
+    "prod2Answer": "Puoi creare: promozioni temporali (flash sale), codici sconto, sconti quantità, offerte bundle, programmi fedeltà. Il sistema gestisce automaticamente tempistiche e applica sconti. Puoi programmare promozioni in anticipo.",
+    "prod3Question": "Posso importare prodotti da altre piattaforme?",
+    "prod3Answer": "Sì, offriamo importazione tramite: file CSV/XML, integrazione API, migrazione piattaforma (Allegro, Amazon, eBay, Shopify). Il nostro team aiuta con migrazioni grandi cataloghi prodotti.",
+    "ship1Question": "Devo spedire i prodotti da solo?",
+    "ship1Answer": "Hai due opzioni: 1) Auto-spedizione - impacchetti e spedisci da solo, 2) Fulfillment by Us - conserviamo, impacchezziamo e spediamo i tuoi prodotti. Servizio fulfillment disponibile dal piano Professional.",
+    "ship2Question": "Quali compagnie corriere sono integrate?",
+    "ship2Answer": "Lavoriamo con: DHL, UPS, FedEx, DPD, InPost (locker pacchi), Pocztex, GLS. Generazione automatica etichette, tracciamento spedizioni e tariffe negoziate per venditori.",
+    "ship3Question": "Come funziona la spedizione internazionale?",
+    "ship3Answer": "Supportiamo spedizione in tutti i paesi UE. Il sistema calcola automaticamente dazi e tasse, genera documenti doganali. Per il piano Enterprise, offriamo supporto per espansione globale.",
+    "ai1Question": "Come funziona l'assistente AI personale?",
+    "ai1Answer": "L'assistente AI apprende sui tuoi prodotti e automaticamente: risponde a domande clienti 24/7, consiglia nella selezione prodotti, gestisce reclami, genera raccomandazioni personalizzate. Funziona in 28 lingue e si integra con live chat.",
+    "ai2Question": "Cos'è l'automazione 24/7?",
+    "ai2Answer": "Il sistema ti permette di programmare: risposte automatiche a domande comuni, notifiche disponibilità prodotti, follow-up post-acquisto, promemoria carrello abbandonato, campagne marketing stagionali.",
+    "ai3Question": "Posso personalizzare il comportamento AI?",
+    "ai3Answer": "Sì, puoi: addestrare AI sui tuoi dati, impostare tono comunicazione (formale/casual), definire regole business, aggiungere risposte personalizzate, escludere argomenti. Il piano Enterprise offre addestramento AI dedicato.",
+    "mkt1Question": "Come funziona il sistema newsletter?",
+    "mkt1Answer": "Ottieni: editor drag-and-drop, template pronti, segmentazione audience, A/B testing, automazione campagne, statistiche dettagliate. Limiti contatti: Starter - 1000, Professional - 5000, Enterprise - illimitati.",
+    "mkt2Question": "Posso gestire un blog o content marketing?",
+    "mkt2Answer": "Sì, ogni negozio ha CMS integrato per: creare articoli e guide, pubblicare contenuti video, ottimizzazione SEO, programmazione pubblicazioni. I contenuti vengono automaticamente promossi nei risultati ricerca.",
+    "mkt3Question": "Come funziona il sistema follower e recensioni?",
+    "mkt3Answer": "I clienti possono: seguire il tuo negozio, ricevere notifiche su nuovi prodotti, lasciare recensioni con foto/video, raccomandare prodotti agli amici. Costruisci community e aumenta la fedeltà clienti.",
+    "ana1Question": "Quali metriche posso tracciare?",
+    "ana1Answer": "La dashboard include: ricavi e margini, conversioni e carrelli abbandonati, fonti traffico, comportamento clienti, ROI campagne marketing, analisi concorrenti, previsioni vendite AI.",
+    "ana2Question": "Posso esportare i dati?",
+    "ana2Answer": "Sì, tutti i dati possono essere esportati come: CSV, Excel, report PDF. Accesso API a dati grezzi (piano Professional+). Integrazione con Google Analytics, Facebook Pixel.",
+    "leg1Question": "Come aiuta la piattaforma con la conformità GDPR?",
+    "leg1Answer": "Forniamo: consensi automatici e gestione dati, crittografia dati personali, strumenti cancellazione dati, report conformità, supporto legale. Aggiorniamo regolarmente il sistema secondo le normative.",
+    "leg2Question": "Chi è responsabile per le tasse di vendita?",
+    "leg2Answer": "Come venditore, sei responsabile per gli accordi fiscali. La piattaforma fornisce: fatture IVA automatiche, report vendite, integrazione sistemi contabilità, supporto IVA OSS per vendite internazionali.",
+    "leg3Question": "Quali sono le politiche resi e reclami?",
+    "leg3Answer": "Devi rispettare le normative UE: 14 giorni per resi senza motivo, 2 anni garanzia per difetti. Il sistema gestisce automaticamente il processo resi e genera etichette reso.",
+    "sup1Question": "Come posso ottenere supporto tecnico?",
+    "sup1Answer": "Il supporto dipende dal piano: Starter - email (risposta 24h), Professional - live chat + telefono (8-20), Enterprise - supporto dedicato 24/7. Inoltre: base conoscenza, tutorial video, webinar.",
+    "sup2Question": "Offrite formazione?",
+    "sup2Answer": "Sì, organizziamo: webinar principianti (settimanali), workshop avanzati (mensili), sessioni individuali (piano Enterprise), certificazione \"Trusted Seller\". Tutte le registrazioni disponibili nella dashboard.",
+    "sup3Question": "Cosa succede con i problemi tecnici?",
+    "sup3Answer": "Garantiamo 99,9% uptime. In caso di guasti: notifiche automatiche, aggiornamenti stato real-time, compensazioni downtime (SLA), supporto prioritario per piano Enterprise.",
+    "stillNeedHelp": "Hai ancora bisogno di aiuto?",
+    "contactSupport": "Il nostro team di supporto è pronto ad aiutare",
+    "emailSupport": "Supporto email",
+    "responseTime": "Risposta entro 24h",
+    "phoneSupport": "Supporto telefonico",
+    "businessHours": "Lun-Ven 9:00-18:00",
+    "liveChat": "Live Chat",
+    "chatWithExpert": "Chatta con un esperto",
+    "availableNow": "Disponibile ora",
+    "additionalResources": "Risorse aggiuntive",
+    "vendorGuide": "Guida venditori",
+    "apiDocs": "Documentazione API",
+    "webinars": "Webinar e formazione",
+    "vendorBlog": "Blog venditori"
+  },
+  "AdminSettings": {
+    "title": "Impostazioni Admin",
+    "subtitle": "Configura le impostazioni della piattaforma e le preferenze di sistema",
+    "accessDenied": "Accesso Negato",
+    "adminRequired": "Hai bisogno dei privilegi di amministratore per accedere alle impostazioni di sistema.",
+    "currentRole": "Ruolo attuale",
+    "notLoggedIn": "Non connesso",
+    "loadingTitle": "Caricamento Impostazioni...",
+    "loadingMessage": "Attendere mentre recuperiamo la configurazione di sistema.",
+    "backToDashboard": "Torna alla Dashboard",
+    "save": "Salva Modifiche",
+    "saving": "Salvataggio...",
+    "saved": "Impostazioni salvate con successo",
+    "tabs": {
+      "general": "Generale",
+      "features": "Funzionalità",
+      "email": "Email",
+      "security": "Sicurezza",
+      "notifications": "Notifiche",
+      "payments": "Pagamenti"
+    },
+    "general": {
+      "title": "Impostazioni Generali",
+      "siteName": "Nome Sito",
+      "siteUrl": "URL Sito",
+      "supportEmail": "Email Supporto",
+      "defaultLanguage": "Lingua Predefinita",
+      "maintenanceMode": "Modalità Manutenzione",
+      "maintenanceModeDesc": "Abilita modalità manutenzione per disabilitare temporaneamente l'accesso utente",
+      "timezone": "Fuso Orario Predefinito",
+      "dateFormat": "Formato Data",
+      "currency": "Valuta Predefinita"
+    },
+    "features": {
+      "title": "Impostazioni Funzionalità",
+      "userRegistration": "Registrazione Utente",
+      "emailVerification": "Verifica Email",
+      "socialLogin": "Login Social",
+      "guestCheckout": "Checkout Ospite",
+      "multiCurrency": "Multi-Valuta",
+      "aiRecommendations": "Raccomandazioni AI",
+      "enableRegistration": "Abilita Registrazione Utente",
+      "enableComments": "Abilita Commenti",
+      "enableReviews": "Abilita Recensioni",
+      "enableChat": "Abilita Chat Live",
+      "enableNotifications": "Abilita Notifiche Push",
+      "enableAnalytics": "Abilita Tracciamento Analytics"
+    },
+    "email": {
+      "title": "Configurazione Email",
+      "smtpHost": "Host SMTP",
+      "smtpPort": "Porta SMTP",
+      "smtpUser": "Utente SMTP",
+      "smtpSecure": "SMTP Sicuro",
+      "smtpUsername": "Username SMTP",
+      "smtpPassword": "Password SMTP",
+      "fromEmail": "Indirizzo Email Mittente",
+      "fromName": "Nome Mittente"
+    },
+    "security": {
+      "title": "Impostazioni Sicurezza",
+      "twoFactorAuth": "Autenticazione a Due Fattori",
+      "passwordMinLength": "Lunghezza Minima Password",
+      "sessionTimeout": "Timeout Sessione",
+      "sessionTimeoutHint": "In secondi",
+      "maxLoginAttempts": "Tentativi Login Max",
+      "requireCaptcha": "Richiedi CAPTCHA",
+      "requireEmailVerification": "Richiedi Verifica Email",
+      "enableTwoFactor": "Abilita Autenticazione a Due Fattori"
+    },
+    "notifications": {
+      "title": "Impostazioni Notifiche",
+      "newUserAlert": "Avviso Nuovo Utente",
+      "lowStockAlert": "Avviso Scorte Basse",
+      "paymentFailureAlert": "Avviso Fallimento Pagamento",
+      "systemErrorAlert": "Avviso Errore Sistema",
+      "dailyReportEmail": "Email Rapporto Giornaliero",
+      "emailNotifications": "Notifiche Email",
+      "pushNotifications": "Notifiche Push",
+      "smsNotifications": "Notifiche SMS",
+      "notificationFrequency": "Frequenza Notifiche"
+    },
+    "payments": {
+      "title": "Impostazioni Pagamenti",
+      "stripeEnabled": "Stripe Abilitato",
+      "paypalEnabled": "PayPal Abilitato",
+      "bankTransferEnabled": "Bonifico Bancario Abilitato",
+      "transactionFee": "Commissione Transazione",
+      "minOrderAmount": "Importo Minimo Ordine",
+      "enablePayments": "Abilita Pagamenti",
+      "paymentGateway": "Gateway Pagamento",
+      "currency": "Valuta Predefinita",
+      "taxRate": "Aliquota Tassa (%)",
+      "commissionRate": "Tasso Commissione (%)"
+    }
+  },
+  "ERP": {
+    "dashboardTitle": "Hub di Integrazione Enterprise",
+    "dashboardSubtitle": "Monitora e gestisci le integrazioni dei sistemi aziendali",
+    "addConnector": "Aggiungi Sistema",
+    "totalConnectors": "Sistemi Totali",
+    "activeConnectors": "Attivi",
+    "syncingNow": "Sincronizzazione",
+    "healthRate": "Stato Salute",
+    "connectors": "Connettori",
+    "connectorsDesc": "Gestisci connettori del sistema ERP e configurazioni",
+    "inventory": "Inventario",
+    "inventoryDesc": "Monitora prenotazioni inventario e sincronizzazione stock",
+    "invoices": "Fatture",
+    "invoicesDesc": "Elabora e gestisci integrazione fatture ERP",
+    "returns": "Resi",
+    "returnsDesc": "Gestisci autorizzazione reso merci (RMA)",
+    "synchronization": "Sincronizzazione",
+    "syncDesc": "Monitora sincronizzazione dati tra sistemi",
+    "analytics": "Analisi",
+    "analyticsDesc": "Visualizza metriche prestazioni integrazione ERP",
+    "recentConnectors": "Stato Sistemi",
+    "viewAll": "Visualizza Tutti",
+    "loadingConnectors": "Caricamento sistemi...",
+    "accessDenied": "Accesso Negato",
+    "adminRequired": "È richiesto l'accesso amministratore per gestire le integrazioni ERP.",
+    "backToDashboard": "Torna alla Dashboard"
+  },
+  "ERPConnectors": {
+    "title": "Connettori ERP",
+    "subtitle": "Gestisci connettori del sistema ERP e integrazioni",
+    "metaTitle": "Gestione Connettori ERP",
+    "metaDescription": "Gestisci connettori del sistema ERP, configurazioni e integrazioni",
+    "accessDenied": "Accesso Negato",
+    "adminRequired": "È richiesto l'accesso amministratore per gestire i connettori ERP.",
+    "backToDashboard": "Torna al Dashboard",
+    "loading": "Caricamento connettori...",
+    "addConnector": "Aggiungi Connettore",
+    "searchConnectors": "Cerca connettori...",
+    "filterByType": "Filtra per tipo",
+    "filterByStatus": "Filtra per stato",
+    "allTypes": "Tutti i Tipi",
+    "allStatuses": "Tutti gli Stati",
+    "sortBy": "Ordina per",
+    "name": "Nome",
+    "type": "Tipo",
+    "status": "Stato",
+    "lastSync": "Ultima Sincronizzazione",
+    "actions": "Azioni",
+    "active": "Attivo",
+    "inactive": "Inattivo",
+    "error": "Errore",
+    "pending": "In Attesa",
+    "syncing": "Sincronizzando",
+    "sap": "SAP ERP",
+    "netsuite": "NetSuite",
+    "odoo": "Odoo",
+    "dynamics365": "Dynamics 365",
+    "configure": "Configura",
+    "testConnection": "Testa Connessione",
+    "viewLogs": "Visualizza Log",
+    "delete": "Elimina",
+    "noConnectorsFound": "Nessun connettore trovato",
+    "noConnectorsMessage": "Nessun connettore corrisponde ai tuoi filtri attuali",
+    "createFirstConnector": "Crea Primo Connettore"
+  },
+  "AdminMedia": {
+    "title": "Gestione Media",
+    "subtitle": "Gestisci i tuoi asset multimediali e file",
+    "uploadNew": "Carica nuovo",
+    "searchPlaceholder": "Cerca file multimediali...",
+    "filterAll": "Tutti i file",
+    "filterImages": "Immagini",
+    "filterVideos": "Video",
+    "filterDocuments": "Documenti",
+    "selected": "{count, plural, =1 {1 file selezionato} other {# file selezionati}}",
+    "deleteSelected": "Elimina selezionati",
+    "loading": "Caricamento file multimediali...",
+    "view": "Visualizza",
+    "download": "Scarica",
+    "delete": "Elimina",
+    "noMedia": "Nessun file multimediale trovato. Carica alcuni file per iniziare.",
+    "deleteSuccess": "File multimediale eliminato con successo",
+    "deleteError": "Impossibile eliminare il file multimediale",
+    "confirmDelete": "Sei sicuro di voler eliminare questo file?",
+    "confirmBulkDelete": "Sei sicuro di voler eliminare {count} file?",
+    "uploading": "Caricamento...",
+    "uploadFiles": "Carica file",
+    "uploadInstructions": "Seleziona immagini o video da caricare",
+    "selectFiles": "Seleziona file",
+    "uploadSuccess": "Caricato con successo {count} file",
+    "uploadError": "Impossibile caricare i file",
+    "uploadFirst": "Carica primo file",
+    "deleting": "Eliminazione...",
+    "bulkDeleteSuccess": "Eliminato con successo {count} file",
+    "bulkDeleteError": "Impossibile eliminare alcuni file",
+    "errorTitle": "Errore nel caricamento dei media",
+    "retry": "Riprova",
+    "sortByDate": "Ordina per data",
+    "sortByName": "Ordina per nome",
+    "sortBySize": "Ordina per dimensione",
+    "sortByType": "Ordina per tipo",
+    "previous": "Precedente",
+    "next": "Successivo",
+    "pageInfo": "Pagina {current} di {total} ({items} elementi)"
+  },
+  "MessagesManagement": {
+    "title": "Gestione Messaggi",
+    "subtitle": "Monitora e gestisci le conversazioni degli utenti",
+    "accessDenied": "Accesso Negato",
+    "adminRequired": "È necessario avere privilegi di amministratore per accedere alla gestione dei messaggi.",
+    "currentRole": "Ruolo attuale",
+    "notLoggedIn": "Non autenticato",
+    "loadingTitle": "Caricamento Messaggi...",
+    "loadingMessage": "Attendere mentre recuperiamo i dati delle conversazioni.",
+    "errorTitle": "Impossibile Caricare i Messaggi",
+    "errorMessage": "Si è verificato un errore durante il recupero dei dati dei messaggi",
+    "retry": "Riprova",
+    "export": "Esporta",
+    "refresh": "Aggiorna",
+    "totalConversations": "Conversazioni Totali",
+    "activeConversations": "Conversazioni Attive",
+    "totalMessages": "Messaggi Totali",
+    "averageResponseTime": "Tempo Medio di Risposta",
+    "searchPlaceholder": "Cerca conversazioni...",
+    "allStatuses": "Tutti gli Stati",
+    "active": "Attivo",
+    "archived": "Archiviato",
+    "flagged": "Segnalato",
+    "last7Days": "Ultimi 7 Giorni",
+    "last30Days": "Ultimi 30 Giorni",
+    "last90Days": "Ultimi 90 Giorni",
+    "lastYear": "Ultimo Anno",
+    "conversation": "Conversazione",
+    "participants": "Partecipanti",
+    "messages": "Messaggi",
+    "lastActivity": "Ultima Attività",
+    "status": "Stato",
+    "actions": "Azioni"
+  },
+  "ShippingManagement": {
+    "title": "Gestione Spedizioni",
+    "subtitle": "Monitora e gestisci la logistica delle spedizioni",
+    "accessDenied": "Accesso Negato",
+    "adminRequired": "È necessario avere privilegi di amministratore per accedere alla gestione delle spedizioni.",
+    "currentRole": "Ruolo attuale",
+    "notLoggedIn": "Non autenticato",
+    "loadingTitle": "Caricamento Dati Spedizione...",
+    "loadingMessage": "Attendere mentre recuperiamo le informazioni di spedizione.",
+    "errorTitle": "Impossibile Caricare i Dati di Spedizione",
+    "errorMessage": "Si è verificato un errore durante il recupero dei dati di spedizione",
+    "retry": "Riprova",
+    "export": "Esporta",
+    "refresh": "Aggiorna",
+    "totalShipments": "Spedizioni Totali",
+    "delivered": "Consegnate",
+    "inTransit": "In Transito",
+    "deliveryRate": "Tasso di Consegna",
+    "searchPlaceholder": "Cerca spedizioni...",
+    "allStatuses": "Tutti gli Stati",
+    "pending": "In Attesa",
+    "processing": "In Elaborazione",
+    "shipped": "Spedito",
+    "allCarriers": "Tutti i Corrieri",
+    "fedex": "FedEx",
+    "ups": "UPS",
+    "dhl": "DHL",
+    "usps": "USPS",
+    "last7Days": "Ultimi 7 Giorni",
+    "last30Days": "Ultimi 30 Giorni",
+    "last90Days": "Ultimi 90 Giorni",
+    "lastYear": "Ultimo Anno",
+    "tracking": "Tracciamento",
+    "customer": "Cliente",
+    "destination": "Destinazione",
+    "status": "Stato",
+    "carrier": "Corriere",
+    "date": "Data",
+    "actions": "Azioni",
+    "trackingDetails": "Dettagli Tracciamento",
+    "trackingNumber": "Numero di Tracciamento",
+    "loadingTracking": "Caricamento informazioni di tracciamento..."
+  },
+  "NotificationsManagement": {
+    "title": "Gestione Notifiche",
+    "subtitle": "Gestisci notifiche di sistema e avvisi",
+    "accessDenied": "Accesso Negato",
+    "adminRequired": "È necessario avere privilegi di amministratore per accedere alla gestione delle notifiche.",
+    "currentRole": "Ruolo attuale",
+    "notLoggedIn": "Non autenticato",
+    "loadingTitle": "Caricamento Notifiche...",
+    "loadingMessage": "Attendere mentre recuperiamo i dati delle notifiche.",
+    "errorTitle": "Impossibile Caricare le Notifiche",
+    "errorMessage": "Si è verificato un errore durante il recupero dei dati delle notifiche",
+    "retry": "Riprova",
+    "export": "Esporta",
+    "refresh": "Aggiorna",
+    "createNotification": "Crea Notifica",
+    "totalNotifications": "Notifiche Totali",
+    "sentToday": "Inviate Oggi",
+    "deliveryRate": "Tasso di Consegna",
+    "openRate": "Tasso di Apertura",
+    "searchPlaceholder": "Cerca notifiche...",
+    "allTypes": "Tutti i Tipi",
+    "system": "Sistema",
+    "promotional": "Promozionale",
+    "announcement": "Annuncio",
+    "alert": "Avviso",
+    "last7Days": "Ultimi 7 Giorni",
+    "last30Days": "Ultimi 30 Giorni",
+    "last90Days": "Ultimi 90 Giorni",
+    "lastYear": "Ultimo Anno",
+    "title": "Titolo",
+    "type": "Tipo",
+    "recipients": "Destinatari",
+    "sent": "Inviate",
+    "delivered": "Consegnate",
+    "opened": "Aperte",
+    "actions": "Azioni"
+  }
+}

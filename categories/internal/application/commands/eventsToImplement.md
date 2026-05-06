@@ -1,0 +1,6 @@
+CategoryOptionAdded
+CategoryOptionRemoved
+CategoryOptionUpdated
+CategoryAttributeAdded
+CategoryAttributeRemoved
+CategoryAttributeUpdated

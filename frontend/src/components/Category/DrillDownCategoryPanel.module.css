@@ -1,0 +1,163 @@
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+
+.panelContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    min-height: 320px;
+    background: var(--color-panel-bg);
+    border: 1px solid var(--color-panel-border);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    animation: slideIn 0.3s ease;
+    position: relative;
+}
+
+.headerRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    background: var(--color-header-bg);
+    border-bottom: 1px solid var(--color-panel-border);
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    color: var(--color-link);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.backButton svg {
+    font-size: 14px;
+}
+
+.backButton:hover {
+    text-decoration: underline;
+}
+
+.currentCategoryTitle {
+    flex: 1;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--color-text);
+    text-align: center;
+}
+
+.contentArea {
+    flex: 1;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.loadingMsg {
+    font-size: 14px;
+    color: #777;
+}
+
+.errorMsg {
+    font-size: 14px;
+    color: var(--color-error);
+    margin-top: 8px;
+}
+
+.noSubcatMsg {
+    font-size: 14px;
+    color: #666;
+    margin-top: 8px;
+}
+
+.subcatList {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 260px;
+    overflow-y: auto;
+}
+
+.subcatItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    background: var(--color-panel-bg);
+    transition: background-color 0.1s ease-in-out;
+}
+
+.subcatItem:hover {
+    background: var(--color-hover);
+}
+
+.subcatItem svg {
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .panelContainer {
+        background: var(--gray-800);
+        border-color: var(--gray-700);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .headerRow {
+        background: var(--gray-900);
+        border-bottom-color: var(--gray-700);
+    }
+
+    .backButton {
+        color: var(--primary-color);
+    }
+
+    .currentCategoryTitle {
+        color: var(--gray-50);
+    }
+
+    .loadingMsg {
+        color: var(--gray-400);
+    }
+
+    .errorMsg {
+        color: var(--danger);
+    }
+
+    .noSubcatMsg {
+        color: var(--gray-400);
+    }
+
+    .subcatItem {
+        background: var(--gray-800);
+        color: var(--gray-200);
+    }
+
+    .subcatItem:hover {
+        background: var(--gray-700);
+    }
+
+    .subcatItem svg {
+        color: var(--gray-400);
+    }
+}

@@ -1,0 +1,269 @@
+/* BottomNav.module.css - Standard Mobile Styling */
+
+/* --- BOTTOM NAVIGATION --- */
+.bottomNav {
+    display: none; /* Hidden by default, enabled via media query */
+}
+
+/* MOBILE ONLY STYLES */
+@media (max-width: 768px) {
+    .bottomNav {
+        /* Core Layout & Positioning */
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 56px; /* WCAG 2.1 - Larger touch targets */
+        z-index: var(--z-sticky);
+
+        /* Styling with CSS variables */
+        background-color: var(--surface-primary);
+        box-shadow: var(--shadow-lg);
+        border-top: 1px solid var(--border-primary);
+        backdrop-filter: blur(10px);
+
+        /* Smooth Transition for showing/hiding */
+        transform: translateY(0);
+        transition: var(--transition-transform), var(--transition-opacity);
+        opacity: 1;
+        visibility: visible;
+
+        /* Performance Optimizations */
+        will-change: transform, opacity;
+        backface-visibility: hidden;
+        contain: layout style;
+
+        /* Flexbox Alignment */
+        align-items: stretch;
+        justify-content: space-around;
+
+        /* Safe Area Inset for iPhones */
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    /* Hidden state for scroll behavior */
+    .bottomNav.hidden {
+        transform: translateY(100%); /* Move below the viewport */
+        opacity: 0.8; /* Slightly fade out */
+        visibility: hidden;
+        pointer-events: none; /* Disable interactions when hidden */
+    }
+
+    /* Navigation list */
+    .navList {
+        display: flex;
+        justify-content: space-around;
+        align-items: stretch;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0 4px;
+        list-style: none;
+    }
+
+    /* Navigation item container */
+    .navItem {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Default Navigation button */
+    .navButton {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: var(--space-1) 0;
+        background: none;
+        border: none;
+        color: var(--text-tertiary);
+        font-family: var(--font-family-primary);
+        cursor: pointer;
+        transition: var(--transition-colors);
+        position: relative;
+        border-radius: 0;
+        
+        /* WCAG 2.1 - Minimum touch target */
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .navButton:hover {
+        color: var(--text-secondary);
+    }
+
+    .navButton:focus {
+        outline: none;
+    }
+
+    .navButton:focus-visible {
+        outline: 3px solid var(--border-focused);
+        outline-offset: -3px;
+        border-radius: var(--radius-md);
+    }
+
+    /* Active navigation item state */
+    .navButton.active {
+        color: var(--color-primary-500);
+        border-top: 2px solid var(--color-primary-500);
+    }
+
+    /* Icon wrapper */
+    .iconWrapper {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 2px;
+        height: 24px;
+    }
+
+    .navButton:hover .iconWrapper {
+        transform: translateY(-1px);
+    }
+
+    /* Badge indicator */
+    .badge {
+        position: absolute;
+        top: -4px;
+        right: -6px;
+        min-width: 18px;
+        height: 18px;
+        padding: 0 var(--space-1);
+        border-radius: var(--radius-full);
+        background-color: var(--color-error-500);
+        color: var(--text-inverse);
+        font-size: var(--font-size-xs);
+        font-weight: var(--font-weight-semibold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+        pointer-events: none;
+        box-shadow: var(--shadow-sm);
+        border: 2px solid var(--surface-primary);
+    }
+
+    /* Navigation item label */
+    .label {
+        font-size: 10px;
+        line-height: 1.1;
+        white-space: nowrap;
+        font-weight: 500;
+        letter-spacing: -0.2px;
+        margin-top: 1px;
+    }
+
+    /* Active label styling */
+    .navButton.active .label {
+        font-weight: 600;
+    }
+
+    /* --- Professional AI Bot Button - WCAG 2.1 Compliant --- */
+    .addNavButton {
+        background: var(--color-primary-500);
+        color: var(--text-inverse);
+        border-radius: var(--radius-2xl);
+        margin: var(--space-1) var(--space-2);
+        height: calc(100% - var(--space-2));
+        width: calc(100% - var(--space-4));
+        box-shadow: var(--shadow-primary);
+        transition: var(--transition-all);
+        border: 2px solid transparent;
+        position: relative;
+    }
+
+    .addNavButton:hover,
+    .addNavButton:focus-visible {
+        background: var(--color-primary-600);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-primary-lg);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .addNavButton:active {
+        transform: translateY(0);
+        box-shadow: var(--shadow-md);
+    }
+
+    .addNavButton:focus-visible {
+        outline: 3px solid var(--color-warning-500);
+        outline-offset: 2px;
+    }
+
+    .addNavButton .iconWrapper {
+        margin-bottom: 2px;
+        height: 24px;
+        width: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .addNavButton .label {
+        font-weight: 500;
+        font-size: 10px;
+        letter-spacing: 0.2px;
+    }
+}
+
+/* HIDE ON DESKTOP */
+@media (min-width: 769px) {
+    .bottomNav {
+        display: none ;
+    }
+}
+
+/* ACCESSIBILITY & PERFORMANCE */
+@media (prefers-reduced-motion: reduce) {
+    .navButton,
+    .addNavButton {
+        transition: none;
+    }
+
+    .navButton:hover .iconWrapper,
+    .addNavButton:hover {
+        transform: none;
+    }
+}
+
+/* HIGH CONTRAST MODE */
+@media (prefers-contrast: high) {
+    .bottomNav {
+        border-top-width: 2px;
+    }
+
+    .navButton {
+        border: 2px solid transparent;
+    }
+    
+    .navButton:hover {
+        border-color: currentColor;
+    }
+
+    .navButton.active {
+        border-top-width: 3px;
+    }
+
+    .addNavButton {
+        border-width: 2px;
+        border-color: currentColor;
+    }
+
+    .badge {
+        font-weight: var(--font-weight-bold);
+        border-width: 3px;
+    }
+
+    .navButton:focus-visible,
+    .addNavButton:focus-visible {
+        outline-width: 4px;
+        outline-offset: -4px;
+    }
+}

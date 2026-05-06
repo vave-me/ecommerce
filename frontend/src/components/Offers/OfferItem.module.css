@@ -1,0 +1,275 @@
+/* ------------------------------------------
+   CSS Module for OfferItem
+------------------------------------------ */
+.itemContainer {
+    border: 1px solid #ccc;
+    margin-bottom: 12px;
+    padding: 12px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme for item container */
+@media (prefers-color-scheme: dark) {
+    .itemContainer {
+        border: 1px solid var(--gray-600, #4b5563);
+        background-color: var(--gray-700, #374151);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.itemContainer:hover {
+    border-color: #1aa89e;
+    box-shadow: 0 2px 8px rgba(26, 168, 158, 0.15);
+    transform: translateY(-1px);
+}
+
+/* Dark theme for item container hover */
+@media (prefers-color-scheme: dark) {
+    .itemContainer:hover {
+        border-color: var(--primary-color, #3b82f6);
+        box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+    }
+}
+
+.offerContent {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.offerHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.offerTitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Dark theme for offer title */
+@media (prefers-color-scheme: dark) {
+    .offerTitle {
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.offerAmount {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1aa89e;
+    white-space: nowrap;
+}
+
+/* Dark theme for offer amount */
+@media (prefers-color-scheme: dark) {
+    .offerAmount {
+        color: var(--primary-color, #60a5fa);
+    }
+}
+
+.offerDetails {
+    font-size: 14px;
+    color: #6c757d;
+    line-height: 1.4;
+}
+
+/* Dark theme for offer details */
+@media (prefers-color-scheme: dark) {
+    .offerDetails {
+        color: var(--gray-300, #d1d5db);
+    }
+}
+
+.offerMeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #868e96;
+    margin-top: 4px;
+}
+
+/* Dark theme for offer meta */
+@media (prefers-color-scheme: dark) {
+    .offerMeta {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.offerStatus {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.statusPending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.statusAccepted {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.statusRejected {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Dark theme for offer status */
+@media (prefers-color-scheme: dark) {
+    .statusPending {
+        background-color: rgba(245, 158, 11, 0.2);
+        color: var(--warning, #f59e0b);
+    }
+
+    .statusAccepted {
+        background-color: rgba(16, 185, 129, 0.2);
+        color: var(--success, #10b981);
+    }
+
+    .statusRejected {
+        background-color: rgba(239, 68, 68, 0.2);
+        color: var(--danger, #ef4444);
+    }
+}
+
+.actions {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.actions button {
+    margin-right: 8px;
+    padding: 4px 8px;
+    border: none;
+    cursor: pointer;
+    background-color: #eee;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Dark theme for action buttons */
+@media (prefers-color-scheme: dark) {
+    .actions button {
+        background-color: var(--gray-600, #4b5563);
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+.actions button:hover {
+    background-color: #ddd;
+    transform: translateY(-1px);
+}
+
+/* Dark theme for action button hover */
+@media (prefers-color-scheme: dark) {
+    .actions button:hover {
+        background-color: var(--gray-500, #6b7280);
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.actions button:focus {
+    outline: 2px solid rgba(26, 168, 158, 0.3);
+    outline-offset: 2px;
+}
+
+/* Dark theme for action button focus */
+@media (prefers-color-scheme: dark) {
+    .actions button:focus {
+        outline: 2px solid rgba(59, 130, 246, 0.3);
+    }
+}
+
+.actions button:active {
+    transform: translateY(0);
+}
+
+.actions button:last-child {
+    margin-right: 0;
+}
+
+/* Primary action button */
+.primaryAction {
+    background-color: #1aa89e ;
+    color: white ;
+}
+
+.primaryAction:hover {
+    background-color: #178f7a ;
+}
+
+/* Dark theme for primary action */
+@media (prefers-color-scheme: dark) {
+    .primaryAction {
+        background-color: var(--primary-color, #3b82f6) ;
+    }
+
+    .primaryAction:hover {
+        background-color: var(--primary-color, #2563eb) ;
+    }
+}
+
+/* Danger action button */
+.dangerAction {
+    background-color: #dc3545 ;
+    color: white ;
+}
+
+.dangerAction:hover {
+    background-color: #c82333 ;
+}
+
+/* Dark theme for danger action */
+@media (prefers-color-scheme: dark) {
+    .dangerAction {
+        background-color: var(--danger, #ef4444) ;
+    }
+
+    .dangerAction:hover {
+        background-color: var(--danger, #dc2626) ;
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .itemContainer {
+        padding: 10px;
+    }
+
+    .offerHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .actions {
+        margin-top: 12px;
+    }
+
+    .actions button {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+}

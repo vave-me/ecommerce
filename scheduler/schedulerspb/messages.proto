@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package schedulerspb;
+
+import "google/protobuf/timestamp.proto";
+
+message SchedulerCreated {
+  string id = 1;
+  string user_id = 2;
+}
+
+message ActionAdded{
+  string id = 1;
+  string scheduler_id = 2;
+  string natural_language_task = 3;
+  google.protobuf.Timestamp execution_time = 4;
+  string status = 5;
+  google.protobuf.Timestamp created_at = 6;
+}
+
+message ActionRemoved{
+  string id = 1;
+  string scheduler_id = 2;
+}
+
+message ActionUpdated{
+  string id = 1;
+  string scheduler_id = 2;
+  string status = 3;
+  google.protobuf.Timestamp executed_at = 4;
+  string result = 5;
+  string error_message = 6;
+}

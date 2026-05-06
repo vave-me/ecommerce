@@ -1,0 +1,42 @@
+.cardBase {
+  background: var(--surface, #ffffff);
+  border-radius: var(--radius-lg, 12px);
+  border: 1px solid var(--border, #e5e7eb);
+  box-shadow: var(--elevation-1, var(--shadow-sm, 0 1px 2px rgba(0,0,0,.05)));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform var(--duration-fast, 150ms) var(--ease-standard, ease);
+}
+
+@media (prefers-color-scheme: dark) {
+  .cardBase {
+    background: var(--gray-800, #1f2937);
+    border-color: var(--gray-700, #374151);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.hoverable:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--elevation-3, 0 4px 12px rgba(0,0,0,0.08));
+}
+
+@media (prefers-color-scheme: dark) {
+  .hoverable:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.compact {
+  min-height: initial;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+  .cardBase {
+    border-width: 2px;
+    border-color: var(--gray-500, #6b7280);
+  }
+} 

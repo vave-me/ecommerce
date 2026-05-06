@@ -1,0 +1,121 @@
+/* Container */
+.barContainer {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 12px 16px;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.topPadding {
+    padding-top: 70px;
+}
+
+.categoryRow {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Chips */
+.categoryChip {
+    padding: 6px 12px;
+    background: var(--color-chip-bg);
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;
+    transition: background-color 0.15s ease-in-out;
+    outline: none;
+    border: 1px solid transparent;
+}
+
+.categoryChip:hover {
+    background-color: var(--color-chip-hover);
+}
+
+.categoryChip:focus {
+    border-color: var(--color-primary);
+}
+
+/* Selected Chip */
+.selectedChip {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+/* Show More Button */
+.toggleButton {
+    background-color: var(--color-button-bg);
+    color: #fff;
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+    outline: none;
+}
+
+.toggleButton:hover {
+    background-color: var(--color-button-hover);
+}
+
+.toggleButton:active {
+    background-color: var(--color-button-active);
+}
+
+.toggleButton:focus {
+    outline: 2px solid var(--color-button-bg);
+    outline-offset: 2px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .barContainer {
+        background-color: var(--gray-900);
+        color: var(--gray-200);
+        border-bottom-color: var(--gray-700);
+    }
+
+    .categoryChip {
+        background: var(--gray-800);
+        color: var(--gray-200);
+        border-color: var(--gray-700);
+    }
+
+    .categoryChip:hover {
+        background-color: var(--gray-700);
+    }
+
+    .categoryChip:focus {
+        border-color: var(--primary-color);
+    }
+
+    .selectedChip {
+        background-color: rgba(41, 128, 185, 0.2);
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .toggleButton {
+        background-color: var(--primary-color);
+        color: white;
+    }
+
+    .toggleButton:hover {
+        background-color: var(--primary-color-hover);
+    }
+
+    .toggleButton:active {
+        background-color: var(--primary-color-active);
+    }
+
+    .toggleButton:focus {
+        outline-color: var(--primary-color);
+    }
+}

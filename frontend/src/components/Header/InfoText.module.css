@@ -1,0 +1,76 @@
+/* LogoText.module.css - Atomic Design Approach */
+
+/* Container Utilities */
+.logoTextContainer {
+    display: flex;
+    position: relative;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    padding: 8px 0;
+    margin: 0 auto;
+}
+
+/* Text Utilities */
+.logoText {
+    position: absolute;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    color: #2980b9;
+    text-align: left;
+    text-transform: lowercase;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+    opacity: 0.9;
+    transition-property: opacity, color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+}
+
+/* Dark theme for logo text */
+@media (prefers-color-scheme: dark) {
+    .logoText {
+        color: var(--primary-color, #60a5fa);
+    }
+}
+
+/* Interaction States */
+.logoText:hover {
+    opacity: 1;
+    color: #3730a3;
+}
+
+/* Dark theme for logo text hover */
+@media (prefers-color-scheme: dark) {
+    .logoText:hover {
+        color: var(--primary-color, #3b82f6);
+    }
+}
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+    .logoTextContainer {
+        max-width: 120px;
+        padding: 1px 0;
+    }
+
+    .logoText {
+        font-size: 0.6rem;
+        letter-spacing: 0.03em;
+    }
+}
+
+@media (max-width: 480px) {
+    .logoTextContainer {
+        max-width: 100px;
+    }
+
+    .logoText {
+        font-size: 0.55rem;
+        letter-spacing: 0.02em;
+    }
+}

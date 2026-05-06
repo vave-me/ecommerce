@@ -1,0 +1,230 @@
+/* ProductsPage.module.css - Updated to match main page and news page grid system */
+
+/* Base styles (apply to all screen sizes) */
+.container {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem;
+    min-height: 100vh;
+    align-items: start;
+    
+    /* Add scroll isolation to prevent cross-component interference */
+    overscroll-behavior: contain;
+    contain: layout style;
+    
+    /* Performance optimization */
+    touch-action: pan-y;
+    
+    /* Hidden scrollbars with preserved functionality */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.mainContent {
+    flex: 1;
+    width: 100%;
+    max-width: 1400px; /* Add max-width constraint */
+    margin: 0 auto; /* Center the content */
+    padding: 0;
+}
+
+/* Updated grid layouts to match main page system */
+.layoutGrid, .layoutListGrid {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    gap: 24px;
+    padding: 24px;
+    min-height: calc(100vh - 48px);
+    overscroll-behavior: contain;
+    overflow: hidden;
+    height: calc(100vh - 48px);
+}
+
+.layoutListGrid {
+    grid-template-columns: 230px 1fr; /* List layout without rightside */
+    gap: 24px;
+}
+
+.contentArea, .contentListArea {
+    /* These will auto-fit in the grid */
+    overflow-y: auto;
+    height: 100%;
+    overscroll-behavior: contain;
+    contain: layout style;
+    touch-action: pan-y;
+    /* Hide scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.contentArea::-webkit-scrollbar,
+.contentListArea::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.productList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.productList li {
+    width: 100%;
+}
+
+/* Loading, Error, and Empty States */
+.loadingState,
+.errorState,
+.emptyState {
+    text-align: center;
+    padding: 2rem;
+    font-weight: 500;
+    color: #666;
+    grid-column: 1 / -1; /* Span all columns */
+}
+
+.errorState {
+    color: #dc2626;
+}
+
+.devError {
+    background-color: #fef2f2;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    text-align: left;
+}
+
+.refetchingIndicator {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #2980b9;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    z-index: 1000;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive breakpoints to match main page */
+@media (max-width: 1400px) {
+    .layoutGrid {
+        grid-template-columns: 230px 1fr;
+        gap: 16px;
+        padding: 16px;
+    }
+    
+    .layoutListGrid {
+        grid-template-columns: 230px 1fr;
+        gap: 16px;
+        padding: 16px;
+    }
+}
+
+@media (max-width: 992px) {
+    .layoutGrid {
+        grid-template-columns: 230px 1fr;
+        gap: 12px;
+        padding: 12px;
+    }
+    
+    .layoutListGrid {
+        grid-template-columns: 230px 1fr;
+        gap: 12px;
+        padding: 12px;
+    }
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+    .layoutGrid, .layoutListGrid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 16px;
+        height: auto;
+        min-height: auto;
+    }
+    
+    .mainContent {
+        padding: 0;
+        max-width: 100%; /* Full width on mobile */
+    }
+    
+    .contentArea, .contentListArea {
+        height: auto;
+        overflow-y: visible;
+    }
+}
+
+/* Small Mobile Optimizations */
+@media (max-width: 576px) {
+    .layoutGrid, .layoutListGrid {
+        padding: 12px;
+        gap: 12px;
+    }
+}
+
+/* ===================== */
+/* Dark Theme Support */
+/* ===================== */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background-color: var(--gray-900);
+        color: var(--gray-50);
+    }
+
+    .mainContent {
+        background-color: var(--gray-900);
+        color: var(--gray-50);
+    }
+
+    .layoutGrid, .layoutListGrid {
+        background-color: var(--gray-900);
+        color: var(--gray-50);
+    }
+
+    .contentArea, .contentListArea {
+        background-color: var(--gray-900);
+        color: var(--gray-50);
+    }
+
+    .productList {
+        background-color: var(--gray-900);
+    }
+
+    /* Loading, Error, and Empty States */
+    .loadingState,
+    .emptyState {
+        color: var(--gray-400);
+        background-color: var(--gray-800);
+        border-radius: 8px;
+    }
+
+    .errorState {
+        color: var(--danger);
+        background-color: var(--gray-800);
+        border-radius: 8px;
+    }
+
+    .devError {
+        background-color: var(--gray-800);
+        color: var(--gray-200);
+        border: 1px solid var(--gray-700);
+    }
+
+    .refetchingIndicator {
+        background-color: var(--primary-color);
+        color: var(--gray-50);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    }
+}

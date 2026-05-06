@@ -1,0 +1,85 @@
+package tools
+
+import ai2 "middleman/internal/ai"
+
+func createShippingTools() []ai2.Tool {
+	return []ai2.Tool{
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "shipping_create",
+				Description: "Create shipping information for an order",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"product_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The product being shipped",
+						},
+						"tracking_number": map[string]interface{}{
+							"type":        "string",
+							"description": "Shipping tracking number",
+						},
+						"label_url": map[string]interface{}{
+							"type":        "string",
+							"description": "URL to shipping label",
+							"format":      "uri",
+						},
+						"sender_name": map[string]interface{}{
+							"type":        "string",
+							"description": "Name of the sender",
+						},
+						"sender_address": map[string]interface{}{
+							"type":        "string",
+							"description": "Full sender address",
+						},
+						"receiver_name": map[string]interface{}{
+							"type":        "string",
+							"description": "Name of the receiver",
+						},
+						"receiver_address": map[string]interface{}{
+							"type":        "string",
+							"description": "Full receiver address",
+						},
+						"weight": map[string]interface{}{
+							"type":        "number",
+							"description": "Package weight in kilograms",
+							"minimum":     0,
+						},
+						"dimensions": map[string]interface{}{
+							"type":        "string",
+							"description": "Package dimensions (LxWxH in cm)",
+							"pattern":     "^\\d+x\\d+x\\d+$",
+						},
+						"service_types": map[string]interface{}{
+							"type":        "array",
+							"description": "Available shipping service types",
+							"items": map[string]interface{}{
+								"type": "string",
+								"enum": []string{"standard", "express", "overnight", "economy"},
+							},
+						},
+					},
+					"required": []string{"product_id", "tracking_number", "sender_name", "sender_address", "receiver_name", "receiver_address"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "shipping_track",
+				Description: "Track a shipment by its tracking number",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"tracking_number": map[string]interface{}{
+							"type":        "string",
+							"description": "The tracking number to look up",
+						},
+					},
+					"required": []string{"tracking_number"},
+				},
+			},
+		},
+	}
+}

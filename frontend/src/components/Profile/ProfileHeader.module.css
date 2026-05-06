@@ -1,0 +1,512 @@
+/* ProfileHeader.module.css */
+/* Modern, professional profile header styling */
+
+.headerContainer {
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    position: relative;
+}
+
+@media (prefers-color-scheme: dark) {
+    .headerContainer {
+        background-color: var(--gray-800, #1f2937);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Cover photo */
+.coverPhotoContainer {
+    height: 180px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.coverPhoto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Profile content wrapper */
+.profileContent {
+    padding: 0 24px 24px;
+    position: relative;
+}
+
+/* Avatar section */
+.avatarSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 16px;
+}
+
+.avatarWrapper {
+    margin-top: -60px;
+    position: relative;
+    z-index: 2;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #ffffff;
+    background-color: #f1f5f9;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+    .avatar {
+        border-color: var(--gray-800, #1f2937);
+        background-color: var(--gray-700, #374151);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+}
+
+.avatar:hover {
+    transform: scale(1.03);
+}
+
+/* Quick action buttons */
+.quickActions {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.followButton, .messageButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 38px;
+    padding: 0 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.followButton {
+    background-color: #2980b9;
+    color: white;
+    border: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .followButton {
+        background-color: var(--primary-color, #3b82f6);
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.followButton:hover {
+    background-color: #2980b9;
+    transform: translateY(-1px);
+}
+
+@media (prefers-color-scheme: dark) {
+    .followButton:hover {
+        background-color: var(--primary-hover, #60a5fa);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+}
+
+.following {
+    background-color: #e2e8f0;
+    color: #0f172a;
+}
+
+@media (prefers-color-scheme: dark) {
+    .following {
+        background-color: var(--gray-700, #374151);
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+.following:hover {
+    background-color: #fee2e2;
+    color: #ef4444;
+}
+
+@media (prefers-color-scheme: dark) {
+    .following:hover {
+        background-color: var(--red-900, #7f1d1d);
+        color: var(--red-400, #f87171);
+    }
+}
+
+.messageButton {
+    background-color: #f8fafc;
+    color: #0f172a;
+    border: 1px solid #e2e8f0;
+}
+
+@media (prefers-color-scheme: dark) {
+    .messageButton {
+        background-color: var(--gray-700, #374151);
+        color: var(--gray-200, #e5e7eb);
+        border-color: var(--gray-600, #4b5563);
+    }
+}
+
+.messageButton:hover {
+    background-color: #f1f5f9;
+    transform: translateY(-1px);
+}
+
+@media (prefers-color-scheme: dark) {
+    .messageButton:hover {
+        background-color: var(--gray-600, #4b5563);
+        border-color: var(--gray-500, #6b7280);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.actionIcon {
+    width: 16px;
+    height: 16px;
+}
+
+/* More options button */
+.moreButton {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+@media (prefers-color-scheme: dark) {
+    .moreButton {
+        background-color: var(--gray-700, #374151);
+        border-color: var(--gray-600, #4b5563);
+    }
+}
+
+.moreButton:hover {
+    background-color: #f1f5f9;
+}
+
+@media (prefers-color-scheme: dark) {
+    .moreButton:hover {
+        background-color: var(--gray-600, #4b5563);
+        border-color: var(--gray-500, #6b7280);
+    }
+}
+
+.moreIcon {
+    width: 20px;
+    height: 20px;
+    color: #64748b;
+}
+
+@media (prefers-color-scheme: dark) {
+    .moreIcon {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+/* Dropdown menu */
+.dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 180px;
+    z-index: 10;
+    overflow: hidden;
+    animation: slideDown 0.2s ease forwards;
+}
+
+@media (prefers-color-scheme: dark) {
+    .dropdown {
+        background-color: var(--gray-800, #1f2937);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        border: 1px solid var(--gray-700, #374151);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdownItem {
+    width: 100%;
+    padding: 10px 16px;
+    text-align: left;
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: #334155;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+    .dropdownItem {
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+.dropdownItem:hover {
+    background-color: #f8fafc;
+    color: #5b53ed;
+}
+
+@media (prefers-color-scheme: dark) {
+    .dropdownItem:hover {
+        background-color: var(--gray-700, #374151);
+        color: var(--primary-color, #3b82f6);
+    }
+}
+
+/* User info section */
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.nameSection {
+    margin-bottom: 4px;
+}
+
+.name {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+    line-height: 1.2;
+}
+
+@media (prefers-color-scheme: dark) {
+    .name {
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.username {
+    font-size: 16px;
+    color: #64748b;
+    margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    .username {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.bio {
+    font-size: 15px;
+    color: #475569;
+    line-height: 1.5;
+    margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    .bio {
+        color: var(--gray-300, #d1d5db);
+    }
+}
+
+.metaInfo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+}
+
+.metaItem {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #64748b;
+}
+
+@media (prefers-color-scheme: dark) {
+    .metaItem {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.metaIcon {
+    width: 16px;
+    height: 16px;
+}
+
+.websiteLink {
+    color: #2980b9;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+    .websiteLink {
+        color: var(--primary-color, #3b82f6);
+    }
+}
+
+.websiteLink:hover {
+    color: #1e40af;
+    text-decoration: underline;
+}
+
+@media (prefers-color-scheme: dark) {
+    .websiteLink:hover {
+        color: var(--primary-hover, #60a5fa);
+    }
+}
+
+.statsSection {
+    display: flex;
+    gap: 24px;
+    padding: 16px 0;
+    border-top: 1px solid #e2e8f0;
+}
+
+@media (prefers-color-scheme: dark) {
+    .statsSection {
+        border-top-color: var(--gray-700, #374151);
+    }
+}
+
+.statItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.statValue {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+@media (prefers-color-scheme: dark) {
+    .statValue {
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.statLabel {
+    font-size: 13px;
+    color: #64748b;
+}
+
+@media (prefers-color-scheme: dark) {
+    .statLabel {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.ratingItem {
+    margin-left: auto;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .profileContent {
+        padding: 0 16px 16px;
+    }
+
+    .avatarSection {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .quickActions {
+        align-self: stretch;
+    }
+
+    .coverPhotoContainer {
+        height: 120px;
+    }
+
+    .avatarWrapper {
+        margin-top: -40px;
+    }
+
+    .avatar {
+        width: 80px;
+        height: 80px;
+    }
+
+    .followButton, .messageButton {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .actionLabel {
+        display: none;
+    }
+
+    .statsSection {
+        gap: 16px;
+        padding: 12px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .profileContent {
+        padding: 0 12px 12px;
+    }
+
+    .avatarWrapper {
+        margin-top: -30px;
+    }
+
+    .avatar {
+        width: 60px;
+        height: 60px;
+        border-width: 3px;
+    }
+
+    .name {
+        font-size: 20px;
+    }
+
+    .bio {
+        font-size: 14px;
+    }
+
+    .metaInfo {
+        gap: 12px;
+    }
+
+    .statsSection {
+        gap: 12px;
+        padding: 8px 0;
+    }
+
+    .statItem {
+        gap: 2px;
+    }
+}

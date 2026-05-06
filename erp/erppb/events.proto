@@ -1,0 +1,467 @@
+syntax = "proto3";
+
+package erppb;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+// Connector Events
+message ConnectorRegistered {
+  string id = 1;
+  string name = 2;
+  string type = 3;
+  google.protobuf.Struct config = 4;
+  bool enabled = 5;
+  google.protobuf.Timestamp created_at = 6;
+}
+
+message ConnectorUpdated {
+  string id = 1;
+  string name = 2;
+  google.protobuf.Struct config = 3;
+  bool enabled = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+message ConnectorDisabled {
+  string id = 1;
+  string reason = 2;
+  google.protobuf.Timestamp disabled_at = 3;
+}
+
+message ConnectorEnabled {
+  string id = 1;
+  google.protobuf.Timestamp enabled_at = 2;
+}
+
+message ConnectorRemoved {
+  string id = 1;
+  google.protobuf.Timestamp removed_at = 2;
+}
+
+// Webhook Events
+message WebhookReceived {
+  string id = 1;
+  string connector_id = 2;
+  string event_type = 3;
+  string source = 4;
+  google.protobuf.Struct payload = 5;
+  google.protobuf.Timestamp received_at = 6;
+}
+
+message WebhookProcessed {
+  string id = 1;
+  string connector_id = 2;
+  string event_type = 3;
+  string status = 4;
+  google.protobuf.Struct result = 5;
+  google.protobuf.Timestamp processed_at = 6;
+}
+
+message WebhookFailed {
+  string id = 1;
+  string connector_id = 2;
+  string event_type = 3;
+  string error = 4;
+  int32 retry_count = 5;
+  google.protobuf.Timestamp failed_at = 6;
+}
+
+// Order Events
+message OrderSentToERP {
+  string id = 1;
+  string connector_id = 2;
+  string order_id = 3;
+  string external_id = 4;
+  google.protobuf.Struct order_data = 5;
+  google.protobuf.Timestamp sent_at = 6;
+}
+
+message OrderSyncedFromERP {
+  string id = 1;
+  string connector_id = 2;
+  string order_id = 3;
+  string external_id = 4;
+  string status = 5;
+  google.protobuf.Struct order_data = 6;
+  google.protobuf.Timestamp synced_at = 7;
+}
+
+message OrderSyncFailed {
+  string id = 1;
+  string connector_id = 2;
+  string order_id = 3;
+  string direction = 4; // inbound or outbound
+  string error = 5;
+  google.protobuf.Timestamp failed_at = 6;
+}
+
+// Invoice Domain Events
+message InvoiceCreated {
+  string id = 1;
+  string invoice_number = 2;
+  string order_id = 3;
+  string customer_id = 4;
+  string customer_name = 5;
+  string customer_email = 6;
+  string type = 7;
+  int64 total_amount = 8;
+  string currency = 9;
+  google.protobuf.Timestamp created_at = 10;
+  string connector_id = 11;
+}
+
+message InvoiceUpdated {
+  string id = 1;
+  google.protobuf.Struct changes = 2;
+  google.protobuf.Timestamp updated_at = 3;
+}
+
+message InvoiceApproved {
+  string id = 1;
+  string approved_by = 2;
+  google.protobuf.Timestamp approved_at = 3;
+}
+
+message InvoiceSent {
+  string id = 1;
+  string method = 2;
+  string recipient_email = 3;
+  google.protobuf.Timestamp sent_at = 4;
+}
+
+message InvoiceVoided {
+  string id = 1;
+  string reason = 2;
+  string voided_by = 3;
+  google.protobuf.Timestamp voided_at = 4;
+}
+
+message InvoicePaymentReceived {
+  string id = 1;
+  int64 amount = 2;
+  string payment_method = 3;
+  string transaction_id = 4;
+  google.protobuf.Timestamp payment_date = 5;
+}
+
+message InvoiceLinkedToERP {
+  string id = 1;
+  string erp_invoice_id = 2;
+  google.protobuf.Timestamp linked_at = 3;
+}
+
+message InvoiceSyncFailed {
+  string id = 1;
+  string error = 2;
+  google.protobuf.Timestamp failed_at = 3;
+}
+
+// Product Sync Events
+message ProductsSyncStarted {
+  string sync_id = 1;
+  string connector_id = 2;
+  int32 batch_size = 3;
+  google.protobuf.Struct filters = 4;
+  google.protobuf.Timestamp started_at = 5;
+}
+
+message ProductsSyncCompleted {
+  string sync_id = 1;
+  string connector_id = 2;
+  int32 products_synced = 3;
+  int32 products_failed = 4;
+  int64 duration_ms = 5;
+  google.protobuf.Timestamp completed_at = 6;
+}
+
+message ProductSynced {
+  string product_id = 1;
+  string connector_id = 2;
+  string sku = 3;
+  string name = 4;
+  int64 price = 5;
+  int64 stock = 6;
+  google.protobuf.Struct attributes = 7;
+  google.protobuf.Timestamp synced_at = 8;
+}
+
+// Stock Sync Events
+message StockSyncStarted {
+  string sync_id = 1;
+  string connector_id = 2;
+  int32 batch_size = 3;
+  google.protobuf.Timestamp started_at = 4;
+}
+
+message StockSyncCompleted {
+  string sync_id = 1;
+  string connector_id = 2;
+  int32 stock_synced = 3;
+  int32 stock_failed = 4;
+  int64 duration_ms = 5;
+  google.protobuf.Timestamp completed_at = 6;
+}
+
+message StockUpdated {
+  string product_id = 1;
+  string connector_id = 2;
+  string sku = 3;
+  int64 old_stock = 4;
+  int64 new_stock = 5;
+  string location = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
+
+// Price Sync Events
+message PricesSyncStarted {
+  string sync_id = 1;
+  string connector_id = 2;
+  int32 batch_size = 3;
+  google.protobuf.Timestamp started_at = 4;
+}
+
+message PricesSyncCompleted {
+  string sync_id = 1;
+  string connector_id = 2;
+  int32 prices_synced = 3;
+  int32 prices_failed = 4;
+  int64 duration_ms = 5;
+  google.protobuf.Timestamp completed_at = 6;
+}
+
+message PriceUpdated {
+  string product_id = 1;
+  string connector_id = 2;
+  string sku = 3;
+  int64 old_price = 4;
+  int64 new_price = 5;
+  string currency = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
+
+// Customer Sync Events
+message CustomersSyncStarted {
+  string sync_id = 1;
+  string connector_id = 2;
+  int32 batch_size = 3;
+  google.protobuf.Timestamp started_at = 4;
+}
+
+message CustomersSyncCompleted {
+  string sync_id = 1;
+  string connector_id = 2;
+  int32 customers_synced = 3;
+  int32 customers_failed = 4;
+  int64 duration_ms = 5;
+  google.protobuf.Timestamp completed_at = 6;
+}
+
+message CustomerSynced {
+  string customer_id = 1;
+  string connector_id = 2;
+  string external_id = 3;
+  string email = 4;
+  string first_name = 5;
+  string last_name = 6;
+  google.protobuf.Struct metadata = 7;
+  google.protobuf.Timestamp synced_at = 8;
+}
+
+// Inventory Reservation Domain Events
+message ReservationCreated {
+  string id = 1;
+  string order_id = 2;
+  string sku = 3;
+  string warehouse_id = 4;
+  int32 quantity = 5;
+  google.protobuf.Timestamp expires_at = 6;
+  google.protobuf.Timestamp created_at = 7;
+  string connector_id = 8;
+}
+
+message ReservationReleased {
+  string id = 1;
+  google.protobuf.Timestamp released_at = 2;
+  string reason = 3;
+}
+
+message ReservationFulfilled {
+  string id = 1;
+  google.protobuf.Timestamp fulfilled_at = 2;
+}
+
+message ReservationTransferred {
+  string id = 1;
+  string from_warehouse_id = 2;
+  string to_warehouse_id = 3;
+  google.protobuf.Timestamp transferred_at = 4;
+}
+
+message ReservationExpired {
+  string id = 1;
+  google.protobuf.Timestamp expired_at = 2;
+}
+
+// Legacy Inventory Events (for backward compatibility)
+message InventoryReserved {
+  string reservation_id = 1;
+  string connector_id = 2;
+  string order_id = 3;
+  repeated ReservedItem items = 4;
+  google.protobuf.Timestamp reserved_at = 5;
+}
+
+message ReservedItem {
+  string product_id = 1;
+  string sku = 2;
+  int64 quantity = 3;
+  string location = 4;
+}
+
+message InventoryReleased {
+  string reservation_id = 1;
+  string connector_id = 2;
+  string order_id = 3;
+  repeated ReleasedItem items = 4;
+  google.protobuf.Timestamp released_at = 5;
+}
+
+message ReleasedItem {
+  string product_id = 1;
+  string sku = 2;
+  int64 quantity = 3;
+  string location = 4;
+}
+
+message InventoryConfirmed {
+  string reservation_id = 1;
+  string connector_id = 2;
+  string order_id = 3;
+  google.protobuf.Timestamp confirmed_at = 4;
+}
+
+// Return Domain Events
+message ReturnCreated {
+  string id = 1;
+  string return_number = 2;
+  string original_order_id = 3;
+  string customer_id = 4;
+  string customer_name = 5;
+  string customer_email = 6;
+  string reason = 7;
+  repeated ReturnItem items = 8;
+  string refund_method = 9;
+  int64 refund_amount = 10;
+  string warehouse_id = 11;
+  string notes = 12;
+  google.protobuf.Timestamp created_at = 13;
+  string connector_id = 14;
+}
+
+message ReturnItem {
+  string sku = 1;
+  string product_name = 2;
+  int32 quantity = 3;
+  string condition = 4;
+  int64 restocking_fee = 5;
+  int64 refund_amount = 6;
+  string exchange_for_sku = 7;
+  repeated string serial_numbers = 8;
+  string inspection_notes = 9;
+}
+
+message ReturnApproved {
+  string id = 1;
+  google.protobuf.Timestamp approved_at = 2;
+  string approved_by = 3;
+}
+
+message ReturnProcessed {
+  string id = 1;
+  google.protobuf.Timestamp processed_at = 2;
+  string erp_return_id = 3;
+}
+
+message ReturnCompleted {
+  string id = 1;
+  google.protobuf.Timestamp completed_at = 2;
+  google.protobuf.Timestamp refund_processed_at = 3;
+  string refund_transaction_id = 4;
+}
+
+message ReturnRejected {
+  string id = 1;
+  google.protobuf.Timestamp rejected_at = 2;
+  string reason = 3;
+}
+message ReturnFailed {
+  string id = 1;
+  google.protobuf.Timestamp rejected_at = 2;
+  string reason = 3;
+}
+
+message ReturnItemsRestocked {
+  string id = 1;
+  repeated RestockedItem items = 2;
+  google.protobuf.Timestamp restocked_at = 3;
+}
+
+message RestockedItem {
+  string sku = 1;
+  int32 quantity = 2;
+  string location_id = 3;
+}
+
+message ReturnLinkedToERP {
+  string id = 1;
+  string erp_return_id = 2;
+  google.protobuf.Timestamp linked_at = 3;
+}
+
+message ReturnSyncFailed {
+  string id = 1;
+  string error = 2;
+  google.protobuf.Timestamp failed_at = 3;
+}
+
+// Sync Status Events
+message SyncStatusUpdated {
+  string connector_id = 1;
+  string entity_type = 2;
+  string status = 3;
+  string previous_status = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+message SyncError {
+  string connector_id = 1;
+  string entity_type = 2;
+  string error = 3;
+  int32 retry_count = 4;
+  google.protobuf.Timestamp occurred_at = 5;
+}
+
+// Commands
+message SyncEntity {
+  string connector_id = 1;
+  string entity_type = 2; // products, stock, prices, customers, orders
+  google.protobuf.Struct filters = 3;
+  bool force = 4;
+}
+
+message ProcessERPEvent {
+  string connector_id = 1;
+  string event_type = 2;
+  google.protobuf.Struct payload = 3;
+}
+
+message RetryFailedSync {
+  string connector_id = 1;
+  string sync_id = 2;
+}
+
+message UpdateConnectorConfig {
+  string connector_id = 1;
+  google.protobuf.Struct config = 2;
+}

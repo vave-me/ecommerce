@@ -1,0 +1,260 @@
+/* Dark Theme Utility Classes and Standardized Patterns */
+/* This file provides dark theme support using [data-theme="dark"] selector */
+
+/* Base Dark Theme Colors - Extend existing CSS variables */
+[data-theme="dark"] {
+  /* Background hierarchy */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #141414;
+  --bg-tertiary: #1a1a1a;
+  --bg-elevated: #1f1f1f;
+  --bg-overlay: rgba(0, 0, 0, 0.8);
+  
+  /* Surface colors */
+  --surface-primary: #1a1a1a;
+  --surface-secondary: #242424;
+  --surface-tertiary: #2a2a2a;
+  --surface-hover: #2f2f2f;
+  --surface-active: #353535;
+  
+  /* Text hierarchy */
+  --text-primary: #f0f0f0;
+  --text-secondary: #b0b0b0;
+  --text-tertiary: #808080;
+  --text-muted: #606060;
+  --text-disabled: #404040;
+  
+  /* Border colors */
+  --border-primary: #2a2a2a;
+  --border-secondary: #353535;
+  --border-tertiary: #404040;
+  --border-focus: #4a9eff;
+  
+  /* Component specific */
+  --input-bg: #1a1a1a;
+  --input-border: #2a2a2a;
+  --input-border-hover: #353535;
+  --input-border-focus: #4a9eff;
+  --input-text: #f0f0f0;
+  --input-placeholder: #606060;
+  
+  /* Button variants */
+  --btn-primary-bg: #2563eb;
+  --btn-primary-hover: #1d4ed8;
+  --btn-secondary-bg: #2a2a2a;
+  --btn-secondary-hover: #353535;
+  --btn-danger-bg: #dc2626;
+  --btn-danger-hover: #b91c1c;
+  
+  /* Shadows for dark mode */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+  
+  /* Status colors adjusted for dark mode */
+  --status-success: #10b981;
+  --status-warning: #f59e0b;
+  --status-error: #ef4444;
+  --status-info: #3b82f6;
+}
+
+/* Component Dark Theme Patterns */
+
+/* Cards and Surfaces */
+[data-theme="dark"] .card,
+[data-theme="dark"] .surface {
+  background-color: var(--surface-primary);
+  border-color: var(--border-primary);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .card:hover,
+[data-theme="dark"] .surface:hover {
+  background-color: var(--surface-hover);
+  border-color: var(--border-secondary);
+}
+
+/* Forms and Inputs */
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--input-text);
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: var(--input-placeholder);
+}
+
+[data-theme="dark"] input:hover,
+[data-theme="dark"] textarea:hover,
+[data-theme="dark"] select:hover {
+  border-color: var(--input-border-hover);
+}
+
+[data-theme="dark"] input:focus,
+[data-theme="dark"] textarea:focus,
+[data-theme="dark"] select:focus {
+  border-color: var(--input-border-focus);
+  outline-color: var(--input-border-focus);
+}
+
+/* Buttons */
+[data-theme="dark"] .btn-primary {
+  background-color: var(--btn-primary-bg);
+  color: white;
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background-color: var(--btn-primary-hover);
+}
+
+[data-theme="dark"] .btn-secondary {
+  background-color: var(--btn-secondary-bg);
+  border-color: var(--border-secondary);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+  background-color: var(--btn-secondary-hover);
+  border-color: var(--border-tertiary);
+}
+
+/* Modals and Overlays */
+[data-theme="dark"] .modal-backdrop {
+  background-color: var(--bg-overlay);
+}
+
+[data-theme="dark"] .modal-content {
+  background-color: var(--bg-elevated);
+  border-color: var(--border-primary);
+  color: var(--text-primary);
+}
+
+/* Tables */
+[data-theme="dark"] table {
+  background-color: var(--surface-primary);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] th {
+  background-color: var(--surface-secondary);
+  border-color: var(--border-primary);
+}
+
+[data-theme="dark"] td {
+  border-color: var(--border-primary);
+}
+
+[data-theme="dark"] tr:hover {
+  background-color: var(--surface-hover);
+}
+
+/* Navigation */
+[data-theme="dark"] .nav-item {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .nav-item:hover {
+  color: var(--text-primary);
+  background-color: var(--surface-hover);
+}
+
+[data-theme="dark"] .nav-item.active {
+  color: var(--text-primary);
+  background-color: var(--surface-active);
+}
+
+/* Badges and Tags */
+[data-theme="dark"] .badge,
+[data-theme="dark"] .tag {
+  background-color: var(--surface-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-primary);
+}
+
+/* Dropdowns */
+[data-theme="dark"] .dropdown-menu {
+  background-color: var(--bg-elevated);
+  border-color: var(--border-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="dark"] .dropdown-item {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+  background-color: var(--surface-hover);
+}
+
+/* Scrollbars */
+[data-theme="dark"] ::-webkit-scrollbar {
+  background-color: var(--bg-secondary);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background-color: var(--surface-tertiary);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background-color: var(--surface-hover);
+}
+
+/* Code blocks */
+[data-theme="dark"] pre,
+[data-theme="dark"] code {
+  background-color: var(--surface-primary);
+  color: var(--text-primary);
+  border-color: var(--border-primary);
+}
+
+/* Tooltips */
+[data-theme="dark"] .tooltip {
+  background-color: var(--bg-elevated);
+  color: var(--text-primary);
+  border-color: var(--border-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Loading states */
+[data-theme="dark"] .skeleton {
+  background-color: var(--surface-secondary);
+  background-image: linear-gradient(
+    90deg,
+    var(--surface-secondary) 0%,
+    var(--surface-tertiary) 50%,
+    var(--surface-secondary) 100%
+  );
+}
+
+/* Focus states */
+[data-theme="dark"] *:focus-visible {
+  outline-color: var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Dividers */
+[data-theme="dark"] hr {
+  border-color: var(--border-primary);
+}
+
+/* Icons */
+[data-theme="dark"] .icon {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .icon:hover {
+  color: var(--text-primary);
+}
+
+/* Utility classes for quick dark mode fixes */
+[data-theme="dark"] .dark\:bg-primary { background-color: var(--bg-primary) !important; }
+[data-theme="dark"] .dark\:bg-secondary { background-color: var(--bg-secondary) !important; }
+[data-theme="dark"] .dark\:bg-elevated { background-color: var(--bg-elevated) !important; }
+[data-theme="dark"] .dark\:text-primary { color: var(--text-primary) !important; }
+[data-theme="dark"] .dark\:text-secondary { color: var(--text-secondary) !important; }
+[data-theme="dark"] .dark\:border-primary { border-color: var(--border-primary) !important; }

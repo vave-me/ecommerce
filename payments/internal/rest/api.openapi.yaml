@@ -1,0 +1,67 @@
+openapiOptions:
+  file:
+    - file: "paymentspb/api.proto"
+      option:
+        info:
+          title: Payments Management API
+          version: "1.0.0"
+          description: "API for managing payments and invoices."
+
+        basePath: /
+  method:
+    # Payment Operations
+    - method: paymentspb.PaymentsService.AuthorizePayment
+      option:
+        operationId: authorizePayment
+        tags:
+          - Payment
+        summary: Authorize a future payment
+
+
+    - method: paymentspb.PaymentsService.ConfirmPayment
+      option:
+        operationId: confirmPayment
+        tags:
+          - Payment
+        summary: Confirm a payment
+
+    - method: paymentspb.PaymentsService.HandleWebhook
+      option:
+        operationId: handleWebhook
+        tags:
+          - Webhook
+        summary: Handle a Webhook
+
+
+    # Invoice Operations
+    - method: paymentspb.PaymentsService.CreateInvoice
+      option:
+        operationId: createInvoice
+        tags:
+          - Invoice
+        summary: Create an invoice
+
+
+    - method: paymentspb.PaymentsService.AdjustInvoice
+      option:
+        operationId: adjustInvoice
+        tags:
+          - Invoice
+        summary: Adjust an invoice
+
+    - method: paymentspb.PaymentsService.PayInvoice
+      option:
+        operationId: payInvoice
+        tags:
+          - Invoice
+        summary: Pay an invoice
+
+    - method: paymentspb.PaymentsService.CancelInvoice
+      option:
+        operationId: cancelInvoice
+        tags:
+          - Invoice
+        summary: Cancel an invoice
+
+
+

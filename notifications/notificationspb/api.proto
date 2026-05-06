@@ -1,0 +1,112 @@
+syntax = "proto3";
+
+package notificationspb;
+
+import "google/protobuf/empty.proto";         // For empty responses
+import "google/protobuf/timestamp.proto";     // For timestamp fields
+
+// NotificationsService provides functionalities related to notifications and notifications management.
+service NotificationsService {
+  rpc ListAlerts(ListAlertsRequest) returns (ListAlertsResponse) {}
+  rpc GetAlertsByType(GetAlertsByTypeRequest) returns (GetAlertsByTypeResponse) {}
+  rpc MarkAlertAsRead(MarkAlertAsReadRequest) returns (google.protobuf.Empty) {}
+  rpc MarkAllAlertsAsRead(MarkAllAlertsAsReadRequest) returns (google.protobuf.Empty) {}
+  rpc DeleteAlert(DeleteAlertRequest) returns (google.protobuf.Empty) {}
+  rpc GetUnreadCount(GetUnreadCountRequest) returns (GetUnreadCountResponse) {}
+  rpc GetNotificationStats(GetNotificationStatsRequest) returns (GetNotificationStatsResponse) {}
+  rpc GetNotificationPreferences(GetNotificationPreferencesRequest) returns (GetNotificationPreferencesResponse) {}
+  rpc UpdateNotificationPreferences(UpdateNotificationPreferencesRequest) returns (google.protobuf.Empty) {}
+}
+
+
+message Alert {
+  string id = 1;                              // Unique identifier of the notification.
+  string user_id = 2;                         // Unique identifier of the user.
+  string type = 3;                            // Type of the notification.
+  string message = 4;                         // Content of the notification message.
+  map<string, string> payload = 5;            // Additional data related to the notification.
+  bool is_read = 6;                           // Indicates whether the notification has been read.
+  google.protobuf.Timestamp created_at = 7;   // When the notification was created.
+}
+
+message ListAlertsRequest {
+  string type = 1;                      // Filter notifications by type (optional).
+  optional bool is_read = 2;            // Filter notifications by read status (optional).
+  int32 limit = 3;                      // Number of notifications per page (optional, default 50).
+  int32 offset = 4;                     // Offset for pagination (optional).
+}
+
+message ListAlertsResponse {
+  repeated Alert alerts = 1;            // List of notifications.
+  int32 total_count = 2;                // Total number of notifications.
+  bool has_more = 3;                    // Whether there are more notifications.
+}
+
+message GetAlertsByTypeRequest {
+  string type = 1;                      // Type of notifications to retrieve.
+  optional bool is_read = 2;            // Filter by read status (optional).
+  int32 limit = 3;                      // Number of notifications per page (optional, default 50).
+  int32 offset = 4;                     // Offset for pagination (optional).
+}
+
+message GetAlertsByTypeResponse {
+  repeated Alert alerts = 1;
+  int32 total_count = 2;                // Total number of notifications.
+  bool has_more = 3;                    // Whether there are more notifications.
+}
+
+message MarkAlertAsReadRequest {
+  string alert_id = 1;                  // ID of the alert to mark as read.
+}
+
+message MarkAllAlertsAsReadRequest {
+  string type = 1;                      // Optional: mark all alerts of specific type as read.
+}
+
+message DeleteAlertRequest {
+  string alert_id = 1;                  // ID of the alert to delete.
+}
+
+message GetUnreadCountRequest {
+  // No fields needed - uses auth token for user identification
+}
+
+message GetUnreadCountResponse {
+  int32 count = 1;                      // Number of unread notifications.
+}
+
+message GetNotificationStatsRequest {
+  // No fields needed - uses auth token for user identification
+}
+
+message GetNotificationStatsResponse {
+  int32 total_count = 1;                // Total number of notifications.
+  int32 unread_count = 2;               // Number of unread notifications.
+  map<string, int32> count_by_type = 3; // Count of notifications by type.
+  google.protobuf.Timestamp last_read_at = 4; // Timestamp of last read notification.
+}
+
+message NotificationPreference {
+  string type = 1;                      // Notification type.
+  bool enabled = 2;                     // Whether this type is enabled.
+  bool email_enabled = 3;               // Whether email notifications are enabled.
+  bool push_enabled = 4;                // Whether push notifications are enabled.
+}
+
+message GetNotificationPreferencesRequest {
+  // No fields needed - uses auth token for user identification
+}
+
+message GetNotificationPreferencesResponse {
+  repeated NotificationPreference preferences = 1;
+  bool global_enabled = 2;              // Global on/off switch.
+  bool email_enabled = 3;               // Global email notifications.
+  bool push_enabled = 4;                // Global push notifications.
+}
+
+message UpdateNotificationPreferencesRequest {
+  repeated NotificationPreference preferences = 1;
+  optional bool global_enabled = 2;     // Global on/off switch.
+  optional bool email_enabled = 3;      // Global email notifications.
+  optional bool push_enabled = 4;       // Global push notifications.
+}

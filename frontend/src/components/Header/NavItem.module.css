@@ -1,0 +1,250 @@
+/*
+  NavItem.module.css
+  Refactored styles for navigation items with compact design
+*/
+
+/* Container for nav item */
+.navItemContainer {
+    list-style: none;
+    position: relative; /* For ::after pseudo-elements */
+    display: flex; /* Ensure flex behavior */
+}
+
+/* Shared base styles for link and button */
+.navItemLink,
+.navItemButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs); /* Reduced gap for compactness */
+    width: 100%; /* Ensure takes full width if needed (esp. mobile) */
+    padding: var(--space-sm); /* Compact padding */
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md, 8px);
+    color: var(--text-secondary, #4B5563); /* Use text-secondary */
+    cursor: pointer;
+    position: relative; /* For ::after pseudo-elements */
+    outline: none; /* Rely on focus-visible */
+    text-align: center; /* Ensure text is centered */
+    /* Define specific transitions */
+    transition: color var(--transition-fast, 150ms) ease,
+    background-color var(--transition-fast, 150ms) ease;
+}
+
+/* Hover states */
+.navItemLink:hover,
+.navItemButton:hover {
+    color: var(--primary-color, #6366F1);
+    background-color: var(--surface-hover, #F3F4F6); /* Use surface hover variable */
+}
+
+/* Active state */
+/* Applied to the parent .navItemContainer via className prop */
+.active .navItemLink,
+.active .navItemButton {
+    color: var(--primary-color, #6366F1);
+    /* Optional: Add background for active state too? */
+    /* background-color: var(--primary-light, #EEF2FF); */
+}
+
+/* Focus state for accessibility */
+.navItemLink:focus-visible,
+.navItemButton:focus-visible {
+    outline: 2px solid var(--primary-color, #6366F1);
+    outline-offset: 2px;
+    /* Optional: Apply hover style on focus-visible for consistency */
+    /* background-color: var(--surface-hover, #F3F4F6); */
+}
+
+/* Icon container */
+.iconContainer {
+    position: relative; /* For badge positioning */
+    display: flex; /* Ensure icon is centered if needed */
+    align-items: center;
+    justify-content: center;
+    /* Define size if needed, or let icon font-size control */
+    width: 20px; /* Reduced from 24px */
+    height: 20px; /* Reduced from 24px */
+}
+
+/* Icon styling */
+.icon {
+    /* font-size: 20px; /* Use variable, e.g., var(--icon-size-md) */
+    /* Use width/height for SVG icons if applicable */
+    width: var(--icon-size-md, 18px); /* Reduced from 20px */
+    height: var(--icon-size-md, 18px);
+    display: block; /* Prevents extra space below */
+    transition: color var(--transition-fast, 150ms) ease; /* Only color transition needed */
+}
+
+/* Badge styling */
+.badge {
+    position: absolute;
+    top: -4px; /* Reduced from -6px */
+    right: -4px; /* Reduced from -6px */
+    /* Use variables for colors/fonts/sizes */
+    background-color: var(--color-danger, #EF4444);
+    color: var(--color-white, white);
+    font-size: var(--text-xs);
+    font-family: var(--font-primary);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--letter-normal);
+    line-height: var(--leading-none);
+    min-width: 14px; /* Reduced from 16px */
+    height: 14px; /* Reduced from 16px */
+    border-radius: var(--radius-full, 9999px); /* Make fully round */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--space-xs); /* Horizontal padding */
+    border: 2px solid var(--surface, white); /* Border against background */
+    box-shadow: var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.08)); /* Use variable */
+}
+
+/* Mobile-specific styles - Applied via .isMobile class on container */
+.isMobile .navItemLink,
+.isMobile .navItemButton {
+    /* Already column direction and 100% width */
+    padding: var(--space-sm) 0; /* Vertical padding only */
+    gap: var(--space-xs); /* Consistent gap */
+}
+
+.isMobile .iconContainer {
+    margin-bottom: 0; /* Use gap on parent flex container instead */
+}
+
+.isMobile .label {
+    font-size: var(--text-xs);
+    font-family: var(--font-primary);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--letter-normal);
+    line-height: var(--leading-tight);
+    margin-top: 0; /* Use gap on parent flex container */
+    color: inherit; /* Inherit color from parent (link/button) */
+}
+
+/* Active state indicator for mobile */
+/* Applied to the parent .navItemContainer */
+.isMobile.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px; /* Reduced from 24px */
+    height: 2px; /* Reduced from 3px */
+    background-color: var(--primary-color, #6366F1);
+    border-radius: 2px 2px 0 0;
+}
+
+/* Desktop specific active state and padding adjustments */
+@media (min-width: 769px) {
+    /* Or use a breakpoint variable */
+    /* Adjust padding for desktop */
+    .navItemLink,
+    .navItemButton {
+        padding: var(--space-2, 8px) var(--space-3, 12px); /* Example */
+        /* Reset mobile gap if needed, or keep for consistency */
+        /* gap: var(--space-1, 4px); */
+    }
+
+    /* Active state indicator for desktop */
+    /* Applied to the parent .navItemContainer */
+    .active::after {
+        content: '';
+        position: absolute;
+        bottom: 0; /* Position at the bottom */
+        left: var(--space-3, 12px); /* Align with padding */
+        right: var(--space-3, 12px); /* Align with padding */
+        height: 2px; /* Adjust size as needed */
+        background-color: var(--primary-color, #6366F1);
+        border-radius: 1px;
+        /* Ensure transform is reset if inheriting from mobile */
+        transform: none;
+    }
+
+    /* Ensure mobile indicator is not shown */
+    .isMobile.active::after {
+        display: none;
+    }
+}
+
+/* Badge animations for new notifications */
+/* Applied directly to the badge */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        /* transform: scale(1.15); - Replaced with opacity for performance */
+    opacity: 0.9;
+    }
+    /* Slightly larger pulse */
+}
+
+/* Apply pulse animation only if badge has content */
+.badge[data-count]:not([data-count="0"]) {
+    animation: pulse 1.5s infinite cubic-bezier(0.4, 0, 0.6, 1); /* Smoother easing */
+}
+
+/* Specific styling for notification badges with large numbers */
+.badge[data-count="99+"] { /* Select directly */
+    font-size: var(--font-size-xxs, 8px); /* Use variable */
+    padding: 0 2px; /* Adjust padding */
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .badge[data-count]:not([data-count="0"]) {
+        animation: none; /* Disable animation */
+    }
+
+    .navItemLink, .navItemButton, .icon {
+        transition-duration: 0.01ms ; /* Disable transitions */
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .navItemLink,
+    .navItemButton {
+        color: var(--gray-300);
+    }
+
+    .navItemLink:hover,
+    .navItemButton:hover {
+        color: var(--primary-color);
+        background-color: var(--gray-700);
+    }
+
+    .active .navItemLink,
+    .active .navItemButton {
+        color: var(--primary-color);
+    }
+
+    .navItemLink:focus-visible,
+    .navItemButton:focus-visible {
+        outline-color: var(--primary-color);
+    }
+
+    .icon {
+        color: inherit;
+    }
+
+    .badge {
+        background-color: var(--danger);
+        color: white;
+        border-color: var(--gray-800);
+    }
+
+    .label {
+        color: inherit;
+    }
+
+    .isMobile.active::after,
+    .active::after {
+        background-color: var(--primary-color);
+    }
+}

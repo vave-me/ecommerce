@@ -1,0 +1,479 @@
+.mediaContainer {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 4 / 3; /* ensures 4:3 ratio if the browser supports aspect-ratio */
+    background-color: #fff;
+    box-sizing: border-box;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.styledImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.thumbWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.blackThumbWrapper {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.videoThumb {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.videoWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border-radius: 6px;
+}
+
+.videoElement {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+/* Overlays for Play / Pause */
+.playOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* .pauseOverlay extends .playOverlay logic - you can reuse the same class or separate if desired */
+.pauseOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Icons for play/pause */
+.playIcon {
+    color: #fff;
+    width: 40px;
+    height: 40px;
+}
+
+.pauseIcon {
+    color: #fff;
+    width: 40px;
+    height: 40px;
+}
+
+/* === DARK THEME === */
+@media (prefers-color-scheme: dark) {
+    .mediaContainer {
+        background-color: var(--gray-900, #111827);
+        border: 1px solid var(--gray-700, #374151);
+    }
+
+    .styledImage {
+        filter: brightness(0.95);
+    }
+
+    .styledImage:hover {
+        filter: brightness(1);
+        transition: filter 0.3s ease;
+    }
+
+    .thumbWrapper {
+        background: var(--gray-900, #111827);
+        border: 1px solid var(--gray-700, #374151);
+    }
+
+    .blackThumbWrapper {
+        background: var(--gray-900, #111827);
+        border: 1px solid var(--gray-700, #374151);
+    }
+
+    .videoWrapper {
+        background: var(--gray-900, #111827);
+        border: 1px solid var(--gray-700, #374151);
+    }
+
+    .videoThumb {
+        filter: brightness(0.95);
+    }
+
+    .videoThumb:hover {
+        filter: brightness(1);
+        transition: filter 0.3s ease;
+    }
+
+    .videoElement {
+        filter: brightness(0.95);
+    }
+
+    .videoElement:hover {
+        filter: brightness(1);
+        transition: filter 0.3s ease;
+    }
+
+    .playOverlay {
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+    }
+
+    .pauseOverlay {
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+    }
+
+    .playIcon {
+        color: var(--teal-400, #2dd4bf);
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+        transition: all 0.3s ease;
+    }
+
+    .playIcon:hover {
+        color: var(--teal-300, #5eead4);
+        transform: scale(1.1);
+    }
+
+    .pauseIcon {
+        color: var(--teal-400, #2dd4bf);
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+        transition: all 0.3s ease;
+    }
+
+    .pauseIcon:hover {
+        color: var(--teal-300, #5eead4);
+        transform: scale(1.1);
+    }
+
+    /* Enhanced Media Display Features */
+    .mediaLoadingState {
+        background: var(--gray-800, #1f2937);
+        border: 1px solid var(--gray-700, #374151);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .mediaLoadingState::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, rgba(20, 184, 166, 0.1), transparent);
+        animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+        0% {
+            transform: translateX(-100%);
+        }
+        100% {
+            transform: translateX(100%);
+        }
+    }
+
+    .mediaErrorState {
+        background: var(--gray-800, #1f2937);
+        border: 2px solid var(--red-500, #ef4444);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--red-400, #f87171);
+        padding: 24px;
+        text-align: center;
+    }
+
+    .mediaErrorIcon {
+        color: var(--red-400, #f87171);
+        width: 48px;
+        height: 48px;
+        margin-bottom: 12px;
+    }
+
+    .mediaErrorText {
+        color: var(--red-400, #f87171);
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .mediaErrorSubtext {
+        color: var(--gray-400, #9ca3af);
+        font-size: 12px;
+    }
+
+    .mediaControls {
+        position: absolute;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 12px;
+        z-index: 3;
+    }
+
+    .mediaControlButton {
+        background: rgba(31, 41, 55, 0.9);
+        color: var(--teal-400, #2dd4bf);
+        border: 1px solid var(--gray-600, #4b5563);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(8px);
+    }
+
+    .mediaControlButton:hover {
+        background: rgba(31, 41, 55, 1);
+        color: var(--teal-300, #5eead4);
+        border-color: var(--teal-500, #14b8a6);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        transform: scale(1.1);
+    }
+
+    .mediaVolumeControl {
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        background: rgba(31, 41, 55, 0.9);
+        color: var(--teal-400, #2dd4bf);
+        border: 1px solid var(--gray-600, #4b5563);
+        border-radius: 20px;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        z-index: 3;
+        backdrop-filter: blur(8px);
+    }
+
+    .mediaVolumeSlider {
+        width: 60px;
+        height: 4px;
+        background: var(--gray-600, #4b5563);
+        border-radius: 2px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .mediaVolumeSlider::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 70%;
+        background: var(--teal-400, #2dd4bf);
+        border-radius: 2px;
+    }
+
+    .mediaTimeDisplay {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        background: rgba(31, 41, 55, 0.9);
+        color: var(--gray-200, #e5e7eb);
+        border: 1px solid var(--gray-600, #4b5563);
+        border-radius: 12px;
+        padding: 4px 8px;
+        font-size: 12px;
+        font-weight: 500;
+        z-index: 3;
+        backdrop-filter: blur(8px);
+    }
+
+    .mediaQualityIndicator {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: var(--teal-600, #0d9488);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 8px;
+        font-size: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        z-index: 3;
+        border: 1px solid var(--teal-500, #14b8a6);
+    }
+
+    .mediaQualityIndicator.hd {
+        background: var(--emerald-600, #059669);
+        border-color: var(--emerald-500, #10b981);
+    }
+
+    .mediaQualityIndicator.uhd {
+        background: var(--purple-600, #9333ea);
+        border-color: var(--purple-500, #a855f7);
+    }
+
+    .mediaFullscreenButton {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        background: rgba(31, 41, 55, 0.9);
+        color: var(--teal-400, #2dd4bf);
+        border: 1px solid var(--gray-600, #4b5563);
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 3;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(8px);
+    }
+
+    .mediaFullscreenButton:hover {
+        background: rgba(31, 41, 55, 1);
+        color: var(--teal-300, #5eead4);
+        border-color: var(--teal-500, #14b8a6);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        transform: scale(1.1);
+    }
+
+    .mediaProgressBar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 4;
+        cursor: pointer;
+    }
+
+    .mediaProgressFill {
+        height: 100%;
+        background: var(--teal-400, #2dd4bf);
+        transition: width 0.3s ease;
+        position: relative;
+    }
+
+    .mediaProgressThumb {
+        position: absolute;
+        right: -6px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 12px;
+        height: 12px;
+        background: var(--teal-400, #2dd4bf);
+        border-radius: 50%;
+        border: 2px solid white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .mediaBufferBar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.2);
+        z-index: 3;
+    }
+
+    .mediaBufferFill {
+        height: 100%;
+        background: rgba(255, 255, 255, 0.4);
+        transition: width 0.3s ease;
+    }
+}
+
+/* === HIGH CONTRAST MODE === */
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+    .mediaContainer {
+        border: 2px solid var(--gray-400, #9ca3af);
+    }
+
+    .thumbWrapper,
+    .blackThumbWrapper,
+    .videoWrapper {
+        border: 2px solid var(--gray-400, #9ca3af);
+    }
+
+    .playIcon,
+    .pauseIcon {
+        color: var(--teal-300, #5eead4);
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
+    }
+
+    .mediaControlButton {
+        border: 2px solid var(--gray-400, #9ca3af);
+    }
+
+    .mediaControlButton:hover {
+        border-color: var(--teal-300, #5eead4);
+    }
+
+    .mediaFullscreenButton {
+        border: 2px solid var(--gray-400, #9ca3af);
+    }
+
+    .mediaFullscreenButton:hover {
+        border-color: var(--teal-300, #5eead4);
+    }
+}
+
+/* === REDUCED MOTION === */
+@media (prefers-reduced-motion: reduce) {
+    .styledImage:hover,
+    .videoThumb:hover,
+    .videoElement:hover {
+        filter: none;
+        transition: none;
+    }
+
+    .playIcon:hover,
+    .pauseIcon:hover {
+        transform: none;
+    }
+
+    .mediaControlButton:hover,
+    .mediaFullscreenButton:hover {
+        transform: none;
+    }
+
+    .shimmer {
+        animation: none;
+    }
+
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}

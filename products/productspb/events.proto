@@ -1,0 +1,234 @@
+syntax = "proto3";
+
+package productspb;
+
+import "productspb/common.proto";
+
+message ProductAdded {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  int64 base_price = 4;
+  string user_seller_id = 5;
+  string  category_id = 6;
+  string  category_slug = 7;
+  string brand = 8;
+  string condition = 9;
+  string model = 10;
+  repeated string tags = 11;
+  bool manage_stocks = 12;
+  int64 stock = 13;
+  string sku = 14;
+  repeated Attribute attributes = 15;
+  int64 weight = 16;
+  int64 height = 17;
+  int64 width = 18;
+  int64 depth = 19;
+  string status = 20;
+  bool negotiable = 21;
+  bool middleman_service = 22;
+  string user_type = 23;
+  int64 shipping_cost = 24;
+  bool has_variants = 25;
+  repeated Option options = 26;
+  string thumbnail = 27;
+  float lat = 28;
+  float lng = 29;
+}
+message ProductUpdated {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  int64 base_price = 4;
+  string user_seller_id = 5;
+  string  category_id = 6;
+  string  category_slug = 7;
+  string brand = 8;
+  string condition = 9;
+  string model = 10;
+  repeated string tags = 11;
+  bool manage_stocks = 12;
+  int64 stock = 13;
+  string sku = 14;
+  repeated Attribute attributes = 15;
+  int64 weight = 16;
+  int64 height = 17;
+  int64 width = 18;
+  int64 depth = 19;
+  string status = 20;
+  bool negotiable = 21;
+  bool middleman_service = 22;
+  string user_type = 23;
+  int64 shipping_cost = 24;
+  bool has_variants = 25;
+  repeated Option options = 26;
+  string thumbnail = 27;
+  float lat = 28;
+  float lng = 29;
+}
+
+// Event when a product is rebranded (name/description changed)
+message ProductRebranded {
+  string id = 1;     // Product ID (UUID)
+  string name = 2;
+  string description = 3;
+  string category_id = 4;
+  string category_slug = 5;
+  int64 base_price = 6;
+  string user_seller_id = 7;
+  int64 stock = 8;
+  string sku = 9;
+  string active = 10;
+}
+// Event fired if the product is archived
+message ProductArchived {
+  string id = 1;              // product ID
+  string user_seller_id = 2;  // who archived it, if needed
+}
+// Event when a product price changes
+message ProductPriceIncreased {
+  string id = 1;     // Product ID (UUID)
+  int64 old_price = 2;   // The delta in price
+  int64 new_price = 3;   // The delta in price
+}
+message ProductPriceDecreased {
+  string id = 1;     // Product ID (UUID)
+  int64 old_price = 2;   // The delta in price
+  int64 new_price = 3;   // The delta in price
+}
+
+message ProductThumbnailAdded{
+  string id = 1;
+  string thumbnail = 2;
+}
+
+message ProductThumbnailUpdated{
+  string id = 1;
+  string thumbnail = 2;
+}
+
+message ProductStockAdjusted{
+  string id = 1;
+  int64 old_stock = 2;
+  int64 new_stock = 3;
+}
+
+
+message ProductSold{
+  string id = 1;
+  string user_seller_id = 2;
+  string buyer_id = 3;
+  string final_price = 4;
+}
+
+message ProductLeased{
+  string id = 1; // product ID
+  string  user_seller_id = 2;
+  string lease_id = 3;
+}
+
+message ProductPawned{
+  string id = 1; // product ID
+  string  user_seller_id = 2;
+  string pawn_id = 3;
+}
+message ProductNegotiableToggled{
+  string id = 1;
+  bool old_value = 2;
+  bool new_value = 3;
+
+}
+// Event when a product is removed
+message ProductRemoved {
+  string id = 1;     // Product ID (UUID)
+}
+
+message VariantAdded {
+  string id = 1;
+  string product_id = 2;
+  string status = 3;
+  string sku = 4;
+  string condition = 5;
+  string barcode = 6;
+  int64 variant_price = 7;
+  string currency_code = 8;
+  int64 stock = 9;
+  int64 weight = 10;
+  int64 height = 11;
+  int64 width = 12;
+  int64 depth = 13;
+  repeated Attribute attributes = 14;
+  bool is_available = 15;
+  bool has_options = 16;
+  repeated Option options = 17;
+}
+
+
+message VariantPriceDecreased{
+  string id = 1;
+  int64 old_price = 2;
+  int64 new_price = 3;
+}
+
+message VariantPriceIncreased{
+  string id = 1;
+  int64 old_price = 2;
+  int64 new_price = 3;
+}
+
+message VariantStockAdjusted{
+  string id = 1;
+  int64 old_stock = 2;
+  int64 new_stock = 3;
+}
+
+message VariantArchived{
+  string id = 1;
+}
+
+message VariantRemoved{
+  string id = 1;
+}
+
+// -------------------------------
+// COMMANDS
+// -------------------------------
+
+// ReserveProduct is a command sent to the Products service asking it to hold
+// a specific quantity of the given product for the lifetime of an order /
+// basket checkout.
+message ReserveProduct {
+  string order_id = 1;   // For correlation – optional
+  string product_id = 2; // Product being reserved
+  int64 quantity = 3;    // Quantity to reserve (must be positive)
+}
+
+// Release previously reserved stock (compensation)
+message ReleaseProduct {
+  string order_id = 1;
+  string product_id = 2;
+  int64 quantity = 3;
+}
+
+// ReserveProducts is a batch command to reserve multiple products at once
+message ReserveProducts {
+  string order_id = 1;
+  repeated ReserveProductItem items = 2;
+}
+
+message ReserveProductItem {
+  string product_id = 1;
+  int64 quantity = 2;
+}
+
+// ReleaseProducts is a batch command to release multiple products at once
+message ReleaseProducts {
+  string order_id = 1;
+  repeated ReleaseProductItem items = 2;
+}
+
+message ReleaseProductItem {
+  string product_id = 1;
+  int64 quantity = 2;
+}
+

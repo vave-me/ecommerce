@@ -1,0 +1,1359 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Media Management",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "MediaService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/media": {
+      "post": {
+        "summary": "Create a new media",
+        "operationId": "createMedia",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbCreateMediaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/mediapbCreateMediaRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Media"
+        ]
+      }
+    },
+    "/api/media/image": {
+      "post": {
+        "summary": "Add Image",
+        "operationId": "addImage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbAddImageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/mediapbAddImageRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Image"
+        ]
+      }
+    },
+    "/api/media/image/author/{userId}": {
+      "get": {
+        "summary": "Get all images belonging to one author",
+        "operationId": "getAllImagesByAuthor",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbGetAllImagesByAuthorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Image"
+        ]
+      }
+    },
+    "/api/media/import": {
+      "post": {
+        "summary": "Start a bulk image import session",
+        "operationId": "startBulkImport",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbImportSession"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/mediapbStartBulkImportRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Import"
+        ]
+      }
+    },
+    "/api/media/import/{sessionId}": {
+      "get": {
+        "summary": "Get import session status",
+        "operationId": "getImportStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbImportStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Import"
+        ]
+      }
+    },
+    "/api/media/import/{sessionId}/batch": {
+      "post": {
+        "summary": "Add a batch of items to import session",
+        "operationId": "addImportBatch",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbBatchResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MediaServiceAddImportBatchBody"
+            }
+          }
+        ],
+        "tags": [
+          "Import"
+        ]
+      }
+    },
+    "/api/media/import/{sessionId}/cancel": {
+      "post": {
+        "summary": "Cancel an active import session",
+        "operationId": "cancelImport",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbEmpty"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MediaServiceCancelImportBody"
+            }
+          }
+        ],
+        "tags": [
+          "Import"
+        ]
+      }
+    },
+    "/api/media/item/{itemId}": {
+      "get": {
+        "summary": "Get Media",
+        "operationId": "getMediaByItem",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbGetMediaByItemResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Media"
+        ]
+      }
+    },
+    "/api/media/item/{itemId}/image": {
+      "get": {
+        "summary": "Get all images belonging to the item",
+        "operationId": "getAllItemImages",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbGetAllItemImagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Image"
+        ]
+      }
+    },
+    "/api/media/item/{itemId}/video": {
+      "get": {
+        "summary": "Get all videos belonging to the item",
+        "operationId": "getAllItemVideos",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbGetAllItemVideosResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Video"
+        ]
+      }
+    },
+    "/api/media/update": {
+      "post": {
+        "summary": "Update a new media",
+        "operationId": "updateMedia",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbUpdateMediaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/mediapbUpdateMediaRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Media"
+        ]
+      }
+    },
+    "/api/media/video": {
+      "post": {
+        "summary": "Add Video",
+        "operationId": "addVideo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbAddVideoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/mediapbAddVideoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Video"
+        ]
+      }
+    },
+    "/api/media/video/author/{userId}": {
+      "get": {
+        "summary": "Get all videos belonging to one author",
+        "operationId": "getAllVideosByAuthor",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbGetAllVideosByAuthorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Video"
+        ]
+      }
+    },
+    "/api/media/videos": {
+      "get": {
+        "summary": "Get all videos",
+        "operationId": "getAllVideos",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbGetAllVideosResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Video"
+        ]
+      }
+    },
+    "/api/media/{mediaId}": {
+      "get": {
+        "summary": "Get Media",
+        "operationId": "getMedia",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbGetMediaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "mediaId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Media"
+        ]
+      },
+      "delete": {
+        "summary": "remove Media",
+        "operationId": "removeMedia",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbRemoveMediaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "mediaId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Media"
+        ]
+      }
+    },
+    "/api/media/{mediaId}/image": {
+      "get": {
+        "summary": "Get all images belonging to the media",
+        "operationId": "getAllMediaImages",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbGetAllMediaImagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "mediaId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Image"
+        ]
+      }
+    },
+    "/api/media/{mediaId}/image/{imageId}": {
+      "delete": {
+        "summary": "remove Image",
+        "operationId": "removeImage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbRemoveImageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "mediaId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "imageId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Image"
+        ]
+      }
+    },
+    "/api/media/{mediaId}/video": {
+      "get": {
+        "summary": "Get all videos belonging to the media",
+        "operationId": "getAllMediaVideos",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbGetAllMediaVideosResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "mediaId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Video"
+        ]
+      }
+    },
+    "/api/media/{mediaId}/video/{videoId}": {
+      "delete": {
+        "summary": "remove Video",
+        "operationId": "removeVideo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mediapbRemoveVideoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "mediaId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "videoId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Video"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "MediaServiceAddImportBatchBody": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/mediapbImportItem"
+          }
+        }
+      }
+    },
+    "MediaServiceCancelImportBody": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "mediapbAddImageRequest": {
+      "type": "object",
+      "properties": {
+        "mediaId": {
+          "type": "string"
+        },
+        "displayOrder": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isMain": {
+          "type": "boolean"
+        },
+        "url": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "string"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        }
+      }
+    },
+    "mediapbAddImageResponse": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "viewUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "mediapbAddVideoRequest": {
+      "type": "object",
+      "properties": {
+        "mediaId": {
+          "type": "string"
+        },
+        "displayOrder": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isMain": {
+          "type": "boolean"
+        },
+        "url": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "string"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        }
+      }
+    },
+    "mediapbAddVideoResponse": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "viewUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "mediapbBatchResult": {
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "type": "string"
+        },
+        "acceptedItems": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rejectedItems": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/mediapbImportError"
+          }
+        }
+      }
+    },
+    "mediapbCreateMediaRequest": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string"
+        },
+        "itemType": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "mediapbCreateMediaResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "mediapbEmpty": {
+      "type": "object"
+    },
+    "mediapbGetAllImagesByAuthorResponse": {
+      "type": "object",
+      "properties": {
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/mediapbImage"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "mediapbGetAllItemImagesResponse": {
+      "type": "object",
+      "properties": {
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/mediapbImage"
+          }
+        }
+      }
+    },
+    "mediapbGetAllItemVideosResponse": {
+      "type": "object",
+      "properties": {
+        "videos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/mediapbVideo"
+          }
+        }
+      }
+    },
+    "mediapbGetAllMediaImagesResponse": {
+      "type": "object",
+      "properties": {
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/mediapbImage"
+          }
+        }
+      }
+    },
+    "mediapbGetAllMediaVideosResponse": {
+      "type": "object",
+      "properties": {
+        "videos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/mediapbVideo"
+          }
+        }
+      }
+    },
+    "mediapbGetAllVideosByAuthorResponse": {
+      "type": "object",
+      "properties": {
+        "videos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/mediapbVideo"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "mediapbGetAllVideosResponse": {
+      "type": "object",
+      "properties": {
+        "videos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/mediapbVideo"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "mediapbGetMediaByItemResponse": {
+      "type": "object",
+      "properties": {
+        "media": {
+          "$ref": "#/definitions/mediapbMedia"
+        }
+      }
+    },
+    "mediapbGetMediaResponse": {
+      "type": "object",
+      "properties": {
+        "media": {
+          "$ref": "#/definitions/mediapbMedia"
+        }
+      }
+    },
+    "mediapbImage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "mediaId": {
+          "type": "string"
+        },
+        "displayOrder": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isMain": {
+          "type": "boolean"
+        },
+        "url": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "string"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "mediapbImportError": {
+      "type": "object",
+      "properties": {
+        "externalId": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": "string"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "mediapbImportItem": {
+      "type": "object",
+      "properties": {
+        "externalId": {
+          "type": "string"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "displayOrder": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "mediapbImportSession": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "externalSystemId": {
+          "type": "string"
+        },
+        "externalSystemType": {
+          "type": "string"
+        },
+        "totalImages": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "processedImages": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "failedImages": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
+          "type": "string"
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "int64"
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "int64"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "mediapbImportStatus": {
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "totalImages": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "processedImages": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "failedImages": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "recentErrors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/mediapbImportError"
+          }
+        },
+        "progressPercentage": {
+          "type": "number",
+          "format": "float"
+        },
+        "estimatedCompletionTime": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "mediapbMedia": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "itemType": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "mediaOrder": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/mediapbMediaOrder"
+          }
+        }
+      }
+    },
+    "mediapbMediaOrder": {
+      "type": "object",
+      "properties": {
+        "mediaItemId": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "mediapbRemoveImageResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "mediapbRemoveMediaResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "mediapbRemoveVideoResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "mediapbStartBulkImportRequest": {
+      "type": "object",
+      "properties": {
+        "externalSystemId": {
+          "type": "string"
+        },
+        "externalSystemType": {
+          "type": "string"
+        },
+        "estimatedCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "options": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "Bulk Import Messages"
+    },
+    "mediapbUpdateMediaRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "itemType": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "mediapbUpdateMediaResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "mediapbVideo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "mediaId": {
+          "type": "string"
+        },
+        "displayOrder": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isMain": {
+          "type": "boolean"
+        },
+        "url": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "string"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

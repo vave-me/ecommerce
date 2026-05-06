@@ -1,0 +1,262 @@
+/* TagContainer.module.css - Modern Compact Design */
+
+/* === CONTAINER LAYOUT === */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 4px 0; /* Reduced from 8px */
+    gap: 12px;
+    position: relative;
+    min-height: 22px; /* Consistent height */
+}
+
+/* Compact variant - even smaller */
+.compact {
+    padding: 2px 0;
+    min-height: 24px;
+    gap: 12px;
+}
+
+/* === MODE-SPECIFIC THEMING === */
+.classic {
+    --accent-color: #2980b9;
+    --accent-bg: rgba(67, 56, 202, 0.08);
+    --text-primary: #374151;
+    --text-secondary: #6b7280;
+}
+
+.ai {
+    --accent-color: #059669;
+    --accent-bg: rgba(5, 150, 105, 0.08);
+    --text-primary: #065f46;
+    --text-secondary: #047857;
+}
+
+/* === MODE INDICATOR === */
+.modeIndicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid transparent;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.modeIcon {
+    color: var(--accent-color);
+    flex-shrink: 0;
+}
+
+.primaryText {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'SF Pro Display', system-ui, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #2980b9;
+    white-space: nowrap;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* === CONTEXTUAL INFO === */
+.contextInfo {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0; /* Allow shrinking */
+}
+
+.secondaryText {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-align: center;
+    line-height: 1.2;
+    /* Ellipsis for overflow */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* === STATS ROW === */
+.statsRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.stat svg {
+    color: var(--accent-color);
+    opacity: 0.7;
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 1024px) {
+    .container {
+        gap: 12px;
+    }
+    
+    .statsRow {
+        gap: 8px;
+    }
+    
+    .stat {
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        /* On mobile, stack vertically but keep compact */
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 3px 0;
+        gap: 4px;
+        min-height: auto;
+    }
+    
+    .modeIndicator {
+        align-self: flex-start;
+        padding: 3px 6px;
+        border-radius: var(--radius-md, 8px);
+    }
+    
+    .primaryText {
+        font-size: 0.8rem;
+        font-weight: 700;
+    }
+    
+    .contextInfo {
+        align-self: stretch;
+        justify-content: flex-start;
+    }
+    
+    .secondaryText {
+        font-size: 0.65rem;
+        text-align: left;
+    }
+    
+    .statsRow {
+        align-self: flex-end;
+        gap: 6px;
+    }
+    
+    .stat {
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 2px 0;
+        gap: 2px;
+    }
+    
+    /* Hide stats on very small screens */
+    .statsRow {
+        display: none;
+    }
+    
+    .primaryText {
+        font-size: 0.75rem;
+        font-weight: 700;
+    }
+    
+    .secondaryText {
+        font-size: 0.6rem;
+    }
+}
+
+/* === COMPACT VARIANT OVERRIDES === */
+.compact .modeIndicator {
+    padding: 2px 6px;
+    border-radius: var(--radius-md, 8px);
+}
+
+.compact .primaryText {
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.compact .secondaryText {
+    font-size: 0.65rem;
+}
+
+.compact .stat {
+    font-size: 0.6rem;
+}
+
+
+/* === ACCESSIBILITY === */
+@media (prefers-reduced-motion: reduce) {
+    .modeIndicator,
+    .stat {
+        transition: none;
+    }
+}
+
+
+
+
+/* === DARK MODE SUPPORT === */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background-color: var(--gray-800);
+        border-color: var(--gray-700);
+    }
+
+    .classic {
+        --accent-color: var(--primary-color);
+        --accent-bg: rgba(41, 128, 185, 0.2);
+        --text-primary: var(--gray-200);
+        --text-secondary: var(--gray-400);
+    }
+    
+    .ai {
+        --accent-color: var(--success);
+        --accent-bg: rgba(34, 197, 94, 0.2);
+        --text-primary: var(--gray-200);
+        --text-secondary: var(--gray-400);
+    }
+
+    .modeIndicator {
+        background-color: var(--accent-bg);
+    }
+
+    .modeIcon {
+        color: var(--accent-color);
+    }
+
+    .primaryText {
+        color: var(--primary-color);
+    }
+
+    .secondaryText {
+        color: var(--text-secondary);
+    }
+
+    .stat {
+        color: var(--text-secondary);
+    }
+
+    .stat svg {
+        color: var(--accent-color);
+    }
+}

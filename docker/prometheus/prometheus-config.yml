@@ -1,0 +1,105 @@
+global:
+  evaluation_interval: 30s
+  scrape_interval: 30s
+  scrape_timeout: 10s
+  external_labels:
+    cluster: 'docker-local'
+    environment: 'development'
+scrape_configs:
+  - job_name: baskets
+    static_configs:
+      - targets:
+          - 'baskets:8080'
+  - job_name: notifications
+    static_configs:
+      - targets:
+          - 'notifications:8080'
+  - job_name: activity
+    static_configs:
+      - targets:
+          - 'activity:8080'
+  - job_name: comments
+    static_configs:
+      - targets:
+          - 'comments:8080'
+  - job_name: ordering
+    static_configs:
+      - targets:
+          - 'ordering:8080'
+  - job_name: payments
+    static_configs:
+      - targets:
+          - 'payments:8080'
+  - job_name: search
+    static_configs:
+      - targets:
+          - 'search:8080'
+  - job_name: users
+    static_configs:
+      - targets:
+          - 'users:8080'
+  - job_name: posts
+    static_configs:
+      - targets:
+          - 'posts:8080'
+  - job_name: messages
+    static_configs:
+      - targets:
+          - 'messages:8080'
+  - job_name: newsletters
+    static_configs:
+      - targets:
+          - 'newsletters:8080'
+  - job_name: support
+    static_configs:
+      - targets:
+          - 'support:8080'
+  - job_name: wishlists
+    static_configs:
+      - targets:
+          - 'wishlists:8080'
+  - job_name: offers
+    static_configs:
+      - targets:
+          - 'offers:8080'
+  - job_name: products
+    static_configs:
+      - targets:
+          - 'products:8080'
+  - job_name: media
+    static_configs:
+      - targets:
+          - 'media:8080'
+  - job_name: cosec
+    static_configs:
+      - targets:
+          - 'cosec:8080'
+  - job_name: scheduler
+    static_configs:
+      - targets:
+          - 'scheduler:8080'
+  - job_name: services
+    static_configs:
+      - targets:
+          - 'services:8080'
+  - job_name: erp
+    static_configs:
+      - targets:
+          - 'erp:8080'
+  - job_name: merchant
+    static_configs:
+      - targets:
+          - 'merchant:8080'
+  - job_name: managers
+    static_configs:
+      - targets:
+          - 'managers:8080'
+  - job_name: otel
+    static_configs:
+      - targets:
+          - 'collector:9464'
+  - job_name: collector
+    static_configs:
+      - targets:
+          - 'collector:8888'
+

@@ -1,0 +1,164 @@
+/* src/components/Skeletons/MediaSkeleton.module.css */
+
+.skeletonContainer {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 4px;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+}
+
+@media (max-width: 768px) {
+    .skeletonContainer {
+        grid-template-columns: 70px 1fr;
+        padding: 5px;
+        min-height: 250px;
+    }
+}
+
+.thumbnailColumnSkeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.thumbnailSkeleton {
+    width: 70px;
+    height: 70px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    animation: pulse 3s ease infinite; /* Reduced frequency for performance */
+}
+
+@media (prefers-color-scheme: dark) {
+    .thumbnailSkeleton {
+        background-color: var(--gray-700, #374151);
+    }
+}
+
+@media (max-width: 768px) {
+    .thumbnailSkeleton {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.mainMediaSkeleton {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    animation: pulse 3s ease infinite; /* Reduced frequency for performance */
+}
+
+@media (prefers-color-scheme: dark) {
+    .mainMediaSkeleton {
+        background-color: var(--gray-700, #374151);
+    }
+}
+
+@media (max-width: 768px) {
+    .mainMediaSkeleton {
+        min-height: 240px;
+    }
+}
+
+/* Shimmer effect */
+.shimmer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 100%); - Removed for performance */
+    background: rgba(255, 255, 255, 0.1); /* Simple background instead of gradient */
+    animation: shimmer 2s infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+    .shimmer {
+        background: rgba(255, 255, 255, 0.05); /* Subtle shimmer for dark theme */
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Enhanced skeleton variants for better dark theme support */
+@media (prefers-color-scheme: dark) {
+    .skeletonContainer {
+        /* Ensure proper contrast in dark mode */
+        background-color: transparent;
+    }
+    
+    /* Enhanced pulse animation for dark theme */
+    @keyframes pulse {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.3; /* More pronounced fade in dark mode */
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .thumbnailSkeleton,
+    .mainMediaSkeleton {
+        border: 2px solid #666;
+    }
+}
+
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+    .thumbnailSkeleton,
+    .mainMediaSkeleton {
+        border-color: var(--gray-400, #9ca3af);
+        background-color: var(--gray-600, #4b5563);
+    }
+    
+    .shimmer {
+        background: rgba(255, 255, 255, 0.15);
+    }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .thumbnailSkeleton,
+    .mainMediaSkeleton,
+    .shimmer {
+        animation: none;
+    }
+    
+    /* Provide static loading indication */
+    .thumbnailSkeleton,
+    .mainMediaSkeleton {
+        opacity: 0.7;
+    }
+}

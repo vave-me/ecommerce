@@ -1,0 +1,107 @@
+[
+  {
+    "Name": "Battery Energy Storage Systems (BESS)",
+    "Description": "Advanced battery storage solutions for commercial and industrial clients to enhance energy resilience, optimize energy costs, and maximize the value of on-site renewable generation. We design, install, and commission fully integrated BESS to store energy when it's cheap or abundant and discharge it when it's most needed.",
+    "ServiceType": "Energy Storage Solution",
+    "Availability": "Nationwide, subject to grid connection regulations and site feasibility.",
+    "DescriptionShort": "Unlock energy independence and reduce peak demand charges with a commercial battery storage system.",
+    "DescriptionLong": "Our Battery Energy Storage Systems (BESS) are a critical component of modern energy strategy. By integrating a BESS with your existing infrastructure and on-site generation like a PV system, you can take control of your energy. The system allows you to store excess solar energy generated during the day for use at night, a practice known as 'load shifting.' It also enables 'peak shaving,' where the battery discharges during periods of high demand to avoid expensive peak demand charges from the utility. Furthermore, a BESS can provide seamless backup power during a grid outage, ensuring your critical operations continue without interruption. Our team handles the entire process, from analyzing your load profile to determine the optimal system size (kWh capacity and kW power rating) to the full installation, integration with your building's electrical system, and commissioning.",
+    "Attributes": [
+      {"AttributeName": "Primary Applications", "AttributeValue": "Peak Shaving, Load Shifting, Backup Power, Grid Services"},
+      {"AttributeName": "System Capacity", "AttributeValue": "Scalable from 50kWh to 2MWh+"},
+      {"AttributeName": "Battery Chemistry", "AttributeValue": "Lithium Iron Phosphate (LFP) for safety and longevity"},
+      {"AttributeName": "Round-trip Efficiency", "AttributeValue": ">90%"}
+    ],
+    "BasePrice": 75000,
+    "Pricing": [
+      "Custom pricing based on system size (kWh) and power output (kW).",
+      "Financing options available, including leasing and performance-based contracts.",
+      "Analysis of potential revenue from participation in grid services programs."
+    ],
+    "Qualifications": [
+      "Certified Energy Storage Professionals",
+      "In-house electrical engineers and certified installers.",
+      "Partnerships with leading BESS manufacturers like Tesla, LG, and Fluence."
+    ],
+    "Contact": "redacted-email@example.com",
+    "Faq": "What is peak shaving? Peak shaving is the practice of using stored energy from a battery to reduce the amount of electricity your facility draws from the grid during peak demand hours, thereby lowering your demand charges.",
+    "Tags": ["BESS", "battery storage", "energy storage", "peak shaving", "energy resilience", "microgrid"],
+    "MiddlemanService": false,
+    "Negotiable": true,
+    "HasVariants": true,
+    "Options": [
+      {"OptionName": "Backup Power Level", "OptionValues": ["Critical Loads Only", "Partial Facility Backup", "Full Facility Backup"]},
+      {"OptionName": "Control Software", "OptionValues": ["Standard Onboard Controller", "Advanced AI-Powered Optimization Platform"]}
+    ],
+    "Thumbnail": "https://www.saflux.com/images/bess-thumbnail.jpg"
+  },
+  {
+    "Name": "Building Management System (BMS) & Smart Building Integration",
+    "Description": "A holistic service to integrate and centralize the control of your building's core systems, including HVAC, lighting, security, and energy infrastructure. We transform your facility into a responsive, efficient, and intelligent smart building.",
+    "ServiceType": "IoT & Control Systems Integration",
+    "Availability": "Nationwide for major commercial properties.",
+    "DescriptionShort": "Unify and automate your building's controls for unparalleled efficiency and operational insight.",
+    "DescriptionLong": "Move beyond isolated systems with our Building Management System (BMS) integration service. We design and deploy a central platform that provides a single pane of glass for monitoring and managing all of your building's vital functions. Our solution connects your HVAC, lighting systems (including Saflux-installed LEDs), access control, security cameras, and energy assets like PV systems and BESS. By enabling these systems to communicate, we can create sophisticated automation routines, such as dimming lights and adjusting thermostats in unoccupied zones, or pre-cooling a building using low-cost overnight energy. This not only generates significant energy savings but also improves occupant comfort, streamlines facility management, and provides a wealth of data for continuous optimization.",
+    "Attributes": [
+      {"AttributeName": "Integrated Systems", "AttributeValue": "HVAC, Lighting, Access Control, Security, Energy Systems"},
+      {"AttributeName": "Platform Type", "AttributeValue": "Open-protocol systems (BACnet, Modbus, etc.)"},
+      {"AttributeName": "User Interface", "AttributeValue": "Customizable dashboard with mobile and desktop access"},
+      {"AttributeName": "Data Analytics", "AttributeValue": "Real-time and historical performance data"}
+    ],
+    "BasePrice": 100000,
+    "Pricing": [
+      "Project-based pricing dependent on the number of integration points and building complexity.",
+      "Ongoing software maintenance and support packages available.",
+      "Phased implementation options to align with your budget cycles."
+    ],
+    "Qualifications": [
+      "Certified BMS engineers (e.g., Siemens, Schneider Electric, Honeywell).",
+      "Expertise in network architecture and IoT security.",
+      "Proven track record of large-scale commercial system integrations."
+    ],
+    "Contact": "redacted-email@example.com",
+    "Faq": "Can you integrate with our existing equipment? Yes, our primary goal is to work with open protocols to integrate with and enhance the systems you already have in place, where possible.",
+    "Tags": ["BMS", "smart building", "building automation", "IoT", "energy management", "HVAC control"],
+    "MiddlemanService": false,
+    "Negotiable": true,
+    "HasVariants": true,
+    "Options": [
+      {"OptionName": "Primary Vendor", "OptionValues": ["Vendor-Agnostic (Open Standard)", "Siemens Desigo", "Schneider EcoStruxure"]},
+      {"OptionName": "Analytics Module", "OptionValues": ["Standard Reporting", "Predictive Fault Detection", "AI-driven Optimization"]}
+    ],
+    "Thumbnail": "https://www.saflux.com/images/bms-integration-thumbnail.jpg"
+  },
+  {
+    "Name": "Energy as a Service (EaaS)",
+    "Description": "A comprehensive, long-term energy management partnership where you pay for an energy outcome, not the equipment. We fund, develop, and manage a suite of energy solutions for your facility in exchange for a predictable, fixed monthly fee, eliminating your upfront investment and performance risk.",
+    "ServiceType": "Financial & Service Model",
+    "Availability": "Select clients with high energy consumption and long-term operational goals.",
+    "DescriptionShort": "Achieve your energy goals with zero upfront cost through a fully managed Energy as a Service agreement.",
+    "DescriptionLong": "Energy as a Service (EaaS) represents the future of corporate energy management. Instead of purchasing a lighting system, a PV array, or a battery separately, you subscribe to an energy outcome, such as 'guaranteed 30% reduction in grid electricity cost.' Saflux, as your EaaS partner, takes on the full responsibility. We audit your facility, design a multi-faceted solution (which could include LEDs, solar, BESS, and BMS), and we handle the entire capital investment for the project. We then install, maintain, and operate the assets over a long-term contract (typically 10-20 years). Your responsibility is a single, predictable monthly service fee, which is structured to be less than your previous energy expenditure, generating savings from day one. This model transfers the performance and technology risk to us, allowing you to focus on your core business while enjoying the benefits of a state-of-the-art, fully managed energy infrastructure.",
+    "Attributes": [
+      {"AttributeName": "Upfront Cost", "AttributeValue": "Zero (No CAPEX required from client)"},
+      {"AttributeName": "Contract Term", "AttributeValue": "Typically 10-20 years"},
+      {"AttributeName": "Service Scope", "AttributeValue": "All-inclusive: hardware, software, installation, maintenance, and management"},
+      {"AttributeName": "Performance Guarantee", "AttributeValue": "Guaranteed savings or uptime levels built into the contract"}
+    ],
+    "BasePrice": 0,
+    "Pricing": [
+      "Fixed monthly service fee.",
+      "Pricing based on a $/kWh model for energy consumed.",
+      "Shared savings models where cost reductions are split between Saflux and the client."
+    ],
+    "Qualifications": [
+      "Strong financial backing and project financing capabilities.",
+      "Expertise in multi-technology energy project development.",
+      "Advanced risk management and asset management capabilities."
+    ],
+    "Contact": "redacted-email@example.com",
+    "Faq": "What happens at the end of the EaaS contract term? Options typically include renewing the contract, buying the equipment at a fair market value, or having Saflux remove the equipment.",
+    "Tags": ["EaaS", "Energy as a Service", "zero capex", "financial solutions", "energy partnership", "managed energy"],
+    "MiddlemanService": false,
+    "Negotiable": true,
+    "HasVariants": false,
+    "Options": [],
+    "Thumbnail": "https://www.saflux.com/images/eaas-thumbnail.jpg"
+  }
+]

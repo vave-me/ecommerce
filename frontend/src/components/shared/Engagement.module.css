@@ -1,0 +1,413 @@
+/* Simple & Compact Engagement Bar */
+.engagementBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.productEngagementBar {
+    margin-top: 4px;
+}
+
+/* Actions container - Full width utilization */
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 4px;
+}
+
+/* Simple engagement button */
+.engagementButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.01em;
+    position: relative;
+    min-height: 24px;
+    flex: 1;
+    max-width: calc(100% / 6);
+}
+
+@media (prefers-color-scheme: dark) {
+    .engagementButton {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+/* Simple hover states */
+.engagementButton:hover:not(:disabled) {
+    color: #3498db;
+}
+
+@media (prefers-color-scheme: dark) {
+    .engagementButton:hover:not(:disabled) {
+        color: var(--teal-400, #2dd4bf);
+    }
+}
+
+.engagementButton:active:not(:disabled) {
+    opacity: 0.7;
+}
+
+.engagementButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .engagementButton:disabled {
+        opacity: 0.5;
+    }
+}
+
+/* Loading state */
+.engagementButton.loading {
+    pointer-events: none;
+}
+
+/* Icon styling - Elegant and refined */
+.engagementIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+}
+
+/* Simple count badges */
+.countBadge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+    .countBadge {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.countBadge:empty {
+    display: none;
+}
+
+/* Filled icon styles for active states */
+.filledIcon {
+    fill: currentColor;
+}
+
+/* Sophisticated active state colors */
+.heartIcon.active {
+    color: #ef4444;
+}
+
+@media (prefers-color-scheme: dark) {
+    .heartIcon.active {
+        color: var(--red-400, #f87171);
+    }
+}
+
+.heartIcon.active + .countBadge {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .heartIcon.active + .countBadge {
+        background: rgba(248, 113, 113, 0.2);
+        color: var(--red-400, #f87171);
+        border-color: rgba(248, 113, 113, 0.3);
+    }
+}
+
+.likeIcon.active {
+    color: #10b981;
+}
+
+@media (prefers-color-scheme: dark) {
+    .likeIcon.active {
+        color: var(--emerald-400, #34d399);
+    }
+}
+
+.likeIcon.active + .countBadge {
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .likeIcon.active + .countBadge {
+        background: rgba(52, 211, 153, 0.2);
+        color: var(--emerald-400, #34d399);
+        border-color: rgba(52, 211, 153, 0.3);
+    }
+}
+
+.dislikeIcon.active {
+    color: #f59e0b;
+}
+
+@media (prefers-color-scheme: dark) {
+    .dislikeIcon.active {
+        color: var(--amber-400, #fbbf24);
+    }
+}
+
+.dislikeIcon.active + .countBadge {
+    background: rgba(245, 158, 11, 0.1);
+    color: #d97706;
+    border-color: rgba(245, 158, 11, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .dislikeIcon.active + .countBadge {
+        background: rgba(251, 191, 36, 0.2);
+        color: var(--amber-400, #fbbf24);
+        border-color: rgba(251, 191, 36, 0.3);
+    }
+}
+
+.shareIcon.active {
+    color: #8b5cf6;
+}
+
+@media (prefers-color-scheme: dark) {
+    .shareIcon.active {
+        color: var(--purple-400, #c084fc);
+    }
+}
+
+.shareIcon.active + .countBadge {
+    background: rgba(139, 92, 246, 0.1);
+    color: #7c3aed;
+    border-color: rgba(139, 92, 246, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .shareIcon.active + .countBadge {
+        background: rgba(192, 132, 252, 0.2);
+        color: var(--purple-400, #c084fc);
+        border-color: rgba(192, 132, 252, 0.3);
+    }
+}
+
+/* Specific hover states for different actions */
+.engagementButton:hover .heartIcon {
+    color: #ef4444;
+}
+
+@media (prefers-color-scheme: dark) {
+    .engagementButton:hover .heartIcon {
+        color: var(--red-400, #f87171);
+    }
+}
+
+.engagementButton:hover .likeIcon {
+    color: #10b981;
+}
+
+@media (prefers-color-scheme: dark) {
+    .engagementButton:hover .likeIcon {
+        color: var(--emerald-400, #34d399);
+    }
+}
+
+.engagementButton:hover .dislikeIcon {
+    color: #f59e0b;
+}
+
+@media (prefers-color-scheme: dark) {
+    .engagementButton:hover .dislikeIcon {
+        color: var(--amber-400, #fbbf24);
+    }
+}
+
+.engagementButton:hover .shareIcon,
+.engagementButton:hover .engagementIcon:has(svg[aria-label*="share" i]) {
+    color: #8b5cf6;
+}
+
+@media (prefers-color-scheme: dark) {
+    .engagementButton:hover .shareIcon,
+    .engagementButton:hover .engagementIcon:has(svg[aria-label*="share" i]) {
+        color: var(--purple-400, #c084fc);
+    }
+}
+
+.engagementButton:hover .countBadge {
+    background: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+    border-color: rgba(52, 152, 219, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .engagementButton:hover .countBadge {
+        background: rgba(45, 212, 191, 0.2);
+        color: var(--teal-400, #2dd4bf);
+        border-color: rgba(45, 212, 191, 0.3);
+    }
+}
+
+/* Product variant - Compact */
+.productEngagementButton {
+    font-size: 12px;
+    min-height: 20px;
+}
+
+/* Mobile responsive design */
+@media (max-width: 640px) {
+    .actions {
+        gap: 2px;
+    }
+
+    .engagementButton {
+        gap: 3px;
+        font-size: 11px;
+        min-height: 20px;
+        max-width: calc(100% / 6);
+    }
+
+    .productEngagementButton {
+        font-size: 10px;
+        min-height: 18px;
+    }
+
+    .countBadge {
+        font-size: 10px;
+    }
+
+    .engagementIcon svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* ShareComponent integration styles */
+.shareWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.shareButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 500;
+    min-height: 24px;
+    flex: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+    .shareButton {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.shareButton:hover {
+    color: #8b5cf6;
+}
+
+@media (prefers-color-scheme: dark) {
+    .shareButton:hover {
+        color: var(--purple-400, #c084fc);
+    }
+}
+
+.shareButton .count {
+    font-size: 12px;
+    font-weight: 500;
+    color: inherit;
+}
+
+/* Loading spinner */
+.loadingSpinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Focus states for accessibility */
+.engagementButton:focus-visible {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .engagementButton:focus-visible {
+        outline-color: var(--teal-400, #2dd4bf);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .engagementButton,
+    .engagementIcon,
+    .shareButton,
+    .loadingSpinner {
+        transition: none;
+        animation: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .engagementButton {
+        border: 1px solid transparent;
+    }
+    
+    .engagementButton:hover:not(:disabled) {
+        border-color: currentColor;
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+    
+    .countBadge {
+        border: 1px solid currentColor;
+    }
+}
+
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+    .engagementButton:hover:not(:disabled) {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: var(--gray-400, #9ca3af);
+    }
+}

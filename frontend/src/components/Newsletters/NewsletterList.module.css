@@ -1,0 +1,58 @@
+/**
+ * List Container
+ */
+.listContainer {
+    list-style: none;
+    padding: 0 30px 20px 30px;
+    margin: 0;
+    flex: 1;
+    overflow-y: auto;
+    /* Custom scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+
+/* Custom scrollbar for webkit browsers */
+.listContainer::-webkit-scrollbar {
+    width: 6px;
+}
+
+.listContainer::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.listContainer::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 3px;
+}
+
+.listContainer::-webkit-scrollbar-thumb:hover {
+    background-color: #94a3b8;
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+    .listContainer {
+        scrollbar-color: var(--gray-600, #4b5563) transparent;
+    }
+
+    .listContainer::-webkit-scrollbar-thumb {
+        background-color: var(--gray-600, #4b5563);
+    }
+
+    .listContainer::-webkit-scrollbar-thumb:hover {
+        background-color: var(--gray-500, #6b7280);
+    }
+}
+
+@media (max-width: 768px) {
+    .listContainer {
+        padding: 0 20px 15px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .listContainer {
+        padding: 0 15px 12px 15px;
+    }
+}

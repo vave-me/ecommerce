@@ -1,0 +1,647 @@
+/* WishlistButton.module.css - Modern Button Design */
+
+/* ===== WISHLIST BUTTON - MODERN PROFESSIONAL DESIGN ===== */
+
+/* ===== BASE BUTTON ===== */
+.wishlistButton {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #6b7280;
+    min-width: 36px;
+    min-height: 36px;
+}
+
+.wishlistButton:hover {
+    background: rgba(220, 38, 38, 0.1);
+    color: #dc2626;
+    transform: scale(1.05);
+}
+
+.wishlistButton:active {
+    transform: scale(0.95);
+}
+
+.wishlistButton:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+.wishlistButton.active {
+    color: #dc2626;
+    background: rgba(220, 38, 38, 0.1);
+}
+
+.wishlistButton.active:hover {
+    background: rgba(220, 38, 38, 0.15);
+}
+
+/* ===== ICON STYLES ===== */
+.icon {
+    width: 20px;
+    height: 20px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wishlistButton.active .icon {
+    fill: currentColor;
+    transform: scale(1.1);
+}
+
+/* ===== LOADING STATE ===== */
+.wishlistButton.loading {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.loadingSpinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #e5e7eb;
+    border-top: 2px solid #dc2626;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== COMPACT VARIANT ===== */
+.wishlistButton.compact {
+    padding: 6px;
+    min-width: 32px;
+    min-height: 32px;
+    border-radius: 6px;
+}
+
+.wishlistButton.compact .icon {
+    width: 16px;
+    height: 16px;
+}
+
+.wishlistButton.compact .loadingSpinner {
+    width: 14px;
+    height: 14px;
+}
+
+/* ===== LARGE VARIANT ===== */
+.wishlistButton.large {
+    padding: 12px;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 12px;
+}
+
+.wishlistButton.large .icon {
+    width: 24px;
+    height: 24px;
+}
+
+.wishlistButton.large .loadingSpinner {
+    width: 20px;
+    height: 20px;
+}
+
+/* ===== WITH TEXT VARIANT ===== */
+.wishlistButton.withText {
+    padding: 8px 12px;
+    gap: 8px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.wishlistButton.withText .icon {
+    width: 16px;
+    height: 16px;
+}
+
+.wishlistButton.withText.compact {
+    padding: 6px 10px;
+    gap: 6px;
+    font-size: 13px;
+}
+
+.wishlistButton.withText.large {
+    padding: 12px 16px;
+    gap: 10px;
+    font-size: 16px;
+}
+
+/* ===== OUTLINED VARIANT ===== */
+.wishlistButton.outlined {
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+}
+
+.wishlistButton.outlined:hover {
+    border-color: #dc2626;
+    background: rgba(220, 38, 38, 0.05);
+}
+
+.wishlistButton.outlined.active {
+    border-color: #dc2626;
+    background: rgba(220, 38, 38, 0.1);
+}
+
+/* ===== FILLED VARIANT ===== */
+.wishlistButton.filled {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.wishlistButton.filled:hover {
+    background: #e5e7eb;
+    color: #1f2937;
+}
+
+.wishlistButton.filled.active {
+    background: #dc2626;
+    color: white;
+}
+
+.wishlistButton.filled.active:hover {
+    background: #b91c1c;
+}
+
+/* ===== ERROR STATE ===== */
+.wishlistButton.error {
+    color: #dc2626;
+    background: rgba(220, 38, 38, 0.1);
+}
+
+.wishlistButton.error:hover {
+    background: rgba(220, 38, 38, 0.15);
+}
+
+/* ===== DISABLED STATE ===== */
+.wishlistButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ===== TOOLTIP ===== */
+.wishlistButton[data-tooltip] {
+    position: relative;
+}
+
+.wishlistButton[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000;
+    animation: tooltipFade 0.2s ease-out;
+}
+
+@keyframes tooltipFade {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(4px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .wishlistButton {
+        min-width: 32px;
+        min-height: 32px;
+        padding: 6px;
+    }
+
+    .icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .wishlistButton.withText {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+
+    .wishlistButton.withText .icon {
+        width: 14px;
+        height: 14px;
+    }
+
+    .wishlistButton.large {
+        min-width: 40px;
+        min-height: 40px;
+        padding: 10px;
+    }
+
+    .wishlistButton.large .icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .wishlistButton {
+        min-width: 28px;
+        min-height: 28px;
+        padding: 4px;
+    }
+
+    .icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .wishlistButton.withText {
+        padding: 4px 8px;
+        font-size: 12px;
+        gap: 4px;
+    }
+
+    .wishlistButton.withText .icon {
+        width: 12px;
+        height: 12px;
+    }
+
+    .wishlistButton.compact {
+        min-width: 24px;
+        min-height: 24px;
+        padding: 2px;
+    }
+
+    .wishlistButton.compact .icon {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+    .wishlistButton,
+    .icon,
+    .loadingSpinner {
+        transition: none;
+        animation: none;
+    }
+
+    .wishlistButton:hover {
+        transform: none;
+    }
+
+    .wishlistButton:active {
+        transform: none;
+    }
+
+    .wishlistButton.active .icon {
+        transform: none;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .wishlistButton {
+        border: 1px solid #000000;
+    }
+
+    .wishlistButton:hover {
+        background: #000000;
+        color: #ffffff;
+    }
+
+    .wishlistButton.active {
+        background: #000000;
+        color: #ffffff;
+    }
+
+    .wishlistButton.outlined {
+        border: 2px solid #000000;
+    }
+
+    .wishlistButton.filled {
+        background: #000000;
+        color: #ffffff;
+    }
+}
+
+/* ===== FOCUS MANAGEMENT ===== */
+.wishlistButton:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ===== ANIMATION VARIANTS ===== */
+.wishlistButton.bounce:hover {
+    animation: bounce 0.6s ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-4px);
+    }
+    60% {
+        transform: translateY(-2px);
+    }
+}
+
+.wishlistButton.pulse:hover {
+    animation: pulse 0.6s ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ===== THEME VARIANTS ===== */
+.wishlistButton.primary {
+    color: #2563eb;
+}
+
+.wishlistButton.primary:hover {
+    background: rgba(37, 99, 235, 0.1);
+}
+
+.wishlistButton.primary.active {
+    background: rgba(37, 99, 235, 0.1);
+}
+
+.wishlistButton.secondary {
+    color: #6b7280;
+}
+
+.wishlistButton.secondary:hover {
+    background: rgba(107, 114, 128, 0.1);
+}
+
+.wishlistButton.secondary.active {
+    background: rgba(107, 114, 128, 0.1);
+}
+
+.wishlistButton.success {
+    color: #059669;
+}
+
+.wishlistButton.success:hover {
+    background: rgba(5, 150, 105, 0.1);
+}
+
+.wishlistButton.success.active {
+    background: rgba(5, 150, 105, 0.1);
+}
+
+.wishlistButton.warning {
+    color: #d97706;
+}
+
+.wishlistButton.warning:hover {
+    background: rgba(217, 119, 6, 0.1);
+}
+
+.wishlistButton.warning.active {
+    background: rgba(217, 119, 6, 0.1);
+}
+
+/* ===== DEPRECATED STYLES (for backwards compatibility) ===== */
+.heartButton {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #6b7280;
+    min-width: 36px;
+    min-height: 36px;
+}
+
+.heartButton:hover {
+    background: rgba(220, 38, 38, 0.1);
+    color: #dc2626;
+    transform: scale(1.05);
+}
+
+.heartButton.active {
+    color: #dc2626;
+    background: rgba(220, 38, 38, 0.1);
+}
+
+.heartIcon {
+    width: 20px;
+    height: 20px;
+    transition: all 0.2s ease;
+}
+
+.heartButton.active .heartIcon {
+    fill: currentColor;
+    transform: scale(1.1);
+}
+
+/* ===== DARK THEME SUPPORT ===== */
+@media (prefers-color-scheme: dark) {
+    .wishlistButton {
+        color: var(--gray-400, #9ca3af);
+    }
+
+    .wishlistButton:hover {
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--red-400, #f87171);
+    }
+
+    .wishlistButton.active {
+        color: var(--red-400, #f87171);
+        background: rgba(239, 68, 68, 0.15);
+    }
+
+    .wishlistButton.active:hover {
+        background: rgba(239, 68, 68, 0.2);
+    }
+
+    .loadingSpinner {
+        border-color: var(--gray-600, #4b5563);
+        border-top-color: var(--red-400, #f87171);
+    }
+
+    .wishlistButton.outlined {
+        border-color: var(--gray-600, #4b5563);
+        background: var(--gray-800, #1f2937);
+        color: var(--gray-300, #d1d5db);
+    }
+
+    .wishlistButton.outlined:hover {
+        border-color: var(--red-400, #f87171);
+        background: rgba(239, 68, 68, 0.1);
+        color: var(--red-400, #f87171);
+    }
+
+    .wishlistButton.outlined.active {
+        border-color: var(--red-400, #f87171);
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--red-400, #f87171);
+    }
+
+    .wishlistButton.filled {
+        background: var(--gray-700, #374151);
+        color: var(--gray-200, #e5e7eb);
+    }
+
+    .wishlistButton.filled:hover {
+        background: var(--gray-600, #4b5563);
+        color: var(--gray-100, #f3f4f6);
+    }
+
+    .wishlistButton.filled.active {
+        background: var(--red-600, #dc2626);
+        color: white;
+    }
+
+    .wishlistButton.filled.active:hover {
+        background: var(--red-500, #ef4444);
+    }
+
+    .wishlistButton.error {
+        color: var(--red-400, #f87171);
+        background: rgba(239, 68, 68, 0.15);
+    }
+
+    .wishlistButton.error:hover {
+        background: rgba(239, 68, 68, 0.2);
+    }
+
+    .wishlistButton[data-tooltip]:hover::after {
+        background: rgba(0, 0, 0, 0.9);
+        color: var(--gray-100, #f3f4f6);
+    }
+
+    .wishlistButton.primary {
+        background-color: var(--teal-600, #0d9488);
+        color: white;
+    }
+
+    .wishlistButton.primary:hover {
+        background-color: var(--teal-500, #14b8a6);
+    }
+
+    .wishlistButton.primary.active {
+        background-color: var(--teal-400, #2dd4bf);
+        color: var(--gray-900, #111827);
+    }
+
+    .wishlistButton.secondary {
+        background-color: var(--gray-600, #4b5563);
+        color: var(--gray-100, #f3f4f6);
+    }
+
+    .wishlistButton.secondary:hover {
+        background-color: var(--gray-500, #6b7280);
+    }
+
+    .wishlistButton.secondary.active {
+        background-color: var(--gray-400, #9ca3af);
+        color: var(--gray-900, #111827);
+    }
+
+    .wishlistButton.success {
+        background-color: var(--emerald-600, #059669);
+        color: white;
+    }
+
+    .wishlistButton.success:hover {
+        background-color: var(--emerald-500, #10b981);
+    }
+
+    .wishlistButton.success.active {
+        background-color: var(--emerald-400, #34d399);
+        color: var(--gray-900, #111827);
+    }
+
+    .wishlistButton.warning {
+        background-color: var(--amber-600, #d97706);
+        color: white;
+    }
+
+    .wishlistButton.warning:hover {
+        background-color: var(--amber-500, #f59e0b);
+    }
+
+    .wishlistButton.warning.active {
+        background-color: var(--amber-400, #fbbf24);
+        color: var(--gray-900, #111827);
+    }
+
+    .heartButton {
+        color: var(--gray-400, #9ca3af);
+    }
+
+    .heartButton:hover {
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--red-400, #f87171);
+    }
+
+    .heartButton.active {
+        color: var(--red-400, #f87171);
+        background: rgba(239, 68, 68, 0.15);
+    }
+
+    /* Enhanced Dark Theme Features */
+    .wishlistButton.withText {
+        background: var(--gray-750, #2d3748);
+        color: var(--gray-200, #e5e7eb);
+    }
+
+    .wishlistButton.withText:hover {
+        background: var(--gray-700, #374151);
+        color: var(--gray-100, #f3f4f6);
+    }
+
+    .wishlistButton.withText.active {
+        background: var(--red-600, #dc2626);
+        color: white;
+    }
+
+    .wishlistButton.compact {
+        background: var(--gray-800, #1f2937);
+    }
+
+    .wishlistButton.compact:hover {
+        background: var(--gray-700, #374151);
+    }
+
+    .wishlistButton.large {
+        background: var(--gray-750, #2d3748);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .wishlistButton.large:hover {
+        background: var(--gray-700, #374151);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+} 

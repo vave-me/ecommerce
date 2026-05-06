@@ -1,0 +1,736 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Messages Management API",
+    "description": "API for managing conversations and messages between user-sellers and user-customers.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "MessagesService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/messages/conversations": {
+      "get": {
+        "summary": "Retrieve a list of conversations",
+        "operationId": "getConversations",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/messagespbGetConversationsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "description": "Page number for pagination (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "description": "Number of conversations per page (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Conversations"
+        ]
+      },
+      "post": {
+        "summary": "Start a new conversation",
+        "operationId": "startConversation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/messagespbStartConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request message to start a new conversation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/messagespbStartConversationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Conversations"
+        ]
+      }
+    },
+    "/api/messages/conversations/active": {
+      "get": {
+        "summary": "Retrieve active conversations",
+        "operationId": "getActiveConversations",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/messagespbGetActiveConversationsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "Unique identifier of the user.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "description": "Page number for pagination (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "description": "Number of conversations per page (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Conversations"
+        ]
+      }
+    },
+    "/api/messages/conversations/recipient/{recipientId}/item/{itemId}": {
+      "get": {
+        "summary": "Retrieve a specific conversation",
+        "operationId": "getConversationByRecipientAndItem",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/messagespbGetConversationByRecipientAndItemResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "recipientId",
+            "description": "Details of the requested conversation.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemId",
+            "description": "Details of the requested conversation.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Conversations"
+        ]
+      }
+    },
+    "/api/messages/conversations/{conversationId}/message": {
+      "get": {
+        "summary": "Retrieve messages in a conversation",
+        "operationId": "getMessages",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/messagespbGetMessagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conversationId",
+            "description": "Unique identifier of the conversation.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "description": "Page number for pagination (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "description": "Number of messages per page (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Messages"
+        ]
+      }
+    },
+    "/api/messages/conversations/{conversationId}/messages": {
+      "post": {
+        "summary": "Send a message in a conversation",
+        "operationId": "sendMessage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/messagespbSendMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/messagespbMessagesServiceSendMessageBody"
+            }
+          }
+        ],
+        "tags": [
+          "Messages"
+        ]
+      }
+    },
+    "/api/messages/conversations/{id}": {
+      "get": {
+        "summary": "Retrieve a specific conversation",
+        "operationId": "getConversation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/messagespbGetConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier of the conversation to retrieve.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Conversations"
+        ]
+      }
+    },
+    "/api/messages/conversations/{id}/archive": {
+      "delete": {
+        "summary": "Archive a conversation",
+        "operationId": "archiveConversation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/messagespbArchiveConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier of the conversation to archive.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Conversations"
+        ]
+      }
+    },
+    "/api/messages/message/{id}": {
+      "get": {
+        "summary": "Retrieve a specific message",
+        "operationId": "getMessage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/messagespbGetMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier of the message to retrieve.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Messages"
+        ]
+      },
+      "delete": {
+        "summary": "Delete a message",
+        "operationId": "deleteMessage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/messagespbDeleteMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier of the message to delete.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Messages"
+        ]
+      }
+    },
+    "/api/messages/{id}/restore": {
+      "put": {
+        "summary": "Restore an archived conversation",
+        "operationId": "restoreConversation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/messagespbRestoreConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier of the conversation to restore.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MessagesServiceRestoreConversationBody"
+            }
+          }
+        ],
+        "tags": [
+          "Conversations"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "MessagesServiceRestoreConversationBody": {
+      "type": "object",
+      "description": "Request message to restore an archived conversation."
+    },
+    "messagespbArchiveConversationResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the archived conversation."
+        },
+        "conversationStatus": {
+          "type": "string",
+          "description": "Updated status of the conversation."
+        }
+      },
+      "description": "Response message after archiving a conversation."
+    },
+    "messagespbConversation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the conversation."
+        },
+        "senderId": {
+          "type": "string",
+          "description": "Unique identifier of the user-seller initiating the conversation."
+        },
+        "recipientId": {
+          "type": "string",
+          "description": "Unique identifier of the user-customer receiving the conversation."
+        },
+        "itemId": {
+          "type": "string",
+          "description": "Unique identifier of the item involved in the conversation."
+        },
+        "conversationStatus": {
+          "type": "string",
+          "description": "Current status of the conversation."
+        }
+      },
+      "description": "Conversation represents a dialogue between a user-seller and a user-customer regarding a specific item."
+    },
+    "messagespbDeleteMessageResponse": {
+      "type": "object"
+    },
+    "messagespbGetActiveConversationsResponse": {
+      "type": "object",
+      "properties": {
+        "conversations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/messagespbConversation"
+          },
+          "description": "List of active conversations."
+        },
+        "total": {
+          "type": "string",
+          "format": "int64",
+          "description": "Total number of active conversations available."
+        },
+        "page": {
+          "type": "string",
+          "format": "int64",
+          "description": "Current page number."
+        },
+        "limit": {
+          "type": "string",
+          "format": "int64",
+          "description": "Number of conversations per page."
+        }
+      },
+      "description": "Response message containing a list of active conversations."
+    },
+    "messagespbGetConversationByRecipientAndItemResponse": {
+      "type": "object",
+      "properties": {
+        "conversation": {
+          "$ref": "#/definitions/messagespbConversation",
+          "description": "Details of the requested conversation."
+        }
+      },
+      "description": "Response message containing the details of the requested conversation."
+    },
+    "messagespbGetConversationResponse": {
+      "type": "object",
+      "properties": {
+        "conversation": {
+          "$ref": "#/definitions/messagespbConversation",
+          "description": "Details of the requested conversation."
+        }
+      },
+      "description": "Response message containing the details of the requested conversation."
+    },
+    "messagespbGetConversationsResponse": {
+      "type": "object",
+      "properties": {
+        "conversations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/messagespbConversation"
+          },
+          "description": "List of conversations."
+        },
+        "total": {
+          "type": "string",
+          "format": "int64",
+          "description": "Total number of conversations available."
+        },
+        "page": {
+          "type": "string",
+          "format": "int64",
+          "description": "Current page number."
+        },
+        "limit": {
+          "type": "string",
+          "format": "int64",
+          "description": "Number of conversations per page."
+        }
+      },
+      "description": "Response message containing a list of conversations."
+    },
+    "messagespbGetMessageResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/messagespbMessage",
+          "description": "Details of the requested message."
+        }
+      },
+      "description": "Response message containing the details of the requested message."
+    },
+    "messagespbGetMessagesResponse": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/messagespbMessage"
+          },
+          "description": "List of messages."
+        },
+        "total": {
+          "type": "string",
+          "format": "int64",
+          "description": "Total number of messages available."
+        },
+        "page": {
+          "type": "string",
+          "format": "int64",
+          "description": "Current page number."
+        },
+        "limit": {
+          "type": "string",
+          "format": "int64",
+          "description": "Number of messages per page."
+        }
+      },
+      "description": "Response message containing a list of messages within a conversation."
+    },
+    "messagespbMessage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the message."
+        },
+        "conversationId": {
+          "type": "string",
+          "description": "Unique identifier of the conversation this message belongs to."
+        },
+        "senderId": {
+          "type": "string",
+          "description": "Unique identifier of the sender (user-seller or user-customer)."
+        },
+        "recipientId": {
+          "type": "string",
+          "description": "Unique identifier of the recipient."
+        },
+        "itemId": {
+          "type": "string",
+          "description": "Unique identifier of the item involved."
+        },
+        "body": {
+          "type": "string"
+        },
+        "isRead": {
+          "type": "boolean",
+          "description": "Content of the message."
+        }
+      },
+      "description": "Message represents an individual message within a conversation."
+    },
+    "messagespbMessagesServiceSendMessageBody": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "recipientId": {
+          "type": "string"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        },
+        "isRead": {
+          "type": "boolean"
+        }
+      },
+      "description": "Request message to send a new message within a conversation."
+    },
+    "messagespbRestoreConversationResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the restored conversation."
+        },
+        "conversationStatus": {
+          "type": "string",
+          "description": "Updated status of the conversation."
+        }
+      },
+      "description": "Response message after restoring a conversation."
+    },
+    "messagespbSendMessageResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the sent message."
+        },
+        "sentAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the message was sent."
+        }
+      },
+      "description": "Response message after sending a new message."
+    },
+    "messagespbStartConversationRequest": {
+      "type": "object",
+      "properties": {
+        "recipientId": {
+          "type": "string",
+          "description": "Unique identifier of the user-customer receiving the conversation."
+        },
+        "itemId": {
+          "type": "string",
+          "description": "Unique identifier of the item involved in the conversation."
+        }
+      },
+      "description": "Request message to start a new conversation."
+    },
+    "messagespbStartConversationResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the created conversation."
+        }
+      },
+      "description": "Response message after starting a new conversation."
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

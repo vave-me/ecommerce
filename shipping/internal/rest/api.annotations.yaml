@@ -1,0 +1,68 @@
+type: google.api.Service
+config_version: 3
+http:
+  rules:
+    # Create a new shipment
+    - selector: shippingpb.ShippingService.CreateShipping
+      post: /api/shipping
+      body: "*"
+    
+    # Cancel a shipment
+    - selector: shippingpb.ShippingService.CancelShipment
+      post: /api/shipping/{id}/cancel
+      body: "*"
+    
+    # Schedule pickup for shipment
+    - selector: shippingpb.ShippingService.SchedulePickup
+      post: /api/shipping/{id}/schedule-pickup
+      body: "*"
+    
+    # Start shipment journey
+    - selector: shippingpb.ShippingService.StartShipment
+      post: /api/shipping/{id}/start
+      body: "*"
+    
+    # Update shipment status
+    - selector: shippingpb.ShippingService.UpdateShipmentStatus
+      patch: /api/shipping/{id}/status
+      body: "*"
+    
+    # Assign carrier to shipment
+    - selector: shippingpb.ShippingService.AssignCarrier
+      patch: /api/shipping/{id}/carrier
+      body: "*"
+    
+    # Mark shipment as delivered
+    - selector: shippingpb.ShippingService.MarkShipmentAsDelivered
+      post: /api/shipping/{id}/delivered
+      body: "*"
+    
+    # Return a shipment
+    - selector: shippingpb.ShippingService.ReturnShipment
+      post: /api/shipping/{id}/return
+      body: "*"
+    
+    # Get shipment by ID
+    - selector: shippingpb.ShippingService.GetShipment
+      get: /api/shipping/{id}
+    
+    # List shipments with filters
+    - selector: shippingpb.ShippingService.ListShipments
+      get: /api/shipping
+    
+    # Track shipment by tracking number
+    - selector: shippingpb.ShippingService.TrackShipping
+      get: /api/shipping/track/{tracking_number}
+    
+    # Get shipment history
+    - selector: shippingpb.ShippingService.GetShipmentHistory
+      get: /api/shipping/{id}/history
+    
+    # Get shipping label
+    - selector: shippingpb.ShippingService.GetLabel
+      get: /api/shipping/{id}/label
+    
+    # Get shipping rates
+    - selector: shippingpb.ShippingService.GetRates
+      post: /api/shipping/rates
+      body: "*"

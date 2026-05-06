@@ -1,0 +1,25 @@
+New Comment on Your Post - {{.AppName}}
+
+Hello {{.FirstName}},
+
+{{.CommenterName}} has left a comment on your post:
+
+Post: "{{.PostTitle}}"
+
+COMMENT:
+"{{.CommentText}}{{if .CommentTruncated}}...{{end}}"
+
+To view and reply to this comment, please visit:
+{{.CommentURL}}
+
+This notification was sent to you because you have enabled email notifications for comments on your posts in your {{.AppName}} account settings.
+
+To manage your notification settings, visit your account settings:
+{{.SettingsURL}}
+
+Thanks,
+The {{.AppName}} Team
+
+---
+If you have any questions, contact our support team at {{.SupportEmail}}.
+© {{.CurrentYear}} {{.CompanyName}}. All rights reserved. 

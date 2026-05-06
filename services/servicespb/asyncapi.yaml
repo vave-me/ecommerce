@@ -1,0 +1,239 @@
+# ag asyncapi.yaml @asyncapi/html-template --force-write
+asyncapi: '2.3.0'
+info:
+  title: Services Management AsyncAPI
+  version: '1.0.1'
+
+defaultContentType: application/octet-stream
+
+channels:
+  middleman.services.events.User:
+    $ref: '#/components/channels/middleman.services.events.User'
+  middleman.services.events.Service:
+    $ref: '#/components/channels/middleman.services.events.Service'
+
+components:
+  channels:
+    middleman.services.events.User:
+      subscribe:
+        operationId: userAggregateEvents
+        message:
+          oneOf:
+            - $ref: '#/components/messages/servicesapi.UserCreatedEvent'
+            - $ref: '#/components/messages/servicesapi.UserParticipationToggledEvent'
+            - $ref: '#/components/messages/servicesapi.UserRenamedEvent'
+            - $ref: '#/components/messages/servicesapi.UserLoggedInEvent'
+            - $ref: '#/components/messages/servicesapi.UserLoggedOutEvent'
+        tags:
+          - name: User
+      bindings:
+        nats:
+          queue: middleman.services.events.User
+          x-queue-constant: servicespb.UserAggregateChannel
+    middleman.services.events.Service:
+      subscribe:
+        operationId: serviceAggregateEvents
+        message:
+          oneOf:
+            - $ref: '#/components/messages/servicesapi.ServiceAddedEvent'
+            - $ref: '#/components/messages/servicesapi.ServiceRebrandedEvent'
+            - $ref: '#/components/messages/servicesapi.ServicePriceChangedEvent'
+            - $ref: '#/components/messages/servicesapi.ServiceRemovedEvent'
+        tags:
+          - name: Service
+      bindings:
+        nats:
+          queue: middleman.services.events.Service
+          x-queue-constant: servicespb.ServiceAggregateChannel
+
+  messages:
+    servicesapi.UserCreatedEvent:
+      title: UserCreated
+      description: A new user has been created
+      x-name-constant: servicespb.UserCreatedEvent
+      x-payload-type: '*servicespb.UserCreated'
+      payload:
+        $ref: '#/components/schemas/servicespb.UserCreated'
+      tags:
+        - name: User
+    servicesapi.UserParticipationToggledEvent:
+      title: UserParticipationToggled
+      description: A user participation status has changed
+      x-name-constant: servicespb.UserParticipationToggledEvent
+      x-payload-type: '*servicespb.UserParticipationToggled'
+      payload:
+        $ref: '#/components/schemas/servicespb.UserParticipationToggled'
+      tags:
+        - name: User
+    servicesapi.UserRenamedEvent:
+      title: UserRenamed
+      description: A user has changed their name
+      x-name-constant: servicespb.UserRenamedEvent
+      x-payload-type: '*servicespb.UserRenamed'
+      payload:
+        $ref: '#/components/schemas/servicespb.UserRenamed'
+      tags:
+        - name: User
+    servicesapi.UserLoggedInEvent:
+      title: UserLoggedIn
+      description: A user has logged in
+      x-name-constant: servicespb.UserLoggedInEvent
+      x-payload-type: '*servicespb.UserLoggedIn'
+      payload:
+        $ref: '#/components/schemas/servicespb.UserLoggedIn'
+      tags:
+        - name: User
+    servicesapi.UserLoggedOutEvent:
+      title: UserLoggedOut
+      description: A user has logged out
+      x-name-constant: servicespb.UserLoggedOutEvent
+      x-payload-type: '*servicespb.UserLoggedOut'
+      payload:
+        $ref: '#/components/schemas/servicespb.UserLoggedOut'
+      tags:
+        - name: User
+
+    servicesapi.ServiceAddedEvent:
+      title: ServiceAdded
+      description: A new service has been added
+      x-name-constant: servicespb.ServiceAddedEvent
+      x-payload-type: '*servicespb.ServiceAdded'
+      payload:
+        $ref: '#/components/schemas/servicespb.ServiceAdded'
+      tags:
+        - name: Service
+    servicesapi.ServiceRebrandedEvent:
+      title: ServiceRebranded
+      description: A service has been rebranded
+      x-name-constant: servicespb.ServiceRebrandedEvent
+      x-payload-type: '*servicespb.ServiceRebranded'
+      payload:
+        $ref: '#/components/schemas/servicespb.ServiceRebranded'
+      tags:
+        - name: Service
+    servicesapi.ServicePriceChangedEvent:
+      title: ServicePriceChanged
+      description: A service's price has changed
+      x-name-constant: servicespb.ServicePriceChangedEvent
+      x-payload-type: '*servicespb.ServicePriceChanged'
+      payload:
+        $ref: '#/components/schemas/servicespb.ServicePriceChanged'
+      tags:
+        - name: Service
+    servicesapi.ServiceRemovedEvent:
+      title: ServiceRemoved
+      description: A service has been removed
+      x-name-constant: servicespb.ServiceRemovedEvent
+      x-payload-type: '*servicespb.ServiceRemoved'
+      payload:
+        $ref: '#/components/schemas/servicespb.ServiceRemoved'
+      tags:
+        - name: Service
+
+  schemas:
+    UserId:
+      type: string
+      description: Identity of the user
+    ServiceId:
+      type: string
+      description: Identity of the service
+
+    servicespb.UserCreated:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/UserId'
+        email:
+          type: string
+          description: User's email
+        first_name:
+          type: string
+        last_name:
+          type: string
+
+    servicespb.UserParticipationToggled:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/UserId'
+        participating:
+          type: boolean
+          description: Whether the user is participating in the service
+
+    servicespb.UserRenamed:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/UserId'
+        new_user_name:
+          type: string
+          description: The new name of the user
+
+    servicespb.UserLoggedIn:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/UserId'
+        authentication_token:
+          type: string
+          description: The user's authentication token
+
+    servicespb.UserLoggedOut:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/UserId'
+        authentication_token:
+          type: string
+          description: The user's authentication token used for the session
+
+    servicespb.ServiceAdded:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/ServiceId'
+        user_seller_id:
+          $ref: '#/components/schemas/UserId'
+        service_name:
+          type: string
+        service_description:
+          type: string
+        sku:
+          type: string
+        price:
+          type: number
+          format: double
+
+    servicespb.ServiceRebranded:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/ServiceId'
+        name:
+          type: string
+        description:
+          type: string
+
+    servicespb.ServicePriceChanged:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/ServiceId'
+        price_change:
+          type: number
+          format: double
+
+    servicespb.ServiceRemoved:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/ServiceId'

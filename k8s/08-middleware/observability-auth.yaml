@@ -1,0 +1,38 @@
+# --- Basic Authentication for Observability Tools ---
+# First, create the auth secret with htpasswd-encoded credentials
+# Default username: admin
+# Password is taken from the common secrets
+apiVersion: v1
+kind: Secret
+metadata:
+  name: observability-basic-auth
+  namespace: observability
+type: Opaque
+data:
+  # Generated with: htpasswd -nb admin ObservabilityP@ss2024!
+  # Username: admin
+  # Password: ObservabilityP@ss2024!
+  users: YWRtaW46JGFwcjEkd0FmUmVnU0ckclRSUVZBOFZWMlVVUjZMWk56S1hsMQoK
+---
+# Traefik Middleware for Basic Authentication
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: basic-auth
+  namespace: observability
+spec:
+  basicAuth:
+    secret: observability-basic-auth
+    removeHeader: true
+---
+# Combined middleware chain for services that need both auth and other middlewares
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: auth-strip-prefix
+  namespace: observability
+spec:
+  chain:
+    middlewares:
+      - name: basic-auth
+      - name: strip-prefix

@@ -1,0 +1,1227 @@
+/* ProductModal.module.css
+   A refined, professional marketplace style (no universal selectors).
+*/
+
+/* ----------------------------------------
+   FADE-DOWN ANIMATION
+---------------------------------------- */
+@keyframes fadeDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ----------------------------------------
+   MODAL OVERLAY
+---------------------------------------- */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* ----------------------------------------
+   MODAL WRAPPER
+---------------------------------------- */
+.modalWrapper {
+    width: 100%;
+    max-width: 860px;
+    background-color: #fff;
+    border-radius: 6px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    animation: fadeDown 0.35s ease-out;
+}
+
+/* ----------------------------------------
+   MODAL HEADER
+---------------------------------------- */
+.modalHeader {
+    padding: 16px 24px;
+    border-bottom: 1px solid #ddd;
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modalTitle {
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+/* Close button (X icon) */
+.closeButton {
+    background: transparent;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: transform 0.2s;
+}
+.closeButton:hover {
+    transform: rotate(90deg);
+}
+.closeButton img {
+    width: 20px;
+    height: 20px;
+}
+
+/* ----------------------------------------
+   STEPS CONTAINER
+---------------------------------------- */
+.stepsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
+    gap: 24px;
+}
+
+/* Step circle - default */
+.singleStep,
+.singleStepActive {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ccc;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Active circle is colored */
+.singleStepActive {
+    background-color: #0061bb;
+}
+
+/* Connecting line between step circles */
+.stepLine {
+    flex: 1;
+    height: 2px;
+    background-color: #ddd;
+}
+
+/* Label under the circle */
+.stepCircleLabel {
+    position: absolute;
+    top: 44px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #333;
+    font-size: 12px;
+    white-space: nowrap;
+    margin-top: 2px;
+}
+
+/* ----------------------------------------
+   CONTENT AREA
+---------------------------------------- */
+.contentArea {
+    padding: 24px;
+    flex: 1;
+}
+
+/* ----------------------------------------
+   ERROR BOX
+---------------------------------------- */
+.errorBox {
+    background-color: #ffe6e6;
+    color: #c0392b;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    border: 1px solid #f5c6c6;
+}
+
+/* ----------------------------------------
+   STEP BOX
+---------------------------------------- */
+.stepBox {
+    background: #fff;
+    padding: 24px;
+    border-radius: 6px;
+    border: 1px solid #f2f2f2;
+    margin-bottom: 24px;
+}
+
+.stepHeading {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.instruction {
+    margin-bottom: 16px;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* ----------------------------------------
+   FORM & INPUTS
+---------------------------------------- */
+.styledForm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.formRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.formGroup {
+    flex: 1;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+}
+.formGroup span {
+    color: #e74c3c;
+    margin-left: 4px;
+}
+
+/* Label styling */
+.label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+/* Basic inputs */
+.textInput,
+.numberInput,
+.selectBox {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.15s;
+}
+
+.textInput:focus,
+.numberInput:focus,
+.selectBox:focus,
+.descriptionArea:focus {
+    border-color: #0061bb;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0,97,187,0.25);
+}
+
+/* Textarea styling */
+.descriptionArea {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Button container */
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+/* Main action button */
+.actionButton {
+    background: #0061bb;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.actionButton:hover {
+    background: #004a8d;
+}
+.actionButton:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* ----------------------------------------
+   TABS (Images / Videos)
+---------------------------------------- */
+.toggleTabs {
+    display: flex;
+    margin-bottom: 16px;
+    border-bottom: 2px solid #f2f2f2;
+    gap: 2px;
+}
+.tabButton {
+    background: #f7f7f7;
+    color: #666;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.tabButton:hover {
+    background: #ebebeb;
+}
+.tabButtonActive {
+    background: #fff !important;
+    color: #0061bb !important;
+    border-bottom: 3px solid #0061bb;
+}
+
+/* ----------------------------------------
+   IMAGE/VIDEO GRID / PREVIEW
+---------------------------------------- */
+.imageGrid {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px,1fr));
+    gap: 12px;
+}
+.imagePreview {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+}
+.imagePreview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Video preview */
+.videoPreview {
+    margin-top: 16px;
+    width: 320px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.videoPreview video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ----------------------------------------
+   PLACEHOLDER (Optional Step)
+---------------------------------------- */
+.placeholder {
+    padding: 16px;
+    background-color: #fafafa;
+    border: 2px dashed #ccc;
+    border-radius: 6px;
+    text-align: center;
+    color: #888;
+}
+
+/* ----------------------------------------
+   CATEGORY SELECTOR
+---------------------------------------- */
+.categoryInlineWrapper {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* "Select Category" button */
+.selectorButton {
+    background: #fff;
+    border: 1px solid #ccc;
+    color: #444;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    width: fit-content;
+}
+.selectorButton:hover {
+    border-color: #999;
+}
+
+/* Category tree panel (scrollable) */
+.categoryTreePanel {
+    position: relative;
+    margin-top: 4px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 12px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* The top row: "Choose Category" + close btn */
+.treeHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+.treeHeaderTitle {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+}
+.closeTreeButton {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    color: #999;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+.closeTreeButton:hover {
+    background-color: #f0f0f0;
+    color: #666;
+}
+
+/* The entire category list container */
+.treeContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* top row with search & expand/collapse */
+.treeActions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+.treeSearch {
+    flex: 1;
+    padding: 8px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+.treeSearch:focus {
+    border-color: #0061bb;
+    box-shadow: 0 0 0 3px rgba(0,97,187,0.25);
+}
+.expandAllButton {
+    background: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 13px;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.expandAllButton:hover {
+    background-color: #ebebeb;
+}
+
+/* Single node in tree */
+.nodeWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Each category row (arrow + name) */
+.nodeRow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.15s;
+}
+.nodeRow:hover {
+    background-color: #f5faff;
+}
+
+/* highlight selected row */
+.selectedRow {
+    background-color: #e6f4ff;
+    border-left: 4px solid #0061bb;
+}
+
+/* Arrow icon (► / ▼) */
+.expandIcon {
+    font-size: 14px;
+    color: #666;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+.emptyIcon {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+}
+
+/* category name text */
+.nodeName {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+    flex: 1;
+}
+
+/* indentation + dotted line for sub-nodes */
+.subTree {
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+    border-left: 1px dashed #ccc;
+    padding-left: 8px;
+    gap: 4px;
+}
+
+/* Info / error messages in tree */
+.infoMsg {
+    font-size: 13px;
+    color: #555;
+    margin: 4px 0 4px 6px;
+}
+.errorMsg {
+    font-size: 13px;
+    color: #b70000;
+    margin: 4px 0 4px 6px;
+}
+
+/* === DARK THEME === */
+@media (prefers-color-scheme: dark) {
+    /* ----------------------------------------
+       MODAL OVERLAY
+    ---------------------------------------- */
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* ----------------------------------------
+       MODAL WRAPPER
+    ---------------------------------------- */
+    .modalWrapper {
+        background-color: var(--gray-800, #1f2937);
+        border: 1px solid var(--gray-700, #374151);
+        box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    /* ----------------------------------------
+       MODAL HEADER
+    ---------------------------------------- */
+    .modalHeader {
+        background-color: var(--gray-900, #111827);
+        border-bottom: 1px solid var(--gray-700, #374151);
+    }
+
+    .modalTitle {
+        color: var(--gray-100, #f3f4f6);
+    }
+
+    .closeButton {
+        background: rgba(55, 65, 81, 0.8);
+        border: 1px solid var(--gray-600, #4b5563);
+        color: var(--gray-300, #d1d5db);
+        border-radius: 6px;
+    }
+
+    .closeButton:hover {
+        background: var(--gray-600, #4b5563);
+        color: var(--gray-100, #f3f4f6);
+        transform: rotate(90deg);
+    }
+
+    .closeButton img {
+        filter: invert(1);
+    }
+
+    /* ----------------------------------------
+       STEPS CONTAINER
+    ---------------------------------------- */
+    .stepsContainer {
+        background-color: var(--gray-750, #2d3748);
+        padding: 16px;
+        border-radius: 8px;
+        margin: 16px 24px;
+        border: 1px solid var(--gray-700, #374151);
+    }
+
+    .singleStep {
+        background-color: var(--gray-600, #4b5563);
+        color: var(--gray-300, #d1d5db);
+        border: 2px solid var(--gray-500, #6b7280);
+    }
+
+    .singleStepActive {
+        background-color: var(--purple-600, #9333ea);
+        color: white;
+        border: 2px solid var(--purple-500, #a855f7);
+        box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+    }
+
+    .stepLine {
+        background-color: var(--gray-600, #4b5563);
+    }
+
+    .stepCircleLabel {
+        color: var(--gray-300, #d1d5db);
+    }
+
+    /* ----------------------------------------
+       CONTENT AREA
+    ---------------------------------------- */
+    .contentArea {
+        background-color: var(--gray-800, #1f2937);
+    }
+
+    /* ----------------------------------------
+       ERROR BOX
+    ---------------------------------------- */
+    .errorBox {
+        background-color: rgba(239, 68, 68, 0.1);
+        color: var(--red-400, #f87171);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    /* ----------------------------------------
+       STEP BOX
+    ---------------------------------------- */
+    .stepBox {
+        background: var(--gray-750, #2d3748);
+        border: 1px solid var(--gray-700, #374151);
+    }
+
+    .stepHeading {
+        color: var(--gray-100, #f3f4f6);
+    }
+
+    .instruction {
+        color: var(--gray-300, #d1d5db);
+    }
+
+    /* ----------------------------------------
+       FORM & INPUTS
+    ---------------------------------------- */
+    .formGroup span {
+        color: var(--red-400, #f87171);
+    }
+
+    .label {
+        color: var(--gray-200, #e5e7eb);
+    }
+
+    .textInput,
+    .numberInput,
+    .selectBox {
+        background-color: var(--gray-700, #374151);
+        border: 1px solid var(--gray-600, #4b5563);
+        color: var(--gray-100, #f3f4f6);
+    }
+
+    .textInput::placeholder,
+    .numberInput::placeholder {
+        color: var(--gray-400, #9ca3af);
+    }
+
+    .textInput:focus,
+    .numberInput:focus,
+    .selectBox:focus,
+    .descriptionArea:focus {
+        border-color: var(--purple-500, #a855f7);
+        box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+        background-color: var(--gray-700, #374151);
+    }
+
+    .descriptionArea {
+        background-color: var(--gray-700, #374151);
+        border: 1px solid var(--gray-600, #4b5563);
+        color: var(--gray-100, #f3f4f6);
+    }
+
+    .descriptionArea::placeholder {
+        color: var(--gray-400, #9ca3af);
+    }
+
+    /* ----------------------------------------
+       BUTTONS
+    ---------------------------------------- */
+    .actionButton {
+        background: var(--purple-600, #9333ea);
+        color: white;
+        border: 1px solid var(--purple-500, #a855f7);
+    }
+
+    .actionButton:hover {
+        background: var(--purple-700, #7c3aed);
+        box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+    }
+
+    .actionButton:disabled {
+        background: var(--gray-600, #4b5563);
+        color: var(--gray-400, #9ca3af);
+        border-color: var(--gray-600, #4b5563);
+    }
+
+    /* ----------------------------------------
+       TABS (Images / Videos)
+    ---------------------------------------- */
+    .toggleTabs {
+        border-bottom: 2px solid var(--gray-700, #374151);
+        background-color: var(--gray-750, #2d3748);
+        padding: 8px;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .tabButton {
+        background: var(--gray-700, #374151);
+        color: var(--gray-300, #d1d5db);
+        border: 1px solid var(--gray-600, #4b5563);
+    }
+
+    .tabButton:hover {
+        background: var(--gray-600, #4b5563);
+        color: var(--gray-100, #f3f4f6);
+    }
+
+    .tabButtonActive {
+        background: var(--gray-800, #1f2937) !important;
+        color: var(--purple-400, #c084fc) !important;
+        border-bottom: 3px solid var(--purple-500, #a855f7) !important;
+        border-color: var(--purple-500, #a855f7);
+    }
+
+    /* ----------------------------------------
+       IMAGE/VIDEO GRID / PREVIEW
+    ---------------------------------------- */
+    .imageGrid {
+        background-color: var(--gray-750, #2d3748);
+        padding: 16px;
+        border-radius: 8px;
+        border: 1px solid var(--gray-700, #374151);
+    }
+
+    .imagePreview {
+        border: 2px solid var(--gray-600, #4b5563);
+        background-color: var(--gray-700, #374151);
+    }
+
+    .imagePreview:hover {
+        border-color: var(--gray-500, #6b7280);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .videoPreview {
+        border: 2px solid var(--gray-600, #4b5563);
+        background-color: var(--gray-700, #374151);
+    }
+
+    .videoPreview:hover {
+        border-color: var(--purple-500, #a855f7);
+        box-shadow: 0 4px 12px rgba(147, 51, 234, 0.2);
+    }
+
+    /* ----------------------------------------
+       PLACEHOLDER (Optional Step)
+    ---------------------------------------- */
+    .placeholder {
+        background-color: var(--gray-700, #374151);
+        border: 2px dashed var(--gray-500, #6b7280);
+        color: var(--gray-400, #9ca3af);
+    }
+
+    /* ----------------------------------------
+       CATEGORY SELECTOR
+    ---------------------------------------- */
+    .categoryInlineWrapper {
+        background-color: var(--gray-750, #2d3748);
+        padding: 16px;
+        border-radius: 8px;
+        border: 1px solid var(--gray-700, #374151);
+    }
+
+    .selectorButton {
+        background: var(--gray-700, #374151);
+        border: 1px solid var(--gray-600, #4b5563);
+        color: var(--gray-200, #e5e7eb);
+    }
+
+    .selectorButton:hover {
+        border-color: var(--gray-500, #6b7280);
+        background: var(--gray-600, #4b5563);
+        color: var(--gray-100, #f3f4f6);
+    }
+
+    .categoryTreePanel {
+        background-color: var(--gray-800, #1f2937);
+        border: 1px solid var(--gray-600, #4b5563);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .treeHeader {
+        border-bottom: 1px solid var(--gray-700, #374151);
+        padding-bottom: 8px;
+    }
+
+    .treeHeaderTitle {
+        color: var(--gray-100, #f3f4f6);
+    }
+
+    .closeTreeButton {
+        background: transparent;
+        color: var(--gray-400, #9ca3af);
+        border: 1px solid var(--gray-600, #4b5563);
+        border-radius: 6px;
+    }
+
+    .closeTreeButton:hover {
+        background-color: var(--gray-700, #374151);
+        color: var(--gray-200, #e5e7eb);
+    }
+
+    .treeContainer {
+        background-color: var(--gray-750, #2d3748);
+        border-radius: 6px;
+        padding: 8px;
+    }
+
+    .treeActions {
+        background-color: var(--gray-700, #374151);
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px solid var(--gray-600, #4b5563);
+    }
+
+    .treeSearch {
+        background-color: var(--gray-600, #4b5563);
+        border: 1px solid var(--gray-500, #6b7280);
+        color: var(--gray-100, #f3f4f6);
+    }
+
+    .treeSearch::placeholder {
+        color: var(--gray-400, #9ca3af);
+    }
+
+    .treeSearch:focus {
+        border-color: var(--purple-500, #a855f7);
+        box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+        background-color: var(--gray-600, #4b5563);
+    }
+
+    .expandAllButton {
+        background: var(--gray-600, #4b5563);
+        border: 1px solid var(--gray-500, #6b7280);
+        color: var(--gray-200, #e5e7eb);
+    }
+
+    .expandAllButton:hover {
+        background-color: var(--gray-500, #6b7280);
+        color: var(--gray-100, #f3f4f6);
+    }
+
+    .nodeRow {
+        background-color: transparent;
+        border: 1px solid transparent;
+    }
+
+    .nodeRow:hover {
+        background-color: var(--gray-700, #374151);
+        border-color: var(--gray-600, #4b5563);
+    }
+
+    .selectedRow {
+        background-color: rgba(168, 85, 247, 0.1);
+        border-left: 4px solid var(--purple-500, #a855f7);
+        border-color: var(--purple-500, #a855f7);
+    }
+
+    .expandIcon {
+        color: var(--gray-400, #9ca3af);
+    }
+
+    .nodeName {
+        color: var(--gray-200, #e5e7eb);
+    }
+
+    .selectedRow .nodeName {
+        color: var(--purple-300, #d8b4fe);
+        font-weight: 600;
+    }
+
+    .subTree {
+        border-left: 1px dashed var(--gray-600, #4b5563);
+        background-color: var(--gray-750, #2d3748);
+        margin-left: 12px;
+        padding: 8px;
+        border-radius: 4px;
+    }
+
+    .infoMsg {
+        color: var(--gray-400, #9ca3af);
+    }
+
+    .errorMsg {
+        color: var(--red-400, #f87171);
+    }
+
+    /* ----------------------------------------
+       VIDEO-SPECIFIC ENHANCEMENTS
+    ---------------------------------------- */
+    .videoUploadArea {
+        background-color: var(--gray-700, #374151);
+        border: 2px dashed var(--purple-500, #a855f7);
+        border-radius: 8px;
+        padding: 24px;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .videoUploadArea:hover {
+        background-color: var(--gray-600, #4b5563);
+        border-color: var(--purple-400, #c084fc);
+        box-shadow: 0 4px 12px rgba(147, 51, 234, 0.2);
+    }
+
+    .videoUploadIcon {
+        color: var(--purple-400, #c084fc);
+        font-size: 48px;
+        margin-bottom: 16px;
+    }
+
+    .videoUploadText {
+        color: var(--gray-200, #e5e7eb);
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .videoUploadHint {
+        color: var(--gray-400, #9ca3af);
+        font-size: 14px;
+    }
+
+    .videoMetadata {
+        background-color: var(--gray-750, #2d3748);
+        border: 1px solid var(--gray-700, #374151);
+        border-radius: 8px;
+        padding: 16px;
+        margin-top: 16px;
+    }
+
+    .videoMetadataTitle {
+        color: var(--gray-100, #f3f4f6);
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        border-bottom: 1px solid var(--gray-700, #374151);
+        padding-bottom: 8px;
+    }
+
+    .videoMetadataRow {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--gray-700, #374151);
+    }
+
+    .videoMetadataRow:last-child {
+        border-bottom: none;
+    }
+
+    .videoMetadataLabel {
+        color: var(--gray-300, #d1d5db);
+        font-weight: 500;
+    }
+
+    .videoMetadataValue {
+        color: var(--purple-400, #c084fc);
+        font-weight: 600;
+    }
+
+    .videoThumbnailGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 12px;
+        margin-top: 16px;
+        padding: 16px;
+        background-color: var(--gray-750, #2d3748);
+        border-radius: 8px;
+        border: 1px solid var(--gray-700, #374151);
+    }
+
+    .videoThumbnailItem {
+        position: relative;
+        border: 2px solid var(--gray-600, #4b5563);
+        border-radius: 6px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .videoThumbnailItem:hover {
+        border-color: var(--purple-500, #a855f7);
+        box-shadow: 0 4px 12px rgba(147, 51, 234, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .videoThumbnailItem.selected {
+        border-color: var(--purple-400, #c084fc);
+        box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.3);
+    }
+
+    .videoThumbnailOverlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(147, 51, 234, 0.8), rgba(168, 85, 247, 0.6));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .videoThumbnailItem:hover .videoThumbnailOverlay {
+        opacity: 1;
+    }
+
+    .videoThumbnailIcon {
+        color: white;
+        font-size: 24px;
+    }
+
+    .videoProgressBar {
+        background-color: var(--gray-700, #374151);
+        border-radius: 4px;
+        height: 8px;
+        overflow: hidden;
+        margin-top: 12px;
+    }
+
+    .videoProgressFill {
+        background: linear-gradient(90deg, var(--purple-600, #9333ea), var(--purple-400, #c084fc));
+        height: 100%;
+        transition: width 0.3s ease;
+        border-radius: 4px;
+    }
+
+    .videoQualitySelector {
+        display: flex;
+        gap: 8px;
+        margin-top: 16px;
+        padding: 12px;
+        background-color: var(--gray-750, #2d3748);
+        border-radius: 8px;
+        border: 1px solid var(--gray-700, #374151);
+    }
+
+    .videoQualityOption {
+        background-color: var(--gray-700, #374151);
+        border: 1px solid var(--gray-600, #4b5563);
+        color: var(--gray-200, #e5e7eb);
+        padding: 8px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .videoQualityOption:hover {
+        background-color: var(--gray-600, #4b5563);
+        border-color: var(--gray-500, #6b7280);
+        color: var(--gray-100, #f3f4f6);
+    }
+
+    .videoQualityOption.selected {
+        background-color: var(--purple-600, #9333ea);
+        border-color: var(--purple-500, #a855f7);
+        color: white;
+        box-shadow: 0 2px 8px rgba(147, 51, 234, 0.3);
+    }
+
+    .videoTagsContainer {
+        background-color: var(--gray-750, #2d3748);
+        border: 1px solid var(--gray-700, #374151);
+        border-radius: 8px;
+        padding: 16px;
+        margin-top: 16px;
+    }
+
+    .videoTagsTitle {
+        color: var(--gray-100, #f3f4f6);
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 12px;
+    }
+
+    .videoTagsInput {
+        background-color: var(--gray-700, #374151);
+        border: 1px solid var(--gray-600, #4b5563);
+        color: var(--gray-100, #f3f4f6);
+        padding: 10px 12px;
+        border-radius: 6px;
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .videoTagsInput::placeholder {
+        color: var(--gray-400, #9ca3af);
+    }
+
+    .videoTagsInput:focus {
+        border-color: var(--purple-500, #a855f7);
+        box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+    }
+
+    .videoTagsList {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+    }
+
+    .videoTag {
+        background-color: var(--purple-600, #9333ea);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 16px;
+        font-size: 12px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        border: 1px solid var(--purple-500, #a855f7);
+    }
+
+    .videoTagRemove {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        transition: background-color 0.2s ease;
+    }
+
+    .videoTagRemove:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* === HIGH CONTRAST MODE === */
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+    .modalWrapper {
+        border: 2px solid var(--gray-400, #9ca3af);
+    }
+
+    .textInput,
+    .numberInput,
+    .selectBox,
+    .descriptionArea {
+        border: 2px solid var(--gray-400, #9ca3af);
+    }
+
+    .textInput:focus,
+    .numberInput:focus,
+    .selectBox:focus,
+    .descriptionArea:focus {
+        border-color: var(--purple-300, #d8b4fe);
+        box-shadow: 0 0 0 4px rgba(216, 180, 254, 0.3);
+    }
+
+    .actionButton {
+        border: 2px solid currentColor;
+        font-weight: 700;
+    }
+
+    .singleStepActive {
+        border: 2px solid var(--purple-300, #d8b4fe);
+    }
+
+    .selectedRow {
+        border-left: 4px solid var(--purple-300, #d8b4fe);
+    }
+
+    .videoThumbnailItem.selected {
+        border: 3px solid var(--purple-300, #d8b4fe);
+        box-shadow: 0 0 0 4px rgba(216, 180, 254, 0.3);
+    }
+}
+
+/* === REDUCED MOTION === */
+@media (prefers-reduced-motion: reduce) {
+    .fadeDown {
+        animation: none;
+    }
+
+    .closeButton:hover {
+        transform: none;
+    }
+
+    .videoThumbnailItem:hover {
+        transform: none;
+    }
+
+    .videoThumbnailOverlay {
+        transition: none;
+    }
+
+    .videoProgressFill {
+        transition: none;
+    }
+
+    .videoQualityOption {
+        transition: none;
+    }
+
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}

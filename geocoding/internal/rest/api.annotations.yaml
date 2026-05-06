@@ -1,0 +1,21 @@
+type: google.api.Service
+config_version: 3
+http:
+  rules:
+    - selector: geocodingpb.GeocodingService.GeocodeAddress
+      post: /api/geocoding/geocode
+      body: "*"
+#    - selector: geocodingpb.GeocodingService.GetOrder
+#      get: /api/geocoding/orders/{id}
+#    - selector: geocodingpb.GeocodingService.GeocodingProductsWithFilters
+#      post: /api/geocoding/geocoding-products
+#      body: "*"
+#    - selector: geocodingpb.GeocodingService.GeocodingProductsWithTerm
+#      post: /api/geocoding
+#      body: "*"
+    - selector: geocodingpb.GeocodingService.SuggestAddress
+      get: /api/geocoding/suggest/address/{address}
+    - selector: geocodingpb.GeocodingService.SuggestCity
+      get: /api/geocoding/suggest/city/{name}
+#    - selector: geocodingpb.GeocodingService.GetProduct
+#      get: /api/geocoding/product/{id}

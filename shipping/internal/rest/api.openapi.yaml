@@ -1,0 +1,21 @@
+openapiOptions:
+  file:
+    - file: "shippingpb/api.proto"
+      option:
+        info:
+          title: Shipping Management
+          version: "1.0.0"
+        basePath: /
+  method:
+    - method: shippingpb.ShippingService.CreateShipping
+      option:
+        operationId: createShipping
+        tags:
+          - Shipping
+        summary: Create a new shipping
+    - method: shippingpb.ShippingService.TrackShipping
+      option:
+        operationId: trackShipping
+        tags:
+          - Shipping
+        summary: Track shipping

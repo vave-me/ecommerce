@@ -1,0 +1,77 @@
+type: google.api.Service
+config_version: 3
+name: services.googleapis.com
+title: Services Management API
+apis:
+  - name: servicespb.ServicesService
+http:
+  rules:
+    # Create a New Service
+    - selector: servicespb.ServicesService.AddService
+      post: /api/services
+      body: "*"
+
+    # Retrieve a Specific Service
+    - selector: servicespb.ServicesService.GetService
+      get: /api/services/{id}
+
+    # List All Services for a User with Optional Filtering and Pagination
+    - selector: servicespb.ServicesService.GetServices
+      get: /api/services
+
+    # Update a Service's Details
+    - selector: servicespb.ServicesService.UpdateService
+      post: /api/services/update
+      body: "*"
+
+    # Delete a Service
+    - selector: servicespb.ServicesService.RemoveService
+      delete: /api/services/{id}
+
+    # Rebrand a Service
+    - selector: servicespb.ServicesService.RebrandService
+      patch: /api/services/{id}/rebrand
+      body: "*"
+
+    - selector: servicespb.ServicesService.GetServicesByCategory
+      get: /api/services/categories/{category_id}
+
+
+    - selector: servicespb.ServicesService.GetCatalog
+      get: /api/services/catalog
+
+    - selector: servicespb.ServicesService.GetPublicCatalog
+      get: /api/services/catalog/public
+
+
+    # Update a Service's Price
+    - selector: servicespb.ServicesService.UpdateServicePrice
+      patch: /api/services/{id}/price
+      body: "*"
+
+    # Update a Service's Price
+    - selector: servicespb.ServicesService.GetServicesWithFilter
+      post: /api/services/filters
+      body: "*"
+
+    # Adjust a Service's Stock
+    - selector: servicespb.ServicesService.AdjustServiceStock
+      patch: /api/services/{service_id}/stock
+      body: "*"
+
+    # Archive a Service (mark it inactive)
+    - selector: servicespb.ServicesService.ArchiveService
+      patch: /api/services/{service_id}/archive
+      body: "*"
+
+    # Mark a Service as Sold
+    - selector: servicespb.ServicesService.MarkServiceSold
+      patch: /api/services/{service_id}/sold
+      body: "*"
+
+    # Mark a Service as Leased
+    - selector: servicespb.ServicesService.MarkServiceLeased
+      patch: /api/services/{service_id}/lease
+      body: "*"
+
+

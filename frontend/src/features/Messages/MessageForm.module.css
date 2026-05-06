@@ -1,0 +1,668 @@
+/* MessageForm.module.css - Light Mode Only */
+/* Base modal styles */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.75);
+    /* backdrop-filter: blur(4px); - Removed for performance */
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modalContent {
+    background: #ffffff;
+    border-radius: 16px;
+    width: 95%;
+    max-width: 550px;
+    max-height: 85vh;
+    overflow: hidden;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    transform-origin: center;
+    animation: scaleIn 0.2s ease-out;
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.contentWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    flex: 1;
+    max-height: calc(85vh - 60px); /* Account for header height */
+    overflow-y: auto;
+}
+
+/* Input area styles */
+.inputArea {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    margin-top: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 4px;
+    margin-top: 4px;
+}
+
+.hiddenInput {
+    display: none;
+}
+
+/* Icon buttons */
+.iconButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    position: relative;
+}
+
+.iconButton:hover {
+    color: #0ea5e9;
+    background-color: #f1f5f9;
+}
+
+.iconButton:focus-visible {
+    outline: 2px solid #0ea5e9;
+    outline-offset: 2px;
+}
+
+.iconButton:active {
+    transform: translateY(1px);
+}
+
+.emojiButton::after {
+    content: attr(data-count);
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: #0ea5e9;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0);
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.emojiButton[data-count]:not([data-count="0"])::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Send button */
+.sendButton {
+    background-color: #0ea5e9;
+    border: none;
+    color: #fff;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    margin-bottom: 1px;
+    box-shadow: 0 2px 5px rgba(14, 165, 233, 0.2);
+}
+
+.sendButton:hover {
+    background-color: #0284c7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(14, 165, 233, 0.3);
+}
+
+.sendButton:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(14, 165, 233, 0.2);
+}
+
+.sendButton:disabled {
+    background-color: #cbd5e1;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.sendButton svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Emoji picker */
+.emojiPickerContainer {
+    position: absolute;
+    bottom: 80px;
+    left: 10px;
+    z-index: 1001;
+    border-radius: 16px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    animation: slideUp 0.2s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Status indicators */
+.statusIndicator {
+    font-size: 12px;
+    color: #64748b;
+    padding: 4px 8px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    max-width: max-content;
+    margin: 4px 0;
+}
+
+.statusIndicator.sending {
+    background-color: #e2e8f0;
+}
+
+.statusIndicator.error {
+    background-color: #fee2e2;
+    color: #ef4444;
+}
+
+/* Progress indicators */
+.uploadProgress {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    background-color: #e2e8f0;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.uploadProgressBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #0ea5e9;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+    .modalContent {
+        width: 100%;
+        max-width: none;
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        border-radius: 16px 16px 0 0;
+        max-height: 80vh;
+        animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes slideUp {
+        from { transform: translateY(100%); }
+        to { transform: translateY(0); }
+    }
+
+    .contentWrapper {
+        padding: 16px;
+    }
+}
+
+/* === DARK THEME === */
+@media (prefers-color-scheme: dark) {
+    .modalOverlay {
+        background: rgba(0, 0, 0, 0.8);
+    }
+
+    .modalContent {
+        background: var(--gray-800, #1f2937);
+        border: 1px solid var(--gray-700, #374151);
+        box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .contentWrapper {
+        background: var(--gray-800, #1f2937);
+    }
+
+    .inputArea {
+        background: var(--gray-750, #2d3748);
+        border-radius: 16px;
+        padding: 12px;
+        border: 1px solid var(--gray-700, #374151);
+    }
+
+    .toolbar {
+        background: var(--gray-750, #2d3748);
+    }
+
+    .iconButton {
+        color: var(--gray-400, #9ca3af);
+        background: transparent;
+    }
+
+    .iconButton:hover {
+        color: var(--blue-400, #60a5fa);
+        background-color: var(--gray-700, #374151);
+    }
+
+    .iconButton:focus-visible {
+        outline: 2px solid var(--blue-500, #3b82f6);
+    }
+
+    .emojiButton::after {
+        background: var(--blue-500, #3b82f6);
+        color: white;
+    }
+
+    .sendButton {
+        background-color: var(--blue-600, #2563eb);
+        box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+    }
+
+    .sendButton:hover {
+        background-color: var(--blue-700, #1d4ed8);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+    }
+
+    .sendButton:active {
+        box-shadow: 0 1px 4px rgba(37, 99, 235, 0.3);
+    }
+
+    .sendButton:disabled {
+        background-color: var(--gray-600, #4b5563);
+        color: var(--gray-400, #9ca3af);
+    }
+
+    .emojiPickerContainer {
+        background: var(--gray-800, #1f2937);
+        border: 1px solid var(--gray-700, #374151);
+        box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .statusIndicator {
+        color: var(--gray-300, #d1d5db);
+    }
+
+    .statusIndicator.sending {
+        background-color: var(--gray-700, #374151);
+        color: var(--blue-400, #60a5fa);
+    }
+
+    .statusIndicator.error {
+        background-color: rgba(239, 68, 68, 0.1);
+        color: var(--red-400, #f87171);
+    }
+
+    .uploadProgress {
+        background-color: var(--gray-700, #374151);
+    }
+
+    .uploadProgressBar {
+        background-color: var(--blue-500, #3b82f6);
+    }
+
+    /* Enhanced Message Features */
+    .messageMetadata {
+        background: var(--gray-750, #2d3748);
+        border: 1px solid var(--gray-700, #374151);
+        border-radius: 12px;
+        padding: 12px;
+        margin-top: 8px;
+    }
+
+    .messageTimestamp {
+        color: var(--gray-400, #9ca3af);
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .messageStatus {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 4px;
+    }
+
+    .messageStatusIcon {
+        width: 16px;
+        height: 16px;
+        color: var(--blue-400, #60a5fa);
+    }
+
+    .messageStatusText {
+        color: var(--gray-300, #d1d5db);
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .messageActions {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid var(--gray-700, #374151);
+    }
+
+    .messageActionButton {
+        background: var(--gray-700, #374151);
+        color: var(--gray-300, #d1d5db);
+        border: 1px solid var(--gray-600, #4b5563);
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .messageActionButton:hover {
+        background: var(--gray-600, #4b5563);
+        color: var(--gray-100, #f3f4f6);
+        border-color: var(--gray-500, #6b7280);
+    }
+
+    .messageActionButton.primary {
+        background: var(--blue-600, #2563eb);
+        color: white;
+        border-color: var(--blue-500, #3b82f6);
+    }
+
+    .messageActionButton.primary:hover {
+        background: var(--blue-700, #1d4ed8);
+        border-color: var(--blue-600, #2563eb);
+    }
+
+    .messagePreview {
+        background: var(--gray-750, #2d3748);
+        border: 1px solid var(--gray-700, #374151);
+        border-radius: 12px;
+        padding: 16px;
+        margin-top: 12px;
+    }
+
+    .messagePreviewHeader {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+
+    .messagePreviewAvatar {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--blue-600, #2563eb);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .messagePreviewSender {
+        color: var(--gray-200, #e5e7eb);
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .messagePreviewTime {
+        color: var(--gray-400, #9ca3af);
+        font-size: 12px;
+        margin-left: auto;
+    }
+
+    .messagePreviewContent {
+        color: var(--gray-300, #d1d5db);
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .messageThread {
+        background: var(--gray-750, #2d3748);
+        border: 1px solid var(--gray-700, #374151);
+        border-radius: 12px;
+        padding: 16px;
+        margin-top: 12px;
+    }
+
+    .messageThreadHeader {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--gray-700, #374151);
+    }
+
+    .messageThreadIcon {
+        color: var(--blue-400, #60a5fa);
+        width: 20px;
+        height: 20px;
+    }
+
+    .messageThreadTitle {
+        color: var(--gray-200, #e5e7eb);
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .messageThreadCount {
+        color: var(--gray-400, #9ca3af);
+        font-size: 12px;
+        margin-left: auto;
+    }
+
+    .messageReactions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 8px;
+    }
+
+    .messageReaction {
+        background: var(--gray-700, #374151);
+        border: 1px solid var(--gray-600, #4b5563);
+        border-radius: 16px;
+        padding: 4px 8px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .messageReaction:hover {
+        background: var(--gray-600, #4b5563);
+        border-color: var(--gray-500, #6b7280);
+    }
+
+    .messageReaction.active {
+        background: var(--blue-600, #2563eb);
+        border-color: var(--blue-500, #3b82f6);
+        color: white;
+    }
+
+    .messageReactionEmoji {
+        font-size: 14px;
+    }
+
+    .messageReactionCount {
+        color: var(--gray-300, #d1d5db);
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .messageReaction.active .messageReactionCount {
+        color: white;
+    }
+
+    .draftIndicator {
+        background: var(--amber-600, #d97706);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 8px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .typingIndicator {
+        background: var(--gray-750, #2d3748);
+        border: 1px solid var(--gray-700, #374151);
+        border-radius: 12px;
+        padding: 12px 16px;
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .typingDots {
+        display: flex;
+        gap: 4px;
+    }
+
+    .typingDot {
+        width: 6px;
+        height: 6px;
+        background: var(--blue-400, #60a5fa);
+        border-radius: 50%;
+        animation: typingPulse 1.4s infinite;
+    }
+
+    .typingDot:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .typingDot:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    @keyframes typingPulse {
+        0%, 60%, 100% {
+            opacity: 0.3;
+            transform: scale(1);
+        }
+        30% {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+    }
+
+    .typingText {
+        color: var(--gray-400, #9ca3af);
+        font-size: 12px;
+        font-style: italic;
+    }
+}
+
+/* === HIGH CONTRAST MODE === */
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+    .modalContent {
+        border: 2px solid var(--gray-400, #9ca3af);
+    }
+
+    .inputArea {
+        border: 2px solid var(--gray-400, #9ca3af);
+    }
+
+    .iconButton {
+        border: 1px solid var(--gray-500, #6b7280);
+    }
+
+    .iconButton:hover,
+    .iconButton:focus-visible {
+        border-color: var(--blue-300, #93c5fd);
+        color: var(--blue-300, #93c5fd);
+    }
+
+    .sendButton {
+        border: 2px solid currentColor;
+        font-weight: 700;
+    }
+
+    .messageActionButton {
+        border: 2px solid var(--gray-400, #9ca3af);
+    }
+
+    .messageActionButton:hover {
+        border-color: var(--gray-300, #d1d5db);
+    }
+
+    .messageActionButton.primary {
+        border: 2px solid var(--blue-300, #93c5fd);
+    }
+}
+
+/* === REDUCED MOTION === */
+@media (prefers-reduced-motion: reduce) {
+    .fadeIn,
+    .scaleIn,
+    .slideUp {
+        animation: none;
+    }
+
+    .iconButton:active {
+        transform: none;
+    }
+
+    .sendButton:hover {
+        transform: none;
+    }
+
+    .sendButton:active {
+        transform: none;
+    }
+
+    .typingDot {
+        animation: none;
+    }
+
+    .typingPulse {
+        animation: none;
+    }
+}

@@ -1,0 +1,6 @@
+StreamOptionAdded
+StreamOptionRemoved
+StreamOptionUpdated
+StreamAttributeAdded
+StreamAttributeRemoved
+StreamAttributeUpdated

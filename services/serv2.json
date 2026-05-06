@@ -1,0 +1,110 @@
+[
+  {
+    "Name": "Photovoltaic System Maintenance & Optimization",
+    "Description": "Proactive maintenance and performance optimization services for existing commercial photovoltaic systems. We ensure your renewable energy asset operates at peak efficiency, maximizing your energy production and return on investment throughout its lifecycle.",
+    "ServiceType": "Maintenance and Support",
+    "Availability": "Nationwide, for systems installed by Saflux or third parties (pending initial inspection).",
+    "DescriptionShort": "Maximize your solar investment with our expert PV system maintenance and optimization plans.",
+    "DescriptionLong": "A solar PV system is a long-term investment. Our Maintenance & Optimization service is designed to protect that investment. We offer tiered service plans that include regular inspections, professional panel cleaning to remove dirt and debris that can hinder production, and comprehensive diagnostics of all system components, including inverters, wiring, and mounting hardware. Our advanced monitoring platform tracks your system's performance in real-time, allowing us to detect and address potential issues before they lead to significant downtime. We provide detailed performance reports, giving you transparent insights into your energy production and the health of your system. This proactive approach ensures maximum uptime, extends the lifespan of your equipment, and secures your energy savings for years to come.",
+    "Attributes": [
+      {"AttributeName": "Response Time", "AttributeValue": "Guaranteed 48-hour on-site response for critical issues"},
+      {"AttributeName": "Performance Monitoring", "AttributeValue": "24/7 real-time tracking"},
+      {"AttributeName": "Reporting", "AttributeValue": "Quarterly performance and health reports"},
+      {"AttributeName": "Panel Cleaning", "AttributeValue": "Annual or bi-annual professional cleaning"}
+    ],
+    "BasePrice": 499,
+    "Pricing": [
+      "Annual service agreements based on system size (kWp).",
+      "Tiered plans (Basic, Advanced, Premium) with varying levels of service.",
+      "Pay-per-visit options for diagnostics and repair."
+    ],
+    "Qualifications": [
+      "Experienced technicians with NABCEP PV System Inspector certification.",
+      "Adherence to manufacturer's maintenance guidelines.",
+      "Fully insured and licensed for electrical work."
+    ],
+    "Contact": "redacted-email@example.com",
+    "Faq": "Why is panel cleaning important? Over time, dust, pollen, and bird droppings can accumulate on panels, potentially reducing energy production by 5% to 15%.",
+    "Tags": ["solar maintenance", "PV optimization", "asset management", "renewable energy", "system health"],
+    "MiddlemanService": false,
+    "Negotiable": false,
+    "HasVariants": true,
+    "Options": [
+      {"OptionName": "Service Tier", "OptionValues": ["Essential Care", "Performance Plus", "Total Assurance"]},
+      {"OptionName": "Contract Length", "OptionValues": ["1-Year", "3-Year", "5-Year"]}
+    ],
+    "Thumbnail": "https://www.saflux.com/images/pv-maintenance-thumbnail.jpg"
+  },
+  {
+    "Name": "Managed EV Charging Network Services",
+    "Description": "A complete, hands-off management solution for your commercial EV charging stations. We handle everything from driver support and payment processing to station monitoring and maintenance, allowing you to offer a premium amenity without the operational overhead.",
+    "ServiceType": "Managed Service / Software as a Service (SaaS)",
+    "Availability": "Nationwide.",
+    "DescriptionShort": "Offer a seamless EV charging experience with our all-inclusive station management service.",
+    "DescriptionLong": "Transform your EV chargers from simple hardware into a fully managed, revenue-generating amenity. Our Managed EV Charging Network Service is ideal for businesses that want to provide a world-class charging experience without dedicating internal resources to its management. Our platform provides 24/7 support for drivers, handles all billing and payment processing, and allows for dynamic pricing strategies to optimize usage and revenue. We proactively monitor your stations' health and uptime, dispatching technicians for repairs when needed. You gain access to a powerful analytics dashboard to track usage patterns, energy consumption, and financial performance. This comprehensive service ensures your charging infrastructure is reliable, user-friendly, and a valuable asset for your business.",
+    "Attributes": [
+      {"AttributeName": "Driver Support", "AttributeValue": "24/7 toll-free hotline"},
+      {"AttributeName": "Payment Processing", "AttributeValue": "Secure credit card and mobile payments"},
+      {"AttributeName": "Uptime Guarantee", "AttributeValue": "99.5% network uptime SLA"},
+      {"AttributeName": "Analytics", "AttributeValue": "Advanced dashboard with custom reports"}
+    ],
+    "BasePrice": 35,
+    "Pricing": [
+      "Monthly subscription fee per charging port.",
+      "Optional revenue-sharing models.",
+      "Tiered pricing based on feature set (e.g., advanced analytics, custom branding)."
+    ],
+    "Qualifications": [
+      "Open Charge Point Protocol (OCPP) compliant network.",
+      "Partnerships with major EV charging hardware manufacturers.",
+      "Dedicated network operations center (NOC)."
+    ],
+    "Contact": "redacted-email@example.com",
+    "Faq": "How do I set the price for customers to use the chargers? Our management dashboard allows you to easily set and adjust pricing based on time of day, energy cost, or user group.",
+    "Tags": ["EV charging network", "managed services", "SaaS", "smart charging", "e-mobility"],
+    "MiddlemanService": false,
+    "Negotiable": true,
+    "HasVariants": true,
+    "Options": [
+      {"OptionName": "Software Tier", "OptionValues": ["Business", "Enterprise"]},
+      {"OptionName": "Driver Access Control", "OptionValues": ["Public Access", "RFID Card Authentication", "Mobile App Access"]}
+    ],
+    "Thumbnail": "https://www.saflux.com/images/managed-ev-thumbnail.jpg"
+  },
+  {
+    "Name": "Residential & Small Business Wind Turbine Systems",
+    "Description": "Harness the power of wind to generate clean, reliable electricity for your home or small business. We offer complete installation of small-scale wind turbine systems, providing a sustainable path to energy independence, especially in areas with strong, consistent wind resources.",
+    "ServiceType": "Renewable Energy Generation",
+    "Availability": "Regional, pending site assessment for wind viability.",
+    "DescriptionShort": "Generate your own power with a state-of-the-art home or small business wind turbine.",
+    "DescriptionLong": "For properties with suitable wind conditions, a small wind turbine can be an excellent source of renewable energy, complementing or even replacing reliance on the grid. Our service begins with a professional wind resource assessment at your location to determine the feasibility and potential energy output. We offer a range of high-efficiency, low-noise turbines from leading manufacturers, designed for residential and small commercial applications. Our team manages the entire project, including navigating local zoning laws and permitting, constructing the foundation, erecting the tower, and handling all electrical work and grid interconnection. We can also integrate your wind system with battery storage solutions for energy security during calm periods or grid outages.",
+    "Attributes": [
+      {"AttributeName": "Turbine Size", "AttributeValue": "From 1kW to 100kW"},
+      {"AttributeName": "Tower Type", "AttributeValue": "Monopole or lattice, guyed or freestanding"},
+      {"AttributeName": "Noise Level", "AttributeValue": "Low-noise blade design for residential areas"},
+      {"AttributeName": "Grid-Tied/Off-Grid", "AttributeValue": "Both configurations available"}
+    ],
+    "BasePrice": 15000,
+    "Pricing": [
+      "Turnkey project cost based on turbine size and tower height.",
+      "Custom quote following a detailed site and wind assessment.",
+      "Financing options available."
+    ],
+    "Qualifications": [
+      "Certified Small Wind Installer",
+      "Structural engineering review for all installations.",
+      "Experience with local and state-level permitting for wind projects."
+    ],
+    "Contact": "redacted-email@example.com",
+    "Faq": "How much wind do I need for a turbine to be effective? A site with an average annual wind speed of at least 12 mph (5.4 m/s) is generally considered viable for a small wind turbine.",
+    "Tags": ["wind turbine", "home wind power", "small wind", "renewable energy", "energy independence"],
+    "MiddlemanService": false,
+    "Negotiable": true,
+    "HasVariants": true,
+    "Options": [
+      {"OptionName": "System Size (kW)", "OptionValues": ["1.5", "5", "10", "50"]},
+      {"OptionName": "Battery Storage", "OptionValues": ["None", "Integrated Lithium-ion Battery Backup"]}
+    ],
+    "Thumbnail": "https://www.saflux.com/images/wind-turbine-thumbnail.jpg"
+  }
+]

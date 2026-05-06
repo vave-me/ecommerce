@@ -1,0 +1,605 @@
+/* Messaging.module.css */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Enhanced Messaging Interface - Professional & Compact Design */
+
+/* Performance-optimized animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+  }
+}
+
+/* Main container - Fixed for desktop, responsive for mobile */
+.messagingContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  height: calc(100vh - 140px);
+  background: var(--messaging-bg, #ffffff);
+  border-radius: var(--messaging-radius, 12px);
+  box-shadow: var(--messaging-shadow-lg, 0 8px 25px rgba(0, 0, 0, 0.1));
+  overflow: hidden;
+  animation: fadeInUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  z-index: 100;
+  isolation: isolate;
+}
+
+@media (prefers-color-scheme: dark) {
+  .messagingContainer {
+    background: var(--gray-900);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Mobile enhancements - full screen with proper navigation handling */
+@media (max-width: 768px) {
+  .messagingContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 100vw;
+    border-radius: 0;
+    box-shadow: none;
+    max-width: 100%;
+    z-index: 1000;
+    background: var(--messaging-bg, #ffffff);
+  }
+}
+
+@media (max-width: 768px) and (prefers-color-scheme: dark) {
+  .messagingContainer {
+    background: var(--gray-900);
+  }
+}
+
+/* Mobile header - Refined and properly positioned */
+.mobileHeader {
+  display: none;
+  background: var(--messaging-bg, #ffffff);
+  border-bottom: 1px solid var(--messaging-border, #e2e8f0);
+  flex-shrink: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mobileHeader {
+    background: var(--gray-900);
+    border-bottom: 1px solid var(--gray-700);
+  }
+}
+
+@media (max-width: 768px) {
+  .mobileHeader {
+    display: block;
+    padding: 0 16px;
+    height: 56px;
+    position: relative;
+    top: 0;
+    background: var(--messaging-bg, #ffffff);
+    border-bottom: 1px solid var(--messaging-border, #e2e8f0);
+  }
+
+  .mobileHeaderContainer {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 768px) and (prefers-color-scheme: dark) {
+  .mobileHeader {
+    background: var(--gray-900);
+    border-bottom: 1px solid var(--gray-700);
+  }
+}
+
+/* Content wrapper - Enhanced layout with mobile adjustments */
+.messagingContent {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  min-height: 0;
+}
+
+/* Mobile content wrapper adjustments */
+@media (max-width: 768px) {
+  .messagingContent {
+    flex: 1;
+    height: calc(100vh - 56px);
+    overflow: hidden;
+  }
+}
+
+/* Sidebar - Professional design with proper scrolling */
+.sidebar {
+  width: 320px;
+  background: var(--messaging-bg, #ffffff);
+  border-right: 1px solid var(--messaging-border, #e2e8f0);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--messaging-transition, all 0.2s cubic-bezier(0.4, 0, 0.2, 1));
+  position: relative;
+}
+
+@media (prefers-color-scheme: dark) {
+  .sidebar {
+    background: var(--gray-900);
+    border-right: 1px solid var(--gray-700);
+  }
+}
+
+/* Enhanced mobile sidebar */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    transform: translateX(0);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .sidebarHiddenOnMobile {
+    transform: translateX(-100%);
+  }
+}
+
+/* Chat section - Modern layout with proper scrolling */
+.chatSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--messaging-surface, #f8fafc);
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  transition: var(--messaging-transition, all 0.2s cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+@media (prefers-color-scheme: dark) {
+  .chatSection {
+    background: var(--gray-800);
+  }
+}
+
+/* Mobile chat section with proper spacing */
+@media (max-width: 768px) {
+  .chatSection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .chatSectionHiddenOnMobile {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+/* Enhanced loading state */
+.loadingContainer {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  color: var(--messaging-text-light, #64748b);
+  font-size: 15px;
+  padding: 40px 20px;
+  background: var(--messaging-surface, #f8fafc);
+}
+
+@media (prefers-color-scheme: dark) {
+  .loadingContainer {
+    background: var(--gray-800);
+    color: var(--gray-400);
+  }
+}
+
+.loadingSpinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--messaging-border, #e2e8f0);
+  border-top-color: var(--messaging-primary, #3b82f6);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+  .loadingSpinner {
+    border: 3px solid var(--gray-600);
+    border-top-color: var(--primary-color);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Enhanced error state */
+.errorContainer {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  padding: 40px 20px;
+  color: var(--messaging-error, #ef4444);
+  background: #fef2f2;
+  font-size: 15px;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  .errorContainer {
+    background: var(--gray-800);
+    color: var(--danger);
+  }
+}
+
+.errorIcon {
+  font-size: 48px;
+  margin-bottom: 8px;
+}
+
+.errorContainer h3 {
+  color: var(--messaging-error, #ef4444);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .errorContainer h3 {
+    color: var(--danger);
+  }
+}
+
+.errorContainer p {
+  color: var(--messaging-text-light, #64748b);
+  font-size: 14px;
+  margin: 0 0 16px 0;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+@media (prefers-color-scheme: dark) {
+  .errorContainer p {
+    color: var(--gray-400);
+  }
+}
+
+.retryButton {
+  background: var(--messaging-primary, #3b82f6);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .retryButton {
+    background: var(--primary-color);
+    color: var(--gray-50);
+  }
+}
+
+.retryButton:hover {
+  background: var(--messaging-primary-hover, #2563eb);
+  transform: translateY(-1px);
+}
+
+@media (prefers-color-scheme: dark) {
+  .retryButton:hover {
+    background: var(--primary-color-hover);
+  }
+}
+
+.retryButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+@media (prefers-color-scheme: dark) {
+  .retryButton:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+  }
+}
+
+/* Elegant no conversation state */
+.noConversationSelected {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  background: var(--messaging-surface, #f8fafc);
+  text-align: center;
+  animation: fadeInUp 0.4s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .noConversationSelected {
+    background: var(--gray-800);
+  }
+}
+
+.noConversationSelected::before {
+  content: '💬';
+  font-size: 64px;
+  margin-bottom: 20px;
+  opacity: 0.6;
+}
+
+.noConversationSelected h2 {
+  color: var(--messaging-text, #1e293b);
+  font-weight: 600;
+  font-size: 20px;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.025em;
+}
+
+@media (prefers-color-scheme: dark) {
+  .noConversationSelected h2 {
+    color: var(--gray-50);
+  }
+}
+
+.noConversationSelected p {
+  color: var(--messaging-text-light, #64748b);
+  font-size: 15px;
+  max-width: 350px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .noConversationSelected p {
+    color: var(--gray-300);
+  }
+}
+
+/* Enhanced not logged in state */
+.notLoggedIn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  height: calc(100vh - 140px);
+  background: var(--messaging-surface, #f8fafc);
+  padding: 40px;
+  text-align: center;
+  border-radius: var(--messaging-radius, 12px);
+  margin: 0 auto;
+  max-width: 500px;
+  box-shadow: var(--messaging-shadow-md, 0 4px 6px rgba(0, 0, 0, 0.07));
+  position: relative;
+}
+
+@media (prefers-color-scheme: dark) {
+  .notLoggedIn {
+    background: var(--gray-800);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.notLoggedIn::before {
+  content: '🔒';
+  font-size: 64px;
+  margin-bottom: 24px;
+  opacity: 0.8;
+}
+
+.notLoggedIn h2 {
+  color: var(--messaging-text, #1e293b);
+  font-size: 22px;
+  font-weight: 600;
+  max-width: 400px;
+  line-height: 1.4;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.025em;
+}
+
+@media (prefers-color-scheme: dark) {
+  .notLoggedIn h2 {
+    color: var(--gray-50);
+  }
+}
+
+.notLoggedIn p {
+  color: var(--messaging-text-light, #64748b);
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 350px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .notLoggedIn p {
+    color: var(--gray-300);
+  }
+}
+
+/* Mobile optimizations for auth state */
+@media (max-width: 768px) {
+  .notLoggedIn {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+    border-radius: 0;
+    max-width: 100%;
+    padding: 60px 20px;
+  }
+}
+
+/* Responsive optimizations */
+@media (max-width: 480px) {
+  .messagingContainer {
+    height: 100vh;
+    top: 0;
+  }
+  
+  .noConversationSelected {
+    padding: 24px 16px;
+  }
+
+  .noConversationSelected::before {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .noConversationSelected h2 {
+    font-size: 18px;
+  }
+
+  .noConversationSelected p {
+    font-size: 14px;
+  }
+  
+  .notLoggedIn {
+    padding: 40px 16px;
+  }
+
+  .notLoggedIn::before {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+
+  .notLoggedIn h2 {
+    font-size: 20px;
+  }
+
+  .notLoggedIn p {
+    font-size: 15px;
+  }
+}
+
+/* Performance optimizations */
+.messagingContainer *,
+.messagingContainer *::before,
+.messagingContainer *::after {
+  box-sizing: border-box;
+}
+
+/* Accessibility enhancements */
+@media (prefers-reduced-motion: reduce) {
+  .messagingContainer,
+  .sidebar,
+  .chatSection,
+  .noConversationSelected,
+  .loadingSpinner {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .messagingContainer {
+    border: 2px solid var(--messaging-text, #1e293b);
+  }
+  
+  .sidebar {
+    border-right: 2px solid var(--messaging-text, #1e293b);
+  }
+
+  .errorContainer {
+    border: 2px solid var(--messaging-error, #ef4444);
+  }
+
+  .retryButton {
+    border: 2px solid var(--messaging-primary, #3b82f6);
+  }
+}
+
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+  .messagingContainer {
+    border: 2px solid var(--gray-50);
+  }
+  
+  .sidebar {
+    border-right: 2px solid var(--gray-50);
+  }
+
+  .errorContainer {
+    border: 2px solid var(--danger);
+  }
+
+  .retryButton {
+    border: 2px solid var(--primary-color);
+  }
+}
+
+/* Focus management for accessibility */
+.messagingContainer:focus-within {
+  outline: none;
+}

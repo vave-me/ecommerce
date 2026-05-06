@@ -1,0 +1,34 @@
+SECURITY ALERT - {{.AppName}}
+
+SUSPICIOUS LOGIN DETECTED ON YOUR ACCOUNT
+
+Hello {{.FirstName}},
+
+We detected a sign-in to your {{.AppName}} account from a new device or location. If this was you, you can ignore this message.
+
+LOGIN DETAILS:
+Time: {{.LoginTime}}
+Location: {{.LoginLocation}}
+Device: {{.LoginDevice}}
+IP Address: {{.LoginIP}}
+
+IF THIS WASN'T YOU: Someone may have your password. We recommend securing your account immediately.
+
+To secure your account, visit:
+{{.SecureAccountURL}}
+
+To report unauthorized access, visit:
+{{.ReportURL}}
+
+For security reasons, we recommend:
+* Changing your password immediately
+* Enabling two-factor authentication if you haven't already
+* Reviewing recent account activity
+
+Thank you for helping us keep your account secure.
+
+The {{.AppName}} Security Team
+
+---
+Need help? Contact our security team at {{.SupportEmail}}
+© {{.CurrentYear}} {{.CompanyName}}. All rights reserved. 

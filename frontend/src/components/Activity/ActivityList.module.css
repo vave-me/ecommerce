@@ -1,0 +1,50 @@
+/*
+  ActivityList.module.css
+  Container for the list of activity items
+*/
+
+.listContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 0 30px 20px 30px;
+    gap: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .listContainer {
+        padding: 0 20px 16px 20px;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .listContainer {
+        padding: 0 15px 12px 15px;
+        gap: 10px;
+    }
+}
+
+/* ================================
+   DARK THEME SUPPORT
+================================ */
+
+@media (prefers-color-scheme: dark) {
+    /* ============= LIST CONTAINER ============= */
+    .listContainer {
+        background-color: var(--gray-900);
+    }
+
+    /* ============= MOBILE RESPONSIVE OVERRIDES ============= */
+    @media (max-width: 768px) {
+        .listContainer {
+            background-color: var(--gray-900);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .listContainer {
+            background-color: var(--gray-900);
+        }
+    }
+}

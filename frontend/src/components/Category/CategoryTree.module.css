@@ -1,0 +1,343 @@
+/* CategoryTree.module.css */
+
+/* Base container */
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 6px;
+    background-color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    position: relative;
+}
+
+/* Modal context specific styles */
+.modalContext {
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Search container */
+.searchContainer {
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 8px 32px 8px 32px;
+    font-size: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: white;
+    color: #1f2937;
+    transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: #2980b9;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+}
+
+.clearSearchButton {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border: none;
+    background: #f3f4f6;
+    color: #6b7280;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clearSearchButton:hover {
+    background-color: #d1d5db;
+    color: #1f2937;
+}
+
+/* Tree container */
+.treeContainer {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    overflow-y: auto;
+    background-color: #ffffff;
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db #ffffff;
+    flex: 1;
+    position: relative;
+    min-height: 150px;
+}
+
+.treeContainer::-webkit-scrollbar {
+    width: 6px;
+}
+
+.treeContainer::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+.treeContainer::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 3px;
+}
+
+/* Categories list */
+.categoriesList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #ffffff;
+}
+
+/* Category item */
+.categoryItem {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    background-color: #ffffff;
+}
+
+.categoryButton {
+    flex: 1;
+    text-align: left;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: #1f2937;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.categoryButton:hover {
+    background-color: #f3f4f6;
+}
+
+.selectedItem .categoryButton {
+    background-color: #f0f9ff;
+    color: #2980b9;
+    font-weight: 500;
+}
+
+.expandButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: #6b7280;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: 4px;
+}
+
+.expandButton:hover {
+    color: #2980b9;
+}
+
+.leafNode {
+    width: 24px;
+    display: inline-block;
+}
+
+/* Loading overlay */
+.loadingOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    z-index: 10;
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+    color: #2980b9;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Error container */
+.errorContainer {
+    padding: 16px;
+    text-align: center;
+    color: #ef4444;
+    background-color: #fee2e2;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.errorMessage {
+    margin: 0;
+    font-size: 14px;
+}
+
+.retryButton {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.retryButton:hover {
+    background-color: #dc2626;
+}
+
+/* Empty states */
+.emptyState, .noResults {
+    padding: 24px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 14px;
+    background-color: #ffffff;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background-color: var(--gray-900);
+    }
+    
+    .modalContext {
+        border-color: var(--gray-700);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    .searchIcon {
+        color: var(--gray-400);
+    }
+    
+    .searchInput {
+        background-color: var(--gray-800);
+        border-color: var(--gray-600);
+        color: var(--gray-50);
+    }
+    
+    .searchInput:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(41, 128, 185, 0.2);
+    }
+    
+    .clearSearchButton {
+        background-color: var(--gray-700);
+        color: var(--gray-300);
+    }
+    
+    .clearSearchButton:hover {
+        background-color: var(--gray-600);
+        color: var(--gray-50);
+    }
+    
+    .treeContainer {
+        background-color: var(--gray-900);
+        border-color: var(--gray-700);
+        scrollbar-color: var(--gray-600) var(--gray-800);
+    }
+    
+    .treeContainer::-webkit-scrollbar-track {
+        background: var(--gray-800);
+    }
+    
+    .treeContainer::-webkit-scrollbar-thumb {
+        background-color: var(--gray-600);
+    }
+    
+    .categoriesList {
+        background-color: var(--gray-900);
+    }
+    
+    .categoryItem {
+        background-color: var(--gray-900);
+    }
+    
+    .categoryButton {
+        color: var(--gray-200);
+    }
+    
+    .categoryButton:hover {
+        background-color: var(--gray-800);
+    }
+    
+    .selectedItem .categoryButton {
+        background-color: rgba(41, 128, 185, 0.2);
+        color: var(--primary-color);
+    }
+    
+    .expandButton {
+        color: var(--gray-400);
+    }
+    
+    .expandButton:hover {
+        color: var(--primary-color);
+    }
+    
+    .loadingOverlay {
+        background-color: rgba(17, 24, 39, 0.9);
+    }
+    
+    .spinner {
+        color: var(--primary-color);
+    }
+    
+    .errorContainer {
+        background-color: rgba(239, 68, 68, 0.1);
+        color: var(--danger);
+    }
+    
+    .errorMessage {
+        color: var(--danger);
+    }
+    
+    .retryButton {
+        background-color: var(--danger);
+    }
+    
+    .retryButton:hover {
+        background-color: var(--danger-hover);
+    }
+    
+    .emptyState, .noResults {
+        background-color: var(--gray-900);
+        color: var(--gray-400);
+    }
+}

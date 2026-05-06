@@ -1,0 +1,41 @@
+type: google.api.Service
+config_version: 3
+http:
+  rules:
+    # List all wishlists for the authenticated user
+    - selector: wishlistspb.WishlistService.GetWishlists
+      get: /api/wishlists
+
+    # Create a New Wishlist
+    - selector: wishlistspb.WishlistService.CreateWishlist
+      post: /api/wishlists/create
+      body: "*"
+    
+    # Retrieve an Existing Wishlist by ID
+    - selector: wishlistspb.WishlistService.GetWishlist
+      get: /api/wishlists/name/{name}
+
+    # Remove/Delete a Wishlist
+    - selector: wishlistspb.WishlistService.RemoveWishlist
+      delete: /api/wishlists/{id}
+
+    
+    # Add an Item to a Wishlist
+    - selector: wishlistspb.WishlistService.AddWishlistItem
+      post: /api/wishlists/{wishlist_id}/items
+      body: "*"
+    
+    # Remove an Item from a Wishlist
+    - selector: wishlistspb.WishlistService.RemoveWishlistItem
+      delete: /api/wishlists/{wishlist_id}/items/{id}
+
+    
+    # Retrieve a Specific Item in a Wishlist
+    - selector: wishlistspb.WishlistService.GetWishlistItem
+      get: /api/wishlists/{wishlist_id}/items/{id}
+    
+    # List All Items in a Wishlist
+    - selector: wishlistspb.WishlistService.GetWishlistItems
+      get: /api/wishlists/{wishlist_id}/items
+
+

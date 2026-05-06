@@ -1,0 +1,459 @@
+/* ============================================================================
+   CATALOG SEARCH BAR - SOPHISTICATED DESIGN (MATCHING HEADER)
+   Blue Iridescent Theme with Performance Optimizations
+   ============================================================================ */
+
+/* Note: CSS Variables are now defined in global.css for consistency */
+
+/* ============================================================================
+   MAIN CONTAINER - SOPHISTICATED LAYOUT
+   ============================================================================ */
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    contain: layout style;
+}
+
+.container.focused {
+    z-index: 10;
+}
+
+.container.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* ============================================================================
+   SEARCH BAR - HEADER-INSPIRED DESIGN
+   ============================================================================ */
+
+.searchBar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: var(--search-height);
+    background: var(--search-bg);
+    border: 1px solid var(--search-border);
+    border-radius: 22px; /* Pill shape like Header */
+    transition: var(--search-transition);
+    box-shadow: var(--search-shadow);
+    overflow: hidden;
+    contain: layout style;
+}
+
+.searchBar:hover {
+    border-color: var(--search-border-hover);
+    box-shadow: 0 2px 4px rgba(28, 73, 255, 0.08);
+}
+
+.container.focused .searchBar {
+    border-color: var(--search-border-focused);
+    background: var(--search-bg-focused);
+    box-shadow: var(--search-shadow-focused), var(--search-shadow);
+}
+
+/* ============================================================================
+   SEARCH ICON - ELEGANT POSITIONING
+   ============================================================================ */
+
+.searchIcon {
+    position: absolute;
+    left: 16px;
+    width: 16px;
+    height: 16px;
+    color: var(--search-icon);
+    pointer-events: none;
+    z-index: 1;
+    transition: var(--search-transition);
+    flex-shrink: 0;
+}
+
+.container.focused .searchIcon {
+    color: var(--search-icon-focused);
+}
+
+/* ============================================================================
+   INPUT FIELD - SOPHISTICATED TYPOGRAPHY
+   ============================================================================ */
+
+.searchInput {
+    width: 100%;
+    height: 100%;
+    padding: 0 16px;
+    padding-left: 48px; /* Space for search icon */
+    padding-right: 48px; /* Space for clear button */
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--search-text);
+    font-size: 14px;
+    font-family: var(--font-primary, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+    border-radius: inherit;
+    transition: var(--search-transition);
+    contain: layout style;
+}
+
+.searchInput::placeholder {
+    color: var(--search-placeholder);
+    opacity: 1;
+    font-weight: 400;
+}
+
+.searchInput:focus::placeholder {
+    opacity: 0.7;
+}
+
+/* Remove browser autofill styling */
+.searchInput:-webkit-autofill,
+.searchInput:-webkit-autofill:hover,
+.searchInput:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px var(--search-bg-focused) inset;
+    -webkit-text-fill-color: var(--search-text);
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ============================================================================
+   CLEAR BUTTON - ELEGANT INTERACTION
+   ============================================================================ */
+
+.clearButton {
+    position: absolute;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    color: var(--clear-icon);
+    cursor: pointer;
+    transition: var(--search-transition);
+    z-index: 2;
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+    contain: layout style;
+}
+
+.container.hasValue .clearButton {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+.clearButton:hover {
+    background: rgba(28, 73, 255, 0.1);
+    color: var(--clear-icon-hover);
+    transform: scale(1.1);
+}
+
+.clearButton:active {
+    transform: scale(0.95);
+}
+
+.clearIcon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+/* ============================================================================
+   LOADING INDICATOR - SOPHISTICATED ANIMATION
+   ============================================================================ */
+
+.loadingIndicator {
+    position: absolute;
+    right: 16px;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.loadingSpinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(28, 73, 255, 0.2);
+    border-top: 2px solid #1c49ff;
+    border-radius: 50%;
+    animation: loadingSpin 1s linear infinite;
+    contain: layout style;
+}
+
+@keyframes loadingSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ============================================================================
+   FOCUS RING - ACCESSIBILITY ENHANCEMENT
+   ============================================================================ */
+
+.searchInput:focus-visible {
+    outline: none;
+}
+
+.container.focused .searchBar {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+/* High contrast focus indicator */
+@media (prefers-contrast: high) {
+    .container.focused .searchBar {
+        outline: 2px solid var(--search-border-focused);
+        outline-offset: 2px;
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - MOBILE OPTIMIZATION
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .searchInput {
+        font-size: 16px; /* Prevent zoom on iOS */
+        padding-left: 44px;
+        padding-right: 44px;
+    }
+    
+    .searchIcon {
+        left: 14px;
+        width: 15px;
+        height: 15px;
+    }
+    
+    .clearButton {
+        right: 10px;
+        width: 22px;
+        height: 22px;
+    }
+    
+    .clearIcon {
+        width: 13px;
+        height: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .searchInput {
+        padding-left: 40px;
+        padding-right: 40px;
+        font-size: 16px;
+    }
+    
+    .searchIcon {
+        left: 12px;
+        width: 14px;
+        height: 14px;
+    }
+    
+    .clearButton {
+        right: 8px;
+        width: 20px;
+        height: 20px;
+    }
+    
+    .clearIcon {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .loadingIndicator {
+        right: 12px;
+        width: 14px;
+        height: 14px;
+    }
+    
+    .loadingSpinner {
+        width: 12px;
+        height: 12px;
+        border-width: 1.5px;
+    }
+}
+
+/* ============================================================================
+   DARK MODE SUPPORT - COMPREHENSIVE IMPLEMENTATION
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+    /* Main container */
+    .container {
+        color: #f3f4f6;
+    }
+
+    /* Search bar */
+    .searchBar {
+        background: #374151;
+        border-color: #4b5563;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .searchBar:hover {
+        border-color: #6b7280;
+        box-shadow: 0 2px 4px rgba(96, 165, 250, 0.1);
+    }
+
+    .container.focused .searchBar {
+        border-color: #60a5fa;
+        background: #4b5563;
+        box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Search icon */
+    .searchIcon {
+        color: #9ca3af;
+    }
+
+    .container.focused .searchIcon {
+        color: #60a5fa;
+    }
+
+    /* Input field */
+    .searchInput {
+        color: #f3f4f6;
+    }
+
+    .searchInput::placeholder {
+        color: #6b7280;
+    }
+
+    .searchInput:focus::placeholder {
+        color: #9ca3af;
+    }
+
+    /* Autofill styling for dark mode */
+    .searchInput:-webkit-autofill,
+    .searchInput:-webkit-autofill:hover,
+    .searchInput:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0 1000px #4b5563 inset;
+        -webkit-text-fill-color: #f3f4f6;
+    }
+
+    /* Clear button */
+    .clearButton {
+        color: #9ca3af;
+    }
+
+    .clearButton:hover {
+        background: rgba(96, 165, 250, 0.1);
+        color: #60a5fa;
+    }
+
+    /* Loading spinner */
+    .loadingSpinner {
+        border-color: rgba(96, 165, 250, 0.2);
+        border-top-color: #60a5fa;
+    }
+
+    /* Focus ring for dark mode */
+    .container.focused .searchBar {
+        outline-color: #60a5fa;
+    }
+}
+
+/* ============================================================================
+   REDUCED MOTION - ACCESSIBILITY
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .searchBar,
+    .searchIcon,
+    .searchInput,
+    .clearButton,
+    .loadingSpinner {
+        transition: none;
+        animation: none;
+    }
+    
+    .clearButton:hover,
+    .clearButton:active {
+        transform: none;
+    }
+    
+    .loadingSpinner {
+        animation: none;
+        transform: rotate(45deg); /* Static loading indicator */
+    }
+}
+
+/* ============================================================================
+   HIGH CONTRAST MODE - ACCESSIBILITY
+   ============================================================================ */
+
+@media (prefers-contrast: high) {
+    .searchBar {
+        border-width: 2px;
+    }
+    
+    .clearButton:hover {
+        background: rgba(0, 102, 204, 0.2);
+        border: 1px solid #0066cc;
+    }
+}
+
+/* High contrast mode support for dark theme */
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+    .searchBar {
+        border-width: 2px;
+        border-color: #60a5fa;
+    }
+
+    .searchBar:hover {
+        border-color: #93c5fd;
+    }
+
+    .container.focused .searchBar {
+        border-color: #60a5fa;
+        border-width: 3px;
+        outline: 2px solid #60a5fa;
+        outline-offset: 2px;
+    }
+    
+    .clearButton:hover {
+        background: rgba(96, 165, 250, 0.2);
+        border: 1px solid #60a5fa;
+    }
+
+    .searchIcon {
+        color: #93c5fd;
+    }
+
+    .container.focused .searchIcon {
+        color: #dbeafe;
+    }
+
+    .searchInput {
+        color: #f9fafb;
+    }
+
+    .searchInput::placeholder {
+        color: #d1d5db;
+    }
+
+    .loadingSpinner {
+        border-color: rgba(147, 197, 253, 0.3);
+        border-top-color: #93c5fd;
+        border-width: 3px;
+    }
+}
+
+/* ============================================================================
+   PRINT STYLES - CLEAN OUTPUT
+   ============================================================================ */
+
+@media print {
+    .container {
+        display: none;
+    }
+} 

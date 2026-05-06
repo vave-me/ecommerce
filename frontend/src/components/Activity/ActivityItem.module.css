@@ -1,0 +1,322 @@
+/*
+  ActivityItem.module.css
+  Styles for individual activity items in the activity feed
+*/
+
+.itemContainer {
+    display: flex;
+    align-items: flex-start;
+    background-color: var(--surface, #ffffff);
+    border-left: 4px solid var(--primary-color, #2980b9);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.itemContainer:hover {
+    background-color: var(--surface-hover, #f9fafb);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* When isRead is true */
+.isRead {
+    background-color: var(--surface-tertiary, #f3f4f6);
+    border-left-color: var(--border, #e5e7eb);
+}
+
+/* Avatar image */
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    border: 2px solid var(--primary-color, #2980b9);
+    background-color: var(--primary-light, #e0e7ff);
+}
+
+/* Content area with flex column and spacing */
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Header row */
+.header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+/* Username styling */
+.userName {
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--text, #374151);
+}
+
+/* message text */
+.message {
+    font-size: 14px;
+    color: var(--text-secondary, #6b7280);
+}
+
+/* timestamp text */
+.timestamp {
+    font-size: 12px;
+    color: var(--text-tertiary, #9ca3af);
+    margin-left: auto;
+}
+
+/* item name or target */
+.targetItem {
+    font-size: 14px;
+    color: var(--text-secondary, #6b7280);
+    margin-left: 65px;
+}
+
+/* Reactions and actions row */
+.reactionsAndActions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-left: 65px;
+    gap: 12px;
+}
+
+/* Reaction section container */
+.reactionSection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Reaction counts container */
+.reactionCounts {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Single reaction count label */
+.reactionCount {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 14px;
+    color: var(--text-secondary, #6b7280);
+}
+
+/* Actions row container */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Base button for ActionButton and DeleteButton */
+.baseButton {
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* ActionButton */
+.actionButton {
+    background-color: var(--primary-color, #2980b9);
+    color: #ffffff;
+}
+
+.actionButton:hover {
+    background-color: var(--primary-hover, #2980b9);
+    transform: translateY(-1px);
+}
+
+/* DeleteButton */
+.deleteButton {
+    background-color: var(--danger, #ef4444);
+    color: #ffffff;
+    padding: 6px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deleteButton:hover {
+    background-color: var(--danger-hover, #dc2626);
+    transform: translateY(-1px);
+}
+
+/* Focus states for accessibility */
+.baseButton:focus-visible {
+    outline: 2px solid var(--primary-color, #2980b9);
+    outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .itemContainer {
+        padding: 12px;
+    }
+
+    .avatar {
+        width: 40px;
+        height: 40px;
+        margin-right: 12px;
+    }
+
+    .targetItem,
+    .reactionsAndActions {
+        margin-left: 52px;
+    }
+
+    .actions {
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .reactionsAndActions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .timestamp {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .actions {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .itemContainer,
+    .actionButton:hover,
+    .deleteButton:hover {
+        transition: none;
+        transform: none;
+    }
+}
+
+/* ================================
+   DARK THEME SUPPORT
+================================ */
+
+@media (prefers-color-scheme: dark) {
+    /* ============= ITEM CONTAINER ============= */
+    .itemContainer {
+        background-color: var(--gray-800);
+        border-left-color: var(--primary-color);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--gray-700);
+        border-left: 4px solid var(--primary-color);
+    }
+
+    .itemContainer:hover {
+        background-color: var(--gray-700);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    /* ============= READ STATE ============= */
+    .isRead {
+        background-color: var(--gray-900);
+        border-left-color: var(--gray-600);
+        border-color: var(--gray-700);
+    }
+
+    /* ============= AVATAR ============= */
+    .avatar {
+        border-color: var(--primary-color);
+        background-color: var(--gray-700);
+    }
+
+    /* ============= TEXT CONTENT ============= */
+    .userName {
+        color: var(--gray-50);
+    }
+
+    .message {
+        color: var(--gray-300);
+    }
+
+    .timestamp {
+        color: var(--gray-400);
+    }
+
+    .targetItem {
+        color: var(--gray-300);
+    }
+
+    /* ============= REACTIONS ============= */
+    .reactionCount {
+        color: var(--gray-300);
+    }
+
+    /* ============= BUTTONS ============= */
+    .actionButton {
+        background-color: var(--primary-color);
+        color: var(--gray-50);
+    }
+
+    .actionButton:hover {
+        background-color: var(--primary-color-hover);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .deleteButton {
+        background-color: var(--danger);
+        color: var(--gray-50);
+    }
+
+    .deleteButton:hover {
+        background-color: var(--danger-hover);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ============= FOCUS STATES ============= */
+    .baseButton:focus-visible {
+        outline-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb, 59, 130, 246), 0.2);
+    }
+
+    /* ============= MOBILE RESPONSIVE OVERRIDES ============= */
+    @media (max-width: 768px) {
+        .itemContainer {
+            background-color: var(--gray-800);
+            border-color: var(--gray-700);
+        }
+
+        .itemContainer:hover {
+            background-color: var(--gray-700);
+        }
+
+        .isRead {
+            background-color: var(--gray-900);
+            border-color: var(--gray-700);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .itemContainer {
+            background-color: var(--gray-800);
+            border-color: var(--gray-700);
+        }
+    }
+}

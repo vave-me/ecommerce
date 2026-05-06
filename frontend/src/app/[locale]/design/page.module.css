@@ -1,0 +1,1180 @@
+/* Main Container */
+.appContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f9fafb;
+}
+
+/* Container Utilities */
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Header Styles */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: white;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.headerContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2980b9;
+}
+
+.menuToggle {
+    display: none;
+    margin-right: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .menuToggle {
+        display: block;
+    }
+}
+
+/* Search Styles */
+.searchContainer {
+    display: none;
+    flex: 1;
+    max-width: 36rem;
+    margin: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .searchContainer {
+        display: flex;
+    }
+}
+
+.searchInputWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    color: #374151;
+    background-color: #f3f4f6;
+    border-radius: 9999px;
+    border: none;
+    font-size: 0.875rem;
+}
+
+.searchInput:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.4);
+}
+
+.searchIcon {
+    position: absolute;
+    left: 0.75rem;
+    top: 0.625rem;
+    color: #9ca3af;
+}
+
+/* Mobile Search */
+.mobileSearch {
+    display: none;
+    border-top: 1px solid #f3f4f6;
+    padding: 0.5rem 1rem;
+}
+
+@media (max-width: 768px) {
+    .mobileSearch {
+        display: block;
+    }
+}
+
+.mobileSearchInputWrapper {
+    position: relative;
+}
+
+.mobileSearchInput {
+    width: 100%;
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    font-size: 0.875rem;
+    color: #374151;
+    background-color: #f3f4f6;
+    border-radius: 9999px;
+    border: none;
+}
+
+.mobileSearchInput:focus {
+    outline: none;
+}
+
+.mobileSearchIcon {
+    position: absolute;
+    left: 0.75rem;
+    top: 0.625rem;
+    color: #9ca3af;
+}
+
+/* Nav Icons */
+.navIcons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.iconButton {
+    padding: 0.375rem;
+    color: #4b5563;
+    background: none;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+}
+
+.iconButton:hover {
+    background-color: #f3f4f6;
+}
+
+.postDealButton {
+    display: none;
+    background-color: #2980b9;
+    color: white;
+    padding: 0.375rem 1rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+}
+
+.postDealButton:hover {
+    background-color: #2980b9;
+}
+
+@media (min-width: 768px) {
+    .postDealButton {
+        display: block;
+    }
+}
+
+.userButton {
+    display: none;
+    align-items: center;
+    gap: 0.25rem;
+    color: #4b5563;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .userButton {
+        display: flex;
+    }
+}
+
+/* Mobile Menu */
+.mobileMenu {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background-color: white;
+    padding-top: 4rem;
+}
+
+.mobileMenuContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+.mobileMenuItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.75rem;
+    text-align: left;
+    border: none;
+    background: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.mobileMenuItem:hover {
+    background-color: #f3f4f6;
+}
+
+.mobilePostButton {
+    margin-top: 1.5rem;
+    width: 100%;
+    background-color: #2980b9;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+}
+
+/* Main Content */
+.main {
+    flex: 1;
+}
+
+.main .container {
+    padding: 1.5rem 1rem;
+}
+
+/* Categories Bar */
+.categoriesWrapper {
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.categoriesWrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+
+.categoriesContainer {
+    display: flex;
+    gap: 0.5rem;
+    min-width: max-content;
+}
+
+@media (min-width: 768px) {
+    .categoriesContainer {
+        gap: 1rem;
+    }
+}
+
+.categoryButton {
+    background-color: #f3f4f6;
+    color: #374151;
+    padding: 0.375rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.categoryButton:hover {
+    background-color: #e5e7eb;
+}
+
+.categoryButtonActive {
+    background-color: #e0e7ff;
+    color: #2980b9;
+    padding: 0.375rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+}
+
+/* Filters Row */
+.filtersRow {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .filtersRow {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.featuredHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    .featuredHeader {
+        margin-bottom: 0;
+    }
+}
+
+.featuredTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.dealCount {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.filterButtons {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.filterButton {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    background-color: white;
+    border: 1px solid #d1d5db;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.filterButton:hover {
+    background-color: #f9fafb;
+}
+
+/* Deals Grid */
+.dealsGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+@media (min-width: 768px) {
+    .dealsGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .dealsGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Deal Card */
+.dealCard {
+    background-color: white;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s;
+}
+
+.dealCard:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dealImageContainer {
+    position: relative;
+}
+
+.dealImage {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+}
+
+.discountBadge {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    background-color: #ef4444;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.localBadge {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    background-color: #2980b9;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.bestPriceBadge {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    background-color: #10b981;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.favoriteButton {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background-color: white;
+    padding: 0.375rem;
+    border-radius: 9999px;
+    border: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.favoriteIcon {
+    color: #6b7280;
+}
+
+.favoriteActive {
+    color: #ec4899;
+    fill: currentColor;
+}
+
+.dealContent {
+    padding: 1rem;
+}
+
+.dealHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.dealPoster {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-bottom: 0.25rem;
+}
+
+.dealTitle {
+    font-weight: 500;
+    color: #111827;
+}
+
+.dealPricing {
+    display: flex;
+    align-items: baseline;
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.currentPrice {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #2980b9;
+}
+
+.originalPrice {
+    margin-left: 0.5rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+    text-decoration: line-through;
+}
+
+.vendorName {
+    margin-left: auto;
+    font-size: 0.875rem;
+    color: #f97316;
+}
+
+.vendorNameBlue {
+    margin-left: auto;
+    font-size: 0.875rem;
+    color: #3b82f6;
+}
+
+.bogoBadge {
+    padding: 0.25rem 0.5rem;
+    background-color: #dcfce7;
+    color: #166534;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 0.25rem;
+}
+
+.expiryInfo {
+    margin-left: auto;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.dealFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.875rem;
+}
+
+.dealStats {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.dealStat {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.commentIcon {
+    color: #9ca3af;
+}
+
+.trendingIcon {
+    color: #10b981;
+}
+
+.shippingInfo {
+    color: #6b7280;
+}
+
+.locationInfo {
+    color: #6b7280;
+}
+
+.cashbackInfo {
+    color: #16a34a;
+}
+
+/* Communities Section */
+.communitiesSection {
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.sectionTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.communitiesGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .communitiesGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.communityCard {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s;
+}
+
+.communityCard:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.communityContent {
+    display: flex;
+    align-items: center;
+}
+
+.communityIconOrange {
+    width: 3rem;
+    height: 3rem;
+    background-color: #ffedd5;
+    color: #f97316;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.communityIconBlue {
+    width: 3rem;
+    height: 3rem;
+    background-color: #dbeafe;
+    color: #3b82f6;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.communityIconGreen {
+    width: 3rem;
+    height: 3rem;
+    background-color: #dcfce7;
+    color: #10b981;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.communityInfo {
+    margin-left: 0.75rem;
+}
+
+.communityName {
+    font-weight: 500;
+}
+
+.communityMembers {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.joinButton {
+    margin-left: auto;
+    background-color: #2980b9;
+    color: white;
+    font-size: 0.875rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.joinButton:hover {
+    background-color: #2980b9;
+}
+
+.joinedButton {
+    margin-left: auto;
+    background-color: #e5e7eb;
+    color: #1f2937;
+    font-size: 0.875rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.joinedButton:hover {
+    background-color: #d1d5db;
+}
+
+/* Classifieds Section */
+.classifiedsSection {
+    margin-top: 2.5rem;
+}
+
+.classifiedsHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.viewAllButton {
+    color: #2980b9;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.classifiedsGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .classifiedsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .classifiedsGrid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.classifiedCard {
+    background-color: white;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s;
+}
+
+.classifiedCard:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.classifiedImageContainer {
+    position: relative;
+}
+
+.classifiedImage {
+    width: 100%;
+    height: 10rem;
+    object-fit: cover;
+}
+
+.classifiedContent {
+    padding: 0.75rem;
+}
+
+.classifiedTitle {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.classifiedPrice {
+    color: #2980b9;
+    font-weight: 700;
+}
+
+.classifiedMeta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+/* Footer */
+.footer {
+    background-color: white;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 2.5rem;
+}
+
+.footerContent {
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.875rem;
+    padding: 1.5rem 0;
+}
+
+/* Mobile Action Button */
+.mobileActionButton {
+    display: none;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+@media (max-width: 768px) {
+    .mobileActionButton {
+        display: block;
+    }
+}
+
+.floatingActionButton {
+    background-color: #2980b9;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 9999px;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Dark Theme Support */
+@media (prefers-color-scheme: dark) {
+    .appContainer {
+        background-color: var(--gray-900);
+        color: var(--gray-50);
+    }
+
+    .header {
+        background-color: var(--gray-800);
+        border-bottom: 1px solid var(--gray-700);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo {
+        color: var(--primary-color);
+    }
+
+    .menuToggle {
+        color: var(--gray-300);
+    }
+
+    .menuToggle:hover {
+        color: var(--gray-50);
+    }
+
+    .searchInput {
+        background-color: var(--gray-700);
+        color: var(--gray-50);
+        border: 1px solid var(--gray-600);
+    }
+
+    .searchInput:focus {
+        box-shadow: 0 0 0 2px var(--primary-color);
+    }
+
+    .searchInput::placeholder {
+        color: var(--gray-400);
+    }
+
+    .searchIcon {
+        color: var(--gray-400);
+    }
+
+    .mobileSearch {
+        background-color: var(--gray-800);
+        border-top: 1px solid var(--gray-700);
+    }
+
+    .mobileSearchInput {
+        background-color: var(--gray-700);
+        color: var(--gray-50);
+        border: 1px solid var(--gray-600);
+    }
+
+    .mobileSearchInput::placeholder {
+        color: var(--gray-400);
+    }
+
+    .mobileSearchIcon {
+        color: var(--gray-400);
+    }
+
+    .iconButton {
+        color: var(--gray-300);
+    }
+
+    .iconButton:hover {
+        background-color: var(--gray-700);
+        color: var(--gray-50);
+    }
+
+    .postDealButton {
+        background-color: var(--primary-color);
+        color: var(--gray-50);
+    }
+
+    .postDealButton:hover {
+        background-color: var(--primary-color-hover);
+    }
+
+    .userButton {
+        color: var(--gray-300);
+    }
+
+    .userButton:hover {
+        color: var(--gray-50);
+    }
+
+    .mobileMenu {
+        background-color: var(--gray-800);
+    }
+
+    .mobileMenuItem {
+        color: var(--gray-300);
+    }
+
+    .mobileMenuItem:hover {
+        background-color: var(--gray-700);
+        color: var(--gray-50);
+    }
+
+    .mobilePostButton {
+        background-color: var(--primary-color);
+        color: var(--gray-50);
+    }
+
+    .mobilePostButton:hover {
+        background-color: var(--primary-color-hover);
+    }
+
+    .main {
+        background-color: var(--gray-900);
+    }
+
+    .categoriesWrapper {
+        background-color: var(--gray-800);
+        border-bottom: 1px solid var(--gray-700);
+    }
+
+    .categoryButton {
+        background-color: var(--gray-700);
+        color: var(--gray-300);
+        border: 1px solid var(--gray-600);
+    }
+
+    .categoryButton:hover {
+        background-color: var(--gray-600);
+        color: var(--gray-50);
+    }
+
+    .categoryButtonActive {
+        background-color: var(--primary-color);
+        color: var(--gray-50);
+    }
+
+    .featuredTitle {
+        color: var(--gray-50);
+    }
+
+    .dealCount {
+        color: var(--gray-400);
+    }
+
+    .filterButton {
+        background-color: var(--gray-700);
+        color: var(--gray-300);
+        border: 1px solid var(--gray-600);
+    }
+
+    .filterButton:hover {
+        background-color: var(--gray-600);
+        color: var(--gray-50);
+    }
+
+    .dealCard {
+        background-color: var(--gray-800);
+        border: 1px solid var(--gray-700);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .dealCard:hover {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .discountBadge {
+        background-color: var(--danger);
+        color: var(--gray-50);
+    }
+
+    .localBadge {
+        background-color: var(--success);
+        color: var(--gray-50);
+    }
+
+    .bestPriceBadge {
+        background-color: var(--primary-color);
+        color: var(--gray-50);
+    }
+
+    .favoriteButton {
+        background-color: var(--gray-700);
+        border: 1px solid var(--gray-600);
+    }
+
+    .favoriteButton:hover {
+        background-color: var(--gray-600);
+    }
+
+    .favoriteIcon {
+        color: var(--gray-300);
+    }
+
+    .favoriteActive {
+        color: var(--danger);
+    }
+
+    .dealPoster {
+        color: var(--gray-400);
+    }
+
+    .dealTitle {
+        color: var(--gray-50);
+    }
+
+    .currentPrice {
+        color: var(--gray-50);
+    }
+
+    .originalPrice {
+        color: var(--gray-400);
+    }
+
+    .vendorName {
+        color: var(--gray-300);
+    }
+
+    .vendorNameBlue {
+        color: var(--primary-color);
+    }
+
+    .bogoBadge {
+        background-color: var(--success);
+        color: var(--gray-50);
+    }
+
+    .expiryInfo {
+        color: var(--gray-400);
+    }
+
+    .dealFooter {
+        border-top: 1px solid var(--gray-700);
+    }
+
+    .dealStat {
+        color: var(--gray-400);
+    }
+
+    .commentIcon {
+        color: var(--gray-400);
+    }
+
+    .trendingIcon {
+        color: var(--primary-color);
+    }
+
+    .shippingInfo {
+        color: var(--success);
+    }
+
+    .locationInfo {
+        color: var(--gray-400);
+    }
+
+    .cashbackInfo {
+        color: var(--primary-color);
+    }
+
+    .sectionTitle {
+        color: var(--gray-50);
+    }
+
+    .communityCard {
+        background-color: var(--gray-800);
+        border: 1px solid var(--gray-700);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .communityCard:hover {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .communityIconOrange {
+        background-color: var(--gray-700);
+        color: #f97316;
+    }
+
+    .communityIconBlue {
+        background-color: var(--gray-700);
+        color: var(--primary-color);
+    }
+
+    .communityIconGreen {
+        background-color: var(--gray-700);
+        color: var(--success);
+    }
+
+    .communityName {
+        color: var(--gray-50);
+    }
+
+    .communityMembers {
+        color: var(--gray-400);
+    }
+
+    .joinButton {
+        background-color: var(--primary-color);
+        color: var(--gray-50);
+    }
+
+    .joinButton:hover {
+        background-color: var(--primary-color-hover);
+    }
+
+    .joinedButton {
+        background-color: var(--gray-700);
+        color: var(--gray-300);
+    }
+
+    .joinedButton:hover {
+        background-color: var(--gray-600);
+        color: var(--gray-50);
+    }
+
+    .viewAllButton {
+        color: var(--primary-color);
+    }
+
+    .viewAllButton:hover {
+        color: var(--primary-color-hover);
+    }
+
+    .classifiedCard {
+        background-color: var(--gray-800);
+        border: 1px solid var(--gray-700);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .classifiedCard:hover {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .classifiedTitle {
+        color: var(--gray-50);
+    }
+
+    .classifiedPrice {
+        color: var(--primary-color);
+    }
+
+    .classifiedMeta {
+        color: var(--gray-400);
+    }
+
+    .footer {
+        background-color: var(--gray-800);
+        border-top: 1px solid var(--gray-700);
+    }
+
+    .footerContent {
+        color: var(--gray-400);
+    }
+
+    .floatingActionButton {
+        background-color: var(--primary-color);
+        color: var(--gray-50);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .floatingActionButton:hover {
+        background-color: var(--primary-color-hover);
+    }
+}

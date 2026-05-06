@@ -1,0 +1,187 @@
+/* MessageInputField.module.css - Light Mode Only */
+.messageInput {
+    flex: 1;
+    padding: 14px 18px;
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    font-size: 16px;
+    font-family: inherit;
+    resize: none;
+    background: #f8fafc;
+    color: #0f172a;
+    outline: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    min-height: 50px;
+    max-height: 150px;
+    line-height: 1.5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+.messageInput::placeholder {
+    color: #94a3b8;
+}
+
+.messageInput:focus {
+    border-color: #0ea5e9;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+}
+
+.messageInput::-webkit-scrollbar {
+    width: 6px;
+}
+
+.messageInput::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 8px;
+}
+
+.messageInput::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 8px;
+}
+
+.messageInput::-webkit-scrollbar-thumb:hover {
+    background-color: #94a3b8;
+}
+
+/* Character count and length limit */
+.messageInputWrapper {
+    position: relative;
+    flex: 1;
+}
+
+.characterCount {
+    position: absolute;
+    right: 20px;
+    bottom: -18px;
+    font-size: 11px;
+    color: #64748b;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.messageInputWrapper:focus-within .characterCount {
+    opacity: 1;
+}
+
+.characterCount.nearLimit {
+    color: #f59e0b;
+}
+
+.characterCount.atLimit {
+    color: #ef4444;
+}
+
+/* Mention and tag styling */
+.mention {
+    color: #0ea5e9;
+    background-color: rgba(14, 165, 233, 0.1);
+    padding: 0 2px;
+    border-radius: 4px;
+}
+
+.tag {
+    color: #8b5cf6;
+    background-color: rgba(139, 92, 246, 0.1);
+    padding: 0 2px;
+    border-radius: 4px;
+}
+
+/* Auto-growing behavior */
+.autoGrow {
+    overflow: hidden;
+    transition: height 0.1s ease;
+}
+
+/* =================================================================
+   DARK THEME SUPPORT
+   ================================================================= */
+
+@media (prefers-color-scheme: dark) {
+    .messageInput {
+        background: #374151;
+        color: #f3f4f6;
+        border-color: #4b5563;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        scrollbar-color: #6b7280 #374151;
+    }
+
+    .messageInput::placeholder {
+        color: #6b7280;
+    }
+
+    .messageInput:focus {
+        border-color: #60a5fa;
+        background: #4b5563;
+        box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.1);
+    }
+
+    .messageInput::-webkit-scrollbar-track {
+        background: #374151;
+    }
+
+    .messageInput::-webkit-scrollbar-thumb {
+        background-color: #6b7280;
+    }
+
+    .messageInput::-webkit-scrollbar-thumb:hover {
+        background-color: #9ca3af;
+    }
+
+    .characterCount {
+        color: #9ca3af;
+    }
+
+    .characterCount.nearLimit {
+        color: #f59e0b;
+    }
+
+    .characterCount.atLimit {
+        color: #ef4444;
+    }
+
+    /* Mention and tag styling */
+    .mention {
+        color: #60a5fa;
+        background-color: rgba(96, 165, 250, 0.1);
+    }
+
+    .tag {
+        color: #a78bfa;
+        background-color: rgba(167, 139, 250, 0.1);
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+    .messageInput {
+        border-width: 2px;
+        border-color: #60a5fa;
+    }
+
+    .messageInput:focus {
+        border-color: #60a5fa;
+        box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.2);
+    }
+
+    .mention {
+        border: 1px solid #60a5fa;
+    }
+
+    .tag {
+        border: 1px solid #a78bfa;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .messageInput,
+    .characterCount,
+    .autoGrow {
+        transition: none;
+    }
+}

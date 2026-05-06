@@ -1,0 +1,436 @@
+/* FloatingAiButton.module.css - Blue themed, always visible "AI MODE" label */
+
+/* === MAIN FLOATING BUTTON === */
+.floatingButton {
+    position: fixed ;
+    bottom: 80px ;
+    right: 20px ;
+    height: 44px ;
+    background: #2563eb ;
+    border: 1px solid rgba(37, 99, 235, 0.2) ;
+    border-radius: 22px ;
+    box-shadow: none ;
+    cursor: pointer ;
+    display: flex ;
+    align-items: center ;
+    justify-content: flex-start ;
+    z-index: 999 ;
+    transition: all 0.2s ease ;
+    overflow: hidden;
+    padding: 0 ;
+    
+    /* Performance optimizations */
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+    isolation: isolate;
+    contain: layout style;
+    
+    /* Default width (round button) */
+    width: 48px ;
+    
+    /* Base styles */
+    opacity: 1 ;
+    pointer-events: auto ;
+    visibility: visible ;
+}
+
+/* === VARIANTS === */
+
+/* Round variant (default) */
+.floatingButton.round {
+    width: 44px ;
+    border-radius: 22px ;
+    justify-content: center ;
+}
+
+/* Pill variant (always expanded with label) */
+.floatingButton.pill {
+    border-radius: 22px ;
+    justify-content: flex-start ;
+    width: 100px ;
+    padding-right: 8px ;
+}
+
+/* Minimal variant */
+.floatingButton.minimal {
+    width: 40px ;
+    height: 40px ;
+    border-radius: 20px ;
+    bottom: 75px ;
+}
+
+/* === BUTTON CONTENT === */
+.buttonContent {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.iconContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.labelContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 2px;
+    margin-left: -6px;
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.labelText {
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.labelSubtitle {
+    font-size: 10px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1;
+    margin-top: 1px;
+    display: none; /* Hide subtitle since we're only using "AI MODE" */
+}
+
+/* === ICON STYLES === */
+.icon {
+    color: white;
+    transition: all 0.2s ease;
+    z-index: 2;
+    position: relative;
+    width: 18px;
+    height: 18px;
+}
+
+/* === HOVER STATES === */
+.floatingButton:hover {
+    background: #1d4ed8 ;
+    box-shadow: none ;
+    border-color: rgba(29, 78, 216, 0.4) ;
+}
+
+/* No size changes on hover */
+.floatingButton:hover .icon {
+    opacity: 0.9;
+}
+
+/* === ACTIVE STATES === */
+.floatingButton:active {
+    transform: scale(0.98);
+    transition-duration: 0.1s;
+}
+
+/* === FOCUS STATES === */
+.floatingButton:focus-visible {
+    outline: 3px solid rgba(59, 130, 246, 0.3);
+    outline-offset: 2px;
+}
+
+/* === DISABLED STATE === */
+.floatingButton.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+    background: #94a3b8 ;
+}
+
+.floatingButton.disabled .labelContainer {
+    opacity: 0.6;
+}
+
+/* === PULSE ANIMATION === */
+.pulse {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: rgba(59, 130, 246, 0.2);
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    z-index: 1;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.05);
+    }
+}
+
+.floatingButton.minimal .pulse {
+    animation-duration: 1.5s;
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (min-width: 769px) {
+    .floatingButton {
+        bottom: 100px ;
+        right: 24px ;
+    }
+}
+
+@media (max-width: 768px) {
+    .floatingButton {
+        bottom: 140px ;
+        left: 20px ;
+    }
+}
+
+@media (max-width: 480px) {
+    .floatingButton {
+        bottom: 70px ;
+        right: 16px ;
+        height: 44px ;
+    }
+
+    .floatingButton.round {
+        width: 44px ;
+        height: 44px ;
+    }
+
+    .floatingButton.pill {
+        width: 96px ;
+        padding-right: 10px ;
+    }
+
+    .floatingButton.minimal {
+        width: 36px ;
+        height: 36px ;
+        bottom: 65px ;
+    }
+
+    .iconContainer {
+        width: 44px;
+        height: 44px;
+    }
+
+    .floatingButton.minimal .iconContainer {
+        width: 36px;
+        height: 36px;
+    }
+
+    .icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .labelText {
+        font-size: 11px;
+    }
+
+    .labelContainer {
+        padding-left: 2px;
+        margin-left: -2px;
+    }
+}
+
+@media (max-width: 360px) {
+    .floatingButton {
+        bottom: 65px ;
+        right: 12px ;
+        height: 40px ;
+    }
+
+    .floatingButton.round {
+        width: 40px ;
+        height: 40px ;
+    }
+
+    .floatingButton.pill {
+        width: 94px ;
+        padding-right: 10px ;
+    }
+
+    .floatingButton.minimal {
+        width: 32px ;
+        height: 32px ;
+        bottom: 60px ;
+    }
+
+    .iconContainer {
+        width: 40px;
+        height: 40px;
+    }
+
+    .floatingButton.minimal .iconContainer {
+        width: 32px;
+        height: 32px;
+    }
+
+    .icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .labelText {
+        font-size: 10px;
+    }
+
+    .labelContainer {
+        padding-left: 2px;
+        margin-left: -2px;
+    }
+}
+
+/* === ACCESSIBILITY === */
+@media (prefers-contrast: high) {
+    .floatingButton {
+        background: #000 ;
+        border-color: #fff ;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) ;
+    }
+
+    .floatingButton:focus-visible {
+        outline-color: #fff;
+    }
+
+    .labelText,
+    .icon {
+        color: #fff ;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .floatingButton,
+    .labelContainer,
+    .icon {
+        transition: none ;
+    }
+
+    .floatingButton:hover {
+        transform: none ;
+    }
+
+    .pulse {
+        animation: none ;
+    }
+}
+
+/* === SAFE AREA SUPPORT === */
+@supports (padding: max(0px)) {
+    .floatingButton {
+        bottom: max(80px, calc(64px + env(safe-area-inset-bottom, 0px))) ;
+        right: max(20px, env(safe-area-inset-right, 20px)) ;
+    }
+    
+    @media (max-width: 480px) {
+        .floatingButton {
+            bottom: max(75px, calc(59px + env(safe-area-inset-bottom, 0px))) ;
+            right: max(16px, env(safe-area-inset-right, 16px)) ;
+        }
+    }
+    
+    @media (max-width: 360px) {
+        .floatingButton {
+            bottom: max(70px, calc(54px + env(safe-area-inset-bottom, 0px))) ;
+            right: max(12px, env(safe-area-inset-right, 12px)) ;
+        }
+    }
+}
+
+/* === ACCESSIBILITY ENHANCEMENTS === */
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .floatingButton {
+        background: #0000ff ;
+        border: 2px solid white ;
+        box-shadow: 
+            0 8px 24px rgba(0, 0, 0, 0.3),
+            0 4px 8px rgba(0, 0, 0, 0.2) ;
+    }
+    
+    .floatingButton:focus-visible {
+        outline: 3px solid #ffffff;
+        outline-offset: 3px;
+    }
+
+    .labelText,
+    .labelSubtitle {
+        color: white;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .floatingButton,
+    .icon,
+    .labelContainer,
+    .buttonContent {
+        transition: none;
+    }
+    
+    .floatingButton:hover {
+        transform: none;
+    }
+    
+    .pulse {
+        animation: none;
+        opacity: 0;
+    }
+}
+
+/* === DARK MODE SUPPORT === */
+@media (prefers-color-scheme: dark) {
+    .floatingButton {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color-hover) 100%) ;
+        box-shadow: 
+            0 8px 24px rgba(0, 0, 0, 0.4),
+            0 4px 8px rgba(0, 0, 0, 0.3) ;
+    }
+
+    .floatingButton:hover {
+        background: linear-gradient(135deg, var(--primary-color-hover) 0%, var(--primary-color) 100%) ;
+        box-shadow: 
+            0 10px 30px rgba(0, 0, 0, 0.5),
+            0 6px 12px rgba(0, 0, 0, 0.4) ;
+    }
+
+    .floatingButton:focus-visible {
+        outline-color: var(--primary-color);
+        box-shadow: 0 0 0 4px rgba(41, 128, 185, 0.3);
+    }
+
+    .buttonContent {
+        color: white;
+    }
+
+    .labelText,
+    .labelSubtitle {
+        color: white;
+    }
+
+    .icon {
+        color: white;
+    }
+
+    .pulse {
+        background: rgba(41, 128, 185, 0.3);
+    }
+} 

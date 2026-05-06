@@ -1,0 +1,30 @@
+.listContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .listContainer {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 16px;
+    }
+}
+
+/* =================================================================
+   DARK THEME SUPPORT
+   ================================================================= */
+
+@media (prefers-color-scheme: dark) {
+    .listContainer {
+        background-color: #111827;
+        color: #f3f4f6;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+    .listContainer {
+        border: 1px solid #60a5fa;
+    }
+}

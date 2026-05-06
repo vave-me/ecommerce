@@ -1,0 +1,95 @@
+type: google.api.Service
+config_version: 3
+name: newsletters.googleapis.com
+title: Newsletter Management API
+apis:
+  - name: newsletterspb.NewslettersService
+http:
+  rules:
+    # Newsletter Management
+    - selector: newsletterspb.NewslettersService.CreateNewsletter
+      post: /api/newsletters
+      body: "*"
+    
+    - selector: newsletterspb.NewslettersService.UpdateNewsletter
+      patch: /api/newsletters/{id}
+      body: "*"
+    
+    - selector: newsletterspb.NewslettersService.GetNewsletter
+      get: /api/newsletters/{id}
+    
+    - selector: newsletterspb.NewslettersService.ListNewsletters
+      get: /api/newsletters
+    
+    - selector: newsletterspb.NewslettersService.DeleteNewsletter
+      delete: /api/newsletters/{id}
+    
+    # Subscription Management
+    - selector: newsletterspb.NewslettersService.Subscribe
+      post: /api/subscriptions
+      body: "*"
+    
+    - selector: newsletterspb.NewslettersService.Unsubscribe
+      delete: /api/subscriptions/{subscription_id}
+    
+    - selector: newsletterspb.NewslettersService.UpdateSubscription
+      patch: /api/subscriptions/{id}
+      body: "*"
+    
+    - selector: newsletterspb.NewslettersService.GetSubscription
+      get: /api/subscriptions/{id}
+    
+    - selector: newsletterspb.NewslettersService.ListSubscriptions
+      get: /api/subscriptions
+    
+    # Edition Management
+    - selector: newsletterspb.NewslettersService.CreateEdition
+      post: /api/newsletters/{newsletter_id}/editions
+      body: "*"
+    
+    - selector: newsletterspb.NewslettersService.UpdateEdition
+      patch: /api/editions/{id}
+      body: "*"
+    
+    - selector: newsletterspb.NewslettersService.GetEdition
+      get: /api/editions/{id}
+    
+    - selector: newsletterspb.NewslettersService.ListEditions
+      get: /api/newsletters/{newsletter_id}/editions
+    
+    - selector: newsletterspb.NewslettersService.ScheduleEdition
+      post: /api/editions/{id}/schedule
+      body: "*"
+    
+    - selector: newsletterspb.NewslettersService.SendEdition
+      post: /api/editions/{id}/send
+      body: "*"
+    
+    - selector: newsletterspb.NewslettersService.PreviewEdition
+      post: /api/editions/{id}/preview
+      body: "*"
+    
+    # Template Management
+    - selector: newsletterspb.NewslettersService.CreateTemplate
+      post: /api/templates
+      body: "*"
+    
+    - selector: newsletterspb.NewslettersService.UpdateTemplate
+      patch: /api/templates/{id}
+      body: "*"
+    
+    - selector: newsletterspb.NewslettersService.GetTemplate
+      get: /api/templates/{id}
+    
+    - selector: newsletterspb.NewslettersService.ListTemplates
+      get: /api/templates
+    
+    - selector: newsletterspb.NewslettersService.DeleteTemplate
+      delete: /api/templates/{id}
+    
+    # Analytics
+    - selector: newsletterspb.NewslettersService.GetNewsletterStats
+      get: /api/newsletters/{newsletter_id}/stats
+    
+    - selector: newsletterspb.NewslettersService.GetEditionStats
+      get: /api/editions/{edition_id}/stats

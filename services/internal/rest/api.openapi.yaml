@@ -1,0 +1,83 @@
+openapiOptions:
+  file:
+    - file: "servicespb/api.proto"
+      option:
+        info:
+          title: Services Management API
+          version: "1.0.0"
+          description: "API for managing services for   including creating, retrieving, updating, deleting services, bulk importing, and handling service-related files."
+        basePath: /
+  method:
+    # Service Management Operations
+    - method: servicespb.ServicesService.AddService
+      option:
+        operationId: addService
+        tags:
+          - Service
+        summary: Add a New Service
+
+    - method: servicespb.ServicesService.UpdateService
+      option:
+        operationId: updateService
+        tags:
+          - Service
+        summary: Add a New Service
+
+    - method: servicespb.ServicesService.GetService
+      option:
+        operationId: getService
+        tags:
+          - Service
+        summary: Retrieve a Specific Service
+
+    - method: servicespb.ServicesService.RemoveService
+      option:
+        operationId: removeService
+        tags:
+          - Service
+        summary: Remove a Service
+
+
+    - method: servicespb.ServicesService.RebrandService
+      option:
+        operationId: rebrandService
+        tags:
+          - Service
+        summary: Rebrand a Service
+
+    - method: servicespb.ServicesService.GetServicesByCategory
+      option:
+        operationId: getServicesByCategory
+        tags:
+          - Service
+        summary: Retrieve all services with given category
+
+    - method: servicespb.ServicesService.GetServices
+      option:
+        operationId: getServices
+        tags:
+          - Service
+        summary: Retrieve all services associated w
+
+
+    - method: servicespb.ServicesService.GetCatalog
+      option:
+        operationId: getCatalog
+        tags:
+          - Service
+        summary: Retrieve all services associated with a user
+
+    - method: servicespb.ServicesService.GetPublicCatalog
+      option:
+        operationId: getPublicCatalog
+        tags:
+          - Service
+        summary: Retrieve all services associated with a user
+
+    - method: servicespb.ServicesService.GetServicesWithFilter
+      option:
+        operationId: getServicesWithFilter
+        tags:
+          - Service
+        summary: Retrieve all services associated w
+

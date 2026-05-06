@@ -1,0 +1,243 @@
+syntax = "proto3";
+
+package ticketspb;
+
+option go_package = "middleman/tickets/ticketspb";
+
+import "google/protobuf/timestamp.proto";
+
+// Enums
+enum MatchStatus {
+  MATCH_STATUS_UNSPECIFIED = 0;
+  MATCH_STATUS_SCHEDULED = 1;
+  MATCH_STATUS_ON_SALE = 2;
+  MATCH_STATUS_SOLD_OUT = 3;
+  MATCH_STATUS_IN_PROGRESS = 4;
+  MATCH_STATUS_COMPLETED = 5;
+  MATCH_STATUS_CANCELLED = 6;
+  MATCH_STATUS_POSTPONED = 7;
+}
+
+enum TicketStatus {
+  TICKET_STATUS_UNSPECIFIED = 0;
+  TICKET_STATUS_AVAILABLE = 1;
+  TICKET_STATUS_RESERVED = 2;
+  TICKET_STATUS_SOLD = 3;
+  TICKET_STATUS_TRANSFERRED = 4;
+  TICKET_STATUS_USED = 5;
+  TICKET_STATUS_CANCELLED = 6;
+  TICKET_STATUS_REFUNDED = 7;
+}
+
+enum SectorType {
+  SECTOR_TYPE_UNSPECIFIED = 0;
+  SECTOR_TYPE_VIP = 1;
+  SECTOR_TYPE_PREMIUM = 2;
+  SECTOR_TYPE_STANDARD = 3;
+  SECTOR_TYPE_FAMILY = 4;
+  SECTOR_TYPE_AWAY = 5;
+  SECTOR_TYPE_HOME = 6;
+  SECTOR_TYPE_NEUTRAL = 7;
+}
+
+enum CompetitionType {
+  COMPETITION_TYPE_UNSPECIFIED = 0;
+  COMPETITION_TYPE_LEAGUE = 1;
+  COMPETITION_TYPE_CUP = 2;
+  COMPETITION_TYPE_FRIENDLY = 3;
+  COMPETITION_TYPE_CHAMPIONS_LEAGUE = 4;
+  COMPETITION_TYPE_EUROPA_LEAGUE = 5;
+  COMPETITION_TYPE_INTERNATIONAL = 6;
+}
+
+// Main Messages
+message Match {
+  string id = 1;
+  Team home_team = 2;
+  Team away_team = 3;
+  Stadium stadium = 4;
+  google.protobuf.Timestamp match_date = 5;
+  MatchStatus status = 6;
+  CompetitionType competition_type = 7;
+  string competition_name = 8;
+  int32 round = 9;
+  string season = 10;
+  
+  // Ticketing information
+  int64 total_capacity = 11;
+  int64 tickets_sold = 12;
+  int64 tickets_available = 13;
+  repeated SectorInfo sectors = 14;
+  
+  // Match details
+  string referee = 15;
+  repeated string officials = 16;
+  bool is_high_demand = 17;
+  
+  // Timestamps
+  google.protobuf.Timestamp created_at = 18;
+  google.protobuf.Timestamp updated_at = 19;
+  google.protobuf.Timestamp sales_start_at = 20;
+  google.protobuf.Timestamp sales_end_at = 21;
+}
+
+message Team {
+  string id = 1;
+  string name = 2;
+  string code = 3;
+  string logo_url = 4;
+  string stadium_id = 5;
+  string city = 6;
+  string country = 7;
+}
+
+message Stadium {
+  string id = 1;
+  string name = 2;
+  string city = 3;
+  string country = 4;
+  int64 capacity = 5;
+  Location location = 6;
+  repeated StadiumSection sections = 7;
+  string image_url = 8;
+  repeated string facilities = 9;
+}
+
+message Location {
+  double latitude = 1;
+  double longitude = 2;
+  string address = 3;
+  string postal_code = 4;
+}
+
+message StadiumSection {
+  string id = 1;
+  string name = 2;
+  SectorType type = 3;
+  int32 capacity = 4;
+  repeated Row rows = 5;
+}
+
+message Row {
+  string id = 1;
+  string number = 2;
+  int32 seat_count = 3;
+  repeated Seat seats = 4;
+}
+
+message Seat {
+  int32 number = 1;
+  bool is_available = 2;
+  bool has_restricted_view = 3;
+  bool is_wheelchair_accessible = 4;
+}
+
+message SectorInfo {
+  string sector_id = 1;
+  string name = 2;
+  SectorType type = 3;
+  int64 base_price = 4;
+  int64 current_price = 5;
+  int32 total_seats = 6;
+  int32 available_seats = 7;
+  bool dynamic_pricing = 8;
+}
+
+message Ticket {
+  string id = 1;
+  string match_id = 2;
+  string sector_id = 3;
+  string row_number = 4;
+  int32 seat_number = 5;
+  TicketStatus status = 6;
+  
+  // Owner information
+  string owner_id = 7;
+  string owner_name = 8;
+  string owner_email = 9;
+  
+  // Pricing
+  int64 original_price = 10;
+  int64 paid_price = 11;
+  int64 resale_price = 12;
+  
+  // Security
+  string qr_code = 13;
+  string barcode = 14;
+  string security_code = 15;
+  
+  // Transfer history
+  repeated Transfer transfers = 16;
+  bool is_transferable = 17;
+  bool is_resellable = 18;
+  
+  // Validation
+  google.protobuf.Timestamp validated_at = 19;
+  string validated_by = 20;
+  string gate_number = 21;
+  
+  // Timestamps
+  google.protobuf.Timestamp created_at = 22;
+  google.protobuf.Timestamp purchased_at = 23;
+  google.protobuf.Timestamp expires_at = 24;
+}
+
+message Transfer {
+  string from_user_id = 1;
+  string to_user_id = 2;
+  google.protobuf.Timestamp transferred_at = 3;
+  string reason = 4;
+}
+
+message TicketSummary {
+  string id = 1;
+  string match_id = 2;
+  string section_name = 3;
+  string row = 4;
+  int32 seat = 5;
+  int64 price = 6;
+  TicketStatus status = 7;
+  google.protobuf.Timestamp match_date = 8;
+  string home_team = 9;
+  string away_team = 10;
+}
+
+message PurchaseRequest {
+  string match_id = 1;
+  string user_id = 2;
+  repeated SeatSelection seats = 3;
+  PaymentMethod payment_method = 4;
+  string promo_code = 5;
+}
+
+message SeatSelection {
+  string sector_id = 1;
+  string row_number = 2;
+  int32 seat_number = 3;
+}
+
+message PaymentMethod {
+  string type = 1; // card, bank_transfer, digital_wallet
+  string token = 2;
+}
+
+message ValidationRequest {
+  string ticket_id = 1;
+  string qr_code = 2;
+  string gate_number = 3;
+  string validator_id = 4;
+}
+
+message SeasonTicket {
+  string id = 1;
+  string owner_id = 2;
+  string team_id = 3;
+  string sector_id = 4;
+  string row_number = 5;
+  int32 seat_number = 6;
+  string season = 7;
+  repeated string included_competitions = 8;
+  int64 price = 9;
+  google.protobuf.Timestamp valid_from = 10;
+  google.protobuf.Timestamp valid_until = 11;
+}

@@ -1,0 +1,3374 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Search",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "SearchService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/search": {
+      "post": {
+        "summary": "Search for products",
+        "operationId": "searchProductsWithTerm",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchProductsWithTermResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchProductsWithTermRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Products"
+        ]
+      }
+    },
+    "/api/search/feed": {
+      "post": {
+        "summary": "Get a unified feed of items",
+        "operationId": "unifiedFeed",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbUnifiedFeedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/searchpbUnifiedFeedRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Unified"
+        ]
+      }
+    },
+    "/api/search/orders": {
+      "post": {
+        "summary": "Search for orders",
+        "operationId": "searchOrders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchOrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchOrdersRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/api/search/orders/{id}": {
+      "get": {
+        "summary": "Get an order",
+        "operationId": "getOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbGetOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Order"
+        ]
+      }
+    },
+    "/api/search/posts": {
+      "post": {
+        "summary": "Search for posts",
+        "operationId": "searchPostsWithTerm",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchPostsWithTermResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchPostsWithTermRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Posts"
+        ]
+      }
+    },
+    "/api/search/posts/category/slug/{categorySlug}": {
+      "get": {
+        "summary": "Search for posts by category slug",
+        "operationId": "searchPostsWithCategorySlug",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchPostsWithCategorySlugResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categorySlug",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Posts"
+        ]
+      }
+    },
+    "/api/search/posts/category/{categoryId}": {
+      "get": {
+        "summary": "Search for posts by category",
+        "operationId": "searchPostsWithCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchPostsWithCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Posts"
+        ]
+      }
+    },
+    "/api/search/posts/{id}": {
+      "get": {
+        "summary": "Get a post by ID",
+        "operationId": "getPost",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbGetPostResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Posts"
+        ]
+      }
+    },
+    "/api/search/products/category/slug/{categorySlug}": {
+      "get": {
+        "summary": "Search for products by category slug",
+        "operationId": "searchProductsWithCategorySlug",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchProductsWithCategorySlugResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categorySlug",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Products"
+        ]
+      }
+    },
+    "/api/search/products/category/{categoryId}": {
+      "get": {
+        "summary": "Search for products by category",
+        "operationId": "searchProductsWithCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchProductsWithCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Products"
+        ]
+      }
+    },
+    "/api/search/products/{id}": {
+      "get": {
+        "summary": "Get a product by ID",
+        "operationId": "getProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbGetProductResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Products"
+        ]
+      }
+    },
+    "/api/search/search-posts": {
+      "post": {
+        "summary": "Search for posts",
+        "operationId": "searchPostsWithFilters",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchPostsWithFiltersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchPostsWithFiltersRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Posts"
+        ]
+      }
+    },
+    "/api/search/search-products": {
+      "post": {
+        "summary": "Search for products",
+        "operationId": "searchProductsWithFilters",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchProductsWithFiltersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchProductsWithFiltersRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Products"
+        ]
+      }
+    },
+    "/api/search/search-services": {
+      "post": {
+        "summary": "Search for services",
+        "operationId": "searchServicesWithFilters",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchServicesWithFiltersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchServicesWithFiltersRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Services"
+        ]
+      }
+    },
+    "/api/search/services": {
+      "post": {
+        "summary": "Search for services",
+        "operationId": "searchServicesWithTerm",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchServicesWithTermResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchServicesWithTermRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Services"
+        ]
+      }
+    },
+    "/api/search/services/category/slug/{categorySlug}": {
+      "get": {
+        "summary": "Search for services by category slug",
+        "operationId": "searchServicesWithCategorySlug",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchServicesWithCategorySlugResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categorySlug",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Services"
+        ]
+      }
+    },
+    "/api/search/services/category/{categoryId}": {
+      "get": {
+        "summary": "Search for services by category",
+        "operationId": "searchServicesWithCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbSearchServicesWithCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Services"
+        ]
+      }
+    },
+    "/api/search/services/{id}": {
+      "get": {
+        "summary": "Get a service by ID",
+        "operationId": "getService",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbGetServiceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Services"
+        ]
+      }
+    },
+    "/api/search/suggest/posts/{name}": {
+      "get": {
+        "summary": "Suggest posts",
+        "operationId": "suggestPosts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbSuggestPostsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Posts"
+        ]
+      }
+    },
+    "/api/search/suggest/services/{name}": {
+      "get": {
+        "summary": "Suggest services",
+        "operationId": "suggestServices",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbSuggestServicesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Services"
+        ]
+      }
+    },
+    "/api/search/suggest/{name}": {
+      "get": {
+        "summary": "Suggest products",
+        "operationId": "suggestProducts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbSuggestProductsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Products"
+        ]
+      }
+    },
+    "/api/search/unified": {
+      "post": {
+        "summary": "Search across all entity types",
+        "operationId": "unifiedSearch",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbUnifiedSearchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/searchpbUnifiedSearchRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Unified"
+        ]
+      }
+    },
+    "/api/search/{userId}/catalog": {
+      "get": {
+        "summary": "Get a unified feed of items",
+        "operationId": "getCatalog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/searchpbUnifiedFeedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityTypes",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "feedType",
+            "description": "\"latest\", \"trending\", \"recommended\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "searchFilter",
+            "description": "Basic search term to filter results (prevents empty searches)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "applyEntityFilter",
+            "description": "Ensures entity_type filtering is applied at the database level",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "maxItemsPerEntity",
+            "description": "Limits number of items per entity type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortField",
+            "description": "Field to sort by (defaults to creation date if empty)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortDescending",
+            "description": "Sort direction",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "timeoutMs",
+            "description": "Custom timeout in milliseconds (defaults to 3000)",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "includedStatuses",
+            "description": "Only include items with these statuses",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "cacheTtlSeconds",
+            "description": "How long to cache this feed result",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "streamingResponse",
+            "description": "Whether to stream results as they come in instead of waiting for all",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "preloadMetadata",
+            "description": "Whether to preload related metadata",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "context.requestId",
+            "description": "Unique ID for the request (for tracking and caching)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "context.clientId",
+            "description": "ID of the client making the request",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "context.timestampMs",
+            "description": "Request timestamp",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "context.bypassCache",
+            "description": "Whether to bypass cache for this request",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "context.metadata",
+            "description": "Additional metadata",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "context.performanceSettings.timeoutMs",
+            "description": "Timeout for this search",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "context.performanceSettings.maxConcurrentQueries",
+            "description": "Maximum number of concurrent queries",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "context.performanceSettings.enableEarlyTermination",
+            "description": "Whether to return partial results if some entity searches time out",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "context.performanceSettings.optimizeForSpeed",
+            "description": "Prioritize speed over completeness",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "context.performanceSettings.queryCacheTtlSeconds",
+            "description": "How long to cache this query's results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "context.performanceSettings.useQueryExpansion",
+            "description": "Whether to expand the query for better recall",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "context.performanceSettings.maxRetries",
+            "description": "Maximum number of retries for fallback operations",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filters.statuses",
+            "description": "Status filters applicable to any entity",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filters.entityTypes",
+            "description": "Entity types to include",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filters.createdAfterTimestamp",
+            "description": "Filter by creation date (Unix timestamp)",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "filters.createdBeforeTimestamp",
+            "description": "Filter by creation date (Unix timestamp)",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "filters.userIds",
+            "description": "Filter by user IDs",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filters.categoryIds",
+            "description": "Filter by category IDs",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filters.tags",
+            "description": "Filter by tags",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filters.minPrice",
+            "description": "Minimum price",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "filters.maxPrice",
+            "description": "Maximum price",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "filters.geoFilter.lat",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "filters.geoFilter.lng",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "filters.geoFilter.radiusKm",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "filters.geoFilter.countryCode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filters.geoFilter.region",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filters.geoFilter.city",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filters.geoFilter.postalCode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "feedOptions.algorithm",
+            "description": "Algorithm to use for ranking feed items: \"recency\", \"popularity\", \"relevance\", \"hybrid\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "feedOptions.personalized",
+            "description": "Whether to personalize the feed for the user",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "feedOptions.freshnessHours",
+            "description": "Only include items created within this many hours",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "feedOptions.deduplicate",
+            "description": "Whether to deduplicate items (useful when showing feeds from multiple sources)",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "feedOptions.includePinned",
+            "description": "Whether to include pinned items at the top",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "feedOptions.pinnedItemsCount",
+            "description": "Maximum number of pinned items to include",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "feedOptions.experimentId",
+            "description": "For A/B testing different feed implementations",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "feedOptions.minScore",
+            "description": "Minimum relevance/quality score for items to include",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "feedOptions.useExtendedFallback",
+            "description": "Whether to use extended fallback strategy for feed generation",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "Unified"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string"
+        },
+        "userSellerId": {
+          "type": "string"
+        },
+        "productName": {
+          "type": "string"
+        },
+        "userSellerName": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "searchpbAttribute": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "searchpbBatchUnifiedFeedResponse": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbUnifiedFeedResponse"
+          }
+        },
+        "totalQueryTimeMs": {
+          "type": "string",
+          "format": "int64",
+          "title": "Total time taken for all requests"
+        }
+      }
+    },
+    "searchpbCommonFilters": {
+      "type": "object",
+      "properties": {
+        "statuses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Status filters applicable to any entity"
+        },
+        "entityTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Entity types to include"
+        },
+        "createdAfterTimestamp": {
+          "type": "string",
+          "format": "int64",
+          "title": "Filter by creation date (Unix timestamp)"
+        },
+        "createdBeforeTimestamp": {
+          "type": "string",
+          "format": "int64",
+          "title": "Filter by creation date (Unix timestamp)"
+        },
+        "userIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Filter by user IDs"
+        },
+        "categoryIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Filter by category IDs"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Filter by tags"
+        },
+        "minPrice": {
+          "type": "number",
+          "format": "float",
+          "title": "Minimum price"
+        },
+        "maxPrice": {
+          "type": "number",
+          "format": "float",
+          "title": "Maximum price"
+        },
+        "geoFilter": {
+          "$ref": "#/definitions/searchpbGeoFilter",
+          "title": "Geolocation filter"
+        }
+      }
+    },
+    "searchpbFeedOptions": {
+      "type": "object",
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "title": "Algorithm to use for ranking feed items: \"recency\", \"popularity\", \"relevance\", \"hybrid\""
+        },
+        "personalized": {
+          "type": "boolean",
+          "title": "Whether to personalize the feed for the user"
+        },
+        "freshnessHours": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Only include items created within this many hours"
+        },
+        "deduplicate": {
+          "type": "boolean",
+          "title": "Whether to deduplicate items (useful when showing feeds from multiple sources)"
+        },
+        "includePinned": {
+          "type": "boolean",
+          "title": "Whether to include pinned items at the top"
+        },
+        "pinnedItemsCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Maximum number of pinned items to include"
+        },
+        "experimentId": {
+          "type": "string",
+          "title": "For A/B testing different feed implementations"
+        },
+        "minScore": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Minimum relevance/quality score for items to include"
+        },
+        "useExtendedFallback": {
+          "type": "boolean",
+          "title": "Whether to use extended fallback strategy for feed generation"
+        }
+      },
+      "title": "Feed-specific options"
+    },
+    "searchpbGeoFilter": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "radiusKm": {
+          "type": "number",
+          "format": "float"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        }
+      }
+    },
+    "searchpbGetOrderResponse": {
+      "type": "object",
+      "properties": {
+        "order": {
+          "$ref": "#/definitions/searchpbOrder"
+        }
+      }
+    },
+    "searchpbGetPostResponse": {
+      "type": "object",
+      "properties": {
+        "post": {
+          "$ref": "#/definitions/searchpbPost"
+        }
+      }
+    },
+    "searchpbGetProductResponse": {
+      "type": "object",
+      "properties": {
+        "product": {
+          "$ref": "#/definitions/searchpbProduct"
+        }
+      }
+    },
+    "searchpbGetServiceResponse": {
+      "type": "object",
+      "properties": {
+        "service": {
+          "$ref": "#/definitions/searchpbService"
+        }
+      }
+    },
+    "searchpbGetUserResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/searchpbUser"
+        }
+      }
+    },
+    "searchpbItemMetric": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "likesCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dislikesCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "commentsCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sharedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "addedToWishlistCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "addedToBasketCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "visitedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "reportedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "followerCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "reviewsCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "ratingCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "videosCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "imagesCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "rating": {
+          "type": "string",
+          "format": "int64"
+        },
+        "category": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        }
+      },
+      "title": "Adding ItemMetric message"
+    },
+    "searchpbOption": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "searchpbOrder": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "userCustomerId": {
+          "type": "string"
+        },
+        "userCustomerName": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/OrderItem"
+          }
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "searchpbPost": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "typeOfPost": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "title": "e.g. \"DRAFT\", \"PUBLISHED\", \"ARCHIVED\""
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "metrics": {
+          "$ref": "#/definitions/searchpbItemMetric"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "searchpbProduct": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "basePrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userSellerId": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manageStocks": {
+          "type": "boolean"
+        },
+        "stock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbAttribute"
+          }
+        },
+        "weight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "height": {
+          "type": "string",
+          "format": "int64"
+        },
+        "width": {
+          "type": "string",
+          "format": "int64"
+        },
+        "depth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "shippingCost": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbOption"
+          }
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "metrics": {
+          "$ref": "#/definitions/searchpbItemMetric"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "------------------------------\nPrimary Messages\n------------------------------"
+    },
+    "searchpbSearchContext": {
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "title": "Unique ID for the request (for tracking and caching)"
+        },
+        "clientId": {
+          "type": "string",
+          "title": "ID of the client making the request"
+        },
+        "timestampMs": {
+          "type": "string",
+          "format": "int64",
+          "title": "Request timestamp"
+        },
+        "bypassCache": {
+          "type": "boolean",
+          "title": "Whether to bypass cache for this request"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Additional metadata"
+        },
+        "performanceSettings": {
+          "$ref": "#/definitions/searchpbSearchPerformanceSettings",
+          "title": "Performance tweaks"
+        }
+      },
+      "title": "Common search parameters and metadata for optimizing the search architecture"
+    },
+    "searchpbSearchOrdersRequest": {
+      "type": "object",
+      "properties": {
+        "userCustomerId": {
+          "type": "string"
+        },
+        "after": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "before": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "userSellerIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "productIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "minTotal": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxTotal": {
+          "type": "string",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string"
+        },
+        "next": {
+          "type": "string",
+          "title": "e.g. for pagination token"
+        },
+        "limit": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "------------------------------\nOrders\n------------------------------"
+    },
+    "searchpbSearchOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbOrder"
+          }
+        },
+        "next": {
+          "type": "string",
+          "title": "pagination token if needed"
+        }
+      }
+    },
+    "searchpbSearchPerformanceSettings": {
+      "type": "object",
+      "properties": {
+        "timeoutMs": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Timeout for this search"
+        },
+        "maxConcurrentQueries": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Maximum number of concurrent queries"
+        },
+        "enableEarlyTermination": {
+          "type": "boolean",
+          "title": "Whether to return partial results if some entity searches time out"
+        },
+        "optimizeForSpeed": {
+          "type": "boolean",
+          "title": "Prioritize speed over completeness"
+        },
+        "queryCacheTtlSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "title": "How long to cache this query's results"
+        },
+        "useQueryExpansion": {
+          "type": "boolean",
+          "title": "Whether to expand the query for better recall"
+        },
+        "maxRetries": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Maximum number of retries for fallback operations"
+        }
+      }
+    },
+    "searchpbSearchPostsWithCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "posts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbPost"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "total # of matched"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "searchpbSearchPostsWithCategorySlugResponse": {
+      "type": "object",
+      "properties": {
+        "posts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbPost"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "total # of matched"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "searchpbSearchPostsWithFiltersRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "postType": {
+          "type": "string"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "title": "e.g. \"DRAFT\", \"PUBLISHED\", \"ARCHIVED\""
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "radius": {
+          "type": "number",
+          "format": "float",
+          "title": "optional radius if you want location filtering"
+        },
+        "page": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pageSize": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sortBy": {
+          "type": "string"
+        },
+        "sortOrder": {
+          "type": "string"
+        }
+      },
+      "title": "------------------------------\nPosts (FIXED / ADDED FIELDS)\n------------------------------"
+    },
+    "searchpbSearchPostsWithFiltersResponse": {
+      "type": "object",
+      "properties": {
+        "posts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbPost"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "searchpbSearchPostsWithTermRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "searchpbSearchPostsWithTermResponse": {
+      "type": "object",
+      "properties": {
+        "posts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbPost"
+          }
+        },
+        "next": {
+          "type": "string",
+          "title": "pagination token"
+        }
+      }
+    },
+    "searchpbSearchProductsWithCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbProduct"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "total # of matched"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "searchpbSearchProductsWithCategorySlugResponse": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbProduct"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "total # of matched"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "searchpbSearchProductsWithFiltersRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "minPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manageStock": {
+          "type": "boolean"
+        },
+        "minStock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxStock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "shippingCost": {
+          "type": "string",
+          "format": "int64"
+        },
+        "minWeight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxWeight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxHeight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "minHeight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "minWidth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxWidth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "minDepth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxDepth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "offset": {
+          "type": "string",
+          "format": "int64"
+        },
+        "limit": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "radius": {
+          "type": "number",
+          "format": "float",
+          "title": "in kilometers"
+        },
+        "page": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pageSize": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sortBy": {
+          "type": "string"
+        },
+        "sortOrder": {
+          "type": "string"
+        }
+      },
+      "title": "------------------------------\nProducts\n------------------------------"
+    },
+    "searchpbSearchProductsWithFiltersResponse": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbProduct"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "total # of matched"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "searchpbSearchProductsWithTermRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "searchpbSearchProductsWithTermResponse": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbProduct"
+          }
+        },
+        "next": {
+          "type": "string",
+          "title": "pagination token"
+        }
+      }
+    },
+    "searchpbSearchServicesWithCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbService"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "total # of matched"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "searchpbSearchServicesWithCategorySlugResponse": {
+      "type": "object",
+      "properties": {
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbService"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "total # of matched"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "searchpbSearchServicesWithFiltersRequest": {
+      "type": "object",
+      "properties": {
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "serviceType": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "searchText": {
+          "type": "string"
+        },
+        "minPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "availableFrom": {
+          "type": "string",
+          "format": "int64"
+        },
+        "availableTo": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "qualifications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "page": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pageSize": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sortBy": {
+          "type": "string"
+        },
+        "sortOrder": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "radius": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "searchpbSearchServicesWithFiltersResponse": {
+      "type": "object",
+      "properties": {
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbService"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "searchpbSearchServicesWithTermRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "searchpbSearchServicesWithTermResponse": {
+      "type": "object",
+      "properties": {
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbService"
+          }
+        },
+        "next": {
+          "type": "string",
+          "title": "pagination token"
+        }
+      }
+    },
+    "searchpbSearchUsersResponse": {
+      "type": "object",
+      "properties": {
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbUser"
+          }
+        },
+        "next": {
+          "type": "string",
+          "title": "pagination token"
+        }
+      }
+    },
+    "searchpbService": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "serviceType": {
+          "type": "string"
+        },
+        "basePrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pricing": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "availability": {
+          "type": "string"
+        },
+        "providerName": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "descriptionShort": {
+          "type": "string"
+        },
+        "descriptionLong": {
+          "type": "string"
+        },
+        "qualifications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contact": {
+          "type": "string"
+        },
+        "faq": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "shippingCost": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbAttribute"
+          }
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbOption"
+          }
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "metrics": {
+          "$ref": "#/definitions/searchpbItemMetric"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "searchpbSuggestPostsResponse": {
+      "type": "object",
+      "properties": {
+        "suggestions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbPost"
+          }
+        }
+      }
+    },
+    "searchpbSuggestProductsResponse": {
+      "type": "object",
+      "properties": {
+        "suggestions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbProduct"
+          }
+        }
+      }
+    },
+    "searchpbSuggestServicesResponse": {
+      "type": "object",
+      "properties": {
+        "suggestions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbService"
+          }
+        }
+      }
+    },
+    "searchpbUnifiedFeedChunk": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbUnifiedSearchResult"
+          }
+        },
+        "entityType": {
+          "type": "string",
+          "title": "Type of entities in this chunk"
+        },
+        "isLastChunk": {
+          "type": "boolean",
+          "title": "Whether this is the last chunk"
+        }
+      },
+      "title": "New messages for optimized feed implementations"
+    },
+    "searchpbUnifiedFeedMetricsResponse": {
+      "type": "object",
+      "properties": {
+        "avgQueryTimeMs": {
+          "type": "string",
+          "format": "int64"
+        },
+        "cacheHitRatio": {
+          "type": "number",
+          "format": "float"
+        },
+        "totalRequests": {
+          "type": "string",
+          "format": "int64"
+        },
+        "requestsByEntityType": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "avgItemsReturned": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "errorCounts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "searchpbUnifiedFeedRequest": {
+      "type": "object",
+      "properties": {
+        "entityTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "feedType": {
+          "type": "string",
+          "title": "\"latest\", \"trending\", \"recommended\""
+        },
+        "page": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pageSize": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "radius": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userId": {
+          "type": "string",
+          "title": "For personalized feeds"
+        },
+        "searchFilter": {
+          "type": "string",
+          "title": "Basic search term to filter results (prevents empty searches)"
+        },
+        "applyEntityFilter": {
+          "type": "boolean",
+          "title": "Ensures entity_type filtering is applied at the database level"
+        },
+        "maxItemsPerEntity": {
+          "type": "string",
+          "format": "int64",
+          "title": "Limits number of items per entity type"
+        },
+        "sortField": {
+          "type": "string",
+          "title": "Field to sort by (defaults to creation date if empty)"
+        },
+        "sortDescending": {
+          "type": "boolean",
+          "title": "Sort direction"
+        },
+        "timeoutMs": {
+          "type": "string",
+          "format": "int64",
+          "title": "Custom timeout in milliseconds (defaults to 3000)"
+        },
+        "includedStatuses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Only include items with these statuses"
+        },
+        "cacheTtlSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "title": "How long to cache this feed result"
+        },
+        "streamingResponse": {
+          "type": "boolean",
+          "title": "Whether to stream results as they come in instead of waiting for all"
+        },
+        "preloadMetadata": {
+          "type": "boolean",
+          "title": "Whether to preload related metadata"
+        },
+        "context": {
+          "$ref": "#/definitions/searchpbSearchContext",
+          "title": "Context for this request (request ID, client ID, etc.)"
+        },
+        "filters": {
+          "$ref": "#/definitions/searchpbCommonFilters",
+          "title": "Common filters to apply across entity types"
+        },
+        "feedOptions": {
+          "$ref": "#/definitions/searchpbFeedOptions",
+          "title": "Options specific to feeds"
+        }
+      }
+    },
+    "searchpbUnifiedFeedResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbUnifiedSearchResult"
+          }
+        },
+        "hasMore": {
+          "type": "boolean",
+          "title": "Whether there are more results available"
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "Total number of results available"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64",
+          "title": "Current page number"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64",
+          "title": "Total number of pages"
+        },
+        "nextCursor": {
+          "type": "string",
+          "title": "Cursor for next page (for cursor-based pagination)"
+        }
+      }
+    },
+    "searchpbUnifiedSearchRequest": {
+      "type": "object",
+      "properties": {
+        "searchTerm": {
+          "type": "string"
+        },
+        "entityTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Filter by type: \"product\", \"post\", etc."
+        },
+        "page": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pageSize": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "radius": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sortBy": {
+          "type": "string"
+        },
+        "sortOrder": {
+          "type": "string"
+        },
+        "minPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "Common filters across entity types"
+        },
+        "maxPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "categoryId": {
+          "type": "string",
+          "title": "Additional filters"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string"
+        },
+        "serviceType": {
+          "type": "string"
+        }
+      },
+      "title": "------------------------------\nUnified Search Messages\n------------------------------"
+    },
+    "searchpbUnifiedSearchResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/searchpbUnifiedSearchResult"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "page": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pageSize": {
+          "type": "string",
+          "format": "int64"
+        },
+        "countsByType": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "hasMore": {
+          "type": "boolean",
+          "title": "Whether there are more results available"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64",
+          "title": "Total number of pages"
+        },
+        "nextCursor": {
+          "type": "string",
+          "title": "Cursor for next page (for cursor-based pagination)"
+        }
+      }
+    },
+    "searchpbUnifiedSearchResult": {
+      "type": "object",
+      "properties": {
+        "product": {
+          "$ref": "#/definitions/searchpbProduct"
+        },
+        "post": {
+          "$ref": "#/definitions/searchpbPost"
+        },
+        "service": {
+          "$ref": "#/definitions/searchpbService"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "relevanceScore": {
+          "type": "number",
+          "format": "float"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "searchpbUser": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    }
+  }
+}

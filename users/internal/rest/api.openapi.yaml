@@ -1,0 +1,144 @@
+openapiOptions:
+  file:
+    - file: "userspb/api.proto"
+      option:
+        info:
+          title: Users API
+          version: "1.0.0"
+          description: "API for managing users and their products."
+        basePath: /
+
+  method:
+    # User Management Operations
+    - method: userspb.UsersService.CreateUser
+      option:
+        operationId: createUser
+        tags:
+          - User
+        summary: Create a new user
+    - method: userspb.UsersService.AddAdmin
+      option:
+        operationId: addAdmin
+        tags:
+          - User
+        summary: Create a new user
+    - method: userspb.UsersService.UpdateUser
+      option:
+        operationId: updateUser
+        tags:
+          - User
+        summary: Update a user
+
+    - method: userspb.UsersService.ForgotPassword
+      option:
+        operationId: forgotPassword
+        tags:
+          - User
+        summary: Passwort Forgot
+
+    - method: userspb.UsersService.ResetPassword
+      option:
+        operationId: resetPassword
+        tags:
+          - User
+        summary: Passwort reset
+
+    - method: userspb.UsersService.GetUser
+      option:
+        operationId: getUser
+        tags:
+          - User
+        summary: Retrieve a user by ID
+    - method: userspb.UsersService.GetBaseUser
+      option:
+        operationId: getBaseUser
+        tags:
+          - User
+        summary: Retrieve a user by ID
+
+
+    - method: userspb.UsersService.ListEnabledUsers
+      option:
+        operationId: listEnabledUsers
+        tags:
+          - User
+        summary: Get participating users
+
+    - method: userspb.UsersService.GetUsers
+      option:
+        operationId: getUsers
+        tags:
+          - User
+        summary: Get participating users
+
+    - method: userspb.UsersService.EnableUser
+      option:
+        operationId: enableUser
+        tags:
+          - User
+        summary: Enable a user account
+
+
+    - method: userspb.UsersService.DisableUser
+      option:
+        operationId: disableUser
+        tags:
+          - User
+        summary: Disable a user account
+
+
+    - method: userspb.UsersService.RenameUser
+      option:
+        operationId: renameUser
+        tags:
+          - User
+        summary: Rename a user by ID
+
+    # Authentication Operations
+    - method: userspb.UsersService.LoginUser
+      option:
+        operationId: loginUser
+        tags:
+          - Authentication
+        summary: User login
+
+    - method: userspb.UsersService.WebLoginWithGoogle
+      option:
+        operationId: webLoginWithGoogle
+        tags:
+          - Authentication
+        summary: User login
+
+
+    - method: userspb.UsersService.MobileLoginWithGoogle
+      option:
+        operationId: mobileLoginWithGoogle
+        tags:
+          - Authentication
+        summary: User login
+
+
+    - method: userspb.UsersService.LogUserOut
+      option:
+        operationId: logoutUser
+        tags:
+          - Authentication
+        summary: User logout
+
+    - method: userspb.UsersService.RefreshAuthToken
+      option:
+        operationId: refreshAuthToken
+        tags:
+          - Authentication
+        summary: Refresh authentication token
+
+    # Token Management Operations
+    - method: userspb.UsersService.ClearTokens
+      option:
+        operationId: clearTokens
+        tags:
+          - Authentication
+        summary: Invalidate user tokens
+
+
+

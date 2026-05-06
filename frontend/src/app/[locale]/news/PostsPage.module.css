@@ -1,0 +1,312 @@
+/* NewsPage.module.css */
+/* Base styles (apply to all screen sizes) */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.mainContent {
+    flex: 1;
+    width: 100%;
+    max-width: 1400px; /* Add max-width constraint */
+    margin: 0 auto; /* Center the content */
+    padding: 0;
+}
+
+/* Updated grid layouts to match main page system */
+.layoutGrid, .layoutListGrid {
+    display: block;
+    width: 100%;
+}
+
+.contentArea, .contentListArea {
+    width: 100%;
+    overflow-y: auto;
+    height: 100%;
+    overscroll-behavior: contain;
+    contain: layout style;
+    touch-action: pan-y;
+    /* Hide scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.contentArea::-webkit-scrollbar,
+.contentListArea::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.postList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.postList li {
+    width: 100%;
+}
+
+.postListItem {
+    width: 100%;
+    margin-bottom: var(--space-sm);
+}
+
+/* Loading, Error, and Empty States */
+.loadingState {
+    text-align: center;
+    padding: 2rem;
+    font-weight: 500;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .loadingState {
+        color: var(--gray-400);
+    }
+}
+
+.errorState {
+    text-align: center;
+    padding: 2rem;
+    background-color: #fee;
+    border: 1px solid #fcc;
+    border-radius: 8px;
+    margin: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .errorState {
+        background-color: var(--gray-800);
+        border: 1px solid var(--gray-700);
+    }
+}
+
+.errorState h2 {
+    color: #c33;
+    margin-bottom: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .errorState h2 {
+        color: var(--danger);
+    }
+}
+
+.errorState p {
+    margin-bottom: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .errorState p {
+        color: var(--gray-300);
+    }
+}
+
+.retryButton {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+@media (prefers-color-scheme: dark) {
+    .retryButton {
+        background-color: var(--danger);
+        color: var(--gray-50);
+    }
+}
+
+.retryButton:hover {
+    background-color: #c0392b;
+}
+
+@media (prefers-color-scheme: dark) {
+    .retryButton:hover {
+        background-color: var(--danger);
+        opacity: 0.9;
+    }
+}
+
+.devError {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 4px;
+    text-align: left;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #666;
+}
+
+@media (prefers-color-scheme: dark) {
+    .devError {
+        background-color: var(--gray-800);
+        border: 1px solid var(--gray-700);
+        color: var(--gray-400);
+    }
+}
+
+.emptyState {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #666;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .emptyState {
+        background-color: var(--gray-800);
+        color: var(--gray-400);
+    }
+}
+
+.emptyState h3 {
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+@media (prefers-color-scheme: dark) {
+    .emptyState h3 {
+        color: var(--gray-200);
+    }
+}
+
+.refetchingIndicator {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background-color: #3498db;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    z-index: 1000;
+}
+
+@media (prefers-color-scheme: dark) {
+    .refetchingIndicator {
+        background-color: var(--primary-color);
+        color: var(--gray-50);
+    }
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+    .mainContent {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 var(--space-md);
+    }
+
+    .layoutGrid {
+        display: grid;
+        grid-template-areas: 'leftside contentarea';
+        grid-template-columns: 0.5fr 3fr;
+        column-gap: 16px;
+        min-height: calc(100vh - 48px);
+        overscroll-behavior: contain;
+        overflow: hidden;
+        height: calc(100vh - 48px);
+    }
+
+    .layoutListGrid {
+        display: flex;
+        gap: 10px;
+        min-height: calc(100vh - 48px);
+        overflow: hidden;
+        height: calc(100vh - 48px);
+    }
+
+    .contentArea {
+        grid-area: contentarea;
+    }
+
+    .contentListArea {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+}
+
+/* Responsive breakpoints to match main page */
+@media (max-width: 1400px) {
+    .layoutGrid {
+        grid-template-columns: 230px 1fr;
+        gap: 16px;
+        padding: 16px;
+    }
+    
+    .layoutListGrid {
+        gap: 16px;
+        padding: 16px;
+    }
+}
+
+@media (max-width: 992px) {
+    .layoutGrid {
+        grid-template-columns: 230px 1fr;
+        gap: 12px;
+        padding: 12px;
+    }
+    
+    .layoutListGrid {
+        gap: 12px;
+        padding: 12px;
+    }
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+    .layoutGrid, .layoutListGrid {
+        display: block;
+        padding: 16px;
+        gap: 16px;
+        height: auto;
+        min-height: auto;
+        overflow: visible;
+    }
+    
+    .mainContent {
+        padding: 0;
+        max-width: 100%; /* Full width on mobile */
+    }
+    
+    .contentArea, .contentListArea {
+        height: auto;
+        overflow-y: visible;
+    }
+}
+
+/* Small Mobile Optimizations */
+@media (max-width: 576px) {
+    .layoutGrid, .layoutListGrid {
+        padding: 12px;
+    }
+    
+    .mainContent {
+        padding: 0;
+    }
+    
+    .errorState,
+    .emptyState {
+        margin: 0.5rem;
+        padding: 1.5rem 1rem;
+    }
+}

@@ -1,0 +1,175 @@
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+    margin: 100px auto;
+}
+
+/* ============================================================================
+   DARK THEME SUPPORT
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+    .spinner {
+        border: 8px solid var(--gray-700, #374151);
+        border-top: 8px solid var(--teal-400, #2dd4bf);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* ============================================================================
+   ENHANCED SPINNER VARIANTS
+   ============================================================================ */
+
+.spinner.small {
+    width: 32px;
+    height: 32px;
+    border-width: 4px;
+    margin: 50px auto;
+}
+
+.spinner.large {
+    width: 80px;
+    height: 80px;
+    border-width: 10px;
+    margin: 120px auto;
+}
+
+.spinner.primary {
+    border-top-color: var(--teal-500, #14b8a6);
+}
+
+.spinner.secondary {
+    border-top-color: var(--blue-500, #3b82f6);
+}
+
+.spinner.success {
+    border-top-color: var(--emerald-500, #10b981);
+}
+
+.spinner.warning {
+    border-top-color: var(--amber-500, #f59e0b);
+}
+
+.spinner.error {
+    border-top-color: var(--red-500, #ef4444);
+}
+
+@media (prefers-color-scheme: dark) {
+    .spinner.primary {
+        border-top-color: var(--teal-400, #2dd4bf);
+    }
+
+    .spinner.secondary {
+        border-top-color: var(--blue-400, #60a5fa);
+    }
+
+    .spinner.success {
+        border-top-color: var(--emerald-400, #34d399);
+    }
+
+    .spinner.warning {
+        border-top-color: var(--amber-400, #fbbf24);
+    }
+
+    .spinner.error {
+        border-top-color: var(--red-400, #f87171);
+    }
+}
+
+/* ============================================================================
+   ACCESSIBILITY & MOTION
+   ============================================================================ */
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .spinner {
+        animation: none;
+        border-top-color: transparent;
+        opacity: 0.6;
+    }
+}
+
+/* High Contrast */
+@media (prefers-contrast: high) {
+    .spinner {
+        border-width: 10px;
+    }
+
+    .spinner.small {
+        border-width: 6px;
+    }
+
+    .spinner.large {
+        border-width: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .spinner {
+            border-color: var(--gray-400, #9ca3af);
+            border-top-color: var(--teal-300, #5eead4);
+        }
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .spinner {
+        width: 48px;
+        height: 48px;
+        border-width: 6px;
+        margin: 80px auto;
+    }
+
+    .spinner.small {
+        width: 24px;
+        height: 24px;
+        border-width: 3px;
+        margin: 40px auto;
+    }
+
+    .spinner.large {
+        width: 64px;
+        height: 64px;
+        border-width: 8px;
+        margin: 100px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .spinner {
+        width: 40px;
+        height: 40px;
+        border-width: 5px;
+        margin: 60px auto;
+    }
+
+    .spinner.small {
+        width: 20px;
+        height: 20px;
+        border-width: 2px;
+        margin: 30px auto;
+    }
+
+    .spinner.large {
+        width: 56px;
+        height: 56px;
+        border-width: 7px;
+        margin: 80px auto;
+    }
+} 

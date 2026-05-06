@@ -1,0 +1,464 @@
+package tools
+
+import ai2 "middleman/internal/ai"
+
+func createMailerTools() []ai2.Tool {
+	return []ai2.Tool{
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "mailer_create_email",
+				Description: "Create and send an email",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"sender_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the sender",
+							"minLength":   1,
+						},
+						"recipient": map[string]interface{}{
+							"type":        "string",
+							"description": "Email address of the recipient",
+							"format":      "email",
+							"minLength":   1,
+						},
+						"subject": map[string]interface{}{
+							"type":        "string",
+							"description": "Email subject line",
+							"minLength":   1,
+							"maxLength":   200,
+						},
+						"body": map[string]interface{}{
+							"type":        "string",
+							"description": "Email body content (HTML or plain text)",
+							"minLength":   1,
+						},
+						"status": map[string]interface{}{
+							"type":        "string",
+							"description": "Initial status of the email",
+							"enum":        []string{"pending", "sent", "failed", "queued"},
+							"default":     "pending",
+						},
+					},
+					"required": []string{"sender_id", "recipient", "subject", "body"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "mailer_notify_user_created",
+				Description: "Send a notification email when a new user is created",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the created user",
+							"minLength":   1,
+						},
+						"username": map[string]interface{}{
+							"type":        "string",
+							"description": "Username of the created user",
+							"minLength":   1,
+						},
+						"firstname": map[string]interface{}{
+							"type":        "string",
+							"description": "First name of the user",
+						},
+						"lastname": map[string]interface{}{
+							"type":        "string",
+							"description": "Last name of the user",
+						},
+						"email": map[string]interface{}{
+							"type":        "string",
+							"description": "Email address of the user",
+							"format":      "email",
+							"minLength":   1,
+						},
+						"enabled": map[string]interface{}{
+							"type":        "boolean",
+							"description": "Whether the user account is enabled",
+							"default":     true,
+						},
+						"subject": map[string]interface{}{
+							"type":        "string",
+							"description": "Email subject line",
+							"minLength":   1,
+						},
+						"body": map[string]interface{}{
+							"type":        "string",
+							"description": "Email body content",
+							"minLength":   1,
+						},
+						"status": map[string]interface{}{
+							"type":        "string",
+							"description": "Initial status of the email",
+							"enum":        []string{"pending", "sent", "failed", "queued"},
+							"default":     "pending",
+						},
+					},
+					"required": []string{"user_id", "username", "email", "subject", "body"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "mailer_get_email",
+				Description: "Get details of a specific email",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"email_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the email",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"email_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "mailer_get_emails_by_sender",
+				Description: "Get all emails sent by a specific sender",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"sender_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the sender",
+							"minLength":   1,
+						},
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number for pagination",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Number of results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+					},
+					"required": []string{"sender_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "mailer_get_emails_by_recipient",
+				Description: "Get all emails sent to a specific recipient",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"recipient": map[string]interface{}{
+							"type":        "string",
+							"description": "Email address of the recipient",
+							"format":      "email",
+							"minLength":   1,
+						},
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number for pagination",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Number of results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+					},
+					"required": []string{"recipient"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "mailer_get_emails_by_status",
+				Description: "Get emails filtered by status",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"status": map[string]interface{}{
+							"type":        "string",
+							"description": "Status to filter by",
+							"enum":        []string{"pending", "sent", "failed", "queued", "bounced", "delivered"},
+						},
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number for pagination",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Number of results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+					},
+					"required": []string{"status"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "mailer_search_emails",
+				Description: "Search emails by content or metadata",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"query": map[string]interface{}{
+							"type":        "string",
+							"description": "Search query for subject, body, or recipient",
+							"minLength":   1,
+						},
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number for pagination",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Number of results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+					},
+					"required": []string{"query"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "mailer_count_emails",
+				Description: "Count emails based on filters",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"sender_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Filter by sender ID",
+						},
+						"recipient": map[string]interface{}{
+							"type":        "string",
+							"description": "Filter by recipient email",
+							"format":      "email",
+						},
+						"status": map[string]interface{}{
+							"type":        "string",
+							"description": "Filter by status",
+							"enum":        []string{"pending", "sent", "failed", "queued", "bounced", "delivered"},
+						},
+					},
+					"required": []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "mailer_update_email_status",
+				Description: "Update the status of an email",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"email_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the email to update",
+							"minLength":   1,
+						},
+						"status": map[string]interface{}{
+							"type":        "string",
+							"description": "New status for the email",
+							"enum":        []string{"pending", "sent", "failed", "queued", "bounced", "delivered"},
+						},
+					},
+					"required": []string{"email_id", "status"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "mailer_delete_email",
+				Description: "Delete an email record",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"email_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the email to delete",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"email_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "mailer_get_user_creation_notifications",
+				Description: "Get user creation notification emails",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the user",
+							"minLength":   1,
+						},
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number for pagination",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Number of results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "mailer_get_emails_in_date_range",
+				Description: "Get emails sent within a date range",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"start_date": map[string]interface{}{
+							"type":        "string",
+							"description": "Start date (ISO 8601 format)",
+							"format":      "date-time",
+						},
+						"end_date": map[string]interface{}{
+							"type":        "string",
+							"description": "End date (ISO 8601 format)",
+							"format":      "date-time",
+						},
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number for pagination",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Number of results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+					},
+					"required": []string{"start_date", "end_date"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "mailer_get_failed_emails",
+				Description: "Get all emails that failed to send",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number for pagination",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Number of results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+					},
+					"required": []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "mailer_get_pending_emails",
+				Description: "Get all emails pending to be sent",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number for pagination",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Number of results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+					},
+					"required": []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "mailer_get_sent_emails",
+				Description: "Get all successfully sent emails",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number for pagination",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Number of results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+					},
+					"required": []string{},
+				},
+			},
+		},
+	}
+
+}

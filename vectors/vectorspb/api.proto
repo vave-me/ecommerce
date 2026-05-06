@@ -1,0 +1,208 @@
+syntax = "proto3";
+
+package vectorspb;
+
+import "google/protobuf/timestamp.proto";
+
+// ------------------------------
+// VectorService - Pure Vector-Oriented API
+// ------------------------------
+service VectorService {
+  // Core LLM-focused vector operations - Accept ONLY raw vectors from LLMs
+  rpc SearchByVector(SearchByVectorRequest) returns (SearchByVectorResponse);
+  rpc SearchSimilarEntities(SearchSimilarEntitiesRequest) returns (SearchSimilarEntitiesResponse);
+  rpc GetEntityContext(GetEntityContextRequest) returns (GetEntityContextResponse);
+  rpc GetRecommendations(GetRecommendationsRequest) returns (GetRecommendationsResponse);
+  rpc GetEntityById(GetEntityByIdRequest) returns (GetEntityByIdResponse);
+}
+
+// ------------------------------
+// Pure Vector Operations
+// ------------------------------
+
+// LLM sends raw vector for semantic search
+message SearchByVectorRequest {
+  repeated float vector = 1;                    // Raw vector from LLM (REQUIRED)
+  repeated string entity_types = 2;             // Filter by types: "product", "post", etc.
+  int64 top_k = 3;                             // Number of results
+  float score_threshold = 4;                   // Minimum similarity score
+  VectorFilters filters = 5;                  // Vector-oriented filters only
+  bool with_vectors = 6;                       // Include vectors in response
+}
+
+message SearchByVectorResponse {
+  repeated VectorSearchResult results = 1;
+  VectorScoreStats stats = 2;
+  int64 total_found = 3;
+  float max_score = 4;
+  float min_score = 5;
+}
+
+// Find entities similar to a given entity using vector similarity
+message SearchSimilarEntitiesRequest {
+  string entity_id = 1;                       // Source entity ID
+  string entity_type = 2;                     // Source entity type
+  int64 top_k = 3;                           // Number of similar entities
+  bool exclude_self = 4;                     // Exclude the source entity
+  VectorFilters filters = 5;                 // Vector-oriented filters
+  repeated string target_entity_types = 6;   // Limit search to these types
+}
+
+message SearchSimilarEntitiesResponse {
+  repeated VectorSearchResult results = 1;
+  string source_entity_id = 2;
+  VectorScoreStats stats = 3;
+}
+
+// Get contextual information about an entity
+message GetEntityContextRequest {
+  string entity_id = 1;
+  string entity_type = 2;
+  bool include_similar = 3;                  // Include vector-similar entities
+  int64 context_size = 4;                   // Number of context items
+}
+
+message GetEntityContextResponse {
+  Entity entity = 1;                        // Main entity
+  repeated VectorSearchResult similar = 2;  // Vector-similar entities
+  EntityMetrics metrics = 3;               // Entity metrics/stats
+}
+
+// Get vector-based personalized recommendations
+message GetRecommendationsRequest {
+  repeated float user_vector = 1;           // User preference vector (REQUIRED)
+  repeated string entity_types = 2;        // Types to recommend
+  int64 top_k = 3;                         // Number of recommendations
+  float diversity_level = 4;               // Recommendation diversity (0-1)
+  VectorFilters filters = 5;               // Vector-oriented filters
+  repeated string exclude_ids = 6;         // Exclude these entity IDs
+}
+
+message GetRecommendationsResponse {
+  repeated VectorSearchResult recommendations = 1;
+  float diversity_score = 2;               // Achieved diversity score
+  VectorScoreStats stats = 3;
+}
+
+// Get entity by ID with optional vector
+message GetEntityByIdRequest {
+  string entity_id = 1;
+  string entity_type = 2;
+  bool with_vector = 3;                    // Include vector embedding
+  bool with_metadata = 4;                 // Include full metadata
+}
+
+message GetEntityByIdResponse {
+  Entity entity = 1;
+  repeated float vector = 2;               // Vector embedding if requested
+  EntityMetrics metrics = 3;              // Entity metrics
+}
+
+// ------------------------------
+// Core Data Types
+// ------------------------------
+
+// Unified entity representation
+message Entity {
+  string id = 1;
+  string type = 2;                         // "product", "post", "deal", etc.
+  string name = 3;
+  string description = 4;
+  map<string, string> metadata = 5;       // All entity-specific fields
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+  EntityLocation location = 8;            // Geographic information
+  EntityPricing pricing = 9;              // Price information
+  repeated string tags = 10;              // Entity tags
+  string status = 11;                     // Entity status
+  string thumbnail = 12;                  // Image thumbnail
+}
+
+// Vector search result with similarity scoring
+message VectorSearchResult {
+  Entity entity = 1;                      // The found entity
+  float score = 2;                        // Vector similarity score
+  repeated float vector = 3;              // Vector embedding (optional)
+  map<string, float> feature_scores = 4;  // Individual feature scores
+  int64 rank = 5;                         // Result ranking
+}
+
+// Entity location information
+message EntityLocation {
+  double latitude = 1;
+  double longitude = 2;
+  string address = 3;
+  string city = 4;
+  string country = 5;
+}
+
+// Entity pricing information
+message EntityPricing {
+  int64 base_price = 1;
+  int64 sale_price = 2;
+  string currency = 3;
+  bool negotiable = 4;
+  PriceRange price_range = 5;
+}
+
+// Price range for filtering
+message PriceRange {
+  int64 min_price = 1;
+  int64 max_price = 2;
+}
+
+// Entity metrics and statistics
+message EntityMetrics {
+  int64 view_count = 1;
+  int64 interaction_count = 2;
+  float popularity_score = 3;
+  google.protobuf.Timestamp last_updated = 4;
+  map<string, int64> custom_metrics = 5;
+}
+
+// ------------------------------
+// Vector-Oriented Filtering
+// ------------------------------
+
+// Vector-oriented filters (no string search)
+message VectorFilters {
+  repeated string entity_types = 1;       // Filter by entity types
+  PriceRange price_range = 2;            // Price filtering
+  GeoFilter geo_filter = 3;              // Location filtering
+  repeated string statuses = 4;          // Status filtering
+  repeated string categories = 5;        // Category filtering
+  bool negotiable_only = 6;              // Only negotiable items
+  TimeRange time_range = 7;              // Creation/update time range
+  string user_type = 8;                  // User type filter
+  map<string, string> metadata_filters = 9; // Exact metadata matches only
+}
+
+// Geographic filtering
+message GeoFilter {
+  double latitude = 1;
+  double longitude = 2;
+  double radius_km = 3;                   // Search radius in kilometers
+  string country = 4;                     // Country filter
+  string city = 5;                        // City filter
+}
+
+// Time range filtering
+message TimeRange {
+  google.protobuf.Timestamp start_time = 1;
+  google.protobuf.Timestamp end_time = 2;
+}
+
+// ------------------------------
+// Vector Statistics
+// ------------------------------
+
+// Vector similarity score statistics
+message VectorScoreStats {
+  float max_score = 1;
+  float min_score = 2;
+  float avg_score = 3;
+  float median_score = 4;
+  int64 total_comparisons = 5;
+  int64 vector_dimensions = 6;             // Embedding dimensions
+  string similarity_metric = 7;           // "cosine", "euclidean", etc.
+} 

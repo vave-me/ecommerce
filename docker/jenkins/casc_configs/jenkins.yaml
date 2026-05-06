@@ -1,0 +1,122 @@
+jenkins:
+  systemMessage: "Jenkins configured via JCasC for Middleman K8s Deployment."
+  numExecutors: 2
+  scmCheckoutRetryCount: 3
+  mode: NORMAL
+  securityRealm:
+    local:
+      allowsSignup: false
+      enableCaptcha: false
+      users:
+        - id: "${JENKINS_ADMIN_ID:-admin}"
+          password: "${ADMIN_PASSWORD_CRED}"
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+        - "Overall/Administer:${JENKINS_ADMIN_ID:-admin}"
+        - "Overall/Read:authenticated"
+        - "Overall/Administer:authenticated"
+        - "Job/Build:authenticated"
+        - "Job/Read:authenticated"
+        - "Job/Workspace:authenticated"
+unclassified:
+  location:
+    url: "${JENKINS_URL}"
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - string:
+              scope: GLOBAL
+              id: "ADMIN_PASSWORD_CRED"
+              secret: "${ENV_ADMIN_PASSWORD}"
+              description: "Jenkins Admin User Password (from ENV)"
+          - basicSSHUserPrivateKey:
+              scope: GLOBAL
+              id: "git-ssh-key"
+              username: "git"
+              description: "SSH private key for GitHub access (from ENV)"
+              privateKeySource:
+                directEntry:
+                  privateKey: "${SSH_PRIVATE_KEY}"
+          - usernamePassword:
+              scope: GLOBAL
+              id: "registry-sfx-markt-com-creds"
+              username: "${REGISTRY_USER}"
+              password: "${REGISTRY_PASS}"
+              description: "Credentials for Docker Registry (registry.sfx-markt.com)"
+          - file:
+              scope: GLOBAL
+              id: "kubeconfig-secret"
+              fileName: "kubeconfig"
+              secretBytes: "${KUBECONFIG_SECRET_CONTENT}"
+              description: "Kubernetes config file (from ENV KUBECONFIG_SECRET_CONTENT, base64 encoded)"
+tool:
+  git:
+    installations:
+      - name: "Default"
+        home: "git"
+jobs:
+  - script: >
+      pipelineJob('Middleman-CI-CD') {
+        description('Main CI/CD pipeline for Middleman microservices deployment to Kubernetes.')
+        definition {
+          cpsScm {
+            scm {
+              git {
+                remote {
+                  url('git@github.com:exampleuser/classified.git')
+                  credentialsId('git-ssh-key')
+                }
+                branch('*/production')
+              }
+            }
+            scriptPath('Jenkinsfile')
+          }
+        }
+        parameters {
+          choiceParam {
+              name('SERVICE')
+              choices(['all', 'activity', 'users', 'products', 'baskets', 'ordering', 'payments', 'search', 'notifications', 'comments', 'media', 'messages', 'categories', 'geocoding', 'mailer', 'newsletters', 'offers', 'posts', 'properties', 'services', 'shipping', 'support', 'vehicles', 'wishlists', 'deals', 'scheduler','following', 'reviews',  'frontend', 'reverse-proxy'])
+              description('Service to build/deploy (or "all")')
+          }
+          choiceParam {
+              name('ENVIRONMENT')
+              choices(['development', 'testing', 'staging', 'production'])
+              description('Target environment (informational, can be used to select K8s manifests)')
+          }
+          stringParam {
+              name('TAG')
+              defaultValue('build-${BUILD_NUMBER}')
+              description('Docker image tag (default: build-${BUILD_NUMBER} set in Jenkinsfile)')
+              trim(true)
+          }
+          booleanParam {
+              name('RUN_TESTS')
+              defaultValue(true)
+              description('Run tests for the selected service (if applicable)')
+          }
+          booleanParam {
+              name('PUSH_IMAGE')
+              defaultValue(true)
+              description('Push Docker image(s) to registry')
+          }
+          booleanParam {
+              name('DEPLOY')
+              defaultValue(true)
+              description('Deploy the service(s) to Kubernetes using kubectl')
+          }
+          stringParam {
+              name('KUBECONFIG_CREDENTIAL_ID')
+              defaultValue('')
+              description('Optional: Jenkins credential ID for kubeconfig file (Secret File type)')
+              trim(true)
+          }
+           stringParam {
+              name('REGISTRY_CREDENTIAL_ID')
+              defaultValue('registry-sfx-markt-com-creds')
+              description('Jenkins credential ID for registry.sfx-markt.com (Username/Password type)')
+              trim(true)
+          }
+        }
+      }

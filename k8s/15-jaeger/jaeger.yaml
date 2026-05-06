@@ -1,0 +1,205 @@
+# --- Jaeger Deployment for Distributed Tracing ---
+# Namespace for Jaeger components
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: observability
+---
+# ConfigMap for Jaeger configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jaeger-config
+  namespace: observability
+data:
+  sampling_strategies.json: |
+    {
+      "default_strategy": {
+        "type": "probabilistic",
+        "param": 1.0
+      },
+      "service_strategies": [
+        {
+          "service": "users",
+          "type": "probabilistic",
+          "param": 1.0
+        }
+      ]
+    }
+---
+# Jaeger Collector Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: jaeger-collector
+  namespace: observability
+  labels:
+    app: jaeger
+    component: collector
+spec:
+  type: ClusterIP
+  ports:
+    - name: grpc-otlp
+      port: 4317
+      targetPort: 4317
+      protocol: TCP
+    - name: http-otlp
+      port: 4318
+      targetPort: 4318
+      protocol: TCP
+    - name: grpc-jaeger
+      port: 14250
+      targetPort: 14250
+      protocol: TCP
+    - name: http-jaeger
+      port: 14268
+      targetPort: 14268
+      protocol: TCP
+    - name: admin
+      port: 14269
+      targetPort: 14269
+      protocol: TCP
+  selector:
+    app: jaeger
+---
+# Jaeger Query Service (UI)
+apiVersion: v1
+kind: Service
+metadata:
+  name: jaeger-query
+  namespace: observability
+  labels:
+    app: jaeger
+    component: query
+spec:
+  type: ClusterIP
+  ports:
+    - name: http-query
+      port: 16686
+      targetPort: 16686
+      protocol: TCP
+    - name: grpc-query
+      port: 16685
+      targetPort: 16685
+      protocol: TCP
+  selector:
+    app: jaeger
+---
+# Jaeger Agent Service (for legacy support)
+apiVersion: v1
+kind: Service
+metadata:
+  name: jaeger-agent
+  namespace: observability
+  labels:
+    app: jaeger
+    component: agent
+spec:
+  type: ClusterIP
+  clusterIP: None  # Headless service for agent
+  ports:
+    - name: thrift-compact
+      port: 6831
+      targetPort: 6831
+      protocol: UDP
+    - name: thrift-binary
+      port: 6832
+      targetPort: 6832
+      protocol: UDP
+    - name: config
+      port: 5778
+      targetPort: 5778
+      protocol: TCP
+  selector:
+    app: jaeger
+---
+# Jaeger All-in-One Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jaeger
+  namespace: observability
+  labels:
+    app: jaeger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jaeger
+  template:
+    metadata:
+      labels:
+        app: jaeger
+    spec:
+      containers:
+        - name: jaeger
+          image: jaegertracing/all-in-one:1.64.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            # Collector ports
+            - containerPort: 4317
+              name: grpc-otlp
+              protocol: TCP
+            - containerPort: 4318
+              name: http-otlp
+              protocol: TCP
+            - containerPort: 14250
+              name: grpc-jaeger
+              protocol: TCP
+            - containerPort: 14268
+              name: http-jaeger
+              protocol: TCP
+            - containerPort: 14269
+              name: admin
+              protocol: TCP
+            # Query ports
+            - containerPort: 16686
+              name: http-query
+              protocol: TCP
+            - containerPort: 16685
+              name: grpc-query
+              protocol: TCP
+            # Agent ports
+            - containerPort: 6831
+              name: thrift-compact
+              protocol: UDP
+            - containerPort: 6832
+              name: thrift-binary
+              protocol: UDP
+            - containerPort: 5778
+              name: config
+              protocol: TCP
+          env:
+            - name: COLLECTOR_OTLP_ENABLED
+              value: "true"
+            - name: SPAN_STORAGE_TYPE
+              value: "memory"  # Change to cassandra/elasticsearch for production
+            - name: QUERY_BASE_PATH
+              value: "/jaeger"
+          volumeMounts:
+            - name: jaeger-config
+              mountPath: /etc/jaeger
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 14269
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 14269
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+      volumes:
+        - name: jaeger-config
+          configMap:
+            name: jaeger-config

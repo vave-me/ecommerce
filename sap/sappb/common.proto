@@ -1,0 +1,13 @@
+syntax = "proto3";
+package productspb;
+
+message Option {
+  string name = 1;
+  string value = 2;
+  int64 price = 3;
+}
+
+message Attribute {
+  string key = 1;
+  string value = 2;
+}

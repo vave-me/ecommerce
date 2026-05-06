@@ -1,0 +1,75 @@
+type: google.api.Service
+config_version: 3
+name: streams.googleapis.com
+title: Video Streaming API
+apis:
+  - name: streamspb.StreamsService
+http:
+  rules:
+    # Stream Management
+    - selector: streamspb.StreamsService.CreateStream
+      post: /api/streams
+      body: "*"
+    
+    - selector: streamspb.StreamsService.GetStream
+      get: /api/streams/{stream_id}
+    
+    - selector: streamspb.StreamsService.UpdateStream
+      put: /api/streams/{stream_id}
+      body: "*"
+    
+    - selector: streamspb.StreamsService.PublishStream
+      post: /api/streams/{stream_id}/publish
+    
+    - selector: streamspb.StreamsService.ArchiveStream
+      post: /api/streams/{stream_id}/archive
+    
+    # Stream Pricing and Access
+    - selector: streamspb.StreamsService.SetStreamPricing
+      post: /api/streams/{stream_id}/pricing
+      body: "*"
+    
+    - selector: streamspb.StreamsService.GrantUserAccess
+      post: /api/streams/{stream_id}/access
+      body: "*"
+    
+    - selector: streamspb.StreamsService.RevokeUserAccess
+      delete: /api/streams/{stream_id}/access/{user_id}
+    
+    # User Interaction
+    - selector: streamspb.StreamsService.UpdateWatchProgress
+      post: /api/streams/{stream_id}/progress
+      body: "*"
+    
+    - selector: streamspb.StreamsService.RateStream
+      post: /api/streams/{stream_id}/rate
+      body: "*"
+    
+    # Stream Discovery
+    - selector: streamspb.StreamsService.GetCatalog
+      get: /api/streams/catalog
+    
+    - selector: streamspb.StreamsService.SearchStreams
+      get: /api/streams/search
+    
+    - selector: streamspb.StreamsService.GetUserStreams
+      get: /api/users/{user_id}/streams
+    
+    - selector: streamspb.StreamsService.GetContinueWatching
+      get: /api/users/{user_id}/continue-watching
+    
+    # Series Management
+    - selector: streamspb.StreamsService.CreateSeries
+      post: /api/series
+      body: "*"
+    
+    - selector: streamspb.StreamsService.GetSeries
+      get: /api/series/{series_id}
+    
+    - selector: streamspb.StreamsService.AddSeason
+      post: /api/series/{series_id}/seasons
+      body: "*"
+    
+    - selector: streamspb.StreamsService.AddEpisode
+      post: /api/series/{series_id}/seasons/{season_number}/episodes
+      body: "*"

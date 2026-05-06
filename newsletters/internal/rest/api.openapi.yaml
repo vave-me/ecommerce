@@ -1,0 +1,182 @@
+openapiOptions:
+  file:
+    - file: "newsletterspb/api.proto"
+      option:
+        info:
+          title: Newsletter Management API
+          version: "1.0.0"
+          description: "API for creating and managing newsletters, subscriptions, editions, and templates."
+        basePath: /
+  method:
+    # Newsletter Management
+    - method: newsletterspb.NewslettersService.CreateNewsletter
+      option:
+        operationId: createNewsletter
+        tags:
+          - Newsletter
+        summary: Create a new newsletter
+
+    - method: newsletterspb.NewslettersService.UpdateNewsletter
+      option:
+        operationId: updateNewsletter
+        tags:
+          - Newsletter
+        summary: Update newsletter details
+
+    - method: newsletterspb.NewslettersService.GetNewsletter
+      option:
+        operationId: getNewsletter
+        tags:
+          - Newsletter
+        summary: Get newsletter by ID
+
+    - method: newsletterspb.NewslettersService.ListNewsletters
+      option:
+        operationId: listNewsletters
+        tags:
+          - Newsletter
+        summary: List all newsletters
+
+    - method: newsletterspb.NewslettersService.DeleteNewsletter
+      option:
+        operationId: deleteNewsletter
+        tags:
+          - Newsletter
+        summary: Delete a newsletter
+
+    # Subscription Management
+    - method: newsletterspb.NewslettersService.Subscribe
+      option:
+        operationId: subscribe
+        tags:
+          - Subscription
+        summary: Subscribe to a newsletter
+
+    - method: newsletterspb.NewslettersService.Unsubscribe
+      option:
+        operationId: unsubscribe
+        tags:
+          - Subscription
+        summary: Unsubscribe from a newsletter
+
+    - method: newsletterspb.NewslettersService.UpdateSubscription
+      option:
+        operationId: updateSubscription
+        tags:
+          - Subscription
+        summary: Update subscription preferences
+
+    - method: newsletterspb.NewslettersService.GetSubscription
+      option:
+        operationId: getSubscription
+        tags:
+          - Subscription
+        summary: Get subscription details
+
+    - method: newsletterspb.NewslettersService.ListSubscriptions
+      option:
+        operationId: listSubscriptions
+        tags:
+          - Subscription
+        summary: List user subscriptions
+
+    # Edition Management
+    - method: newsletterspb.NewslettersService.CreateEdition
+      option:
+        operationId: createEdition
+        tags:
+          - Edition
+        summary: Create a new edition
+
+    - method: newsletterspb.NewslettersService.UpdateEdition
+      option:
+        operationId: updateEdition
+        tags:
+          - Edition
+        summary: Update edition content
+
+    - method: newsletterspb.NewslettersService.GetEdition
+      option:
+        operationId: getEdition
+        tags:
+          - Edition
+        summary: Get edition details
+
+    - method: newsletterspb.NewslettersService.ListEditions
+      option:
+        operationId: listEditions
+        tags:
+          - Edition
+        summary: List newsletter editions
+
+    - method: newsletterspb.NewslettersService.ScheduleEdition
+      option:
+        operationId: scheduleEdition
+        tags:
+          - Edition
+        summary: Schedule edition for sending
+
+    - method: newsletterspb.NewslettersService.SendEdition
+      option:
+        operationId: sendEdition
+        tags:
+          - Edition
+        summary: Send edition to subscribers
+
+    - method: newsletterspb.NewslettersService.PreviewEdition
+      option:
+        operationId: previewEdition
+        tags:
+          - Edition
+        summary: Preview edition before sending
+
+    # Template Management
+    - method: newsletterspb.NewslettersService.CreateTemplate
+      option:
+        operationId: createTemplate
+        tags:
+          - Template
+        summary: Create a new template
+
+    - method: newsletterspb.NewslettersService.UpdateTemplate
+      option:
+        operationId: updateTemplate
+        tags:
+          - Template
+        summary: Update template content
+
+    - method: newsletterspb.NewslettersService.GetTemplate
+      option:
+        operationId: getTemplate
+        tags:
+          - Template
+        summary: Get template details
+
+    - method: newsletterspb.NewslettersService.ListTemplates
+      option:
+        operationId: listTemplates
+        tags:
+          - Template
+        summary: List available templates
+
+    - method: newsletterspb.NewslettersService.DeleteTemplate
+      option:
+        operationId: deleteTemplate
+        tags:
+          - Template
+        summary: Delete a template
+
+    # Analytics
+    - method: newsletterspb.NewslettersService.GetNewsletterStats
+      option:
+        operationId: getNewsletterStats
+        tags:
+          - Analytics
+        summary: Get newsletter statistics
+
+    - method: newsletterspb.NewslettersService.GetEditionStats
+      option:
+        operationId: getEditionStats
+        tags:
+          - Analytics
+        summary: Get edition statistics

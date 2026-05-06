@@ -1,0 +1,68 @@
+.featureCard {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+  transition: all 0.2s ease;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.featureCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  border-color: #cbd5e1;
+}
+
+.featureCard.highlight {
+  background: #faf5ff;
+  border-color: #e9d5ff;
+}
+
+.badge {
+  position: absolute;
+  top: -0.5rem;
+  right: 1rem;
+  background: #3730a3;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 0.625rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.iconWrapper {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  background: #f8fafc;
+  border-radius: 10px;
+}
+
+.iconEmoji {
+  font-size: 1.5rem;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.description {
+  font-size: 0.875rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+  flex-grow: 1;
+}

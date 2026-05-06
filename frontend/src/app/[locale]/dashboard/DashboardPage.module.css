@@ -1,0 +1,258 @@
+/* DashboardPage.module.css */
+/* Base styles (apply to all screen sizes) */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.mainContent {
+    flex: 1;
+    width: 100%;
+    padding: 0;
+}
+
+.layoutGrid, .layoutListGrid {
+    display: block;
+    width: 100%;
+}
+
+.contentArea, .contentListArea {
+    width: 100%;
+}
+
+.postList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.postList li {
+    width: 100%;
+    margin-bottom: var(--space-sm);
+}
+
+/* Page header styles */
+.pageHeader {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 1rem;
+}
+
+.pageTitle {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #111827;
+}
+
+.resultCount {
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+/* State styles */
+.loadingState {
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.125rem;
+    color: #6b7280;
+}
+
+.emptyState {
+    text-align: center;
+    padding: 3rem;
+    color: #6b7280;
+}
+
+.emptyState h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #374151;
+}
+
+.emptyState p {
+    font-size: 0.875rem;
+}
+
+.errorState {
+    text-align: center;
+    padding: 3rem;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    border-radius: 0.5rem;
+    background-color: #fef2f2;
+    margin: 1rem;
+}
+
+.errorState h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.retryButton {
+    background-color: #dc2626;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.retryButton:hover:not(:disabled) {
+    background-color: #b91c1c;
+}
+
+.retryButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.devError {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f3f4f6;
+    border-radius: 0.375rem;
+    text-align: left;
+    font-size: 0.75rem;
+    color: #374151;
+}
+
+.paginationInfo {
+    text-align: center;
+    padding: 1rem;
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+    .mainContent {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 var(--space-md);
+    }
+
+    .layoutGrid {
+        display: grid;
+        grid-template-areas: 'leftside contentarea';
+        grid-template-columns: 0.5fr 3fr;
+        column-gap: 16px;
+    }
+
+    .layoutListGrid {
+        display: flex;
+        gap: 10px;
+    }
+
+    .contentArea {
+        grid-area: contentarea;
+    }
+
+    .contentListArea {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .pageHeader {
+        padding: 1.5rem;
+    }
+
+    .pageTitle {
+        font-size: 2.25rem;
+    }
+}
+
+/* Small Mobile Optimizations */
+@media (max-width: 576px) {
+    .mainContent {
+        padding: 0;
+    }
+
+    .pageHeader {
+        padding: 0.75rem;
+    }
+
+    .pageTitle {
+        font-size: 1.5rem;
+    }
+
+    .errorState, .emptyState, .loadingState {
+        padding: 2rem 1rem;
+    }
+}
+
+/* Dark Theme Support */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background-color: var(--gray-900);
+        color: var(--gray-50);
+    }
+
+    .mainContent {
+        background-color: var(--gray-900);
+    }
+
+    .pageHeader {
+        border-bottom: 1px solid var(--gray-700);
+        background-color: var(--gray-800);
+    }
+
+    .pageTitle {
+        color: var(--gray-50);
+    }
+
+    .resultCount {
+        color: var(--gray-300);
+    }
+
+    .loadingState {
+        color: var(--gray-300);
+        background-color: var(--gray-800);
+    }
+
+    .emptyState {
+        color: var(--gray-300);
+        background-color: var(--gray-800);
+    }
+
+    .emptyState h3 {
+        color: var(--gray-200);
+    }
+
+    .errorState {
+        color: var(--danger);
+        border: 1px solid var(--gray-700);
+        background-color: var(--gray-800);
+    }
+
+    .retryButton {
+        background-color: var(--danger);
+        color: var(--gray-50);
+    }
+
+    .retryButton:hover:not(:disabled) {
+        background-color: var(--danger);
+        filter: brightness(0.9);
+    }
+
+    .devError {
+        background-color: var(--gray-700);
+        color: var(--gray-200);
+    }
+
+    .paginationInfo {
+        color: var(--gray-300);
+        background-color: var(--gray-800);
+    }
+}

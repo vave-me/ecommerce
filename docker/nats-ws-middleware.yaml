@@ -1,0 +1,43 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: nats-ws-protocol
+  namespace: messaging
+spec:
+  headers:
+    customRequestHeaders:
+      Connection: "Upgrade"
+      Upgrade: "websocket"
+    customResponseHeaders:
+      Access-Control-Allow-Origin: "*"
+      Access-Control-Allow-Methods: "GET, OPTIONS"
+      Access-Control-Allow-Headers: "*"
+      Access-Control-Max-Age: "86400"
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: nats-ws-compress
+  namespace: messaging
+spec:
+  compress: {}
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: nats-websocket-route
+  namespace: messaging
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`nats-ws.sfx-markt.com`)
+      kind: Rule
+      services:
+        - name: nats
+          port: 9222
+      middlewares:
+        - name: nats-ws-protocol
+        - name: nats-ws-compress
+  tls:
+    secretName: nats-ws-tls 

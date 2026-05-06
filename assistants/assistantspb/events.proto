@@ -1,0 +1,123 @@
+syntax = "proto3";
+
+package assistantspb;
+import "assistantspb/common_assistant.proto";
+
+// Event when assistant is authorized
+message AssistantAuthorized {
+  string id = 1;
+}
+
+// Event when a new assistant is created
+message AssistantCreated {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  bool active = 4;
+  string model = 5;
+  repeated AssistantCapability capabilities = 6;
+  double temperature = 7;
+  int32 max_tokens = 8;
+  string system_prompt = 9;
+  string user_id = 10;
+}
+
+// Event when an assistant is activated
+message AssistantActivated {
+  string id = 1;        // Assistant ID (UUID)
+  string timestamp = 2; // When the activation occurred
+}
+
+// Event when an assistant is deactivated
+message AssistantDeactivated {
+  string id = 1;        // Assistant ID (UUID)
+  string timestamp = 2; // When the deactivation occurred
+}
+
+// Event when an assistant's configuration is updated
+message AssistantConfigurationUpdated {
+  string id = 1;           // Assistant ID (UUID)
+  double temperature = 2;   // Updated temperature setting
+  int32 max_tokens = 3;     // Updated max tokens setting
+  string system_prompt = 4; // Updated system prompt
+  string updated_at = 5;    // When the update occurred
+}
+
+// Event when an assistant processes a user request
+message AssistantRequestProcessed {
+  string id = 1;              // Assistant ID (UUID)
+  string request_id = 2;      // Request ID
+  string user_id = 3;         // User ID who made the request
+  string message = 4;         // User's request message
+  map<string, string> context = 5; // Request context
+  string request_type = 6;    // Type of request
+  string response_id = 7;     // Response ID
+  string response_message = 8; // Assistant's response
+  map<string, string> response_data = 9; // Response data
+  repeated AssistantAction actions = 10; // Actions performed
+  string timestamp = 11;      // When processing completed
+  string status = 12;         // Processing status
+  double confidence = 13;     // Confidence score
+}
+
+// Assistant action definition for events
+
+// Event when a assistant logs in
+message AssistantLoggedIn {
+  string id = 1;        // Assistant ID (UUID)
+}
+
+// Event when a assistant logs out
+message AssistantLoggedOut {
+  string id = 1;        // Assistant ID (UUID)
+}
+
+// Event when a assistant's participation in a service or activity is toggled
+message AssistantParticipationToggled {
+  string id = 1;        // Assistant ID (UUID)
+  bool participating = 2;    // True if participating, False if not
+}
+
+// Event when a assistant changes their name
+message AssistantRenamed {
+  string id = 1;        // Assistant ID (UUID)
+  string name = 2;  // The updated name of the assistant (renamed for clarity)
+}
+
+// Conversation Events
+
+// Event when a new conversation is created
+message ConversationCreated {
+  string conversation_id = 1;
+  string user_id = 2;
+  string assistant_id = 3;
+  string created_at = 4;
+  map<string, string> context = 5;
+}
+
+// Event when a message is added to a conversation
+message MessageAdded {
+  string conversation_id = 1;
+  ConversationMessage message = 2;
+  string assistant_id = 3;
+  string timestamp = 4;
+}
+
+// Event when conversation context is updated
+message ConversationContextUpdated {
+  string conversation_id = 1;
+  string assistant_id = 2;
+  map<string, string> context = 3;
+  string updated_at = 4;
+}
+
+// Event when a conversation is archived
+message ConversationArchived {
+  string conversation_id = 1;
+  string assistant_id = 2;
+  string archived_at = 3;
+}
+
+
+
+

@@ -1,0 +1,910 @@
+/* CreateModal.forms.module.css - Unified Form Styles for All Create Modals */
+
+/* Import design system and base modal variables */
+@import '../../styles/design-system.css';
+@import './CreateModal.base.module.css';
+
+/* =================================================================
+   FORM CONTAINER & LAYOUT
+   ================================================================= */
+
+.formContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.formTitle {
+  font-size: var(--modal-font-2xl);
+  font-weight: var(--modal-font-bold);
+  color: var(--modal-text-primary);
+  margin: 0 0 var(--modal-space-sm) 0;
+  line-height: 1.2;
+}
+
+.formDescription {
+  color: var(--modal-text-secondary);
+  margin-bottom: var(--modal-space-2xl);
+  font-size: var(--modal-font-base);
+  line-height: 1.5;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--modal-space-xl);
+}
+
+/* =================================================================
+   FORM GROUPS & LAYOUT
+   ================================================================= */
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--modal-space-sm);
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--modal-space-lg);
+  align-items: start;
+}
+
+.formRowThree {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--modal-space-lg);
+  align-items: start;
+}
+
+.formGroupFull {
+  grid-column: 1 / -1;
+}
+
+/* =================================================================
+   FORM LABELS
+   ================================================================= */
+
+.formLabel {
+  font-size: var(--modal-font-sm);
+  font-weight: var(--modal-font-semibold);
+  color: var(--modal-text-primary);
+  margin-bottom: var(--modal-space-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--modal-space-xs);
+}
+
+.labelIcon {
+  width: 16px;
+  height: 16px;
+  color: var(--modal-text-secondary);
+}
+
+.requiredMark {
+  color: var(--modal-error);
+  font-weight: var(--modal-font-bold);
+}
+
+.optionalMark {
+  color: var(--modal-text-muted);
+  font-size: var(--modal-font-xs);
+  font-weight: var(--modal-font-normal);
+  margin-left: var(--modal-space-xs);
+}
+
+/* =================================================================
+   FORM INPUTS
+   ================================================================= */
+
+.formInput,
+.formTextarea,
+.formSelect {
+  width: 100%;
+  padding: var(--modal-space-md);
+  border: 1px solid var(--modal-border);
+  border-radius: var(--modal-radius-md);
+  font-size: var(--modal-font-base);
+  color: var(--modal-text-primary);
+  background-color: var(--modal-bg-white);
+  transition: var(--modal-transition-normal);
+  font-family: inherit;
+}
+
+.formInput:focus,
+.formTextarea:focus,
+.formSelect:focus {
+  outline: none;
+  border-color: var(--modal-primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.formInput::placeholder,
+.formTextarea::placeholder {
+  color: var(--modal-text-muted);
+  opacity: 0.6;
+}
+
+.formTextarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.formSelect {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right var(--modal-space-md) center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: calc(var(--modal-space-md) + 24px);
+  appearance: none;
+}
+
+/* =================================================================
+   INPUT STATES
+   ================================================================= */
+
+.inputError {
+  border-color: var(--modal-error);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.inputError:focus {
+  border-color: var(--modal-error);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.inputDisabled {
+  background-color: var(--modal-border-light);
+  color: var(--modal-text-muted);
+  cursor: not-allowed;
+}
+
+.inputSuccess {
+  border-color: var(--modal-success);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+}
+
+/* =================================================================
+   FIELD ERRORS & HINTS
+   ================================================================= */
+
+.fieldError {
+  color: var(--modal-error);
+  font-size: var(--modal-font-sm);
+  margin-top: var(--modal-space-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--modal-space-xs);
+}
+
+.fieldHint {
+  color: var(--modal-text-secondary);
+  font-size: var(--modal-font-sm);
+  margin-top: var(--modal-space-xs);
+  line-height: 1.4;
+}
+
+.fieldSuccess {
+  color: var(--modal-success);
+  font-size: var(--modal-font-sm);
+  margin-top: var(--modal-space-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--modal-space-xs);
+}
+
+.charCount {
+  color: var(--modal-text-secondary);
+  font-size: var(--modal-font-xs);
+  margin-top: var(--modal-space-xs);
+  text-align: right;
+}
+
+.charCount.warning {
+  color: #f59e0b;
+}
+
+.charCount.error {
+  color: var(--modal-error);
+}
+
+/* =================================================================
+   SPECIALIZED INPUTS
+   ================================================================= */
+
+.priceInputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.currencySymbol {
+  position: absolute;
+  left: var(--modal-space-md);
+  color: var(--modal-text-secondary);
+  font-weight: var(--modal-font-semibold);
+  pointer-events: none;
+}
+
+.priceInput {
+  padding-left: calc(var(--modal-space-md) + 24px);
+}
+
+.priceInput::-webkit-outer-spin-button,
+.priceInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.priceInput[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* =================================================================
+   TAGS INPUT
+   ================================================================= */
+
+.tagsInputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.tagIcon {
+  position: absolute;
+  left: var(--modal-space-md);
+  color: var(--modal-text-secondary);
+  pointer-events: none;
+}
+
+.tagsInputWrapper .formInput {
+  padding-left: calc(var(--modal-space-md) + 24px);
+}
+
+/* =================================================================
+   FILE INPUT
+   ================================================================= */
+
+.fileInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.fileInputLabel {
+  display: inline-block;
+  padding: var(--modal-space-md) var(--modal-space-xl);
+  background-color: var(--modal-bg-white);
+  border: 2px dashed var(--modal-border);
+  border-radius: var(--modal-radius-md);
+  color: var(--modal-text-primary);
+  cursor: pointer;
+  transition: var(--modal-transition-normal);
+  text-align: center;
+  width: 100%;
+}
+
+.fileInputLabel:hover {
+  border-color: var(--modal-primary);
+  background-color: var(--modal-primary-light);
+  color: var(--modal-primary);
+}
+
+.fileInputLabel.dragActive {
+  border-color: var(--modal-primary);
+  background-color: var(--modal-primary-light);
+  color: var(--modal-primary);
+  transform: scale(1.02);
+}
+
+/* =================================================================
+   TOGGLE SWITCH
+   ================================================================= */
+
+.toggleSwitch {
+  display: flex;
+  align-items: center;
+  gap: var(--modal-space-md);
+}
+
+.toggleInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.toggleLabel {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+  background-color: var(--modal-border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: var(--modal-transition-normal);
+}
+
+.toggleLabel:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: var(--modal-bg-white);
+  border-radius: 50%;
+  transition: var(--modal-transition-normal);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toggleInput:checked + .toggleLabel {
+  background-color: var(--modal-primary);
+}
+
+.toggleInput:checked + .toggleLabel:before {
+  transform: translateX(24px);
+}
+
+.toggleInput:focus + .toggleLabel {
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.toggleText {
+  font-size: var(--modal-font-sm);
+  color: var(--modal-text-primary);
+  font-weight: var(--modal-font-medium);
+}
+
+/* =================================================================
+   CHECKBOX & RADIO
+   ================================================================= */
+
+.checkbox,
+.radio {
+  display: flex;
+  align-items: center;
+  gap: var(--modal-space-sm);
+  cursor: pointer;
+}
+
+.checkboxInput,
+.radioInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.checkboxInput {
+  /* Custom checkbox styles handled by ::before */
+}
+
+.radioInput {
+  /* Custom radio styles handled by ::before */
+}
+
+.checkboxInput:checked,
+.checkboxInput:indeterminate {
+  /* Visual feedback handled by ::before */
+}
+
+.radioInput:checked {
+  /* Visual feedback handled by ::before */
+}
+
+.checkboxInput:focus,
+.radioInput:focus {
+  /* Focus styles handled by ::before */
+}
+
+.checkboxLabel,
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--modal-space-sm);
+  cursor: pointer;
+  font-size: var(--modal-font-sm);
+  color: var(--modal-text-primary);
+  line-height: 1.4;
+}
+
+/* =================================================================
+   FORM ACTIONS
+   ================================================================= */
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--modal-space-md);
+  margin-top: var(--modal-space-2xl);
+  padding-top: var(--modal-space-xl);
+  border-top: 1px solid var(--modal-border-light);
+}
+
+.formActionsLeft {
+  justify-content: flex-start;
+}
+
+.formActionsCenter {
+  justify-content: center;
+}
+
+.formActionsSplit {
+  justify-content: space-between;
+}
+
+.formActionsSplit > :first-child {
+  margin-right: auto;
+}
+
+/* =================================================================
+   BUTTONS
+   ================================================================= */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--modal-space-sm);
+  padding: var(--modal-space-md) var(--modal-space-xl);
+  border: 1px solid transparent;
+  border-radius: var(--modal-radius-md);
+  font-size: var(--modal-font-base);
+  font-weight: var(--modal-font-medium);
+  line-height: 1;
+  cursor: pointer;
+  transition: var(--modal-transition-normal);
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Button Variants */
+.primaryButton {
+  background-color: var(--modal-primary);
+  color: var(--modal-bg-white);
+  border-color: var(--modal-primary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.primaryButton:hover:not(:disabled) {
+  background-color: var(--modal-primary-hover);
+  border-color: var(--modal-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.secondaryButton {
+  background-color: var(--modal-bg-white);
+  color: var(--modal-text-primary);
+  border-color: var(--modal-border);
+}
+
+.secondaryButton:hover:not(:disabled) {
+  background-color: var(--modal-border-light);
+  border-color: var(--modal-text-secondary);
+}
+
+.dangerButton {
+  background-color: var(--modal-error);
+  color: var(--modal-bg-white);
+  border-color: var(--modal-error);
+}
+
+.dangerButton:hover:not(:disabled) {
+  background-color: #dc2626;
+  border-color: #dc2626;
+}
+
+.ghostButton {
+  background-color: transparent;
+  color: var(--modal-text-primary);
+  border-color: transparent;
+}
+
+.ghostButton:hover:not(:disabled) {
+  background-color: var(--modal-border-light);
+}
+
+/* Button Sizes */
+.buttonSmall {
+  padding: var(--modal-space-sm) var(--modal-space-md);
+  font-size: var(--modal-font-sm);
+}
+
+.buttonLarge {
+  padding: var(--modal-space-lg) var(--modal-space-2xl);
+  font-size: var(--modal-font-lg);
+}
+
+/* Loading State */
+.buttonLoading {
+  position: relative;
+  pointer-events: none;
+}
+
+.buttonLoading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  margin-left: -8px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* =================================================================
+   RESPONSIVE DESIGN
+   ================================================================= */
+
+@media (max-width: 768px) {
+  .formRow,
+  .formRowThree {
+    grid-template-columns: 1fr;
+  }
+
+  .formActions {
+    flex-direction: column;
+  }
+
+  .formActionsSplit {
+    flex-direction: column;
+  }
+
+  .button {
+    justify-content: center;
+  }
+
+  .formTitle {
+    font-size: var(--modal-font-xl);
+  }
+
+  .formContainer {
+    padding: var(--modal-space-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .form {
+    gap: var(--modal-space-lg);
+  }
+
+  .formGroup {
+    gap: var(--modal-space-xs);
+  }
+
+  .formInput,
+  .formTextarea,
+  .formSelect {
+    padding: var(--modal-space-sm);
+  }
+
+  .button {
+    padding: var(--modal-space-sm) var(--modal-space-lg);
+  }
+
+  .toggleLabel {
+    width: 40px;
+    height: 20px;
+  }
+
+  .toggleLabel:before {
+    width: 16px;
+    height: 16px;
+  }
+
+  .toggleInput:checked + .toggleLabel:before {
+    transform: translateX(20px);
+  }
+}
+
+/* =================================================================
+   DARK THEME SUPPORT
+   ================================================================= */
+
+@media (prefers-color-scheme: dark) {
+  .formTitle {
+    color: var(--modal-text-primary);
+  }
+
+  .formDescription {
+    color: var(--modal-text-secondary);
+  }
+
+  .formLabel {
+    color: var(--modal-text-primary);
+  }
+
+  .labelIcon {
+    color: var(--modal-text-secondary);
+  }
+
+  .requiredMark {
+    color: var(--modal-error);
+  }
+
+  .optionalMark {
+    color: var(--modal-text-muted);
+  }
+
+  .formInput,
+  .formTextarea,
+  .formSelect {
+    background-color: var(--modal-bg-sidebar);
+    border-color: var(--modal-border);
+    color: var(--modal-text-primary);
+  }
+
+  .formInput:focus,
+  .formTextarea:focus,
+  .formSelect:focus {
+    border-color: var(--modal-primary);
+    box-shadow: 0 0 0 3px var(--modal-primary-light);
+  }
+
+  .formInput::placeholder,
+  .formTextarea::placeholder {
+    color: var(--modal-text-muted);
+  }
+
+  .formSelect {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  }
+
+  .inputError {
+    border-color: var(--modal-error);
+    box-shadow: 0 0 0 3px var(--modal-error-bg);
+  }
+
+  .inputError:focus {
+    border-color: var(--modal-error);
+    box-shadow: 0 0 0 3px var(--modal-error-bg);
+  }
+
+  .inputDisabled {
+    background-color: var(--modal-border);
+    color: var(--modal-text-muted);
+  }
+
+  .inputSuccess {
+    border-color: var(--modal-success);
+    box-shadow: 0 0 0 3px var(--modal-success-bg);
+  }
+
+  .fieldError {
+    color: var(--modal-error);
+  }
+
+  .fieldHint {
+    color: var(--modal-text-secondary);
+  }
+
+  .fieldSuccess {
+    color: var(--modal-success);
+  }
+
+  .charCount {
+    color: var(--modal-text-secondary);
+  }
+
+  .charCount.warning {
+    color: #f59e0b;
+  }
+
+  .charCount.error {
+    color: var(--modal-error);
+  }
+
+  .currencySymbol {
+    color: var(--modal-text-secondary);
+  }
+
+  .tagIcon {
+    color: var(--modal-text-secondary);
+  }
+
+  .fileInputLabel {
+    background-color: var(--modal-bg-sidebar);
+    border-color: var(--modal-border);
+    color: var(--modal-text-primary);
+  }
+
+  .fileInputLabel:hover {
+    border-color: var(--modal-primary);
+    background-color: var(--modal-primary-light);
+    color: var(--modal-primary);
+  }
+
+  .fileInputLabel.dragActive {
+    border-color: var(--modal-primary);
+    background-color: var(--modal-primary-light);
+    color: var(--modal-primary);
+  }
+
+  .toggleLabel {
+    background-color: var(--modal-border);
+  }
+
+  .toggleLabel:before {
+    background-color: var(--modal-bg-white);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .toggleInput:checked + .toggleLabel {
+    background-color: var(--modal-primary);
+  }
+
+  .toggleInput:focus + .toggleLabel {
+    box-shadow: 0 0 0 3px var(--modal-primary-light);
+  }
+
+  .toggleText {
+    color: var(--modal-text-primary);
+  }
+
+  .checkboxLabel,
+  .radioLabel {
+    color: var(--modal-text-primary);
+  }
+
+  .formActions {
+    border-top-color: var(--modal-border-light);
+  }
+
+  .button:focus {
+    box-shadow: 0 0 0 3px var(--modal-primary-light);
+  }
+
+  .primaryButton {
+    background-color: var(--modal-primary);
+    color: var(--modal-bg-white);
+    border-color: var(--modal-primary);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .primaryButton:hover:not(:disabled) {
+    background-color: var(--modal-primary-hover);
+    border-color: var(--modal-primary-hover);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .secondaryButton {
+    background-color: var(--modal-bg-sidebar);
+    color: var(--modal-text-primary);
+    border-color: var(--modal-border);
+  }
+
+  .secondaryButton:hover:not(:disabled) {
+    background-color: var(--modal-border);
+    border-color: var(--modal-text-secondary);
+  }
+
+  .dangerButton {
+    background-color: var(--modal-error);
+    color: var(--modal-bg-white);
+    border-color: var(--modal-error);
+  }
+
+  .dangerButton:hover:not(:disabled) {
+    background-color: #dc2626;
+    border-color: #dc2626;
+  }
+
+  .ghostButton {
+    background-color: transparent;
+    color: var(--modal-text-primary);
+  }
+
+  .ghostButton:hover:not(:disabled) {
+    background-color: var(--modal-border-light);
+  }
+}
+
+/* =================================================================
+   HIGH CONTRAST MODE SUPPORT
+   ================================================================= */
+
+@media (prefers-contrast: high) {
+  .formInput,
+  .formTextarea,
+  .formSelect {
+    border-width: 2px;
+  }
+
+  .formInput:focus,
+  .formTextarea:focus,
+  .formSelect:focus {
+    border-width: 3px;
+    box-shadow: none;
+  }
+
+  .button {
+    border-width: 2px;
+  }
+
+  .toggleLabel {
+    border: 2px solid var(--modal-border);
+  }
+
+  .toggleLabel:before {
+    border: 1px solid var(--modal-border);
+  }
+
+  .fileInputLabel {
+    border-width: 3px;
+  }
+}
+
+/* =================================================================
+   REDUCED MOTION SUPPORT
+   ================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .formInput,
+  .formTextarea,
+  .formSelect,
+  .button,
+  .toggleLabel,
+  .toggleLabel:before,
+  .fileInputLabel {
+    transition: none;
+  }
+
+  .buttonLoading::after {
+    animation: none;
+  }
+
+  .fileInputLabel.dragActive {
+    transform: none;
+  }
+
+  .primaryButton:hover:not(:disabled) {
+    transform: none;
+  }
+} 

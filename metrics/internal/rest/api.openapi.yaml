@@ -1,0 +1,51 @@
+openapiOptions:
+  file:
+    - file: "metricspb/api.proto"
+      option:
+        info:
+          title: Metric
+          version: "1.0.0"
+        basePath: /
+  method:
+    - method: metricspb.MetricsService.GetUserMetric
+      option:
+        operationId: getUserMetric
+        tags:
+          - UserMetric
+        summary: User metrics
+    - method: metricspb.MetricsService.GetItemMetric
+      option:
+        operationId: GetItemMetric
+        tags:
+          - ItemMetric
+        summary: Item metrics
+    - method: metricspb.MetricsService.GetItemsMetric
+      option:
+        operationId: getItemsMetric
+        tags:
+          - ItemMetric
+        summary: Item metrics
+    - method: metricspb.MetricsService.GetHighestMetricsByType
+      option:
+        operationId: getHighestMetricsByType
+        tags:
+          - ItemMetric
+        summary: Item metrics
+    - method: metricspb.MetricsService.GetLowestMetricsByType
+      option:
+        operationId: getLowestMetricsByType
+        tags:
+          - ItemMetric
+        summary: Item metrics
+    - method: metricspb.MetricsService.ShareItem
+      option:
+        operationId: shareItem
+        tags:
+          - ItemMetric
+        summary: Item metrics
+    - method: metricspb.MetricsService.VisitItem
+      option:
+        operationId: visitItem
+        tags:
+          - ItemMetric
+        summary: Item metrics

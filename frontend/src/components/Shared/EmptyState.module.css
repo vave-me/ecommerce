@@ -1,0 +1,328 @@
+/**
+ * OPTIMIZED EMPTY STATE STYLES
+ * Clear visual hierarchy and encouraging design
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--ai-space-4xl);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Size variants */
+.small {
+  padding: var(--ai-space-xl);
+  max-width: 350px;
+}
+
+.medium {
+  padding: var(--ai-space-4xl);
+  max-width: 500px;
+}
+
+.large {
+  padding: var(--ai-space-6xl);
+  max-width: 600px;
+}
+
+/* Variant styles */
+.default {
+  background: transparent;
+}
+
+.card {
+  background: var(--ai-color-surface);
+  border: 1px solid var(--ai-color-border);
+  border-radius: var(--ai-radius-lg);
+  box-shadow: var(--shadow-optimized-sm);
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: var(--gray-800, #1f2937);
+    border-color: var(--gray-700, #374151);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.highlight {
+  background: var(--ai-color-info-bg);
+  border: 1px solid var(--ai-color-info-border);
+  border-radius: var(--ai-radius-lg);
+}
+
+@media (prefers-color-scheme: dark) {
+  .highlight {
+    background: rgba(45, 212, 191, 0.1);
+    border-color: var(--teal-600, #0d9488);
+  }
+}
+
+/* Icon container */
+.iconContainer {
+  margin-bottom: var(--ai-space-xl);
+}
+
+.emptyIcon {
+  color: var(--ai-color-text-muted);
+  stroke-width: 1.5;
+}
+
+@media (prefers-color-scheme: dark) {
+  .emptyIcon {
+    color: var(--gray-500, #6b7280);
+  }
+}
+
+.highlight .emptyIcon {
+  color: var(--ai-color-info);
+}
+
+@media (prefers-color-scheme: dark) {
+  .highlight .emptyIcon {
+    color: var(--teal-400, #2dd4bf);
+  }
+}
+
+/* Content */
+.content {
+  margin-bottom: var(--ai-space-xl);
+}
+
+.title {
+  font-size: var(--ai-text-xl);
+  font-weight: var(--ai-font-weight-semibold);
+  color: var(--ai-color-text-primary);
+  margin: 0 0 var(--ai-space-md) 0;
+  line-height: var(--ai-line-height-tight);
+}
+
+@media (prefers-color-scheme: dark) {
+  .title {
+    color: var(--gray-100, #f3f4f6);
+  }
+}
+
+.small .title {
+  font-size: var(--ai-text-lg);
+}
+
+.large .title {
+  font-size: var(--ai-text-2xl);
+}
+
+.message {
+  font-size: var(--ai-text-base);
+  color: var(--ai-color-text-secondary);
+  margin: 0 0 var(--ai-space-md) 0;
+  line-height: var(--ai-line-height-relaxed);
+}
+
+@media (prefers-color-scheme: dark) {
+  .message {
+    color: var(--gray-400, #9ca3af);
+  }
+}
+
+.small .message {
+  font-size: var(--ai-text-sm);
+}
+
+.large .message {
+  font-size: var(--ai-text-lg);
+}
+
+.suggestion {
+  font-size: var(--ai-text-sm);
+  color: var(--ai-color-text-muted);
+  margin: 0;
+  line-height: var(--ai-line-height-relaxed);
+  font-style: italic;
+}
+
+@media (prefers-color-scheme: dark) {
+  .suggestion {
+    color: var(--gray-500, #6b7280);
+  }
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: var(--ai-space-md);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ai-space-sm);
+  padding: var(--ai-space-md) var(--ai-space-lg);
+  border-radius: var(--ai-radius-md);
+  font-size: var(--ai-text-sm);
+  font-weight: var(--ai-font-weight-medium);
+  cursor: pointer;
+  transition: all var(--ai-transition-fast);
+  border: 1px solid transparent;
+  text-decoration: none;
+  min-height: 40px;
+}
+
+.button:focus {
+  outline: 2px solid var(--ai-color-border-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .button:focus {
+    outline-color: var(--teal-400, #2dd4bf);
+  }
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (prefers-color-scheme: dark) {
+  .button:disabled {
+    opacity: 0.5;
+  }
+}
+
+.primary {
+  background: var(--ai-color-primary);
+  color: white;
+  border-color: var(--ai-color-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+  .primary {
+    background: var(--teal-600, #0d9488);
+    color: var(--gray-50, #f9fafb);
+    border-color: var(--teal-600, #0d9488);
+  }
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--ai-color-primary-hover);
+  border-color: var(--ai-color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-optimized-md);
+}
+
+@media (prefers-color-scheme: dark) {
+  .primary:hover:not(:disabled) {
+    background: var(--teal-500, #14b8a6);
+    border-color: var(--teal-500, #14b8a6);
+    box-shadow: 0 4px 12px rgba(45, 212, 191, 0.3);
+  }
+}
+
+.secondary {
+  background: transparent;
+  color: var(--ai-color-text-primary);
+  border-color: var(--ai-color-border);
+}
+
+@media (prefers-color-scheme: dark) {
+  .secondary {
+    color: var(--gray-300, #d1d5db);
+    border-color: var(--gray-600, #4b5563);
+  }
+}
+
+.secondary:hover:not(:disabled) {
+  background: var(--ai-color-neutral-light);
+  border-color: var(--ai-color-border-hover);
+}
+
+@media (prefers-color-scheme: dark) {
+  .secondary:hover:not(:disabled) {
+    background: var(--gray-700, #374151);
+    border-color: var(--gray-500, #6b7280);
+    transform: translateY(-1px);
+  }
+}
+
+.buttonIcon {
+  flex-shrink: 0;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .container {
+    padding: var(--ai-space-xl);
+  }
+  
+  .actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .button {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .primary:hover:not(:disabled) {
+    transform: none;
+  }
+  
+  .secondary:hover:not(:disabled) {
+    transform: none;
+  }
+  
+  .button {
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+  .button {
+    border: 1px solid ButtonText;
+  }
+  
+  .primary {
+    background: ButtonFace;
+    color: ButtonText;
+  }
+  
+  .emptyIcon {
+    color: ButtonText;
+  }
+}
+
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+  .card {
+    border-width: 2px;
+    border-color: var(--gray-500, #6b7280);
+  }
+  
+  .highlight {
+    border-width: 2px;
+    border-color: var(--teal-400, #2dd4bf);
+  }
+  
+  .button {
+    border-width: 2px;
+  }
+  
+  .primary {
+    border-color: var(--teal-400, #2dd4bf);
+  }
+  
+  .secondary {
+    border-color: var(--gray-400, #9ca3af);
+  }
+} 

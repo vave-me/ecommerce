@@ -1,0 +1,221 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mailer-secrets
+  namespace: my-project
+type: Opaque
+data:
+  MAILER_PASS: REDACTED
+  SMTP_HOST: c210cC1yZWxheS5icmV2by5jb20= # Example: echo -n 'smtp-relay.brevo.com' | base64
+  SMTP_PORT: NTg3 # Example: echo -n '587' | base64
+  SMTP_USERNAME: OGI5NDczMDAxQHNtdHAtYnJldm8uY29t  # Example: echo -n 'redacted-email@example.com' | base64
+  SMTP_PASSWORD: REDACTED
+  DEFAULT_SMTP_SENDER: NU9zaHB6OERNQzFRbmF5UA==  # Example: echo -n 'redacted-email@example.com' | base64
+  SERVER_SMTP_ADDRESS: c210cC1yZWxheS5icmV2by5jb20=  # Example: echo -n 'smtp-relay.brevo.com' | base64
+  AWS_REGION: ZXUtbm9ydGxzaC0x
+  S3_BUCKET_NAME: WW91clMyQnVja2V0TmFtZUhlcmU= # Example: echo -n 'YourS3BucketNameHere' | base64
+  S3_USER_ARN: QVJOU0FtcGxlVXNlckFSTg== # Example: echo -n 'ARNSampleUserARN' | base64
+  SES_FROM_EMAIL: bm9yZXBseUB2YXZlbWUuY29t # Example: echo -n 'redacted-email@example.com' | base64
+  RPC_SERVICES: VVNFUlM9dXNlcnM6OTAwMA== #echo -n 'USERS=users:9000' | base64
+  AWS_MAILER_ACCESS_KEY_ID: REDACTED
+  AWS_MAILER_SECRET_ACCESS_KEY: REDACTED
+  MAILER_USER_ARN: bWFpbGVyLXNlcnZpY2Utc2VzLXVzZXI=
+  AWS_MAILER_USER_NAME: bWFpbGVyLXNlcnZpY2Utc2VzLXVzZXI= #echo -n 'mailer-service-ses-user' | base64
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mailer
+  namespace: my-project
+  labels:
+    app: mailer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mailer
+  template:
+    metadata:
+      labels:
+        app: mailer
+    spec:
+      initContainers:
+        - name: wait-for-db
+          image: postgres:16-alpine
+          env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mailer-secrets
+                  key: MAILER_PASS
+          command: [ 'sh', '-c' ]
+          args:
+            - |
+              set -e
+              echo "Waiting for postgres service (postgres.database.svc.cluster.local:5432) to accept connections for user mailer_user..."
+              until psql -h postgres.database.svc.cluster.local -U mailer_user -d mailer -c "SELECT 1;" > /dev/null 2>&1; do
+                echo "Postgres not ready yet for user mailer_user, sleeping for 2 seconds..."
+                sleep 2
+              done
+              echo "Postgres service is ready for user mailer_user!"
+          resources:
+            requests:
+              cpu: "25m"
+              memory: "32Mi"
+            limits:
+              cpu: "100m"
+              memory: "64Mi"
+        - name: wait-for-nats
+          image: busybox:1.36
+          command: [ 'sh', '-c', 'echo "Waiting for nats (nats.messaging.svc.cluster.local:4222)..."; until nc -zv nats.messaging.svc.cluster.local 4222; do sleep 2; done; echo "NATS ready!"' ]
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "16Mi"
+            limits:
+              cpu: "50m"
+              memory: "32Mi"
+      containers:
+        - name: mailer
+          image: registry.sfx-markt.de/mailer:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: http
+            - containerPort: 9000
+              name: grpc
+          envFrom:
+            - configMapRef:
+                name: common-config
+            - secretRef:
+                name: common-secrets
+          env:
+            - name: PG_CONN
+              value: "host=$(POSTGRES_HOST) port=$(POSTGRES_PORT) dbname=mailer user=mailer_user search_path=mailer,public sslmode=disable password=mailer_pass"
+            - name: PGHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: POSTGRES_HOST
+            - name: PGPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: POSTGRES_PORT
+            - name: PGDATABASE
+              value: "mailer"
+            - name: PGUSER
+              value: "mailer_user"
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mailer-secrets
+                  key: MAILER_PASS
+            - name: PGSSLMODE
+              value: "disable"
+            - name: RPC_MAILER # Assuming mailer expects this specific var? Check app code.
+              value: "MAILER=mailer.my-project.svc.cluster.local:9000"
+            - name: AWS_REGION # Added
+              valueFrom:
+                secretKeyRef:
+                  name: mailer-secrets
+                  key: AWS_REGION
+            - name: S3_BUCKET_NAME # Added
+              valueFrom:
+                secretKeyRef:
+                  name: mailer-secrets
+                  key: S3_BUCKET_NAME
+            - name: S3_USER_ARN # Added
+              valueFrom:
+                secretKeyRef:
+                  name: mailer-secrets
+                  key: S3_USER_ARN
+            - name: SES_FROM_EMAIL # Added
+              valueFrom:
+                secretKeyRef:
+                  name: mailer-secrets
+                  key: SES_FROM_EMAIL
+            - name: SMTP_HOST # Added
+              valueFrom:
+                secretKeyRef:
+                  name: mailer-secrets
+                  key: SMTP_HOST
+            - name: SMTP_PORT # Added
+              valueFrom:
+                secretKeyRef:
+                  name: mailer-secrets
+                  key: SMTP_PORT
+            - name: SMTP_USERNAME # Added
+              valueFrom:
+                secretKeyRef:
+                  name: mailer-secrets
+                  key: SMTP_USERNAME
+            - name: SMTP_PASSWORD # Added
+              valueFrom:
+                secretKeyRef:
+                  name: mailer-secrets
+                  key: SMTP_PASSWORD
+            - name: DEFAULT_SMTP_SENDER # Added
+              valueFrom:
+                secretKeyRef:
+                  name: mailer-secrets
+                  key: DEFAULT_SMTP_SENDER
+            - name: SERVER_SMTP_ADDRESS # Added
+              valueFrom:
+                secretKeyRef:
+                  name: mailer-secrets
+                  key: SERVER_SMTP_ADDRESS
+            - name: OTEL_SERVICE_NAME
+              value: "mailer"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://otel-collector.observability.svc.cluster.local:4317"
+            - name: OTEL_EXPORTER_OTLP_INSECURE
+              value: "true"
+            - name: OTEL_TRACES_EXPORTER
+              value: "otlp"
+            - name: OTEL_METRICS_EXPORTER
+              value: "otlp"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mailer
+  namespace: my-project
+  labels:
+    app: mailer
+spec:
+  selector:
+    app: mailer
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+    - name: grpc-internal
+      port: 9000
+      targetPort: grpc
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mailer-external # External service name
+  namespace: my-project
+  labels:
+    app: mailer
+spec:
+  selector:
+    app: mailer
+  ports:
+    - name: grpc-external
+      protocol: TCP
+      port: 30009 # External port
+      targetPort: grpc
+  type: LoadBalancer

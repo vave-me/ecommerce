@@ -1,0 +1,771 @@
+/* WishlistSelector.module.css - Clean Minimal Design */
+/* Aligned with Header and HorizontalFilters - compact and elegant */
+
+/* ===== CONTAINER ===== */
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.noWishlists {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.emptyIcon {
+    color: #9ca3af;
+    flex-shrink: 0;
+}
+
+/* ===== COMPACT TRIGGER BUTTON ===== */
+.trigger {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 44px;
+}
+
+.trigger:hover {
+    border-color: #d1d5db;
+    background-color: #f8fafc;
+}
+
+.trigger:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+    border-color: #3b82f6;
+}
+
+.trigger.open {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.triggerContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+}
+
+.wishlistInfo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+}
+
+.heartIcon {
+    color: #6b7280;
+    flex-shrink: 0;
+}
+
+.wishlistDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+    flex: 1;
+}
+
+.wishlistName {
+    font-weight: 600;
+    color: #111827;
+    font-size: 14px;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.wishlistDescription {
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.triggerActions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.itemCount {
+    background: #f3f4f6;
+    color: #6b7280;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.chevron {
+    color: #9ca3af;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.chevron.rotated {
+    transform: rotate(180deg);
+}
+
+/* ===== CLEAN DROPDOWN ===== */
+.dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    z-index: 50;
+    overflow: hidden;
+    max-height: 320px;
+    overflow-y: auto;
+}
+
+.dropdownHeader {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f3f4f6;
+    background: #f8fafc;
+}
+
+.dropdownTitle {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+}
+
+.wishlistCount {
+    font-size: 12px;
+    color: #8892a6;
+    font-weight: 400;
+}
+
+/* Dropdown Content */
+.dropdownContent {
+    max-height: 240px;
+    overflow-y: auto;
+    padding: 4px 8px;
+}
+
+/* Wishlist Item Styles */
+.wishlistItem {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 12px;
+    margin: 2px 0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.wishlistItem:hover {
+    background: #f3f4f6;
+}
+
+.wishlistItem.active {
+    background: #e1e5e9;
+}
+
+.itemContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.itemInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+}
+
+.itemIcon {
+    color: #8892a6;
+    flex-shrink: 0;
+}
+
+.itemIcon.activeIcon {
+    color: #00CCBF;
+}
+
+.itemDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+}
+
+.itemName {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a1f2e;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.itemDescription {
+    font-size: 12px;
+    color: #8892a6;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.activeIndicator {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 60%;
+    background: #00CCBF;
+    border-radius: 0 2px 2px 0;
+}
+
+.wishlistsList {
+    padding: 8px 0;
+}
+
+.wishlistOption {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 16px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-align: left;
+    gap: 10px;
+}
+
+.wishlistOption:hover {
+    background-color: #f8fafc;
+}
+
+.wishlistOption.active {
+    background-color: #eff6ff;
+    color: #2563eb;
+}
+
+.wishlistOption.active .heartIcon {
+    color: #3b82f6;
+}
+
+.optionIcon {
+    color: #6b7280;
+    flex-shrink: 0;
+}
+
+.wishlistOption.active .optionIcon {
+    color: #3b82f6;
+}
+
+.optionDetails {
+    flex: 1;
+    min-width: 0;
+}
+
+.optionName {
+    font-size: 14px;
+    font-weight: 500;
+    color: #111827;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 0 2px 0;
+}
+
+.wishlistOption.active .optionName {
+    color: #2563eb;
+}
+
+.optionCount {
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.optionActions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.deleteButton {
+    padding: 4px;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deleteButton:hover {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.dropdownFooter {
+    padding: 8px;
+    border-top: 1px solid #e1e5e9;
+    background: #f8fafc;
+}
+
+/* Create New Option - Clean button in dropdown */
+.createNewOption {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 12px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: #1a1f2e;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.createNewOption:hover {
+    background: #e1e5e9;
+}
+
+.createNewOption svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Inline Create Form */
+.createFormInline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px;
+}
+
+.nameInputInline {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #e1e5e9;
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: #ffffff;
+    color: #1a1f2e;
+    transition: all 0.2s ease;
+}
+
+.nameInputInline:focus {
+    outline: none;
+    border-color: #00CCBF;
+    box-shadow: 0 0 0 2px rgba(0, 204, 191, 0.15);
+}
+
+.nameInputInline::placeholder {
+    color: #8892a6;
+}
+
+.createActionsInline {
+    display: flex;
+    gap: 4px;
+}
+
+.cancelButtonIcon,
+.createButtonIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cancelButtonIcon {
+    background: transparent;
+    color: #8892a6;
+}
+
+.cancelButtonIcon:hover {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+.createButtonIcon {
+    background: #00CCBF;
+    color: #ffffff;
+}
+
+.createButtonIcon:hover:not(:disabled) {
+    background: #00b3a7;
+}
+
+.createButtonIcon:disabled {
+    background: #e1e5e9;
+    color: #8892a6;
+    cursor: not-allowed;
+}
+
+.createButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: #1a1f2e;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.createButton:hover {
+    background: #0f1319;
+}
+
+.createIcon {
+    flex-shrink: 0;
+}
+
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .dropdown {
+        max-height: 280px;
+    }
+
+    .trigger {
+        padding: 8px 12px;
+        min-height: 40px;
+    }
+
+    .wishlistName {
+        font-size: 13px;
+    }
+
+    .wishlistDescription {
+        font-size: 11px;
+    }
+
+    .optionName {
+        font-size: 13px;
+    }
+
+    .optionCount {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .trigger {
+        padding: 8px 10px;
+        min-height: 36px;
+    }
+
+    .wishlistName {
+        font-size: 12px;
+    }
+
+    .wishlistDescription {
+        display: none;
+    }
+
+    .itemCount {
+        font-size: 10px;
+        padding: 1px 6px;
+    }
+
+    .dropdown {
+        max-height: 240px;
+    }
+
+    .wishlistOption {
+        padding: 8px 12px;
+    }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+    .trigger,
+    .wishlistOption,
+    .chevronIcon,
+    .createButton,
+    .deleteButton {
+        transition: none;
+    }
+
+    .trigger.open .chevronIcon {
+        transform: none;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .trigger,
+    .dropdown {
+        border: 2px solid #000000;
+    }
+
+    .trigger.open {
+        border-color: #000000;
+        box-shadow: none;
+    }
+
+    .wishlistOption.active {
+        background-color: #000000;
+        color: #ffffff;
+    }
+}
+
+/* ===== FOCUS STATES ===== */
+.trigger:focus-visible,
+.wishlistOption:focus-visible,
+.createButton:focus-visible,
+.deleteButton:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* ===== DARK THEME SUPPORT ===== */
+@media (prefers-color-scheme: dark) {
+    .container {
+        color: #f3f4f6;
+    }
+
+    .noWishlists {
+        background-color: #1f2937;
+        color: #9ca3af;
+    }
+
+    .emptyIcon {
+        color: #6b7280;
+    }
+
+    .trigger {
+        background: #1f2937;
+        border-color: #374151;
+        color: #f3f4f6;
+    }
+
+    .trigger:hover {
+        border-color: #4b5563;
+        background-color: #111827;
+    }
+
+    .trigger:focus-visible {
+        border-color: #3b82f6;
+    }
+
+    .trigger.open {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .heartIcon,
+    .optionIcon {
+        color: #9ca3af;
+    }
+
+    .wishlistName,
+    .optionName {
+        color: #f3f4f6;
+    }
+
+    .wishlistDescription,
+    .optionCount {
+        color: #9ca3af;
+    }
+
+    .itemCount {
+        background: #374151;
+        color: #9ca3af;
+    }
+
+    .chevron {
+        color: #6b7280;
+    }
+
+    .dropdown {
+        background: #1f2937;
+        border-color: #374151;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    }
+
+    .dropdownHeader,
+    .dropdownFooter {
+        background: #111827;
+        border-color: #374151;
+    }
+
+    .dropdownTitle {
+        color: #f3f4f6;
+    }
+    
+    .wishlistCount {
+        color: #8892a6;
+    }
+    
+    .dropdownContent {
+        background: #1a1f2e;
+    }
+    
+    .wishlistItem:hover {
+        background: #2a3142;
+    }
+    
+    .wishlistItem.active {
+        background: #2a3142;
+    }
+    
+    .itemIcon {
+        color: #8892a6;
+    }
+    
+    .itemIcon.activeIcon {
+        color: #00CCBF;
+    }
+    
+    .itemName {
+        color: #f3f4f6;
+    }
+    
+    .itemDescription {
+        color: #8892a6;
+    }
+    
+    .activeIndicator {
+        background: #00CCBF;
+    }
+
+    .wishlistOption:hover {
+        background-color: #111827;
+    }
+
+    .wishlistOption.active {
+        background-color: rgba(59, 130, 246, 0.1);
+        color: #60a5fa;
+    }
+
+    .wishlistOption.active .heartIcon,
+    .wishlistOption.active .optionIcon {
+        color: #60a5fa;
+    }
+
+    .wishlistOption.active .optionName {
+        color: #60a5fa;
+    }
+
+    .deleteButton {
+        color: #6b7280;
+    }
+
+    .deleteButton:hover {
+        background: rgba(220, 38, 38, 0.1);
+        color: #f87171;
+    }
+
+    .createButton {
+        background: #00CCBF;
+        color: #0f1319;
+    }
+
+    .createButton:hover {
+        background: #00b3a7;
+    }
+    
+    .dropdownFooter {
+        background: #0f1319;
+        border-color: #2a3142;
+    }
+    
+    .createNewOption {
+        color: #f3f4f6;
+    }
+    
+    .createNewOption:hover {
+        background: #1a1f2e;
+    }
+    
+    .nameInputInline {
+        background: #1a1f2e;
+        border-color: #2a3142;
+        color: #f3f4f6;
+    }
+    
+    .nameInputInline:focus {
+        border-color: #00CCBF;
+        box-shadow: 0 0 0 2px rgba(0, 204, 191, 0.15);
+    }
+    
+    .nameInputInline::placeholder {
+        color: #8892a6;
+    }
+    
+    .cancelButtonIcon {
+        color: #8892a6;
+    }
+    
+    .cancelButtonIcon:hover {
+        background: #2a3142;
+        color: #f3f4f6;
+    }
+    
+    .createButtonIcon {
+        background: #00CCBF;
+        color: #0f1319;
+    }
+    
+    .createButtonIcon:hover:not(:disabled) {
+        background: #00b3a7;
+    }
+    
+    .createButtonIcon:disabled {
+        background: #2a3142;
+        color: #4b5563;
+    }
+} 

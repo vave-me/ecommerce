@@ -1,0 +1,190 @@
+[
+  {
+    "Name": "Solar Power Purchase Agreement (PPA) Facilitation",
+    "Description": "A financial arrangement that allows a business to host a solar PV system on its property and purchase the generated power at a fixed, competitive rate, with zero upfront investment in the system itself. Saflux handles the financing, installation, operation, and maintenance of the solar asset.",
+    "ServiceType": "Financial Instrument / Energy Supply",
+    "Availability": "Nationwide for qualifying commercial and industrial clients with suitable rooftop or land space.",
+    "DescriptionShort": "Go solar with no upfront cost and lock in low electricity rates with a Solar PPA.",
+    "DescriptionLong": "Our Solar Power Purchase Agreement (PPA) is the simplest path to procuring clean, on-site solar energy. Instead of buying a solar panel system, you are buying the power it produces. Under this model, Saflux (or our financial partners) will fund the entire project, including the design, procurement, and installation of a solar PV system on your rooftop or property. In return, you sign a long-term agreement (typically 15-25 years) to purchase the generated electricity at a predetermined price per kilowatt-hour (kWh). This PPA rate is almost always lower than your current utility rate, generating immediate savings. We retain ownership of the system and are responsible for all ongoing operations, maintenance, and performance monitoring, providing you with a completely hassle-free renewable energy solution.",
+    "Attributes": [
+      {
+        "AttributeName": "Upfront Cost",
+        "AttributeValue": "Zero (No CAPEX for the host)"
+      },
+      {
+        "AttributeName": "Contract Term",
+        "AttributeValue": "15-25 years"
+      },
+      {
+        "AttributeName": "Pricing Structure",
+        "AttributeValue": "Fixed price per kWh"
+      },
+      {
+        "AttributeName": "System Maintenance",
+        "AttributeValue": "Included for the full term of the agreement"
+      }
+    ],
+    "BasePrice": 0,
+    "Pricing": [
+      "Fixed per-kWh rate, often with a pre-defined annual price escalator (e.g., 1.5% - 2.5%).",
+      "No cost for installation or maintenance.",
+      "End-of-term options include contract extension, system purchase, or system removal."
+    ],
+    "Qualifications": [
+      "Strong project finance capabilities and network of institutional investors.",
+      "Deep experience in PPA structuring and negotiation.",
+      "Vertically integrated team to handle all aspects from development to asset management."
+    ],
+    "Contact": "redacted-email@example.com",
+    "Faq": "Who gets the tax credits and renewable energy incentives? Under a PPA, the system owner (Saflux or its investors) receives these financial incentives, which helps lower the PPA price offered to the client.",
+    "Tags": [
+      "PPA",
+      "solar PPA",
+      "zero down solar",
+      "financial solution",
+      "energy procurement",
+      "risk-free solar"
+    ],
+    "MiddlemanService": false,
+    "Negotiable": true,
+    "HasVariants": true,
+    "Options": [
+      {
+        "OptionName": "Annual Escalator",
+        "OptionValues": [
+          "Fixed Rate (No Escalator)",
+          "Standard Escalator (e.g., 2.0%)",
+          "Custom Escalator"
+        ]
+      },
+      {
+        "OptionName": "End-of-Term Option",
+        "OptionValues": [
+          "Purchase Option",
+          "Renewal Option"
+        ]
+      }
+    ],
+    "Thumbnail": "https://www.saflux.com/images/ppa-thumbnail.jpg"
+  },
+  {
+    "Name": "Sustainability & ESG Reporting Services",
+    "Description": "Specialized consulting services to help your organization accurately measure, manage, and report on the environmental impact of your energy operations. We translate your energy efficiency and renewable energy projects into quantifiable data for your sustainability and ESG (Environmental, Social, and Governance) reports.",
+    "ServiceType": "Consulting & Advisory",
+    "Availability": "Nationwide, available as a standalone service or as an add-on to our energy projects.",
+    "DescriptionShort": "Quantify your green initiatives and enhance your corporate ESG profile with our expert reporting services.",
+    "DescriptionLong": "In today's business climate, stakeholders, investors, and customers demand transparency on corporate sustainability efforts. Our ESG Reporting Service is designed to meet this need. We help you move beyond simply stating you've 'gone green' to proving it with hard data. Our team works with you to establish an energy data baseline, then quantifies the impact of your energy projects—such as LED lighting, solar PV, or BESS—in terms of kWh saved, metric tons of CO2 emissions avoided, and other key performance indicators. We help you align this data with leading reporting frameworks like the Global Reporting Initiative (GRI), Sustainability Accounting Standards Board (SASB), and the GHG Protocol. The result is a credible, data-driven report that substantiates your commitment to sustainability and enhances your corporate reputation.",
+    "Attributes": [
+      {
+        "AttributeName": "Reporting Frameworks",
+        "AttributeValue": "GRI, SASB, TCFD, GHG Protocol"
+      },
+      {
+        "AttributeName": "Key Metrics",
+        "AttributeValue": "Carbon Footprint Reduction, Renewable Energy Usage (%), Energy Use Intensity (EUI)"
+      },
+      {
+        "AttributeName": "Deliverable",
+        "AttributeValue": "Investment-grade sustainability report and data sets"
+      },
+      {
+        "AttributeName": "Verification",
+        "AttributeValue": "Assistance with third-party verification of data"
+      }
+    ],
+    "BasePrice": 10000,
+    "Pricing": [
+      "Fixed-fee consulting engagement based on scope and complexity.",
+      "Annual retainer model for ongoing tracking and reporting.",
+      "Discounted packages for clients who have implemented energy projects with Saflux."
+    ],
+    "Qualifications": [
+      "GRI Certified Sustainability Professionals.",
+      "GHG Protocol certified carbon accounting experts.",
+      "Deep understanding of the link between energy projects and ESG metrics."
+    ],
+    "Contact": "redacted-email@example.com",
+    "Faq": "Why is third-party verification of our sustainability data important? Verification provides credibility and assurance to investors and other stakeholders that your reported data is accurate and reliable, protecting against accusations of 'greenwashing'.",
+    "Tags": [
+      "ESG reporting",
+      "sustainability consulting",
+      "carbon accounting",
+      "GRI",
+      "SASB",
+      "corporate social responsibility"
+    ],
+    "MiddlemanService": false,
+    "Negotiable": true,
+    "HasVariants": true,
+    "Options": [
+      {
+        "OptionName": "Reporting Scope",
+        "OptionValues": [
+          "Scope 1 & 2 Emissions",
+          "Full Scope 1, 2, & 3 Emissions"
+        ]
+      },
+      {
+        "OptionName": "Framework Focus",
+        "OptionValues": [
+          "GRI Standards",
+          "SASB Industry Standards",
+          "Integrated Reporting"
+        ]
+      }
+    ],
+    "Thumbnail": "https://www.saflux.com/images/esg-reporting-thumbnail.jpg"
+  },
+  {
+    "Name": "Grid Services & Demand Response Programs",
+    "Description": "Unlock new revenue streams from your energy assets by participating in utility and grid operator programs. We manage and automate the participation of your battery storage systems and controllable loads in grid services, helping to stabilize the grid while paying you for your flexibility.",
+    "ServiceType": "Revenue Generation / Energy Management",
+    "Availability": "Available in regions with active ancillary service markets and demand response programs.",
+    "DescriptionShort": "Turn your energy assets into a revenue source by helping to balance the electric grid.",
+    "DescriptionLong": "Your energy assets—like a battery storage system, smart thermostats, or controllable industrial loads—can do more than just save you money; they can earn you money. Grid operators are constantly seeking resources to help balance electricity supply and demand in real-time. Our Grid Services program aggregates your flexible assets into a 'virtual power plant.' Using our sophisticated energy management platform, we can automatically respond to signals from the grid operator, by either discharging a battery to provide power (frequency regulation) or temporarily reducing your energy consumption (demand response). You get paid for this participation, creating a new, passive revenue stream from assets you already own, while also contributing to a more stable and resilient power grid for the entire community.",
+    "Attributes": [
+      {
+        "AttributeName": "Program Participation",
+        "AttributeValue": "Frequency Regulation, Capacity Markets, Automated Demand Response (ADR), Spinning Reserves"
+      },
+      {
+        "AttributeName": "Asset Control",
+        "AttributeValue": "Fully automated, AI-driven dispatch based on grid signals and financial optimization"
+      },
+      {
+        "AttributeName": "Revenue Model",
+        "AttributeValue": "Shared savings based on market earnings"
+      },
+      {
+        "AttributeName": "Operational Impact",
+        "AttributeValue": "Minimal to no impact on core business operations"
+      }
+    ],
+    "BasePrice": 0,
+    "Pricing": [
+      "Revenue sharing model: Saflux takes a percentage of the market revenue generated by your assets.",
+      "No upfront fees to join the program.",
+      "Transparent reporting on dispatch events and revenue earned."
+    ],
+    "Qualifications": [
+      "Registered Curtailment Service Provider (CSP) or Aggregator in relevant markets.",
+      "Advanced energy management software platform with secure API connections.",
+      "24/7 market operations team."
+    ],
+    "Contact": "redacted-email@example.com",
+    "Faq": "Will participating in demand response affect my business operations? No, the programs are designed with your operational constraints in mind. We work with you to define clear parameters for when and how much your load can be curtailed, ensuring no disruption to your core activities.",
+    "Tags": [
+      "demand response",
+      "grid services",
+      "virtual power plant",
+      "VPP",
+      "revenue stream",
+      "ancillary services"
+    ],
+    "MiddlemanService": false,
+    "Negotiable": true,
+    "HasVariants": false,
+    "Options": [],
+    "Thumbnail": "https://www.saflux.com/images/grid-services-thumbnail.jpg"
+  }
+]

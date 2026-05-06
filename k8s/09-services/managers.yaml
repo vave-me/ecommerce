@@ -1,0 +1,240 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: managers-secrets
+  namespace: my-project
+type: Opaque
+data:
+  MANAGERS_PASS: REDACTED
+  # Replace placeholders below with YOUR actual base64 encoded values
+  # Example: echo -n '{openai_api_key}' | base64
+  
+  # OPENAI CONFIGURATION
+  OPENAI_API_KEY: REDACTED
+  OPENAI_BASE_URL: aHR0cHM6Ly9hcGkub3BlbmFpLmNvbS92MQ==  # https://api.openai.com/v1
+  OPENAI_BASE_MODEL: Z3B0LTRvLW1pbmk=  # gpt-4o-mini (May 2025 default)
+  
+  # DEEPSEEK CONFIGURATION  
+  DEEPSEEK_API_KEY: REDACTED
+  DEEPSEEK_BASE_URL: aHR0cHM6Ly9hcGkuZGVlcHNlZWsuY29tL3Yx  # https://api.deepseek.com/v1
+  DEEPSEEK_DEFAULT_MODEL: ZGVlcHNlZWstY2hhdA==  # deepseek-chat
+  
+  # ANTHROPIC CONFIGURATION
+  ANTHROPIC_API_KEY: REDACTED
+  ANTHROPIC_BASE_URL: aHR0cHM6Ly9hcGkuYW50aHJvcGljLmNvbS92MQ==  # https://api.anthropic.com/v1
+  ANTHROPIC_MODEL: Y2xhdWRlLTMtNS1zb25uZXQtMjAyNDEwMjI=  # claude-3-5-sonnet-20241022
+  
+  # GOOGLE AI CONFIGURATION
+  GOOGLE_AI_API_KEY: REDACTED
+  GOOGLE_AI_BASE_URL: aHR0cHM6Ly9nZW5lcmF0aXZlbGFuZ3VhZ2UuZ29vZ2xlYXBpcy5jb20vdjFiZXRh  # https://generativelanguage.googleapis.com/v1beta
+  GOOGLE_AI_DEFAULT_MODEL: Z2VtaW5pLTEuNS1mbGFzaA==  # gemini-1.5-flash
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: managers
+  namespace: my-project
+  labels:
+    app: managers
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: managers
+  template:
+    metadata:
+      labels:
+        app: managers
+    spec:
+      initContainers:
+        - name: wait-for-db
+          image: postgres:16-alpine
+          env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: managers-secrets
+                  key: MANAGERS_PASS
+          command: [ 'sh', '-c' ]
+          args:
+            - |
+              set -e
+              echo "Waiting for postgres service (postgres.database.svc.cluster.local:5432) to accept connections for user managers_user..."
+              until psql -h postgres.database.svc.cluster.local -U managers_user -d managers -c "SELECT 1;" > /dev/null 2>&1; do
+                echo "Postgres not ready yet for user managers_user, sleeping for 2 seconds..."
+                sleep 2
+              done
+              echo "Postgres service is ready for user managers_user!"
+          resources:
+            requests:
+              cpu: "25m"
+              memory: "32Mi"
+            limits:
+              cpu: "100m"
+              memory: "64Mi"
+        - name: wait-for-nats
+          image: busybox:1.36
+          command: [ 'sh', '-c', 'echo "Waiting for nats (nats.messaging.svc.cluster.local:4222)..."; until nc -zv nats.messaging.svc.cluster.local 4222; do sleep 2; done; echo "NATS ready!"' ]
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "16Mi"
+            limits:
+              cpu: "50m"
+              memory: "32Mi"
+      containers:
+        - name: managers
+          image: registry.sfx-markt.de/managers:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: http
+            - containerPort: 9000
+              name: grpc
+          envFrom:
+            - configMapRef:
+                name: common-config
+            - secretRef:
+                name: common-secrets
+          env:
+            - name: PG_CONN
+              value: "host=$(POSTGRES_HOST) port=$(POSTGRES_PORT) dbname=managers user=managers_user search_path=managers,public sslmode=disable password=managers_pass"
+            - name: PGHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: POSTGRES_HOST
+            - name: PGPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: POSTGRES_PORT
+            - name: PGDATABASE
+              value: "managers"
+            - name: PGUSER
+              value: "managers_user"
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: managers-secrets
+                  key: MANAGERS_PASS
+            - name: PGSSLMODE
+              value: "disable"
+            - name: RPC_SERVICES
+              value: "USERS=users.my-project.svc.cluster.local:9000, ACTIVITY=activity.my-project.svc.cluster.local:9000, BASKETS=baskets.my-project.svc.cluster.local:9000, CATEGORIES=categories.my-project.svc.cluster.local:9000, COMMENTS=comments.my-project.svc.cluster.local:9000, FOLLOWING=following.my-project.svc.cluster.local:9000,GEOCODING=geocoding.my-project.svc.cluster.local:9000,ASSISTANTS=assistants.my-project.svc.cluster.local:9000, MAILER=mailer.my-project.svc.cluster.local:9000,MERCHANT=merchant.my-project.svc.cluster.local:9000, MEDIA=media.my-project.svc.cluster.local:9000, MESSAGES=messages.my-project.svc.cluster.local:9000, METRICS=metrics.my-project.svc.cluster.local:9000, NEWSLETTERS=newsletters.my-project.svc.cluster.local:9000, NOTIFICATIONS=notifications.my-project.svc.cluster.local:9000, OFFERS=offers.my-project.svc.cluster.local:9000, ORDERING=ordering.my-project.svc.cluster.local:9000, PAYMENTS=payments.my-project.svc.cluster.local:9000, POSTS=posts.my-project.svc.cluster.local:9000, PRODUCTS=products.my-project.svc.cluster.local:9000, REVIEWS=reviews.my-project.svc.cluster.local:9000,SCHEDULER=scheduler.my-project.svc.cluster.local:9000, SERVICES=services.my-project.svc.cluster.local:9000,SHIPPING=shipping.my-project.svc.cluster.local:9000,SEARCH=search.my-project.svc.cluster.local:9000,ERP=erp.my-project.svc.cluster.local:9000, SUPPORT=support.my-project.svc.cluster.local:9000,VECTORS=vectors.my-project.svc.cluster.local:9000, WISHLISTS=wishlists.my-project.svc.cluster.local:9000"
+            - name: OTEL_SERVICE_NAME
+              value: "managers"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://otel-collector.observability.svc.cluster.local:4317"
+            - name: OTEL_EXPORTER_OTLP_INSECURE
+              value: "true"
+            - name: OTEL_TRACES_EXPORTER
+              value: "otlp"
+            - name: OTEL_METRICS_EXPORTER
+              value: "otlp"
+            - name: ANTHROPIC_API_KEY # Added
+              valueFrom:
+                secretKeyRef:
+                  name: managers-secrets
+                  key: ANTHROPIC_API_KEY
+            - name: ANTHROPIC_BASE_URL # Added
+              valueFrom:
+                secretKeyRef:
+                  name: managers-secrets
+                  key: ANTHROPIC_BASE_URL
+            - name: ANTHROPIC_MODEL # Added
+              valueFrom:
+                secretKeyRef:
+                  name: managers-secrets
+                  key: ANTHROPIC_MODEL
+            - name: OPENAI_API_KEY # Added
+              valueFrom:
+                secretKeyRef:
+                  name: managers-secrets
+                  key: OPENAI_API_KEY
+            - name: OPENAI_BASE_URL # Added
+              valueFrom:
+                secretKeyRef:
+                  name: managers-secrets
+                  key: OPENAI_BASE_URL
+            - name: OPENAI_BASE_MODEL # Added (If used by your app)
+              valueFrom:
+                secretKeyRef:
+                  name: managers-secrets
+                  key: OPENAI_BASE_MODEL
+            - name: DEEPSEEK_API_KEY # Added
+              valueFrom:
+                secretKeyRef:
+                  name: managers-secrets
+                  key: DEEPSEEK_API_KEY
+            - name: DEEPSEEK_BASE_URL # Added
+              valueFrom:
+                secretKeyRef:
+                  name: managers-secrets
+                  key: DEEPSEEK_BASE_URL
+            - name: DEEPSEEK_DEFAULT_MODEL # Added
+              valueFrom:
+                secretKeyRef:
+                  name: managers-secrets
+                  key: DEEPSEEK_DEFAULT_MODEL
+            - name: GOOGLE_AI_API_KEY # Added
+              valueFrom:
+                secretKeyRef:
+                  name: managers-secrets
+                  key: GOOGLE_AI_API_KEY
+            - name: GOOGLE_AI_BASE_URL # Added
+              valueFrom:
+                secretKeyRef:
+                  name: managers-secrets
+                  key: GOOGLE_AI_BASE_URL
+            - name: GOOGLE_AI_DEFAULT_MODEL # Added
+              valueFrom:
+                secretKeyRef:
+                  name: managers-secrets
+                  key: GOOGLE_AI_DEFAULT_MODEL
+
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: managers
+  namespace: my-project
+  labels:
+    app: managers
+spec:
+  selector:
+    app: managers
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+    - name: grpc-internal
+      protocol: TCP
+      port: 9000
+      targetPort: grpc
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: managers-external # External service name
+  namespace: my-project
+  labels:
+    app: managers
+spec:
+  selector:
+    app: managers
+  ports:
+    - name: grpc-external
+      protocol: TCP
+      port: 30044 # External port
+      targetPort: grpc
+  type: LoadBalancer

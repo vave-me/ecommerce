@@ -1,0 +1,86 @@
+<!-- HTML for static distribution bundle build -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Swagger UI</title>
+    <link rel="stylesheet" type="text/css" href="/swagger-ui/swagger-ui.css"/>
+    <link rel="icon" type="image/png" href="/swagger-ui/favicon-32x32.png" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="/swagger-ui/favicon-16x16.png" sizes="16x16"/>
+    <style>
+        html {
+            box-sizing: border-box;
+            overflow: -moz-scrollbars-vertical;
+            overflow-y: scroll;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            margin: 0;
+            background: #fafafa;
+        }
+    </style>
+</head>
+
+<body>
+<div id="swagger-ui"></div>
+
+<script src="/swagger-ui/swagger-ui-bundle.js" charset="UTF-8"></script>
+<script src="/swagger-ui/swagger-ui-standalone-preset.js" charset="UTF-8"></script>
+<script>
+    window.onload = function () {
+        // Begin Swagger UI call region
+        const ui = SwaggerUIBundle({
+            urls: [
+                {name: "Users", url: "users-spec/api.swagger.json"},
+                {name: "Products", url: "products-spec/api.swagger.json"},
+                {name: "Posts", url: "posts-spec/api.swagger.json"},
+                {name: "Assistants", url: "assistants-spec/api.swagger.json"},
+                {name: "Scheduler", url: "scheduler-spec/api.swagger.json"},
+                {name: "Erp", url: "erp-spec/api.swagger.json"},
+                {name: "Managers", url: "managers-spec/api.swagger.json"},
+                {name: "Merchant", url: "merchant-spec/api.swagger.json"},
+                {name: "Following", url: "following-spec/api.swagger.json"},
+                {name: "Reviews", url: "reviews-spec/api.swagger.json"},
+                {name: "Services", url: "services-spec/api.swagger.json"},
+                {name: "Offers", url: "offers-spec/api.swagger.json"},
+                {name: "Shopping Baskets", url: "baskets-spec/api.swagger.json"},
+                {name: "Payments", url: "payments-spec/api.swagger.json"},
+                {name: "Order Processing", url: "ordering-spec/api.swagger.json"},
+                {name: "Categories", url: "categories-spec/api.swagger.json"},
+                {name: "Shipping", url: "shipping-spec/api.swagger.json"},
+                {name: "Wishlist Operations", url: "wishlist-spec/api.swagger.json"},
+                {name: "Notifications Operations", url: "notifications-spec/api.swagger.json"},
+                {name: "Activity Operations", url: "activity-spec/api.swagger.json"},
+                {name: "Comments", url: "comments-spec/api.swagger.json"},
+                {name: "Messages", url: "messages-spec/api.swagger.json"},
+                {name: "Support", url: "support-spec/api.swagger.json"},
+                {name: "Search", url: "search-spec/api.swagger.json"},
+                {name: "Media", url: "media-spec/api.swagger.json"},
+                {name: "Mailer", url: "mailer-spec/api.swagger.json"},
+                {name: "Metrics", url: "metrics-spec/api.swagger.json"},
+                {name: "Geocoding", url: "geocoding-spec/api.swagger.json"},
+            ],
+            dom_id: '#swagger-ui',
+            deepLinking: true,
+            presets: [
+                SwaggerUIBundle.presets.apis,
+                SwaggerUIStandalonePreset
+            ],
+            plugins: [
+                SwaggerUIBundle.plugins.DownloadUrl
+            ],
+            layout: "StandaloneLayout"
+        });
+        // End Swagger UI call region
+
+        window.ui = ui;
+    };
+</script>
+</body>
+</html>

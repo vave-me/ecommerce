@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Command Cockpit UI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for a polished UI */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .filter-popover {
+            position: absolute; z-index: 50; margin-top: 0.5rem; border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07), 0 4px 6px -2px rgba(0,0,0,0.05);
+            border: 1px solid #e5e7eb; background-color: white; width: 320px;
+            opacity: 0; transform: translateY(-10px);
+            transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+            pointer-events: none;
+        }
+        .filter-popover.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        
+        .price-slider-container { position: relative; height: 20px; width: 100%; }
+        .price-slider-container input[type=range] { position: absolute; width: 100%; -webkit-appearance: none; appearance: none; background: transparent; pointer-events: none; height: 100%; }
+        .price-slider-container input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; pointer-events: auto; width: 20px; height: 20px; border-radius: 50%; background-color: #2563eb; cursor: pointer; transition: transform .1s ease-in-out; }
+        .price-slider-container input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.1); }
+        .price-slider-container input[type=range]::-moz-range-thumb { pointer-events: auto; width: 20px; height: 20px; border-radius: 50%; background-color: #2563eb; cursor: pointer; }
+        .slider-track { position: absolute; width: 100%; height: 4px; background-color: #e5e7eb; top: 50%; transform: translateY(-50%); border-radius: 4px; }
+        .slider-range { position: absolute; height: 4px; background-color: #2563eb; top: 50%; transform: translateY(-50%); border-radius: 4px; }
+        
+        .category-tree ul { padding-left: 1rem; }
+        .category-tree .parent-category > div { cursor: pointer; }
+        .category-tree .parent-category .arrow { transition: transform 0.2s; }
+        .category-tree .parent-category.open > div .arrow { transform: rotate(90deg); }
+        .category-tree .parent-category ul { display: none; }
+        .category-tree .parent-category.open > ul { display: block; }
+
+        .ai-chat-box::-webkit-scrollbar, .category-bar::-webkit-scrollbar { height: 8px; width: 8px; }
+        .ai-chat-box::-webkit-scrollbar-track, .category-bar::-webkit-scrollbar-track { background: transparent; }
+        .ai-chat-box::-webkit-scrollbar-thumb, .category-bar::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; border: 2px solid #f9fafb; }
+        .ai-chat-box::-webkit-scrollbar-thumb:hover, .category-bar::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+
+        .ai-copilot-container {
+            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out, margin-top 0.5s ease-in-out, padding-top 0.5s ease-in-out;
+            overflow: hidden;
+        }
+        .category-link.active {
+            color: #1d4ed8; /* blue-700 */
+            font-weight: 600;
+            border-bottom-color: #2563eb;
+        }
+        .filter-btn.active {
+            background-color: #eff6ff; /* blue-50 */
+            border-color: #60a5fa; /* blue-400 */
+            color: #1d4ed8; /* blue-700 */
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex items-start justify-center min-h-screen pt-10 px-4 font-sans">
+
+    <div class="w-full max-w-7xl bg-white rounded-2xl shadow-lg p-4 md:p-6 space-y-6">
+        
+        <!-- Main Category Bar -->
+        <div class="border-b border-gray-200">
+            <div id="main-category-bar" class="flex items-center gap-2 overflow-x-auto category-bar -mb-px">
+                <!-- Categories will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <!-- Filter Section -->
+        <div class="bg-slate-50 p-4 rounded-xl space-y-4">
+            <div class="flex flex-col md:flex-row gap-4 items-center">
+                <!-- Left side: Filter buttons -->
+                <div class="flex items-center gap-2 flex-wrap">
+                    <div class="relative" data-popover-container>
+                        <button id="categories-filter-btn" data-popover-trigger="categories-popover" class="filter-btn px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 flex items-center gap-2 transition-colors">All Categories <svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></button>
+                        <div id="categories-popover" class="filter-popover p-4"><div id="categories-tree-container" class="category-tree"></div></div>
+                    </div>
+                    <div class="relative" data-popover-container>
+                        <button id="price-filter-btn" data-popover-trigger="price-popover" class="filter-btn px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 flex items-center gap-2 transition-colors">Price <svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></button>
+                        <div id="price-popover" class="filter-popover p-4 space-y-4">
+                            <div class="flex items-center justify-between text-gray-800 font-medium"><span id="price-min-label">€0</span><span id="price-max-label">€5000</span></div>
+                            <div class="price-slider-container"><div class="slider-track"></div><div id="slider-range-color" class="slider-range"></div><input type="range" id="price-min-slider" min="0" max="5000" value="0"><input type="range" id="price-max-slider" min="0" max="5000" value="5000"></div>
+                        </div>
+                    </div>
+                    <div class="relative" data-popover-container>
+                        <button id="brand-filter-btn" data-popover-trigger="brand-popover" class="filter-btn px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 flex items-center gap-2 transition-colors">Brand <svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></button>
+                        <div id="brand-popover" class="filter-popover p-4 space-y-2"><div id="brand-list-container"></div></div>
+                    </div>
+                </div>
+                <!-- Right side: Actions -->
+                <div class="flex items-center gap-4 w-full md:w-auto md:ml-auto">
+                    <select class="p-2 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none w-full md:w-auto">
+                        <option>Sort by: Relevance</option><option>Sort by: Price (Low to High)</option><option>Sort by: Price (High to Low)</option>
+                    </select>
+                    <button id="open-ai-btn" class="hidden items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:text-blue-600 hover:border-blue-500 hover:bg-blue-50 transition-colors">
+                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.315 7.584C12.195 3.883 16.695 1.5 21.75 1.5a.75.75 0 0 1 .75.75c0 5.056-2.383 9.555-6.084 12.436A6.75 6.75 0 0 1 9.75 22.5a.75.75 0 0 1-.75-.75v-7.19c0-.897.106-1.773.315-2.622ZM3 10.5a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Zm.75 4.5a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5h1.5ZM4.5 6a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5A.75.75 0 0 1 4.5 6Z" clip-rule="evenodd" /></svg>
+                    </button>
+                </div>
+            </div>
+            <div id="filter-pills-container" class="hidden flex-wrap gap-2 items-center border-t border-slate-200 pt-4"></div>
+        </div>
+
+        <!-- AI Co-pilot Section -->
+        <div id="ai-copilot-container" class="ai-copilot-container border-t border-gray-200 pt-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-semibold text-gray-800">AI Co-pilot</h2>
+                <button id="close-ai-btn" title="Close AI Co-pilot" class="p-1.5 text-gray-500 hover:text-red-600 hover:bg-red-100 rounded-full transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div class="flex flex-col gap-4 items-start">
+                <div id="ai-chat-box" class="w-full h-[250px] bg-slate-50 rounded-xl p-4 space-y-4 overflow-y-auto pr-2 ai-chat-box">
+                    <div class="flex justify-start"><div class="bg-gray-200 text-gray-800 p-3 rounded-lg max-w-md">Hello! How can I help you filter our products today?</div></div>
+                    <div class="flex justify-end"><div class="bg-blue-600 text-white p-3 rounded-lg max-w-md">Show me wallboxes</div></div>
+                </div>
+                <form id="ai-form" class="w-full">
+                    <div class="relative">
+                        <textarea id="ai-input" placeholder="Or type your request..." class="w-full p-3 pl-4 pr-32 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none h-24 resize-none transition-colors"></textarea>
+                        <div class="absolute bottom-3 right-14 flex gap-1">
+                            <button type="button" class="p-2 text-gray-500 hover:text-blue-600 hover:bg-gray-100 rounded-full transition-colors" title="Add Image"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></button>
+                            <button type="button" class="p-2 text-gray-500 hover:text-blue-600 hover:bg-gray-100 rounded-full transition-colors" title="Record Voice"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg></button>
+                        </div>
+                        <button id="ai-send-btn" type="submit" title="Send Message" class="absolute bottom-3 right-3 w-9 h-9 flex items-center justify-center bg-blue-600 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-300 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const CATEGORY_DATA = [ { name: 'E-Auto-Ladesysteme', children: [{ name: 'Wallboxes' }, { name: 'Mobile Chargers' }] }, { name: 'Professionelle Beleuchtung', children: [{ name: 'LED Panels' }, { name: 'Downlights' }] }, { name: 'Energiemanagementsysteme' } ];
+        const DUMMY_CATEGORIES = ['Wallboxes', 'LED Panels', 'Smart Home', 'Solar', 'Batteries', 'Cables', 'Tools', 'Safety Gear'];
+        const BRAND_DATA = ['Siemens', 'Schneider Electric', 'ABB', 'Zaptec', 'Philips', 'Osram'];
+        const INITIAL_FILTERS = { categories: [], price: [0, 5000], brands: [] };
+        let filterState = { ...INITIAL_FILTERS };
+
+        const mainCategoryBar = document.getElementById('main-category-bar');
+        const pillsContainer = document.getElementById('filter-pills-container');
+        const categoriesTreeContainer = document.getElementById('categories-tree-container');
+        const brandListContainer = document.getElementById('brand-list-container');
+        const priceMinSlider = document.getElementById('price-min-slider');
+        const priceMaxSlider = document.getElementById('price-max-slider');
+        const priceMinLabel = document.getElementById('price-min-label');
+        const priceMaxLabel = document.getElementById('price-max-label');
+        const sliderRangeColor = document.getElementById('slider-range-color');
+        const aiForm = document.getElementById('ai-form');
+        const aiInput = document.getElementById('ai-input');
+        const aiSendBtn = document.getElementById('ai-send-btn');
+        const aiChatBox = document.getElementById('ai-chat-box');
+        const aiCopilotContainer = document.getElementById('ai-copilot-container');
+        const closeAiBtn = document.getElementById('close-ai-btn');
+        const openAiBtn = document.getElementById('open-ai-btn');
+
+        function renderAll() { renderPills(); updateControls(); }
+
+        function renderPills() {
+            pillsContainer.innerHTML = '';
+            const hasActiveFilters = filterState.categories.length > 0 || filterState.brands.length > 0 || filterState.price[0] !== 0 || filterState.price[1] !== 5000;
+            if (!hasActiveFilters) {
+                pillsContainer.style.display = 'none';
+                return;
+            }
+            pillsContainer.style.display = 'flex';
+
+            const addPill = (text, onRemove) => {
+                const pill = document.createElement('span');
+                pill.className = 'flex items-center bg-blue-100 text-blue-800 rounded-full px-3 py-1 text-sm font-medium';
+                pill.innerHTML = `${text} <button class="ml-2 w-5 h-5 flex items-center justify-center bg-blue-200 hover:bg-blue-300 rounded-full text-blue-800 transition-all">&#x2715;</button>`;
+                pill.querySelector('button').addEventListener('click', onRemove);
+                pillsContainer.appendChild(pill);
+            };
+
+            pillsContainer.insertAdjacentHTML('afterbegin', '<span class="text-sm font-medium text-gray-600">Active:</span>');
+            filterState.categories.forEach(cat => addPill(cat, () => { filterState.categories = filterState.categories.filter(c => c !== cat); renderAll(); }));
+            filterState.brands.forEach(brand => addPill(brand, () => { filterState.brands = filterState.brands.filter(b => b !== brand); renderAll(); }));
+            if (filterState.price[0] !== 0 || filterState.price[1] !== 5000) {
+                addPill(`Price: €${filterState.price[0]} - €${filterState.price[1]}`, () => { filterState.price = [0, 5000]; renderAll(); });
+            }
+            const clearBtn = document.createElement('button');
+            clearBtn.className = 'text-sm text-red-600 hover:underline ml-auto font-medium';
+            clearBtn.textContent = 'Clear all';
+            clearBtn.onclick = () => { filterState = { ...INITIAL_FILTERS }; renderAll(); };
+            pillsContainer.appendChild(clearBtn);
+        }
+
+        function updateControls() {
+            document.querySelectorAll('#main-category-bar .category-link').forEach(link => {
+                link.classList.toggle('active', filterState.categories.includes(link.dataset.category));
+            });
+            document.querySelectorAll('#categories-tree-container input[type="checkbox"]').forEach(cb => { cb.checked = filterState.categories.includes(cb.dataset.category); });
+            document.querySelectorAll('#brand-list-container input[type="checkbox"]').forEach(cb => { cb.checked = filterState.brands.includes(cb.dataset.brand); });
+            priceMinSlider.value = filterState.price[0];
+            priceMaxSlider.value = filterState.price[1];
+            updatePriceUI();
+            updateFilterButtonStates();
+        }
+        
+        function updateFilterButtonStates() {
+            const catBtn = document.getElementById('categories-filter-btn');
+            const priceBtn = document.getElementById('price-filter-btn');
+            const brandBtn = document.getElementById('brand-filter-btn');
+            catBtn.classList.toggle('active', filterState.categories.length > 0);
+            priceBtn.classList.toggle('active', filterState.price[0] !== 0 || filterState.price[1] !== 5000);
+            brandBtn.classList.toggle('active', filterState.brands.length > 0);
+        }
+
+        function updatePriceUI() {
+            const [min, max] = filterState.price;
+            priceMinLabel.textContent = `€${min}`; priceMaxLabel.textContent = `€${max}`;
+            sliderRangeColor.style.left = `${(min / 5000) * 100}%`;
+            sliderRangeColor.style.width = `${((max - min) / 5000) * 100}%`;
+        }
+        
+        function initialize() {
+            // Main Category Bar
+            DUMMY_CATEGORIES.forEach(cat => {
+                const link = document.createElement('button');
+                link.className = 'category-link text-gray-500 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap transition-colors border-b-2 border-transparent';
+                link.textContent = cat;
+                link.dataset.category = cat;
+                link.onclick = () => {
+                    const isSelected = filterState.categories.includes(cat);
+                    if (isSelected) {
+                        filterState.categories = filterState.categories.filter(c => c !== cat);
+                    } else {
+                        filterState.categories.push(cat);
+                    }
+                    renderAll();
+                };
+                mainCategoryBar.appendChild(link);
+            });
+
+            // Popovers
+            document.querySelectorAll('[data-popover-container]').forEach(container => {
+                const trigger = container.querySelector('[data-popover-trigger]');
+                const popover = document.getElementById(trigger.dataset.popoverTrigger);
+                trigger.addEventListener('click', (e) => { e.stopPropagation(); closeAllPopovers(popover); popover.classList.toggle('visible'); });
+            });
+            document.addEventListener('click', () => closeAllPopovers());
+
+            // Category Tree in Popover
+            const tree = document.createElement('ul');
+            CATEGORY_DATA.forEach(cat => tree.appendChild(createCategoryNode(cat)));
+            categoriesTreeContainer.appendChild(tree);
+            
+            // Brand List in Popover
+            BRAND_DATA.forEach(brand => {
+                const div = document.createElement('div');
+                div.className = 'flex items-center';
+                div.innerHTML = `<input type="checkbox" id="brand-${brand}" data-brand="${brand}" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"><label for="brand-${brand}" class="ml-2 text-gray-700">${brand}</label>`;
+                div.querySelector('input').addEventListener('change', (e) => {
+                    if (e.target.checked) filterState.brands.push(brand);
+                    else filterState.brands = filterState.brands.filter(b => b !== brand);
+                    renderAll();
+                });
+                brandListContainer.appendChild(div);
+            });
+
+            [priceMinSlider, priceMaxSlider].forEach(slider => { slider.addEventListener('input', handlePriceSliderInput); slider.addEventListener('change', renderAll); });
+            
+            aiForm.addEventListener('submit', handleAISubmit);
+            aiInput.addEventListener('input', () => { aiSendBtn.disabled = aiInput.value.trim() === ''; });
+            aiSendBtn.disabled = true;
+
+            closeAiBtn.addEventListener('click', toggleAICopilot);
+            openAiBtn.addEventListener('click', toggleAICopilot);
+
+            renderAll();
+        }
+        
+        function toggleAICopilot() {
+            const isVisible = !aiCopilotContainer.classList.contains('hidden');
+            if (isVisible) {
+                aiCopilotContainer.style.maxHeight = aiCopilotContainer.scrollHeight + 'px';
+                setTimeout(() => {
+                    aiCopilotContainer.style.maxHeight = '0';
+                    aiCopilotContainer.style.opacity = '0';
+                    aiCopilotContainer.style.paddingTop = '0';
+                    aiCopilotContainer.style.marginTop = '0';
+                }, 10);
+                setTimeout(() => {
+                    aiCopilotContainer.classList.add('hidden');
+                    openAiBtn.classList.remove('hidden');
+                }, 500);
+            } else {
+                aiCopilotContainer.classList.remove('hidden');
+                openAiBtn.classList.add('hidden');
+                aiCopilotContainer.style.paddingTop = '';
+                aiCopilotContainer.style.marginTop = '';
+                aiCopilotContainer.style.maxHeight = aiCopilotContainer.scrollHeight + 'px';
+                aiCopilotContainer.style.opacity = '1';
+                setTimeout(() => {
+                    aiCopilotContainer.style.maxHeight = '';
+                }, 500);
+            }
+        }
+
+        function closeAllPopovers(exceptThisOne = null) {
+            document.querySelectorAll('.filter-popover').forEach(p => { if (p !== exceptThisOne) p.classList.remove('visible'); });
+        }
+
+        function createCategoryNode(category) {
+            const li = document.createElement('li');
+            const hasChildren = category.children && category.children.length > 0;
+            li.className = hasChildren ? 'parent-category' : '';
+            li.innerHTML = `<div class="flex items-center p-1 rounded-md hover:bg-gray-100">${hasChildren ? '<svg class="w-4 h-4 mr-1 arrow text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>' : '<div class="w-4 h-4 mr-1"></div>'}<input type="checkbox" id="cat-${category.name}" data-category="${category.name}" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"><label for="cat-${category.name}" class="ml-2 text-gray-700">${category.name}</label></div>`;
+            li.querySelector('input').addEventListener('change', (e) => {
+                const catName = e.target.dataset.category;
+                const isSelected = filterState.categories.includes(catName);
+                if (e.target.checked && !isSelected) {
+                    filterState.categories.push(catName);
+                } else if (!e.target.checked && isSelected) {
+                    filterState.categories = filterState.categories.filter(c => c !== catName);
+                }
+                renderAll();
+            });
+            if (hasChildren) {
+                const childrenUl = document.createElement('ul');
+                category.children.forEach(child => childrenUl.appendChild(createCategoryNode(child)));
+                li.appendChild(childrenUl);
+                li.querySelector('div').addEventListener('click', (e) => { if (e.target.type !== 'checkbox') li.classList.toggle('open'); });
+            }
+            return li;
+        }
+
+        function handlePriceSliderInput() {
+            let minVal = parseInt(priceMinSlider.value), maxVal = parseInt(priceMaxSlider.value);
+            if (minVal >= maxVal) { this.id === 'price-min-slider' ? minVal = maxVal - 1 : maxVal = minVal + 1; }
+            filterState.price = [minVal, maxVal];
+            updatePriceUI();
+        }
+
+        function handleAISubmit(e) {
+            e.preventDefault();
+            const query = aiInput.value.trim();
+            if (!query) return;
+            addMessageToChat(query, 'user');
+            
+            const lowerQuery = query.toLowerCase();
+            if (lowerQuery.includes('wallbox')) filterState.categories.push('Wallboxes');
+            if (lowerQuery.includes('zaptec')) filterState.brands.push('Zaptec');
+            const priceMatch = lowerQuery.match(/under (\d+)/);
+            if (priceMatch) filterState.price[1] = parseInt(priceMatch[1]);
+            
+            setTimeout(() => addMessageToChat("I've updated the filters for you.", 'ai'), 500);
+
+            aiInput.value = '';
+            aiSendBtn.disabled = true;
+            renderAll();
+        }
+
+        function addMessageToChat(text, sender) {
+            const msgWrapper = document.createElement('div');
+            msgWrapper.className = sender === 'user' ? 'flex justify-end' : 'flex justify-start';
+            const msgBubble = document.createElement('div');
+            msgBubble.className = sender === 'user' ? 'bg-blue-600 text-white p-3 rounded-lg max-w-md' : 'bg-gray-200 text-gray-800 p-3 rounded-lg max-w-md';
+            msgBubble.textContent = text;
+            msgWrapper.appendChild(msgBubble);
+            aiChatBox.appendChild(msgWrapper);
+            aiChatBox.scrollTop = aiChatBox.scrollHeight;
+        }
+
+        initialize();
+    });
+    </script>
+</body>
+</html>
+

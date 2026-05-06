@@ -1,0 +1,26 @@
+type: google.api.Service
+config_version: 3
+http:
+  rules:
+    # Core LLM-focused vector operations
+    - selector: vectorspb.VectorService.SearchByVector
+      post: /api/vector/search
+      body: "*"
+
+    - selector: vectorspb.VectorService.SearchSimilarEntities  
+      post: /api/vector/similar
+      body: "*"
+
+    - selector: vectorspb.VectorService.GetEntityContext
+      post: /api/vector/context
+      body: "*"
+
+    - selector: vectorspb.VectorService.GetRecommendations
+      post: /api/vector/recommendations
+      body: "*"
+
+    - selector: vectorspb.VectorService.GetEntityById
+      get: /api/vector/entity/{entity_id}
+      additional_bindings:
+        - post: /api/vector/entity
+          body: "*"

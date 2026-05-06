@@ -1,0 +1,296 @@
+/* UserAvatar.module.css */
+.avatarWrapper {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--gray-200, #e5e7eb);
+    background: var(--gray-100, #f3f4f6);
+    transition: all 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+    .avatarWrapper {
+        border-color: var(--gray-700, #374151);
+        background: var(--gray-800, #1f2937);
+    }
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+}
+
+/* Size variants */
+.small {
+    width: 32px;
+    height: 32px;
+    border-width: 1px;
+}
+
+.medium {
+    width: 40px;
+    height: 40px;
+    border-width: 2px;
+}
+
+.large {
+    width: 56px;
+    height: 56px;
+    border-width: 2px;
+}
+
+.xlarge {
+    width: 80px;
+    height: 80px;
+    border-width: 3px;
+}
+
+/* Status indicators */
+.statusIndicator {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--white, #ffffff);
+    z-index: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+    .statusIndicator {
+        border-color: var(--gray-800, #1f2937);
+    }
+}
+
+.small .statusIndicator {
+    width: 8px;
+    height: 8px;
+    border-width: 1px;
+}
+
+.large .statusIndicator {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+}
+
+.xlarge .statusIndicator {
+    width: 20px;
+    height: 20px;
+    border-width: 3px;
+}
+
+/* Status colors */
+.online {
+    background: var(--emerald-500, #10b981);
+}
+
+@media (prefers-color-scheme: dark) {
+    .online {
+        background: var(--emerald-400, #34d399);
+    }
+}
+
+.offline {
+    background: var(--gray-400, #9ca3af);
+}
+
+@media (prefers-color-scheme: dark) {
+    .offline {
+        background: var(--gray-500, #6b7280);
+    }
+}
+
+.away {
+    background: var(--amber-500, #f59e0b);
+}
+
+@media (prefers-color-scheme: dark) {
+    .away {
+        background: var(--amber-400, #fbbf24);
+    }
+}
+
+.busy {
+    background: var(--red-500, #ef4444);
+}
+
+@media (prefers-color-scheme: dark) {
+    .busy {
+        background: var(--red-400, #f87171);
+    }
+}
+
+/* Placeholder for missing avatar */
+.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: var(--gray-200, #e5e7eb);
+    color: var(--gray-500, #6b7280);
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .placeholder {
+        background: var(--gray-700, #374151);
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.small .placeholder {
+    font-size: 0.75rem;
+}
+
+.large .placeholder {
+    font-size: 1rem;
+}
+
+.xlarge .placeholder {
+    font-size: 1.25rem;
+}
+
+/* Interactive states */
+.clickable {
+    cursor: pointer;
+}
+
+.clickable:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (prefers-color-scheme: dark) {
+    .clickable:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+}
+
+.clickable:focus {
+    outline: 2px solid var(--blue-500, #3b82f6);
+    outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .clickable:focus {
+        outline-color: var(--blue-400, #60a5fa);
+    }
+}
+
+.clickable:active {
+    transform: scale(0.95);
+}
+
+/* Verified badge */
+.verifiedBadge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 16px;
+    height: 16px;
+    background: var(--blue-500, #3b82f6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 10px;
+    border: 2px solid var(--white, #ffffff);
+    z-index: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+    .verifiedBadge {
+        background: var(--blue-400, #60a5fa);
+        border-color: var(--gray-800, #1f2937);
+    }
+}
+
+.small .verifiedBadge {
+    width: 12px;
+    height: 12px;
+    font-size: 8px;
+    border-width: 1px;
+}
+
+.large .verifiedBadge {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+}
+
+.xlarge .verifiedBadge {
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+}
+
+/* Loading state */
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+    .loading::before {
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    .avatar,
+    .avatarWrapper,
+    .clickable:hover,
+    .clickable:active,
+    .loading::before {
+        transition: none;
+        animation: none;
+        transform: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+    .avatarWrapper {
+        border-width: 3px;
+        border-color: var(--gray-500, #6b7280);
+    }
+    
+    .statusIndicator {
+        border-width: 3px;
+    }
+    
+    .verifiedBadge {
+        border-width: 3px;
+    }
+}

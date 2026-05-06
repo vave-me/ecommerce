@@ -1,0 +1,188 @@
+/* ------------------------------------------
+   CSS Module for OffersList
+------------------------------------------ */
+
+.container {
+    padding: 16px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.2s ease;
+}
+
+/* Dark theme for container */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background-color: var(--gray-800, #1f2937);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 12px;
+    }
+}
+
+.loadingMessage {
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Dark theme for loading message */
+@media (prefers-color-scheme: dark) {
+    .loadingMessage {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+/* Empty state styling */
+.emptyState {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+/* Dark theme for empty state */
+@media (prefers-color-scheme: dark) {
+    .emptyState {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.emptyStateIcon {
+    font-size: 48px;
+    color: #dee2e6;
+    margin-bottom: 16px;
+}
+
+/* Dark theme for empty state icon */
+@media (prefers-color-scheme: dark) {
+    .emptyStateIcon {
+        color: var(--gray-600, #4b5563);
+    }
+}
+
+.emptyStateTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 8px;
+}
+
+/* Dark theme for empty state title */
+@media (prefers-color-scheme: dark) {
+    .emptyStateTitle {
+        color: var(--gray-300, #d1d5db);
+    }
+}
+
+.emptyStateDescription {
+    font-size: 14px;
+    color: #6c757d;
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* Dark theme for empty state description */
+@media (prefers-color-scheme: dark) {
+    .emptyStateDescription {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+/* Loading spinner */
+.loadingSpinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e9ecef;
+    border-top: 2px solid #1aa89e;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Dark theme for loading spinner */
+@media (prefers-color-scheme: dark) {
+    .loadingSpinner {
+        border: 2px solid var(--gray-600, #4b5563);
+        border-top: 2px solid var(--primary-color, #3b82f6);
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* List styling */
+.offersList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.offersListItem {
+    margin-bottom: 12px;
+}
+
+.offersListItem:last-child {
+    margin-bottom: 0;
+}
+
+/* Header styling */
+.listHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+/* Dark theme for list header */
+@media (prefers-color-scheme: dark) {
+    .listHeader {
+        border-bottom: 1px solid var(--gray-700, #374151);
+    }
+}
+
+.listTitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+}
+
+/* Dark theme for list title */
+@media (prefers-color-scheme: dark) {
+    .listTitle {
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.offersCount {
+    font-size: 14px;
+    color: #6c757d;
+    background-color: #f8f9fa;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+/* Dark theme for offers count */
+@media (prefers-color-scheme: dark) {
+    .offersCount {
+        color: var(--gray-300, #d1d5db);
+        background-color: var(--gray-700, #374151);
+    }
+}

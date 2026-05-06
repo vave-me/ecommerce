@@ -1,0 +1,247 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Geocoding",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "GeocodingService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/geocoding/geocode": {
+      "post": {
+        "summary": "Geocode address",
+        "operationId": "geocodeAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/geocodingpbGeocodeAddressResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/geocodingpbGeocodeAddressRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Address"
+        ]
+      }
+    },
+    "/api/geocoding/suggest/address/{address}": {
+      "get": {
+        "summary": "Suggest Address",
+        "operationId": "suggestAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/geocodingpbSuggestAddressResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Address"
+        ]
+      }
+    },
+    "/api/geocoding/suggest/city/{name}": {
+      "get": {
+        "summary": "Suggest City",
+        "operationId": "suggestCity",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/geocodingpbSuggestCityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "City"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "geocodingpbBatchGeocodeAddressResponse": {
+      "type": "object"
+    },
+    "geocodingpbGeocodeAddressRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "geocodingpbGeocodeAddressResponse": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "geocodingpbGetAddressForCoordinatesResponse": {
+      "type": "object"
+    },
+    "geocodingpbGetGeocodingDetailsResponse": {
+      "type": "object"
+    },
+    "geocodingpbRefreshGeocodingCacheResponse": {
+      "type": "object"
+    },
+    "geocodingpbReverseGeocodeLocationResponse": {
+      "type": "object"
+    },
+    "geocodingpbSuggestAddressResponse": {
+      "type": "object",
+      "properties": {
+        "suggestionAddress": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/geocodingpbSuggestionAddress"
+          }
+        }
+      }
+    },
+    "geocodingpbSuggestCityResponse": {
+      "type": "object",
+      "properties": {
+        "suggestedCities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/geocodingpbSuggestionCity"
+          }
+        }
+      }
+    },
+    "geocodingpbSuggestionAddress": {
+      "type": "object",
+      "properties": {
+        "suggestedAddress": {
+          "type": "string"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "geocodingpbSuggestionCity": {
+      "type": "object",
+      "properties": {
+        "suggestedCity": {
+          "type": "string"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "geocodingpbValidateAddressResponse": {
+      "type": "object"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

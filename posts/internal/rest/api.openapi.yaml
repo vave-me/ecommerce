@@ -1,0 +1,106 @@
+openapiOptions:
+  file:
+    - file: "postspb/api.proto"
+      option:
+        info:
+          title: Posts Management API
+          version: "1.0.0"
+          description: "API for managing posts for   including creating, retrieving, updating, deleting posts, bulk importing, and handling post-related files."
+        basePath: /
+  method:
+    # Post Management Operations
+    - method: postspb.PostsService.AddPost
+      option:
+        operationId: addPost
+        tags:
+          - Post
+        summary: Add a New Post
+    - method: postspb.PostsService.UpdatePost
+      option:
+        operationId: updatePost
+        tags:
+          - Post
+        summary: Update a Post
+
+
+    - method: postspb.PostsService.GetPost
+      option:
+        operationId: getPost
+        tags:
+          - Post
+        summary: Retrieve a Specific Post
+
+    - method: postspb.PostsService.RemovePost
+      option:
+        operationId: removePost
+        tags:
+          - Post
+        summary: Remove a Post
+
+    - method: postspb.PostsService.AddPostThumbnail
+      option:
+        operationId: addPostThumbnail
+        tags:
+          - Post
+        summary: Add Post thumbnail
+
+    - method: postspb.PostsService.UpdatePostThumbnail
+      option:
+        operationId: updatePostThumbnail
+        tags:
+          - Post
+        summary: Update Post thumbnail
+
+
+    - method: postspb.PostsService.GetPosts
+      option:
+        operationId: getPosts
+        tags:
+          - Post
+        summary: Retrieve all posts associated w
+
+    - method: postspb.PostsService.GetPostsWithFilters
+      option:
+        operationId: getPostsWithFilters
+        tags:
+          - Post
+        summary: Retrieve all posts associated w
+
+
+    - method: postspb.PostsService.GetPostsByCategory
+      option:
+        operationId: getPostsByCategory
+        tags:
+          - Post
+        summary: Retrieve all posts associated w
+
+    - method: postspb.PostsService.GetPostsByCategorySlug
+      option:
+        operationId: getPostsByCategorySlug
+        tags:
+          - Post
+        summary: Retrieve all posts associated w
+
+
+    - method: postspb.PostsService.GetUserPosts
+      option:
+        operationId: getUserPosts
+        tags:
+          - Post
+        summary: Retrieve all posts associated w
+
+    - method: postspb.PostsService.GetPublicCatalog
+      option:
+        operationId: getPublicCatalog
+        tags:
+          - Post
+        summary: Retrieve all posts associated with a user
+
+
+    - method: postspb.PostsService.ArchivePost
+      option:
+        operationId: archivePost
+        tags:
+          - Post
+        summary: Archive a Post (mark as unavailable)
+

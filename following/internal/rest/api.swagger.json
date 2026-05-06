@@ -1,0 +1,608 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Follow Management API",
+    "description": "API for managing following and replies between users, including functionalities to add, approve, reject, edit, and retrieve following and their replies.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "FollowingService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/following": {
+      "post": {
+        "summary": "Add a new follow",
+        "operationId": "addFollow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/followingpbAddFollowResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request message to add a new follow.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/followingpbAddFollowRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Follow"
+        ]
+      }
+    },
+    "/api/following/approved": {
+      "get": {
+        "summary": "Get approved following",
+        "operationId": "getApprovedFollowing",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/followingpbGetApprovedFollowingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Follow"
+        ]
+      }
+    },
+    "/api/following/most": {
+      "get": {
+        "summary": "Get items count",
+        "operationId": "getMostFollowed",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/followingpbGetMostFollowedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "ItemFollowCount"
+        ]
+      }
+    },
+    "/api/following/most/{categoryId}": {
+      "get": {
+        "summary": "Get items count",
+        "operationId": "getMostFollowedByCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/followingpbGetMostFollowedByCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ItemFollowCount"
+        ]
+      }
+    },
+    "/api/following/sender": {
+      "post": {
+        "summary": "Get a list of following",
+        "operationId": "getFollowingBySender",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/followingpbGetFollowingBySenderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/followingpbGetFollowingBySenderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Follow"
+        ]
+      }
+    },
+    "/api/following/{followedUserId}/all": {
+      "get": {
+        "summary": "Get a list of following",
+        "operationId": "getFollowing",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/followingpbGetFollowingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "followedUserId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Follow"
+        ]
+      }
+    },
+    "/api/following/{id}": {
+      "get": {
+        "summary": "Get a follow",
+        "operationId": "getFollow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/followingpbGetFollowResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier of the follow to retrieve.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Follow"
+        ]
+      },
+      "put": {
+        "summary": "Edit a follow",
+        "operationId": "editFollow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/followingpbEditFollowResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FollowingServiceEditFollowBody"
+            }
+          }
+        ],
+        "tags": [
+          "Follow"
+        ]
+      }
+    },
+    "/api/following/{id}/approve": {
+      "put": {
+        "summary": "Approve a follow",
+        "operationId": "approveFollow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/followingpbApproveFollowResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FollowingServiceApproveFollowBody"
+            }
+          }
+        ],
+        "tags": [
+          "Follow"
+        ]
+      }
+    },
+    "/api/following/{id}/reject": {
+      "delete": {
+        "summary": "Reject a follow",
+        "operationId": "rejectFollow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/followingpbRejectFollowResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Follow"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "FollowingServiceApproveFollowBody": {
+      "type": "object"
+    },
+    "FollowingServiceEditFollowBody": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+    "followingpbAddFollowRequest": {
+      "type": "object",
+      "properties": {
+        "followedUserId": {
+          "type": "string"
+        },
+        "followedUserType": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "string"
+        }
+      },
+      "description": "Request message to add a new follow."
+    },
+    "followingpbAddFollowResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the created follow."
+        }
+      },
+      "description": "Response message after adding a new follow."
+    },
+    "followingpbApproveFollowResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "followStatus": {
+          "type": "string"
+        },
+        "approvedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "followingpbEditFollowResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+    "followingpbFlagFollowResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "flagged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "followingpbFollow": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the follow."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier of the user who made the follow."
+        },
+        "followedUserId": {
+          "type": "string"
+        },
+        "followedUserType": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string",
+          "description": "Unique identifier of the item being followed on."
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "followStatus": {
+          "type": "string",
+          "description": "Current status of the follow."
+        },
+        "flagged": {
+          "type": "boolean",
+          "description": "Indicates if the follow has been flagged."
+        }
+      },
+      "description": "Follow represents a user's follow on a item."
+    },
+    "followingpbGetApprovedFollowingResponse": {
+      "type": "object",
+      "properties": {
+        "following": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/followingpbFollow"
+          },
+          "description": "List of approved following."
+        }
+      },
+      "description": "Response message for retrieving approved following."
+    },
+    "followingpbGetFollowResponse": {
+      "type": "object",
+      "properties": {
+        "follow": {
+          "$ref": "#/definitions/followingpbFollow",
+          "description": "Details of the requested follow."
+        }
+      },
+      "description": "Response message for retrieving a follow."
+    },
+    "followingpbGetFollowingBySenderRequest": {
+      "type": "object"
+    },
+    "followingpbGetFollowingBySenderResponse": {
+      "type": "object",
+      "properties": {
+        "following": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/followingpbFollow"
+          },
+          "description": "List of following."
+        }
+      }
+    },
+    "followingpbGetFollowingResponse": {
+      "type": "object",
+      "properties": {
+        "following": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/followingpbFollow"
+          },
+          "description": "List of following."
+        }
+      },
+      "description": "Response message for retrieving a list of following."
+    },
+    "followingpbGetMostFollowedByCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "itemFollowCount": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/followingpbItemFollowCount"
+          },
+          "description": "Number of following per page."
+        }
+      },
+      "description": "Response message for retrieving a list of following."
+    },
+    "followingpbGetMostFollowedResponse": {
+      "type": "object",
+      "properties": {
+        "itemFollowCount": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/followingpbItemFollowCount"
+          },
+          "description": "List of following."
+        }
+      },
+      "description": "Response message for retrieving a list of following."
+    },
+    "followingpbItemFollowCount": {
+      "type": "object",
+      "properties": {
+        "followedUserId": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "followingCount": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "followingpbRejectFollowResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "followStatus": {
+          "type": "string"
+        }
+      }
+    },
+    "followingpbRemoveFollowResponse": {
+      "type": "object"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+syntax = "proto3";
+package categoriespb;
+
+
+// Example event for CategoryAdded
+message CategoryAdded {
+  string id = 1;  // Category ID
+  string description =2;
+  string parent_id = 3;
+  string google_category_id = 4;
+  string slug = 5;
+  repeated string tags = 6;
+  bool is_active = 7;
+  // etc. if you store SEO fields here
+}
+
+// CategoryRebranded might only update name/description
+message CategoryRebranded {
+  string id = 1;
+  string new_slug = 2;
+  string new_desc = 3;
+}
+
+message CategoryArchived {
+  string id = 1;
+  string user_id = 2;
+}
+
+message CategoryRemoved {
+  string id = 1;
+  string user_id = 2;
+}
+
+// Filter events
+message FilterAdded {
+  string id = 1;
+  string category_id = 2;
+  string name = 3;
+  string filter_type = 4;
+  repeated string values = 5;
+  bool is_active = 6;
+}
+
+// If needed
+message FilterArchived {
+  string id = 1;
+}
+
+message FilterRemoved {
+  string id = 1;
+}
+

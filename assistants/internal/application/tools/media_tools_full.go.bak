@@ -1,0 +1,509 @@
+package tools
+
+import ai2 "middleman/internal/ai"
+
+func createMediaTools() []ai2.Tool {
+	return []ai2.Tool{
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "media_create",
+				Description: "Create a new media record for an item",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the item (product, service, etc.)",
+							"minLength":   1,
+						},
+						"item_type": map[string]interface{}{
+							"type":        "string",
+							"description": "The type of item",
+							"enum":        []string{"product", "service", "post", "offer", "user"},
+						},
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the user creating the media",
+							"minLength":   1,
+						},
+						"status": map[string]interface{}{
+							"type":        "string",
+							"description": "Status of the media",
+							"enum":        []string{"active", "inactive", "processing", "failed"},
+							"default":     "active",
+						},
+					},
+					"required": []string{"item_id", "item_type", "user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "media_update",
+				Description: "Update an existing media record",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"media_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the media to update",
+							"minLength":   1,
+						},
+						"item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the item",
+							"minLength":   1,
+						},
+						"item_type": map[string]interface{}{
+							"type":        "string",
+							"description": "The type of item",
+							"enum":        []string{"product", "service", "post", "offer", "user"},
+						},
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the user",
+							"minLength":   1,
+						},
+						"status": map[string]interface{}{
+							"type":        "string",
+							"description": "Status of the media",
+							"enum":        []string{"active", "inactive", "processing", "failed"},
+						},
+					},
+					"required": []string{"media_id", "item_id", "item_type", "user_id", "status"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "media_get",
+				Description: "Get media by ID",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"media_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the media",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"media_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "media_get_by_item",
+				Description: "Get media for a specific item",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the item",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"item_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "media_remove",
+				Description: "Remove media from an item",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"media_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the media to remove",
+							"minLength":   1,
+						},
+						"item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the item",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"media_id", "item_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "media_add_image",
+				Description: "Add an image to media",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"media_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the media",
+							"minLength":   1,
+						},
+						"display_order": map[string]interface{}{
+							"type":        "integer",
+							"description": "Display order of the image",
+							"minimum":     0,
+							"default":     0,
+						},
+						"is_main": map[string]interface{}{
+							"type":        "boolean",
+							"description": "Whether this is the main image",
+							"default":     false,
+						},
+						"url": map[string]interface{}{
+							"type":        "string",
+							"description": "URL of the image",
+							"minLength":   1,
+							"format":      "uri",
+						},
+						"metadata": map[string]interface{}{
+							"type":        "string",
+							"description": "JSON metadata for the image",
+							"default":     "{}",
+						},
+						"file_type": map[string]interface{}{
+							"type":        "string",
+							"description": "File type of the image",
+							"enum":        []string{"jpg", "jpeg", "png", "gif", "webp", "svg"},
+						},
+						"thumbnail": map[string]interface{}{
+							"type":        "string",
+							"description": "URL of the thumbnail",
+							"format":      "uri",
+						},
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the user adding the image",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"media_id", "url", "file_type", "user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "media_remove_image",
+				Description: "Remove an image from media",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"media_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the media",
+							"minLength":   1,
+						},
+						"image_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the image to remove",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"media_id", "image_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "media_get_all_item_images",
+				Description: "Get all images for an item",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the item",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"item_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "media_get_all_images",
+				Description: "Get all images for a media record",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"media_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the media",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"media_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "media_get_images_by_author",
+				Description: "Get all images uploaded by a specific user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the user",
+							"minLength":   1,
+						},
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number for pagination",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Number of results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+						"sort_by": map[string]interface{}{
+							"type":        "string",
+							"description": "Sort field",
+							"enum":        []string{"created_at", "updated_at", "display_order", "size"},
+							"default":     "created_at",
+						},
+						"sort_order": map[string]interface{}{
+							"type":        "string",
+							"description": "Sort order",
+							"enum":        []string{"asc", "desc"},
+							"default":     "desc",
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "media_add_video",
+				Description: "Add a video to media",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"media_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the media",
+							"minLength":   1,
+						},
+						"display_order": map[string]interface{}{
+							"type":        "integer",
+							"description": "Display order of the video",
+							"minimum":     0,
+							"default":     0,
+						},
+						"is_main": map[string]interface{}{
+							"type":        "boolean",
+							"description": "Whether this is the main video",
+							"default":     false,
+						},
+						"url": map[string]interface{}{
+							"type":        "string",
+							"description": "URL of the video",
+							"minLength":   1,
+							"format":      "uri",
+						},
+						"metadata": map[string]interface{}{
+							"type":        "string",
+							"description": "JSON metadata for the video",
+							"default":     "{}",
+						},
+						"file_type": map[string]interface{}{
+							"type":        "string",
+							"description": "File type of the video",
+							"enum":        []string{"mp4", "webm", "mov", "avi", "mkv", "flv"},
+						},
+						"thumbnail": map[string]interface{}{
+							"type":        "string",
+							"description": "URL of the video thumbnail",
+							"format":      "uri",
+						},
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the user adding the video",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"media_id", "url", "file_type", "user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "media_remove_video",
+				Description: "Remove a video from media",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"media_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the media",
+							"minLength":   1,
+						},
+						"video_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the video to remove",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"media_id", "video_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "media_get_all_item_videos",
+				Description: "Get all videos for an item",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the item",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"item_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "media_get_all_videos",
+				Description: "Get all videos for a media record",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"media_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the media",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"media_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "media_get_all_platform_videos",
+				Description: "Get all videos on the platform with pagination",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number for pagination",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Number of results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+						"sort_by": map[string]interface{}{
+							"type":        "string",
+							"description": "Sort field",
+							"enum":        []string{"created_at", "updated_at", "duration", "size"},
+							"default":     "created_at",
+						},
+						"sort_order": map[string]interface{}{
+							"type":        "string",
+							"description": "Sort order",
+							"enum":        []string{"asc", "desc"},
+							"default":     "desc",
+						},
+					},
+					"required": []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "media_get_videos_by_author",
+				Description: "Get all videos uploaded by a specific user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the user",
+							"minLength":   1,
+						},
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number for pagination",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Number of results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+						"sort_by": map[string]interface{}{
+							"type":        "string",
+							"description": "Sort field",
+							"enum":        []string{"created_at", "updated_at", "duration", "size"},
+							"default":     "created_at",
+						},
+						"sort_order": map[string]interface{}{
+							"type":        "string",
+							"description": "Sort order",
+							"enum":        []string{"asc", "desc"},
+							"default":     "desc",
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "media_get_all_user_media",
+				Description: "Get all media records for a specific user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the user",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+	}
+}

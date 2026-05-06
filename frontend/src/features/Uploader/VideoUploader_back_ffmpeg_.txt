@@ -1,0 +1,365 @@
+import React, {useState, useEffect} from 'react';
+import {useFormik} from 'formik';
+import * as Yup from 'yup';
+import axios from 'axios';
+import styled, {keyframes} from 'styled-components';
+import {FaUpload, FaCheckCircle, FaExclamationCircle} from 'react-icons/fa';
+import {FFmpeg} from '@ffmpeg/ffmpeg';
+import {fetchFile, toBlobURL} from '@ffmpeg/util';
+import {FilePond, registerPlugin} from 'react-filepond';
+import 'filepond/dist/filepond.min.css';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
+
+registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
+
+const fadeIn = keyframes`
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+`;
+const supportedVideoTypes = [
+    'video/mp4',            // MPEG-4 Part 14
+    'video/webm',           // WebM
+    'video/ogg',            // Ogg
+    'video/x-matroska',     // Matroska (MKV)
+    'video/x-ms-wmv',       // Windows Media Video (WMV)
+    'video/mpeg',           // MPEG-1, MPEG-2
+    'video/3gpp',           // 3GPP
+    'video/3gpp2',          // 3GPP2
+    'video/x-flv',          // Flash Video (FLV) - Deprecated
+    'video/avi',            // Audio Video Interleave (AVI)
+    'video/x-ms-asf',       // Advanced Systems Format (ASF)
+    'video/quicktime',      // QuickTime File Format (MOV)
+    'video/mov',      // QuickTime File Format (MOV)
+];
+const VideoUploader = () => {
+    const [videoPreview, setVideoPreview] = useState(null);
+    const [uploadProgress, setUploadProgress] = useState(0);
+    const [uploadError, setUploadError] = useState('');
+    const [uploadSuccess, setUploadSuccess] = useState('');
+    const [isConverting, setIsConverting] = useState(false);
+    const [ffmpeg, setFFmpeg] = useState(null);
+    const [isFFmpegLoaded, setIsFFmpegLoaded] = useState(false);
+    const getFileExtension = (filename) => {
+        return filename.split('.').pop();
+    };
+    const getMimeSubtype = (mimeType) => {
+        return mimeType.split('/')[1];
+    };
+
+    // Initialize FFmpeg instance
+    useEffect(() => {
+        const initFFmpeg = async () => {
+            const ffmpegInstance = new FFmpeg();
+            const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
+            try {
+                await ffmpegInstance.load({
+                    coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.jsx`, 'text/javascript'),
+                    wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
+                });
+                setFFmpeg(ffmpegInstance);
+                setIsFFmpegLoaded(true);
+            } catch (error) {
+                console.error("FFmpeg loading error:", error);
+            }
+        };
+        initFFmpeg();
+    }, []);
+
+    const formik = useFormik({
+        initialValues: {
+            title: '',
+            description: '',
+            tags: '',
+        },
+        validationSchema: Yup.object({
+            title: Yup.string().required('Title is required'),
+            description: Yup.string().required('Description is required'),
+            tags: Yup.string().required('At least one tag is required'),
+        }),
+        onSubmit: async (values, {resetForm}) => {
+            setUploadError('');
+            setUploadProgress(0);
+            setUploadSuccess('');
+
+            try {
+                let file = videoPreview;
+
+                // Convert to MP4 if not already in that format
+                if (!supportedVideoTypes.includes(file.type) && ffmpeg){
+                    setIsConverting(true);
+                    const mp4Blob = await convertToMP4(file);
+                    if (!mp4Blob) {
+                        setIsConverting(false);
+                        return;
+                    }
+                    file = new File([mp4Blob], 'converted.mp4', {type: 'video/mp4'});
+                    setIsConverting(false);
+                }
+
+                const fileExtension = getFileExtension(file.name).toLowerCase();
+                const mimeSubtype = getMimeSubtype(file.type).toLowerCase();
+                const isMatch = fileExtension === mimeSubtype
+
+                const response = await axios.post(' http://192.168.178.84:8080/api/media/video', {
+                    mediaId: '12345',
+                    order: 1,
+                    isMain: true,
+                    fileType: fileExtension,
+                    metadata: JSON.stringify({
+                        title: values.title,
+                        description: values.description,
+                        tags: values.tags.split(',').map((tag) => tag.trim()),
+                    }),
+                });
+
+                const {url: presignedUrl} = response.data;
+
+                // Upload to S3
+                const uploadResponse = await axios.put(presignedUrl, file, {
+                    headers: {
+                        'Content-Type': 'video/mp4',
+                        'x-amz-acl': 'private',
+                    },
+                    onUploadProgress: (progressEvent) => {
+                        const percentCompleted = Math.round(
+                            (progressEvent.loaded * 100) / progressEvent.total
+                        );
+                        setUploadProgress(percentCompleted);
+                    },
+                });
+
+                if (uploadResponse.status === 200) {
+                    setUploadSuccess('Video uploaded successfully!');
+                    resetForm();
+                    setVideoPreview(null);
+                    setUploadProgress(0);
+                } else {
+                    setUploadError('Upload failed. Please try again.');
+                }
+            } catch (error) {
+                console.error('Upload Error:', error);
+                setUploadError('An error occurred during upload.');
+            } finally {
+                setIsConverting(false);
+            }
+        },
+    });
+
+    const convertToMP4 = async (file) => {
+        if (!isFFmpegLoaded) {
+            console.error("FFmpeg is not loaded yet.");
+            return null;
+        }
+        try {
+            await ffmpeg.writeFile(file.name, await fetchFile(file));
+            await ffmpeg.exec(['-i', file.name, '-c:v', 'libx264', '-preset', 'ultrafast', 'output.mp4']);
+            const data = await ffmpeg.readFile('output.mp4');
+            return new Blob([data.buffer], {type: 'video/mp4'});
+        } catch (error) {
+            console.error("Conversion error:", error);
+            return null;
+        }
+    };
+
+    return (
+        <UploaderContainer>
+            <Title>Upload Video</Title>
+            {isConverting && <p>Converting to MP4...</p>}
+            <Form onSubmit={formik.handleSubmit}>
+                <FilePond
+                    files={videoPreview ? [videoPreview] : []}
+                    allowMultiple={false}
+                    acceptedFileTypes={['video/*']}
+                    maxFileSize="400MB"
+                    onupdatefiles={(fileItems) => {
+                        setVideoPreview(fileItems.length > 0 ? fileItems[0].file : null);
+                        setUploadError('');
+                        setUploadSuccess('');
+                    }}
+                    onprocessfile={(error) => {
+                        if (error) setUploadError('Error during file processing.');
+                    }}
+                    labelIdle='Drag & Drop your video or <span class="filepond--label-action">Browse</span>'
+                />
+
+                <TextInputContainer>
+                    <FileInputLabel htmlFor="title">Title:</FileInputLabel>
+                    <TextInput
+                        id="title"
+                        name="title"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.title}
+                        onBlur={formik.handleBlur}
+                        placeholder="Enter video title"
+                    />
+                    {formik.touched.title && formik.errors.title ? (
+                        <ErrorMessage>
+                            <FaExclamationCircle style={{marginRight: '5px'}}/>
+                            {formik.errors.title}
+                        </ErrorMessage>
+                    ) : null}
+                </TextInputContainer>
+
+                <TextInputContainer>
+                    <FileInputLabel htmlFor="description">Description:</FileInputLabel>
+                    <TextArea
+                        id="description"
+                        name="description"
+                        onChange={formik.handleChange}
+                        value={formik.values.description}
+                        onBlur={formik.handleBlur}
+                        placeholder="Enter video description"
+                    />
+                    {formik.touched.description && formik.errors.description ? (
+                        <ErrorMessage>
+                            <FaExclamationCircle style={{marginRight: '5px'}}/>
+                            {formik.errors.description}
+                        </ErrorMessage>
+                    ) : null}
+                </TextInputContainer>
+
+                <TextInputContainer>
+                    <FileInputLabel htmlFor="tags">Tags (comma separated):</FileInputLabel>
+                    <TextInput
+                        id="tags"
+                        name="tags"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.tags}
+                        onBlur={formik.handleBlur}
+                        placeholder="e.g., Travel, Adventure, Nature"
+                    />
+                    {formik.touched.tags && formik.errors.tags ? (
+                        <ErrorMessage>
+                            <FaExclamationCircle style={{marginRight: '5px'}}/>
+                            {formik.errors.tags}
+                        </ErrorMessage>
+                    ) : null}
+                </TextInputContainer>
+
+                {uploadProgress > 0 && (
+                    <ProgressBarContainer>
+                        <ProgressBar value={uploadProgress} max="100"/>
+                        <span>{uploadProgress}%</span>
+                    </ProgressBarContainer>
+                )}
+
+                {uploadSuccess && (
+                    <SuccessMessage>
+                        <FaCheckCircle style={{marginRight: '5px'}}/>
+                        {uploadSuccess}
+                    </SuccessMessage>
+                )}
+
+                {uploadError && (
+                    <ErrorMessage>
+                        <FaExclamationCircle style={{marginRight: '5px'}}/>
+                        {uploadError}
+                    </ErrorMessage>
+                )}
+
+                <UploadButton type="submit" disabled={isConverting || uploadProgress > 0}>
+                    <FaUpload style={{marginRight: '8px'}}/>
+                    {uploadProgress > 0 ? 'Uploading...' : isConverting ? 'Converting...' : 'Upload'}
+                </UploadButton>
+            </Form>
+        </UploaderContainer>
+    );
+};
+
+export default VideoUploader;
+
+// Styled components
+const UploaderContainer = styled.div`
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    border: 2px dashed #ccc;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: ${fadeIn} 0.5s ease-in-out;
+`;
+
+const Title = styled.h2`
+    text-align: center;
+    color: #333333;
+    margin-bottom: 25px;
+    font-size: 28px;
+`;
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+`;
+
+const TextInputContainer = styled.div`
+    margin-bottom: 20px;
+`;
+
+const FileInputLabel = styled.label`
+    display: block;
+    margin-bottom: 8px;
+    color: #555555;
+    font-weight: 600;
+`;
+
+const TextInput = styled.input`
+    padding: 10px;
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    width: 100%;
+`;
+
+const TextArea = styled.textarea`
+    padding: 10px;
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    width: 100%;
+    resize: vertical;
+    min-height: 100px;
+`;
+
+const ProgressBarContainer = styled.div`
+    margin-bottom: 20px;
+`;
+
+const ProgressBar = styled.progress`
+    width: 100%;
+    height: 20px;
+`;
+
+const SuccessMessage = styled.div`
+    color: #00c853;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 16px;
+`;
+
+const ErrorMessage = styled.div`
+    color: #ff1744;
+    margin-top: 5px;
+    font-size: 14px;
+`;
+
+const UploadButton = styled.button`
+    padding: 12px;
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+        background-color: #1976d2;
+        transform: scale(1.02);
+    }
+`;

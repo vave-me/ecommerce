@@ -1,0 +1,256 @@
+syntax = "proto3";
+
+package userspb;
+
+
+// UsersService provides user and product management functionalities.
+service UsersService {
+  // User Management RPC Methods
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
+  rpc AddAdmin(AddAdminRequest) returns (AddAdminResponse) {}
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {}
+  rpc GetBaseUser(GetBaseUserRequest) returns (GetBaseUserResponse) {}
+  rpc GetUsers(GetUsersRequest) returns (GetUsersResponse) {}
+  rpc ListEnabledUsers(ListEnabledUsersRequest) returns (ListEnabledUsersResponse) {}
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
+  rpc RenameUser(RenameUserRequest) returns (RenameUserResponse) {}
+  rpc EnableUser(EnableUserRequest) returns (EnableUserResponse) {}
+  rpc DisableUser(DisableUserRequest) returns (DisableUserResponse) {}
+  rpc LoginUser(LoginUserRequest) returns (LoginUserResponse) {}
+  rpc WebLoginWithGoogle(WebLoginWithGoogleRequest) returns (LoginUserResponse) {}
+  rpc MobileLoginWithGoogle(MobileLoginWithGoogleRequest) returns (LoginUserResponse) {}
+  rpc LogUserOut(LogUserOutRequest) returns (LogUserOutResponse) {}
+  rpc RefreshAuthToken(RefreshAuthTokenRequest) returns (RefreshAuthTokenResponse) {}
+  rpc ClearTokens(ClearTokensRequest) returns (ClearTokensResponse) {}
+  rpc ForgotPassword(ForgotPasswordRequest) returns (ForgotPasswordResponse) {}
+  rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse) {}
+}
+
+message  LogUserOutResponse{}
+message  DisableUserResponse{}
+message  EnableUserResponse{}
+
+// Request to create a new user.
+message CreateUserRequest {
+  string email = 1;
+  string password = 2;
+  string user_name = 3;
+  string first_name = 4;
+  string last_name = 5;
+  string location = 6;
+  float lat = 7;
+  float lng = 8;
+  string thumbnail = 9;
+  string language = 10;
+  string role = 11;
+}
+
+// Request to add a new admin user.
+message AddAdminRequest {
+  string email = 1;
+  string password = 2;
+  string user_name = 3;
+  string first_name = 4;
+  string last_name = 5;
+  string location = 6;
+  float lat = 7;
+  float lng = 8;
+  string thumbnail = 9;
+}
+
+// Response after successfully adding an admin.
+message AddAdminResponse {
+  string id = 1;                // The newly created admin's unique ID.
+}
+
+message UpdateUserRequest {
+  string id = 1;
+  string user_name = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string bio = 5;
+  string privacy = 6;
+  string background = 7;
+  string location = 8;
+  float lat = 9;
+  float lng = 10;
+  string thumbnail = 11;
+  string role = 12;
+}
+
+
+message UserUpdateInfo {
+  string email = 1;
+  string user_name = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string location = 5;
+}
+
+// Definition of a User (without password).
+message User {
+  string id = 1;              // Unique identifier of the user.
+  string email = 2;
+  string user_name = 3;// User's email address.
+  string first_name = 4;           // User's first name.
+  string last_name = 5;            // User's last name.
+  bool enabled = 6;
+  string google_id = 7;
+  string location = 8;
+  float lat = 9;
+  float lng = 10;
+  string thumbnail = 11;
+  string background = 12;
+  string bio = 13;
+  string privacy = 14;
+  string role = 15;
+}
+
+message BaseUser {
+  string id = 1;
+  string user_name = 2;
+  string thumbnail = 3;
+  float lat = 4;
+  float lng = 5;
+  string location = 6;
+  string bio = 7;
+  string privacy = 8;
+  string background = 9;
+}
+// Response after successfully creating a user.
+message CreateUserResponse {
+  string id = 1;                // The newly created user's unique ID.
+}
+
+// Request to retrieve a user by their unique ID.
+message GetUserRequest {
+  string id = 1;              // Unique identifier of the user.
+}
+
+// Response containing user details.
+message GetUserResponse {
+  User user = 1;                   // User object with detailed information.
+}
+
+// Request to retrieve a user by their unique ID.
+message GetBaseUserRequest {
+  string id = 1;              // Unique identifier of the user.
+}
+
+// Response containing user details.
+message GetBaseUserResponse {
+  BaseUser user = 1;                   // User object with detailed information.
+}
+// Request to list multiple users with optional filtering.
+message GetUsersRequest {
+  repeated string user_ids = 1;
+
+}
+
+message GetUsersResponse {
+  repeated User users = 1;         // List of user objects.
+}
+
+
+
+message ListEnabledUsersRequest {
+
+}
+
+message ListEnabledUsersResponse {
+  repeated User users = 1;
+}
+
+
+
+message UpdateUserResponse {
+  string user_id = 1;
+}
+
+// Request to rename a user.
+message RenameUserRequest {
+  string id = 1;
+  string user_name = 2;
+}
+
+message RenameUserResponse {
+  User user = 1;
+}
+
+
+message EnableUserRequest {
+  string id = 1;
+  string verification_token = 2; // Optional verification token for email verification flow
+}
+
+message DisableUserRequest {
+  string id = 1;
+}
+message LoginUserRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginUserResponse {
+  string access_token = 1;
+  string token = 2;
+  string user_name = 3;
+  float lat = 4;
+  float lng = 5;
+
+}
+
+message LogUserOutRequest {
+  string id = 1;
+  string auth_token = 2;    // The access token to invalidate
+  string refresh_token = 3; // The refresh token to invalidate
+}
+
+
+message RefreshAuthTokenRequest {
+  string refresh_token = 1;
+  string user_id = 2;
+}
+
+message RefreshAuthTokenResponse {
+  string token = 1;         // Access token
+  string refresh_token = 2; // New refresh token
+}
+
+// Request to explicitly clear/invalidate tokens for security reasons
+message ClearTokensRequest {
+  string user_id = 1;
+  string token_id = 2;     // Identifier for the token (partial)
+  string refresh_token = 3; // The refresh token to invalidate
+  string reason = 4;       // Reason for clearing tokens (e.g., "security concern", "user logout")
+}
+
+message ClearTokensResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message ForgotPasswordRequest {
+  string email = 1;
+}
+
+message ForgotPasswordResponse {
+  string message = 1;
+}
+
+message ResetPasswordRequest {
+  string token = 1;
+  string new_password = 2;
+}
+
+message ResetPasswordResponse {
+  string message = 1;
+}
+
+message WebLoginWithGoogleRequest {
+  string id_token = 1;
+}
+
+message MobileLoginWithGoogleRequest {
+  string id_token = 1;
+}

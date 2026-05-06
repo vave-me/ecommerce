@@ -1,0 +1,60 @@
+/* List Container */
+.listContainer {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    overflow-y: auto;
+    background-color: #f9f9f9; /* Neutral background for a clean look */
+    border: 1px solid #dcdcdc; /* Subtle border for definition */
+    border-radius: 6px; /* Slight rounding for a polished feel */
+    max-height: 400px; /* Restrict height for better layout control */
+    scrollbar-width: thin; /* Thin scrollbar for modern appearance */
+    scrollbar-color: #ccc transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+    .listContainer {
+        background-color: var(--gray-800, #1f2937);
+        border-color: var(--gray-700, #374151);
+        scrollbar-color: var(--gray-600, #4b5563) transparent;
+    }
+}
+
+.listContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.listContainer::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .listContainer::-webkit-scrollbar-thumb {
+        background-color: var(--gray-600, #4b5563);
+    }
+}
+
+.listContainer::-webkit-scrollbar-thumb:hover {
+    background-color: #b0b0b0;
+}
+
+@media (prefers-color-scheme: dark) {
+    .listContainer::-webkit-scrollbar-thumb:hover {
+        background-color: var(--gray-500, #6b7280);
+    }
+}
+
+@media (max-width: 768px) {
+    .listContainer {
+        max-height: 300px; /* Adjust for smaller screens */
+        border-radius: 4px; /* Slight reduction for compactness */
+    }
+}
+
+@media (max-width: 480px) {
+    .listContainer {
+        max-height: 250px; /* Further adjustment for mobile */
+    }
+}

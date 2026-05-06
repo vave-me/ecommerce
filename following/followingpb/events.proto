@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package followingpb;
+
+
+//Command
+message AddFollow{
+  string id = 1;
+  string user_id = 2;
+  string followed_user_id = 3;
+  string followed_user_type = 4;
+  string content = 5;
+  string category_id = 6;
+  string parent_id = 7;
+}
+
+
+message FollowAdded{
+  string id = 1;
+  string user_id = 2;
+  string followed_user_id = 3;
+  string followed_user_type = 4;
+  string content = 5;
+  string category_id = 6;
+  string parent_id = 7;
+}
+
+message FollowApproved {
+  string id = 1;
+  bool approve = 2;
+}
+message FollowRemoved {
+  string id = 1;
+}
+message FollowFlagged {
+  string id = 1;
+  bool flagged = 2;
+}
+message FollowRejected {
+  string id = 1;
+  bool approved = 2;
+}
+message FollowEdited {
+  string id = 1;
+  string content = 2;
+}
+

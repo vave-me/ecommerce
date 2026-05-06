@@ -1,0 +1,354 @@
+/* ===== PROFILE PAGE - CLEAN MINIMAL DESIGN ===== */
+/* Aligned with the clean design system */
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    min-height: 100vh;
+    background: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== LOADING STATE ===== */
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+    max-width: 400px;
+    width: 100%;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e5e7eb;
+    border-top: 3px solid #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 24px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loadingContainer h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 8px 0;
+}
+
+.loadingContainer p {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* ===== REDIRECT STATE ===== */
+.redirectContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+    max-width: 400px;
+    width: 100%;
+}
+
+.redirectIcon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eff6ff;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    color: #3b82f6;
+}
+
+.redirectContainer h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 8px 0;
+}
+
+.redirectContainer p {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* ===== AUTH PROMPT STATE ===== */
+.authPromptContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 60px 40px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+    max-width: 500px;
+    width: 100%;
+}
+
+.authPromptIcon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    border-radius: 20px;
+    margin-bottom: 32px;
+    color: #6b7280;
+}
+
+.authPromptTitle {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+}
+
+.authPromptDescription {
+    font-size: 16px;
+    color: #6b7280;
+    margin: 0 0 32px 0;
+    line-height: 1.5;
+    max-width: 400px;
+}
+
+/* ===== ACTION BUTTONS ===== */
+.authPromptActions {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.loginButton,
+.registerButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: none;
+    min-width: 120px;
+}
+
+.loginButton {
+    background: #3b82f6;
+    color: #ffffff;
+}
+
+.loginButton:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.registerButton {
+    background: #ffffff;
+    color: #3b82f6;
+    border: 2px solid #3b82f6;
+}
+
+.registerButton:hover {
+    background: #3b82f6;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* ===== HELP TEXT ===== */
+.helpText {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #e5e7eb;
+    width: 100%;
+}
+
+.helpText p {
+    font-size: 13px;
+    color: #9ca3af;
+    margin: 0;
+    font-style: italic;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 16px;
+    }
+
+    .authPromptContainer {
+        padding: 40px 24px;
+        margin: 16px;
+    }
+
+    .authPromptTitle {
+        font-size: 24px;
+    }
+
+    .authPromptDescription {
+        font-size: 15px;
+    }
+
+    .authPromptActions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .loginButton,
+    .registerButton {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 16px 12px;
+    }
+
+    .authPromptContainer {
+        padding: 32px 20px;
+    }
+
+    .authPromptIcon {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 24px;
+    }
+
+    .authPromptTitle {
+        font-size: 22px;
+    }
+
+    .authPromptDescription {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+    .spinner {
+        animation: none;
+    }
+
+    .loginButton:hover,
+    .registerButton:hover {
+        transform: none;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .container,
+    .loadingContainer,
+    .redirectContainer,
+    .authPromptContainer {
+        border: 2px solid #000000;
+    }
+
+    .loginButton,
+    .registerButton {
+        border: 2px solid #000000;
+    }
+}
+
+/* ===== FOCUS STATES ===== */
+.loginButton:focus-visible,
+.registerButton:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* ===== DARK THEME SUPPORT ===== */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background: #111827;
+    }
+
+    .loadingContainer,
+    .redirectContainer,
+    .authPromptContainer {
+        background: #1f2937;
+        border-color: #374151;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .loadingContainer h2,
+    .redirectContainer h2,
+    .authPromptTitle {
+        color: #f3f4f6;
+    }
+
+    .loadingContainer p,
+    .redirectContainer p,
+    .authPromptDescription {
+        color: #9ca3af;
+    }
+
+    .spinner {
+        border-color: #374151;
+        border-top-color: #3b82f6;
+    }
+
+    .redirectIcon {
+        background: rgba(59, 130, 246, 0.1);
+        color: #60a5fa;
+    }
+
+    .authPromptIcon {
+        background: #374151;
+        color: #9ca3af;
+    }
+
+    .registerButton {
+        background: #1f2937;
+        color: #60a5fa;
+        border-color: #3b82f6;
+    }
+
+    .registerButton:hover {
+        background: #3b82f6;
+        color: #ffffff;
+    }
+
+    .helpText {
+        border-top-color: #374151;
+    }
+
+    .helpText p {
+        color: #6b7280;
+    }
+} 

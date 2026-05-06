@@ -1,0 +1,251 @@
+[
+  {
+    "Name": "Commercial LED Lighting Systems",
+    "Description": "Comprehensive LED lighting solutions for businesses, designed to significantly reduce energy consumption and improve illumination quality. We handle the entire process from initial consultation and planning to installation and maintenance, ensuring a seamless transition to a more sustainable and cost-effective lighting system.",
+    "ServiceType": "Energy Efficiency Solution",
+    "Availability": "Nationwide, with on-site consultation available.",
+    "DescriptionShort": "Upgrade your business with our advanced LED lighting systems and save up to 85% on energy costs.",
+    "DescriptionLong": "Saflux offers a turnkey solution for businesses looking to upgrade their lighting infrastructure. Our commercial LED lighting systems are tailored to the specific needs of your facility, whether it's an office, warehouse, retail space, or industrial plant. We begin with a thorough site analysis to understand your current lighting setup and identify areas for improvement. Our team of experts then designs a customized LED lighting plan that maximizes energy savings while enhancing the safety and productivity of your environment. We use only high-quality, certified LED products to ensure long-lasting performance and reliability. The installation is carried out by our certified technicians with minimal disruption to your daily operations. Post-installation, we offer ongoing support and maintenance to ensure your system continues to operate at peak efficiency.",
+    "Attributes": [
+      {
+        "AttributeName": "Energy Savings",
+        "AttributeValue": "Up to 85%"
+      },
+      {
+        "AttributeName": "System Lifespan",
+        "AttributeValue": "Up to 50,000 hours"
+      },
+      {
+        "AttributeName": "Color Rendering Index (CRI)",
+        "AttributeValue": ">80"
+      },
+      {
+        "AttributeName": "Warranty",
+        "AttributeValue": "5-year standard warranty"
+      }
+    ],
+    "BasePrice": 7500,
+    "Pricing": [
+      "Custom quote based on facility size and complexity.",
+      "Financing and leasing options available.",
+      "Potential for government rebates and incentives."
+    ],
+    "Qualifications": [
+      "Certified Lighting Efficiency Professional (CLEP)",
+      "Licensed Electrical Contractors",
+      "Partnerships with leading LED manufacturers."
+    ],
+    "Contact": "redacted-email@example.com",
+    "Faq": "What is the typical ROI for an LED upgrade? The return on investment for an LED lighting upgrade is typically between 1-3 years, depending on the scale of the project and local energy costs.",
+    "Tags": [
+      "LED lighting",
+      "energy efficiency",
+      "commercial lighting",
+      "sustainability",
+      "cost savings"
+    ],
+    "MiddlemanService": false,
+    "Negotiable": true,
+    "HasVariants": true,
+    "Options": [
+      {
+        "OptionName": "Color Temperature",
+        "OptionValues": [
+          "3000K",
+          "4000K",
+          "5000K"
+        ]
+      },
+      {
+        "OptionName": "Control Systems",
+        "OptionValues": [
+          "Dimming",
+          "Motion Sensors",
+          "Daylight Harvesting"
+        ]
+      }
+    ],
+    "Thumbnail": "https://www.saflux.com/images/led-lighting-thumbnail.jpg"
+  },
+  {
+    "Name": "Commercial Photovoltaic (PV) Systems",
+    "Description": "End-to-end photovoltaic solutions for businesses to generate their own clean and affordable electricity. We provide a comprehensive service that includes site analysis, system design, installation, and maintenance, empowering your business with energy independence.",
+    "ServiceType": "Renewable Energy Generation",
+    "Availability": "Nationwide, with on-site assessment.",
+    "DescriptionShort": "Harness the power of the sun with a custom photovoltaic system for your business.",
+    "DescriptionLong": "Saflux specializes in the design and installation of commercial-grade photovoltaic systems. Our process begins with a detailed assessment of your facility's roof structure, orientation, and energy consumption patterns. Based on this analysis, our engineers design a high-performance PV system tailored to your specific energy needs and financial goals. We use top-tier solar panels, inverters, and mounting hardware to ensure maximum energy production and system longevity. Our certified installation team manages the entire project, from securing permits to final commissioning and grid connection. We also offer comprehensive monitoring and maintenance packages to ensure your PV system operates at optimal performance for years to come, providing you with a reliable source of clean energy and significant savings on your electricity bills.",
+    "Attributes": [
+      {
+        "AttributeName": "System Capacity",
+        "AttributeValue": "Customized to business needs"
+      },
+      {
+        "AttributeName": "Panel Efficiency",
+        "AttributeValue": "Up to 22%"
+      },
+      {
+        "AttributeName": "Inverter Technology",
+        "AttributeValue": "String, Micro, or Hybrid"
+      },
+      {
+        "AttributeName": "Mounting Options",
+        "AttributeValue": "Rooftop, Ground-mounted, Carport"
+      }
+    ],
+    "BasePrice": 25000,
+    "Pricing": [
+      "Per-watt pricing model, with detailed project proposals.",
+      "Power Purchase Agreement (PPA) options.",
+      "Information on federal and state tax credits."
+    ],
+    "Qualifications": [
+      "NABCEP Certified PV Installation Professional",
+      "Structural Engineer review for all rooftop installations.",
+      "Compliance with all local and national electrical codes."
+    ],
+    "Contact": "redacted-email@example.com",
+    "Faq": "How much roof space is needed for a commercial PV system? The required space depends on your energy needs, but a general estimate is 100 square feet per kilowatt of solar.",
+    "Tags": [
+      "photovoltaic",
+      "solar power",
+      "renewable energy",
+      "sustainability",
+      "energy independence"
+    ],
+    "MiddlemanService": false,
+    "Negotiable": true,
+    "HasVariants": true,
+    "Options": [
+      {
+        "OptionName": "Panel Type",
+        "OptionValues": [
+          "Monocrystalline",
+          "Polycrystalline"
+        ]
+      },
+      {
+        "OptionName": "Monitoring System",
+        "OptionValues": [
+          "Basic",
+          "Advanced with performance alerts"
+        ]
+      }
+    ],
+    "Thumbnail": "https://www.saflux.com/images/pv-system-thumbnail.jpg"
+  },
+  {
+    "Name": "Comprehensive Energy Audit",
+    "Description": "A detailed analysis of your business's energy consumption to identify opportunities for efficiency improvements and cost savings. Our certified energy auditors provide a holistic view of your energy usage and a prioritized roadmap for optimization.",
+    "ServiceType": "Energy Consulting",
+    "Availability": "Nationwide.",
+    "DescriptionShort": "Identify and eliminate energy waste with our professional energy audit services.",
+    "DescriptionLong": "Our comprehensive energy audit is the first step towards taking control of your energy costs. A certified energy auditor will conduct a thorough on-site evaluation of your facility, including your HVAC systems, building envelope, lighting, and industrial processes. We use advanced diagnostic tools to pinpoint areas of energy inefficiency. Following the audit, you will receive a detailed report that outlines our findings, quantifies potential energy and cost savings, and provides a clear, actionable set of recommendations. This report will serve as a strategic guide for your energy management initiatives, allowing you to make informed decisions that will have a lasting positive impact on your bottom line and environmental footprint.",
+    "Attributes": [
+      {
+        "AttributeName": "Audit Level",
+        "AttributeValue": "ASHRAE Level I, II, and III"
+      },
+      {
+        "AttributeName": "Reporting",
+        "AttributeValue": "Detailed report with financial analysis"
+      },
+      {
+        "AttributeName": "Follow-up",
+        "AttributeValue": "Implementation support available"
+      }
+    ],
+    "BasePrice": 5000,
+    "Pricing": [
+      "Fixed fee based on the square footage and complexity of the facility.",
+      "Potential to be credited towards future energy efficiency projects with us."
+    ],
+    "Qualifications": [
+      "Certified Energy Manager (CEM)",
+      "Association of Energy Engineers (AEE) Member"
+    ],
+    "Contact": "redacted-email@example.com",
+    "Faq": "What is the difference between the ASHRAE levels of audits? Level I is a preliminary walk-through, Level II is a detailed energy survey and analysis, and Level III provides an in-depth analysis of capital-intensive modifications.",
+    "Tags": [
+      "energy audit",
+      "energy consulting",
+      "cost savings",
+      "sustainability",
+      "energy management"
+    ],
+    "MiddlemanService": false,
+    "Negotiable": true,
+    "HasVariants": true,
+    "Options": [
+      {
+        "OptionName": "Focus Area",
+        "OptionValues": [
+          "HVAC Optimization",
+          "Building Envelope",
+          "Process Efficiency"
+        ]
+      }
+    ],
+    "Thumbnail": "https://www.saflux.com/images/energy-audit-thumbnail.jpg"
+  },
+  {
+    "Name": "EV Charging Station Installation",
+    "Description": "Turnkey solutions for the installation of electric vehicle (EV) charging stations at your commercial property. Attract and retain customers and employees by providing a convenient and essential amenity for EV drivers.",
+    "ServiceType": "Infrastructure Installation",
+    "Availability": "Nationwide.",
+    "DescriptionShort": "Equip your business for the future with our professional EV charging station installation services.",
+    "DescriptionLong": "As the adoption of electric vehicles continues to grow, offering EV charging at your business is becoming a competitive advantage. We provide a seamless installation experience, from selecting the right charging hardware (Level 2 or DC Fast Charging) to managing the entire installation process, including any necessary electrical upgrades and permitting. Our solutions are scalable, allowing you to start with a few stations and expand as demand grows. We also offer networked charging solutions that allow for payment processing, access control, and usage monitoring. By providing EV charging, you can enhance your brand's green credentials and attract a valuable demographic of customers and employees.",
+    "Attributes": [
+      {
+        "AttributeName": "Charger Type",
+        "AttributeValue": "Level 2 and DC Fast Charging"
+      },
+      {
+        "AttributeName": "Networked Solutions",
+        "AttributeValue": "Optional with remote management"
+      },
+      {
+        "AttributeName": "Scalability",
+        "AttributeValue": "Solutions designed for future expansion"
+      }
+    ],
+    "BasePrice": 4000,
+    "Pricing": [
+      "Per-station installation cost plus hardware.",
+      "Custom quotes for multi-station deployments.",
+      "Information on available grants and incentives."
+    ],
+    "Qualifications": [
+      "Certified EVSE (Electric Vehicle Supply Equipment) Installers",
+      "Licensed Electrical Contractors"
+    ],
+    "Contact": "redacted-email@example.com",
+    "Faq": "Can I bill users for charging their vehicles? Yes, our networked charging solutions allow you to set pricing and collect payments.",
+    "Tags": [
+      "EV charging",
+      "electric vehicles",
+      "sustainability",
+      "infrastructure",
+      "customer amenity"
+    ],
+    "MiddlemanService": false,
+    "Negotiable": true,
+    "HasVariants": true,
+    "Options": [
+      {
+        "OptionName": "Number of Ports",
+        "OptionValues": [
+          "Single Port",
+          "Dual Port"
+        ]
+      },
+      {
+        "OptionName": "Branding",
+        "OptionValues": [
+          "Standard",
+          "Custom branded enclosures"
+        ]
+      }
+    ],
+    "Thumbnail": "https://www.saflux.com/images/ev-charging-thumbnail.jpg"
+  }
+]

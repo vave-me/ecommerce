@@ -1,0 +1,47 @@
+.ratingContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+@media (max-width: 480px) {
+    .ratingContainer {
+        gap: 6px;
+    }
+}
+
+.stars {
+    color: #f1c40f;
+    display: flex;
+    gap: 2px;
+    font-size: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .stars {
+        color: var(--yellow-400, #fbbf24);
+    }
+}
+
+@media (max-width: 480px) {
+    .stars {
+        font-size: 18px;
+    }
+}
+
+.reviewCount {
+    font-size: 14px;
+    color: #7f8c8d;
+}
+
+@media (prefers-color-scheme: dark) {
+    .reviewCount {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+@media (max-width: 480px) {
+    .reviewCount {
+        font-size: 13px;
+    }
+}

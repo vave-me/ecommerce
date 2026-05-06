@@ -1,0 +1,905 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Order Processing API",
+    "description": "API for managing orders in the system.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "OrderingService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/ordering": {
+      "get": {
+        "operationId": "OrderingService_ListOrders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderingpbListOrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "description": "created_at, updated_at, status",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "description": "asc, desc",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OrderingService"
+        ]
+      },
+      "post": {
+        "summary": "Create a new order",
+        "operationId": "createOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderingpbCreateOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/orderingpbCreateOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Order"
+        ]
+      }
+    },
+    "/api/ordering/customer/{userCustomerId}": {
+      "get": {
+        "operationId": "OrderingService_GetOrdersByCustomer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderingpbGetOrdersByCustomerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userCustomerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OrderingService"
+        ]
+      }
+    },
+    "/api/ordering/status/{status}": {
+      "get": {
+        "operationId": "OrderingService_GetOrdersByStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderingpbGetOrdersByStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "status",
+            "description": "pending, approved, rejected, cancelled, ready, shipped, delivered, completed",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OrderingService"
+        ]
+      }
+    },
+    "/api/ordering/{id}": {
+      "get": {
+        "summary": "Retrieve an order",
+        "operationId": "getOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderingpbGetOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Order"
+        ]
+      },
+      "delete": {
+        "summary": "Cancel an order",
+        "operationId": "cancelOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderingpbCancelOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reason",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Order"
+        ]
+      }
+    },
+    "/api/ordering/{id}/approve": {
+      "post": {
+        "operationId": "OrderingService_ApproveOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderingpbApproveOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/orderingpbOrderingServiceApproveOrderBody"
+            }
+          }
+        ],
+        "tags": [
+          "OrderingService"
+        ]
+      }
+    },
+    "/api/ordering/{id}/complete": {
+      "post": {
+        "summary": "Complete an order",
+        "operationId": "completeOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderingpbCompleteOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrderingServiceCompleteOrderBody"
+            }
+          }
+        ],
+        "tags": [
+          "Order"
+        ]
+      }
+    },
+    "/api/ordering/{id}/deliver": {
+      "post": {
+        "operationId": "OrderingService_DeliverOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderingpbDeliverOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrderingServiceDeliverOrderBody"
+            }
+          }
+        ],
+        "tags": [
+          "OrderingService"
+        ]
+      }
+    },
+    "/api/ordering/{id}/ready": {
+      "post": {
+        "summary": "Mark an order as ready",
+        "operationId": "readyOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderingpbReadyOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrderingServiceReadyOrderBody"
+            }
+          }
+        ],
+        "tags": [
+          "Order"
+        ]
+      }
+    },
+    "/api/ordering/{id}/reject": {
+      "post": {
+        "operationId": "OrderingService_RejectOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderingpbRejectOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/orderingpbOrderingServiceRejectOrderBody"
+            }
+          }
+        ],
+        "tags": [
+          "OrderingService"
+        ]
+      }
+    },
+    "/api/ordering/{id}/ship": {
+      "post": {
+        "operationId": "OrderingService_ShipOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderingpbShipOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrderingServiceShipOrderBody"
+            }
+          }
+        ],
+        "tags": [
+          "OrderingService"
+        ]
+      }
+    },
+    "/api/ordering/{id}/status": {
+      "put": {
+        "operationId": "OrderingService_UpdateOrderStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderingpbUpdateOrderStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrderingServiceUpdateOrderStatusBody"
+            }
+          }
+        ],
+        "tags": [
+          "OrderingService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "OrderingServiceCompleteOrderBody": {
+      "type": "object",
+      "properties": {
+        "invoiceId": {
+          "type": "string"
+        }
+      }
+    },
+    "OrderingServiceDeliverOrderBody": {
+      "type": "object"
+    },
+    "OrderingServiceReadyOrderBody": {
+      "type": "object"
+    },
+    "OrderingServiceShipOrderBody": {
+      "type": "object"
+    },
+    "OrderingServiceUpdateOrderStatusBody": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string",
+          "title": "optional reason for status change"
+        }
+      },
+      "title": "UpdateOrderStatus"
+    },
+    "orderingpbApproveOrderResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "approvedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "orderingpbCancelOrderResponse": {
+      "type": "object"
+    },
+    "orderingpbCompleteOrderResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "orderingpbCreateOrderRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/orderingpbItem"
+          }
+        },
+        "userCustomerId": {
+          "type": "string"
+        },
+        "basketId": {
+          "type": "string"
+        },
+        "paymentIntent": {
+          "type": "string"
+        }
+      }
+    },
+    "orderingpbCreateOrderResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "orderingpbDeliverOrderResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "deliveredAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "orderingpbGetOrderResponse": {
+      "type": "object",
+      "properties": {
+        "order": {
+          "$ref": "#/definitions/orderingpbOrder"
+        }
+      }
+    },
+    "orderingpbGetOrdersByCustomerResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/orderingpbOrder"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "orderingpbGetOrdersByStatusResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/orderingpbOrder"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "orderingpbItem": {
+      "type": "object",
+      "properties": {
+        "userSellerId": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "userSellerName": {
+          "type": "string"
+        },
+        "productName": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "orderingpbListOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/orderingpbOrder"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "orderingpbOrder": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userCustomerId": {
+          "type": "string"
+        },
+        "paymentMethodId": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/orderingpbItem"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "description": "Order represents an order placed by a customer."
+    },
+    "orderingpbOrderingServiceApproveOrderBody": {
+      "type": "object",
+      "properties": {
+        "shoppingId": {
+          "type": "string"
+        }
+      }
+    },
+    "orderingpbOrderingServiceRejectOrderBody": {
+      "type": "object"
+    },
+    "orderingpbReadyOrderResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "readyAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "orderingpbRejectOrderResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "rejectedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "orderingpbShipOrderResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "shippedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "orderingpbUpdateOrderStatusResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

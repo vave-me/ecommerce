@@ -1,0 +1,2365 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ticketspb/common.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "TicketsService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/tickets": {
+      "get": {
+        "summary": "Retrieve all tickets associated w",
+        "operationId": "getTickets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbGetTicketsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      },
+      "post": {
+        "summary": "Add a New Ticket",
+        "operationId": "addTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbAddTicketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ticketspbAddTicketRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/tickets/catalog": {
+      "get": {
+        "summary": "Get user tickets",
+        "operationId": "getCatalog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbGetCatalogResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/tickets/catalog/public": {
+      "get": {
+        "summary": "Get user tickets",
+        "operationId": "getPublicCatalog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbGetPublicCatalogResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/tickets/categories/slug/{categorySlug}": {
+      "get": {
+        "summary": "Retrieve all tickets with given category",
+        "operationId": "getTicketsByCategorySlug",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbGetTicketsByCategorySlugResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categorySlug",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/tickets/categories/{categoryId}": {
+      "get": {
+        "summary": "Retrieve all tickets with given category",
+        "operationId": "getTicketsByCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbGetTicketsByCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/tickets/filters": {
+      "post": {
+        "summary": "Retrieve all tickets with given category",
+        "operationId": "getTicketsWithFilters",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbGetTicketsWithFiltersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ticketspbGetTicketsWithFiltersRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/tickets/variants": {
+      "post": {
+        "summary": "Create a new Variant referencing a Ticket",
+        "operationId": "addVariant",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbAddVariantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ticketspbAddVariantRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Variant"
+        ]
+      }
+    },
+    "/api/tickets/variants/{variantId}": {
+      "get": {
+        "summary": "Retrieve a specific Variant",
+        "operationId": "getVariant",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbGetVariantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Variant"
+        ]
+      },
+      "delete": {
+        "summary": "Remove a Variant",
+        "operationId": "removeVariant",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbRemoveVariantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Variant"
+        ]
+      }
+    },
+    "/api/tickets/variants/{variantId}/archive": {
+      "patch": {
+        "summary": "Archive a Variant (mark as unavailable)",
+        "operationId": "archiveVariant",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbArchiveVariantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TicketsServiceArchiveVariantBody"
+            }
+          }
+        ],
+        "tags": [
+          "Variant"
+        ]
+      }
+    },
+    "/api/tickets/variants/{variantId}/decreasePrice": {
+      "patch": {
+        "summary": "Decrease the price of a Variant",
+        "operationId": "decreaseVariantPrice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbDecreaseVariantPriceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TicketsServiceDecreaseVariantPriceBody"
+            }
+          }
+        ],
+        "tags": [
+          "Variant"
+        ]
+      }
+    },
+    "/api/tickets/variants/{variantId}/increasePrice": {
+      "patch": {
+        "summary": "Increase the price of a Variant",
+        "operationId": "increaseVariantPrice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbIncreaseVariantPriceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TicketsServiceIncreaseVariantPriceBody"
+            }
+          }
+        ],
+        "tags": [
+          "Variant"
+        ]
+      }
+    },
+    "/api/tickets/variants/{variantId}/stock": {
+      "patch": {
+        "summary": "Adjust the stock level of a Variant",
+        "operationId": "adjustVariantStock",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbAdjustVariantStockResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TicketsServiceAdjustVariantStockBody"
+            }
+          }
+        ],
+        "tags": [
+          "Variant"
+        ]
+      }
+    },
+    "/api/tickets/{id}": {
+      "get": {
+        "summary": "Retrieve a Specific Ticket",
+        "operationId": "getTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbGetTicketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      },
+      "delete": {
+        "summary": "Remove a Ticket",
+        "operationId": "removeTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbRemoveTicketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      },
+      "post": {
+        "summary": "Update a ticket thumbnail",
+        "operationId": "updateTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbUpdateTicketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TicketsServiceUpdateTicketBody"
+            }
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/tickets/{id}/price": {
+      "patch": {
+        "operationId": "TicketsService_UpdateTicketPrice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbUpdateTicketPriceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TicketsServiceUpdateTicketPriceBody"
+            }
+          }
+        ],
+        "tags": [
+          "TicketsService"
+        ]
+      }
+    },
+    "/api/tickets/{id}/rebrand": {
+      "patch": {
+        "summary": "Rebrand a Ticket",
+        "operationId": "rebrandTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbRebrandTicketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TicketsServiceRebrandTicketBody"
+            }
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/tickets/{ticketId}/archive": {
+      "patch": {
+        "operationId": "TicketsService_ArchiveTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbArchiveTicketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TicketsServiceArchiveTicketBody"
+            }
+          }
+        ],
+        "tags": [
+          "TicketsService"
+        ]
+      }
+    },
+    "/api/tickets/{ticketId}/lease": {
+      "patch": {
+        "operationId": "TicketsService_MarkTicketLeased",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbMarkTicketLeasedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TicketsServiceMarkTicketLeasedBody"
+            }
+          }
+        ],
+        "tags": [
+          "TicketsService"
+        ]
+      }
+    },
+    "/api/tickets/{ticketId}/pawn": {
+      "patch": {
+        "operationId": "TicketsService_MarkTicketPawned",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbMarkTicketPawnedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TicketsServiceMarkTicketPawnedBody"
+            }
+          }
+        ],
+        "tags": [
+          "TicketsService"
+        ]
+      }
+    },
+    "/api/tickets/{ticketId}/sold": {
+      "patch": {
+        "operationId": "TicketsService_MarkTicketSold",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbMarkTicketSoldResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TicketsServiceMarkTicketSoldBody"
+            }
+          }
+        ],
+        "tags": [
+          "TicketsService"
+        ]
+      }
+    },
+    "/api/tickets/{ticketId}/stock": {
+      "patch": {
+        "operationId": "TicketsService_AdjustTicketStock",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbAdjustTicketStockResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TicketsServiceAdjustTicketStockBody"
+            }
+          }
+        ],
+        "tags": [
+          "TicketsService"
+        ]
+      }
+    },
+    "/api/tickets/{ticketId}/thumbnail/add": {
+      "post": {
+        "summary": "Add a ticket thumbnail",
+        "operationId": "addTicketThumbnail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbAddTicketThumbnailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TicketsServiceAddTicketThumbnailBody"
+            }
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/tickets/{ticketId}/thumbnail/update": {
+      "post": {
+        "summary": "Update a ticket thumbnail",
+        "operationId": "updateTicketThumbnail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbUpdateTicketThumbnailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TicketsServiceUpdateTicketThumbnailBody"
+            }
+          }
+        ],
+        "tags": [
+          "Ticket"
+        ]
+      }
+    },
+    "/api/tickets/{ticketId}/variants": {
+      "get": {
+        "summary": "Retrieve multiple Variants with optional filters",
+        "operationId": "getVariants",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketspbGetVariantsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Variant"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "TicketsServiceAddTicketThumbnailBody": {
+      "type": "object",
+      "properties": {
+        "thumbnail": {
+          "type": "string"
+        }
+      }
+    },
+    "TicketsServiceAdjustTicketStockBody": {
+      "type": "object",
+      "properties": {
+        "newStock": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "TicketsServiceAdjustVariantStockBody": {
+      "type": "object",
+      "properties": {
+        "newStock": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "TicketsServiceArchiveTicketBody": {
+      "type": "object"
+    },
+    "TicketsServiceArchiveVariantBody": {
+      "type": "object"
+    },
+    "TicketsServiceDecreaseVariantPriceBody": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "TicketsServiceIncreaseVariantPriceBody": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "TicketsServiceMarkTicketLeasedBody": {
+      "type": "object",
+      "properties": {
+        "monthlyPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "leaseTermMonths": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "TicketsServiceMarkTicketPawnedBody": {
+      "type": "object",
+      "properties": {
+        "lockedPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "redemptionFee": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "TicketsServiceMarkTicketSoldBody": {
+      "type": "object"
+    },
+    "TicketsServiceRebrandTicketBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "basePrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manageStocks": {
+          "type": "boolean"
+        },
+        "stock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbAttribute"
+          }
+        },
+        "weight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "height": {
+          "type": "string",
+          "format": "int64"
+        },
+        "width": {
+          "type": "string",
+          "format": "int64"
+        },
+        "depth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "shippingCost": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbOption"
+          }
+        }
+      }
+    },
+    "TicketsServiceUpdateTicketBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "basePrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manageStocks": {
+          "type": "boolean"
+        },
+        "stock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbAttribute"
+          }
+        },
+        "weight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "height": {
+          "type": "string",
+          "format": "int64"
+        },
+        "width": {
+          "type": "string",
+          "format": "int64"
+        },
+        "depth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "shippingCost": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbOption"
+          }
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "TicketsServiceUpdateTicketPriceBody": {
+      "type": "object",
+      "properties": {
+        "newPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "oldPrice": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "TicketsServiceUpdateTicketThumbnailBody": {
+      "type": "object",
+      "properties": {
+        "thumbnail": {
+          "type": "string"
+        }
+      }
+    },
+    "ticketspbAddTicketRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "basePrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manageStocks": {
+          "type": "boolean"
+        },
+        "stock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbAttribute"
+          }
+        },
+        "weight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "height": {
+          "type": "string",
+          "format": "int64"
+        },
+        "width": {
+          "type": "string",
+          "format": "int64"
+        },
+        "depth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "shippingCost": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbOption"
+          }
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "ticketspbAddTicketResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "ticketspbAddTicketThumbnailResponse": {
+      "type": "object"
+    },
+    "ticketspbAddVariantRequest": {
+      "type": "object",
+      "properties": {
+        "ticketId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "barcode": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "variantPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "stock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "weight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "height": {
+          "type": "string",
+          "format": "int64"
+        },
+        "width": {
+          "type": "string",
+          "format": "int64"
+        },
+        "depth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbAttribute"
+          }
+        },
+        "isAvailable": {
+          "type": "boolean"
+        },
+        "hasOptions": {
+          "type": "boolean"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbOption"
+          }
+        }
+      }
+    },
+    "ticketspbAddVariantResponse": {
+      "type": "object",
+      "properties": {
+        "variantId": {
+          "type": "string"
+        }
+      }
+    },
+    "ticketspbAdjustTicketStockResponse": {
+      "type": "object",
+      "properties": {
+        "ticketId": {
+          "type": "string"
+        },
+        "oldStock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "newStock": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ticketspbAdjustVariantStockResponse": {
+      "type": "object",
+      "properties": {
+        "variantId": {
+          "type": "string"
+        },
+        "oldStock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "newStock": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ticketspbArchiveTicketResponse": {
+      "type": "object",
+      "properties": {
+        "ticketId": {
+          "type": "string"
+        },
+        "archived": {
+          "type": "boolean",
+          "title": "e.g. true if success"
+        }
+      }
+    },
+    "ticketspbArchiveVariantResponse": {
+      "type": "object",
+      "properties": {
+        "variantId": {
+          "type": "string"
+        },
+        "archived": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ticketspbAttribute": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "ticketspbDecreaseTicketPriceResponse": {
+      "type": "object",
+      "properties": {
+        "ticketId": {
+          "type": "string"
+        },
+        "oldPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "newPrice": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ticketspbDecreaseVariantPriceResponse": {
+      "type": "object",
+      "properties": {
+        "variantId": {
+          "type": "string"
+        },
+        "oldPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "newPrice": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ticketspbGetCatalogResponse": {
+      "type": "object",
+      "properties": {
+        "tickets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbTicket"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ticketspbGetTicketBySKUResponse": {
+      "type": "object",
+      "properties": {
+        "ticket": {
+          "$ref": "#/definitions/ticketspbTicket"
+        }
+      }
+    },
+    "ticketspbGetTicketResponse": {
+      "type": "object",
+      "properties": {
+        "ticket": {
+          "$ref": "#/definitions/ticketspbTicket"
+        }
+      }
+    },
+    "ticketspbGetTicketsByCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "tickets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbTicket"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ticketspbGetTicketsByCategorySlugResponse": {
+      "type": "object",
+      "properties": {
+        "tickets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbTicket"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ticketspbGetTicketsBySKUsResponse": {
+      "type": "object",
+      "properties": {
+        "tickets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbTicket"
+          }
+        },
+        "notFoundSkus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ticketspbGetTicketsResponse": {
+      "type": "object",
+      "properties": {
+        "tickets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbTicket"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ticketspbGetTicketsWithFiltersRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "minPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manageStock": {
+          "type": "boolean"
+        },
+        "minStock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxStock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "shippingCost": {
+          "type": "string",
+          "format": "int64"
+        },
+        "minWeight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxWeight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxHeight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "minHeight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "minWidth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxWidth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "minDepth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxDepth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "offset": {
+          "type": "string",
+          "format": "int64"
+        },
+        "limit": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "radius": {
+          "type": "number",
+          "format": "float"
+        },
+        "page": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pageSize": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sortBy": {
+          "type": "string"
+        },
+        "sortOrder": {
+          "type": "string"
+        }
+      }
+    },
+    "ticketspbGetTicketsWithFiltersResponse": {
+      "type": "object",
+      "properties": {
+        "tickets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbTicket"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ticketspbGetPublicCatalogResponse": {
+      "type": "object",
+      "properties": {
+        "tickets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbTicket"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ticketspbGetVariantResponse": {
+      "type": "object",
+      "properties": {
+        "variant": {
+          "$ref": "#/definitions/ticketspbVariant"
+        }
+      }
+    },
+    "ticketspbGetVariantsResponse": {
+      "type": "object",
+      "properties": {
+        "variants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbVariant"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ticketspbIncreaseTicketPriceResponse": {
+      "type": "object",
+      "properties": {
+        "ticketId": {
+          "type": "string"
+        },
+        "oldPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "newPrice": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ticketspbIncreaseVariantPriceResponse": {
+      "type": "object",
+      "properties": {
+        "variantId": {
+          "type": "string"
+        },
+        "oldPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "newPrice": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ticketspbMarkTicketLeasedResponse": {
+      "type": "object",
+      "properties": {
+        "ticketId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "ticketspbMarkTicketPawnedResponse": {
+      "type": "object",
+      "properties": {
+        "ticketId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "ticketspbMarkTicketSoldResponse": {
+      "type": "object",
+      "properties": {
+        "ticketId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "ticketspbOption": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ticketspbTicket": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "basePrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userSellerId": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manageStocks": {
+          "type": "boolean"
+        },
+        "stock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbAttribute"
+          }
+        },
+        "weight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "height": {
+          "type": "string",
+          "format": "int64"
+        },
+        "width": {
+          "type": "string",
+          "format": "int64"
+        },
+        "depth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "shippingCost": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbOption"
+          }
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "ticketspbRebrandTicketResponse": {
+      "type": "object"
+    },
+    "ticketspbRemoveTicketResponse": {
+      "type": "object"
+    },
+    "ticketspbRemoveVariantResponse": {
+      "type": "object",
+      "properties": {
+        "variantId": {
+          "type": "string"
+        }
+      }
+    },
+    "ticketspbUpdateTicketPriceResponse": {
+      "type": "object"
+    },
+    "ticketspbUpdateTicketResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "ticketspbUpdateTicketThumbnailResponse": {
+      "type": "object"
+    },
+    "ticketspbVariant": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "ticketId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "barcode": {
+          "type": "string"
+        },
+        "variantPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "stock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "weight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "height": {
+          "type": "string",
+          "format": "int64"
+        },
+        "width": {
+          "type": "string",
+          "format": "int64"
+        },
+        "depth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbAttribute"
+          }
+        },
+        "isAvailable": {
+          "type": "boolean"
+        },
+        "hasOptions": {
+          "type": "boolean"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ticketspbOption"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

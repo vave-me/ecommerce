@@ -1,0 +1,166 @@
+syntax = "proto3";
+
+package commentspb;
+
+import "google/protobuf/timestamp.proto";    // For timestamp fields
+
+// CommentsService provides functionalities related to comment and reply management.
+service CommentsService {
+  // Adds a new comment.
+  rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {}
+  rpc ApproveComment(ApproveCommentRequest) returns (ApproveCommentResponse) {}
+  rpc RejectComment(RejectCommentRequest) returns (RejectCommentResponse) {}
+  rpc FlagComment(FlagCommentRequest) returns (FlagCommentResponse) {}
+  rpc EditComment(EditCommentRequest) returns (EditCommentResponse) {}
+  rpc RemoveComment(RemoveCommentRequest) returns (RemoveCommentResponse) {}
+  rpc GetComment(GetCommentRequest) returns (GetCommentResponse) {}
+  rpc GetComments(GetCommentsRequest) returns (GetCommentsResponse) {}
+  rpc GetMostCommented(GetMostCommentedRequest) returns (GetMostCommentedResponse) {}
+  rpc GetMostCommentedByCategory(GetMostCommentedByCategoryRequest) returns (GetMostCommentedByCategoryResponse) {}
+  rpc GetCommentsBySender(GetCommentsBySenderRequest) returns (GetCommentsBySenderResponse) {}
+  rpc GetApprovedComments(GetApprovedCommentsRequest) returns (GetApprovedCommentsResponse) {}
+
+}
+
+// Comment represents a user's comment on a item.
+message Comment {
+  string id = 1;                           // Unique identifier of the comment.
+  string sender_id = 2;                   // Unique identifier of the user who made the comment.
+  string item_id = 3;
+  string item_type = 4;
+  string content = 5;
+  string category_id = 6;// Unique identifier of the item being commented on.
+  string parent_id = 7;
+  string comment_status = 8;               // Current status of the comment.
+  bool flagged = 9;                       // Indicates if the comment has been flagged.
+
+}
+
+message ItemCommentCount  {
+  string item_id = 1;
+  string category_id = 2;
+  int64 comments_count = 3;
+}
+
+// Request message to add a new comment.
+message AddCommentRequest {
+  string item_id = 1;
+  string item_type = 2;
+  string content = 3;
+  string category_id = 4;
+  string parent_id = 5;
+}
+
+// Response message after adding a new comment.
+message AddCommentResponse {
+  string id = 1;                           // Unique identifier of the created comment.
+
+}
+
+
+message ApproveCommentRequest {
+  string id = 1;
+}
+
+message ApproveCommentResponse {
+  string id = 1;
+  string comment_status = 2;
+  google.protobuf.Timestamp approved_at = 3;
+}
+
+// Request message to reject a comment.
+message RejectCommentRequest {
+  string id = 1;
+}
+
+
+message RejectCommentResponse {
+  string id = 1;
+  string comment_status = 2;
+
+}
+message FlagCommentRequest {
+  string id = 1;
+}
+
+message FlagCommentResponse {
+  string id = 1;
+  bool flagged = 2;
+
+}
+
+
+message EditCommentRequest {
+  string id = 1;
+  string content = 2;
+}
+
+message EditCommentResponse {
+  string id = 1;
+  string content = 2;
+}
+
+// Request message to remove a comment.
+message RemoveCommentRequest {
+  string id = 1;
+}
+message RemoveCommentResponse {
+
+}
+
+// Request message to retrieve a specific comment.
+message GetCommentRequest {
+  string id = 1;                           // Unique identifier of the comment to retrieve.
+}
+
+// Response message for retrieving a comment.
+message GetCommentResponse {
+  Comment comment = 1;                     // Details of the requested comment.
+}
+
+// Request message to retrieve a list of comments.
+message GetCommentsRequest {
+  string item_id = 2;
+}
+message GetCommentsBySenderRequest{
+}
+// Response message for retrieving a list of comments.
+message GetCommentsResponse {
+  repeated Comment comments = 1;           // List of comments.
+  // Number of comments per page.
+}
+message GetCommentsBySenderResponse {
+  repeated Comment comments = 1;           // List of comments.
+  // Number of comments per page.
+}
+message GetMostCommentedRequest {
+}
+
+// Response message for retrieving a list of comments.
+message GetMostCommentedResponse {
+  repeated ItemCommentCount item_comment_count = 1;           // List of comments.
+  // Number of comments per page.
+}
+message GetMostCommentedByCategoryRequest {
+  string category_id = 1;
+  int64 offset = 2;
+  int64 limit = 3;
+
+}
+
+// Response message for retrieving a list of comments.
+message GetMostCommentedByCategoryResponse {
+  repeated ItemCommentCount item_comment_count = 1;                         // Number of comments per page.
+}
+// Request message to retrieve approved comments.
+message GetApprovedCommentsRequest {}
+
+// Response message for retrieving approved comments.
+message GetApprovedCommentsResponse {
+  repeated Comment comments = 1;           // List of approved comments.
+}
+
+
+
+
+

@@ -1,0 +1,194 @@
+# --- MinIO Standalone Deployment (Refactored Ports) ---
+# Deploys a single-node MinIO object storage server in the 'minio' namespace.
+# Ports aligned with common Docker Compose setup (Container API: 9096, Container Console: 9099).
+# Service exposes stable ports (API: 9000, Console: 9001) targeting the correct container ports.
+# Includes: Namespace, Secret, PVC, Service, Deployment, and Ingress for external Console access.
+
+# --- Namespace ---
+# Creates a dedicated namespace for MinIO resources.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: minio
+---
+# --- MinIO Credentials Secret ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: minio-secret
+  namespace: minio # Deploy in the target namespace
+type: Opaque
+data:
+  # IMPORTANT: Replace with YOUR Base64 encoded strong MinIO credentials
+  # Example: echo -n 'youradminuser' | base64
+  MINIO_ROOT_USER: YWRtaW4= # Default: admin (CHANGE THIS!)
+  # Example: echo -n 'YourVeryStrongPassword!' | base64
+  MINIO_ROOT_PASSWORD: REDACTED
+---
+# --- Persistent Volume Claim for MinIO Data ---
+# Defines storage for MinIO objects. Persistence is essential.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: minio-pvc # Name used in the Deployment's volumes section
+  namespace: minio
+spec:
+  accessModes:
+    - ReadWriteOnce # Suitable for single-node deployment
+  # Ensure this StorageClass exists and provides adequate performance/reliability.
+  storageClassName: local-path # Or your preferred StorageClass
+  resources:
+    requests:
+      # Adjust size based on expected object storage usage.
+      storage: 50Gi # Example size, increase as needed
+---
+# --- MinIO Internal Service ---
+# Provides a stable internal DNS endpoint (minio.minio.svc.cluster.local)
+# Exposes Service port 9000 for API (targeting container 9096 via name 'api')
+# Exposes Service port 9001 for Console (targeting container 9099 via name 'console')
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio
+  namespace: minio
+spec:
+  type: ClusterIP # Internal service; expose via Ingress if needed externally
+  ports:
+    - port: 9096 # Stable Service port for MinIO API
+      targetPort: api # Targets the container port named 'api' (which is 9096)
+      protocol: TCP
+      name: api
+    - port: 9099 # Stable Service port for MinIO Console
+      targetPort: console # Targets the container port named 'console' (which is 9099)
+      protocol: TCP
+      name: console
+  selector:
+    app: minio # Selects the MinIO pod(s)
+---
+# --- MinIO Deployment ---
+# Manages the single MinIO server pod in standalone mode.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minio
+  namespace: minio
+  labels:
+    app: minio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minio
+  template:
+    metadata:
+      labels:
+        app: minio
+    spec:
+      containers:
+        - name: minio
+          # IMPORTANT: Use a specific stable release tag instead of 'latest'.
+          image: minio/minio:RELEASE.2025-02-18T16-25-55Z
+          imagePullPolicy: IfNotPresent
+
+          # ===============================================================
+          # == HERE ARE THE CHANGED PORTS IN THE CONTAINER START COMMAND ==
+          # ===============================================================
+          command:
+            - /bin/sh
+            - -c
+            - minio server /data --console-address :9099 --address :9096 # API: 9096, Console: 9099
+
+          # ===============================================================
+          # == HERE ARE THE CHANGED CONTAINER PORTS THE POD EXPOSES ==
+          # ===============================================================
+          ports:
+            - containerPort: 9096 # API Port matching the command
+              name: api
+              protocol: TCP
+            - containerPort: 9099 # Console Port matching the command
+              name: console
+              protocol: TCP
+
+          # Credentials sourced from the K8s Secret defined above.
+          env:
+            - name: MINIO_ROOT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: MINIO_ROOT_USER
+            - name: MINIO_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: MINIO_ROOT_PASSWORD
+
+          # Mount the persistent volume for MinIO data.
+          volumeMounts:
+            - name: minio-storage
+              mountPath: /data
+
+          # Health Checks using MinIO's built-in health endpoint.
+          readinessProbe:
+            httpGet:
+              path: /minio/health/live
+              port: api # Checks the container port named 'api' (9096)
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 3
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /minio/health/live
+              port: api # Checks the container port named 'api' (9096)
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            timeoutSeconds: 3
+            successThreshold: 1
+            failureThreshold: 3
+
+          # Resource Management - TUNE THESE VALUES.
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
+
+      # Volume definition using the PVC.
+      volumes:
+        - name: minio-storage
+          persistentVolumeClaim:
+            claimName: minio-pvc
+---
+# --- MinIO Ingress ---
+# Exposes the MinIO Console externally at https://minio.sfx-markt.de
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minio-ingress
+  namespace: minio
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - minio.sfx-markt.de # Your desired public domain for MinIO Console
+      secretName: minio-tls # Cert-manager will create this secret
+  rules:
+    - host: minio.sfx-markt.de
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  # Targets the Service port named 'console' (9001), which correctly
+                  # routes to the container's 'console' port (9099)
+                  name: console

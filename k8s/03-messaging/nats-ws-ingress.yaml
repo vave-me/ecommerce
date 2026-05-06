@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  # IMPORTANT: Ensure this Ingress resource is created in the 'messaging' namespace
+  name: nats-ingress
+  namespace: messaging # <--- MOVED to messaging namespace
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.middlewares: messaging-ws-headers@kubernetescrd
+    # Optional Traefik annotation if you need WebSocket support explicitly enabled (often default)
+    # traefik.ingress.kubernetes.io/customRequestHeaders: "Upgrade: websocket"
+    # traefik.ingress.kubernetes.io/customRequestHeaders: "Connection: Upgrade"
+    # Note: Traefik usually handles WebSocket upgrades automatically when the client sends the correct headers.
+spec:
+  tls:
+    - hosts:
+        - nats-ws.sfx-markt.de
+      secretName: nats-ws-tls-secret # <--- CORRECTED secret name
+  rules:
+    - host: nats-ws.sfx-markt.de
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nats # Matches the Service name in the 'messaging' namespace
+                port:
+                  name: websocket # <--- CORRECTED port name (points to 9222)

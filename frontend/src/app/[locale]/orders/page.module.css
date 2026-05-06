@@ -1,0 +1,846 @@
+/* ===== ORDERS PAGE - CLEAN MINIMAL DESIGN ===== */
+/* Aligned with Header and HorizontalFilters - professional and compact */
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 16px;
+    min-height: 100vh;
+    background: #f8fafc;
+}
+
+/* ===== CLEAN HEADER SECTION ===== */
+.header {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    color: #111827;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    line-height: 1.2;
+}
+
+.titleIcon {
+    width: 24px;
+    height: 24px;
+    color: #6b7280;
+    flex-shrink: 0;
+}
+
+.refreshButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.refreshButton:hover:not(:disabled) {
+    background: #f8fafc;
+    border-color: #6b7280;
+}
+
+.refreshButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ===== ERROR BANNER ===== */
+.errorBanner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    color: #dc2626;
+    font-size: 14px;
+}
+
+/* ===== CLEAN ORDERS LIST ===== */
+.ordersList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ===== CLEAN ORDER ITEM ===== */
+.orderItem {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.orderItem:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: #d1d5db;
+    transform: translateY(-1px);
+}
+
+.orderItem.expanded .itemsSummary {
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 16px;
+}
+
+.statusBorder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    border-radius: 12px 0 0 12px;
+}
+
+/* ===== CLEAN ORDER HEADER ===== */
+.orderHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    gap: 16px;
+}
+
+.orderMeta {
+    flex: 1;
+}
+
+.orderPrimary {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+.orderId {
+    font-weight: 600;
+    color: #111827;
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+.orderDate {
+    color: #9ca3af;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.orderSecondary {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.itemCount {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.orderTotal {
+    font-weight: 600;
+    color: #111827;
+    font-size: 16px;
+}
+
+.statusBadge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+.statusIcon {
+    width: 12px;
+    height: 12px;
+}
+
+/* ===== STATUS COLORS ===== */
+.statusBadge[data-status="pending"] {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.statusBadge[data-status="processing"] {
+    background: #eff6ff;
+    color: #1e40af;
+}
+
+.statusBadge[data-status="ready"] {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+.statusBadge[data-status="shipped"] {
+    background: #e0f2fe;
+    color: #0891b2;
+}
+
+.statusBadge[data-status="delivered"] {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.statusBadge[data-status="completed"] {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.statusBadge[data-status="cancelled"] {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.statusBadge[data-status="failed"] {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+/* ===== ITEMS SUMMARY ===== */
+.itemsSummary {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-top: 1px solid #e5e7eb;
+    padding-top: 0;
+}
+
+.itemsSummary.expanded {
+    padding-top: 16px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.itemInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.itemName {
+    font-weight: 500;
+    color: #111827;
+    font-size: 14px;
+}
+
+.itemSeller {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.itemPricing {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.itemQuantity {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.itemPrice {
+    font-weight: 600;
+    color: #111827;
+    font-size: 14px;
+}
+
+/* ===== CLEAN ORDER ACTIONS ===== */
+.orderActions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.actionButton {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #ffffff;
+    color: #6b7280;
+}
+
+.actionButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.actionIcon {
+    width: 14px;
+    height: 14px;
+}
+
+.viewButton {
+    color: #3b82f6;
+    background: #eff6ff;
+    border-color: #bfdbfe;
+}
+
+.viewButton:hover:not(:disabled) {
+    background: #dbeafe;
+    border-color: #93c5fd;
+}
+
+.reorderButton {
+    color: #6b7280;
+    background: #ffffff;
+    border-color: #e5e7eb;
+}
+
+.reorderButton:hover:not(:disabled) {
+    background: #f8fafc;
+    border-color: #d1d5db;
+    color: #374151;
+}
+
+.readyButton {
+    color: #3b82f6;
+    background: #eff6ff;
+    border-color: #bfdbfe;
+}
+
+.readyButton:hover:not(:disabled) {
+    background: #dbeafe;
+    border-color: #93c5fd;
+}
+
+.completeButton {
+    color: #059669;
+    background: #ecfdf5;
+    border-color: #a7f3d0;
+}
+
+.completeButton:hover:not(:disabled) {
+    background: #d1fae5;
+    border-color: #6ee7b7;
+}
+
+.cancelButton {
+    color: #dc2626;
+    background: #fef2f2;
+    border-color: #fecaca;
+}
+
+.cancelButton:hover:not(:disabled) {
+    background: #fee2e2;
+    border-color: #fca5a5;
+}
+
+.browseButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #3b82f6;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.browseButton:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+}
+
+/* ===== CLEAN STATE COMPONENTS ===== */
+.centerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    padding: 60px 20px;
+}
+
+.emptyContainer,
+.errorContainer,
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 400px;
+}
+
+.emptyIcon,
+.errorIcon {
+    width: 48px;
+    height: 48px;
+    color: #9ca3af;
+    margin-bottom: 16px;
+}
+
+.errorIcon {
+    color: #ef4444;
+}
+
+.emptyTitle,
+.errorTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 8px 0;
+}
+
+.emptyMessage,
+.errorMessage {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.5;
+    margin: 0 0 16px 0;
+}
+
+.retryButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.retryButton:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+}
+
+/* ===== UTILITY ICONS ===== */
+.icon {
+    width: 16px;
+    height: 16px;
+}
+
+.iconSmall {
+    width: 16px;
+    height: 16px;
+}
+
+.spinning {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+    .container {
+        padding: 16px;
+    }
+
+    .ordersList {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 12px;
+    }
+
+    .header {
+        padding: 16px;
+        margin-bottom: 16px;
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .title {
+        font-size: 18px;
+        justify-content: center;
+    }
+
+    .refreshButton {
+        align-self: center;
+    }
+
+    .orderItem {
+        padding: 16px;
+    }
+
+    .orderHeader {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .orderPrimary {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .orderSecondary {
+        justify-content: center;
+    }
+
+    .orderActions {
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .actionButton {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+
+    .centerContainer {
+        min-height: 300px;
+        padding: 40px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 8px;
+    }
+
+    .header {
+        padding: 12px;
+    }
+
+    .title {
+        font-size: 16px;
+    }
+
+    .orderItem {
+        padding: 12px;
+    }
+
+    .orderId {
+        font-size: 15px;
+    }
+
+    .orderTotal {
+        font-size: 15px;
+    }
+
+    .actionButton {
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+
+    .actionIcon {
+        width: 12px;
+        height: 12px;
+    }
+
+    .centerContainer {
+        min-height: 250px;
+        padding: 30px 12px;
+    }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+    .refreshButton,
+    .orderItem,
+    .actionButton,
+    .browseButton,
+    .retryButton {
+        transition: none;
+    }
+
+    .orderItem:hover {
+        transform: none;
+    }
+
+    .browseButton:hover,
+    .retryButton:hover {
+        transform: none;
+    }
+
+    .spinning {
+        animation: none;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .header,
+    .orderItem {
+        border: 2px solid #000000;
+    }
+
+    .refreshButton,
+    .actionButton,
+    .browseButton,
+    .retryButton {
+        border: 2px solid #000000;
+    }
+
+    .browseButton,
+    .retryButton {
+        background: #000000;
+        color: #ffffff;
+    }
+}
+
+/* ===== FOCUS STATES ===== */
+.refreshButton:focus-visible,
+.actionButton:focus-visible,
+.browseButton:focus-visible,
+.retryButton:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* ===== DARK THEME SUPPORT ===== */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background: #111827;
+        color: #f3f4f6;
+    }
+
+    .header,
+    .orderItem {
+        background: #1f2937;
+        border-color: #374151;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .title {
+        color: #f3f4f6;
+    }
+
+    .titleIcon {
+        color: #9ca3af;
+    }
+
+    .refreshButton {
+        background: #374151;
+        border-color: #4b5563;
+        color: #d1d5db;
+    }
+
+    .refreshButton:hover:not(:disabled) {
+        background: #4b5563;
+        border-color: #6b7280;
+    }
+
+    .orderId,
+    .orderTotal {
+        color: #f3f4f6;
+    }
+
+    .orderDate,
+    .itemCount {
+        color: #9ca3af;
+    }
+
+    .statusBorder {
+        opacity: 0.8;
+    }
+
+    .statusBadge {
+        background: #374151;
+        color: #9ca3af;
+    }
+
+    .statusBadge[data-status="pending"] {
+        background: rgba(245, 158, 11, 0.1);
+        color: #fbbf24;
+    }
+
+    .statusBadge[data-status="processing"] {
+        background: rgba(59, 130, 246, 0.1);
+        color: #60a5fa;
+    }
+
+    .statusBadge[data-status="ready"] {
+        background: #374151;
+        color: #9ca3af;
+    }
+
+    .statusBadge[data-status="shipped"] {
+        background: rgba(6, 182, 212, 0.1);
+        color: #22d3ee;
+    }
+
+    .statusBadge[data-status="delivered"],
+    .statusBadge[data-status="completed"] {
+        background: rgba(5, 150, 105, 0.1);
+        color: #34d399;
+    }
+
+    .statusBadge[data-status="cancelled"],
+    .statusBadge[data-status="failed"] {
+        background: rgba(220, 38, 38, 0.1);
+        color: #f87171;
+    }
+
+    .itemsSummary {
+        border-top-color: #374151;
+    }
+
+    .item {
+        border-bottom-color: #374151;
+    }
+
+    .itemName,
+    .itemPrice {
+        color: #f3f4f6;
+    }
+
+    .itemSeller,
+    .itemQuantity {
+        color: #9ca3af;
+    }
+
+    .orderActions {
+        border-top-color: #374151;
+    }
+
+    .actionButton {
+        background: #374151;
+        border-color: #4b5563;
+        color: #9ca3af;
+    }
+
+    .viewButton {
+        background: rgba(59, 130, 246, 0.1);
+        border-color: #3b82f6;
+        color: #60a5fa;
+    }
+
+    .viewButton:hover:not(:disabled) {
+        background: rgba(59, 130, 246, 0.2);
+    }
+
+    .reorderButton:hover:not(:disabled) {
+        background: #4b5563;
+        border-color: #6b7280;
+        color: #d1d5db;
+    }
+
+    .readyButton {
+        background: rgba(59, 130, 246, 0.1);
+        border-color: #3b82f6;
+        color: #60a5fa;
+    }
+
+    .readyButton:hover:not(:disabled) {
+        background: rgba(59, 130, 246, 0.2);
+    }
+
+    .completeButton {
+        background: rgba(5, 150, 105, 0.1);
+        border-color: #059669;
+        color: #34d399;
+    }
+
+    .completeButton:hover:not(:disabled) {
+        background: rgba(5, 150, 105, 0.2);
+    }
+
+    .cancelButton {
+        background: rgba(220, 38, 38, 0.1);
+        border-color: #dc2626;
+        color: #f87171;
+    }
+
+    .cancelButton:hover:not(:disabled) {
+        background: rgba(220, 38, 38, 0.2);
+    }
+
+    .errorBanner {
+        background: rgba(239, 68, 68, 0.1);
+        border-color: #b91c1c;
+        color: #f87171;
+    }
+
+    .emptyTitle,
+    .errorTitle {
+        color: #f3f4f6;
+    }
+
+    .emptyMessage,
+    .errorMessage {
+        color: #9ca3af;
+    }
+
+    .emptyIcon {
+        color: #6b7280;
+    }
+
+    .errorIcon {
+        color: #f87171;
+    }
+
+    .browseButton,
+    .retryButton {
+        background: #3b82f6;
+        color: #ffffff;
+    }
+
+         .browseButton:hover,
+     .retryButton:hover {
+         background: #2563eb;
+     }
+ }

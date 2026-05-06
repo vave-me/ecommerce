@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9dacc86b-626a-46b3-adde-9b2e6eb2fab6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/activityclient/activity/activity_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/activityclient/activity/activity_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/activityclient/interaction/interaction_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/activityclient/interaction/interaction_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/activitypb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/activitypb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/activitypb/messages.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/activitypb/messages.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/activitypb/mock_activity_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/activitypb/mock_activity_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/activitypb/mock_activity_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/activitypb/mock_activity_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/activitypb/mock_unsafe_activity_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/activitypb/mock_unsafe_activity_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/internal/domain/mock_activity_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/internal/domain/mock_activity_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/internal/domain/mock_interaction_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/internal/domain/mock_interaction_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/internal/domain/mock_middleman_cache_interaction_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/internal/domain/mock_middleman_cache_interaction_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/internal/domain/mock_middleman_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/internal/domain/mock_middleman_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/internal/domain/mock_middleman_interaction_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/internal/domain/mock_middleman_interaction_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/internal/domain/mock_middleman_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/internal/domain/mock_middleman_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/internal/domain/mock_product_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/internal/domain/mock_product_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/internal/domain/mock_product_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/internal/domain/mock_product_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/internal/domain/mock_user_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/internal/domain/mock_user_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/internal/domain/mock_user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/internal/domain/mock_user_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/internal/rest/api.openapi.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/internal/rest/api.openapi.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../activity/internal/rest/api.swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/../activity/internal/rest/api.swagger.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/assistantsclient/assistant/assistant_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/assistantsclient/assistant/assistant_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/assistantspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/assistantspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/assistantspb/common_assistant.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/assistantspb/common_assistant.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/assistantspb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/assistantspb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/assistantspb/mock_assistants_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/assistantspb/mock_assistants_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/assistantspb/mock_assistants_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/assistantspb/mock_assistants_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/assistantspb/mock_unsafe_assistants_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/assistantspb/mock_unsafe_assistants_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_activity_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_activity_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_assistant_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_assistant_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_basket_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_basket_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_category_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_category_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_comment_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_comment_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_conversation_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_conversation_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_following_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_following_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_geocoding_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_geocoding_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_item_metric_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_item_metric_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_mailer_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_mailer_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_messages_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_messages_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_metric_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_metric_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_metric_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_metric_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_middleman_media_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_middleman_media_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_newsletter_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_newsletter_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_notification_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_notification_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_offer_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_offer_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_order_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_order_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_payment_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_payment_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_post_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_post_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_product_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_product_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_read_conversation_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_read_conversation_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_read_messages_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_read_messages_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_request_analyzer.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_request_analyzer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_review_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_review_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_service_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_service_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_shipping_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_shipping_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_support_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_support_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_system_prompt_provider.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_system_prompt_provider.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_user_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_variant_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_variant_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_variant_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_variant_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_vector_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_vector_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/domain/mock_wishlist_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/domain/mock_wishlist_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/rest/api.openapi.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/rest/api.openapi.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assistants/internal/rest/api.swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/../assistants/internal/rest/api.swagger.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../baskets/basketspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../baskets/basketspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../baskets/basketspb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../baskets/basketspb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../baskets/basketspb/mock_basket_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../baskets/basketspb/mock_basket_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../baskets/basketspb/mock_basket_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../baskets/basketspb/mock_basket_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../baskets/basketspb/mock_unsafe_basket_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../baskets/basketspb/mock_unsafe_basket_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../baskets/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../baskets/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../baskets/internal/domain/mock_basket_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../baskets/internal/domain/mock_basket_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../baskets/internal/domain/mock_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../baskets/internal/domain/mock_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../baskets/internal/domain/mock_order_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../baskets/internal/domain/mock_order_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../baskets/internal/domain/mock_product_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../baskets/internal/domain/mock_product_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../baskets/internal/domain/mock_product_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../baskets/internal/domain/mock_product_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../baskets/internal/domain/mock_user_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../baskets/internal/domain/mock_user_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../baskets/internal/domain/mock_user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../baskets/internal/domain/mock_user_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../categories/categoriespb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../categories/categoriespb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../categories/categoriespb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../categories/categoriespb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../categories/categoriespb/mock_categories_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../categories/categoriespb/mock_categories_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../categories/categoriespb/mock_categories_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../categories/categoriespb/mock_categories_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../categories/categoriespb/mock_unsafe_categories_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../categories/categoriespb/mock_unsafe_categories_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../categories/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../categories/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../categories/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../categories/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../categories/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../categories/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../categories/internal/domain/mock_catalog_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../categories/internal/domain/mock_catalog_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../categories/internal/domain/mock_catalog_filter_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../categories/internal/domain/mock_catalog_filter_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../categories/internal/domain/mock_catalog_filter_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../categories/internal/domain/mock_catalog_filter_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../categories/internal/domain/mock_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../categories/internal/domain/mock_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../categories/internal/domain/mock_category_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../categories/internal/domain/mock_category_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../categories/internal/domain/mock_filter_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../categories/internal/domain/mock_filter_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../comments/commentspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../comments/commentspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../comments/commentspb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../comments/commentspb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../comments/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../comments/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../comments/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../comments/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../comments/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../comments/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../comments/internal/domain/mock_comment_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../comments/internal/domain/mock_comment_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../comments/internal/domain/mock_middleman_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../comments/internal/domain/mock_middleman_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../comments/internal/domain/mock_middleman_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../comments/internal/domain/mock_middleman_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker/prometheus/prometheus-config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker/prometheus/prometheus-config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../erp/erppb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../erp/erppb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../erp/erppb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../erp/erppb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../erp/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../erp/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../erp/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../erp/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../erp/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../erp/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../erp/internal/domain/mock_connector_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../erp/internal/domain/mock_connector_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../erp/internal/domain/mock_event.go" beforeDir="false" afterPath="$PROJECT_DIR$/../erp/internal/domain/mock_event.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../erp/internal/domain/mock_event_publisher.go" beforeDir="false" afterPath="$PROJECT_DIR$/../erp/internal/domain/mock_event_publisher.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../erp/internal/domain/mock_invoice_sync_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../erp/internal/domain/mock_invoice_sync_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../erp/internal/domain/mock_order_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../erp/internal/domain/mock_order_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../erp/internal/domain/mock_order_sync_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../erp/internal/domain/mock_order_sync_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../erp/internal/domain/mock_payment_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../erp/internal/domain/mock_payment_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../erp/internal/domain/mock_product_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../erp/internal/domain/mock_product_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../erp/internal/domain/mock_sync_configuration_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../erp/internal/domain/mock_sync_configuration_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../erp/internal/domain/mock_sync_log_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../erp/internal/domain/mock_sync_log_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../erp/internal/domain/mock_sync_status_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../erp/internal/domain/mock_sync_status_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../erp/internal/domain/mock_webhook_event_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../erp/internal/domain/mock_webhook_event_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../following/followingpb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../following/followingpb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../following/followingpb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../following/followingpb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../following/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../following/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../following/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../following/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../following/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../following/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../following/internal/domain/mock_follow_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../following/internal/domain/mock_follow_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../following/internal/domain/mock_middleman_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../following/internal/domain/mock_middleman_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../following/internal/domain/mock_middleman_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../following/internal/domain/mock_middleman_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/messages/de.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/messages/de.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/messages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/messages/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/messages/it.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/messages/it.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/messages/pl.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/messages/pl.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/api/client/userApi.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/api/client/userApi.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/[locale]/admin/dashboard/AdminDashboard.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/[locale]/admin/dashboard/AdminDashboard.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/[locale]/admin/dashboard/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/[locale]/admin/dashboard/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/[locale]/admin/notifications/NotificationsManagement.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/[locale]/admin/notifications/NotificationsManagement.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/[locale]/admin/posts/PostsManagement.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/[locale]/admin/posts/PostsManagement.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/[locale]/admin/products/ProductManagement.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/[locale]/admin/products/ProductManagement.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/[locale]/admin/users/UserManagement.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/[locale]/admin/users/UserManagement.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/[locale]/dashboard/DashboardPage.client.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/[locale]/dashboard/DashboardPage.client.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/[locale]/dashboard/DashboardPage.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/[locale]/dashboard/DashboardPage.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/[locale]/explore/ProductsPage.client.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/[locale]/explore/ProductsPage.client.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/[locale]/explore/ProductsPage.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/[locale]/explore/ProductsPage.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/[locale]/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/[locale]/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/[locale]/login/LoginForm.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/[locale]/login/LoginForm.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/[locale]/notifications/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/[locale]/notifications/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/[locale]/notifications/page.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/[locale]/notifications/page.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/[locale]/products/ProductsPage.client.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/[locale]/products/ProductsPage.client.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/[locale]/products/ProductsPage.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/[locale]/products/ProductsPage.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/[locale]/videos/VideoPage.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/[locale]/videos/VideoPage.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/global.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/ErrorBoundary/ErrorBoundary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/ErrorBoundary/ErrorBoundary.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Header/SignOutMenu.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Header/SignOutMenu.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Messaging/MessageList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Messaging/MessageList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Messaging/MessageList.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Messaging/MessageList.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Newsletters/NewsletterForm.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Newsletters/NewsletterForm.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/features/shared/CreateModal.base.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/features/shared/CreateModal.base.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/styles/premierLeague.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/styles/premierLeague.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../geocoding/geocodingpb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../geocoding/geocodingpb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../geocoding/geocodingpb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../geocoding/geocodingpb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/am/message_types.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/am/message_types.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/am/mock_command_publisher.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/am/mock_command_publisher.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/am/mock_event_publisher.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/am/mock_event_publisher.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/am/mock_message_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/am/mock_message_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/am/mock_message_publisher.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/am/mock_message_publisher.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/am/mock_message_subscriber.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/am/mock_message_subscriber.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/am/mock_reply_publisher.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/am/mock_reply_publisher.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/am/mock_websocket_publisher.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/am/mock_websocket_publisher.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/ddd/mock_aggregate.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/ddd/mock_aggregate.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/ddd/mock_command_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/ddd/mock_command_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/ddd/mock_entity.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/ddd/mock_entity.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/ddd/mock_event_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/ddd/mock_event_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/ddd/mock_event_publisher.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/ddd/mock_event_publisher.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/ddd/mock_event_subscriber.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/ddd/mock_event_subscriber.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/ddd/mock_reply_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/ddd/mock_reply_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/ddd/mock_websocket_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/ddd/mock_websocket_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/ddd/mock_websocket_publisher.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/ddd/mock_websocket_publisher.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/ddd/mock_websocket_subscriber.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/ddd/mock_websocket_subscriber.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/es/mock_aggregate.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/es/mock_aggregate.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/es/mock_aggregate_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/es/mock_aggregate_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/es/mock_aggregate_store.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/es/mock_aggregate_store.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/es/mock_event_sourced_aggregate.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/es/mock_event_sourced_aggregate.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../internal/jetstream/stream_message.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../internal/jetstream/stream_message.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mailer/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../mailer/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mailer/internal/application/mock_user_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../mailer/internal/application/mock_user_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mailer/internal/application/mock_user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../mailer/internal/application/mock_user_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mailer/internal/domain/mock_email_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../mailer/internal/domain/mock_email_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mailer/mailerpb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../mailer/mailerpb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mailer/mailerpb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../mailer/mailerpb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mailer/mailerpb/mock_mailer_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../mailer/mailerpb/mock_mailer_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mailer/mailerpb/mock_mailer_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../mailer/mailerpb/mock_mailer_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mailer/mailerpb/mock_unsafe_mailer_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../mailer/mailerpb/mock_unsafe_mailer_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/commands/mock_create_manager_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/commands/mock_create_manager_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/commands/mock_validatable.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/commands/mock_validatable.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/services/mock_ai_client_provider.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/services/mock_ai_client_provider.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/services/mock_data_processor.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/services/mock_data_processor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/services/mock_document_processor.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/services/mock_document_processor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/services/mock_llm_processor.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/services/mock_llm_processor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/services/mock_repository_language_processor.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/services/mock_repository_language_processor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/services/mock_speech_processor.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/services/mock_speech_processor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/services/mock_unified_repository_interface.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/services/mock_unified_repository_interface.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/application/services/mock_vision_processor.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/application/services/mock_vision_processor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_activity_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_activity_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_basket_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_basket_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_category_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_category_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_comment_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_comment_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_conversation_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_conversation_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_following_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_following_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_geocoding_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_geocoding_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_item_metric_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_item_metric_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_llm_journal_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_llm_journal_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_mailer_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_mailer_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_manager_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_manager_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_messages_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_messages_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_metric_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_metric_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_metric_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_metric_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_middleman_media_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_middleman_media_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_basket_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_basket_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_category_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_category_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_message_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_message_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_metric_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_metric_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_notification_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_notification_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_order_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_order_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_payment_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_payment_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_product_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_product_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_review_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_review_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_support_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_support_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_user_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_vector_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_vector_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_wishlist_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_natural_wishlist_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_newsletter_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_newsletter_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_notification_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_notification_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_offer_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_offer_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_order_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_order_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_payment_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_payment_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_post_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_post_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_product_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_product_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_read_conversation_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_read_conversation_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_read_messages_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_read_messages_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_request_analyzer.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_request_analyzer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_review_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_review_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_scheduler_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_scheduler_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_service_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_service_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_shipping_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_shipping_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_support_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_support_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_system_prompt_provider.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_system_prompt_provider.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_user_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_variant_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_variant_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_variant_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_variant_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_vector_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_vector_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/internal/domain/mock_wishlist_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/internal/domain/mock_wishlist_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/managerspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/managerspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/managerspb/common_manager.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/managerspb/common_manager.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/managerspb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/managerspb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/managerspb/mock_managers_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/managerspb/mock_managers_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/managerspb/mock_managers_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/managerspb/mock_managers_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../managers/managerspb/mock_unsafe_managers_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../managers/managerspb/mock_unsafe_managers_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../media/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../media/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../media/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../media/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../media/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../media/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../media/mediapb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../media/mediapb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../media/mediapb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../media/mediapb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../media/mediapb/mock_media_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../media/mediapb/mock_media_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../media/mediapb/mock_media_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../media/mediapb/mock_media_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../media/mediapb/mock_unsafe_media_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../media/mediapb/mock_unsafe_media_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../merchant/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../merchant/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../merchant/internal/domain/mock_merchant_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../merchant/internal/domain/mock_merchant_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../merchant/internal/domain/mock_product_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../merchant/internal/domain/mock_product_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../merchant/internal/domain/mock_product_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../merchant/internal/domain/mock_product_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../merchant/internal/domain/mock_product_sync_status_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../merchant/internal/domain/mock_product_sync_status_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../merchant/merchantpb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../merchant/merchantpb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../merchant/merchantpb/messages.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../merchant/merchantpb/messages.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../merchant/merchantpb/mock_merchant_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../merchant/merchantpb/mock_merchant_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../merchant/merchantpb/mock_merchant_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../merchant/merchantpb/mock_merchant_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../merchant/merchantpb/mock_unsafe_merchant_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../merchant/merchantpb/mock_unsafe_merchant_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/internal/domain/mock_conversation_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/internal/domain/mock_conversation_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/internal/domain/mock_message_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/internal/domain/mock_message_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/internal/domain/mock_messenger_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/internal/domain/mock_messenger_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/internal/domain/mock_middleman_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/internal/domain/mock_middleman_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/messagespb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/messagespb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/messagespb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/messagespb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/messagespb/mock_messages_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/messagespb/mock_messages_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/messagespb/mock_messages_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/messagespb/mock_messages_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../messages/messagespb/mock_unsafe_messages_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../messages/messagespb/mock_unsafe_messages_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../metrics/metricspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../metrics/metricspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newsletters/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../newsletters/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newsletters/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../newsletters/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newsletters/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../newsletters/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newsletters/internal/domain/mock_edition_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../newsletters/internal/domain/mock_edition_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newsletters/internal/domain/mock_edition_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../newsletters/internal/domain/mock_edition_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newsletters/internal/domain/mock_middleman_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../newsletters/internal/domain/mock_middleman_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newsletters/internal/domain/mock_newsletter_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../newsletters/internal/domain/mock_newsletter_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newsletters/internal/domain/mock_newsletter_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../newsletters/internal/domain/mock_newsletter_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newsletters/internal/domain/mock_subscription_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../newsletters/internal/domain/mock_subscription_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newsletters/internal/domain/mock_subscription_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../newsletters/internal/domain/mock_subscription_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newsletters/internal/domain/mock_template_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../newsletters/internal/domain/mock_template_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newsletters/internal/domain/mock_template_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../newsletters/internal/domain/mock_template_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newsletters/newsletterspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../newsletters/newsletterspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newsletters/newsletterspb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../newsletters/newsletterspb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newsletters/newsletterspb/mock_newsletters_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../newsletters/newsletterspb/mock_newsletters_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newsletters/newsletterspb/mock_newsletters_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../newsletters/newsletterspb/mock_newsletters_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newsletters/newsletterspb/mock_unsafe_newsletters_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../newsletters/newsletterspb/mock_unsafe_newsletters_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notifications/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../notifications/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notifications/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../notifications/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notifications/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../notifications/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notifications/internal/domain/mock_alert_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../notifications/internal/domain/mock_alert_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notifications/internal/domain/mock_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../notifications/internal/domain/mock_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notifications/internal/domain/mock_preferences_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../notifications/internal/domain/mock_preferences_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notifications/internal/domain/mock_product_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../notifications/internal/domain/mock_product_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notifications/internal/domain/mock_product_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../notifications/internal/domain/mock_product_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notifications/internal/domain/mock_user_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../notifications/internal/domain/mock_user_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notifications/internal/domain/mock_user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../notifications/internal/domain/mock_user_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notifications/notificationspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../notifications/notificationspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notifications/notificationspb/messages.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../notifications/notificationspb/messages.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notifications/notificationspb/mock_notifications_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../notifications/notificationspb/mock_notifications_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notifications/notificationspb/mock_notifications_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../notifications/notificationspb/mock_notifications_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notifications/notificationspb/mock_unsafe_notifications_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../notifications/notificationspb/mock_unsafe_notifications_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../offers/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../offers/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../offers/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../offers/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../offers/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../offers/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../offers/internal/domain/mock_buy_back_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../offers/internal/domain/mock_buy_back_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../offers/internal/domain/mock_buy_now_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../offers/internal/domain/mock_buy_now_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../offers/internal/domain/mock_lease_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../offers/internal/domain/mock_lease_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../offers/internal/domain/mock_middleman_buy_back_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../offers/internal/domain/mock_middleman_buy_back_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../offers/internal/domain/mock_middleman_buy_now_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../offers/internal/domain/mock_middleman_buy_now_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../offers/internal/domain/mock_middleman_lease_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../offers/internal/domain/mock_middleman_lease_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../offers/internal/domain/mock_middleman_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../offers/internal/domain/mock_middleman_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../offers/internal/domain/mock_middleman_reservation_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../offers/internal/domain/mock_middleman_reservation_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../offers/internal/domain/mock_offer_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../offers/internal/domain/mock_offer_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../offers/internal/domain/mock_reservation_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../offers/internal/domain/mock_reservation_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../offers/offerspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../offers/offerspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../offers/offerspb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../offers/offerspb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../offers/offerspb/mock_offers_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../offers/offerspb/mock_offers_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../offers/offerspb/mock_offers_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../offers/offerspb/mock_offers_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../offers/offerspb/mock_unsafe_offers_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../offers/offerspb/mock_unsafe_offers_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ordering/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ordering/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ordering/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ordering/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ordering/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ordering/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ordering/internal/domain/mock_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ordering/internal/domain/mock_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ordering/internal/domain/mock_order_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ordering/internal/domain/mock_order_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ordering/internal/domain/mock_payment_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ordering/internal/domain/mock_payment_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ordering/internal/domain/mock_shopping_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ordering/internal/domain/mock_shopping_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ordering/internal/domain/mock_user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ordering/internal/domain/mock_user_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ordering/orderingpb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ordering/orderingpb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ordering/orderingpb/messages.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ordering/orderingpb/messages.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ordering/orderingpb/mock_ordering_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ordering/orderingpb/mock_ordering_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ordering/orderingpb/mock_ordering_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ordering/orderingpb/mock_ordering_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ordering/orderingpb/mock_unsafe_ordering_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../ordering/orderingpb/mock_unsafe_ordering_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/internal/application/mock_invoice_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/internal/application/mock_invoice_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/internal/application/mock_merchant_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/internal/application/mock_merchant_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/internal/application/mock_payment_domain.go" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/internal/application/mock_payment_domain.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/internal/application/mock_payment_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/internal/application/mock_payment_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/internal/application/mock_recurring_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/internal/application/mock_recurring_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/internal/domain/mock_order_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/internal/domain/mock_order_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/internal/domain/mock_product_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/internal/domain/mock_product_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/internal/domain/mock_product_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/internal/domain/mock_product_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/internal/domain/mock_user_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/internal/domain/mock_user_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/internal/domain/mock_user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/internal/domain/mock_user_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/paymentspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/paymentspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/paymentspb/messages.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/paymentspb/messages.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/paymentspb/mock_payments_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/paymentspb/mock_payments_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/paymentspb/mock_payments_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/paymentspb/mock_payments_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payments/paymentspb/mock_unsafe_payments_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../payments/paymentspb/mock_unsafe_payments_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pim/internal/domain/mock_catalog_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../pim/internal/domain/mock_catalog_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pim/internal/domain/mock_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../pim/internal/domain/mock_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pim/internal/domain/mock_catalog_variant_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../pim/internal/domain/mock_catalog_variant_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pim/internal/domain/mock_catalog_variant_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../pim/internal/domain/mock_catalog_variant_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pim/internal/domain/mock_product_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../pim/internal/domain/mock_product_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pim/internal/domain/mock_variant_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../pim/internal/domain/mock_variant_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pim/productspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../pim/productspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pim/productspb/common.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../pim/productspb/common.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pim/productspb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../pim/productspb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pim/productspb/mock_products_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../pim/productspb/mock_products_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pim/productspb/mock_products_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../pim/productspb/mock_products_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pim/productspb/mock_unsafe_products_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../pim/productspb/mock_unsafe_products_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../posts/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../posts/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../posts/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../posts/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../posts/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../posts/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../posts/internal/domain/mock_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../posts/internal/domain/mock_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../posts/internal/domain/mock_post_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../posts/internal/domain/mock_post_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../posts/postspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../posts/postspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../posts/postspb/common.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../posts/postspb/common.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../posts/postspb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../posts/postspb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../posts/postspb/mock_posts_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../posts/postspb/mock_posts_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../posts/postspb/mock_posts_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../posts/postspb/mock_posts_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../posts/postspb/mock_unsafe_posts_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../posts/postspb/mock_unsafe_posts_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../products/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../products/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../products/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../products/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../products/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../products/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../products/internal/domain/mock_catalog_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../products/internal/domain/mock_catalog_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../products/internal/domain/mock_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../products/internal/domain/mock_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../products/internal/domain/mock_catalog_variant_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../products/internal/domain/mock_catalog_variant_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../products/internal/domain/mock_catalog_variant_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../products/internal/domain/mock_catalog_variant_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../products/internal/domain/mock_product_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../products/internal/domain/mock_product_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../products/internal/domain/mock_variant_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../products/internal/domain/mock_variant_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../products/productspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../products/productspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../products/productspb/common.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../products/productspb/common.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../products/productspb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../products/productspb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../products/productspb/mock_products_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../products/productspb/mock_products_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../products/productspb/mock_products_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../products/productspb/mock_products_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../products/productspb/mock_unsafe_products_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../products/productspb/mock_unsafe_products_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reviews/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../reviews/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reviews/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../reviews/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reviews/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../reviews/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reviews/internal/domain/mock_middleman_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../reviews/internal/domain/mock_middleman_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reviews/internal/domain/mock_middleman_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../reviews/internal/domain/mock_middleman_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reviews/internal/domain/mock_review_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../reviews/internal/domain/mock_review_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reviews/reviewspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../reviews/reviewspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reviews/reviewspb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../reviews/reviewspb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../docker/Dockerfile.rust" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/internal/domain/mock_action_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/internal/domain/mock_action_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/internal/domain/mock_assistant_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/internal/domain/mock_assistant_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/internal/domain/mock_catalog_task_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/internal/domain/mock_catalog_task_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/internal/domain/mock_middleman_action_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/internal/domain/mock_middleman_action_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/internal/domain/mock_middleman_cache_action_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/internal/domain/mock_middleman_cache_action_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/internal/domain/mock_middleman_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/internal/domain/mock_middleman_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/internal/domain/mock_middleman_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/internal/domain/mock_middleman_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/internal/domain/mock_scheduler_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/internal/domain/mock_scheduler_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/internal/domain/mock_task_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/internal/domain/mock_task_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/schedulerspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/schedulerspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/schedulerspb/messages.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/schedulerspb/messages.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/schedulerspb/mock_scheduler_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/schedulerspb/mock_scheduler_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/schedulerspb/mock_scheduler_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/schedulerspb/mock_scheduler_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scheduler/schedulerspb/mock_unsafe_scheduler_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduler/schedulerspb/mock_unsafe_scheduler_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../search/searchpb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../search/searchpb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../services/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../services/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../services/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/internal/domain/mock_catalog_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../services/internal/domain/mock_catalog_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/internal/domain/mock_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../services/internal/domain/mock_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/internal/domain/mock_service_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../services/internal/domain/mock_service_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/servicespb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../services/servicespb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/servicespb/common.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../services/servicespb/common.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/servicespb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../services/servicespb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/servicespb/mock_services_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../services/servicespb/mock_services_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/servicespb/mock_services_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../services/servicespb/mock_services_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../services/servicespb/mock_unsafe_services_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../services/servicespb/mock_unsafe_services_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shipping/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../shipping/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shipping/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../shipping/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shipping/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../shipping/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shipping/internal/domain/mock_shipping_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../shipping/internal/domain/mock_shipping_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shipping/internal/domain/mock_shipping_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../shipping/internal/domain/mock_shipping_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shipping/shippingpb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../shipping/shippingpb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shipping/shippingpb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../shipping/shippingpb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shipping/shippingpb/mock_shipping_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../shipping/shippingpb/mock_shipping_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shipping/shippingpb/mock_shipping_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../shipping/shippingpb/mock_shipping_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shipping/shippingpb/mock_unsafe_shipping_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../shipping/shippingpb/mock_unsafe_shipping_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../streams/internal/rest/api.annotations.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../streams/internal/rest/api.annotations.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../streams/internal/rest/api.swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/../streams/internal/rest/api.swagger.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../streams/module.go" beforeDir="false" afterPath="$PROJECT_DIR$/../streams/module.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../streams/streamsclient/series/create_series_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../streams/streamsclient/series/create_series_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../streams/streamsclient/series/get_series_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../streams/streamsclient/series/get_series_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../streams/streamsclient/series/series_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../streams/streamsclient/series/series_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../streams/streamsclient/user/get_continue_watching_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../streams/streamsclient/user/get_continue_watching_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../streams/streamsclient/user/get_user_streams_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../streams/streamsclient/user/get_user_streams_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../streams/streamsclient/user/user_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../streams/streamsclient/user/user_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../streams/streamspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../streams/streamspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../streams/streamspb/api.pb.gw.go" beforeDir="false" afterPath="$PROJECT_DIR$/../streams/streamspb/api.pb.gw.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../streams/streamspb/common.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../streams/streamspb/common.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../streams/streamspb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../streams/streamspb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../streams/streamspb/mock_streams_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../streams/streamspb/mock_streams_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../streams/streamspb/mock_streams_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../streams/streamspb/mock_streams_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../streams/streamspb/mock_unsafe_streams_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../streams/streamspb/mock_unsafe_streams_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../support/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../support/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../support/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../support/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../support/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../support/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../support/internal/domain/mock_ai_configuration_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../support/internal/domain/mock_ai_configuration_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../support/internal/domain/mock_communication_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../support/internal/domain/mock_communication_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../support/internal/domain/mock_knowledge_article_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../support/internal/domain/mock_knowledge_article_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../support/internal/domain/mock_middleman_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../support/internal/domain/mock_middleman_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../support/internal/domain/mock_support_channel_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../support/internal/domain/mock_support_channel_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../support/internal/domain/mock_support_channel_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../support/internal/domain/mock_support_channel_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../support/internal/domain/mock_ticket_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../support/internal/domain/mock_ticket_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../support/internal/domain/mock_ticket_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../support/internal/domain/mock_ticket_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../support/supportpb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../support/supportpb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../support/supportpb/common.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../support/supportpb/common.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../support/supportpb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../support/supportpb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../support/supportpb/mock_support_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../support/supportpb/mock_support_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../support/supportpb/mock_support_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../support/supportpb/mock_support_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../support/supportpb/mock_unsafe_support_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../support/supportpb/mock_unsafe_support_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/internal/domain/mock_match_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/internal/domain/mock_match_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/internal/domain/mock_match_domain_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/internal/domain/mock_match_domain_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/internal/domain/mock_match_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/internal/domain/mock_match_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/internal/domain/mock_season_ticket_domain_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/internal/domain/mock_season_ticket_domain_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/internal/domain/mock_stadium_domain_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/internal/domain/mock_stadium_domain_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/internal/domain/mock_ticket_domain_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/internal/domain/mock_ticket_domain_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/internal/domain/mock_ticket_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/internal/domain/mock_ticket_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/internal/domain/mock_ticket_search_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/internal/domain/mock_ticket_search_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/internal/rest/api.annotations.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/internal/rest/api.annotations.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/internal/rest/api.swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/internal/rest/api.swagger.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/matches/cancel_match_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/matches/cancel_match_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/matches/close_match_sales_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/matches/close_match_sales_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/matches/create_match_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/matches/create_match_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/matches/get_match_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/matches/get_match_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/matches/get_upcoming_matches_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/matches/get_upcoming_matches_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/matches/get_user_upcoming_matches_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/matches/get_user_upcoming_matches_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/matches/matches_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/matches/matches_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/matches/open_match_sales_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/matches/open_match_sales_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/matches/postpone_match_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/matches/postpone_match_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/matches/search_matches_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/matches/search_matches_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/matches/update_match_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/matches/update_match_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/season_tickets/create_season_ticket_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/season_tickets/create_season_ticket_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/season_tickets/renew_season_ticket_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/season_tickets/renew_season_ticket_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/season_tickets/season_tickets_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/season_tickets/season_tickets_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/stadiums/create_stadium_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/stadiums/create_stadium_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/stadiums/get_sector_availability_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/stadiums/get_sector_availability_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/stadiums/get_stadium_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/stadiums/get_stadium_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/stadiums/stadiums_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/stadiums/stadiums_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/stadiums/update_sector_pricing_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/stadiums/update_sector_pricing_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/tickets/cancel_ticket_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/tickets/cancel_ticket_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/tickets/get_ticket_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/tickets/get_ticket_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/tickets/get_user_tickets_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/tickets/get_user_tickets_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/tickets/refund_ticket_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/tickets/refund_ticket_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/tickets/tickets_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/tickets/tickets_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketsclient/tickets/transfer_ticket_responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketsclient/tickets/transfer_ticket_responses.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketspb/api.pb.gw.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketspb/api.pb.gw.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketspb/common.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketspb/common.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketspb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketspb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketspb/mock_tickets_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketspb/mock_tickets_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketspb/mock_tickets_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketspb/mock_tickets_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tickets/ticketspb/mock_unsafe_tickets_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../tickets/ticketspb/mock_unsafe_tickets_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../users/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../users/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../users/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users/internal/domain/mock_middleman_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../users/internal/domain/mock_middleman_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users/internal/domain/mock_token_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../users/internal/domain/mock_token_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users/internal/domain/mock_user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../users/internal/domain/mock_user_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users/internal/rest/api.openapi.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../users/internal/rest/api.openapi.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users/internal/rest/api.swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/../users/internal/rest/api.swagger.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users/usersclient/user/user_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../users/usersclient/user/user_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users/userspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../users/userspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users/userspb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../users/userspb/events.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users/userspb/mock_unsafe_users_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../users/userspb/mock_unsafe_users_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users/userspb/mock_users_service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/../users/userspb/mock_users_service_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users/userspb/mock_users_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../users/userspb/mock_users_service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vectors/vectorspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../vectors/vectorspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wishlists/internal/application/mock_app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../wishlists/internal/application/mock_app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wishlists/internal/application/mock_commands.go" beforeDir="false" afterPath="$PROJECT_DIR$/../wishlists/internal/application/mock_commands.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wishlists/internal/application/mock_queries.go" beforeDir="false" afterPath="$PROJECT_DIR$/../wishlists/internal/application/mock_queries.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wishlists/internal/domain/mock_catalog_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../wishlists/internal/domain/mock_catalog_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wishlists/internal/domain/mock_middleman_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../wishlists/internal/domain/mock_middleman_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wishlists/internal/domain/mock_product_cache_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../wishlists/internal/domain/mock_product_cache_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wishlists/internal/domain/mock_product_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../wishlists/internal/domain/mock_product_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wishlists/internal/domain/mock_wishlist_item_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../wishlists/internal/domain/mock_wishlist_item_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wishlists/internal/domain/mock_wishlist_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../wishlists/internal/domain/mock_wishlist_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wishlists/wishlistspb/api.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../wishlists/wishlistspb/api.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wishlists/wishlistspb/events.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../wishlists/wishlistspb/events.pb.go" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="CBHtR6kJ" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="31E8weZYb9ugdkDMso10Oq8N2ck" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.rust.reset.selective.auto.import": "true",
+    "git-widget-placeholder": "prm",
+    "last_opened_file_path": "/home/szymon/classified/rust-streams",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
+    "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
+    "org.rust.first.attach.projects": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9dacc86b-626a-46b3-adde-9b2e6eb2fab6" name="Changes" comment="" />
+      <created>1755078111260</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1755078111260</updated>
+      <workItem from="1755078112548" duration="3153000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

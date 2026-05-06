@@ -1,0 +1,71 @@
+import { 
+  User, 
+  Package, 
+  Heart, 
+  Settings, 
+  Building, 
+  BarChart, 
+  ShoppingBag,
+  LayoutDashboard,
+  Users,
+  Shield,
+  Cog,
+  MessageSquare,
+  Bell,
+  CreditCard,
+  TrendingUp,
+  HelpCircle,
+  ShoppingCart,
+  Mail,
+  Activity,
+  FileText,
+  Tag,
+  Eye
+} from 'lucide-react';
+
+export const roleMenuItems = {
+  customer: [
+    { id: 'profile', label: 'My Profile', icon: User, href: '/profile' },
+    { id: 'orders', label: 'My Orders', icon: Package, href: '/orders' },
+    { id: 'wishlist', label: 'My Wishlists', icon: Heart, href: '/wishlist' },
+    { id: 'basket', label: 'My Basket', icon: ShoppingCart, href: '/cart' },
+    { id: 'offers', label: 'My Offers', icon: TrendingUp, href: '/offers' },
+    { id: 'messages', label: 'Messages', icon: MessageSquare, href: '/messages' },
+    { id: 'reviews', label: 'My Reviews', icon: MessageSquare, href: '/reviews' },
+    { id: 'activity', label: 'Activity History', icon: Activity, href: '/activity' },
+    { id: 'notifications', label: 'Notifications', icon: Bell, href: '/notifications' },
+    { id: 'support', label: 'Support', icon: HelpCircle, href: '/support' },
+    { id: 'newsletter', label: 'Newsletter', icon: Mail, href: '/newsletter' },
+    { id: 'settings', label: 'Settings', icon: Settings, href: '/settings' }
+  ],
+  business: [
+    { id: 'dashboard', label: 'Business Dashboard', icon: LayoutDashboard, href: '/business/dashboard' },
+    { id: 'profile', label: 'Business Profile', icon: Building, href: '/business/profile' },
+    { id: 'products', label: 'My Products', icon: Package, href: '/business/products' },
+    { id: 'orders', label: 'Order Management', icon: ShoppingBag, href: '/business/orders' },
+    { id: 'offers', label: 'Offer Management', icon: TrendingUp, href: '/business/offers' },
+    { id: 'invoices', label: 'Invoices', icon: CreditCard, href: '/business/invoices' },
+    { id: 'shipping', label: 'Shipping', icon: Package, href: '/business/shipping' },
+    { id: 'posts', label: 'Blog Posts', icon: FileText, href: '/business/posts' },
+    { id: 'analytics', label: 'Sales Analytics', icon: BarChart, href: '/business/analytics' },
+    { id: 'reviews', label: 'Customer Reviews', icon: MessageSquare, href: '/business/reviews' },
+    { id: 'messages', label: 'Messages', icon: MessageSquare, href: '/business/messages' },
+    { id: 'settings', label: 'Business Settings', icon: Settings, href: '/business/settings' }
+  ],
+  admin: [
+    { id: 'dashboard', label: 'Admin Dashboard', icon: LayoutDashboard, href: '/admin/dashboard' },
+    { id: 'users', label: 'User Management', icon: Users, href: '/admin/users' },
+    { id: 'products', label: 'Product Moderation', icon: Shield, href: '/admin/products' },
+    { id: 'services', label: 'Services Moderation', icon: Shield, href: '/admin/services' },
+    { id: 'posts', label: 'Posts Moderation', icon: Shield, href: '/admin/posts' },
+    { id: 'categories', label: 'Categories', icon: Tag, href: '/admin/categories' },
+    { id: 'orders', label: 'All Orders', icon: ShoppingBag, href: '/admin/orders' },
+    { id: 'payments', label: 'Payments', icon: CreditCard, href: '/admin/payments' },
+    { id: 'analytics', label: 'Platform Analytics', icon: BarChart, href: '/admin/analytics' },
+    { id: 'activity', label: 'User Activity', icon: Activity, href: '/admin/activity' },
+    { id: 'support', label: 'Support Tickets', icon: HelpCircle, href: '/admin/support' },
+    { id: 'newsletters', label: 'Newsletters', icon: Mail, href: '/admin/newsletters' },
+    { id: 'media', label: 'Media Library', icon: Eye, href: '/admin/media' },
+    { id: 'settings', label: 'System Settings', icon: Cog, href: '/admin/settings' }
+  ]
+};

@@ -1,0 +1,67 @@
+/* MinNav.module.css */
+.nav {
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+
+.navContainer {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.navList {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+/* Desktop styles */
+@media (min-width: 769px) {
+    .nav {
+        border-bottom: 1px solid #eaeaea;
+    }
+
+    /* Dark theme for desktop nav */
+    @media (prefers-color-scheme: dark) {
+        .nav {
+            border-bottom: 1px solid var(--gray-700, #374151);
+        }
+    }
+
+    .navList {
+        gap: 8px;
+        height: 70px;
+    }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .navContainer {
+        padding: 0 8px;
+    }
+
+    .navList {
+        justify-content: space-around;
+        overflow-x: auto;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+        padding: 0 4px;
+    }
+
+    .navList::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    }
+}
+
+/* Small mobile screens */
+@media (max-width: 580px) {
+    .navList {
+        height: 50px;
+    }
+}

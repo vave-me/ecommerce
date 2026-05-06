@@ -1,0 +1,59 @@
+{
+  "name": "@vaveme/core-api-modules",
+  "version": "1.0.0",
+  "description": "Core API modules for Vaveme platform",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "type-check": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "jwt-decode": "^4.0.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "@tanstack/react-query": "^5.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@types/jest": "^29.0.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "rollup": "^4.0.0",
+    "rollup-plugin-dts": "^6.0.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "ts-jest": "^29.0.0",
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "api",
+    "vaveme",
+    "client",
+    "axios"
+  ],
+  "author": "Vaveme Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vaveme/core-api-modules.git"
+  }
+}

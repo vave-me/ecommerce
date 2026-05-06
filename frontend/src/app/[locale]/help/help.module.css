@@ -1,0 +1,354 @@
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--highlight-start), var(--highlight-end));
+    border-radius: 16px;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto 1rem;
+    line-height: 1.6;
+}
+
+.searchContainer {
+    margin-bottom: 3rem;
+}
+
+.searchWrapper {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+}
+
+.searchInput {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--input-bg);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(var(--accent-color-rgb), 0.1);
+}
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.categoryCard {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.categoryCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--highlight-start);
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.categoryTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.categoryDescription {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.faqSection {
+    margin-bottom: 4rem;
+}
+
+.faqTitle {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.faqList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faqItem {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.faqQuestion {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.125rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.faqQuestion:hover {
+    background: rgba(var(--accent-color-rgb), 0.05);
+}
+
+.faqAnswer {
+    padding: 0 1.5rem 1.5rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.contactSection {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contactCard {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.contactIcon {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.contactTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.contactText {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.contactButton {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--accent-color);
+    color: white;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.contactButton:hover {
+    background: var(--accent-color-hover);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .header {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .categories {
+        grid-template-columns: 1fr;
+    }
+
+    .categoryCard {
+        padding: 1.5rem;
+    }
+
+    .faqQuestion {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    .faqAnswer {
+        padding: 0 1rem 1rem;
+    }
+
+    .contactCard {
+        padding: 1.5rem;
+    }
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background: var(--gray-900);
+        color: var(--gray-50);
+    }
+
+    .header {
+        background: linear-gradient(135deg, var(--gray-800), var(--gray-700));
+        border: 1px solid var(--gray-700);
+    }
+
+    .title {
+        color: var(--gray-50);
+    }
+
+    .subtitle {
+        color: var(--gray-300);
+    }
+
+    .searchIcon {
+        color: var(--gray-400);
+    }
+
+    .searchInput {
+        background: var(--gray-800);
+        border-color: var(--gray-700);
+        color: var(--gray-50);
+    }
+
+    .searchInput:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
+    }
+
+    .searchInput::placeholder {
+        color: var(--gray-400);
+    }
+
+    .categoryCard {
+        background: var(--gray-800);
+        border-color: var(--gray-700);
+    }
+
+    .categoryCard:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        border-color: var(--gray-600);
+    }
+
+    .iconWrapper {
+        background: var(--gray-700);
+        color: var(--primary-color);
+    }
+
+    .categoryTitle {
+        color: var(--gray-50);
+    }
+
+    .categoryDescription {
+        color: var(--gray-300);
+    }
+
+    .faqTitle {
+        color: var(--gray-50);
+    }
+
+    .faqItem {
+        background: var(--gray-800);
+        border-color: var(--gray-700);
+    }
+
+    .faqQuestion {
+        color: var(--gray-50);
+    }
+
+    .faqQuestion:hover {
+        background: rgba(var(--primary-color-rgb), 0.1);
+    }
+
+    .faqAnswer {
+        color: var(--gray-300);
+    }
+
+    .contactCard {
+        background: var(--gray-800);
+        border-color: var(--gray-700);
+    }
+
+    .contactIcon {
+        color: var(--primary-color);
+    }
+
+    .contactTitle {
+        color: var(--gray-50);
+    }
+
+    .contactText {
+        color: var(--gray-300);
+    }
+
+    .contactButton {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    .contactButton:hover {
+        background: var(--primary-color-hover);
+    }
+} 

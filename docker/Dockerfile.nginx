@@ -1,0 +1,11 @@
+# docker/Dockerfile.nginx (SIMPLIFIED)
+FROM nginx:alpine
+
+# Configuration will be mounted via Kubernetes ConfigMap
+# No COPY instruction needed here
+
+# Expose the port Nginx will listen on (as defined in the ConfigMap)
+EXPOSE 8080
+
+# Default command to run Nginx in the foreground
+CMD ["nginx", "-g", "daemon off;"]

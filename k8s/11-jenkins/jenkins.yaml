@@ -1,0 +1,370 @@
+# --- jenkins-rbac.yaml (CORRECTED) ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: jenkins-controller-sa
+  namespace: jenkins # Must be in the Jenkins namespace
+  labels:
+    app.kubernetes.io/name: jenkins
+    app.kubernetes.io/component: controller
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: jenkins-deployer-role
+rules:
+  - apiGroups: [""] # Core API group
+    resources: ["namespaces", "services", "secrets", "configmaps", "persistentvolumeclaims", "serviceaccounts", "pods", "pods/log", "pods/exec"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["apps"]
+    resources: ["deployments", "statefulsets", "replicasets"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["batch"]
+    resources: ["jobs", "cronjobs"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["networking.k8s.io"]
+    resources: ["ingresses"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  # --- ADDED RULE for Traefik Middlewares ---
+  - apiGroups: ["traefik.io"]
+    resources: ["middlewares"] # Add other Traefik CRDs if Jenkins manages them (e.g., ingressroutes, tlsoptions)
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  # --- END ADDED RULE ---
+  # --- ADDED RULE for Cert-Manager ---
+  - apiGroups: [ "cert-manager.io" ]
+    resources: [ "certificates", "certificaterequests", "issuers", "clusterissuers" ] # Add other cert-manager resources if needed
+    verbs: [ "get", "list", "watch", "create", "update", "patch", "delete" ] # Full permissions needed by 'apply'
+  # --- END ADDED RULE ---
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: jenkins-deployer-binding
+subjects:
+  - kind: ServiceAccount
+    name: jenkins-controller-sa # Name of the ServiceAccount created above
+    namespace: jenkins         # Namespace of the ServiceAccount
+roleRef:
+  kind: ClusterRole
+  name: jenkins-deployer-role # Name of the ClusterRole created above
+  apiGroup: rbac.authorization.k8s.io
+---
+# --- jenkins-namespace.yaml ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jenkins
+---
+# --- jenkins-casc-configmap.yaml ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jenkins-casc-config
+  namespace: jenkins
+data:
+  jenkins.yaml: |
+    jenkins:
+      systemMessage: "Jenkins configured via JCasC for Middleman K8s Deployment."
+      numExecutors: 2
+      scmCheckoutRetryCount: 3
+      mode: NORMAL
+      securityRealm:
+        local:
+          allowsSignup: false
+          enableCaptcha: false
+          users:
+            - id: "${JENKINS_ADMIN_ID:-admin}"
+              password: "${ADMIN_PASSWORD_CRED}"
+      authorizationStrategy:
+        globalMatrix:
+          permissions:
+            - "Overall/Administer:${JENKINS_ADMIN_ID:-admin}"
+            - "Overall/Read:authenticated"
+            - "Overall/Administer:authenticated"
+            - "Job/Build:authenticated"
+            - "Job/Read:authenticated"
+            - "Job/Workspace:authenticated"
+    unclassified:
+      location:
+        url: "${JENKINS_URL}"
+    credentials:
+      system:
+        domainCredentials:
+          - credentials:
+              - string:
+                  scope: GLOBAL
+                  id: "ADMIN_PASSWORD_CRED"
+                  secret: "${ENV_ADMIN_PASSWORD}"
+                  description: "Jenkins Admin User Password (from ENV)"
+              - basicSSHUserPrivateKey:
+                  scope: GLOBAL
+                  id: "git-ssh-key"
+                  username: "git"
+                  description: "SSH private key for GitHub access (from ENV)"
+                  privateKeySource:
+                    directEntry:
+                      privateKey: "${SSH_PRIVATE_KEY}"
+              - usernamePassword:
+                  scope: GLOBAL
+                  id: "registry-sfx-markt-de-creds"
+                  username: "${REGISTRY_USER}"
+                  password: "${REGISTRY_PASS}"
+                  description: "Credentials for Docker Registry (registry.sfx-markt.com)"
+              - file:
+                  scope: GLOBAL
+                  id: "kubeconfig-secret"
+                  fileName: "kubeconfig"
+                  secretBytes: "${KUBECONFIG_SECRET_CONTENT}"
+                  description: "Kubernetes config file (from ENV KUBECONFIG_SECRET_CONTENT, base64 encoded)"
+    tool:
+      git:
+        installations:
+          - name: "Default"
+            home: "git"
+    jobs:
+      - script: >
+          pipelineJob('Middleman-CI-CD') {
+            description('Main CI/CD pipeline for Middleman microservices deployment to Kubernetes.')
+            definition {
+              cpsScm {
+                scm {
+                  git {
+                    remote {
+                      url('git@github.com:exampleuser/classified.git')
+                      credentials('git-ssh-key')
+                    }
+                    branch('*/sfc')
+                  }
+                }
+                scriptPath('Jenkinsfile')
+              }
+            }
+            parameters {
+              choiceParam {
+                  name('SERVICE')
+                  choices(['all', 'activity', 'users', 'products', 'baskets', 'ordering', 'payments', 'search', 'notifications', 'comments', 'media', 'messages', 'categories', 'geocoding', 'mailer', 'newsletters', 'offers', 'posts', 'properties', 'services', 'shipping', 'support', 'vehicles', 'wishlists', 'deals', 'scheduler','following', 'reviews',  'frontend', 'reverse-proxy'])
+                  description('Service to build/deploy (or "all")')
+              }
+              choiceParam {
+                  name('ENVIRONMENT')
+                  choices(['development', 'testing', 'staging', 'production'])
+                  description('Target environment (informational, can be used to select K8s manifests)')
+              }
+              stringParam {
+                  name('TAG')
+                  defaultValue('build-${BUILD_NUMBER}')
+                  description('Docker image tag (default: build-${BUILD_NUMBER} set in Jenkinsfile)')
+                  trim(true)
+              }
+              booleanParam {
+                  name('RUN_TESTS')
+                  defaultValue(true)
+                  description('Run tests for the selected service (if applicable)')
+              }
+              booleanParam {
+                  name('PUSH_IMAGE')
+                  defaultValue(true)
+                  description('Push Docker image(s) to registry')
+              }
+              booleanParam {
+                  name('DEPLOY')
+                  defaultValue(true)
+                  description('Deploy the service(s) to Kubernetes using kubectl')
+              }
+              stringParam {
+                  name('KUBECONFIG_CREDENTIAL_ID')
+                  defaultValue('')
+                  description('Optional: Jenkins credential ID for kubeconfig file (Secret File type)')
+                  trim(true)
+              }
+               stringParam {
+                  name('REGISTRY_CREDENTIAL_ID')
+                  defaultValue('registry-sfx-markt-de-creds')
+                  description('Jenkins credential ID for registry.sfx-markt.com (Username/Password type)')
+                  trim(true)
+              }
+            }
+          }
+---
+# --- jenkins-pvc.yaml ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jenkins-pvc
+  namespace: jenkins
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 50Gi
+---
+# --- jenkins-deployment.yaml ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-controller
+  namespace: jenkins
+  labels:
+    app.kubernetes.io/name: jenkins
+    app.kubernetes.io/component: controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: jenkins
+      app.kubernetes.io/component: controller
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: jenkins
+        app.kubernetes.io/component: controller
+    spec:
+      serviceAccountName: jenkins-controller-sa # Use the ServiceAccount from RBAC
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+      containers:
+        - name: jenkins
+          # Use your custom Jenkins image
+          image: registry.sfx-markt.de/middleman-jenkins-custom:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http-port
+              containerPort: 8080
+            - name: jnlp-port
+              containerPort: 50000
+          livenessProbe:
+            httpGet:
+              path: "/login"
+              port: 8080
+            initialDelaySeconds: 90
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: "/login"
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: /var/jenkins_home
+            - name: jenkins-casc-config
+              mountPath: /var/jenkins_home/casc_configs
+              readOnly: true
+            - name: docker-sock
+              mountPath: /var/run/docker.sock
+          env:
+            - name: CASC_JENKINS_CONFIG
+              value: "/var/jenkins_home/casc_configs"
+            - name: JAVA_OPTS
+              value: "-Djenkins.install.runSetupWizard=false -Djenkins.security.ApiTokenProperty.adminCanGenerateNewTokens=true"
+            - name: JENKINS_OPTS
+              value: "--httpPort=8080"
+            - name: JENKINS_ADMIN_ID
+              value: "admin"
+            - name: ADMIN_PASSWORD_CRED
+              value: "Jp8$mK9#vN2qL5wX"
+            - name: ENV_ADMIN_PASSWORD
+              value: "Jp8$mK9#vN2qL5wX"
+            - name: JENKINS_URL
+              value: "https://jenkins.sfx-markt.de/"
+            - name: SSH_PRIVATE_KEY
+              value: ""
+            - name: REGISTRY_USER
+              value: "simongladmin"
+            - name: REGISTRY_PASS
+              value: "kljasd89aknsmdfl69an3896alakhdfa"
+            - name: KUBECONFIG_SECRET_CONTENT
+              value: ""
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: 2000m
+              memory: 3Gi
+      volumes:
+        - name: jenkins-home
+          persistentVolumeClaim:
+            claimName: jenkins-pvc
+        - name: jenkins-casc-config
+          configMap:
+            name: jenkins-casc-config
+        - name: docker-sock
+          hostPath:
+            path: /var/run/docker.sock
+            type: Socket
+---
+# --- jenkins-service.yaml ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-controller-service
+  namespace: jenkins
+  labels:
+    app.kubernetes.io/name: jenkins
+    app.kubernetes.io/component: controller
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: http-port
+      protocol: TCP
+      name: http
+    - port: 50000
+      targetPort: jnlp-port
+      protocol: TCP
+      name: jnlp
+  selector:
+    app.kubernetes.io/name: jenkins
+    app.kubernetes.io/component: controller
+---
+# --- jenkins-ingress.yaml ---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jenkins-ingress
+  namespace: jenkins
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    # Increase body size for file uploads
+    traefik.ingress.kubernetes.io/router.middlewares: jenkins-headers@kubernetescrd
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - jenkins.sfx-markt.de
+      secretName: jenkins-tls
+  rules:
+    - host: jenkins.sfx-markt.de
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: jenkins-controller-service
+                port:
+                  number: 8080
+---
+# --- jenkins-middleware.yaml ---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: headers
+  namespace: jenkins
+spec:
+  headers:
+    customRequestHeaders:
+      X-Forwarded-Proto: "https"
+    customResponseHeaders:
+      X-Content-Type-Options: "nosniff"
+      X-Frame-Options: "SAMEORIGIN"

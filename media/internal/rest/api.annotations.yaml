@@ -1,0 +1,71 @@
+type: google.api.Service
+config_version: 3
+
+http:
+  rules:
+    - selector: mediapb.MediaService.CreateMedia
+      post: /api/media
+      body: "*"
+    - selector: mediapb.MediaService.UpdateMedia
+      post: /api/media/update
+      body: "*"
+
+    - selector: mediapb.MediaService.AddImage
+      post: /api/media/image
+      body: "*"
+    - selector: mediapb.MediaService.AddVideo
+      post: /api/media/video
+      body: "*"
+
+    - selector: mediapb.MediaService.GetAllVideos
+      get: /api/media/videos
+
+    - selector: mediapb.MediaService.GetMedia
+      get: /api/media/{media_id}
+
+    - selector: mediapb.MediaService.GetMediaByItem
+      get: /api/media/item/{item_id}
+
+
+    - selector: mediapb.MediaService.GetAllItemImages
+      get: /api/media/item/{item_id}/image
+
+    - selector: mediapb.MediaService.GetAllImagesByAuthor
+      get: /api/media/image/author/{user_id}
+
+    - selector: mediapb.MediaService.GetAllVideosByAuthor
+      get: /api/media/video/author/{user_id}
+
+    - selector: mediapb.MediaService.GetAllItemVideos
+      get: /api/media/item/{item_id}/video
+
+    - selector: mediapb.MediaService.GetAllMediaImages
+      get: /api/media/{media_id}/image
+
+    - selector: mediapb.MediaService.GetAllMediaVideos
+      get: /api/media/{media_id}/video
+
+    - selector: mediapb.MediaService.RemoveMedia
+      delete: /api/media/{media_id}
+
+    - selector: mediapb.MediaService.RemoveImage
+      delete: /api/media/{media_id}/image/{image_id}
+
+    - selector: mediapb.MediaService.RemoveVideo
+      delete: /api/media/{media_id}/video/{video_id}
+      
+    # Bulk Import Endpoints
+    - selector: mediapb.MediaService.StartBulkImport
+      post: /api/media/import
+      body: "*"
+      
+    - selector: mediapb.MediaService.AddImportBatch
+      post: /api/media/import/{session_id}/batch
+      body: "*"
+      
+    - selector: mediapb.MediaService.GetImportStatus
+      get: /api/media/import/{session_id}
+      
+    - selector: mediapb.MediaService.CancelImport
+      post: /api/media/import/{session_id}/cancel
+      body: "*"

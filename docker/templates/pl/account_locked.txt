@@ -1,0 +1,28 @@
+SECURITY ALERT: Your {{.AppName}} Account Has Been Temporarily Locked
+
+Hello {{.FirstName}},
+
+We've detected unusual activity on your account and have temporarily locked it for your protection.
+
+The lock was triggered for the following reason:
+{{.LockReason}}
+
+Details of the recent login attempt:
+- Time: {{.AttemptTime}}
+- Location: {{.AttemptLocation}}
+- IP Address: {{.AttemptIP}}
+- Device: {{.AttemptDevice}}
+
+If this was you, you can unlock your account immediately by visiting:
+{{.UnlockURL}}
+
+If this wasn't you, please contact our support team immediately at {{.SupportEmail}} to report this unauthorized attempt.
+
+For added security, we recommend regularly updating your password and enabling two-factor authentication in your security settings:
+{{.SecuritySettingsURL}}
+
+Thanks,
+The {{.AppName}} Security Team
+
+---
+© {{.CurrentYear}} {{.CompanyName}}. All rights reserved. 

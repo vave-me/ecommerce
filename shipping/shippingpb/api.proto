@@ -1,0 +1,236 @@
+syntax = "proto3";
+
+package shippingpb;
+
+import "google/protobuf/timestamp.proto";
+
+service ShippingService {
+  // Commands
+  rpc CreateShipping(CreateShippingRequest) returns (CreateShippingResponse) {};
+  rpc CancelShipment(CancelShipmentRequest) returns (CancelShipmentResponse) {};
+  rpc SchedulePickup(SchedulePickupRequest) returns (SchedulePickupResponse) {};
+  rpc StartShipment(StartShipmentRequest) returns (StartShipmentResponse) {};
+  rpc UpdateShipmentStatus(UpdateShipmentStatusRequest) returns (UpdateShipmentStatusResponse) {};
+  rpc AssignCarrier(AssignCarrierRequest) returns (AssignCarrierResponse) {};
+  rpc MarkShipmentAsDelivered(MarkShipmentAsDeliveredRequest) returns (MarkShipmentAsDeliveredResponse) {};
+  rpc ReturnShipment(ReturnShipmentRequest) returns (ReturnShipmentResponse) {};
+  
+  // Queries
+  rpc GetShipment(GetShipmentRequest) returns (GetShipmentResponse) {};
+  rpc ListShipments(ListShipmentsRequest) returns (ListShipmentsResponse) {};
+  rpc TrackShipping(TrackShippingRequest) returns (TrackShippingResponse) {};
+  rpc GetShipmentHistory(GetShipmentHistoryRequest) returns (GetShipmentHistoryResponse) {};
+  rpc GetLabel(GetLabelRequest) returns (GetLabelResponse) {};
+  rpc GetRates(GetRatesRequest) returns (GetRatesResponse) {};
+}
+
+message Shipping {
+  string id = 1;
+  string product_id = 2;
+  string tracking_number = 3;
+  string label_url = 4;
+  string sender_name = 5;
+  string sender_address = 6;
+  string receiver_name = 7;
+  string receiver_address = 8;
+  string weight = 9;
+  string dimensions = 10;
+  string service_type = 11;
+  string status = 12;
+  string carrier_id = 13;
+  string carrier_name = 14;
+  google.protobuf.Timestamp created_at = 15;
+  google.protobuf.Timestamp updated_at = 16;
+  google.protobuf.Timestamp pickup_scheduled_at = 17;
+  google.protobuf.Timestamp delivered_at = 18;
+  google.protobuf.Timestamp cancelled_at = 19;
+  string order_id = 20;
+  string basket_id = 21;
+}
+
+
+message CreateShippingRequest{
+  string product_id = 1;
+  string order_id = 2;
+  string basket_id = 3;
+  string tracking_number = 4;
+  string label_url = 5;
+  string sender_name = 6;
+  string sender_address = 7;
+  string receiver_name = 8;
+  string receiver_address = 9;
+  string weight = 10;
+  string dimensions = 11;
+  string service_types = 12;
+}
+
+message CreateShippingResponse{
+  string id = 1;
+}
+
+message TrackShippingRequest{
+  string tracking_number = 1;
+}
+
+message TrackShippingResponse{
+  Shipping shipping = 1;
+}
+
+// Cancel Shipment
+message CancelShipmentRequest {
+  string id = 1;
+  string reason = 2;
+}
+
+message CancelShipmentResponse {
+  bool success = 1;
+}
+
+// Schedule Pickup
+message SchedulePickupRequest {
+  string id = 1;
+  google.protobuf.Timestamp pickup_time = 2;
+  string instructions = 3;
+}
+
+message SchedulePickupResponse {
+  string pickup_confirmation_number = 1;
+}
+
+// Start Shipment
+message StartShipmentRequest {
+  string id = 1;
+}
+
+message StartShipmentResponse {
+  bool success = 1;
+}
+
+// Update Shipment Status
+message UpdateShipmentStatusRequest {
+  string id = 1;
+  string status = 2;
+  string location = 3;
+  string notes = 4;
+}
+
+message UpdateShipmentStatusResponse {
+  bool success = 1;
+}
+
+// Assign Carrier
+message AssignCarrierRequest {
+  string id = 1;
+  string carrier_id = 2;
+  string carrier_name = 3;
+}
+
+message AssignCarrierResponse {
+  bool success = 1;
+}
+
+// Mark as Delivered
+message MarkShipmentAsDeliveredRequest {
+  string id = 1;
+  string signed_by = 2;
+  google.protobuf.Timestamp delivery_time = 3;
+  string proof_of_delivery_url = 4;
+}
+
+message MarkShipmentAsDeliveredResponse {
+  bool success = 1;
+}
+
+// Return Shipment
+message ReturnShipmentRequest {
+  string id = 1;
+  string reason = 2;
+  string return_tracking_number = 3;
+}
+
+message ReturnShipmentResponse {
+  string return_shipment_id = 1;
+}
+
+// Get Shipment
+message GetShipmentRequest {
+  string id = 1;
+}
+
+message GetShipmentResponse {
+  Shipping shipping = 1;
+}
+
+// List Shipments
+message ListShipmentsRequest {
+  int32 limit = 1;
+  int32 offset = 2;
+  string status = 3;
+  string product_id = 4;
+  string order_id = 5;
+  string carrier_id = 6;
+  google.protobuf.Timestamp start_date = 7;
+  google.protobuf.Timestamp end_date = 8;
+}
+
+message ListShipmentsResponse {
+  repeated Shipping shipments = 1;
+  int32 total = 2;
+}
+
+// Get Shipment History
+message ShipmentEvent {
+  string id = 1;
+  string shipment_id = 2;
+  string event_type = 3;
+  string status = 4;
+  string location = 5;
+  string description = 6;
+  google.protobuf.Timestamp timestamp = 7;
+}
+
+message GetShipmentHistoryRequest {
+  string id = 1;
+}
+
+message GetShipmentHistoryResponse {
+  repeated ShipmentEvent events = 1;
+}
+
+// Get Label
+message GetLabelRequest {
+  string id = 1;
+  string format = 2; // pdf, png, zpl
+}
+
+message GetLabelResponse {
+  bytes label_data = 1;
+  string content_type = 2;
+}
+
+// Get Rates
+message GetRatesRequest {
+  string sender_postal_code = 1;
+  string sender_country_code = 2;
+  string receiver_postal_code = 3;
+  string receiver_country_code = 4;
+  float weight = 5;
+  float length = 6;
+  float width = 7;
+  float height = 8;
+  string service_type = 9;
+}
+
+message Rate {
+  string service_type = 1;
+  string service_name = 2;
+  float amount = 3;
+  string currency = 4;
+  int32 estimated_days = 5;
+  google.protobuf.Timestamp estimated_delivery = 6;
+}
+
+message GetRatesResponse {
+  repeated Rate rates = 1;
+}
+

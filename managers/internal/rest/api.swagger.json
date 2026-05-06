@@ -1,0 +1,1786 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "managerspb/common_manager.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ManagersService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/managers": {
+      "post": {
+        "summary": "Manager Management (Internal/Admin only)",
+        "operationId": "ManagersService_CreateManager",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbCreateManagerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbCreateManagerRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ManagersService"
+        ]
+      },
+      "put": {
+        "summary": "Update Manager Configuration",
+        "operationId": "UpdateManagerConfiguration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbUpdateManagerConfigurationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbUpdateManagerConfigurationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/managers/activate": {
+      "post": {
+        "summary": "Activate a new manager",
+        "operationId": "activateManager",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbActivateManagerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbActivateManagerRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/managers/all": {
+      "post": {
+        "summary": "Retrieve active managers",
+        "operationId": "getManagers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbGetManagersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbGetManagersRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/managers/conversations": {
+      "post": {
+        "summary": "Get conversation by ID",
+        "operationId": "getConversation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbGetConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbGetConversationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Conversation"
+        ]
+      }
+    },
+    "/api/managers/conversations/archive": {
+      "post": {
+        "summary": "Archive conversation",
+        "operationId": "archiveConversation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbArchiveConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbArchiveConversationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Conversation"
+        ]
+      }
+    },
+    "/api/managers/conversations/chat": {
+      "post": {
+        "summary": "Chat within conversation context",
+        "operationId": "chatWithConversation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbChatWithConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbChatWithConversationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Conversation"
+        ]
+      }
+    },
+    "/api/managers/conversations/context": {
+      "put": {
+        "summary": "Update conversation context",
+        "operationId": "updateConversationContext",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbUpdateConversationContextResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbUpdateConversationContextRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Conversation"
+        ]
+      }
+    },
+    "/api/managers/conversations/create": {
+      "post": {
+        "summary": "Create new conversation (user from JWT)",
+        "operationId": "createConversation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbCreateConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbCreateConversationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Conversation"
+        ]
+      }
+    },
+    "/api/managers/conversations/messages": {
+      "post": {
+        "summary": "Get conversation messages",
+        "operationId": "getConversationMessages",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbGetConversationMessagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbGetConversationMessagesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Conversation"
+        ]
+      }
+    },
+    "/api/managers/conversations/messages/add": {
+      "post": {
+        "summary": "Add message to conversation",
+        "operationId": "addMessageToConversation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbAddMessageToConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbAddMessageToConversationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Message"
+        ]
+      }
+    },
+    "/api/managers/conversations/user": {
+      "post": {
+        "summary": "Get user conversations (user from JWT)",
+        "operationId": "getUserConversations",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbGetUserConversationsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbGetUserConversationsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Conversation"
+        ]
+      }
+    },
+    "/api/managers/conversations/{conversationId}": {
+      "delete": {
+        "summary": "Delete conversation",
+        "operationId": "deleteConversation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbDeleteConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Conversation"
+        ]
+      },
+      "put": {
+        "summary": "Update conversation",
+        "operationId": "updateConversation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbUpdateConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagersServiceUpdateConversationBody"
+            }
+          }
+        ],
+        "tags": [
+          "Conversation"
+        ]
+      }
+    },
+    "/api/managers/deactivate": {
+      "post": {
+        "summary": "Deactivate active managers",
+        "operationId": "deactivateManager",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbDeactivateManagerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbDeactivateManagerRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/managers/input/document": {
+      "post": {
+        "summary": "Process Document Input and Execute Document Analysis",
+        "operationId": "processDocumentInput",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbProcessDocumentInputResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbProcessDocumentInputRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Input"
+        ]
+      }
+    },
+    "/api/managers/input/image": {
+      "post": {
+        "summary": "Process Image Input and Execute Vision Analysis",
+        "operationId": "processImageInput",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbProcessImageInputResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbProcessImageInputRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Input"
+        ]
+      }
+    },
+    "/api/managers/input/speech": {
+      "post": {
+        "summary": "Process Speech Input and Execute Tools",
+        "operationId": "processSpeechInput",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbProcessSpeechInputResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbProcessSpeechInputRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Input"
+        ]
+      }
+    },
+    "/api/managers/input/text": {
+      "post": {
+        "summary": "Process User Text Input",
+        "operationId": "processUserInput",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbProcessUserInputResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbProcessUserInputRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Input"
+        ]
+      }
+    },
+    "/api/managers/manager": {
+      "post": {
+        "summary": "Retrieve a manager by ID",
+        "operationId": "getManager",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbGetManagerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbGetManagerRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/managers/process": {
+      "post": {
+        "summary": "Process advanced manager request",
+        "operationId": "processManagerRequestAdvanced",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbProcessManagerRequestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/managerspbProcessManagerRequestRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Chat"
+        ]
+      }
+    },
+    "/api/managers/stats": {
+      "get": {
+        "summary": "Get conversation statistics (user from JWT)",
+        "operationId": "getConversationStats",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/managerspbGetConversationStatsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Conversation"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ManagersServiceUpdateConversationBody": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "Update Conversation (Frontend-expected endpoint)"
+    },
+    "managerspbActivateManagerRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "managerspbActivateManagerResponse": {
+      "type": "object"
+    },
+    "managerspbAddMessageToConversationRequest": {
+      "type": "object",
+      "properties": {
+        "conversationId": {
+          "type": "string"
+        },
+        "managerId": {
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/definitions/managerspbMessageRole"
+        },
+        "content": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "Add Message to Conversation"
+    },
+    "managerspbAddMessageToConversationResponse": {
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "type": "string"
+        }
+      }
+    },
+    "managerspbArchiveConversationRequest": {
+      "type": "object",
+      "properties": {
+        "conversationId": {
+          "type": "string"
+        }
+      },
+      "title": "Archive Conversation"
+    },
+    "managerspbArchiveConversationResponse": {
+      "type": "object"
+    },
+    "managerspbChatWithConversationRequest": {
+      "type": "object",
+      "properties": {
+        "managerId": {
+          "type": "string"
+        },
+        "conversationId": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "maxHistoryMessages": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Optional: limit history sent to LLM"
+        }
+      },
+      "title": "Chat with Conversation (Enhanced Chat with History)"
+    },
+    "managerspbChatWithConversationResponse": {
+      "type": "object",
+      "properties": {
+        "response": {
+          "type": "string"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/managerspbManagerAction"
+          }
+        },
+        "confidence": {
+          "type": "number",
+          "format": "double"
+        },
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "messageId": {
+          "type": "string",
+          "title": "ID of the response message"
+        }
+      }
+    },
+    "managerspbConversation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "managerId": {
+          "type": "string"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/managerspbConversationMessage"
+          }
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "Conversation entity - shared between API and events"
+    },
+    "managerspbConversationMessage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "conversationId": {
+          "type": "string"
+        },
+        "managerId": {
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/definitions/managerspbMessageRole"
+        },
+        "content": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "actionsTaken": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/managerspbManagerAction"
+          }
+        }
+      },
+      "title": "Message in a conversation"
+    },
+    "managerspbConversationStats": {
+      "type": "object",
+      "properties": {
+        "totalConversations": {
+          "type": "string",
+          "format": "int64"
+        },
+        "activeConversations": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalMessages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "messagesToday": {
+          "type": "string",
+          "format": "int64"
+        },
+        "messagesThisWeek": {
+          "type": "string",
+          "format": "int64"
+        },
+        "messagesThisMonth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "firstConversationAt": {
+          "type": "string"
+        },
+        "lastConversationAt": {
+          "type": "string"
+        },
+        "avgMessagesPerConversation": {
+          "type": "number",
+          "format": "double"
+        },
+        "mostUsedManagerId": {
+          "type": "string"
+        }
+      },
+      "title": "Conversation Statistics - shared between API and events"
+    },
+    "managerspbCreateConversationRequest": {
+      "type": "object",
+      "properties": {
+        "managerId": {
+          "type": "string"
+        },
+        "initialContext": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "Create Conversation"
+    },
+    "managerspbCreateConversationResponse": {
+      "type": "object",
+      "properties": {
+        "conversationId": {
+          "type": "string"
+        }
+      }
+    },
+    "managerspbCreateManagerRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/managerspbManagerType"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/managerspbManagerCapability"
+          }
+        },
+        "temperature": {
+          "type": "number",
+          "format": "double"
+        },
+        "maxTokens": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "systemPrompt": {
+          "type": "string"
+        }
+      },
+      "title": "Create Manager Request"
+    },
+    "managerspbCreateManagerResponse": {
+      "type": "object",
+      "properties": {
+        "managerId": {
+          "type": "string"
+        }
+      }
+    },
+    "managerspbDeactivateManagerRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "managerspbDeactivateManagerResponse": {
+      "type": "object"
+    },
+    "managerspbDeleteConversationResponse": {
+      "type": "object"
+    },
+    "managerspbGetConversationMessagesRequest": {
+      "type": "object",
+      "properties": {
+        "conversationId": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Get Conversation Messages"
+    },
+    "managerspbGetConversationMessagesResponse": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/managerspbConversationMessage"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "managerspbGetConversationRequest": {
+      "type": "object",
+      "properties": {
+        "conversationId": {
+          "type": "string"
+        }
+      },
+      "title": "Get Conversation"
+    },
+    "managerspbGetConversationResponse": {
+      "type": "object",
+      "properties": {
+        "conversation": {
+          "$ref": "#/definitions/managerspbConversation"
+        }
+      }
+    },
+    "managerspbGetConversationStatsResponse": {
+      "type": "object",
+      "properties": {
+        "stats": {
+          "$ref": "#/definitions/managerspbConversationStats"
+        }
+      }
+    },
+    "managerspbGetManagerRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "title": "Get Manager Request"
+    },
+    "managerspbGetManagerResponse": {
+      "type": "object",
+      "properties": {
+        "manager": {
+          "$ref": "#/definitions/managerspbManager"
+        }
+      }
+    },
+    "managerspbGetManagersRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "managerspbGetManagersResponse": {
+      "type": "object",
+      "properties": {
+        "managers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/managerspbManager"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "managerspbGetUserConversationsRequest": {
+      "type": "object",
+      "properties": {
+        "activeOnly": {
+          "type": "boolean"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Get User Conversations"
+    },
+    "managerspbGetUserConversationsResponse": {
+      "type": "object",
+      "properties": {
+        "conversations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/managerspbConversation"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "managerspbManager": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/managerspbManagerCapability"
+          }
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "model": {
+          "type": "string"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "double"
+        },
+        "maxTokens": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "systemPrompt": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/managerspbManagerType"
+        }
+      },
+      "title": "Manager entity - shared between API and events"
+    },
+    "managerspbManagerAction": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "endpoint": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "title": "Common action message"
+    },
+    "managerspbManagerCapability": {
+      "type": "string",
+      "enum": [
+        "ASSISTANT_MANAGEMENT",
+        "USER_INTERACTION",
+        "DATA_ANALYSIS",
+        "LOCATION_SERVICES",
+        "AUTHENTICATION",
+        "PUBLIC_API_ACCESS",
+        "JAILBREAK_RESISTANT",
+        "SCOPE_ENFORCEMENT",
+        "DATA_RETRIEVAL",
+        "SEARCH_AND_FILTER",
+        "PRIVATE_API_ACCESS",
+        "USER_DATA_ACCESS",
+        "TOKEN_MANAGEMENT",
+        "DATA_MASKING",
+        "AUDIT_LOGGING",
+        "TEXT_GENERATION",
+        "CODE_GENERATION",
+        "WEB_SEARCH"
+      ],
+      "default": "ASSISTANT_MANAGEMENT"
+    },
+    "managerspbManagerType": {
+      "type": "string",
+      "enum": [
+        "STANDARD",
+        "ADMIN",
+        "BUSINESS",
+        "SUPPORT",
+        "SCHEDULER"
+      ],
+      "default": "STANDARD",
+      "title": "Manager type enum"
+    },
+    "managerspbMessageRole": {
+      "type": "string",
+      "enum": [
+        "USER",
+        "ASSISTANT",
+        "SYSTEM"
+      ],
+      "default": "USER",
+      "title": "Message role enum"
+    },
+    "managerspbProcessDocumentInputRequest": {
+      "type": "object",
+      "properties": {
+        "managerId": {
+          "type": "string"
+        },
+        "documentData": {
+          "type": "string",
+          "format": "byte",
+          "description": "Raw document data (direct upload)",
+          "title": "Document input options - use either document_data OR document_url"
+        },
+        "documentUrl": {
+          "type": "string",
+          "title": "URL to document (public or signed URL)"
+        },
+        "documentFormat": {
+          "type": "string",
+          "description": "pdf, docx, csv, xlsx, txt, etc."
+        },
+        "analysisType": {
+          "type": "string",
+          "description": "extract_text, analyze_structure, summarize, etc."
+        },
+        "userPrompt": {
+          "type": "string",
+          "title": "User's specific request about the document"
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "requestType": {
+          "type": "string"
+        }
+      },
+      "title": "Process Document Input Request"
+    },
+    "managerspbProcessDocumentInputResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "extractedContent": {
+          "type": "string",
+          "title": "Extracted text/data from document"
+        },
+        "analysisResult": {
+          "type": "string",
+          "title": "Analysis result summary"
+        },
+        "message": {
+          "type": "string",
+          "title": "AI manager response"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Additional metadata (pages, size, etc.)"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/managerspbManagerAction"
+          }
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "format": "double"
+        },
+        "processingConfidence": {
+          "type": "number",
+          "format": "double",
+          "title": "Document processing confidence"
+        },
+        "wordCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Word count of extracted content"
+        },
+        "pageCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Number of pages (for documents)"
+        }
+      }
+    },
+    "managerspbProcessImageInputRequest": {
+      "type": "object",
+      "properties": {
+        "managerId": {
+          "type": "string"
+        },
+        "imageData": {
+          "type": "string",
+          "format": "byte",
+          "title": "Raw image data (direct upload)"
+        },
+        "imageUrl": {
+          "type": "string",
+          "title": "URL to image (public or signed URL)"
+        },
+        "imageFormat": {
+          "type": "string",
+          "description": "jpeg, png, webp, gif, etc."
+        },
+        "analysisType": {
+          "type": "string",
+          "description": "describe, ocr, objects, etc."
+        },
+        "userPrompt": {
+          "type": "string",
+          "title": "User's specific request about the image"
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "requestType": {
+          "type": "string"
+        }
+      },
+      "title": "Process Image Input Request"
+    },
+    "managerspbProcessImageInputResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "analysisResult": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/managerspbManagerAction"
+          }
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "format": "double"
+        },
+        "analysisConfidence": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "managerspbProcessManagerRequestRequest": {
+      "type": "object",
+      "properties": {
+        "managerId": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "managerspbProcessManagerRequestResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/managerspbManagerAction"
+          }
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "format": "double"
+        },
+        "managerId": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "managerspbProcessSpeechInputRequest": {
+      "type": "object",
+      "properties": {
+        "managerId": {
+          "type": "string"
+        },
+        "audioData": {
+          "type": "string",
+          "format": "byte"
+        },
+        "audioFormat": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "requestType": {
+          "type": "string"
+        }
+      },
+      "title": "Process Speech Input Request"
+    },
+    "managerspbProcessSpeechInputResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "transcribedText": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/managerspbManagerAction"
+          }
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "format": "double"
+        },
+        "transcriptionConfidence": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "managerspbProcessUserInputRequest": {
+      "type": "object",
+      "properties": {
+        "managerId": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "requestType": {
+          "type": "string"
+        }
+      },
+      "title": "Process User Request"
+    },
+    "managerspbProcessUserInputResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/managerspbManagerAction"
+          }
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "managerspbUpdateConversationContextRequest": {
+      "type": "object",
+      "properties": {
+        "conversationId": {
+          "type": "string"
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "Update Conversation Context"
+    },
+    "managerspbUpdateConversationContextResponse": {
+      "type": "object"
+    },
+    "managerspbUpdateConversationResponse": {
+      "type": "object",
+      "properties": {
+        "conversation": {
+          "$ref": "#/definitions/managerspbConversation"
+        }
+      }
+    },
+    "managerspbUpdateManagerConfigurationRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "double"
+        },
+        "maxTokens": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "systemPrompt": {
+          "type": "string"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/managerspbManagerCapability"
+          }
+        }
+      }
+    },
+    "managerspbUpdateManagerConfigurationResponse": {
+      "type": "object"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

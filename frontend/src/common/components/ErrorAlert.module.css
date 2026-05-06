@@ -1,0 +1,55 @@
+/* common/components/ErrorAlert.module.css */
+
+.errorAlert {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Vertically align icon and text */
+    gap: 0.75rem; /* Space between icon and text (12px) */
+    padding: 0.875rem 1rem; /* Padding inside the alert (14px 16px) */
+    margin-bottom: 1.5rem; /* Space below the alert (24px) */
+    border-radius: 0.5rem; /* Rounded corners (8px) */
+
+    background-color: #fee2e2; /* Light red background */
+    color: #b91c1c; /* Dark red text color (Tailwind red-800) */
+    border: 1px solid #fecaca; /* Slightly darker red border (Tailwind red-300) */
+
+    font-size: 0.9375rem; /* Text size (15px) */
+    font-weight: 500; /* Medium font weight */
+    line-height: 1.4; /* Adjust line height for readability */
+}
+
+/* Style the SVG icon specifically if needed */
+.errorAlert svg {
+    flex-shrink: 0; /* Prevent icon from shrinking */
+    /* The icon color can inherit, or be set specifically: */
+    /* color: #ef4444; */ /* Tailwind red-500 */
+}
+
+/* Ensure long messages wrap */
+.errorAlert span {
+    word-break: break-word;
+}
+
+/* ================================
+   DARK THEME SUPPORT
+================================ */
+
+@media (prefers-color-scheme: dark) {
+    /* ============= ERROR ALERT ============= */
+    .errorAlert {
+        background-color: var(--gray-800);
+        color: var(--danger);
+        border-color: var(--danger);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ============= ERROR ICON ============= */
+    .errorAlert svg {
+        color: var(--danger);
+        filter: brightness(1.1);
+    }
+
+    /* ============= ERROR TEXT ============= */
+    .errorAlert span {
+        color: var(--gray-50);
+    }
+}

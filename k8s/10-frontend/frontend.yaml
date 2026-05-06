@@ -1,0 +1,142 @@
+# ──────────────────────────────────────────────────────────
+# Namespace (create once)
+# ──────────────────────────────────────────────────────────
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: my-project
+---
+# ──────────────────────────────────────────────────────────
+# Deployment
+# ──────────────────────────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: my-project
+  labels:
+    app: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: registry.sfx-markt.de/frontend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: API_URL
+              value: "https://api.sfx-markt.de"
+            - name: NEXT_PUBLIC_API_BASE_URL
+              value: "https://api.sfx-markt.de/api"
+            - name: NEXT_PUBLIC_GOOGLE_CLIENT_ID
+              value: 160985644847-mo00jp8skr83i1ekjaurkdeu5t41lahe.apps.googleusercontent.com
+            - name: NEXT_NATS_SERVERS
+              value: 'wss://nats-ws.sfx-markt.de'
+            - name: NEXT_NATS_CM_NAME
+              value: 'comments.AddComment'
+            - name: NEXT_NATS_SM_NAME
+              value: 'messenger.SendMessage'
+            - name: OTEL_SERVICE_NAME
+              value: "frontend"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://otel-collector.observability.svc.cluster.local:4318"
+            - name: OTEL_EXPORTER_OTLP_INSECURE
+              value: "true"
+            - name: OTEL_TRACES_EXPORTER
+              value: "otlp"
+            - name: OTEL_METRICS_EXPORTER
+              value: "otlp"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu:  "500m"
+              memory: "512Mi"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1001
+            runAsGroup: 1001
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+      # If your registry.sfx-markt.de requires login, uncomment and create a secret first:
+      # imagePullSecrets:
+      #   - name: regcred
+---
+# ──────────────────────────────────────────────────────────
+# Service
+# ──────────────────────────────────────────────────────────
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: my-project
+  labels:
+    app: frontend
+spec:
+  type: ClusterIP
+  selector:
+    app: frontend
+  ports:
+    - name: http          # Service port name must match Ingress backend
+      port: 80            # Cluster‑internal port
+      targetPort: http    # Targets containerPort 3000 (named "http")
+---
+# ──────────────────────────────────────────────────────────
+# Ingress  (Traefik + Cert‑Manager)
+# ──────────────────────────────────────────────────────────
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend-ingress
+  namespace: my-project
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - sfx-markt.de
+        - www.sfx-markt.de
+      secretName: sfx-markt-de-tls # Ensure this secret is managed by cert-manager
+  rules:
+    - host: sfx-markt.de
+      http:
+        paths:
+          - path: / # Route all paths for this host to the frontend service
+            pathType: Prefix # Use Prefix for standard web app routing
+            backend:
+              service:
+                name: frontend # Matches the Service name
+                port:
+                  name: http # Matches the Service port name (which maps to port 80)
+    - host: www.sfx-markt.de # Handle www subdomain
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  name: http

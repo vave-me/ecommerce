@@ -1,0 +1,840 @@
+/* ===== ACTIVITY PAGE - CLEAN MINIMAL DESIGN ===== */
+/* Aligned with Header and HorizontalFilters - professional and compact */
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 16px;
+    min-height: 100vh;
+    background: #f8fafc;
+}
+
+/* ===== CLEAN HEADER SECTION ===== */
+.header {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titleSection {
+    flex: 1;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    color: #111827;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    line-height: 1.2;
+}
+
+.title svg {
+    width: 24px;
+    height: 24px;
+    color: #6b7280;
+    flex-shrink: 0;
+}
+
+.unreadBadge {
+    background: #dc2626;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 12px;
+    min-width: 16px;
+    text-align: center;
+    margin-left: 6px;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: #6b7280;
+    margin: 4px 0 0 0;
+    font-weight: 400;
+}
+
+.headerActions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.refreshButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.refreshButton:hover:not(:disabled) {
+    background: #f8fafc;
+    border-color: #6b7280;
+}
+
+.refreshButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.markAllButton {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border: 1px solid #059669;
+    border-radius: 8px;
+    background: #ecfdf5;
+    color: #059669;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.markAllButton:hover {
+    background: #d1fae5;
+    border-color: #047857;
+    color: #047857;
+}
+
+/* ===== CLEAN FILTER BAR ===== */
+.filterBar {
+    background: #ffffff;
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.searchContainer {
+    position: relative;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: #9ca3af;
+    z-index: 1;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 8px 12px 8px 36px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #ffffff;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #111827;
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.searchInput::placeholder {
+    color: #9ca3af;
+}
+
+.filterControls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filterSelect {
+    padding: 8px 12px;
+    padding-right: 32px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #ffffff;
+    color: #111827;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+    min-width: 120px;
+}
+
+.filterSelect:hover {
+    border-color: #6b7280;
+    background: #f8fafc;
+}
+
+.filterSelect:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.clearFiltersButton {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.clearFiltersButton:hover {
+    background: #f8fafc;
+    border-color: #6b7280;
+    color: #374151;
+}
+
+/* ===== CLEAN CONTENT AREA ===== */
+.content {
+    position: relative;
+}
+
+.activitiesList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ===== CLEAN ACTIVITY ITEM ===== */
+.activityItem {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.activityItem:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: #d1d5db;
+    transform: translateY(-1px);
+}
+
+.activityItem.unread {
+    background: #fefffe;
+    border-left: 3px solid #3b82f6;
+    padding-left: 13px;
+}
+
+.activityItem.read {
+    opacity: 0.8;
+}
+
+.activityIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: #f3f4f6;
+    border-radius: 8px;
+    color: #6b7280;
+    flex-shrink: 0;
+}
+
+.activityItem.unread .activityIcon {
+    background: #eff6ff;
+    color: #3b82f6;
+}
+
+.activityContent {
+    flex: 1;
+    min-width: 0;
+}
+
+.activityHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    gap: 8px;
+}
+
+.activityType {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.activityTime {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #9ca3af;
+    white-space: nowrap;
+}
+
+.activityMessage {
+    font-size: 14px;
+    color: #111827;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+}
+
+.activityItem.read .activityMessage {
+    color: #6b7280;
+}
+
+.activityTarget {
+    margin-top: 6px;
+}
+
+.targetItem {
+    font-size: 12px;
+    color: #6b7280;
+    padding: 4px 8px;
+    background: #f3f4f6;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.activityActions {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.actionButton {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.actionButton:hover {
+    background: #f8fafc;
+    border-color: #6b7280;
+    color: #374151;
+}
+
+.readButton {
+    color: #3b82f6;
+    border-color: #bfdbfe;
+    background: #eff6ff;
+}
+
+.readButton:hover {
+    background: #dbeafe;
+    border-color: #93c5fd;
+}
+
+.removeButton {
+    color: #dc2626;
+    border-color: #fecaca;
+    background: #fef2f2;
+}
+
+.removeButton:hover {
+    background: #fee2e2;
+    border-color: #fca5a5;
+}
+
+/* ===== CLEAN STATE COMPONENTS ===== */
+.loadingState,
+.emptyState,
+.errorState,
+.loginRequired {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+    min-height: 400px;
+}
+
+.loadingSpinner {
+    margin-bottom: 16px;
+}
+
+.spinIcon {
+    animation: spin 1s linear infinite;
+}
+
+.emptyIcon,
+.errorIcon {
+    width: 48px;
+    height: 48px;
+    color: #9ca3af;
+    margin-bottom: 16px;
+}
+
+.errorIcon {
+    color: #ef4444;
+}
+
+.emptyState h3,
+.errorState h3,
+.loginRequired h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 8px 0;
+}
+
+.emptyState p,
+.errorState p,
+.loginRequired p,
+.loadingState p {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.5;
+    margin: 0 0 16px 0;
+}
+
+.retryButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.retryButton:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+}
+
+/* ===== UTILITY CLASSES ===== */
+.spinning {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+    .container {
+        padding: 16px;
+    }
+
+    .activitiesList {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 12px;
+    }
+
+    .header {
+        padding: 16px;
+        margin-bottom: 16px;
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .titleSection {
+        text-align: center;
+    }
+
+    .title {
+        font-size: 18px;
+        justify-content: center;
+    }
+
+    .headerActions {
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .filterBar {
+        padding: 12px;
+        margin-bottom: 16px;
+    }
+
+    .filterControls {
+        gap: 8px;
+    }
+
+    .filterSelect {
+        min-width: auto;
+        flex: 1;
+    }
+
+    .activityItem {
+        padding: 12px;
+    }
+
+    .activityIcon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .activityHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .activityTime {
+        align-self: flex-end;
+    }
+
+    .loadingState,
+    .emptyState,
+    .errorState,
+    .loginRequired {
+        padding: 40px 16px;
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 8px;
+    }
+
+    .header {
+        padding: 12px;
+    }
+
+    .title {
+        font-size: 16px;
+    }
+
+    .subtitle {
+        font-size: 12px;
+    }
+
+    .filterBar {
+        padding: 8px;
+    }
+
+    .refreshButton,
+    .markAllButton,
+    .clearFiltersButton {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .searchInput,
+    .filterSelect {
+        font-size: 13px;
+    }
+
+    .activityItem {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .activityIcon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .activityMessage {
+        font-size: 13px;
+    }
+
+    .loadingState,
+    .emptyState,
+    .errorState,
+    .loginRequired {
+        padding: 30px 12px;
+        min-height: 250px;
+    }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+    .refreshButton,
+    .markAllButton,
+    .clearFiltersButton,
+    .actionButton,
+    .activityItem,
+    .retryButton {
+        transition: none;
+    }
+
+    .activityItem:hover,
+    .retryButton:hover {
+        transform: none;
+    }
+
+    .spinning,
+    .spinIcon {
+        animation: none;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .header,
+    .filterBar,
+    .activityItem {
+        border: 2px solid #000000;
+    }
+
+    .refreshButton,
+    .markAllButton,
+    .clearFiltersButton,
+    .actionButton,
+    .retryButton {
+        border: 2px solid #000000;
+    }
+
+    .markAllButton,
+    .retryButton {
+        background: #000000;
+        color: #ffffff;
+    }
+}
+
+/* ===== FOCUS STATES ===== */
+.refreshButton:focus-visible,
+.markAllButton:focus-visible,
+.searchInput:focus-visible,
+.filterSelect:focus-visible,
+.clearFiltersButton:focus-visible,
+.actionButton:focus-visible,
+.retryButton:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* ===== DARK THEME SUPPORT ===== */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background: #111827;
+        color: #f3f4f6;
+    }
+
+    .header,
+    .filterBar,
+    .activityItem {
+        background: #1f2937;
+        border-color: #374151;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .title {
+        color: #f3f4f6;
+    }
+
+    .title svg {
+        color: #9ca3af;
+    }
+
+    .subtitle {
+        color: #9ca3af;
+    }
+
+    .refreshButton,
+    .clearFiltersButton {
+        background: #374151;
+        border-color: #4b5563;
+        color: #d1d5db;
+    }
+
+    .refreshButton:hover:not(:disabled),
+    .clearFiltersButton:hover {
+        background: #4b5563;
+        border-color: #6b7280;
+        color: #f3f4f6;
+    }
+
+    .markAllButton {
+        background: rgba(5, 150, 105, 0.1);
+        border-color: #059669;
+        color: #34d399;
+    }
+
+    .markAllButton:hover {
+        background: rgba(5, 150, 105, 0.2);
+        border-color: #047857;
+        color: #10b981;
+    }
+
+    .searchIcon {
+        color: #6b7280;
+    }
+
+    .searchInput,
+    .filterSelect {
+        background: #374151;
+        border-color: #4b5563;
+        color: #f3f4f6;
+    }
+
+    .searchInput:focus,
+    .filterSelect:focus {
+        background: #374151;
+        border-color: #3b82f6;
+    }
+
+    .searchInput::placeholder {
+        color: #6b7280;
+    }
+
+    .filterSelect:hover {
+        background: #4b5563;
+        border-color: #6b7280;
+    }
+
+    .activityItem.unread {
+        background: #1f2937;
+        border-left-color: #3b82f6;
+    }
+
+    .activityIcon {
+        background: #374151;
+        color: #9ca3af;
+    }
+
+    .activityItem.unread .activityIcon {
+        background: rgba(59, 130, 246, 0.1);
+        color: #60a5fa;
+    }
+
+    .activityType {
+        color: #9ca3af;
+    }
+
+    .activityTime {
+        color: #6b7280;
+    }
+
+    .activityMessage {
+        color: #f3f4f6;
+    }
+
+    .activityItem.read .activityMessage {
+        color: #9ca3af;
+    }
+
+    .targetItem {
+        background: #374151;
+        color: #9ca3af;
+    }
+
+    .actionButton {
+        background: #374151;
+        border-color: #4b5563;
+        color: #9ca3af;
+    }
+
+    .actionButton:hover {
+        background: #4b5563;
+        border-color: #6b7280;
+        color: #d1d5db;
+    }
+
+    .readButton {
+        background: rgba(59, 130, 246, 0.1);
+        border-color: #3b82f6;
+        color: #60a5fa;
+    }
+
+    .readButton:hover {
+        background: rgba(59, 130, 246, 0.2);
+        border-color: #2563eb;
+    }
+
+    .removeButton {
+        background: rgba(220, 38, 38, 0.1);
+        border-color: #dc2626;
+        color: #f87171;
+    }
+
+    .removeButton:hover {
+        background: rgba(220, 38, 38, 0.2);
+        border-color: #b91c1c;
+    }
+
+    .emptyIcon {
+        color: #6b7280;
+    }
+
+    .errorIcon {
+        color: #f87171;
+    }
+
+    .emptyState h3,
+    .errorState h3,
+    .loginRequired h2 {
+        color: #f3f4f6;
+    }
+
+    .emptyState p,
+    .errorState p,
+    .loginRequired p,
+    .loadingState p {
+        color: #9ca3af;
+    }
+
+    .retryButton {
+        background: #3b82f6;
+        color: #ffffff;
+    }
+
+    .retryButton:hover {
+        background: #2563eb;
+    }
+}

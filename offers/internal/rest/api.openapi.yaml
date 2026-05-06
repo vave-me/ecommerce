@@ -1,0 +1,201 @@
+openapiOptions:
+  file:
+    - file: "offerspb/api.proto"
+      option:
+        info:
+          title: Offer Management API
+          version: "1.0.0"
+          description: "API for managing offers between user-sellers and user-customers."
+        basePath: /
+  method:
+    # Offer Operations
+    - method: offerspb.OffersService.CreateOffer
+      option:
+        operationId: createOffer
+        tags:
+          - Offer
+        summary: Create a new offer
+
+
+    - method: offerspb.OffersService.GetOffer
+      option:
+        operationId: getOffer
+        tags:
+          - Offer
+        summary: Retrieve an offer
+
+
+    - method: offerspb.OffersService.ListOffers
+      option:
+        operationId: listOffers
+        tags:
+          - Offer
+        summary: List offers
+    - method: offerspb.OffersService.CreateOffer
+      option:
+        operationId: createOffer
+        tags:
+          - Offer
+        summary: Create a new offer
+
+
+    - method: offerspb.OffersService.GetOffer
+      option:
+        operationId: getOffer
+        tags:
+          - Offer
+        summary: Retrieve an offer
+
+    - method: offerspb.OffersService.ListOffers
+      option:
+        operationId: listOffers
+        tags:
+          - Offer
+        summary: List offers
+
+    # -----------------------------------------
+    # New Offer Methods
+    # -----------------------------------------
+    - method: offerspb.OffersService.ActivateOffer
+      option:
+        operationId: activateOffer
+        tags:
+          - Offer
+        summary: Activate an existing offer
+
+    - method: offerspb.OffersService.CloseOffer
+      option:
+        operationId: closeOffer
+        tags:
+          - Offer
+        summary: Close an existing offer
+
+    - method: offerspb.OffersService.AcceptOffer
+      option:
+        operationId: acceptOffer
+        tags:
+          - Offer
+        summary: Accept an existing offer by a user-customer
+
+    # -----------------------------------------
+    # BuyNow Aggregator Methods
+    # -----------------------------------------
+    - method: offerspb.OffersService.CreateBuyNow
+      option:
+        operationId: createBuyNow
+        tags:
+          - BuyNow
+        summary: Create a BuyNow aggregator for a chosen offer
+
+    - method: offerspb.OffersService.ConfirmBuyNow
+      option:
+        operationId: confirmBuyNow
+        tags:
+          - BuyNow
+        summary: Confirm a BuyNow aggregator (final purchase)
+
+    # -----------------------------------------
+    # Lease Aggregator Methods
+    # -----------------------------------------
+    - method: offerspb.OffersService.CreateLease
+      option:
+        operationId: createLease
+        tags:
+          - Lease
+        summary: Create a Lease aggregator for a chosen offer
+
+    - method: offerspb.OffersService.StartLease
+      option:
+        operationId: startLease
+        tags:
+          - Lease
+        summary: Start a lease (transition from pending to active)
+
+    - method: offerspb.OffersService.MakeLeasePayment
+      option:
+        operationId: makeLeasePayment
+        tags:
+          - Lease
+        summary: Make a monthly payment for an active lease
+
+    - method: offerspb.OffersService.ExecuteLeaseBuyout
+      option:
+        operationId: executeLeaseBuyout
+        tags:
+          - Lease
+        summary: Execute a lease buyout if allowed
+
+    - method: offerspb.OffersService.EndLease
+      option:
+        operationId: endLease
+        tags:
+          - Lease
+        summary: End a lease normally (e.g., completed)
+
+    - method: offerspb.OffersService.DefaultLease
+      option:
+        operationId: defaultLease
+        tags:
+          - Lease
+        summary: Default a lease for non-payment
+
+    # -----------------------------------------
+    # BuyBack Aggregator Methods
+    # -----------------------------------------
+    - method: offerspb.OffersService.CreateBuyBack
+      option:
+        operationId: createBuyBack
+        tags:
+          - BuyBack
+        summary: Create a BuyBack aggregator for a chosen offer
+
+    - method: offerspb.OffersService.RedeemBuyBack
+      option:
+        operationId: redeemBuyBack
+        tags:
+          - BuyBack
+        summary: Redeem a BuyBack before lock expires
+
+    - method: offerspb.OffersService.ExpireBuyBack
+      option:
+        operationId: expireBuyBack
+        tags:
+          - BuyBack
+        summary: Expire a BuyBack (lock window ends, buyer obtains item)
+
+    - method: offerspb.OffersService.CancelBuyBack
+      option:
+        operationId: cancelBuyBack
+        tags:
+          - BuyBack
+        summary: Cancel a BuyBack (if domain rules allow)
+    # -----------------------------------------
+    # Reservation Aggregator Methods
+    # -----------------------------------------
+    - method: offerspb.OffersService.CreateReservation
+      option:
+        operationId: createReservation
+        tags:
+          - Reservation
+        summary: Create a Reservation aggregator for a chosen offer
+
+    - method: offerspb.OffersService.RedeemReservation
+      option:
+        operationId: redeemReservation
+        tags:
+          - Reservation
+        summary: Redeem a Reservation before lock expires
+
+    - method: offerspb.OffersService.ExpireReservation
+      option:
+        operationId: expireReservation
+        tags:
+          - Reservation
+        summary: Expire a Reservation (lock window ends, buyer obtains item)
+
+    - method: offerspb.OffersService.CancelReservation
+      option:
+        operationId: cancelReservation
+        tags:
+          - Reservation
+        summary: Cancel a Reservation (if domain rules allow)

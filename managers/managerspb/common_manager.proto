@@ -1,0 +1,105 @@
+syntax = "proto3";
+package managerspb;
+
+// Common enums
+
+// Manager type enum
+enum ManagerType {
+  STANDARD = 0;
+  ADMIN = 1;
+  BUSINESS = 2;
+  SUPPORT = 3;
+  SCHEDULER = 4;
+}
+
+enum ManagerCapability {
+  ASSISTANT_MANAGEMENT = 0;
+  USER_INTERACTION = 1;
+  DATA_ANALYSIS = 2;
+  LOCATION_SERVICES = 3;
+  AUTHENTICATION = 4;
+  PUBLIC_API_ACCESS = 5;
+  JAILBREAK_RESISTANT = 6;
+  SCOPE_ENFORCEMENT = 7;
+  DATA_RETRIEVAL = 8;
+  SEARCH_AND_FILTER = 9;
+  PRIVATE_API_ACCESS = 10;
+  USER_DATA_ACCESS = 11;
+  TOKEN_MANAGEMENT = 12;
+  DATA_MASKING = 13;
+  AUDIT_LOGGING = 14;
+  TEXT_GENERATION = 15;
+  CODE_GENERATION = 16;
+  WEB_SEARCH = 17;
+}
+
+// Message role enum
+enum MessageRole {
+  USER = 0;
+  ASSISTANT = 1;
+  SYSTEM = 2;
+}
+
+// Common action message
+message ManagerAction {
+  string type = 1;
+  string endpoint = 2;
+  string method = 3;
+  map<string, string> parameters = 4;
+  string description = 5;
+}
+
+// Message in a conversation
+message ConversationMessage {
+  string id = 1;
+  string conversation_id = 2;
+  string manager_id = 3;
+  MessageRole role = 4;
+  string content = 5;
+  string timestamp = 6;
+  map<string, string> metadata = 7;
+  repeated ManagerAction actions_taken = 8;
+}
+
+// Manager entity - shared between API and events
+message Manager {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  repeated ManagerCapability capabilities = 4;
+  bool active = 5;
+  string model = 6;
+  double temperature = 7;
+  int32 max_tokens = 8;
+  string system_prompt = 9;
+  string created_at = 10;
+  string updated_at = 11;
+  string user_id = 12;
+  ManagerType type = 13;
+}
+
+// Conversation entity - shared between API and events
+message Conversation {
+  string id = 1;
+  string user_id = 2;
+  string manager_id = 3;
+  repeated ConversationMessage messages = 4;
+  string created_at = 5;
+  string updated_at = 6;
+  bool active = 7;
+  map<string, string> context = 8;
+}
+
+// Conversation Statistics - shared between API and events
+message ConversationStats {
+  int64 total_conversations = 1;
+  int64 active_conversations = 2;
+  int64 total_messages = 3;
+  int64 messages_today = 4;
+  int64 messages_this_week = 5;
+  int64 messages_this_month = 6;
+  string first_conversation_at = 7;
+  string last_conversation_at = 8;
+  double avg_messages_per_conversation = 9;
+  string most_used_manager_id = 10;
+}

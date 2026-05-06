@@ -1,0 +1,347 @@
+/* SuccessPage.module.css */
+
+.container {
+    max-width: 600px;
+    margin: 80px auto;
+    text-align: center;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+/* Dark theme for container */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background-color: var(--gray-800, #1f2937);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.iconWrapper {
+    color: #28a745;
+    font-size: 5em;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: rgba(40, 167, 69, 0.1);
+    margin: 0 auto 20px;
+    transition: all 0.3s ease;
+}
+
+/* Dark theme for icon wrapper */
+@media (prefers-color-scheme: dark) {
+    .iconWrapper {
+        color: var(--success, #10b981);
+        background-color: rgba(16, 185, 129, 0.2);
+    }
+}
+
+.iconWrapper:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2);
+}
+
+/* Dark theme for icon wrapper hover */
+@media (prefers-color-scheme: dark) {
+    .iconWrapper:hover {
+        box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+    }
+}
+
+.heading {
+    font-size: 2em;
+    color: #333333;
+    margin-bottom: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* Dark theme for heading */
+@media (prefers-color-scheme: dark) {
+    .heading {
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.message {
+    font-size: 1.2em;
+    color: #555555;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+}
+
+/* Dark theme for message */
+@media (prefers-color-scheme: dark) {
+    .message {
+        color: var(--gray-300, #d1d5db);
+    }
+}
+
+.orderDetails {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    margin: 20px 0;
+    text-align: left;
+}
+
+/* Dark theme for order details */
+@media (prefers-color-scheme: dark) {
+    .orderDetails {
+        background-color: var(--gray-700, #374151);
+        border: 1px solid var(--gray-600, #4b5563);
+    }
+}
+
+.orderDetails h3 {
+    margin: 0 0 12px 0;
+    color: #2c3e50;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+/* Dark theme for order details heading */
+@media (prefers-color-scheme: dark) {
+    .orderDetails h3 {
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.orderDetails p {
+    margin: 8px 0;
+    color: #6c757d;
+    font-size: 0.95em;
+}
+
+/* Dark theme for order details text */
+@media (prefers-color-scheme: dark) {
+    .orderDetails p {
+        color: var(--gray-300, #d1d5db);
+    }
+}
+
+.orderId {
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+    color: #0d6efd;
+    background-color: rgba(13, 110, 253, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    word-break: break-all;
+}
+
+/* Dark theme for order ID */
+@media (prefers-color-scheme: dark) {
+    .orderId {
+        color: var(--primary-color, #60a5fa);
+        background-color: rgba(59, 130, 246, 0.2);
+    }
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #0d6efd;
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(13, 110, 253, 0.2);
+    border: none;
+    cursor: pointer;
+    min-width: 140px;
+}
+
+/* Dark theme for button */
+@media (prefers-color-scheme: dark) {
+    .button {
+        background-color: var(--primary-color, #3b82f6);
+        box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+    }
+}
+
+.button:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
+}
+
+/* Dark theme for button hover */
+@media (prefers-color-scheme: dark) {
+    .button:hover {
+        background-color: var(--primary-color, #2563eb);
+        box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+    }
+}
+
+.button:focus {
+    outline: 2px solid rgba(13, 110, 253, 0.3);
+    outline-offset: 2px;
+}
+
+/* Dark theme for button focus */
+@media (prefers-color-scheme: dark) {
+    .button:focus {
+        outline: 2px solid rgba(59, 130, 246, 0.3);
+    }
+}
+
+.button:active {
+    transform: translateY(0);
+}
+
+.buttonSecondary {
+    background-color: #6c757d;
+    color: #ffffff;
+}
+
+/* Dark theme for secondary button */
+@media (prefers-color-scheme: dark) {
+    .buttonSecondary {
+        background-color: var(--gray-600, #4b5563);
+    }
+}
+
+.buttonSecondary:hover {
+    background-color: #5a6268;
+}
+
+/* Dark theme for secondary button hover */
+@media (prefers-color-scheme: dark) {
+    .buttonSecondary:hover {
+        background-color: var(--gray-500, #6b7280);
+    }
+}
+
+.statusBadge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 8px;
+}
+
+.statusBadge.success {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+    border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.statusBadge.processing {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.statusBadge.failed {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+/* Dark theme for status badges */
+@media (prefers-color-scheme: dark) {
+    .statusBadge.success {
+        background-color: rgba(16, 185, 129, 0.2);
+        color: var(--success, #10b981);
+        border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .statusBadge.processing {
+        background-color: rgba(245, 158, 11, 0.2);
+        color: var(--warning, #f59e0b);
+        border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .statusBadge.failed {
+        background-color: rgba(239, 68, 68, 0.2);
+        color: var(--danger, #ef4444);
+        border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        margin: 40px 20px;
+        padding: 30px;
+    }
+
+    .iconWrapper {
+        font-size: 4em;
+        width: 100px;
+        height: 100px;
+    }
+
+    .heading {
+        font-size: 1.6em;
+    }
+
+    .message {
+        font-size: 1.1em;
+    }
+
+    .buttonGroup {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .button {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        margin: 20px 16px;
+        padding: 24px;
+    }
+
+    .iconWrapper {
+        font-size: 3.5em;
+        width: 80px;
+        height: 80px;
+    }
+
+    .heading {
+        font-size: 1.4em;
+    }
+
+    .message {
+        font-size: 1em;
+    }
+
+    .button {
+        padding: 12px 24px;
+        font-size: 0.9em;
+    }
+
+    .orderDetails {
+        padding: 16px;
+    }
+}

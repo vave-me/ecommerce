@@ -1,0 +1,686 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Metric",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "MetricsService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/metrics/item/{itemId}": {
+      "get": {
+        "summary": "Item metrics",
+        "operationId": "GetItemMetric",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/metricspbGetItemMetricResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ItemMetric"
+        ]
+      }
+    },
+    "/api/metrics/items": {
+      "post": {
+        "summary": "Item metrics",
+        "operationId": "getItemsMetric",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/metricspbGetItemsMetricResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/metricspbGetItemsMetricRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ItemMetric"
+        ]
+      }
+    },
+    "/api/metrics/items/{metricType}/highest": {
+      "post": {
+        "summary": "Item metrics",
+        "operationId": "getHighestMetricsByType",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/metricspbGetItemsMetricResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "metricType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricsServiceGetHighestMetricsByTypeBody"
+            }
+          }
+        ],
+        "tags": [
+          "ItemMetric"
+        ]
+      }
+    },
+    "/api/metrics/items/{metricType}/lowest": {
+      "post": {
+        "summary": "Item metrics",
+        "operationId": "getLowestMetricsByType",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/metricspbGetItemsMetricResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "metricType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricsServiceGetLowestMetricsByTypeBody"
+            }
+          }
+        ],
+        "tags": [
+          "ItemMetric"
+        ]
+      }
+    },
+    "/api/metrics/user/{userId}": {
+      "get": {
+        "summary": "User metrics",
+        "operationId": "getUserMetric",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/metricspbGetUserMetricResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "UserMetric"
+        ]
+      }
+    },
+    "/api/metrics/{itemId}/share": {
+      "post": {
+        "summary": "Item metrics",
+        "operationId": "shareItem",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/metricspbShareItemResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricsServiceShareItemBody"
+            }
+          }
+        ],
+        "tags": [
+          "ItemMetric"
+        ]
+      }
+    },
+    "/api/metrics/{itemId}/visit": {
+      "post": {
+        "summary": "Item metrics",
+        "operationId": "visitItem",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/metricspbVisitItemResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricsServiceVisitItemBody"
+            }
+          }
+        ],
+        "tags": [
+          "ItemMetric"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "MetricsServiceGetHighestMetricsByTypeBody": {
+      "type": "object",
+      "properties": {
+        "entityTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "minPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "radius": {
+          "type": "number",
+          "format": "float"
+        },
+        "createdFrom": {
+          "type": "string"
+        },
+        "createdTo": {
+          "type": "string"
+        }
+      }
+    },
+    "MetricsServiceGetLowestMetricsByTypeBody": {
+      "type": "object",
+      "properties": {
+        "entityTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "minPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "radius": {
+          "type": "number",
+          "format": "float"
+        },
+        "createdFrom": {
+          "type": "string"
+        },
+        "createdTo": {
+          "type": "string"
+        }
+      }
+    },
+    "MetricsServiceShareItemBody": {
+      "type": "object"
+    },
+    "MetricsServiceVisitItemBody": {
+      "type": "object"
+    },
+    "metricspbGetItemMetricResponse": {
+      "type": "object",
+      "properties": {
+        "metric": {
+          "$ref": "#/definitions/metricspbItemMetric"
+        }
+      }
+    },
+    "metricspbGetItemsMetricRequest": {
+      "type": "object",
+      "properties": {
+        "itemIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Optional limit, max 150 items"
+        }
+      }
+    },
+    "metricspbGetItemsMetricResponse": {
+      "type": "object",
+      "properties": {
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/metricspbItemMetric"
+          }
+        }
+      }
+    },
+    "metricspbGetUserMetricResponse": {
+      "type": "object",
+      "properties": {
+        "metric": {
+          "$ref": "#/definitions/metricspbUserMetric"
+        }
+      }
+    },
+    "metricspbItemMetric": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "likesCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dislikesCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "commentsCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "messagesCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sharedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "addedToWishlistCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "addedToBasketCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "visitedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "reportedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "followerCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "reviewCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "ratingCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "videosCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "imagesCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "rating": {
+          "type": "string",
+          "format": "int64"
+        },
+        "category": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "mediaCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "metricspbShareItemResponse": {
+      "type": "object"
+    },
+    "metricspbUpdateItemMetricResponse": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string"
+        }
+      }
+    },
+    "metricspbUpdateUserMetricResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "metricspbUserMetric": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "likesCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dislikesCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "commentsCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "messagesCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sharedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "addedToWishlistCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "addedToBasketCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "visitedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "reportedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "followerCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "reviewCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "ratingCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "videosCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "imagesCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "rating": {
+          "type": "string",
+          "format": "int64"
+        },
+        "category": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "mediaAddedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "commentAddedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "likedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dislikedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "productsAddedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "videosAddedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "imagesAddedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "seriesAddedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "jobsAddedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "postsAddedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "vehiclesAddedCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "propertiesAddedCount": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "metricspbVisitItemResponse": {
+      "type": "object"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

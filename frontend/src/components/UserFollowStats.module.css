@@ -1,0 +1,370 @@
+/* ===== BASE CONTAINER ===== */
+.container {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* ===== STAT BUTTON ===== */
+.statButton {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+}
+
+.statButton:hover {
+    transform: translateY(-1px);
+}
+
+.statButton:active {
+    transform: translateY(0);
+}
+
+/* ===== STAT ITEM ===== */
+.statItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.statButton:hover .statItem {
+    background-color: #f3f4f6;
+}
+
+/* ===== COUNT ===== */
+.count {
+    font-weight: 700;
+    color: #111827;
+    line-height: 1;
+}
+
+/* ===== LABEL ===== */
+.label {
+    font-size: 12px;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+/* ===== ICON ===== */
+.icon {
+    color: #3b82f6;
+    margin-bottom: 2px;
+}
+
+/* ===== LOADING STATE ===== */
+.loading {
+    color: #9ca3af;
+    font-weight: 600;
+}
+
+/* ===== ERROR STATE ===== */
+.error {
+    color: #dc2626;
+    font-size: 12px;
+    text-align: center;
+    padding: 8px;
+}
+
+/* ===== SIZE VARIANTS ===== */
+.small {
+    gap: 12px;
+}
+
+.small .statItem {
+    padding: 6px 8px;
+    gap: 2px;
+}
+
+.small .count {
+    font-size: 16px;
+}
+
+.small .label {
+    font-size: 10px;
+}
+
+.small .icon {
+    width: 14px;
+    height: 14px;
+}
+
+.medium {
+    gap: 16px;
+}
+
+.medium .statItem {
+    padding: 8px 12px;
+    gap: 4px;
+}
+
+.medium .count {
+    font-size: 20px;
+}
+
+.medium .label {
+    font-size: 12px;
+}
+
+.medium .icon {
+    width: 16px;
+    height: 16px;
+}
+
+.large {
+    gap: 24px;
+}
+
+.large .statItem {
+    padding: 12px 16px;
+    gap: 6px;
+}
+
+.large .count {
+    font-size: 28px;
+}
+
+.large .label {
+    font-size: 14px;
+}
+
+.large .icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* ===== STYLE VARIANTS ===== */
+.default {
+    /* Default styling already applied above */
+}
+
+.compact {
+    gap: 8px;
+}
+
+.compact .statItem {
+    flex-direction: row;
+    gap: 6px;
+    padding: 4px 8px;
+}
+
+.compact .label {
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.card {
+    background-color: #f9fafb;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+.card .statItem {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 12px;
+}
+
+.card .statButton:hover .statItem {
+    background-color: #f8fafc;
+    border-color: #d1d5db;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .container {
+        gap: 12px;
+    }
+    
+    .large {
+        gap: 16px;
+    }
+    
+    .large .statItem {
+        padding: 10px 12px;
+    }
+    
+    .large .count {
+        font-size: 24px;
+    }
+    
+    .large .label {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        gap: 8px;
+    }
+    
+    .medium {
+        gap: 12px;
+    }
+    
+    .medium .statItem {
+        padding: 6px 10px;
+    }
+    
+    .large {
+        gap: 12px;
+    }
+    
+    .large .statItem {
+        padding: 8px 10px;
+    }
+    
+    .large .count {
+        font-size: 20px;
+    }
+}
+
+/* ===== ACCESSIBILITY ===== */
+.statButton:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+.statButton:focus:not(:focus-visible) {
+    outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .statButton {
+        transition: none;
+    }
+    
+    .statButton:hover {
+        transform: none;
+    }
+    
+    .statButton:active {
+        transform: none;
+    }
+    
+    .statItem {
+        transition: none;
+    }
+}
+
+/* ===== HIGH CONTRAST MODE ===== */
+@media (prefers-contrast: high) {
+    .statButton:hover .statItem {
+        background-color: #e5e7eb;
+        border: 1px solid #6b7280;
+    }
+    
+    .card .statItem {
+        border-width: 2px;
+    }
+    
+    .statButton:focus {
+        outline-width: 3px;
+    }
+}
+
+/* =================================================================
+   DARK THEME SUPPORT
+   ================================================================= */
+
+@media (prefers-color-scheme: dark) {
+    /* ===== BASE CONTAINER ===== */
+    .container {
+        color: #f3f4f6;
+    }
+
+    /* ===== STAT ITEM ===== */
+    .statButton:hover .statItem {
+        background-color: #374151;
+    }
+
+    /* ===== COUNT ===== */
+    .count {
+        color: #f3f4f6;
+    }
+
+    /* ===== LABEL ===== */
+    .label {
+        color: #9ca3af;
+    }
+
+    /* ===== ICON ===== */
+    .icon {
+        color: #60a5fa;
+    }
+
+    /* ===== LOADING STATE ===== */
+    .loading {
+        color: #6b7280;
+    }
+
+    /* ===== ERROR STATE ===== */
+    .error {
+        color: #ef4444;
+    }
+
+    /* ===== STYLE VARIANTS ===== */
+    .card {
+        background-color: #1f2937;
+        border-color: #374151;
+    }
+
+    .card .statItem {
+        background-color: #374151;
+        border-color: #4b5563;
+    }
+
+    .card .statButton:hover .statItem {
+        background-color: #4b5563;
+        border-color: #6b7280;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* ===== ACCESSIBILITY ===== */
+    .statButton:focus {
+        outline-color: #60a5fa;
+    }
+}
+
+/* High contrast mode support for dark theme */
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+    .statButton:hover .statItem {
+        background-color: #4b5563;
+        border: 1px solid #60a5fa;
+    }
+    
+    .card .statItem {
+        border-width: 2px;
+        border-color: #60a5fa;
+    }
+    
+    .statButton:focus {
+        outline-width: 3px;
+        outline-color: #60a5fa;
+    }
+
+    .count {
+        color: #f9fafb;
+    }
+
+    .label {
+        color: #d1d5db;
+    }
+
+    .icon {
+        color: #93c5fd;
+    }
+}

@@ -1,0 +1,165 @@
+openapiOptions:
+  file:
+    - file: "assistantspb/api.proto"
+      option:
+        info:
+          title: Assistants API
+          version: "1.0.0"
+          description: "API for managing AI assistants, conversations, and chat interactions. Uses JWT authentication - no user_id required in requests."
+        basePath: /
+
+  method:
+    # Assistant Management Operations
+    - method: assistantspb.AssistantsService.ActivateAssistant
+      option:
+        operationId: activateAssistant
+        tags:
+          - Assistant
+        summary: Activate a new assistant
+
+
+    - method: assistantspb.AssistantsService.GetAssistant
+      option:
+        operationId: getAssistant
+        tags:
+          - Assistant
+        summary: Retrieve a assistant by ID
+
+    - method: assistantspb.AssistantsService.GetAssistants
+      option:
+        operationId: getAssistants
+        tags:
+          - Assistant
+        summary: Retrieve active assistants
+
+    - method: assistantspb.AssistantsService.DeactivateAssistant
+      option:
+        operationId: deactivateAssistant
+        tags:
+          - Assistant
+        summary: Deactivate active assistants
+
+    - method: assistantspb.AssistantsService.ProcessUserInput
+      option:
+        operationId: processUserInput
+        tags:
+          - Input
+        summary: Process User Text Input
+
+    - method: assistantspb.AssistantsService.ProcessSpeechInput
+      option:
+        operationId: processSpeechInput
+        tags:
+          - Input
+        summary: Process Speech Input and Execute Tools
+
+    - method: assistantspb.AssistantsService.ProcessImageInput
+      option:
+        operationId: processImageInput
+        tags:
+          - Input
+        summary: Process Image Input and Execute Vision Analysis
+
+    - method: assistantspb.AssistantsService.ProcessDocumentInput
+      option:
+        operationId: processDocumentInput
+        tags:
+          - Input
+        summary: Process Document Input and Execute Document Analysis
+
+    - method: assistantspb.AssistantsService.UpdateAssistantConfiguration
+      option:
+        operationId: UpdateAssistantConfiguration
+        tags:
+          - Assistant
+        summary: Update Assistant Configuration
+
+
+
+
+    - method: assistantspb.AssistantsService.ProcessAssistantRequest
+      option:
+        operationId: processAssistantRequestAdvanced
+        tags:
+          - Chat
+        summary: Process advanced assistant request
+
+
+    # Conversation Management (JWT auth - no user_id in paths)
+    - method: assistantspb.AssistantsService.CreateConversation
+      option:
+        operationId: createConversation
+        tags:
+          - Conversation
+        summary: Create new conversation (user from JWT)
+
+    - method: assistantspb.AssistantsService.GetConversation
+      option:
+        operationId: getConversation
+        tags:
+          - Conversation
+        summary: Get conversation by ID
+
+    - method: assistantspb.AssistantsService.GetUserConversations
+      option:
+        operationId: getUserConversations
+        tags:
+          - Conversation
+        summary: Get user conversations (user from JWT)
+
+    - method: assistantspb.AssistantsService.GetConversationMessages
+      option:
+        operationId: getConversationMessages
+        tags:
+          - Conversation
+        summary: Get conversation messages
+
+    - method: assistantspb.AssistantsService.GetConversationStats
+      option:
+        operationId: getConversationStats
+        tags:
+          - Conversation
+        summary: Get conversation statistics (user from JWT)
+
+    - method: assistantspb.AssistantsService.ChatWithConversation
+      option:
+        operationId: chatWithConversation
+        tags:
+          - Conversation
+        summary: Chat within conversation context
+
+    - method: assistantspb.AssistantsService.UpdateConversation
+      option:
+        operationId: updateConversation
+        tags:
+          - Conversation
+        summary: Update conversation
+
+    - method: assistantspb.AssistantsService.UpdateConversationContext
+      option:
+        operationId: updateConversationContext
+        tags:
+          - Conversation
+        summary: Update conversation context
+
+    - method: assistantspb.AssistantsService.DeleteConversation
+      option:
+        operationId: deleteConversation
+        tags:
+          - Conversation
+        summary: Delete conversation
+
+    - method: assistantspb.AssistantsService.ArchiveConversation
+      option:
+        operationId: archiveConversation
+        tags:
+          - Conversation
+        summary: Archive conversation
+
+    # Message Management
+    - method: assistantspb.AssistantsService.AddMessageToConversation
+      option:
+        operationId: addMessageToConversation
+        tags:
+          - Message
+        summary: Add message to conversation

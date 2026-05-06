@@ -1,0 +1,855 @@
+/* ===== PREMIUM WISHLIST PAGE - MINIMAL & ELEGANT ===== */
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+/* ===== PREMIUM HEADER SECTION ===== */
+.header {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px 0;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.headerTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+
+.titleSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.titleIcon {
+  color: #8892a6;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.pageTitle {
+  font-size: 18px;
+  font-weight: 500;
+  color: #1a1f2e;
+  margin: 0;
+  line-height: 1.2;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.createButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #1a1f2e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.createButton:hover {
+  background: #0f1319;
+  transform: translateY(-0.5px);
+}
+
+.createButton:active {
+  transform: translateY(0);
+}
+
+/* ===== COMPACT WISHLIST SELECTOR ===== */
+.wishlistSelector {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e1e5e9;
+}
+
+/* ===== MINIMAL CREATE FORM MODAL ===== */
+.createFormOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.createForm {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.createForm h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1f2e;
+  margin: 0 0 16px 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.nameInput {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  margin-bottom: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: #ffffff;
+}
+
+.nameInput:focus {
+  outline: none;
+  border-color: #00CCBF;
+  box-shadow: 0 0 0 2px rgba(0, 204, 191, 0.15);
+}
+
+.nameInput::placeholder {
+  color: #8892a6;
+}
+
+.formActions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.submitButton {
+  background: #1a1f2e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.submitButton:hover {
+  background: #0f1319;
+}
+
+.cancelButton {
+  background: transparent;
+  color: #6b7280;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.cancelButton:hover {
+  background: #f8fafc;
+  border-color: #c7d2e7;
+}
+
+/* ===== CLEAN MAIN CONTENT ===== */
+.mainContent {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e1e5e9;
+}
+
+/* ===== MINIMAL TOOLBAR ===== */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #ffffff;
+  gap: 16px;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.searchSection {
+  flex: 1;
+  max-width: 320px;
+}
+
+.searchInput {
+  position: relative;
+  width: 100%;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8892a6;
+  pointer-events: none;
+  z-index: 1;
+  width: 18px;
+  height: 18px;
+}
+
+.searchInput input {
+  width: 100%;
+  padding: 8px 14px 8px 38px;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  background: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  color: #1a1f2e;
+}
+
+.searchInput input:focus {
+  outline: none;
+  border-color: #00CCBF;
+  box-shadow: 0 0 0 2px rgba(0, 204, 191, 0.15);
+}
+
+.searchInput input::placeholder {
+  color: #8892a6;
+}
+
+.viewControls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.viewButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #8892a6;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.viewButton:hover {
+  background: #f8fafc;
+  border-color: #c7d2e7;
+  color: #1a1f2e;
+}
+
+.viewButton.active {
+  background: #1a1f2e;
+  border-color: #1a1f2e;
+  color: white;
+}
+
+.sortSelect {
+  padding: 8px 12px;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 13px;
+  background: #ffffff;
+  color: #1a1f2e;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%238892a6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+.sortSelect:focus {
+  outline: none;
+  border-color: #00CCBF;
+  box-shadow: 0 0 0 2px rgba(0, 204, 191, 0.15);
+}
+
+/* ===== CLEAN ITEMS CONTAINER ===== */
+.itemsContainer {
+  padding: 16px;
+  background: #ffffff;
+}
+
+.itemsContainer.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.itemsContainer.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ===== CLEAN STATE COMPONENTS ===== */
+.loadingState,
+.errorState,
+.notLoggedInState,
+.emptyState,
+.noWishlistState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+  text-align: center;
+  background: #ffffff;
+  margin: 0;
+  border-radius: 12px;
+  border: 1px solid #e1e5e9;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 2px solid #e1e5e9;
+  border-top: 2px solid #00CCBF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loadingState p,
+.errorState p,
+.notLoggedInState p,
+.emptyState p,
+.noWishlistState p {
+  font-size: 14px;
+  color: #8892a6;
+  margin: 8px 0 0 0;
+  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.errorState h2,
+.notLoggedInState h2,
+.emptyState h3,
+.noWishlistState h2 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1f2e;
+  margin: 12px 0 8px 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.errorIcon,
+.heartIcon,
+.emptyIcon {
+  margin-bottom: 12px;
+  color: #8892a6;
+  width: 36px;
+  height: 36px;
+}
+
+.errorIcon {
+  color: #ef4444;
+}
+
+.heartIcon {
+  color: #8892a6;
+}
+
+.retryButton,
+.loginButton,
+.clearSearchButton,
+.exploreButton {
+  background: #1a1f2e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.retryButton:hover,
+.loginButton:hover,
+.exploreButton:hover {
+  background: #0f1319;
+  transform: translateY(-0.5px);
+}
+
+.clearSearchButton {
+  background: transparent;
+  color: #6b7280;
+  border: 1px solid #e1e5e9;
+}
+
+.clearSearchButton:hover {
+  background: #f8fafc;
+  border-color: #c7d2e7;
+  transform: none;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+  .container {
+    padding: 16px;
+  }
+
+  .itemsContainer.grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 12px;
+  }
+
+  .header {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .headerTop {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .titleSection {
+    justify-content: center;
+  }
+
+  .pageTitle {
+    font-size: 18px;
+  }
+
+  .createButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+    padding: 16px;
+  }
+
+  .searchSection {
+    max-width: none;
+  }
+
+  .viewControls {
+    justify-content: center;
+  }
+
+  .sortSelect {
+    width: 100%;
+  }
+
+  .itemsContainer {
+    padding: 16px;
+  }
+
+  .itemsContainer.grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .wishlistSelector {
+    margin-top: 16px;
+    padding-top: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 8px;
+  }
+
+  .header,
+  .toolbar,
+  .itemsContainer {
+    padding: 12px;
+  }
+
+  .pageTitle {
+    font-size: 16px;
+  }
+
+  .createButton {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .viewButton {
+    width: 32px;
+    height: 32px;
+  }
+
+  .sortSelect {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  .createForm {
+    padding: 20px;
+  }
+
+  .loadingState,
+  .errorState,
+  .notLoggedInState,
+  .emptyState,
+  .noWishlistState {
+    padding: 40px 16px;
+    margin: 12px;
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  .createButton,
+  .viewButton,
+  .retryButton,
+  .loginButton,
+  .submitButton,
+  .cancelButton,
+  .clearSearchButton,
+  .exploreButton,
+  .searchInput input,
+  .sortSelect,
+  .nameInput {
+    transition: none;
+  }
+
+  .createButton:hover,
+  .retryButton:hover,
+  .loginButton:hover {
+    transform: none;
+  }
+
+  .spinner,
+  .titleIcon {
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .container {
+    background: white;
+  }
+
+  .header,
+  .mainContent {
+    border: 2px solid black;
+  }
+
+  .createButton,
+  .viewButton.active,
+  .retryButton,
+  .loginButton,
+  .submitButton {
+    border: 2px solid black;
+  }
+
+  .viewButton {
+    border: 2px solid black;
+  }
+
+  .nameInput,
+  .searchInput input,
+  .sortSelect {
+    border: 2px solid black;
+  }
+}
+
+/* ===== FOCUS STATES ===== */
+.createButton:focus-visible,
+.viewButton:focus-visible,
+.retryButton:focus-visible,
+.loginButton:focus-visible,
+.submitButton:focus-visible,
+.cancelButton:focus-visible,
+.clearSearchButton:focus-visible,
+.exploreButton:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.nameInput:focus-visible,
+.searchInput input:focus-visible,
+.sortSelect:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* ===== DARK THEME SUPPORT ===== */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: #0f1319;
+    color: #f3f4f6;
+  }
+
+  .header,
+  .mainContent {
+    background: #1a1f2e;
+    border-color: #2a3142;
+  }
+
+  .pageTitle {
+    color: #f3f4f6;
+  }
+
+  .titleIcon {
+    color: #8892a6;
+  }
+
+  .heartIcon {
+    color: #8892a6;
+  }
+
+  .createButton {
+    background: #00CCBF;
+    color: #0f1319;
+  }
+
+  .createButton:hover {
+    background: #00b3a7;
+  }
+
+  .toolbar {
+    background: #1a1f2e;
+    border-bottom-color: #2a3142;
+  }
+
+  .searchInput input {
+    background: #0f1319;
+    border-color: #2a3142;
+    color: #f3f4f6;
+  }
+
+  .searchInput input:focus {
+    border-color: #00CCBF;
+    box-shadow: 0 0 0 2px rgba(0, 204, 191, 0.15);
+  }
+
+  .searchInput input::placeholder {
+    color: #8892a6;
+  }
+
+  .searchIcon {
+    color: #8892a6;
+  }
+
+  .viewButton {
+    background: #0f1319;
+    border-color: #2a3142;
+    color: #8892a6;
+  }
+
+  .viewButton:hover {
+    background: #1a1f2e;
+    border-color: #3d4559;
+    color: #f3f4f6;
+  }
+
+  .viewButton.active {
+    background: #00CCBF;
+    border-color: #00CCBF;
+    color: #0f1319;
+  }
+
+  .sortSelect {
+    background: #0f1319;
+    border-color: #2a3142;
+    color: #f3f4f6;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%238892a6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+
+  .sortSelect:focus {
+    border-color: #00CCBF;
+    box-shadow: 0 0 0 2px rgba(0, 204, 191, 0.15);
+  }
+
+  .itemsContainer {
+    background: #1a1f2e;
+  }
+
+  .loadingState,
+  .errorState,
+  .notLoggedInState,
+  .emptyState,
+  .noWishlistState {
+    background: #1a1f2e;
+    border-color: #2a3142;
+    color: #d1d5db;
+  }
+
+  .loadingState p,
+  .errorState p,
+  .notLoggedInState p,
+  .emptyState p,
+  .noWishlistState p {
+    color: #8892a6;
+  }
+
+  .errorState h2,
+  .notLoggedInState h2,
+  .emptyState h3,
+  .noWishlistState h2 {
+    color: #f3f4f6;
+  }
+
+  .spinner {
+    border-color: #2a3142;
+    border-top-color: #00CCBF;
+  }
+
+  .errorIcon {
+    color: #ef4444;
+  }
+
+  .emptyIcon {
+    color: #8892a6;
+  }
+
+  .retryButton,
+  .loginButton,
+  .exploreButton {
+    background: #00CCBF;
+    color: #0f1319;
+  }
+
+  .retryButton:hover,
+  .loginButton:hover,
+  .exploreButton:hover {
+    background: #00b3a7;
+  }
+
+  .clearSearchButton {
+    background: transparent;
+    color: #8892a6;
+    border-color: #2a3142;
+  }
+
+  .clearSearchButton:hover {
+    background: #1a1f2e;
+    border-color: #3d4559;
+    color: #f3f4f6;
+  }
+
+  .createFormOverlay {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .createForm {
+    background: #1a1f2e;
+    border: 1px solid #2a3142;
+  }
+
+  .createForm h3 {
+    color: #f3f4f6;
+  }
+
+  .nameInput {
+    background: #0f1319;
+    border-color: #2a3142;
+    color: #f3f4f6;
+  }
+
+  .nameInput:focus {
+    border-color: #00CCBF;
+    box-shadow: 0 0 0 2px rgba(0, 204, 191, 0.15);
+  }
+
+  .nameInput::placeholder {
+    color: #8892a6;
+  }
+
+  .submitButton {
+    background: #00CCBF;
+    color: #0f1319;
+  }
+
+  .submitButton:hover {
+    background: #00b3a7;
+  }
+
+  .cancelButton {
+    background: transparent;
+    color: #8892a6;
+    border-color: #2a3142;
+  }
+
+  .cancelButton:hover {
+    background: #0f1319;
+    border-color: #3d4559;
+    color: #f3f4f6;
+  }
+
+  .wishlistSelector {
+    border-top-color: #2a3142;
+  }
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+.itemsContainer.grid > *,
+.itemsContainer.list > * {
+  contain: layout style paint;
+}
+
+/* Remove deprecated styles */
+.pageTitle { font-size: 20px !important; font-weight: 600 !important; margin: 0 !important; }
+.loadingMessage, .errorMessage, .emptyMessage, .notLoggedInMessage, .wishlistsContainer, .wishlistsGrid, .wishlistCard, .wishlistName, .wishlistDescription, .deleteButton, .newWishlistButton, .backButton, .refreshButton, .wishlistItems, .wishlistContainer, .wishlistHeader, .wishlistTitle { display: none; }

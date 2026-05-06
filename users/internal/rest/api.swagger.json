@@ -1,0 +1,1134 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Users API",
+    "description": "API for managing users and their products.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "UsersService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/users": {
+      "get": {
+        "summary": "Get participating users",
+        "operationId": "getUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userspbGetUsersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userIds",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      },
+      "post": {
+        "summary": "Create a new user",
+        "operationId": "createUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userspbCreateUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request to create a new user.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userspbCreateUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/users/admin/add": {
+      "post": {
+        "summary": "Create a new user",
+        "operationId": "addAdmin",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userspbAddAdminResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request to add a new admin user.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userspbAddAdminRequest"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/users/clear-tokens": {
+      "post": {
+        "summary": "Invalidate user tokens",
+        "operationId": "clearTokens",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userspbClearTokensResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userspbClearTokensRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/api/users/enabled": {
+      "get": {
+        "summary": "Get participating users",
+        "operationId": "listEnabledUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userspbListEnabledUsersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/users/forgot-password": {
+      "post": {
+        "summary": "Passwort Forgot",
+        "operationId": "forgotPassword",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userspbForgotPasswordResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userspbForgotPasswordRequest"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/users/google-login": {
+      "post": {
+        "summary": "User login",
+        "operationId": "webLoginWithGoogle",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userspbLoginUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userspbWebLoginWithGoogleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/api/users/google-login/mobile": {
+      "post": {
+        "summary": "User login",
+        "operationId": "mobileLoginWithGoogle",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userspbLoginUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userspbMobileLoginWithGoogleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "summary": "User login",
+        "operationId": "loginUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userspbLoginUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userspbLoginUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/api/users/logout": {
+      "post": {
+        "summary": "User logout",
+        "operationId": "logoutUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userspbLogUserOutResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userspbLogUserOutRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/api/users/refresh-token": {
+      "post": {
+        "summary": "Refresh authentication token",
+        "operationId": "refreshAuthToken",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userspbRefreshAuthTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userspbRefreshAuthTokenRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/api/users/reset-password": {
+      "post": {
+        "summary": "Passwort reset",
+        "operationId": "resetPassword",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userspbResetPasswordResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userspbResetPasswordRequest"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "summary": "Retrieve a user by ID",
+        "operationId": "getUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userspbGetUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier of the user.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/users/{id}/base": {
+      "get": {
+        "summary": "Retrieve a user by ID",
+        "operationId": "getBaseUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userspbGetBaseUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier of the user.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/users/{id}/disable": {
+      "patch": {
+        "summary": "Disable a user account",
+        "operationId": "disableUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userspbDisableUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UsersServiceDisableUserBody"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/users/{id}/enable": {
+      "patch": {
+        "summary": "Enable a user account",
+        "operationId": "enableUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userspbEnableUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UsersServiceEnableUserBody"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/users/{id}/name": {
+      "patch": {
+        "summary": "Rename a user by ID",
+        "operationId": "renameUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userspbRenameUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UsersServiceRenameUserBody"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/users/{id}/update": {
+      "patch": {
+        "summary": "Update a user",
+        "operationId": "updateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userspbUpdateUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UsersServiceUpdateUserBody"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "UsersServiceDisableUserBody": {
+      "type": "object"
+    },
+    "UsersServiceEnableUserBody": {
+      "type": "object",
+      "properties": {
+        "verificationToken": {
+          "type": "string",
+          "title": "Optional verification token for email verification flow"
+        }
+      }
+    },
+    "UsersServiceRenameUserBody": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string"
+        }
+      },
+      "description": "Request to rename a user."
+    },
+    "UsersServiceUpdateUserBody": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "bio": {
+          "type": "string"
+        },
+        "privacy": {
+          "type": "string"
+        },
+        "background": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "userspbAddAdminRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "thumbnail": {
+          "type": "string"
+        }
+      },
+      "description": "Request to add a new admin user."
+    },
+    "userspbAddAdminResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The newly created admin's unique ID."
+        }
+      },
+      "description": "Response after successfully adding an admin."
+    },
+    "userspbBaseUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "location": {
+          "type": "string"
+        },
+        "bio": {
+          "type": "string"
+        },
+        "privacy": {
+          "type": "string"
+        },
+        "background": {
+          "type": "string"
+        }
+      }
+    },
+    "userspbClearTokensRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "tokenId": {
+          "type": "string",
+          "title": "Identifier for the token (partial)"
+        },
+        "refreshToken": {
+          "type": "string",
+          "title": "The refresh token to invalidate"
+        },
+        "reason": {
+          "type": "string",
+          "title": "Reason for clearing tokens (e.g., \"security concern\", \"user logout\")"
+        }
+      },
+      "title": "Request to explicitly clear/invalidate tokens for security reasons"
+    },
+    "userspbClearTokensResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "userspbCreateUserRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      },
+      "description": "Request to create a new user."
+    },
+    "userspbCreateUserResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The newly created user's unique ID."
+        }
+      },
+      "description": "Response after successfully creating a user."
+    },
+    "userspbDisableUserResponse": {
+      "type": "object"
+    },
+    "userspbEnableUserResponse": {
+      "type": "object"
+    },
+    "userspbForgotPasswordRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "userspbForgotPasswordResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "userspbGetBaseUserResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/userspbBaseUser",
+          "description": "User object with detailed information."
+        }
+      },
+      "description": "Response containing user details."
+    },
+    "userspbGetUserResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/userspbUser",
+          "description": "User object with detailed information."
+        }
+      },
+      "description": "Response containing user details."
+    },
+    "userspbGetUsersResponse": {
+      "type": "object",
+      "properties": {
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/userspbUser"
+          },
+          "description": "List of user objects."
+        }
+      }
+    },
+    "userspbListEnabledUsersResponse": {
+      "type": "object",
+      "properties": {
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/userspbUser"
+          }
+        }
+      }
+    },
+    "userspbLogUserOutRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "authToken": {
+          "type": "string",
+          "title": "The access token to invalidate"
+        },
+        "refreshToken": {
+          "type": "string",
+          "title": "The refresh token to invalidate"
+        }
+      }
+    },
+    "userspbLogUserOutResponse": {
+      "type": "object"
+    },
+    "userspbLoginUserRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "userspbLoginUserResponse": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "userspbMobileLoginWithGoogleRequest": {
+      "type": "object",
+      "properties": {
+        "idToken": {
+          "type": "string"
+        }
+      }
+    },
+    "userspbRefreshAuthTokenRequest": {
+      "type": "object",
+      "properties": {
+        "refreshToken": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "userspbRefreshAuthTokenResponse": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "title": "Access token"
+        },
+        "refreshToken": {
+          "type": "string",
+          "title": "New refresh token"
+        }
+      }
+    },
+    "userspbRenameUserResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/userspbUser"
+        }
+      }
+    },
+    "userspbResetPasswordRequest": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "newPassword": {
+          "type": "string"
+        }
+      }
+    },
+    "userspbResetPasswordResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "userspbUpdateUserResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "userspbUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the user."
+        },
+        "email": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string",
+          "description": "User's email address."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "User's first name."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "User's last name."
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "googleId": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "background": {
+          "type": "string"
+        },
+        "bio": {
+          "type": "string"
+        },
+        "privacy": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      },
+      "description": "Definition of a User (without password)."
+    },
+    "userspbWebLoginWithGoogleRequest": {
+      "type": "object",
+      "properties": {
+        "idToken": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

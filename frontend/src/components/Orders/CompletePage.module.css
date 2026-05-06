@@ -1,0 +1,306 @@
+/* src/features/Orders/components/CompletePage.module.css */
+
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+/* Dark theme for container */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background-color: var(--gray-800, #1f2937);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.statusIcon {
+    font-size: 50px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    transition: all 0.3s ease;
+}
+
+/* Status-specific icon colors */
+.statusIcon.succeeded {
+    color: #28a745;
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+.statusIcon.processing {
+    color: #6c757d;
+    background-color: rgba(108, 117, 125, 0.1);
+}
+
+.statusIcon.requiresPaymentMethod,
+.statusIcon.error,
+.statusIcon.noClientSecret {
+    color: #dc3545;
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+.statusIcon.requiresAction {
+    color: #ffc107;
+    background-color: rgba(255, 193, 7, 0.1);
+}
+
+.statusIcon.loading {
+    color: #0d6efd;
+    background-color: rgba(13, 110, 253, 0.1);
+}
+
+/* Dark theme for status icons */
+@media (prefers-color-scheme: dark) {
+    .statusIcon.succeeded {
+        color: var(--success, #10b981);
+        background-color: rgba(16, 185, 129, 0.2);
+    }
+
+    .statusIcon.processing {
+        color: var(--gray-400, #9ca3af);
+        background-color: rgba(156, 163, 175, 0.2);
+    }
+
+    .statusIcon.requiresPaymentMethod,
+    .statusIcon.error,
+    .statusIcon.noClientSecret {
+        color: var(--danger, #ef4444);
+        background-color: rgba(239, 68, 68, 0.2);
+    }
+
+    .statusIcon.requiresAction {
+        color: var(--warning, #f59e0b);
+        background-color: rgba(245, 158, 11, 0.2);
+    }
+
+    .statusIcon.loading {
+        color: var(--primary-color, #3b82f6);
+        background-color: rgba(59, 130, 246, 0.2);
+    }
+}
+
+.statusIcon.loading::after {
+    content: '';
+    width: 24px;
+    height: 24px;
+    border: 3px solid currentColor;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 20px 0;
+    line-height: 1.4;
+}
+
+/* Dark theme for title */
+@media (prefers-color-scheme: dark) {
+    .title {
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.message {
+    font-size: 18px;
+    color: #555555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Dark theme for message */
+@media (prefers-color-scheme: dark) {
+    .message {
+        color: var(--gray-300, #d1d5db);
+    }
+}
+
+.intentDetails {
+    font-size: 14px;
+    color: #6c757d;
+    background-color: #f8f9fa;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    margin-top: 20px;
+    font-family: 'Courier New', monospace;
+}
+
+/* Dark theme for intent details */
+@media (prefers-color-scheme: dark) {
+    .intentDetails {
+        color: var(--gray-400, #9ca3af);
+        background-color: var(--gray-700, #374151);
+        border: 1px solid var(--gray-600, #4b5563);
+    }
+}
+
+.intentId {
+    font-weight: 600;
+    color: #0d6efd;
+    word-break: break-all;
+}
+
+/* Dark theme for intent ID */
+@media (prefers-color-scheme: dark) {
+    .intentId {
+        color: var(--primary-color, #60a5fa);
+    }
+}
+
+.statusText {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.statusText.succeeded {
+    color: #28a745;
+}
+
+.statusText.processing {
+    color: #6c757d;
+}
+
+.statusText.error,
+.statusText.requiresPaymentMethod,
+.statusText.noClientSecret {
+    color: #dc3545;
+}
+
+.statusText.requiresAction {
+    color: #ffc107;
+}
+
+.statusText.loading {
+    color: #0d6efd;
+}
+
+/* Dark theme for status text */
+@media (prefers-color-scheme: dark) {
+    .statusText.succeeded {
+        color: var(--success, #10b981);
+    }
+
+    .statusText.processing {
+        color: var(--gray-400, #9ca3af);
+    }
+
+    .statusText.error,
+    .statusText.requiresPaymentMethod,
+    .statusText.noClientSecret {
+        color: var(--danger, #ef4444);
+    }
+
+    .statusText.requiresAction {
+        color: var(--warning, #f59e0b);
+    }
+
+    .statusText.loading {
+        color: var(--primary-color, #60a5fa);
+    }
+}
+
+.actionButton {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #0d6efd;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(13, 110, 253, 0.2);
+}
+
+/* Dark theme for action button */
+@media (prefers-color-scheme: dark) {
+    .actionButton {
+        background-color: var(--primary-color, #3b82f6);
+        box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+    }
+}
+
+.actionButton:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
+}
+
+/* Dark theme for action button hover */
+@media (prefers-color-scheme: dark) {
+    .actionButton:hover {
+        background-color: var(--primary-color, #2563eb);
+        box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px;
+        padding: 24px;
+    }
+
+    .statusIcon {
+        font-size: 40px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .message {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        margin: 16px;
+        padding: 20px;
+    }
+
+    .statusIcon {
+        font-size: 36px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .title {
+        font-size: 18px;
+    }
+
+    .message {
+        font-size: 14px;
+    }
+
+    .intentDetails {
+        padding: 12px;
+        font-size: 12px;
+    }
+}

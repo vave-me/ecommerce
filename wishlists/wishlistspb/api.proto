@@ -1,0 +1,121 @@
+syntax = "proto3";
+
+package wishlistspb;
+
+
+
+// WishlistService provides functionalities related to managing user wishlists and their items.
+service WishlistService {
+
+  // Creates a new wishlist for a user.
+  rpc CreateWishlist(CreateWishlistRequest) returns (CreateWishlistResponse) {}
+  rpc GetWishlist(GetWishlistRequest) returns (GetWishlistResponse) {}
+  rpc GetWishlists(GetWishlistsRequest) returns (GetWishlistsResponse) {}
+  rpc GetWishlistItems(GetWishlistItemsRequest) returns (GetWishlistItemsResponse) {}
+  rpc RemoveWishlist(RemoveWishlistRequest) returns (RemoveWishlistResponse) {}
+  rpc AddWishlistItem(AddWishlistItemRequest) returns (AddWishlistItemResponse) {}
+  rpc RemoveWishlistItem(RemoveWishlistItemRequest) returns (RemoveWishlistItemResponse) {}
+  rpc GetWishlistItem(GetWishlistItemRequest) returns (GetWishlistItemResponse) {}
+
+}
+
+
+message Wishlist {
+  string id = 1;
+  string user_id = 2;
+  string name = 3;
+  string description = 4;
+}
+
+
+message WishlistItem {
+  string id = 1;
+  string wishlist_id = 2;
+  string item_id = 3;
+  string entity_type = 4;
+  string notes = 5;
+
+}
+
+//// SubscriptionPreferences defines user preferences for wishlist notifications.
+//message WishlistPreferences {
+//  bool email_notifications = 1;          // Enable or disable email notifications.
+//  bool sms_notifications = 2;            // Enable or disable SMS notifications.
+//  bool push_notifications = 3;           // Enable or disable push notifications.
+//}
+
+// CreateWishlistRequest is the request message for creating a wishlist.
+message CreateWishlistRequest {
+  string name = 1;
+}
+
+// CreateWishlistResponse is the response message after creating a wishlist.
+message CreateWishlistResponse {
+  string id = 1;                // Unique identifier of the created wishlist.
+}
+
+// GetWishlistRequest is the request message for retrieving a wishlist.
+message GetWishlistRequest {
+  string name = 1;
+}
+
+// GetWishlistResponse is the response message for retrieving a wishlist.
+message GetWishlistResponse {
+  string wishlist_id = 1;                 // Details of the requested wishlist.
+}
+message GetWishlistsRequest {
+}
+
+// GetWishlistResponse is the response message for retrieving a wishlist.
+message GetWishlistsResponse {
+  repeated Wishlist wishlists = 1;                 // Details of the requested wishlist.
+}
+// DeleteWishlistRequest is the request message for deleting a wishlist.
+message RemoveWishlistRequest {
+  string id = 1;                // Unique identifier of the wishlist to delete.
+}
+
+// AddItemRequest is the request message for adding an item to a wishlist.
+message AddWishlistItemRequest {
+  string wishlist_id = 1;                // Unique identifier of the wishlist.
+  string item_id = 2;                 // Unique identifier of the product to add.
+  string entity_type = 3;
+  // string notes = 3;                      // Optional notes or remarks about the product.
+}
+
+// AddItemResponse is the response message after adding an item to a wishlist.
+message AddWishlistItemResponse {
+  string id = 1;                    // Unique identifier of the added item.
+}
+
+// RemoveItemRequest is the request message for removing an item from a wishlist.
+message RemoveWishlistItemRequest {
+  string wishlist_id= 1;
+  string id = 2;   // Unique identifier of the item to remove.
+}
+
+// GetItemRequest is the request message for retrieving an item from a wishlist.
+message GetWishlistItemRequest {
+  string id = 1;
+  string wishlist_id = 2;                // Unique identifier of the wishlist.
+  string item_id = 3;                    // Unique identifier of the item to retrieve.
+}
+
+// GetItemResponse is the response message for retrieving an item from a wishlist.
+message GetWishlistItemResponse {
+  WishlistItem item = 1;                 // Details of the requested item.
+}
+
+
+// GetItemRequest is the request message for retrieving an item from a wishlist.
+message GetWishlistItemsRequest {
+  string wishlist_id = 1;                // Unique identifier of the wishlist.   // Unique identifier of the item to retrieve.
+}
+
+// GetItemResponse is the response message for retrieving an item from a wishlist.
+message GetWishlistItemsResponse {
+  repeated WishlistItem items = 1;                 // Details of the requested item.
+}
+message RemoveWishlistResponse{}
+
+message RemoveWishlistItemResponse{}

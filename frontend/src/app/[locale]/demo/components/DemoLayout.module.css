@@ -1,0 +1,95 @@
+.demoLayout {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.breadcrumbs {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.75rem 2rem;
+  font-size: 0.8125rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.breadcrumbLink {
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumbLink:hover {
+  color: #334155;
+  text-decoration: none;
+}
+
+.breadcrumbSeparator {
+  color: #cbd5e1;
+}
+
+.breadcrumbCurrent {
+  color: #0f172a;
+  font-weight: 500;
+}
+
+.header {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #64748b;
+  margin: 0.75rem auto 0;
+  font-weight: 400;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.content {
+  padding: 3rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.adSection {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 3rem auto 0;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.75rem;
+  }
+  
+  .subtitle {
+    font-size: 0.9375rem;
+  }
+  
+  .header {
+    padding: 2rem 1.5rem;
+  }
+  
+  .content {
+    padding: 2rem 1.5rem;
+  }
+  
+  .breadcrumbs {
+    padding: 0.625rem 1.5rem;
+    font-size: 0.75rem;
+  }
+}

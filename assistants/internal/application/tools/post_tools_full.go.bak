@@ -1,0 +1,313 @@
+package tools
+
+import ai2 "middleman/internal/ai"
+
+func createPostTools() []ai2.Tool {
+	return []ai2.Tool{
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "post_create",
+				Description: "Create a new post with location and tags",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"post_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Unique ID for the post",
+						},
+						"name": map[string]interface{}{
+							"type":        "string",
+							"description": "Title of the post",
+						},
+						"description": map[string]interface{}{
+							"type":        "string",
+							"description": "Content of the post",
+						},
+						"tags": map[string]interface{}{
+							"type":        "array",
+							"description": "Tags associated with the post",
+							"items": map[string]interface{}{
+								"type": "string",
+							},
+						},
+						"status": map[string]interface{}{
+							"type":        "string",
+							"description": "Post status (active, draft, archived)",
+							"enum":        []string{"active", "draft", "archived"},
+							"default":     "active",
+						},
+						"lat": map[string]interface{}{
+							"type":        "number",
+							"description": "Latitude for post location",
+						},
+						"lng": map[string]interface{}{
+							"type":        "number",
+							"description": "Longitude for post location",
+						},
+						"thumbnail": map[string]interface{}{
+							"type":        "string",
+							"description": "URL of the post thumbnail image",
+						},
+					},
+					"required": []string{"name", "description"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "post_search_advanced",
+				Description: "Advanced search for posts with multiple filters",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"name": map[string]interface{}{
+							"type":        "string",
+							"description": "Search in post title",
+						},
+						"description": map[string]interface{}{
+							"type":        "string",
+							"description": "Search in post content",
+						},
+						"tags": map[string]interface{}{
+							"type":        "array",
+							"description": "Filter by tags",
+							"items": map[string]interface{}{
+								"type": "string",
+							},
+						},
+						"status": map[string]interface{}{
+							"type":        "string",
+							"description": "Filter by status",
+							"enum":        []string{"active", "draft", "archived"},
+						},
+						"lat": map[string]interface{}{
+							"type":        "number",
+							"description": "Center latitude for location search",
+						},
+						"lng": map[string]interface{}{
+							"type":        "number",
+							"description": "Center longitude for location search",
+						},
+						"radius": map[string]interface{}{
+							"type":        "integer",
+							"description": "Search radius in kilometers",
+							"minimum":     1,
+							"default":     10,
+						},
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+						"sort_by": map[string]interface{}{
+							"type":        "string",
+							"description": "Field to sort by",
+							"enum":        []string{"created_at", "updated_at", "name", "popularity"},
+							"default":     "created_at",
+						},
+						"sort_order": map[string]interface{}{
+							"type":        "string",
+							"description": "Sort order",
+							"enum":        []string{"asc", "desc"},
+							"default":     "desc",
+						},
+					},
+					"required": []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "post_get_by_id",
+				Description: "Get a specific post by its ID",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"post_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the post to retrieve",
+						},
+					},
+					"required": []string{"post_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "post_update_details",
+				Description: "Update post details",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"post_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the post to update",
+						},
+						"name": map[string]interface{}{
+							"type":        "string",
+							"description": "New title for the post",
+						},
+						"description": map[string]interface{}{
+							"type":        "string",
+							"description": "New content for the post",
+						},
+						"tags": map[string]interface{}{
+							"type":        "array",
+							"description": "New tags for the post",
+							"items": map[string]interface{}{
+								"type": "string",
+							},
+						},
+						"status": map[string]interface{}{
+							"type":        "string",
+							"description": "New status for the post",
+							"enum":        []string{"active", "draft", "archived"},
+						},
+						"thumbnail": map[string]interface{}{
+							"type":        "string",
+							"description": "New thumbnail URL",
+						},
+					},
+					"required": []string{"post_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "post_get_by_location",
+				Description: "Get posts within a specific geographic area",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"lat": map[string]interface{}{
+							"type":        "number",
+							"description": "Center latitude",
+						},
+						"lng": map[string]interface{}{
+							"type":        "number",
+							"description": "Center longitude",
+						},
+						"radius": map[string]interface{}{
+							"type":        "integer",
+							"description": "Search radius in kilometers",
+							"minimum":     1,
+							"default":     10,
+						},
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+					},
+					"required": []string{"lat", "lng"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "post_get_trending",
+				Description: "Get currently trending posts",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+					},
+					"required": []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "post_add_like",
+				Description: "Add a like to a post",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"post_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the post to like",
+						},
+					},
+					"required": []string{"post_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "post_get_by_user_id",
+				Description: "Get all posts by a specific user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the user whose posts to retrieve",
+						},
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+						"sort_by": map[string]interface{}{
+							"type":        "string",
+							"description": "Field to sort by",
+							"enum":        []string{"created_at", "updated_at", "name"},
+							"default":     "created_at",
+						},
+						"sort_order": map[string]interface{}{
+							"type":        "string",
+							"description": "Sort order",
+							"enum":        []string{"asc", "desc"},
+							"default":     "desc",
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+	}
+}

@@ -1,0 +1,167 @@
+syntax = "proto3";
+
+package reviewspb;
+
+import "google/protobuf/timestamp.proto";    // For timestamp fields
+
+// ReviewsService provides functionalities related to review and reply management.
+service ReviewsService {
+  // Adds a new review.
+  rpc AddReview(AddReviewRequest) returns (AddReviewResponse) {}
+  rpc ApproveReview(ApproveReviewRequest) returns (ApproveReviewResponse) {}
+  rpc RejectReview(RejectReviewRequest) returns (RejectReviewResponse) {}
+  rpc FlagReview(FlagReviewRequest) returns (FlagReviewResponse) {}
+  rpc EditReview(EditReviewRequest) returns (EditReviewResponse) {}
+  rpc RemoveReview(RemoveReviewRequest) returns (RemoveReviewResponse) {}
+  rpc GetReview(GetReviewRequest) returns (GetReviewResponse) {}
+  rpc GetReviews(GetReviewsRequest) returns (GetReviewsResponse) {}
+  rpc GetMostReviewed(GetMostReviewedRequest) returns (GetMostReviewedResponse) {}
+  rpc GetMostReviewedByCategory(GetMostReviewedByCategoryRequest) returns (GetMostReviewedByCategoryResponse) {}
+  rpc GetReviewsBySender(GetReviewsBySenderRequest) returns (GetReviewsBySenderResponse) {}
+  rpc GetApprovedReviews(GetApprovedReviewsRequest) returns (GetApprovedReviewsResponse) {}
+
+}
+
+// Review represents a user's review on a item.
+message Review {
+  string id = 1;                           // Unique identifier of the review.
+  string sender_id = 2;                   // Unique identifier of the user who made the review.
+  string item_id = 3;
+  string item_type = 4;
+  string content = 5;
+  string category_id = 6;// Unique identifier of the item being reviewed on.
+  string parent_id = 7;
+  string review_status = 8;               // Current status of the review.
+  bool flagged = 9;                       // Indicates if the review has been flagged.
+
+}
+
+message ItemReviewCount  {
+  string item_id = 1;
+  string category_id = 2;
+  int64 reviews_count = 3;
+}
+
+// Request message to add a new review.
+message AddReviewRequest {
+  string item_id = 1;
+  string item_type = 2;
+  string content = 3;
+  string category_id = 4;
+  string parent_id = 5;
+}
+
+// Response message after adding a new review.
+message AddReviewResponse {
+  string id = 1;                           // Unique identifier of the created review.
+
+}
+
+
+message ApproveReviewRequest {
+  string id = 1;
+}
+
+message ApproveReviewResponse {
+  string id = 1;
+  string review_status = 2;
+  google.protobuf.Timestamp approved_at = 3;
+}
+
+// Request message to reject a review.
+message RejectReviewRequest {
+  string id = 1;
+}
+
+
+message RejectReviewResponse {
+  string id = 1;
+  string review_status = 2;
+
+}
+message FlagReviewRequest {
+  string id = 1;
+}
+
+message FlagReviewResponse {
+  string id = 1;
+  bool flagged = 2;
+
+}
+
+
+message EditReviewRequest {
+  string id = 1;
+  string content = 2;
+}
+
+message EditReviewResponse {
+  string id = 1;
+  string content = 2;
+}
+
+// Request message to remove a review.
+message RemoveReviewRequest {
+  string id = 1;
+}
+message RemoveReviewResponse {
+
+}
+
+// Request message to retrieve a specific review.
+message GetReviewRequest {
+  string id = 1;                           // Unique identifier of the review to retrieve.
+}
+
+// Response message for retrieving a review.
+message GetReviewResponse {
+  Review review = 1;                     // Details of the requested review.
+}
+
+// Request message to retrieve a list of reviews.
+message GetReviewsRequest {
+  string item_id = 2;
+}
+message GetReviewsBySenderRequest{
+  string sender_id = 1;
+}
+// Response message for retrieving a list of reviews.
+message GetReviewsResponse {
+  repeated Review reviews = 1;           // List of reviews.
+  // Number of reviews per page.
+}
+message GetReviewsBySenderResponse {
+  repeated Review reviews = 1;           // List of reviews.
+  // Number of reviews per page.
+}
+message GetMostReviewedRequest {
+}
+
+// Response message for retrieving a list of reviews.
+message GetMostReviewedResponse {
+  repeated ItemReviewCount item_review_count = 1;           // List of reviews.
+  // Number of reviews per page.
+}
+message GetMostReviewedByCategoryRequest {
+  string category_id = 1;
+  int64 offset = 2;
+  int64 limit = 3;
+
+}
+
+// Response message for retrieving a list of reviews.
+message GetMostReviewedByCategoryResponse {
+  repeated ItemReviewCount item_review_count = 1;                         // Number of reviews per page.
+}
+// Request message to retrieve approved reviews.
+message GetApprovedReviewsRequest {}
+
+// Response message for retrieving approved reviews.
+message GetApprovedReviewsResponse {
+  repeated Review reviews = 1;           // List of approved reviews.
+}
+
+
+
+
+

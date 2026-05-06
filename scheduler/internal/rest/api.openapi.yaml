@@ -1,0 +1,65 @@
+openapiOptions:
+  file:
+    - file: "schedulerspb/api.proto"
+      option:
+        info:
+          title: Scheduler Management API
+          version: "1.0.0"
+          description: "API for managing user activities and interactions within the system."
+        basePath: /
+  method:
+    # Scheduler Operations
+    - method: schedulerspb.SchedulerService.CreateScheduler
+      option:
+        operationId: createScheduler
+        tags:
+          - Scheduler
+        summary: Create a new scheduler
+
+    - method: schedulerspb.SchedulerService.GetScheduler
+      option:
+        operationId: getScheduler
+        tags:
+          - Scheduler
+        summary: Retrieve an scheduler
+
+
+    - method: schedulerspb.SchedulerService.GetSchedulers
+      option:
+        operationId: listSchedulers
+        tags:
+          - Scheduler
+        summary: List all activities
+
+
+
+    # Action Operations
+    - method: schedulerspb.SchedulerService.AddAction
+      option:
+        operationId: addAction
+        tags:
+          - Action
+        summary: Add a new interaction
+
+    - method: schedulerspb.SchedulerService.GetAction
+      option:
+        operationId: getAction
+        tags:
+          - Action
+        summary: Retrieve an interaction
+
+    - method: schedulerspb.SchedulerService.GetActions
+      option:
+        operationId: listActions
+        tags:
+          - Action
+        summary: List all interactions for an scheduler
+
+
+    - method: schedulerspb.SchedulerService.RemoveAction
+      option:
+        operationId: removeAction
+        tags:
+          - Action
+        summary: Remove an interaction
+

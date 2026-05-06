@@ -1,0 +1,570 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Scheduler Management API",
+    "description": "API for managing user activities and interactions within the system.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "SchedulerService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/scheduler": {
+      "get": {
+        "summary": "List all activities",
+        "operationId": "listSchedulers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/schedulerspbGetSchedulersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "Filter activities by user ID (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Scheduler"
+        ]
+      },
+      "post": {
+        "summary": "Create a new scheduler",
+        "operationId": "createScheduler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/schedulerspbCreateSchedulerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request message to create a new scheduler.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/schedulerspbCreateSchedulerRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Scheduler"
+        ]
+      }
+    },
+    "/api/scheduler/actions": {
+      "post": {
+        "summary": "Add a new interaction",
+        "operationId": "addAction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/schedulerspbAddActionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request message to add a new scheduled action.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/schedulerspbAddActionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Action"
+        ]
+      }
+    },
+    "/api/scheduler/actions/{id}": {
+      "get": {
+        "summary": "Retrieve an interaction",
+        "operationId": "getAction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/schedulerspbGetActionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier of the interaction to retrieve.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Action"
+        ]
+      },
+      "delete": {
+        "summary": "Remove an interaction",
+        "operationId": "removeAction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/schedulerspbRemoveActionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier of the interaction to remove.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Action"
+        ]
+      }
+    },
+    "/api/scheduler/{schedulerId}/actions": {
+      "get": {
+        "summary": "List all interactions for an scheduler",
+        "operationId": "listActions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/schedulerspbGetActionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "schedulerId",
+            "description": "Unique identifier of the scheduler.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Action"
+        ]
+      }
+    },
+    "/api/scheduler/{userId}": {
+      "get": {
+        "summary": "Retrieve an scheduler",
+        "operationId": "getScheduler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/schedulerspbGetSchedulerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "Unique identifier of the scheduler to retrieve.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Scheduler"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "schedulerspbAction": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the action."
+        },
+        "schedulerId": {
+          "type": "string",
+          "description": "Unique identifier of the associated scheduler."
+        },
+        "naturalLanguageTask": {
+          "type": "string",
+          "description": "Natural language description of the task."
+        },
+        "executionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When to execute the task."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status: pending, executing, completed, failed."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the action was created."
+        },
+        "executedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the action was executed."
+        },
+        "result": {
+          "type": "string",
+          "description": "Result from LLM/Assistant service."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message if failed."
+        }
+      },
+      "description": "Action represents a scheduled natural language task."
+    },
+    "schedulerspbAddActionRequest": {
+      "type": "object",
+      "properties": {
+        "schedulerId": {
+          "type": "string",
+          "description": "Unique identifier of the associated scheduler."
+        },
+        "naturalLanguageTask": {
+          "type": "string",
+          "description": "Natural language description of the task."
+        },
+        "executionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When to execute the task."
+        }
+      },
+      "description": "Request message to add a new scheduled action."
+    },
+    "schedulerspbAddActionResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the created interaction."
+        }
+      },
+      "description": "Response message after adding a new interaction."
+    },
+    "schedulerspbCancelTaskResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "Whether cancellation was successful"
+        }
+      },
+      "title": "Response after cancelling a task"
+    },
+    "schedulerspbCreateSchedulerRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier of the user creating the scheduler."
+        }
+      },
+      "description": "Request message to create a new scheduler."
+    },
+    "schedulerspbCreateSchedulerResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the created scheduler."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier of the user."
+        }
+      },
+      "description": "Response message after creating a new scheduler."
+    },
+    "schedulerspbGetActionResponse": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/schedulerspbAction",
+          "description": "Details of the requested action."
+        }
+      },
+      "description": "Response message for retrieving an action."
+    },
+    "schedulerspbGetActionsResponse": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/schedulerspbAction"
+          },
+          "description": "List of actions."
+        }
+      },
+      "description": "Response message for listing actions."
+    },
+    "schedulerspbGetScheduledTasksResponse": {
+      "type": "object",
+      "properties": {
+        "tasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/schedulerspbTask"
+          },
+          "title": "List of scheduled tasks"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Total count of matching tasks"
+        }
+      },
+      "title": "Response with scheduled tasks"
+    },
+    "schedulerspbGetSchedulerResponse": {
+      "type": "object",
+      "properties": {
+        "schedulerId": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Details of the requested scheduler."
+        }
+      },
+      "description": "Response message for retrieving an scheduler."
+    },
+    "schedulerspbGetSchedulersResponse": {
+      "type": "object",
+      "properties": {
+        "activities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/schedulerspbScheduler"
+          },
+          "description": "List of activities."
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of activities available."
+        }
+      },
+      "description": "Response message for listing activities."
+    },
+    "schedulerspbRemoveActionResponse": {
+      "type": "object"
+    },
+    "schedulerspbScheduleTaskResponse": {
+      "type": "object",
+      "properties": {
+        "taskId": {
+          "type": "string",
+          "title": "ID of the scheduled task"
+        }
+      },
+      "title": "Response after scheduling a task"
+    },
+    "schedulerspbScheduler": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the scheduler."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier of the user associated with the scheduler."
+        },
+        "archived": {
+          "type": "boolean",
+          "description": "Indicates whether the scheduler is archived."
+        }
+      },
+      "description": "Scheduler represents a long-living aggregate associated with a user."
+    },
+    "schedulerspbTask": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Unique identifier of the task"
+        },
+        "managerId": {
+          "type": "string",
+          "title": "Manager ID that scheduled this task"
+        },
+        "taskType": {
+          "type": "string",
+          "title": "Type of task to execute"
+        },
+        "scheduledAt": {
+          "type": "string",
+          "format": "int64",
+          "title": "Unix timestamp when to execute"
+        },
+        "payload": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Task parameters"
+        },
+        "status": {
+          "$ref": "#/definitions/schedulerspbTaskStatus",
+          "title": "Current status of the task"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "int64",
+          "title": "Unix timestamp when created"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "int64",
+          "title": "Unix timestamp when last updated"
+        },
+        "executedAt": {
+          "type": "string",
+          "format": "int64",
+          "title": "Unix timestamp when executed"
+        },
+        "result": {
+          "type": "string",
+          "title": "Result of execution"
+        },
+        "error": {
+          "type": "string",
+          "title": "Error message if failed"
+        }
+      },
+      "title": "Task represents a scheduled task for managers"
+    },
+    "schedulerspbTaskStatus": {
+      "type": "string",
+      "enum": [
+        "TASK_STATUS_UNSPECIFIED",
+        "PENDING",
+        "RUNNING",
+        "COMPLETED",
+        "FAILED",
+        "CANCELLED"
+      ],
+      "default": "TASK_STATUS_UNSPECIFIED",
+      "title": "Task status enum for manager tasks"
+    },
+    "schedulerspbUpdateTaskResponse": {
+      "type": "object",
+      "properties": {
+        "task": {
+          "$ref": "#/definitions/schedulerspbTask",
+          "title": "Updated task details"
+        }
+      },
+      "title": "Response after updating a task"
+    }
+  }
+}

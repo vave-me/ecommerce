@@ -1,0 +1,267 @@
+syntax = "proto3";
+
+package categoriespb;
+
+import "google/protobuf/timestamp.proto"; // if needed
+
+
+service CategoriesService {
+  // Category-related RPCs
+  rpc AddCategory(AddCategoryRequest) returns (AddCategoryResponse) {}
+  rpc GetCategory(GetCategoryRequest) returns (GetCategoryResponse) {}
+  rpc GetCategoryBySlug(GetCategoryBySlugRequest) returns (GetCategoryBySlugResponse) {}
+  rpc GetCategories(GetCategoriesRequest) returns (GetCategoriesResponse) {}
+  rpc GetMainCategories(GetMainCategoriesRequest) returns (GetMainCategoriesResponse) {}
+  rpc GetAllMainCategories(GetAllMainCategoriesRequest) returns (GetAllMainCategoriesResponse) {}
+  rpc GetSubCategories(GetSubCategoriesRequest) returns (GetSubCategoriesResponse) {}
+  rpc RemoveCategory(RemoveCategoryRequest) returns (RemoveCategoryResponse) {}
+  rpc RebrandCategory(RebrandCategoryRequest) returns (RebrandCategoryResponse) {}
+  rpc UpdateCategory(UpdateCategoryRequest) returns (UpdateCategoryResponse) {}
+  rpc ArchiveCategory(ArchiveCategoryRequest) returns (ArchiveCategoryResponse) {}
+  rpc AddFilter(AddFilterRequest) returns (AddFilterResponse) {}
+  rpc GetFilter(GetFilterRequest) returns (GetFilterResponse) {}
+  rpc GetFilters(GetFiltersRequest) returns (GetFiltersResponse) {}
+  rpc ArchiveFilter(ArchiveFilterRequest) returns (ArchiveFilterResponse) {}
+  rpc RemoveFilter(RemoveFilterRequest) returns (RemoveFilterResponse) {}
+}
+
+//------------------------------------------------------
+// Category messages
+//------------------------------------------------------
+
+// The Category “view” or “DTO” for responses
+message Category {
+  string id = 1;
+  string description = 2;
+  string parent_id = 3;
+  string google_category_id = 4;
+  repeated string tags = 5;
+  string slug = 6;
+  bool   is_active = 7;
+  string seo_title = 8;
+  repeated string seo_keywords = 9;
+  string seo_desc = 10;
+  string category_type = 11;
+  string lang = 12;
+}
+
+// Request to create a new category
+message AddCategoryRequest {
+  string description = 1;
+  string parent_id = 2;
+  string google_category_id = 3;
+  repeated string tags = 4;
+  string slug = 5;
+  bool   is_active = 6;
+  string seo_title = 7;
+  repeated string seo_keywords = 8;
+  string seo_desc = 9;
+  string category_type = 10;
+  string lang = 11;
+}
+
+message AddCategoryResponse {
+  string id = 1; // newly created category ID
+}
+
+message GetCategoryRequest {
+  string id = 1; // which category do we fetch
+  string lang = 2;
+  string user_id = 3; // optional if your service logic needs user context
+}
+
+message GetCategoryResponse {
+  Category category = 1;
+}
+message GetCategoryBySlugRequest {
+  string slug = 1; // which category do we fetch
+  string lang = 2;
+  string user_id = 3; // optional if your service logic needs user context
+}
+
+message GetCategoryBySlugResponse {
+  Category category = 1;
+}
+
+
+message GetCategoriesRequest {
+  int64 page = 1;
+  string lang = 2;
+  string category_type = 3;
+  int64 page_size = 4;
+  string sort_by = 5;
+  string sort_order = 6;
+}
+
+message GetCategoriesResponse {
+  repeated Category categories = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+message GetMainCategoriesRequest {
+  int64 page = 1;
+  string lang = 2;
+  string category_type = 3;
+  int64 page_size = 4;
+  string sort_by = 5;
+  string sort_order = 6;
+  // Maybe a user_id if needed
+}
+
+message GetMainCategoriesResponse {
+  repeated Category categories = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+message GetAllMainCategoriesRequest {
+  int64 page = 1;
+  string lang = 2;
+  int64 page_size = 3;
+  string sort_by = 4;
+  string sort_order = 5;
+  // Maybe a user_id if needed
+}
+
+message GetAllMainCategoriesResponse {
+  repeated Category categories = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+message GetSubCategoriesRequest {
+  string parent_category_id = 1;
+  string lang = 2;
+  int64 page = 3;
+  int64 page_size = 4;
+  string sort_by = 5;
+  string sort_order = 6;
+  // Maybe a user_id if needed
+}
+
+message GetSubCategoriesResponse {
+  repeated Category categories = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+message RemoveCategoryRequest {
+  string id = 1; // category ID
+  string user_id = 2; // who removes it
+}
+
+message RemoveCategoryResponse {
+  string id = 1; // removed category ID
+}
+
+message RebrandCategoryRequest {
+  string id = 1;
+  string new_slug = 2;
+  string new_desc = 3;
+  string user_id = 4; // optional
+}
+
+message RebrandCategoryResponse {}
+
+message UpdateCategoryRequest {
+  string id = 1;
+  string description = 2;
+  string parent_id = 3;
+  string google_category_id = 4;
+  repeated string tags = 5;
+  string slug = 6;
+  bool   is_active = 7;
+  string seo_title = 8;
+  repeated string seo_keywords = 9;
+  string seo_desc = 10;
+  string category_type = 11;
+  string lang = 12;
+}
+
+message UpdateCategoryResponse {
+  string id = 1;
+}
+
+message ArchiveCategoryRequest {
+  string id = 1;
+  string user_id = 2;
+}
+
+message ArchiveCategoryResponse {
+  string category_id = 1;
+  bool archived = 2;
+}
+
+//------------------------------------------------------
+// Filter messages
+//------------------------------------------------------
+
+message Filter {
+  string id = 1;
+  string category_id = 2;
+  string name = 3;
+  string filter_type = 4;
+  repeated string values = 5; // enumerated options if filter_type=SELECT
+  bool is_active = 6;
+}
+
+
+
+message AddFilterRequest {
+  string category_id = 1;
+  string name = 2;
+  string filter_type = 3;
+  repeated string values = 4;
+  string user_id = 5;
+  bool is_active = 6;
+}
+
+message AddFilterResponse {
+  string filter_id = 1;
+}
+
+message GetFilterRequest {
+  string filter_id = 1;
+  string user_id = 2; // optional
+}
+
+message GetFilterResponse {
+  Filter filter = 1;
+}
+
+message GetFiltersRequest {
+  string category_id = 1;  // filters by category or pass empty
+  int64 page = 2;
+  int64 page_size = 3;
+  string sort_by = 4;
+  string sort_order = 5;
+  string user_id = 6; // optional
+}
+
+message GetFiltersResponse {
+  repeated Filter filters = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+message ArchiveFilterRequest {
+  string filter_id = 1;
+  string user_id = 2;
+}
+
+message ArchiveFilterResponse {
+  string filter_id = 1;
+  bool archived = 2;
+}
+
+message RemoveFilterRequest {
+  string filter_id = 1;
+  string user_id = 2;
+}
+
+message RemoveFilterResponse {
+  string filter_id = 1;
+}

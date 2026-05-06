@@ -1,0 +1,242 @@
+.trendingTags {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 16px;
+}
+
+.tagsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background-color: #f3f4f6;
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+}
+
+.tag:hover {
+    background-color: #e5e7eb;
+    transform: translateY(-1px);
+}
+
+.tagName {
+    font-weight: 500;
+    color: #4b5563;
+}
+
+.tagCount {
+    font-size: 0.875rem;
+    color: #6b7280;
+    background-color: #e5e7eb;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* Dark Theme Support */
+@media (prefers-color-scheme: dark) {
+    .trendingTags {
+        background: var(--gray-800, #1f2937);
+        border: 1px solid var(--gray-700, #374151);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .title {
+        color: var(--gray-100, #f3f4f6);
+    }
+
+    .tag {
+        background-color: var(--gray-700, #374151);
+        border: 1px solid var(--gray-600, #4b5563);
+        color: var(--gray-200, #e5e7eb);
+    }
+
+    .tag:hover {
+        background-color: var(--gray-600, #4b5563);
+        border-color: var(--teal-500, #14b8a6);
+        box-shadow: 0 2px 8px rgba(20, 184, 166, 0.2);
+        transform: translateY(-1px);
+    }
+
+    .tag:focus {
+        outline: 2px solid var(--teal-400, #2dd4bf);
+        outline-offset: 2px;
+    }
+
+    .tag:active {
+        transform: translateY(0);
+        background-color: var(--gray-650, #3f4b5a);
+    }
+
+    .tagName {
+        color: var(--gray-200, #e5e7eb);
+    }
+
+    .tagCount {
+        color: var(--gray-300, #d1d5db);
+        background-color: var(--gray-600, #4b5563);
+        border: 1px solid var(--gray-500, #6b7280);
+    }
+}
+
+/* Enhanced Interactive States */
+.tag:focus-visible {
+    outline: 2px solid var(--teal-500, #14b8a6);
+    outline-offset: 2px;
+}
+
+.tag:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Loading State */
+.tag.loading {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.tag.loading:hover {
+    background-color: inherit;
+    transform: none;
+}
+
+/* Enhanced Tag Variants */
+.tag.popular {
+    position: relative;
+    overflow: hidden;
+}
+
+.tag.popular::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--teal-400, #2dd4bf), var(--emerald-400, #34d399));
+}
+
+@media (prefers-color-scheme: dark) {
+    .tag.popular {
+        background-color: var(--gray-750, #2d3748);
+        border-color: var(--teal-600, #0d9488);
+    }
+
+    .tag.popular:hover {
+        background-color: var(--gray-700, #374151);
+        box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    .tag {
+        border: 2px solid;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .tag {
+            border-color: var(--gray-400, #9ca3af);
+        }
+
+        .tag:hover {
+            border-color: var(--teal-300, #5eead4);
+        }
+
+        .tagName {
+            color: var(--gray-100, #f3f4f6);
+        }
+
+        .tagCount {
+            color: var(--gray-200, #e5e7eb);
+            background-color: var(--gray-700, #374151);
+        }
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .tag {
+        transition: none;
+    }
+
+    .tag:hover {
+        transform: none;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .trendingTags {
+        padding: 12px;
+    }
+
+    .tag {
+        padding: 4px 8px;
+    }
+
+    .tagName {
+        font-size: 0.875rem;
+    }
+
+    .tagCount {
+        font-size: 0.75rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .trendingTags {
+            border-width: 1px;
+        }
+
+        .tag {
+            border-width: 1px;
+        }
+    }
+}
+
+/* Small Screen Optimizations */
+@media (max-width: 480px) {
+    .trendingTags {
+        padding: 8px;
+        border-radius: 8px;
+    }
+
+    .title {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+
+    .tagsContainer {
+        gap: 6px;
+    }
+
+    .tag {
+        padding: 3px 6px;
+        border-radius: 4px;
+    }
+
+    .tagName {
+        font-size: 0.8125rem;
+    }
+
+    .tagCount {
+        font-size: 0.6875rem;
+        padding: 1px 4px;
+    }
+} 

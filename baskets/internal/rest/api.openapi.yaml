@@ -1,0 +1,89 @@
+openapiOptions:
+  file:
+    - file: "basketspb/api.proto"
+      option:
+        info:
+          title: Shopping Basket API
+          version: "1.0.0"
+          description: "API for managing shopping baskets, including creating, updating, and processing baskets."
+        basePath: /
+  method:
+    # Basket Operations
+    - method: basketspb.BasketService.StartBasket
+      option:
+        operationId: startBasket
+        tags:
+          - Basket
+        summary: Start a new shopping basket
+
+    - method: basketspb.BasketService.GetBasket
+      option:
+        operationId: getBasket
+        tags:
+          - Basket
+        summary: Retrieve a shopping basket
+
+    - method: basketspb.BasketService.GetTotalBasket
+      option:
+        operationId: getTotalBasket
+        tags:
+          - Basket
+        summary: Retrieve a shopping basket amount to pay
+
+    - method: basketspb.BasketService.GetCurrentBasket
+      option:
+        operationId: getCurrentBasket
+        tags:
+          - Basket
+        summary: Retrieve a shopping basket
+
+    - method: basketspb.BasketService.CancelBasket
+      option:
+        operationId: cancelBasket
+        tags:
+          - Basket
+        summary: Cancel a shopping basket
+
+
+    - method: basketspb.BasketService.CheckoutBasket
+      option:
+        operationId: checkoutBasket
+        tags:
+          - Basket
+        summary: Checkout a shopping basket
+
+    - method: basketspb.BasketService.AddItem
+      option:
+        operationId: addItem
+        tags:
+          - Item
+        summary: Add an item to the basket
+
+    - method: basketspb.BasketService.RemoveItem
+      option:
+        operationId: removeItem
+        tags:
+          - Item
+        summary: Remove an item from the basket
+
+    - method: basketspb.BasketService.UpdateItemQuantity
+      option:
+        operationId: updateItemQuantity
+        tags:
+          - Item
+        summary: Update item quantity in the basket
+
+    # Basket Listing Operations
+    - method: basketspb.BasketService.ListBaskets
+      option:
+        operationId: listBaskets
+        tags:
+          - Basket
+        summary: List all baskets
+
+    - method: basketspb.BasketService.GetActiveBaskets
+      option:
+        operationId: getActiveBaskets
+        tags:
+          - Basket
+        summary: Retrieve active baskets

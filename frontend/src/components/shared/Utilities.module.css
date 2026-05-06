@@ -1,0 +1,467 @@
+/* Utilities.module.css - Common utility classes */
+
+/* Flex Layouts */
+.flex {
+  display: flex;
+}
+
+.flexInline {
+  display: inline-flex;
+}
+
+.flexRow {
+  flex-direction: row;
+}
+
+.flexCol {
+  flex-direction: column;
+}
+
+.flexWrap {
+  flex-wrap: wrap;
+}
+
+.flexNoWrap {
+  flex-wrap: nowrap;
+}
+
+.itemsStart {
+  align-items: flex-start;
+}
+
+.itemsCenter {
+  align-items: center;
+}
+
+.itemsEnd {
+  align-items: flex-end;
+}
+
+.justifyStart {
+  justify-content: flex-start;
+}
+
+.justifyCenter {
+  justify-content: center;
+}
+
+.justifyEnd {
+  justify-content: flex-end;
+}
+
+.justifyBetween {
+  justify-content: space-between;
+}
+
+.justifyAround {
+  justify-content: space-around;
+}
+
+/* Gaps */
+.gap1 {
+  gap: var(--space-1, 4px);
+}
+
+.gap2 {
+  gap: var(--space-2, 8px);
+}
+
+.gap3 {
+  gap: var(--space-3, 12px);
+}
+
+.gap4 {
+  gap: var(--space-4, 16px);
+}
+
+/* Text Utilities */
+.textTruncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.textClamp2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.textClamp3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.textUppercase {
+  text-transform: uppercase;
+}
+
+.textCapitalize {
+  text-transform: capitalize;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.textRight {
+  text-align: right;
+}
+
+/* Font Sizes */
+.textXs {
+  font-size: var(--font-size-xs, 12px);
+}
+
+.textSm {
+  font-size: var(--font-size-sm, 14px);
+}
+
+.textBase {
+  font-size: var(--font-size-base, 16px);
+}
+
+.textLg {
+  font-size: var(--font-size-lg, 18px);
+}
+
+.textXl {
+  font-size: var(--font-size-xl, 20px);
+}
+
+.text2xl {
+  font-size: var(--font-size-2xl, 24px);
+}
+
+/* Font Weights */
+.fontNormal {
+  font-weight: var(--font-weight-normal, 400);
+}
+
+.fontMedium {
+  font-weight: var(--font-weight-medium, 500);
+}
+
+.fontSemibold {
+  font-weight: var(--font-weight-semibold, 600);
+}
+
+.fontBold {
+  font-weight: var(--font-weight-bold, 700);
+}
+
+/* Colors */
+.textPrimary {
+  color: var(--text-primary, #111827);
+}
+
+.textSecondary {
+  color: var(--text-secondary, #6b7280);
+}
+
+.textTertiary {
+  color: var(--text-tertiary, #9ca3af);
+}
+
+.textSuccess {
+  color: var(--color-success-600, #16a34a);
+}
+
+.textWarning {
+  color: var(--color-warning-600, #d97706);
+}
+
+.textError {
+  color: var(--color-error-600, #dc2626);
+}
+
+/* Spacing */
+.p0 {
+  padding: 0;
+}
+
+.p1 {
+  padding: var(--space-1, 4px);
+}
+
+.p2 {
+  padding: var(--space-2, 8px);
+}
+
+.p3 {
+  padding: var(--space-3, 12px);
+}
+
+.p4 {
+  padding: var(--space-4, 16px);
+}
+
+.px1 {
+  padding-left: var(--space-1, 4px);
+  padding-right: var(--space-1, 4px);
+}
+
+.px2 {
+  padding-left: var(--space-2, 8px);
+  padding-right: var(--space-2, 8px);
+}
+
+.px3 {
+  padding-left: var(--space-3, 12px);
+  padding-right: var(--space-3, 12px);
+}
+
+.px4 {
+  padding-left: var(--space-4, 16px);
+  padding-right: var(--space-4, 16px);
+}
+
+.py1 {
+  padding-top: var(--space-1, 4px);
+  padding-bottom: var(--space-1, 4px);
+}
+
+.py2 {
+  padding-top: var(--space-2, 8px);
+  padding-bottom: var(--space-2, 8px);
+}
+
+.py3 {
+  padding-top: var(--space-3, 12px);
+  padding-bottom: var(--space-3, 12px);
+}
+
+.py4 {
+  padding-top: var(--space-4, 16px);
+  padding-bottom: var(--space-4, 16px);
+}
+
+/* Margins */
+.m0 {
+  margin: 0;
+}
+
+.mt1 {
+  margin-top: var(--space-1, 4px);
+}
+
+.mt2 {
+  margin-top: var(--space-2, 8px);
+}
+
+.mt3 {
+  margin-top: var(--space-3, 12px);
+}
+
+.mt4 {
+  margin-top: var(--space-4, 16px);
+}
+
+.mb1 {
+  margin-bottom: var(--space-1, 4px);
+}
+
+.mb2 {
+  margin-bottom: var(--space-2, 8px);
+}
+
+.mb3 {
+  margin-bottom: var(--space-3, 12px);
+}
+
+.mb4 {
+  margin-bottom: var(--space-4, 16px);
+}
+
+/* Display */
+.block {
+  display: block;
+}
+
+.inlineBlock {
+  display: inline-block;
+}
+
+.inline {
+  display: inline;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Position */
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.sticky {
+  position: sticky;
+}
+
+/* Overflow */
+.overflowHidden {
+  overflow: hidden;
+}
+
+.overflowAuto {
+  overflow: auto;
+}
+
+.overflowScroll {
+  overflow: scroll;
+}
+
+.overflowVisible {
+  overflow: visible;
+}
+
+.overflowXAuto {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.overflowYAuto {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Border Radius */
+.rounded {
+  border-radius: var(--radius-base, 6px);
+}
+
+.roundedSm {
+  border-radius: var(--radius-sm, 4px);
+}
+
+.roundedLg {
+  border-radius: var(--radius-lg, 8px);
+}
+
+.roundedXl {
+  border-radius: var(--radius-xl, 12px);
+}
+
+.roundedFull {
+  border-radius: var(--radius-full, 9999px);
+}
+
+/* Shadows */
+.shadowSm {
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0,0,0,0.05));
+}
+
+.shadowMd {
+  box-shadow: var(--shadow-md, 0 4px 6px rgba(0,0,0,0.1));
+}
+
+.shadowLg {
+  box-shadow: var(--shadow-lg, 0 10px 15px rgba(0,0,0,0.1));
+}
+
+/* Transitions */
+.transitionAll {
+  transition: all var(--transition-base, 150ms ease);
+}
+
+.transitionColors {
+  transition: background-color var(--transition-base, 150ms ease),
+              border-color var(--transition-base, 150ms ease),
+              color var(--transition-base, 150ms ease);
+}
+
+.transitionTransform {
+  transition: transform var(--transition-base, 150ms ease);
+}
+
+/* Cursors */
+.cursorPointer {
+  cursor: pointer;
+}
+
+.cursorNotAllowed {
+  cursor: not-allowed;
+}
+
+/* User Select */
+.selectNone {
+  user-select: none;
+}
+
+.selectText {
+  user-select: text;
+}
+
+/* Aspect Ratios */
+.aspect1x1 {
+  aspect-ratio: 1/1;
+}
+
+.aspect16x9 {
+  aspect-ratio: 16/9;
+}
+
+.aspect4x3 {
+  aspect-ratio: 4/3;
+}
+
+/* Mobile Utilities */
+@media (max-width: 768px) {
+  .mobileHidden {
+    display: none;
+  }
+  
+  .mobileBlock {
+    display: block;
+  }
+  
+  .mobileFlex {
+    display: flex;
+  }
+}
+
+/* Desktop Utilities */
+@media (min-width: 768px) {
+  .desktopHidden {
+    display: none;
+  }
+  
+  .desktopBlock {
+    display: block;
+  }
+  
+  .desktopFlex {
+    display: flex;
+  }
+}
+
+/* Accessibility */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus Visible */
+.focusVisible:focus-visible {
+  outline: 2px solid var(--color-primary-500, #3b82f6);
+  outline-offset: 2px;
+}

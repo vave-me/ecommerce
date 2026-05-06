@@ -1,0 +1,61 @@
+FROM node:20-alpine AS builder
+LABEL stage=builder
+
+WORKDIR /app
+
+# Move this lower to break cache when needed
+# ARG CACHE_BUST=1
+
+RUN apk add --no-cache \
+    autoconf \
+    automake \
+    libtool \
+    nasm \
+    make \
+    pkgconfig \
+    g++ \
+    python3 \
+    build-base
+
+RUN mkdir -p /app
+
+COPY frontend/package*.json ./
+
+RUN if [ -f package-lock.json ]; then \
+      npm ci --legacy-peer-deps; \
+    else \
+      npm install --legacy-peer-deps; \
+    fi
+
+# Add effective cache busting here
+ARG CACHE_BUST=$(date +%s)
+ENV CACHE_BUST=${CACHE_BUST}
+
+# This will now break cache reliably
+COPY frontend/. ./
+
+RUN rm -rf .next/cache || true
+
+RUN npm run build
+
+FROM node:20-alpine
+LABEL stage=runtime
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV API_URL=https://api.sfx-markt.com
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder --chown=nextjs:nodejs /app/public       ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next        ./.next
+COPY --from=builder --chown=nextjs:nodejs /app/next.config.mjs ./next.config.mjs
+COPY --from=builder --chown=nextjs:nodejs /app/package*.json  ./
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules  ./node_modules
+
+USER nextjs
+
+EXPOSE 3000
+CMD ["npm", "start"]

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package mailerpb;
+
+message EmailCreated {
+  string id = 1;
+  string sender_id = 2;
+  string recipient = 3;
+  string subject = 4;
+  string body = 5;
+  string status = 6;
+}
+

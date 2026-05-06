@@ -1,0 +1,230 @@
+package tools
+
+import ai2 "middleman/internal/ai"
+
+func createActivityTools() []ai2.Tool {
+	return []ai2.Tool{
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "activity_log",
+				Description: "Log a user activity with detailed information",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the user performing the activity",
+						},
+						"action": map[string]interface{}{
+							"type":        "string",
+							"description": "The action being performed (e.g., 'viewed', 'purchased', 'liked')",
+						},
+						"description": map[string]interface{}{
+							"type":        "string",
+							"description": "Detailed description of the activity",
+						},
+						"metadata": map[string]interface{}{
+							"type":                 "object",
+							"description":          "Additional metadata about the activity",
+							"additionalProperties": true,
+						},
+						"target_type": map[string]interface{}{
+							"type":        "string",
+							"description": "The type of entity being acted upon",
+							"enum":        []string{"product", "service", "user", "order", "post"},
+						},
+						"target_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the target entity",
+						},
+						"severity": map[string]interface{}{
+							"type":        "string",
+							"description": "The importance level of the activity",
+							"enum":        []string{"low", "medium", "high"},
+							"default":     "medium",
+						},
+					},
+					"required": []string{"user_id", "action", "description"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "activity_get_user",
+				Description: "Get activity history for a specific user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the user whose activities to retrieve",
+						},
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of activities to return",
+							"default":     20,
+							"minimum":     1,
+							"maximum":     100,
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "activity_create_user_activity",
+				Description: "Create a new activity tracking record for a user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The unique identifier of the user",
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "activity_get_by_user_id",
+				Description: "Get the activity record for a specific user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The user ID to find activity for",
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "activity_add_user_interaction",
+				Description: "Add a user interaction (like or dislike) to an item",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"interaction_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Unique ID for this interaction",
+						},
+						"activity_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The activity ID this interaction belongs to",
+						},
+						"item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the item being liked/disliked",
+						},
+						"item_type": map[string]interface{}{
+							"type":        "string",
+							"description": "Type of item being interacted with",
+							"enum":        []string{"product", "service", "post", "comment", "review"},
+						},
+						"interaction_type": map[string]interface{}{
+							"type":        "string",
+							"description": "Type of interaction",
+							"enum":        []string{"like", "dislike"},
+						},
+					},
+					"required": []string{"interaction_id", "activity_id", "item_id", "item_type", "interaction_type"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "activity_get_interaction_by_id",
+				Description: "Get a specific interaction by ID",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"interaction_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The interaction ID to find",
+						},
+					},
+					"required": []string{"interaction_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "activity_get_all_activity_interactions",
+				Description: "Get all interactions for a specific activity",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"activity_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The activity ID to get interactions for",
+						},
+					},
+					"required": []string{"activity_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "activity_get_most_liked_items",
+				Description: "Get the most liked items of a specific type",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"item_type": map[string]interface{}{
+							"type":        "string",
+							"description": "Type of items to get",
+							"enum":        []string{"product", "service", "post", "comment", "review"},
+						},
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of items to return",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     10,
+						},
+					},
+					"required": []string{"item_type"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "activity_get_most_disliked_items",
+				Description: "Get the most disliked items of a specific type",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"item_type": map[string]interface{}{
+							"type":        "string",
+							"description": "Type of items to get",
+							"enum":        []string{"product", "service", "post", "comment", "review"},
+						},
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of items to return",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     10,
+						},
+					},
+					"required": []string{"item_type"},
+				},
+			},
+		},
+	}
+}

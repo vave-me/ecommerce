@@ -1,0 +1,219 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: vectors-secrets
+  namespace: my-project
+type: Opaque
+data:
+  # AI Services Configuration (base64 encoded)
+  # Example: echo -n '{openai_api_key}' | base64
+  
+  # OPENAI CONFIGURATION
+  OPENAI_API_KEY: REDACTED
+  OPENAI_BASE_URL: aHR0cHM6Ly9hcGkub3BlbmFpLmNvbS92MQ==  # https://api.openai.com/v1
+  OPENAI_BASE_MODEL: Z3B0LTRvLW1pbmk=  # gpt-4o-mini
+  
+  # DEEPSEEK CONFIGURATION  
+  DEEPSEEK_API_KEY: REDACTED
+  DEEPSEEK_BASE_URL: aHR0cHM6Ly9hcGkuZGVlcHNlZWsuY29tL3Yx  # https://api.deepseek.com/v1
+  DEEPSEEK_DEFAULT_MODEL: ZGVlcHNlZWstY2hhdA==  # deepseek-chat
+  
+  # ANTHROPIC CONFIGURATION
+  ANTHROPIC_API_KEY: REDACTED
+  ANTHROPIC_BASE_URL: aHR0cHM6Ly9hcGkuYW50aHJvcGljLmNvbS92MQ==  # https://api.anthropic.com/v1
+  ANTHROPIC_MODEL: Y2xhdWRlLTMtNS1zb25uZXQtMjAyNDEwMjI=  # claude-3-5-sonnet-20241022
+  
+  # GOOGLE AI CONFIGURATION
+  GOOGLE_AI_API_KEY: REDACTED
+  GOOGLE_AI_BASE_URL: aHR0cHM6Ly9nZW5lcmF0aXZlbGFuZ3VhZ2UuZ29vZ2xlYXBpcy5jb20vdjFiZXRh  # https://generativelanguage.googleapis.com/v1beta
+  GOOGLE_AI_DEFAULT_MODEL: Z2VtaW5pLTEuNS1mbGFzaA==  # gemini-1.5-flash
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vectors
+  namespace: my-project
+  labels:
+    app: vectors
+  annotations:
+    description: "Vector embeddings service - Uses Qdrant and Redis, NO PostgreSQL dependency"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vectors
+  template:
+    metadata:
+      labels:
+        app: vectors
+    spec:
+      initContainers:
+        # NOTE: Vectors service only waits for Qdrant and NATS - NO PostgreSQL dependency
+        - name: wait-for-qdrant
+          image: busybox:1.36
+          command: [ 'sh', '-c', 'echo "Waiting for qdrant (qdrant.vectors.svc.cluster.local:6334)..."; until nc -zv qdrant.vectors.svc.cluster.local 6334; do sleep 2; done; echo "Qdrant ready!"' ]
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "16Mi"
+            limits:
+              cpu: "50m"
+              memory: "32Mi"
+        - name: wait-for-nats
+          image: busybox:1.36
+          command: [ 'sh', '-c', 'echo "Waiting for nats (nats.messaging.svc.cluster.local:4222)..."; until nc -zv nats.messaging.svc.cluster.local 4222; do sleep 2; done; echo "NATS ready!"' ]
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "16Mi"
+            limits:
+              cpu: "50m"
+              memory: "32Mi"
+      containers:
+        - name: vectors
+          image: registry.sfx-markt.de/vectors:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: http
+            - containerPort: 9000
+              name: grpc
+          envFrom:
+            - configMapRef:
+                name: common-config
+            - secretRef:
+                name: common-secrets
+          env:
+            # Service identification for config system
+            - name: SERVICE_NAME
+              value: "vectors"
+              
+            # Qdrant Configuration (Primary vector database)
+            - name: QDRANT_HOST
+              value: "qdrant.vectors.svc.cluster.local"
+            - name: QDRANT_PORT
+              value: "6334"
+            
+            # NOTE: PG_CONN is intentionally NOT set - vectors service doesn't use PostgreSQL
+            # The service uses Qdrant for vector storage and Redis for caching only
+            
+            # RPC Services Configuration
+            - name: RPC_SERVICES
+              value: "USERS=users.my-project.svc.cluster.local:9000,PRODUCTS=products.my-project.svc.cluster.local:9000,POSTS=posts.my-project.svc.cluster.local:9000,SERVICES=services.my-project.svc.cluster.local:9000,JOBS=jobs.my-project.svc.cluster.local:9000,PROPERTIES=properties.my-project.svc.cluster.local:9000,VEHICLES=vehicles.my-project.svc.cluster.local:9000,DEALS=deals.my-project.svc.cluster.local:9000,METRICS=metrics.my-project.svc.cluster.local:9000,COMMENTS=comments.my-project.svc.cluster.local:9000,MESSAGES=messages.my-project.svc.cluster.local:9000,ACTIVITY=activity.my-project.svc.cluster.local:9000,WISHLISTS=wishlists.my-project.svc.cluster.local:9000,SEARCH=search.my-project.svc.cluster.local:9000,SUPPORT=support.my-project.svc.cluster.local:9000,FOLLOWING=following.my-project.svc.cluster.local:9000,REVIEWS=reviews.my-project.svc.cluster.local:9000"
+            - name: OTEL_SERVICE_NAME
+              value: "vectors"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://otel-collector.observability.svc.cluster.local:4317"
+            - name: OTEL_EXPORTER_OTLP_INSECURE
+              value: "true"
+            - name: OTEL_TRACES_EXPORTER
+              value: "otlp"
+            - name: OTEL_METRICS_EXPORTER
+              value: "otlp"
+            
+            # AI Services Configuration
+            - name: ANTHROPIC_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: vectors-secrets
+                  key: ANTHROPIC_API_KEY
+            - name: ANTHROPIC_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: vectors-secrets
+                  key: ANTHROPIC_BASE_URL
+            - name: ANTHROPIC_MODEL
+              valueFrom:
+                secretKeyRef:
+                  name: vectors-secrets
+                  key: ANTHROPIC_MODEL
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: vectors-secrets
+                  key: OPENAI_API_KEY
+            - name: OPENAI_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: vectors-secrets
+                  key: OPENAI_BASE_URL
+            - name: OPENAI_BASE_MODEL
+              valueFrom:
+                secretKeyRef:
+                  name: vectors-secrets
+                  key: OPENAI_BASE_MODEL
+            - name: DEEPSEEK_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: vectors-secrets
+                  key: DEEPSEEK_API_KEY
+            - name: DEEPSEEK_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: vectors-secrets
+                  key: DEEPSEEK_BASE_URL
+            - name: DEEPSEEK_DEFAULT_MODEL
+              valueFrom:
+                secretKeyRef:
+                  name: vectors-secrets
+                  key: DEEPSEEK_DEFAULT_MODEL
+            - name: GOOGLE_AI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: vectors-secrets
+                  key: GOOGLE_AI_API_KEY
+            - name: GOOGLE_AI_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: vectors-secrets
+                  key: GOOGLE_AI_BASE_URL
+            - name: GOOGLE_AI_DEFAULT_MODEL
+              valueFrom:
+                secretKeyRef:
+                  name: vectors-secrets
+                  key: GOOGLE_AI_DEFAULT_MODEL
+
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vectors
+  namespace: my-project
+  labels:
+    app: vectors
+spec:
+  selector:
+    app: vectors
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+    - name: grpc-internal
+      port: 9000
+      targetPort: grpc
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vectors-external
+  namespace: my-project
+  labels:
+    app: vectors
+spec:
+  selector:
+    app: vectors
+  ports:
+    - name: grpc-external
+      protocol: TCP
+      port: 30036
+      targetPort: grpc
+  type: LoadBalancer 

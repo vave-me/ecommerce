@@ -1,0 +1,304 @@
+/* ============================================================================
+   LISTINGS TABLE - ATOMIC DESIGN SYSTEM
+   ============================================================================ */
+
+/* Uses Global Design Tokens from design-tokens.css */
+
+/* ============================================================================
+   TABLE CONTAINER - ORGANISM
+   ============================================================================ */
+
+.tableContainer {
+  width: 100%;
+  background: var(--ai-color-surface);
+  border-radius: var(--ai-radius-lg);
+  box-shadow: var(--ai-shadow-md);
+  overflow: hidden;
+  border: 1px solid var(--ai-color-border);
+}
+
+/* ============================================================================
+   TABLE WRAPPER - MOLECULE
+   ============================================================================ */
+
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ============================================================================
+   TABLE STRUCTURE - MOLECULES
+   ============================================================================ */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+  background: var(--ai-color-surface);
+  font-family: var(--ai-font-family-sans);
+}
+
+.tableHead {
+  background: var(--ai-color-primary);
+  position: sticky;
+  top: 0;
+  z-index: var(--ai-z-sticky);
+}
+
+.headerRow {
+  background: var(--ai-color-primary);
+}
+
+.headerCell {
+  padding: var(--ai-space-md) var(--ai-space-lg);
+  text-align: left;
+  background: var(--ai-color-primary);
+  color: var(--ai-color-surface);
+  font-size: var(--ai-text-sm);
+  font-weight: var(--ai-font-weight-semibold);
+  border: none;
+  white-space: nowrap;
+  user-select: none;
+  position: relative;
+}
+
+.headerCell:first-child {
+  border-top-left-radius: var(--ai-radius-lg);
+}
+
+.headerCell:last-child {
+  border-top-right-radius: var(--ai-radius-lg);
+}
+
+.tableBody {
+  background: var(--ai-color-surface);
+}
+
+/* ============================================================================
+   EMPTY STATE - ORGANISM
+   ============================================================================ */
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ai-space-6xl) var(--ai-space-xl);
+  text-align: center;
+  background: var(--ai-color-surface);
+  min-height: 300px;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  margin-bottom: var(--ai-space-lg);
+  opacity: 0.6;
+}
+
+.emptyTitle {
+  font-size: var(--ai-text-xl);
+  font-weight: var(--ai-font-weight-semibold);
+  color: var(--ai-color-text-primary);
+  margin: 0 0 var(--ai-space-sm) 0;
+}
+
+.emptyMessage {
+  font-size: var(--ai-text-base);
+  color: var(--ai-color-text-muted);
+  margin: 0;
+  max-width: 400px;
+  line-height: var(--ai-line-height-relaxed);
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - MOBILE FIRST
+   ============================================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .table {
+    min-width: 600px;
+  }
+
+  .headerCell {
+    padding: var(--ai-space-sm) var(--ai-space-md);
+    font-size: var(--ai-text-xs);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .tableContainer {
+    border-radius: var(--ai-radius-md);
+    margin: 0 var(--ai-space-sm);
+  }
+
+  .table {
+    min-width: 100%;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .tableHead,
+  .tableBody {
+    display: block;
+  }
+
+  .headerRow {
+    display: block;
+  }
+
+  .headerCell {
+    display: inline-block;
+    padding: var(--ai-space-xs) var(--ai-space-sm);
+    font-size: var(--ai-text-xs);
+    min-width: 100px;
+    text-align: center;
+  }
+
+  .headerCell:first-child,
+  .headerCell:last-child {
+    border-radius: 0;
+  }
+
+  .emptyState {
+    padding: var(--ai-space-4xl) var(--ai-space-md);
+    min-height: 200px;
+  }
+
+  .emptyIcon {
+    font-size: 36px;
+    margin-bottom: var(--ai-space-md);
+  }
+
+  .emptyTitle {
+    font-size: var(--ai-text-lg);
+  }
+
+  .emptyMessage {
+    font-size: var(--ai-text-sm);
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .tableContainer {
+    margin: 0 var(--ai-space-xs);
+    border-radius: var(--ai-radius-sm);
+  }
+
+  .headerCell {
+    padding: var(--ai-space-xs);
+    font-size: 10px;
+    min-width: 80px;
+  }
+
+  .emptyState {
+    padding: var(--ai-space-3xl) var(--ai-space-sm);
+  }
+
+  .emptyIcon {
+    font-size: 32px;
+  }
+
+  .emptyTitle {
+    font-size: var(--ai-text-base);
+  }
+
+  .emptyMessage {
+    font-size: var(--ai-text-xs);
+  }
+}
+
+/* ============================================================================
+   ACCESSIBILITY & MOTION
+   ============================================================================ */
+
+/* Dark Theme */
+@media (prefers-color-scheme: dark) {
+  .tableContainer {
+    background: var(--gray-800, #1f2937);
+    border: 1px solid var(--gray-700, #374151);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .table {
+    background: var(--gray-800, #1f2937);
+  }
+
+  .tableHead {
+    background: var(--gray-900, #111827);
+  }
+
+  .headerRow {
+    background: var(--gray-900, #111827);
+  }
+
+  .headerCell {
+    background: var(--gray-900, #111827);
+    color: var(--gray-50, #f9fafb);
+  }
+
+  .tableBody {
+    background: var(--gray-800, #1f2937);
+  }
+
+  .emptyState {
+    background: var(--gray-800, #1f2937);
+  }
+
+  .emptyIcon {
+    color: var(--gray-400, #9ca3af);
+  }
+
+  .emptyTitle {
+    color: var(--gray-50, #f9fafb);
+  }
+
+  .emptyMessage {
+    color: var(--gray-300, #d1d5db);
+  }
+}
+
+/* High Contrast */
+@media (prefers-contrast: high) {
+  .tableContainer {
+    border-width: 2px;
+  }
+
+  .headerCell {
+    border-bottom: 2px solid var(--ai-color-surface);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .tableWrapper {
+    scroll-behavior: auto;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .tableContainer {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+
+  .table {
+    min-width: 100%;
+  }
+
+  .headerCell {
+    background: #f0f0f0 ;
+    color: #000 ;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .emptyState {
+    display: none;
+  }
+} 

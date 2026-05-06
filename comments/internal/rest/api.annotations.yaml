@@ -1,0 +1,49 @@
+type: google.api.Service
+config_version: 3
+name: comments.googleapis.com
+title: Comment Management API
+apis:
+  - name: commentspb.CommentsService
+http:
+  rules:
+    # Create a New Comment
+    - selector: commentspb.CommentsService.AddComment
+      post: /api/comments
+      body: "*"
+
+    # Approve a Comment
+    - selector: commentspb.CommentsService.ApproveComment
+      put: /api/comments/{id}/approve
+      body: "*"
+
+    # Reject a Comment
+    - selector: commentspb.CommentsService.RejectComment
+      delete: /api/comments/{id}/reject
+
+    # Edit a Comment
+    - selector: commentspb.CommentsService.EditComment
+      put: /api/comments/{id}
+      body: "*"
+
+    # Get All Comments
+    - selector: commentspb.CommentsService.GetComments
+      get: /api/comments/{item_id}/all
+
+    - selector: commentspb.CommentsService.GetCommentsBySender
+      get: /api/comments/sender
+
+    # Get a Specific Comment
+    - selector: commentspb.CommentsService.GetComment
+      get: /api/comments/{id}
+
+    # Get Approved Comments
+    - selector: commentspb.CommentsService.GetApprovedComments
+      get: /api/comments/approved
+
+    # Get a Specific Comment
+    - selector: commentspb.CommentsService.GetMostCommented
+      get: /api/comments/most
+
+    # Get a Specific Comment
+    - selector: commentspb.CommentsService.GetMostCommentedByCategory
+      get: /api/comments/most/{category_id}

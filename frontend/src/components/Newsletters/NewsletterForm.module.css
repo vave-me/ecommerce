@@ -1,0 +1,499 @@
+/* Keyframe Animation for fadeIn effect */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Keyframe for spinner animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Overlay for modal */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(44, 62, 80, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Dark theme for overlay */
+@media (prefers-color-scheme: dark) {
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+}
+
+/* Modal Container */
+.modal {
+    background-color: #ffffff;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Dark theme for modal */
+@media (prefers-color-scheme: dark) {
+    .modal {
+        background-color: var(--gray-800, #1f2937);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+}
+
+@media (max-width: 480px) {
+    .modal {
+        padding: 15px;
+    }
+}
+
+/* Modal Header */
+.modalHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 480px) {
+    .modalHeader {
+        margin-bottom: 15px;
+    }
+}
+
+/* Modal Title */
+.modalTitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+}
+
+/* Dark theme for modal title */
+@media (prefers-color-scheme: dark) {
+    .modalTitle {
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+@media (max-width: 480px) {
+    .modalTitle {
+        font-size: 18px;
+    }
+}
+
+/* Close Button */
+.closeButton {
+    background: none;
+    border: none;
+    color: #7f8c8d;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+/* Dark theme for close button */
+@media (prefers-color-scheme: dark) {
+    .closeButton {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.closeButton:hover {
+    color: #bdc3c7;
+}
+
+/* Dark theme for close button hover */
+@media (prefers-color-scheme: dark) {
+    .closeButton:hover {
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+.closeButton:focus {
+    outline: 2px solid #2c3e50;
+    outline-offset: 2px;
+}
+
+/* Dark theme for close button focus */
+@media (prefers-color-scheme: dark) {
+    .closeButton:focus {
+        outline: 2px solid var(--gray-400, #9ca3af);
+    }
+}
+
+@media (max-width: 480px) {
+    .closeButton {
+        font-size: 18px;
+    }
+}
+
+/* Form Container */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+@media (max-width: 480px) {
+    .form {
+        gap: 12px;
+    }
+}
+
+/* Form Group */
+.formGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Label */
+.label {
+    font-size: 14px;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+/* Dark theme for label */
+@media (prefers-color-scheme: dark) {
+    .label {
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+@media (max-width: 480px) {
+    .label {
+        font-size: 13px;
+    }
+}
+
+/* Required Indicator */
+.required {
+    color: #e74c3c;
+    margin-left: 2px;
+}
+
+/* Dark theme for required indicator */
+@media (prefers-color-scheme: dark) {
+    .required {
+        color: var(--danger, #ef4444);
+    }
+}
+
+/* Input Field */
+.input {
+    padding: 8px 12px;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #2c3e50;
+    transition: border-color 0.2s ease;
+}
+
+/* Dark theme for input */
+@media (prefers-color-scheme: dark) {
+    .input {
+        background-color: var(--gray-700, #374151);
+        border: 1px solid var(--gray-600, #4b5563);
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Dark theme for input focus */
+@media (prefers-color-scheme: dark) {
+    .input:focus {
+        border-color: var(--primary-color, #3b82f6);
+    }
+}
+
+@media (max-width: 480px) {
+    .input {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+}
+
+/* Textarea Field */
+.textarea {
+    padding: 8px 12px;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 100px;
+    background-color: #ffffff;
+    color: #2c3e50;
+    transition: border-color 0.2s ease;
+}
+
+/* Dark theme for textarea */
+@media (prefers-color-scheme: dark) {
+    .textarea {
+        background-color: var(--gray-700, #374151);
+        border: 1px solid var(--gray-600, #4b5563);
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.textarea:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Dark theme for textarea focus */
+@media (prefers-color-scheme: dark) {
+    .textarea:focus {
+        border-color: var(--primary-color, #3b82f6);
+    }
+}
+
+@media (max-width: 480px) {
+    .textarea {
+        padding: 6px 10px;
+        font-size: 13px;
+        min-height: 80px;
+    }
+}
+
+/* Content Editor (could be replaced with a rich text editor) */
+.contentEditor {
+    padding: 8px 12px;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 150px;
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    color: #2c3e50;
+    transition: border-color 0.2s ease;
+}
+
+/* Dark theme for content editor */
+@media (prefers-color-scheme: dark) {
+    .contentEditor {
+        background-color: var(--gray-700, #374151);
+        border: 1px solid var(--gray-600, #4b5563);
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.contentEditor:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Dark theme for content editor focus */
+@media (prefers-color-scheme: dark) {
+    .contentEditor:focus {
+        border-color: var(--primary-color, #3b82f6);
+    }
+}
+
+@media (max-width: 480px) {
+    .contentEditor {
+        padding: 6px 10px;
+        font-size: 13px;
+        min-height: 120px;
+    }
+}
+
+/* Select Dropdown */
+.select {
+    padding: 8px 12px;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #2c3e50;
+    transition: border-color 0.2s ease;
+}
+
+/* Dark theme for select */
+@media (prefers-color-scheme: dark) {
+    .select {
+        background-color: var(--gray-700, #374151);
+        border: 1px solid var(--gray-600, #4b5563);
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.select:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Dark theme for select focus */
+@media (prefers-color-scheme: dark) {
+    .select:focus {
+        border-color: var(--primary-color, #3b82f6);
+    }
+}
+
+@media (max-width: 480px) {
+    .select {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+}
+
+/* Form Actions (Buttons) */
+.formActions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+@media (max-width: 480px) {
+    .formActions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+}
+
+/* Submit Button */
+.submitButton {
+    background-color: #27ae60;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Dark theme for submit button */
+@media (prefers-color-scheme: dark) {
+    .submitButton {
+        background-color: var(--success, #10b981);
+    }
+}
+
+.submitButton:hover {
+    background-color: #1e8449;
+    transform: translateY(-2px);
+}
+
+/* Dark theme for submit button hover */
+@media (prefers-color-scheme: dark) {
+    .submitButton:hover {
+        background-color: var(--success, #059669);
+    }
+}
+
+.submitButton:focus {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+/* Dark theme for submit button focus */
+@media (prefers-color-scheme: dark) {
+    .submitButton:focus {
+        outline: 2px solid var(--gray-400, #9ca3af);
+    }
+}
+
+.submitButton:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+/* Dark theme for submit button disabled */
+@media (prefers-color-scheme: dark) {
+    .submitButton:disabled {
+        background-color: var(--gray-600, #4b5563);
+    }
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+}
+
+@media (max-width: 480px) {
+    .submitButton {
+        padding: 7px 14px;
+        font-size: 13px;
+    }
+}
+
+/* Cancel Button */
+.cancelButton {
+    background-color: #7f8c8d;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Dark theme for cancel button */
+@media (prefers-color-scheme: dark) {
+    .cancelButton {
+        background-color: var(--gray-600, #4b5563);
+    }
+}
+
+.cancelButton:hover {
+    background-color: #606f7b;
+    transform: translateY(-2px);
+}
+
+/* Dark theme for cancel button hover */
+@media (prefers-color-scheme: dark) {
+    .cancelButton:hover {
+        background-color: var(--gray-500, #6b7280);
+    }
+}
+
+.cancelButton:focus {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+/* Dark theme for cancel button focus */
+@media (prefers-color-scheme: dark) {
+    .cancelButton:focus {
+        outline: 2px solid var(--gray-400, #9ca3af);
+    }
+}
+
+@media (max-width: 480px) {
+    .cancelButton {
+        padding: 7px 14px;
+        font-size: 13px;
+    }
+}

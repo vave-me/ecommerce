@@ -1,0 +1,240 @@
+package tools
+
+import ai2 "middleman/internal/ai"
+
+func createBasketTools() []ai2.Tool {
+	return []ai2.Tool{
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "basket_add_item",
+				Description: "Add an item to the user's shopping basket",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"basket_item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Unique ID for this basket item",
+						},
+						"basket_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The basket ID to add the item to",
+						},
+						"product_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The product ID to add",
+						},
+						"variant_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Optional variant ID for the product",
+						},
+						"quantity": map[string]interface{}{
+							"type":        "integer",
+							"description": "Quantity of the item to add",
+							"minimum":     1,
+							"default":     1,
+						},
+					},
+					"required": []string{"basket_item_id", "basket_id", "product_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "basket_create_new_basket",
+				Description: "Create a new shopping basket for a user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"basket_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Unique identifier for the basket",
+						},
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The user who owns this basket",
+						},
+					},
+					"required": []string{"basket_id", "user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "basket_add_product_to_basket",
+				Description: "Add a product to a shopping basket",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"basket_item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Unique ID for this basket item",
+						},
+						"basket_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The basket to add the item to",
+						},
+						"product_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The product to add",
+						},
+						"variant_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Optional product variant ID",
+						},
+						"quantity": map[string]interface{}{
+							"type":        "integer",
+							"description": "Quantity to add",
+							"minimum":     1,
+							"default":     1,
+						},
+					},
+					"required": []string{"basket_item_id", "basket_id", "product_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "basket_remove_product_from_basket",
+				Description: "Remove a product from a basket",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"basket_item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The basket item ID to remove",
+						},
+					},
+					"required": []string{"basket_item_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "basket_get_basket_by_id",
+				Description: "Get a basket by ID",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"basket_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The basket ID to find",
+						},
+					},
+					"required": []string{"basket_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "basket_get_all_basket_items",
+				Description: "Get all items in a basket",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"basket_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The basket ID to get items from",
+						},
+					},
+					"required": []string{"basket_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "basket_update_basket_item_quantity",
+				Description: "Update the quantity of an item in the basket",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"basket_item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The basket item to update",
+						},
+						"quantity": map[string]interface{}{
+							"type":        "integer",
+							"description": "New quantity",
+							"minimum":     1,
+						},
+					},
+					"required": []string{"basket_item_id", "quantity"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "basket_clear_all_basket_items",
+				Description: "Remove all items from a basket",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"basket_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The basket to clear",
+						},
+					},
+					"required": []string{"basket_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "basket_get_user_current_basket",
+				Description: "Get a user's current basket",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The user ID to find basket for",
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "basket_get_basket_item_count",
+				Description: "Get total number of items in a basket",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"basket_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The basket to count items in",
+						},
+					},
+					"required": []string{"basket_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "basket_calculate_basket_total",
+				Description: "Calculate the total price of all items in a basket",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"basket_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The basket to calculate total for",
+						},
+					},
+					"required": []string{"basket_id"},
+				},
+			},
+		},
+	}
+}

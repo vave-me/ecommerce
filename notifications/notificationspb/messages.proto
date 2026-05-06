@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+package notificationspb;
+
+
+message UserAlertAdded {
+  string user_id = 1;
+  string message = 2;
+}
+
+message ProductAlertAdded {
+  string user_id = 1;
+  string product_id = 2;
+  string message = 3;
+}
+
+message BasketAlertAdded {
+  string basket_id = 1;
+  string user_id = 2;
+  string product_id = 3;
+  string message = 4;
+}
+message OrderAlertAdded {
+  string user_id = 1;
+  string product_id = 2;
+  string message = 3;
+}
+message WishlistAlertAdded{
+  string wishlist_id = 1;
+  string user_id = 2;
+  string product_id = 3;
+  string message = 4;
+}
+
+message MessageAlertAdded{
+  string message_id = 1;
+  string user_id = 2;
+  string sender_id = 3;
+  string product_id = 4;
+  string message = 5;
+}
+
+message InteractionAlertAdded{
+  string user_id = 1;
+  string product_id = 2;
+  string message = 3;
+}
+
+message CommentAlertAdded{
+  string comment_id = 1;
+  string user_id = 2;
+  string sender_id = 3;
+  string product_id = 4;
+  string message = 5;
+}
+message OfferAlertAdded{
+  string offer_id = 1;
+  string user_id = 2;
+  string sender_id = 3;
+  string product_id = 4;
+  string message = 5;
+}
+message SupportAlertAdded{
+  string user_id = 1;
+  string ticket_id = 2;
+  string message = 3;
+}
+
+message ReviewAlertAdded {
+  string review_id = 1;
+  string user_id = 2;
+  string product_id = 3;
+  string message = 4;
+}
+
+message PaymentAlertAdded {
+  string payment_id = 1;
+  string user_id = 2;
+  string order_id = 3;
+  string message = 4;
+}
+
+message FollowingAlertAdded {
+  string follower_id = 1;
+  string user_id = 2;
+  string message = 3;
+}
+
+message AlertRead {
+  string id = 1;
+}
+

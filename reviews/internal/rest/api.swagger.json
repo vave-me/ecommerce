@@ -1,0 +1,603 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Review Management API",
+    "description": "API for managing reviews and replies between users, including functionalities to add, approve, reject, edit, and retrieve reviews and their replies.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "ReviewsService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/reviews": {
+      "post": {
+        "summary": "Add a new review",
+        "operationId": "addReview",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/reviewspbAddReviewResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request message to add a new review.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/reviewspbAddReviewRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Review"
+        ]
+      }
+    },
+    "/api/reviews/approved": {
+      "get": {
+        "summary": "Get approved reviews",
+        "operationId": "getApprovedReviews",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/reviewspbGetApprovedReviewsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Review"
+        ]
+      }
+    },
+    "/api/reviews/most": {
+      "get": {
+        "summary": "Get items count",
+        "operationId": "getMostReviewed",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/reviewspbGetMostReviewedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "ItemReviewCount"
+        ]
+      }
+    },
+    "/api/reviews/most/{categoryId}": {
+      "get": {
+        "summary": "Get items count",
+        "operationId": "getMostReviewedByCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/reviewspbGetMostReviewedByCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ItemReviewCount"
+        ]
+      }
+    },
+    "/api/reviews/sender/{senderId}": {
+      "get": {
+        "summary": "Get a list of reviews",
+        "operationId": "getReviewsBySender",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/reviewspbGetReviewsBySenderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "senderId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Review"
+        ]
+      }
+    },
+    "/api/reviews/{id}": {
+      "get": {
+        "summary": "Get a review",
+        "operationId": "getReview",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/reviewspbGetReviewResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier of the review to retrieve.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Review"
+        ]
+      },
+      "put": {
+        "summary": "Edit a review",
+        "operationId": "editReview",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/reviewspbEditReviewResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReviewsServiceEditReviewBody"
+            }
+          }
+        ],
+        "tags": [
+          "Review"
+        ]
+      }
+    },
+    "/api/reviews/{id}/approve": {
+      "put": {
+        "summary": "Approve a review",
+        "operationId": "approveReview",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/reviewspbApproveReviewResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReviewsServiceApproveReviewBody"
+            }
+          }
+        ],
+        "tags": [
+          "Review"
+        ]
+      }
+    },
+    "/api/reviews/{id}/reject": {
+      "delete": {
+        "summary": "Reject a review",
+        "operationId": "rejectReview",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/reviewspbRejectReviewResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Review"
+        ]
+      }
+    },
+    "/api/reviews/{itemId}/all": {
+      "get": {
+        "summary": "Get a list of reviews",
+        "operationId": "getReviews",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/reviewspbGetReviewsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Review"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ReviewsServiceApproveReviewBody": {
+      "type": "object"
+    },
+    "ReviewsServiceEditReviewBody": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "reviewspbAddReviewRequest": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string"
+        },
+        "itemType": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "string"
+        }
+      },
+      "description": "Request message to add a new review."
+    },
+    "reviewspbAddReviewResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the created review."
+        }
+      },
+      "description": "Response message after adding a new review."
+    },
+    "reviewspbApproveReviewResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "reviewStatus": {
+          "type": "string"
+        },
+        "approvedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "reviewspbEditReviewResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+    "reviewspbFlagReviewResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "flagged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "reviewspbGetApprovedReviewsResponse": {
+      "type": "object",
+      "properties": {
+        "reviews": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/reviewspbReview"
+          },
+          "description": "List of approved reviews."
+        }
+      },
+      "description": "Response message for retrieving approved reviews."
+    },
+    "reviewspbGetMostReviewedByCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "itemReviewCount": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/reviewspbItemReviewCount"
+          },
+          "description": "Number of reviews per page."
+        }
+      },
+      "description": "Response message for retrieving a list of reviews."
+    },
+    "reviewspbGetMostReviewedResponse": {
+      "type": "object",
+      "properties": {
+        "itemReviewCount": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/reviewspbItemReviewCount"
+          },
+          "description": "List of reviews."
+        }
+      },
+      "description": "Response message for retrieving a list of reviews."
+    },
+    "reviewspbGetReviewResponse": {
+      "type": "object",
+      "properties": {
+        "review": {
+          "$ref": "#/definitions/reviewspbReview",
+          "description": "Details of the requested review."
+        }
+      },
+      "description": "Response message for retrieving a review."
+    },
+    "reviewspbGetReviewsBySenderResponse": {
+      "type": "object",
+      "properties": {
+        "reviews": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/reviewspbReview"
+          },
+          "description": "List of reviews."
+        }
+      }
+    },
+    "reviewspbGetReviewsResponse": {
+      "type": "object",
+      "properties": {
+        "reviews": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/reviewspbReview"
+          },
+          "description": "List of reviews."
+        }
+      },
+      "description": "Response message for retrieving a list of reviews."
+    },
+    "reviewspbItemReviewCount": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "reviewsCount": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "reviewspbRejectReviewResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "reviewStatus": {
+          "type": "string"
+        }
+      }
+    },
+    "reviewspbRemoveReviewResponse": {
+      "type": "object"
+    },
+    "reviewspbReview": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the review."
+        },
+        "senderId": {
+          "type": "string",
+          "description": "Unique identifier of the user who made the review."
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "itemType": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string",
+          "description": "Unique identifier of the item being reviewed on."
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "reviewStatus": {
+          "type": "string",
+          "description": "Current status of the review."
+        },
+        "flagged": {
+          "type": "boolean",
+          "description": "Indicates if the review has been flagged."
+        }
+      },
+      "description": "Review represents a user's review on a item."
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

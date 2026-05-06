@@ -1,0 +1,765 @@
+/* ================================
+   PAGE CONTAINER
+================================ */
+
+/*
+  A main wrapper for your page content.
+  Provides a max-width, horizontal centering,
+  and top padding for any fixed header, etc.
+*/
+
+.pageContainer {
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 100vh;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #2f2f2f;
+    font-size: 15px;
+    line-height: 1.5;
+    transition: padding-top 0.2s ease; /* smooth transitions on layout changes */
+}
+
+@media (max-width: 768px) {
+    .pageContainer {
+        font-size: 14px;
+    }
+}
+
+/* ================================
+   MAIN CONTENT LAYOUT
+================================ */
+
+.mainContent {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+    min-height: calc(100vh - 48px);
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.introCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border: 1px solid #dbe2ea;
+    border-radius: 14px;
+    background: #f8fafc;
+    padding: 16px;
+}
+
+.introTitle {
+    margin: 0;
+    font-size: clamp(1.2rem, 2.6vw, 1.6rem);
+    line-height: 1.2;
+    color: #142638;
+}
+
+.introText {
+    margin: 8px 0 0;
+    color: #42586d;
+    line-height: 1.55;
+    max-width: 66ch;
+}
+
+.introLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: 10px;
+    border: 1px solid #1f3a52;
+    background: #1f3a52;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.introLink:hover {
+    background: #162d41;
+    border-color: #162d41;
+}
+
+@media (max-width: 1400px) {
+    .mainContent {
+        gap: 16px;
+        padding: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mainContent {
+        gap: 8px;
+        padding: 8px;
+        min-height: auto;
+    }
+
+    .introCard {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px;
+    }
+
+    .introLink {
+        width: 100%;
+    }
+}
+
+/* ================================
+   COMPOSER SECTION
+================================ */
+.composerSection {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .composerSection {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+}
+
+/* ================================
+   COMPOSER + AD CONTAINER
+================================ */
+.composerAdContainer {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.composerWrapper {
+    flex: 0 0 80%;
+    width: 80%;
+}
+
+.adWrapper {
+    flex: 0 0 20%;
+    width: 20%;
+    min-width: 200px;
+}
+
+@media (max-width: 1024px) {
+    .composerAdContainer {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .composerWrapper,
+    .adWrapper {
+        flex: 1;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .composerAdContainer {
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+}
+
+/* ================================
+   SIDEBAR
+================================ */
+
+.sidebar {
+    /* Make sidebar sticky and scrollable independently */
+    position: sticky;
+    top: 24px;
+    height: calc(100vh - 120px);
+    max-height: calc(100vh - 120px);
+    min-height: 400px;
+    overflow-y: auto;
+    /* Add scroll isolation */
+    overscroll-behavior: contain;
+    contain: layout;
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+/* ================================
+   REMOVED GRID COLUMN LAYOUT - Using single column layout with horizontal filters
+================================ */
+
+.quickLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.quickLink {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: var(--radius-md, 8px);
+    transition: background-color 0.2s ease, color 0.2s ease;
+    background-color: var(--primary-color-light);
+}
+
+.quickLink:hover {
+    background-color: rgba(79, 70, 229, 0.2);
+    transform: translateX(4px);
+}
+
+.usersList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ================================
+   MAIN CONTENT
+================================ */
+
+.mainContent {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    /* Allow natural content flow without height constraints */
+    overscroll-behavior: contain;
+    contain: layout style;
+    touch-action: pan-y;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Mobile constraints for main content */
+@media (max-width: 768px) {
+    .mainContent {
+        gap: 8px;
+        padding: 0;
+        overflow-x: hidden;
+    }
+}
+
+
+.feedSection {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ================================
+   FEED LOADING STATES
+================================ */
+
+.feedLoading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid #f3f4f6;
+    border-top: 3px solid #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 12px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.feedItemLoading {
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.loadingSkeleton {
+    background-color: var(--gray-100, #f3f4f6);
+    /* Shimmer animation removed for performance */
+    height: 200px;
+    border-radius: var(--radius-lg, 12px);
+}
+
+/* Shimmer keyframes removed for performance */
+
+.initialFeedItems {
+    display: grid;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Desktop: 4 columns */
+@media (min-width: 1024px) {
+    .initialFeedItems {
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: max-content; /* Each row takes only needed height */
+        max-width: 1400px;
+        margin: 0 auto;
+        align-items: start; /* Prevent cards from stretching */
+    }
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .initialFeedItems {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 680px;
+        margin: 0 auto;
+    }
+}
+
+/* Mobile: 1 column */
+@media (max-width: 767px) {
+    .initialFeedItems {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.feedItemContainer {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+    box-sizing: border-box;
+    align-items: flex-start; /* Prevent vertical stretching */
+    height: fit-content; /* Use content height */
+}
+
+/* Ensure feed items don't overflow on mobile */
+@media (max-width: 768px) {
+    .feedItemContainer {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .feedItemContainer > * {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+.errorFallback {
+    text-align: center;
+    padding: 32px;
+    color: #dc2626;
+    background-color: #fef2f2;
+    border-radius: 8px;
+    margin: 16px 0;
+}
+
+.emptyFeed {
+    text-align: center;
+    padding: 48px 24px;
+    color: #6b7280;
+    font-size: 16px;
+}
+
+.endOfFeed {
+    text-align: center;
+    padding: 24px;
+    color: #9ca3af;
+    font-size: 14px;
+    border-top: 1px solid #f3f4f6;
+    margin-top: 16px;
+}
+
+/* ================================
+   SECTION CONTAINER
+================================ */
+
+/*
+  Generic sections with background and spacing.
+*/
+.sectionContainer {
+    padding: 16px;
+    margin-bottom: 16px;
+    border-radius: var(--radius-lg, 12px);
+    background-color: var(--surface, #ffffff);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Larger screens can adjust spacing if desired */
+@media (min-width: 992px) {
+    .sectionContainer {
+        padding: 10px 10px;
+        margin-bottom: 8px;
+    }
+}
+
+/* ================================
+   SECTION TITLE
+================================ */
+
+/*
+  Titles for each section.
+  We use Montserrat for a cohesive heading style.
+*/
+.sectionTitle {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    color: #2d3748;
+    letter-spacing: 0.2px;
+    margin-bottom: 16px;
+    line-height: 1;
+    font-size: 1.2rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/*
+  If you want to place "show more" links or other small links
+  next to the heading, style them here.
+*/
+.sectionTitle a {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.sectionTitle a:hover {
+    color: var(--primary-color-hover);
+}
+
+/* ================================
+   VIEW ALL LINK
+================================ */
+
+.viewAllLink {
+    display: inline-block;
+    margin-top: 12px;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.viewAllLink:hover {
+    color: var(--primary-color-hover);
+    text-decoration: underline;
+}
+
+/* ================================
+   FOOTER
+================================ */
+
+.footer {
+    background-color: var(--surface-tertiary, #f3f4f6);
+    text-align: center;
+    padding: 24px;
+    margin-top: 40px;
+    border-radius: var(--radius-lg, 12px);
+    transition: padding 0.2s ease;
+}
+
+@media (min-width: 992px) {
+    .footer {
+        padding: 24px;
+        margin-top: 40px;
+        border-radius: var(--radius-md, 8px);
+    }
+}
+
+/*
+  Typically, a short paragraph or disclaimer text in the footer.
+*/
+.footer p {
+    margin: 8px 0 0;
+    font-size: 0.88rem;
+    color: #6b7280;
+}
+
+@media (min-width: 992px) {
+    .footer p {
+        font-size: 0.95rem;
+    }
+}
+
+/*
+  A container for footer links
+  (Help, Contact, About, etc.).
+*/
+.footerLinks {
+    margin-bottom: 12px;
+}
+
+/*
+  Footer links styling with a simple hover state.
+*/
+.footerLinks a {
+    color: #2980b9;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    margin: 0 8px;
+}
+
+/*
+  Underline on hover to differentiate from normal text
+  and enhance discoverability.
+*/
+.footerLinks a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+/* ================================
+   RESPONSIVE ADJUSTMENTS
+================================ */
+
+/* Removed duplicate mobile breakpoint - consolidated above */
+
+@media (max-width: 480px) {
+    .mainGrid {
+        padding: 0;
+        gap: 4px;
+        max-width: 100vw;
+    }
+
+    .sectionContainer {
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+    }
+
+    .sectionTitle {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .quickLink {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+
+    .footer {
+        padding: 12px;
+        margin-top: 16px;
+        border-radius: 6px;
+    }
+
+    .footerLinks a {
+        margin: 0 4px;
+        font-size: 0.85rem;
+    }
+}
+
+.meta {
+    color: var(--neutral-color);
+    font-size: 0.875rem;
+    margin-bottom: 4px;
+}
+
+/* ================================
+   DARK THEME SUPPORT
+================================ */
+
+@media (prefers-color-scheme: dark) {
+    /* ============= PAGE CONTAINER ============= */
+    .pageContainer {
+        color: var(--gray-50);
+        background-color: var(--gray-900);
+    }
+
+    /* ============= SIDEBAR ============= */
+    .sidebar {
+        background-color: var(--gray-800);
+        border-color: var(--gray-700);
+    }
+
+    .sidebar.open {
+        background-color: var(--gray-800);
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.4);
+    }
+
+    /* ============= QUICK LINKS ============= */
+    .quickLink {
+        color: var(--primary-color);
+        background-color: rgba(var(--primary-color-rgb, 59, 130, 246), 0.1);
+        border: 1px solid rgba(var(--primary-color-rgb, 59, 130, 246), 0.2);
+    }
+
+    .quickLink:hover {
+        background-color: rgba(var(--primary-color-rgb, 59, 130, 246), 0.2);
+        border-color: rgba(var(--primary-color-rgb, 59, 130, 246), 0.3);
+    }
+
+    /* ============= MAIN CONTENT ============= */
+    .mainContent {
+        background-color: var(--gray-900);
+    }
+
+    /* ============= FEED LOADING STATES ============= */
+    .feedLoading {
+        color: var(--gray-400);
+        background-color: var(--gray-800);
+        border-radius: var(--radius-lg, 12px);
+    }
+
+    .spinner {
+        border-color: var(--gray-700);
+        border-top-color: var(--primary-color);
+    }
+
+    .loadingSkeleton {
+        background-color: var(--gray-800);
+        background-image: linear-gradient(
+            90deg,
+            var(--gray-800) 0%,
+            var(--gray-700) 50%,
+            var(--gray-800) 100%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+    }
+
+    @keyframes shimmer {
+        0% {
+            background-position: -200% 0;
+        }
+        100% {
+            background-position: 200% 0;
+        }
+    }
+
+    .errorFallback {
+        color: var(--danger);
+        background-color: var(--gray-800);
+        border: 1px solid var(--danger);
+    }
+
+    .emptyFeed {
+        color: var(--gray-400);
+        background-color: var(--gray-800);
+        border-radius: var(--radius-lg, 12px);
+    }
+
+    .endOfFeed {
+        color: var(--gray-500);
+        border-top-color: var(--gray-700);
+        background-color: var(--gray-800);
+    }
+
+    /* ============= SECTION CONTAINER ============= */
+    .sectionContainer {
+        background-color: var(--gray-800);
+        border: 1px solid var(--gray-700);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ============= SECTION TITLE ============= */
+    .sectionTitle {
+        color: var(--gray-50);
+    }
+
+    .sectionTitle a {
+        color: var(--primary-color);
+    }
+
+    .sectionTitle a:hover {
+        color: var(--primary-color-hover);
+    }
+
+    /* ============= VIEW ALL LINK ============= */
+    .viewAllLink {
+        color: var(--primary-color);
+    }
+
+    .viewAllLink:hover {
+        color: var(--primary-color-hover);
+    }
+
+    /* ============= FOOTER ============= */
+    .footer {
+        background-color: var(--gray-800);
+        border: 1px solid var(--gray-700);
+        color: var(--gray-300);
+    }
+
+    .footer p {
+        color: var(--gray-400);
+    }
+
+    .footerLinks a {
+        color: var(--primary-color);
+    }
+
+    .footerLinks a:hover {
+        color: var(--primary-color-hover);
+    }
+
+    /* ============= META ============= */
+    .meta {
+        color: var(--gray-400);
+    }
+
+    /* ============= MOBILE RESPONSIVE OVERRIDES ============= */
+    @media (max-width: 768px) {
+        .sidebar {
+            background-color: var(--gray-800);
+            border-right: 1px solid var(--gray-700);
+        }
+
+        .sidebar.open {
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .sectionContainer {
+            background-color: var(--gray-800);
+            border-color: var(--gray-700);
+        }
+
+        .footer {
+            background-color: var(--gray-800);
+            border-color: var(--gray-700);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .sectionContainer {
+            background-color: var(--gray-800);
+            border-color: var(--gray-700);
+        }
+
+        .footer {
+            background-color: var(--gray-800);
+            border-color: var(--gray-700);
+        }
+
+        .footerLinks a {
+            color: var(--primary-color);
+        }
+    }
+}

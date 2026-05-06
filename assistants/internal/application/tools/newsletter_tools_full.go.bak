@@ -1,0 +1,471 @@
+package tools
+
+import ai2 "middleman/internal/ai"
+
+func createNewsletterTools() []ai2.Tool {
+	return []ai2.Tool{
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_subscribe",
+				Description: "Subscribe a user to a newsletter",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "User ID of the subscriber",
+							"minLength":   1,
+						},
+						"newsletter_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Newsletter ID to subscribe to",
+							"minLength":   1,
+						},
+						"preferences": map[string]interface{}{
+							"type":        "array",
+							"description": "Subscription preferences",
+							"items": map[string]interface{}{
+								"type": "string",
+							},
+						},
+					},
+					"required": []string{"user_id", "newsletter_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_unsubscribe",
+				Description: "Unsubscribe from a newsletter",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"subscription_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the subscription to cancel",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"subscription_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_get_subscription",
+				Description: "Get details of a specific newsletter subscription",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"subscription_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the subscription",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"subscription_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_list_subscriptions",
+				Description: "List newsletter subscriptions with filtering",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Filter by user ID",
+						},
+						"subscription_status": map[string]interface{}{
+							"type":        "string",
+							"description": "Filter by subscription status",
+							"enum":        []string{"active", "inactive", "paused", "cancelled"},
+						},
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number for pagination",
+							"minimum":     1,
+							"default":     1,
+						},
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Number of results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+					},
+					"required": []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_update_subscription",
+				Description: "Update newsletter subscription preferences or status",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"subscription_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the subscription to update",
+							"minLength":   1,
+						},
+						"subscription_preferences": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated JSON string of subscription preferences",
+						},
+						"subscription_status": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated subscription status",
+							"enum":        []string{"active", "inactive", "paused", "cancelled"},
+						},
+					},
+					"required": []string{"subscription_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_send",
+				Description: "Send a newsletter to subscribers",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"newsletter_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the newsletter to send",
+							"minLength":   1,
+						},
+						"content": map[string]interface{}{
+							"type":        "string",
+							"description": "The content of the newsletter (HTML or plain text)",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"newsletter_id", "content"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_get_subscriptions_by_user",
+				Description: "Get all newsletter subscriptions for a specific user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the user",
+							"minLength":   1,
+						},
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of results",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_get_subscriptions_by_newsletter",
+				Description: "Get all subscriptions for a specific newsletter",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"newsletter_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the newsletter",
+							"minLength":   1,
+						},
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of results",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+					},
+					"required": []string{"newsletter_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_get_active_subscriptions",
+				Description: "Get all active newsletter subscriptions for a user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the user",
+							"minLength":   1,
+						},
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of results",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_search_subscriptions",
+				Description: "Search user's newsletter subscriptions",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the user",
+							"minLength":   1,
+						},
+						"query": map[string]interface{}{
+							"type":        "string",
+							"description": "Search query for newsletter names or descriptions",
+							"minLength":   1,
+						},
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of results",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+					},
+					"required": []string{"user_id", "query"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_count_subscriptions",
+				Description: "Count subscriptions based on filters",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Filter by user ID",
+						},
+						"subscription_status": map[string]interface{}{
+							"type":        "string",
+							"description": "Filter by subscription status",
+							"enum":        []string{"active", "inactive", "paused", "cancelled"},
+						},
+					},
+					"required": []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_count_active_subscriptions",
+				Description: "Count active subscriptions for a user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the user",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_count_by_newsletter",
+				Description: "Count subscriptions for a specific newsletter",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"newsletter_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the newsletter",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"newsletter_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_get",
+				Description: "Get details of a specific newsletter",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"newsletter_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the newsletter",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"newsletter_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_get_all",
+				Description: "Get all newsletters with optional status filter",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"status": map[string]interface{}{
+							"type":        "string",
+							"description": "Filter by newsletter status",
+							"enum":        []string{"active", "inactive", "draft", "archived"},
+						},
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of results",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+					},
+					"required": []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_search",
+				Description: "Search newsletters by name or content",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"query": map[string]interface{}{
+							"type":        "string",
+							"description": "Search query for newsletter names or descriptions",
+							"minLength":   1,
+						},
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of results",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+					},
+					"required": []string{"query"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_is_subscribed",
+				Description: "Check if an email is subscribed to the newsletter",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"email": map[string]interface{}{
+							"type":        "string",
+							"description": "Email address to check",
+							"format":      "email",
+						},
+					},
+					"required": []string{"email"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_get_subscribers",
+				Description: "Get a list of newsletter subscribers",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of subscribers to return",
+							"minimum":     1,
+							"maximum":     1000,
+							"default":     100,
+						},
+					},
+					"required": []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_get_history",
+				Description: "Get newsletter sending history",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of history entries to return",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     50,
+						},
+					},
+					"required": []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "newsletter_update_preferences",
+				Description: "Update subscriber email preferences",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"email": map[string]interface{}{
+							"type":        "string",
+							"description": "Subscriber email address",
+							"format":      "email",
+						},
+						"preferences": map[string]interface{}{
+							"type":                 "object",
+							"description":          "Preference settings to update",
+							"additionalProperties": true,
+						},
+					},
+					"required": []string{"email", "preferences"},
+				},
+			},
+		},
+	}
+}

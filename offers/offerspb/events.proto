@@ -1,0 +1,171 @@
+syntax = "proto3";
+
+package offerspb;
+
+message OfferCreated {
+  string id = 1;
+  string user_seller_id = 2;
+  string user_customer_id = 3;
+  string product_id = 4;
+  int64 price = 5;
+}
+
+message OfferActivated {
+  string id = 1;
+  string offer_id = 2;
+}
+
+message OfferAccepted {
+  string id = 1;
+  string offer_id = 2;
+  string user_customer_id = 3;
+}
+message OfferClosed {
+  string id = 1;
+  string offer_id = 2;
+  string reason = 3;
+}
+
+message BuyNowCreated {
+  string id = 1;
+  string offer_id = 2;
+  int64 final_price = 3;
+}
+
+message BuyNowConfirmed{
+  string id = 1;
+  string buy_now_id = 2;
+}
+
+message BuyNowCanceled {
+  string id = 1;
+  string buy_now_id = 2;
+}
+
+message LeaseCreated {
+  string id = 1;
+  string offer_id = 2;
+  int64 monthly_price = 3;
+  int64 lease_term_months = 4;
+  bool has_buyout = 5;
+  int64 buyout_price = 6;
+  string lease_status = 7;
+}
+
+message LeaseStarted {
+  string id = 1;
+  string lease_id = 2;
+  string lease_start_date = 3;
+  string lease_end_date = 4;
+}
+
+message LeasePaymentMade {
+  string id = 1;
+  string lease_id = 2;
+  int64  amount = 3;
+  string payment_date = 4;
+}
+
+message LeaseBuyoutExecuted{
+  string id = 1;
+  string lease_id = 2;
+  int64 buyout_amount = 3;
+}
+
+message LeaseEnded {
+  string id = 1;
+  string lease_id = 2;
+}
+
+
+
+message LeaseCanceled {
+  string id = 1;
+  string lease_id = 2;
+}
+message LeaseDefaulted {
+  string id = 1;
+  string lease_id = 2;
+  string reason = 3;
+}
+
+message BuyBackCreated {
+  string id = 1;
+  string offer_id = 2;
+  int64  locked_price = 3;
+  int64 redemption_price = 4;
+  string lock_buyer_id = 5;
+  string lock_start_at = 6;
+  string lock_expires_at = 7;
+  string buyBack_status = 8;
+}
+
+message BuyBackRedeemed {
+  string id = 1;
+  string buyBack_id = 2;
+
+}
+
+message BuyBackExpired {
+  string id = 1 ;
+  string buyBack_id = 2;
+}
+
+message BuyBackCanceled {
+  string id = 1;
+  string buyBack_id = 2;
+}
+
+
+
+message ReservationCreated {
+  string id = 1;
+  string offer_id = 2;
+  int64 locked_price = 3;
+  int64 reservation_fee = 4;
+  string lock_buyer_id = 5;
+  string lock_start_at = 6;
+  string lock_expires_at = 7;
+  string reservation_status = 8;
+  bool is_free = 9;
+}
+
+// ReservationRedeemed
+message ReservationRedeemed {
+  string id = 1;
+  string reservation_id = 2;
+}
+
+// ReservationExpired
+message ReservationExpired {
+  string id = 1 ;
+  string reservation_id = 2;
+}
+
+// ReservationCanceled
+message ReservationCanceled {
+  string id = 1;
+  string reservation_id = 2;
+}
+
+// Negotiation
+message ReservationNegotiationRequested {
+  string id = 1;
+  string reservation_id = 2;
+  int64 new_locked_price = 3;
+  int64 new_reservation_fee = 4; // if adjusting fee
+  string message = 5;
+}
+
+message ReservationNegotiationAccepted {
+  string id = 1;
+  string reservation_id = 2;
+  int64 agreed_locked_price = 3;
+  int64 agreed_reservation_fee = 4;
+}
+
+message ReservationNegotiationDeclined {
+  string id = 1;
+  string reservation_id = 2;
+  string reason = 3;
+}

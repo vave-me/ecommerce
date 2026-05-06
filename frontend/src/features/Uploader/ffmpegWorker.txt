@@ -1,0 +1,42 @@
+/* eslint-env worker */
+/* global importScripts, self */
+"use client";
+
+// Now ESLint knows 'worker' env is used,
+// and importScripts/self won't trigger no-undef errors.
+import { FFmpeg } from "@ffmpeg/ffmpeg";
+
+importScripts('https://unpkg.com/@ffmpeg/ffmpeg@0.10.1/dist/ffmpeg.min.jsx');
+
+const { createFFmpeg, fetchFile } = FFmpeg;
+
+const ffmpeg = createFFmpeg({ log: true });
+
+self.onmessage = async (e) => {
+    const { file } = e.data;
+
+    if (!ffmpeg.isLoaded()) {
+        await ffmpeg.load();
+    }
+
+    ffmpeg.FS('writeFile', file.name, await fetchFile(file));
+
+    // Optimize FFmpeg command for speed
+    await ffmpeg.run(
+        '-i', file.name,
+        '-c:v', 'libx264',
+        '-preset', 'veryfast', // Faster preset
+        '-crf', '28',          // Adjust CRF for quality/speed balance
+        '-vf', 'transpose=1',  // Rotate 90 degrees clockwise
+        'output.mp4'
+    );
+
+    const data = ffmpeg.FS('readFile', 'output.mp4');
+    const rotatedBlob = new Blob([data.buffer], { type: 'video/mp4' });
+
+    // Cleanup
+    ffmpeg.FS('unlink', file.name);
+    ffmpeg.FS('unlink', 'output.mp4');
+
+    self.postMessage({ rotatedBlob });
+};

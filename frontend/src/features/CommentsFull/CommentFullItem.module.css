@@ -1,0 +1,243 @@
+.commentContainer {
+    margin-bottom: 8px;
+    /* We'll replicate the dynamic padding-left: e.g. style={{ paddingLeft: Math.min(depth * 15, 30) }} in JSX */
+}
+
+.commentBox {
+    border-bottom: 1px solid #e6e6e6;
+    transition: background-color 0.2s ease; /* optional hover transition */
+}
+
+.commentBox:hover {
+    background-color: #f2f2f2;
+}
+
+/* Header */
+.commentHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+/* The user name text */
+.commentUser {
+    font-weight: 600;
+    font-size: 12px;
+    color: #1aa89e;
+    margin-left: 8px;
+}
+
+/* The time text */
+.commentTime {
+    font-size: 12px;
+    color: #666666;
+    margin-left: auto;
+}
+
+/* The main comment content text */
+.commentContent {
+    font-size: 14px;
+    color: #333333;
+    margin: 8px 0;
+    padding: 6px 6px 2px 12px;
+    line-height: 1.4;
+}
+
+/* Actions row: reply, like, etc. */
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Base style for reply/like/dislike/share buttons */
+.replyButton {
+    background: none;
+    border: none;
+    color: #1aa89e;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: background-color 0.1s ease;
+}
+
+.replyButton:hover {
+    background-color: rgba(26, 168, 158, 0.1);
+}
+
+.replyButton:focus {
+    outline: 2px solid #1aa89e;
+    outline-offset: 2px;
+}
+
+/* Variation for action (like,dislike) buttons */
+.actionButton {
+    color: #555555;
+}
+
+.actionButton:hover {
+    background-color: rgba(85, 85, 85, 0.1);
+}
+
+/* Variation for view replies button */
+.viewRepliesButton {
+    color: #555555;
+}
+
+.viewRepliesButton:hover {
+    background-color: rgba(85, 85, 85, 0.1);
+}
+
+/* Wrapper for the reply input field */
+.replyInputWrapper {
+    margin-top: 10px;
+}
+
+/* Nested replies container */
+.repliesList {
+    margin-top: 10px;
+    padding-left: 18px;
+    border-left: 1.5px solid #e6e6e6;
+}
+
+/* ===== DARK THEME SUPPORT ===== */
+@media (prefers-color-scheme: dark) {
+    .commentBox {
+        border-bottom-color: var(--gray-700, #374151);
+        background-color: var(--gray-800, #1f2937);
+    }
+
+    .commentBox:hover {
+        background-color: var(--gray-750, #2d3748);
+    }
+
+    .commentUser {
+        color: var(--teal-400, #2dd4bf);
+    }
+
+    .commentTime {
+        color: var(--gray-400, #9ca3af);
+    }
+
+    .commentContent {
+        color: var(--gray-200, #e5e7eb);
+    }
+
+    .replyButton {
+        color: var(--teal-400, #2dd4bf);
+    }
+
+    .replyButton:hover {
+        background-color: rgba(45, 212, 191, 0.1);
+    }
+
+    .replyButton:focus {
+        outline-color: var(--teal-400, #2dd4bf);
+    }
+
+    .actionButton {
+        color: var(--gray-400, #9ca3af);
+    }
+
+    .actionButton:hover {
+        background-color: var(--gray-700, #374151);
+        color: var(--gray-200, #e5e7eb);
+    }
+
+    .viewRepliesButton {
+        color: var(--gray-400, #9ca3af);
+    }
+
+    .viewRepliesButton:hover {
+        background-color: var(--gray-700, #374151);
+        color: var(--gray-200, #e5e7eb);
+    }
+
+    .repliesList {
+        border-left-color: var(--gray-700, #374151);
+    }
+
+    /* Enhanced Dark Theme Features */
+    .commentBox.highlighted {
+        background-color: rgba(45, 212, 191, 0.1);
+        border-left: 3px solid var(--teal-400, #2dd4bf);
+        padding-left: 9px;
+    }
+
+    .commentBox.pinned {
+        background-color: rgba(251, 191, 36, 0.1);
+        border-left: 3px solid var(--amber-400, #fbbf24);
+        padding-left: 9px;
+    }
+
+    .commentBox.author {
+        background-color: rgba(139, 92, 246, 0.1);
+        border-left: 3px solid var(--violet-400, #a78bfa);
+        padding-left: 9px;
+    }
+
+    .commentUser.verified {
+        color: var(--teal-400, #2dd4bf);
+    }
+
+    .commentUser.verified::after {
+        content: "✓";
+        margin-left: 4px;
+        color: var(--teal-400, #2dd4bf);
+    }
+
+    .commentUser.moderator {
+        color: var(--amber-400, #fbbf24);
+    }
+
+    .commentUser.moderator::after {
+        content: "⚡";
+        margin-left: 4px;
+        color: var(--amber-400, #fbbf24);
+    }
+
+    .commentUser.admin {
+        color: var(--violet-400, #a78bfa);
+    }
+
+    .commentUser.admin::after {
+        content: "👑";
+        margin-left: 4px;
+        color: var(--violet-400, #a78bfa);
+    }
+
+    .replyButton.liked {
+        background-color: var(--emerald-600, #059669);
+        color: white;
+    }
+
+    .replyButton.disliked {
+        background-color: var(--red-600, #dc2626);
+        color: white;
+    }
+
+    .commentContent.edited {
+        border-left: 2px solid var(--amber-400, #fbbf24);
+        padding-left: 10px;
+        background-color: rgba(251, 191, 36, 0.05);
+    }
+
+    .commentTime.edited::after {
+        content: " (edited)";
+        color: var(--amber-400, #fbbf24);
+        font-size: 10px;
+        font-style: italic;
+    }
+
+    .commentContainer.depth1 {
+        border-left: 2px solid var(--gray-700, #374151);
+    }
+
+    .commentContainer.depth2 {
+        border-left: 2px solid var(--gray-600, #4b5563);
+    }
+
+    .commentContainer.depth3 {
+        border-left: 2px solid var(--gray-500, #6b7280);
+    }
+}

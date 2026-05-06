@@ -1,0 +1,127 @@
+type: google.api.Service
+config_version: 3
+name: erp.googleapis.com
+title: ERP Integration API
+apis:
+  - name: erppb.ERPService
+http:
+  rules:
+    # Connector Management
+    - selector: erppb.ERPService.RegisterConnector
+      post: /api/erp/connectors
+      body: "*"
+    
+    - selector: erppb.ERPService.AddConnector
+      post: /api/erp/connectors/v2
+      body: "*"
+    
+    - selector: erppb.ERPService.UpdateConnector
+      put: /api/erp/connectors/{connector_id}
+      body: "*"
+    
+    - selector: erppb.ERPService.RemoveConnector
+      delete: /api/erp/connectors/{connector_id}
+    
+    - selector: erppb.ERPService.ToggleConnector
+      post: /api/erp/connectors/{connector_id}/toggle
+      body: "*"
+    
+    - selector: erppb.ERPService.ListConnectors
+      get: /api/erp/connectors
+    
+    - selector: erppb.ERPService.GetConnectorStatus
+      get: /api/erp/connectors/{connector_id}/status
+    
+    # Sync Management
+    - selector: erppb.ERPService.GetSyncHistory
+      get: /api/erp/connectors/{connector_id}/sync-history
+    
+    - selector: erppb.ERPService.SyncProducts
+      post: /api/erp/connectors/{connector_id}/sync/products
+      body: "*"
+    
+    - selector: erppb.ERPService.SyncStock
+      post: /api/erp/connectors/{connector_id}/sync/stock
+      body: "*"
+    
+    - selector: erppb.ERPService.SyncPrices
+      post: /api/erp/connectors/{connector_id}/sync/prices
+      body: "*"
+    
+    - selector: erppb.ERPService.SyncCustomers
+      post: /api/erp/connectors/{connector_id}/sync/customers
+      body: "*"
+    
+    # Order Management
+    - selector: erppb.ERPService.SendOrder
+      post: /api/erp/connectors/{connector_id}/orders
+      body: "*"
+
+    # Invoice Granular Commands
+    - selector: erppb.ERPService.CreateInvoice
+      post: /api/erp/invoices
+      body: "*"
+    
+    - selector: erppb.ERPService.ApproveInvoice
+      post: /api/erp/invoices/{invoice_id}/approve
+      body: "*"
+    
+    - selector: erppb.ERPService.SendInvoice
+      post: /api/erp/invoices/{invoice_id}/send
+      body: "*"
+    
+    - selector: erppb.ERPService.VoidInvoice
+      post: /api/erp/invoices/{invoice_id}/void
+      body: "*"
+    
+    - selector: erppb.ERPService.RecordInvoicePayment
+      post: /api/erp/invoices/{invoice_id}/payments
+      body: "*"
+
+    
+    # Return Granular Commands
+    - selector: erppb.ERPService.CreateReturn
+      post: /api/erp/returns
+      body: "*"
+    
+    - selector: erppb.ERPService.ApproveReturn
+      post: /api/erp/returns/{return_id}/approve
+      body: "*"
+    
+    - selector: erppb.ERPService.RejectReturn
+      post: /api/erp/returns/{return_id}/reject
+      body: "*"
+    
+    - selector: erppb.ERPService.ProcessReturnStart
+      post: /api/erp/returns/{return_id}/process
+      body: "*"
+    
+    - selector: erppb.ERPService.CompleteReturn
+      post: /api/erp/returns/{return_id}/complete
+      body: "*"
+    
+    - selector: erppb.ERPService.RestockReturnItems
+      post: /api/erp/returns/{return_id}/restock
+      body: "*"
+    
+    # Inventory Reservation Management (Deprecated)
+    - selector: erppb.ERPService.UpdateInventoryReservation
+      post: /api/erp/connectors/{connector_id}/inventory/reservations
+      body: "*"
+    
+    # Inventory Reservation Granular Commands
+    - selector: erppb.ERPService.CreateInventoryReservation
+      post: /api/erp/inventory/reservations
+      body: "*"
+    
+    - selector: erppb.ERPService.ReleaseInventoryReservation
+      post: /api/erp/inventory/reservations/{reservation_id}/release
+      body: "*"
+    
+    - selector: erppb.ERPService.FulfillInventoryReservation
+      post: /api/erp/inventory/reservations/{reservation_id}/fulfill
+      body: "*"
+    
+    - selector: erppb.ERPService.TransferInventoryReservation
+      post: /api/erp/inventory/reservations/{reservation_id}/transfer
+      body: "*"

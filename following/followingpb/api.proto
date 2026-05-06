@@ -1,0 +1,167 @@
+syntax = "proto3";
+
+package followingpb;
+
+import "google/protobuf/timestamp.proto";    // For timestamp fields
+
+// FollowingService provides functionalities related to follow and reply management.
+service FollowingService {
+  // Adds a new follow.
+  rpc AddFollow(AddFollowRequest) returns (AddFollowResponse) {}
+  rpc ApproveFollow(ApproveFollowRequest) returns (ApproveFollowResponse) {}
+  rpc RejectFollow(RejectFollowRequest) returns (RejectFollowResponse) {}
+  rpc FlagFollow(FlagFollowRequest) returns (FlagFollowResponse) {}
+  rpc EditFollow(EditFollowRequest) returns (EditFollowResponse) {}
+  rpc RemoveFollow(RemoveFollowRequest) returns (RemoveFollowResponse) {}
+  rpc GetFollow(GetFollowRequest) returns (GetFollowResponse) {}
+  rpc GetFollowing(GetFollowingRequest) returns (GetFollowingResponse) {}
+  rpc GetMostFollowed(GetMostFollowedRequest) returns (GetMostFollowedResponse) {}
+  rpc GetMostFollowedByCategory(GetMostFollowedByCategoryRequest) returns (GetMostFollowedByCategoryResponse) {}
+  rpc GetFollowingBySender(GetFollowingBySenderRequest) returns (GetFollowingBySenderResponse) {}
+  rpc GetApprovedFollowing(GetApprovedFollowingRequest) returns (GetApprovedFollowingResponse) {}
+
+}
+
+// Follow represents a user's follow on a item.
+message Follow {
+  string id = 1;                           // Unique identifier of the follow.
+  string user_id = 2;                   // Unique identifier of the user who made the follow.
+  string followed_user_id = 3;
+  string followed_user_type = 4;
+  string content = 5;
+  string category_id = 6;// Unique identifier of the item being followed on.
+  string parent_id = 7;
+  string follow_status = 8;               // Current status of the follow.
+  bool flagged = 9;                       // Indicates if the follow has been flagged.
+
+}
+
+message ItemFollowCount  {
+  string followed_user_id = 1;
+  string category_id = 2;
+  int64 following_count = 3;
+}
+
+// Request message to add a new follow.
+message AddFollowRequest {
+  string followed_user_id = 1;
+  string followed_user_type =2;
+  string content = 3;
+  string category_id = 4;
+  string parent_id = 5;
+}
+
+// Response message after adding a new follow.
+message AddFollowResponse {
+  string id = 1;                           // Unique identifier of the created follow.
+
+}
+
+
+message ApproveFollowRequest {
+  string id = 1;
+}
+
+message ApproveFollowResponse {
+  string id = 1;
+  string follow_status = 2;
+  google.protobuf.Timestamp approved_at = 3;
+}
+
+// Request message to reject a follow.
+message RejectFollowRequest {
+  string id = 1;
+}
+
+
+message RejectFollowResponse {
+  string id = 1;
+  string follow_status = 2;
+
+}
+message FlagFollowRequest {
+  string id = 1;
+}
+
+message FlagFollowResponse {
+  string id = 1;
+  bool flagged = 2;
+
+}
+
+
+message EditFollowRequest {
+  string id = 1;
+  string content = 2;
+}
+
+message EditFollowResponse {
+  string id = 1;
+  string content = 2;
+}
+
+// Request message to remove a follow.
+message RemoveFollowRequest {
+  string id = 1;
+}
+message RemoveFollowResponse {
+
+}
+
+// Request message to retrieve a specific follow.
+message GetFollowRequest {
+  string id = 1;                           // Unique identifier of the follow to retrieve.
+}
+
+// Response message for retrieving a follow.
+message GetFollowResponse {
+  Follow follow = 1;                     // Details of the requested follow.
+}
+
+// Request message to retrieve a list of following.
+message GetFollowingRequest {
+  string followed_user_id = 2;
+}
+message GetFollowingBySenderRequest{
+
+}
+// Response message for retrieving a list of following.
+message GetFollowingResponse {
+  repeated Follow following = 1;           // List of following.
+  // Number of following per page.
+}
+message GetFollowingBySenderResponse {
+  repeated Follow following = 1;           // List of following.
+  // Number of following per page.
+}
+message GetMostFollowedRequest {
+}
+
+// Response message for retrieving a list of following.
+message GetMostFollowedResponse {
+  repeated ItemFollowCount item_follow_count = 1;           // List of following.
+  // Number of following per page.
+}
+message GetMostFollowedByCategoryRequest {
+  string category_id = 1;
+  int64 offset = 2;
+  int64 limit = 3;
+
+}
+
+// Response message for retrieving a list of following.
+message GetMostFollowedByCategoryResponse {
+  repeated ItemFollowCount item_follow_count = 1;                         // Number of following per page.
+}
+// Request message to retrieve approved following.
+message GetApprovedFollowingRequest {}
+
+// Response message for retrieving approved following.
+message GetApprovedFollowingResponse {
+  repeated Follow following = 1;           // List of approved following.
+}
+
+
+
+
+

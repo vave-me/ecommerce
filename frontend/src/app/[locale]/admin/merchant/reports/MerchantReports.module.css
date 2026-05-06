@@ -1,0 +1,852 @@
+/* ===============================================================================
+   ENTERPRISE MERCHANT REPORTS - PROFESSIONAL ANALYTICS DASHBOARD
+   Ultra-sophisticated analytics and reporting interface for Google Merchant Center
+   Using global design tokens from global.css
+   =============================================================================== */
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-5);
+  background: var(--bg-secondary);
+  min-height: 100vh;
+  font-family: var(--font-display);
+}
+
+/* ===== HEADER SECTION ===== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: var(--bg-primary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-lg);
+  margin-bottom: var(--space-6);
+  padding: var(--space-6);
+  gap: var(--space-6);
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  flex: 1;
+  min-width: 0;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: var(--button-height-md);
+  padding: 0 var(--space-4);
+  background: var(--bg-tertiary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: var(--transition-all);
+  text-decoration: none;
+  align-self: flex-start;
+}
+
+.backButton:hover {
+  background: var(--bg-secondary);
+  border-color: var(--border-color-hover);
+  color: var(--text-primary);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.025em;
+  line-height: var(--leading-tight);
+}
+
+.subtitle {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: var(--leading-relaxed);
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.dateRangeSelect,
+.exportSelect {
+  height: var(--button-height-md);
+  padding: 0 var(--space-3);
+  background: var(--bg-tertiary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: var(--transition-all);
+}
+
+.dateRangeSelect:focus,
+.exportSelect:focus {
+  outline: none;
+  border-color: var(--enterprise-primary);
+  box-shadow: 0 0 0 var(--border-width-2) var(--enterprise-primary-light);
+}
+
+.exportButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: var(--button-height-md);
+  padding: 0 var(--space-4);
+  background: var(--enterprise-success);
+  border: var(--border-width) solid var(--enterprise-success);
+  border-radius: var(--border-radius);
+  color: white;
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  cursor: pointer;
+  transition: var(--transition-all);
+}
+
+.exportButton:hover {
+  background: var(--enterprise-success-hover);
+  border-color: var(--enterprise-success-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--button-height-md);
+  height: var(--button-height-md);
+  background: var(--bg-tertiary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition-all);
+}
+
+.iconButton:hover {
+  background: var(--bg-secondary);
+  border-color: var(--border-color-hover);
+  color: var(--text-primary);
+}
+
+.iconButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ===== SECTION TITLES ===== */
+.sectionTitle {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-5);
+  letter-spacing: -0.025em;
+  line-height: var(--leading-tight);
+}
+
+/* ===== METRICS SECTION ===== */
+.metricsSection {
+  margin-bottom: var(--space-8);
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-4);
+}
+
+.metricCard {
+  background: var(--bg-primary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-all);
+  position: relative;
+  overflow: hidden;
+}
+
+.metricCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--enterprise-primary);
+  transition: var(--transition-all);
+}
+
+.metricCard.success::before { background: var(--enterprise-success); }
+.metricCard.warning::before { background: var(--enterprise-warning); }
+.metricCard.info::before { background: var(--enterprise-info); }
+.metricCard.secondary::before { background: var(--text-tertiary); }
+
+.metricCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-color-hover);
+}
+
+.metricHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.metricIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--enterprise-primary-light);
+  color: var(--enterprise-primary);
+  border-radius: var(--border-radius);
+  flex-shrink: 0;
+}
+
+.metricCard.success .metricIcon {
+  background: var(--enterprise-success-light);
+  color: var(--enterprise-success);
+}
+
+.metricCard.warning .metricIcon {
+  background: var(--enterprise-warning-light);
+  color: var(--enterprise-warning);
+}
+
+.metricCard.info .metricIcon {
+  background: var(--enterprise-info-light);
+  color: var(--enterprise-info);
+}
+
+.metricCard.secondary .metricIcon {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
+
+.metricTitle {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.metricValue {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  line-height: var(--leading-none);
+  font-family: var(--font-mono);
+  margin-bottom: var(--space-2);
+}
+
+.metricChange {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+}
+
+.metricChange.positive {
+  color: var(--enterprise-success);
+}
+
+.metricChange.negative {
+  color: var(--enterprise-danger);
+}
+
+.metricChange.neutral {
+  color: var(--text-tertiary);
+}
+
+/* ===== CHARTS SECTION ===== */
+.chartsSection {
+  margin-bottom: var(--space-8);
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: var(--space-5);
+}
+
+.chartCard {
+  background: var(--bg-primary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: var(--transition-all);
+}
+
+.chartCard:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-color-hover);
+}
+
+.chartContainer {
+  padding: var(--space-5);
+}
+
+.chartTitle {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-4);
+  letter-spacing: -0.025em;
+}
+
+.chartPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  background: var(--bg-tertiary);
+  border: var(--border-width-2) dashed var(--border-color);
+  border-radius: var(--border-radius);
+  color: var(--text-tertiary);
+  text-align: center;
+  gap: var(--space-2);
+}
+
+.chartNote {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+.chartEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: var(--text-tertiary);
+  text-align: center;
+  gap: var(--space-3);
+}
+
+/* ===== INSIGHTS SECTION ===== */
+.insightsSection {
+  margin-bottom: var(--space-8);
+}
+
+.insightsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-4);
+}
+
+.insightCard {
+  display: flex;
+  gap: var(--space-4);
+  background: var(--bg-primary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-all);
+}
+
+.insightCard:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-color-hover);
+}
+
+.insightCard.warning {
+  border-left: 4px solid var(--enterprise-warning);
+}
+
+.insightCard.success {
+  border-left: 4px solid var(--enterprise-success);
+}
+
+.insightCard.info {
+  border-left: 4px solid var(--enterprise-info);
+}
+
+.insightIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--bg-tertiary);
+  border-radius: var(--border-radius);
+  flex-shrink: 0;
+  color: var(--text-secondary);
+}
+
+.insightCard.warning .insightIcon {
+  background: var(--enterprise-warning-light);
+  color: var(--enterprise-warning);
+}
+
+.insightCard.success .insightIcon {
+  background: var(--enterprise-success-light);
+  color: var(--enterprise-success);
+}
+
+.insightCard.info .insightIcon {
+  background: var(--enterprise-info-light);
+  color: var(--enterprise-info);
+}
+
+.insightContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.insightTitle {
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-2);
+  line-height: var(--leading-tight);
+}
+
+.insightDescription {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-3);
+  line-height: var(--leading-relaxed);
+}
+
+.insightAction {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--bg-tertiary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  color: var(--text-primary);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: var(--transition-all);
+  text-decoration: none;
+}
+
+.insightAction:hover {
+  background: var(--bg-secondary);
+  border-color: var(--border-color-hover);
+}
+
+/* ===== TOP PRODUCTS SECTION ===== */
+.topProductsSection {
+  margin-bottom: var(--space-8);
+}
+
+.tableContainer {
+  background: var(--bg-primary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.table thead {
+  background: var(--bg-tertiary);
+  border-bottom: var(--border-width) solid var(--border-color);
+}
+
+.table th {
+  padding: var(--space-4);
+  text-align: left;
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  border-right: var(--border-width) solid var(--border-color);
+}
+
+.table th:last-child {
+  border-right: none;
+}
+
+.tableRow {
+  border-bottom: var(--border-width) solid var(--border-color);
+  transition: var(--transition-all);
+}
+
+.tableRow:hover {
+  background: var(--bg-tertiary);
+}
+
+.table td {
+  padding: var(--space-4);
+  border-right: var(--border-width) solid var(--border-color);
+  vertical-align: middle;
+}
+
+.table td:last-child {
+  border-right: none;
+}
+
+.productCell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.productImage {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  border: var(--border-width) solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.productInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.productTitle {
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  line-height: var(--leading-tight);
+  margin-bottom: var(--space-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.productId {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
+.numberCell {
+  font-family: var(--font-mono);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  text-align: right;
+}
+
+/* ===== EXPORT SECTION ===== */
+.exportSection {
+  margin-bottom: var(--space-8);
+}
+
+.exportCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-primary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+  gap: var(--space-6);
+}
+
+.exportOptions {
+  display: flex;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.exportOption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.exportOption label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.exportMainButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: var(--button-height-lg);
+  padding: 0 var(--space-6);
+  background: var(--enterprise-primary);
+  border: var(--border-width) solid var(--enterprise-primary);
+  border-radius: var(--border-radius-lg);
+  color: white;
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  cursor: pointer;
+  transition: var(--transition-all);
+  box-shadow: var(--shadow-sm);
+}
+
+.exportMainButton:hover {
+  background: var(--enterprise-primary-hover);
+  border-color: var(--enterprise-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ===== ERROR STATE ===== */
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-12) var(--space-6);
+  background: var(--bg-primary);
+  border: var(--border-width) solid var(--enterprise-danger);
+  border-radius: var(--border-radius-xl);
+  margin-bottom: var(--space-6);
+}
+
+.errorState svg {
+  color: var(--enterprise-danger);
+  margin-bottom: var(--space-4);
+}
+
+.errorState h2 {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-3);
+}
+
+.errorState p {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-5);
+  max-width: 400px;
+  line-height: var(--leading-relaxed);
+}
+
+.retryButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: var(--button-height-md);
+  padding: 0 var(--space-4);
+  background: var(--enterprise-danger);
+  border: var(--border-width) solid var(--enterprise-danger);
+  border-radius: var(--border-radius);
+  color: white;
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  cursor: pointer;
+  transition: var(--transition-all);
+}
+
+.retryButton:hover {
+  background: var(--enterprise-danger-hover);
+  border-color: var(--enterprise-danger-hover);
+}
+
+/* ===== LOADING STATE ===== */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: var(--space-4);
+}
+
+.loadingContainer p {
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1200px) {
+  .container {
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .headerActions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .metricsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .chartsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-4) var(--space-3);
+  }
+
+  .headerActions {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .metricsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .chartsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .insightsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .exportCard {
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .exportOptions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .exportMainButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .tableContainer {
+    overflow-x: auto;
+  }
+
+  .table {
+    min-width: 600px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: var(--space-4);
+  }
+
+  .title {
+    font-size: var(--text-xl);
+  }
+
+  .metricsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .exportOptions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+  }
+}
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+@media (prefers-reduced-motion: reduce) {
+  .metricCard,
+  .chartCard,
+  .insightCard,
+  .tableRow,
+  .exportButton,
+  .exportMainButton {
+    transition: none;
+  }
+
+  .metricCard:hover,
+  .chartCard:hover,
+  .insightCard:hover,
+  .exportButton:hover,
+  .exportMainButton:hover {
+    transform: none;
+  }
+
+  .spinning {
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .table,
+  .tableContainer,
+  .metricCard,
+  .chartCard,
+  .insightCard {
+    border-width: var(--border-width-2);
+  }
+
+  .metricChange.positive,
+  .metricChange.negative {
+    font-weight: var(--font-bold);
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  .container {
+    background: white;
+    box-shadow: none;
+  }
+
+  .headerActions,
+  .exportSection,
+  .insightAction {
+    display: none;
+  }
+
+  .metricCard,
+  .chartCard,
+  .tableContainer {
+    break-inside: avoid;
+  }
+} 

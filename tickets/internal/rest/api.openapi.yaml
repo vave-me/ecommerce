@@ -1,0 +1,184 @@
+openapiOptions:
+  file:
+    - file: "ticketspb/api.proto"
+      option:
+        info:
+          title: Football Match Tickets API
+          version: "1.0.0"
+          description: "API for managing football match tickets, seat reservations, stadium operations, and season tickets."
+        basePath: /
+  method:
+    # Match Management Operations
+    - method: ticketspb.TicketsService.CreateMatch
+      option:
+        operationId: createMatch
+        tags:
+          - Matches
+        summary: Create a new football match
+    
+    - method: ticketspb.TicketsService.GetMatch
+      option:
+        operationId: getMatch
+        tags:
+          - Matches
+        summary: Get match details
+    
+    - method: ticketspb.TicketsService.UpdateMatch
+      option:
+        operationId: updateMatch
+        tags:
+          - Matches
+        summary: Update match information
+    
+    - method: ticketspb.TicketsService.OpenMatchSales
+      option:
+        operationId: openMatchSales
+        tags:
+          - Matches
+        summary: Open ticket sales for a match
+    
+    - method: ticketspb.TicketsService.CloseMatchSales
+      option:
+        operationId: closeMatchSales
+        tags:
+          - Matches
+        summary: Close ticket sales for a match
+    
+    - method: ticketspb.TicketsService.CancelMatch
+      option:
+        operationId: cancelMatch
+        tags:
+          - Matches
+        summary: Cancel a match
+    
+    - method: ticketspb.TicketsService.PostponeMatch
+      option:
+        operationId: postponeMatch
+        tags:
+          - Matches
+        summary: Postpone a match to a new date
+    
+    # Sector Management
+    - method: ticketspb.TicketsService.UpdateSectorPricing
+      option:
+        operationId: updateSectorPricing
+        tags:
+          - Stadiums
+        summary: Update sector pricing
+    
+    - method: ticketspb.TicketsService.GetSectorAvailability
+      option:
+        operationId: getSectorAvailability
+        tags:
+          - Stadiums
+        summary: Get available seats in a sector
+    
+    # Ticket Operations
+    - method: ticketspb.TicketsService.PurchaseTickets
+      option:
+        operationId: purchaseTickets
+        tags:
+          - Tickets
+        summary: Purchase match tickets
+    
+    - method: ticketspb.TicketsService.ReserveTickets
+      option:
+        operationId: reserveTickets
+        tags:
+          - Tickets
+        summary: Reserve tickets temporarily
+    
+    - method: ticketspb.TicketsService.GetTicket
+      option:
+        operationId: getTicket
+        tags:
+          - Tickets
+        summary: Get ticket details
+    
+    - method: ticketspb.TicketsService.TransferTicket
+      option:
+        operationId: transferTicket
+        tags:
+          - Tickets
+        summary: Transfer ticket to another user
+    
+    - method: ticketspb.TicketsService.ValidateTicket
+      option:
+        operationId: validateTicket
+        tags:
+          - Tickets
+        summary: Validate ticket at stadium entry
+    
+    - method: ticketspb.TicketsService.CancelTicket
+      option:
+        operationId: cancelTicket
+        tags:
+          - Tickets
+        summary: Cancel a ticket
+    
+    - method: ticketspb.TicketsService.RefundTicket
+      option:
+        operationId: refundTicket
+        tags:
+          - Tickets
+        summary: Refund a ticket
+    
+    # User Tickets
+    - method: ticketspb.TicketsService.GetUserTickets
+      option:
+        operationId: getUserTickets
+        tags:
+          - Tickets
+        summary: Get user's tickets
+    
+    - method: ticketspb.TicketsService.GetUserUpcomingMatches
+      option:
+        operationId: getUserUpcomingMatches
+        tags:
+          - Matches
+        summary: Get user's upcoming matches
+    
+    # Match Discovery
+    - method: ticketspb.TicketsService.GetUpcomingMatches
+      option:
+        operationId: getUpcomingMatches
+        tags:
+          - Matches
+        summary: Get upcoming matches
+    
+    - method: ticketspb.TicketsService.SearchMatches
+      option:
+        operationId: searchMatches
+        tags:
+          - Matches
+        summary: Search for matches
+    
+    # Season Tickets
+    - method: ticketspb.TicketsService.CreateSeasonTicket
+      option:
+        operationId: createSeasonTicket
+        tags:
+          - Season Tickets
+        summary: Create a season ticket
+    
+    - method: ticketspb.TicketsService.RenewSeasonTicket
+      option:
+        operationId: renewSeasonTicket
+        tags:
+          - Season Tickets
+        summary: Renew a season ticket
+    
+    # Stadium Management
+    - method: ticketspb.TicketsService.CreateStadium
+      option:
+        operationId: createStadium
+        tags:
+          - Stadiums
+        summary: Create a new stadium
+    
+    - method: ticketspb.TicketsService.GetStadium
+      option:
+        operationId: getStadium
+        tags:
+          - Stadiums
+        summary: Get stadium details

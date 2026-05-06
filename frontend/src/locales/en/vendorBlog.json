@@ -1,0 +1,74 @@
+{
+  "pageTitle": "Vendor Success Hub",
+  "subtitle": "Stories, insights, and resources to help you grow your business",
+  "searchPlaceholder": "Search articles, guides, and videos...",
+  
+  "statArticles": "Articles & Guides",
+  "statVideos": "Video Tutorials",
+  "statContributors": "Contributors",
+  "statSuccess": "Seller Success GMV",
+  
+  "categories": "Categories",
+  "categoryAll": "All Articles",
+  "categorySuccess": "Success Stories",
+  "categoryTips": "Tips & Tricks",
+  "categoryUpdates": "Platform Updates",
+  "categoryInsights": "Industry Insights",
+  
+  "contentType": "Content Type",
+  "typeAll": "All Types",
+  "typeArticle": "Articles",
+  "typeVideo": "Videos",
+  "typeGuide": "Guides",
+  
+  "popularTags": "Popular Tags",
+  
+  "newsletterTitle": "Weekly Vendor Tips",
+  "newsletterDesc": "Get the latest success stories and growth strategies delivered to your inbox",
+  "subscribe": "Subscribe Now",
+  
+  "featured": "Featured This Week",
+  "allArticles": "All Articles",
+  "searchResults": "Search Results",
+  
+  "featured1Title": "How Sarah Built a €1M Business from Her Living Room",
+  "featured1Excerpt": "Starting with just 5 handmade products, Sarah leveraged our platform's community features to build a loyal following of 50,000 customers in just 18 months.",
+  
+  "featured2Title": "New AI-Powered Analytics Dashboard",
+  "featured2Excerpt": "Discover how our new AI analytics can help you understand customer behavior, predict trends, and optimize your product listings for maximum conversion.",
+  
+  "article3Title": "10 Ways to Boost Your Product Visibility",
+  "article3Excerpt": "Learn proven strategies to improve your search rankings and get your products in front of more customers.",
+  
+  "article4Title": "E-commerce Trends 2024: What Sellers Need to Know",
+  "article4Excerpt": "Stay ahead of the curve with our comprehensive analysis of emerging e-commerce trends and consumer behaviors.",
+  
+  "article5Title": "From Local Shop to Global Brand: The Martinez Journey",
+  "article5Excerpt": "Watch how a family business expanded internationally using our platform's multi-language and currency features.",
+  
+  "article6Title": "Master Live Streaming: Engage Your Audience in Real-Time",
+  "article6Excerpt": "Everything you need to know about using live streaming to showcase products and connect with customers.",
+  
+  "article7Title": "Introducing Advanced Inventory Management",
+  "article7Excerpt": "Our new inventory system helps you track stock across multiple channels and automate reordering.",
+  
+  "article8Title": "Building Customer Loyalty Through Community",
+  "article8Excerpt": "Discover how to use followers, newsletters, and exclusive content to create a loyal customer base.",
+  
+  "readMore": "Read Full Story",
+  "read": "Read",
+  "noResults": "No articles found",
+  "tryDifferent": "Try adjusting your filters or search terms",
+  
+  "contributorSpotlight": "Contributor Spotlight",
+  "spotlightRole": "Power Seller & Community Leader",
+  "spotlightBio": "Emma has grown her sustainable fashion brand to €2M in annual revenue and shares her journey and tips with our community.",
+  "articles": "Articles",
+  "followers": "Followers",
+  "viewProfile": "View Profile",
+  
+  "ctaTitle": "Share Your Success Story",
+  "ctaDesc": "Have a great story about growing your business on our platform? We'd love to feature you!",
+  "submitStory": "Submit Your Story",
+  "vendorGuide": "Read Vendor Guide"
+}

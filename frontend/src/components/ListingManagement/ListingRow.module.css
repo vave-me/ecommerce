@@ -1,0 +1,433 @@
+/* ============================================================================
+   LISTING ROW - ATOMIC DESIGN SYSTEM
+   ============================================================================ */
+
+/* Uses Global Design Tokens from design-tokens.css */
+
+/* ============================================================================
+   TABLE ROW - MOLECULE
+   ============================================================================ */
+
+.tableRow {
+  background: var(--ai-color-surface);
+  border-bottom: 1px solid var(--ai-color-border);
+  transition: var(--ai-transition-colors);
+}
+
+.tableRow:hover {
+  background: var(--ai-color-secondary-light);
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+/* ============================================================================
+   TABLE CELLS - ATOMS
+   ============================================================================ */
+
+.tableCell {
+  padding: var(--ai-space-md) var(--ai-space-lg);
+  vertical-align: middle;
+  border: none;
+  font-size: var(--ai-text-sm);
+  color: var(--ai-color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+.cellContent {
+  display: flex;
+  align-items: center;
+  min-height: 24px;
+}
+
+.cellText {
+  color: var(--ai-color-text-primary);
+  font-weight: var(--ai-font-weight-normal);
+  line-height: var(--ai-line-height-normal);
+}
+
+/* ============================================================================
+   SPECIALIZED CELLS - MOLECULES
+   ============================================================================ */
+
+/* Price Cell */
+.priceText {
+  color: var(--ai-color-success);
+  font-weight: var(--ai-font-weight-semibold);
+  font-size: var(--ai-text-base);
+}
+
+/* Category Badge */
+.categoryBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--ai-space-xs) var(--ai-space-sm);
+  background: var(--ai-color-primary-light);
+  color: var(--ai-color-primary);
+  border-radius: var(--ai-radius-full);
+  font-size: var(--ai-text-xs);
+  font-weight: var(--ai-font-weight-medium);
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+/* Stock Badges */
+.stockBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--ai-space-xs) var(--ai-space-sm);
+  border-radius: var(--ai-radius-sm);
+  font-size: var(--ai-text-xs);
+  font-weight: var(--ai-font-weight-semibold);
+  min-width: 40px;
+  justify-content: center;
+}
+
+.stockHigh {
+  background: var(--ai-color-success-bg);
+  color: var(--ai-color-success);
+  border: 1px solid var(--ai-color-success-border);
+}
+
+.stockLow {
+  background: var(--ai-color-warning-bg);
+  color: var(--ai-color-warning);
+  border: 1px solid var(--ai-color-warning-border);
+}
+
+.stockOut {
+  background: var(--ai-color-error-bg);
+  color: var(--ai-color-error);
+  border: 1px solid var(--ai-color-error-border);
+}
+
+/* Actions Cell */
+.actionsCell {
+  display: flex;
+  align-items: center;
+  gap: var(--ai-space-xs);
+  justify-content: flex-start;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 1px solid var(--ai-color-border);
+  border-radius: var(--ai-radius-sm);
+  cursor: pointer;
+  transition: var(--ai-transition-colors);
+  color: var(--ai-color-text-secondary);
+}
+
+.actionButton:hover {
+  background: var(--ai-color-secondary-light);
+  border-color: var(--ai-color-border-hover);
+  color: var(--ai-color-text-primary);
+  transform: translateY(-1px);
+  box-shadow: var(--ai-shadow-sm);
+}
+
+.actionButton:focus-visible {
+  outline: none;
+  box-shadow: var(--ai-shadow-focus);
+}
+
+.actionButton:active {
+  transform: translateY(0);
+}
+
+.editButton:hover {
+  background: var(--ai-color-primary-light);
+  border-color: var(--ai-color-primary);
+  color: var(--ai-color-primary);
+}
+
+.deleteButton:hover {
+  background: var(--ai-color-error-bg);
+  border-color: var(--ai-color-error);
+  color: var(--ai-color-error);
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - MOBILE FIRST
+   ============================================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .tableCell {
+    padding: var(--ai-space-sm) var(--ai-space-md);
+    font-size: var(--ai-text-xs);
+    max-width: 150px;
+  }
+
+  .actionButton {
+    width: 28px;
+    height: 28px;
+  }
+
+  .categoryBadge,
+  .stockBadge {
+    font-size: 10px;
+    padding: 2px var(--ai-space-xs);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .tableRow {
+    display: block;
+    margin-bottom: var(--ai-space-md);
+    background: var(--ai-color-surface);
+    border: 1px solid var(--ai-color-border);
+    border-radius: var(--ai-radius-md);
+    box-shadow: var(--ai-shadow-sm);
+    overflow: hidden;
+  }
+
+  .tableRow:hover {
+    background: var(--ai-color-surface);
+    box-shadow: var(--ai-shadow-md);
+  }
+
+  .tableCell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--ai-space-sm) var(--ai-space-md);
+    border-bottom: 1px solid var(--ai-color-border);
+    max-width: none;
+    white-space: normal;
+  }
+
+  .tableCell:last-child {
+    border-bottom: none;
+  }
+
+  .tableCell::before {
+    content: attr(data-label);
+    font-weight: var(--ai-font-weight-semibold);
+    color: var(--ai-color-text-secondary);
+    font-size: var(--ai-text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex: 1;
+    min-width: 80px;
+  }
+
+  .cellContent {
+    flex: 1;
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  .actionsCell {
+    justify-content: flex-end;
+  }
+
+  .actionButton {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .tableRow {
+    margin-bottom: var(--ai-space-sm);
+    border-radius: var(--ai-radius-sm);
+  }
+
+  .tableCell {
+    padding: var(--ai-space-xs) var(--ai-space-sm);
+    font-size: var(--ai-text-xs);
+  }
+
+  .tableCell::before {
+    font-size: 10px;
+    min-width: 70px;
+  }
+
+  .actionButton {
+    width: 32px;
+    height: 32px;
+  }
+
+  .categoryBadge,
+  .stockBadge {
+    font-size: 9px;
+    padding: 1px var(--ai-space-xs);
+  }
+
+  .priceText {
+    font-size: var(--ai-text-sm);
+  }
+}
+
+/* ============================================================================
+   ACCESSIBILITY & MOTION
+   ============================================================================ */
+
+/* Dark Theme */
+@media (prefers-color-scheme: dark) {
+  .tableRow {
+    background: var(--gray-800, #1f2937);
+    border-bottom: 1px solid var(--gray-700, #374151);
+  }
+
+  .tableRow:hover {
+    background: var(--gray-700, #374151);
+  }
+
+  .tableCell {
+    color: var(--gray-50, #f9fafb);
+  }
+
+  .cellText {
+    color: var(--gray-50, #f9fafb);
+  }
+
+  .priceText {
+    color: var(--success, #10b981);
+  }
+
+  .categoryBadge {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--primary-color, #3b82f6);
+  }
+
+  .stockHigh {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success, #10b981);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+  }
+
+  .stockLow {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warning, #f59e0b);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+  }
+
+  .stockOut {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger, #ef4444);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+
+  .actionButton {
+    background: var(--gray-700, #374151);
+    border: 1px solid var(--gray-600, #4b5563);
+    color: var(--gray-300, #d1d5db);
+  }
+
+  .actionButton:hover {
+    background: var(--gray-600, #4b5563);
+    border-color: var(--gray-500, #6b7280);
+    color: var(--gray-50, #f9fafb);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .editButton:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: var(--primary-color, #3b82f6);
+    color: var(--primary-color, #3b82f6);
+  }
+
+  .deleteButton:hover {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: var(--danger, #ef4444);
+    color: var(--danger, #ef4444);
+  }
+
+  /* Mobile dark theme overrides */
+  @media (max-width: 768px) {
+    .tableRow {
+      background: var(--gray-800, #1f2937);
+      border: 1px solid var(--gray-700, #374151);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .tableRow:hover {
+      background: var(--gray-800, #1f2937);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .tableCell {
+      border-bottom: 1px solid var(--gray-700, #374151);
+    }
+
+    .tableCell::before {
+      color: var(--gray-400, #9ca3af);
+    }
+  }
+}
+
+/* High Contrast */
+@media (prefers-contrast: high) {
+  .tableRow {
+    border-width: 2px;
+  }
+
+  .actionButton {
+    border-width: 2px;
+  }
+
+  .actionButton:focus-visible {
+    outline: 3px solid var(--ai-color-border-focus);
+    outline-offset: 2px;
+  }
+
+  .categoryBadge,
+  .stockBadge {
+    border-width: 2px;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .tableRow,
+  .actionButton {
+    transition: none;
+  }
+
+  .actionButton:hover {
+    transform: none;
+  }
+
+  .actionButton:active {
+    transform: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .tableRow {
+    background: transparent ;
+    border-bottom: 1px solid #000;
+  }
+
+  .tableCell {
+    padding: var(--ai-space-xs) var(--ai-space-sm);
+    font-size: 10px;
+  }
+
+  .actionsCell {
+    display: none;
+  }
+
+  .categoryBadge,
+  .stockBadge {
+    background: transparent ;
+    border: 1px solid #000 ;
+    color: #000 ;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+} 

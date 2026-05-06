@@ -1,0 +1,334 @@
+package tools
+
+import ai2 "middleman/internal/ai"
+
+func createWishlistTools() []ai2.Tool {
+	return []ai2.Tool{
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_create_new",
+				Description: "Create a new wishlist",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"wishlist_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Unique ID for the wishlist",
+						},
+						"name": map[string]interface{}{
+							"type":        "string",
+							"description": "Name of the wishlist",
+						},
+					},
+					"required": []string{"wishlist_id", "name"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_get_by_name",
+				Description: "Get a wishlist by its name",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"name": map[string]interface{}{
+							"type":        "string",
+							"description": "Name of the wishlist to retrieve",
+						},
+					},
+					"required": []string{"name"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_get_all",
+				Description: "Get all wishlists",
+				Parameters: map[string]interface{}{
+					"type":       "object",
+					"properties": map[string]interface{}{},
+					"required":   []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_delete",
+				Description: "Delete a wishlist",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"wishlist_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the wishlist to delete",
+						},
+					},
+					"required": []string{"wishlist_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_add_item",
+				Description: "Add an item to a wishlist",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"wishlist_item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Unique ID for this wishlist item",
+						},
+						"wishlist_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The wishlist to add the item to",
+						},
+						"item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the item to add",
+						},
+						"entity_type": map[string]interface{}{
+							"type":        "string",
+							"description": "The type of entity being added",
+							"enum":        []string{"product", "service", "bundle"},
+						},
+					},
+					"required": []string{"wishlist_item_id", "wishlist_id", "item_id", "entity_type"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_remove_item",
+				Description: "Remove an item from a wishlist",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"wishlist_item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the wishlist item to remove",
+						},
+					},
+					"required": []string{"wishlist_item_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_get_item_details",
+				Description: "Get details of a specific wishlist item",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"wishlist_item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the wishlist item",
+						},
+						"wishlist_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the wishlist",
+						},
+						"item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the item",
+						},
+					},
+					"required": []string{"wishlist_item_id", "wishlist_id", "item_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_get_all_items",
+				Description: "Get all items in a wishlist",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"wishlist_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the wishlist",
+						},
+					},
+					"required": []string{"wishlist_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_add_to_user_default",
+				Description: "Add an item to the user's default wishlist",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the item to add",
+						},
+						"item_type": map[string]interface{}{
+							"type":        "string",
+							"description": "Type of the item",
+							"enum":        []string{"product", "service", "bundle"},
+						},
+					},
+					"required": []string{"item_id", "item_type"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_remove_from_user_default",
+				Description: "Remove an item from the user's default wishlist",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the item to remove",
+						},
+					},
+					"required": []string{"item_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_get_user_default",
+				Description: "Get the user's default wishlist",
+				Parameters: map[string]interface{}{
+					"type":       "object",
+					"properties": map[string]interface{}{},
+					"required":   []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_get_user_with_limit",
+				Description: "Get user wishlists with a limit",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of wishlists to return",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     10,
+						},
+					},
+					"required": []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_clear_user_default",
+				Description: "Clear all items from the user's default wishlist",
+				Parameters: map[string]interface{}{
+					"type":       "object",
+					"properties": map[string]interface{}{},
+					"required":   []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_check_if_item_in",
+				Description: "Check if an item is in any of the user's wishlists",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the item to check",
+						},
+					},
+					"required": []string{"item_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_get_total_item_count",
+				Description: "Get the total count of items in all wishlists",
+				Parameters: map[string]interface{}{
+					"type":       "object",
+					"properties": map[string]interface{}{},
+					"required":   []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_get_item_by_id",
+				Description: "Get a specific wishlist item by its ID",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"wishlist_item_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the wishlist item",
+						},
+					},
+					"required": []string{"wishlist_item_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_get_all_items_for_user",
+				Description: "Get all wishlist items for the current user",
+				Parameters: map[string]interface{}{
+					"type":       "object",
+					"properties": map[string]interface{}{},
+					"required":   []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_find_by_name_detailed",
+				Description: "Find a wishlist by name with detailed information",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"name": map[string]interface{}{
+							"type":        "string",
+							"description": "Name of the wishlist to find",
+						},
+					},
+					"required": []string{"name"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "wishlist_get_all_user_detailed",
+				Description: "Get all user wishlists with detailed information",
+				Parameters: map[string]interface{}{
+					"type":       "object",
+					"properties": map[string]interface{}{},
+					"required":   []string{},
+				},
+			},
+		},
+	}
+}

@@ -1,0 +1,142 @@
+type: google.api.Service
+config_version: 3
+http:
+  rules:
+    # Support Channel Management
+    - selector: supportpb.SupportService.CreateSupportChannel
+      post: /api/support/channels
+      body: "*"
+    
+    - selector: supportpb.SupportService.GetSupportChannel
+      get: /api/support/channels/{id}
+    
+    - selector: supportpb.SupportService.GetUserSupportChannels
+      get: /api/support/users/{user_id}/channels
+    
+    - selector: supportpb.SupportService.UpdateSupportChannelSettings
+      put: /api/support/channels/{id}/settings
+      body: "*"
+    
+    - selector: supportpb.SupportService.CloseSupportChannel
+      post: /api/support/channels/{id}/close
+      body: "*"
+    
+    - selector: supportpb.SupportService.ReactivateSupportChannel
+      post: /api/support/channels/{id}/reactivate
+      body: "*"
+    
+    # Ticket Management
+    - selector: supportpb.SupportService.CreateTicket
+      post: /api/support/tickets
+      body: "*"
+    
+    - selector: supportpb.SupportService.GetTicket
+      get: /api/support/tickets/{id}
+    
+    - selector: supportpb.SupportService.GetTickets
+      post: /api/support/tickets/batch
+      body: "*"
+    
+    - selector: supportpb.SupportService.GetChannelTickets
+      get: /api/support/channels/{channel_id}/tickets
+    
+    - selector: supportpb.SupportService.ListTickets
+      get: /api/support/tickets
+    
+    - selector: supportpb.SupportService.UpdateTicket
+      put: /api/support/tickets/{id}
+      body: "*"
+    
+    - selector: supportpb.SupportService.AssignTicket
+      post: /api/support/tickets/{id}/assign
+      body: "*"
+    
+    - selector: supportpb.SupportService.UpdateTicketPriority
+      put: /api/support/tickets/{id}/priority
+      body: "*"
+    
+    - selector: supportpb.SupportService.EscalateTicket
+      post: /api/support/tickets/{id}/escalate
+      body: "*"
+    
+    - selector: supportpb.SupportService.ResolveTicket
+      post: /api/support/tickets/{id}/resolve
+      body: "*"
+    
+    - selector: supportpb.SupportService.ReopenTicket
+      post: /api/support/tickets/{id}/reopen
+      body: "*"
+    
+    - selector: supportpb.SupportService.CloseTicket
+      post: /api/support/tickets/{id}/close
+      body: "*"
+    
+    - selector: supportpb.SupportService.MergeTickets
+      post: /api/support/tickets/merge
+      body: "*"
+    
+    - selector: supportpb.SupportService.LinkTickets
+      post: /api/support/tickets/{ticket_id}/link
+      body: "*"
+    
+    # Communication
+    - selector: supportpb.SupportService.AddTicketReply
+      post: /api/support/tickets/{ticket_id}/replies
+      body: "*"
+    
+    - selector: supportpb.SupportService.AddInternalNote
+      post: /api/support/tickets/{ticket_id}/notes
+      body: "*"
+    
+    - selector: supportpb.SupportService.GetTicketCommunications
+      get: /api/support/tickets/{ticket_id}/communications
+    
+    # AI Integration
+    - selector: supportpb.SupportService.EnableAISupport
+      post: /api/support/channels/{channel_id}/ai/enable
+      body: "*"
+    
+    - selector: supportpb.SupportService.ConfigureAIAssistant
+      put: /api/support/channels/{channel_id}/ai/config
+      body: "*"
+    
+    - selector: supportpb.SupportService.HandoffToHuman
+      post: /api/support/tickets/{ticket_id}/handoff/human
+      body: "*"
+    
+    - selector: supportpb.SupportService.HandoffToAI
+      post: /api/support/tickets/{ticket_id}/handoff/ai
+      body: "*"
+    
+    - selector: supportpb.SupportService.GetAISuggestions
+      get: /api/support/tickets/{ticket_id}/ai/suggestions
+    
+    # Knowledge Base
+    - selector: supportpb.SupportService.CreateKnowledgeArticle
+      post: /api/support/knowledge
+      body: "*"
+    
+    - selector: supportpb.SupportService.GetKnowledgeArticle
+      get: /api/support/knowledge/{id}
+    
+    - selector: supportpb.SupportService.SearchKnowledgeBase
+      post: /api/support/knowledge/search
+      body: "*"
+    
+    - selector: supportpb.SupportService.LinkArticleToTicket
+      post: /api/support/tickets/{ticket_id}/articles
+      body: "*"
+    
+    - selector: supportpb.SupportService.RateArticle
+      post: /api/support/knowledge/{article_id}/rate
+      body: "*"
+    
+    # Analytics
+    - selector: supportpb.SupportService.GetSupportMetrics
+      get: /api/support/analytics/metrics
+    
+    - selector: supportpb.SupportService.GetAgentPerformance
+      get: /api/support/analytics/agents/{agent_id}
+    
+    - selector: supportpb.SupportService.GetTicketAnalytics
+      get: /api/support/analytics/tickets

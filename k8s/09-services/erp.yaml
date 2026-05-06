@@ -1,0 +1,157 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: erp-secrets
+  namespace: my-project
+type: Opaque
+data:
+  ERP_PASS: REDACTED
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: erp
+  namespace: my-project
+  labels:
+    app: erp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: erp
+  template:
+    metadata:
+      labels:
+        app: erp
+    spec:
+      initContainers:
+        - name: wait-for-db
+          image: postgres:16-alpine
+          env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: erp-secrets
+                  key: ERP_PASS
+          command: [ 'sh', '-c' ]
+          args:
+            - |
+              set -e
+              echo "Waiting for postgres service (postgres.database.svc.cluster.local:5432) to accept connections for user erp_user..."
+              until psql -h postgres.database.svc.cluster.local -U erp_user -d erp -c "SELECT 1;" > /dev/null 2>&1; do
+                echo "Postgres not ready yet for user erp_user, sleeping for 2 seconds..."
+                sleep 2
+              done
+              echo "Postgres service is ready for user erp_user!"
+          resources:
+            requests:
+              cpu: "25m"
+              memory: "32Mi"
+            limits:
+              cpu: "100m"
+              memory: "64Mi"
+        - name: wait-for-nats
+          image: busybox:1.36
+          command: [ 'sh', '-c', 'echo "Waiting for nats (nats.messaging.svc.cluster.local:4222)..."; until nc -zv nats.messaging.svc.cluster.local 4222; do sleep 2; done; echo "NATS ready!"' ]
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "16Mi"
+            limits:
+              cpu: "50m"
+              memory: "32Mi"
+      containers:
+        - name: erp
+          image: registry.sfx-markt.de/erp:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: http
+            - containerPort: 9000
+              name: grpc
+          envFrom:
+            - configMapRef:
+                name: common-config
+            - secretRef:
+                name: common-secrets
+          env:
+            - name: PG_CONN
+              value: "host=$(POSTGRES_HOST) port=$(POSTGRES_PORT) dbname=erp user=erp_user search_path=erp,public sslmode=disable password=erp_pass"
+            - name: PGHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: POSTGRES_HOST
+            - name: PGPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: POSTGRES_PORT
+            - name: PGDATABASE
+              value: "erp"
+            - name: PGUSER
+              value: "erp_user"
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: erp-secrets
+                  key: ERP_PASS
+            - name: PGSSLMODE
+              value: "disable"
+            - name: RPC_ERP
+              value: "ERP=erp.my-project.svc.cluster.local:9000"
+            - name: RPC_SERVICES
+              value: "USERS=users.my-project.svc.cluster.local:9000"
+            - name: OTEL_SERVICE_NAME
+              value: "erp"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://otel-collector.observability.svc.cluster.local:4317"
+            - name: OTEL_EXPORTER_OTLP_INSECURE
+              value: "true"
+            - name: OTEL_TRACES_EXPORTER
+              value: "otlp"
+            - name: OTEL_ERP_EXPORTER
+              value: "otlp"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: erp
+  namespace: my-project
+  labels:
+    app: erp
+spec:
+  selector:
+    app: erp
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+    - name: grpc-internal
+      port: 9000
+      targetPort: grpc
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: erp-external # External service name
+  namespace: my-project
+  labels:
+    app: erp
+spec:
+  selector:
+    app: erp
+  ports:
+    - name: grpc-external
+      protocol: TCP
+      port: 30040 # External port
+      targetPort: grpc
+  type: LoadBalancer

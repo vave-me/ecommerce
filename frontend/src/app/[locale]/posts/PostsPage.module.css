@@ -1,0 +1,239 @@
+/* PostsPage.module.css */
+/* Base styles (apply to all screen sizes) */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+    .container {
+        background: var(--gray-900);
+        color: var(--gray-200);
+    }
+}
+
+.mainContent {
+    flex: 1;
+    width: 100%;
+    padding: 0;
+}
+
+.layoutGrid, .layoutListGrid {
+    display: block;
+    width: 100%;
+}
+
+.contentArea, .contentListArea {
+    width: 100%;
+}
+
+.postList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.postList li {
+    width: 100%;
+    margin-bottom: var(--space-sm);
+}
+
+.postListItem {
+    width: 100%;
+    margin-bottom: var(--space-sm);
+}
+
+.loadingState {
+    text-align: center;
+    padding: 2rem;
+    font-weight: 500;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .loadingState {
+        color: var(--gray-400);
+    }
+}
+
+.errorState {
+    text-align: center;
+    padding: 2rem;
+    background-color: #fee;
+    border: 1px solid #fcc;
+    border-radius: 8px;
+    margin: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .errorState {
+        background-color: rgba(239, 68, 68, 0.1);
+        border: 1px solid var(--danger);
+    }
+}
+
+.errorState h2 {
+    color: #c33;
+    margin-bottom: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .errorState h2 {
+        color: var(--danger);
+    }
+}
+
+.errorState p {
+    margin-bottom: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .errorState p {
+        color: var(--gray-300);
+    }
+}
+
+.retryButton {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+@media (prefers-color-scheme: dark) {
+    .retryButton {
+        background-color: var(--danger);
+        color: var(--gray-50);
+    }
+}
+
+.retryButton:hover {
+    background-color: #c0392b;
+}
+
+@media (prefers-color-scheme: dark) {
+    .retryButton:hover {
+        background-color: #dc2626;
+    }
+}
+
+.devError {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 4px;
+    text-align: left;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #666;
+}
+
+@media (prefers-color-scheme: dark) {
+    .devError {
+        background-color: var(--gray-800);
+        border: 1px solid var(--gray-600);
+        color: var(--gray-400);
+    }
+}
+
+.emptyState {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #666;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .emptyState {
+        color: var(--gray-400);
+        background-color: var(--gray-800);
+    }
+}
+
+.emptyState h3 {
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+@media (prefers-color-scheme: dark) {
+    .emptyState h3 {
+        color: var(--gray-300);
+    }
+}
+
+.refetchingIndicator {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background-color: #3498db;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    z-index: 1000;
+}
+
+@media (prefers-color-scheme: dark) {
+    .refetchingIndicator {
+        background-color: var(--primary-color);
+        color: var(--gray-50);
+    }
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+    .mainContent {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 var(--space-md);
+    }
+
+    .layoutGrid {
+        display: grid;
+        grid-template-areas: 'leftside contentarea';
+        grid-template-columns: 0.5fr 3fr;
+        column-gap: 16px;
+    }
+
+    .layoutListGrid {
+        display: flex;
+        gap: 10px;
+    }
+
+    .contentArea {
+        grid-area: contentarea;
+    }
+
+    .contentListArea {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+}
+
+/* Small Mobile Optimizations */
+@media (max-width: 576px) {
+    .mainContent {
+        padding: 0;
+    }
+    
+    .errorState,
+    .emptyState {
+        margin: 0.5rem;
+        padding: 1.5rem 1rem;
+    }
+}

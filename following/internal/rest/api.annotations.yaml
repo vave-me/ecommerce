@@ -1,0 +1,50 @@
+type: google.api.Service
+config_version: 3
+name: following.googleapis.com
+title: Follow Management API
+apis:
+  - name: followingpb.FollowingService
+http:
+  rules:
+    # Create a New Follow
+    - selector: followingpb.FollowingService.AddFollow
+      post: /api/following
+      body: "*"
+
+    # Approve a Follow
+    - selector: followingpb.FollowingService.ApproveFollow
+      put: /api/following/{id}/approve
+      body: "*"
+
+    # Reject a Follow
+    - selector: followingpb.FollowingService.RejectFollow
+      delete: /api/following/{id}/reject
+
+    # Edit a Follow
+    - selector: followingpb.FollowingService.EditFollow
+      put: /api/following/{id}
+      body: "*"
+
+    # Get All Following
+    - selector: followingpb.FollowingService.GetFollowing
+      get: /api/following/{followed_user_id}/all
+
+    - selector: followingpb.FollowingService.GetFollowingBySender
+      post: /api/following/sender
+      body: "*"
+
+    # Get a Specific Follow
+    - selector: followingpb.FollowingService.GetFollow
+      get: /api/following/{id}
+
+    # Get Approved Following
+    - selector: followingpb.FollowingService.GetApprovedFollowing
+      get: /api/following/approved
+
+    # Get a Specific Follow
+    - selector: followingpb.FollowingService.GetMostFollowed
+      get: /api/following/most
+
+    # Get a Specific Follow
+    - selector: followingpb.FollowingService.GetMostFollowedByCategory
+      get: /api/following/most/{category_id}

@@ -1,0 +1,233 @@
+/* ============================================================================
+   LISTINGS HEADER - ATOMIC DESIGN SYSTEM
+   ============================================================================ */
+
+/* Uses Global Design Tokens from design-tokens.css */
+
+/* ============================================================================
+   HEADER CONTAINER - ORGANISM
+   ============================================================================ */
+
+.headerContainer {
+  background: var(--ai-color-surface);
+  border-bottom: 1px solid var(--ai-color-border);
+  padding: var(--ai-space-xl) 0;
+  box-shadow: var(--ai-shadow-sm);
+}
+
+.headerContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--ai-space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--ai-space-lg);
+}
+
+/* ============================================================================
+   ICON SECTION - MOLECULE
+   ============================================================================ */
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: var(--ai-color-primary-light);
+  border-radius: var(--ai-radius-xl);
+  flex-shrink: 0;
+}
+
+.icon {
+  color: var(--ai-color-primary);
+  width: 32px;
+  height: 32px;
+}
+
+/* ============================================================================
+   TEXT CONTENT - MOLECULE
+   ============================================================================ */
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ai-space-xs);
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--ai-text-3xl);
+  font-weight: var(--ai-font-weight-bold);
+  color: var(--ai-color-text-primary);
+  margin: 0;
+  line-height: var(--ai-line-height-tight);
+}
+
+.subtitle {
+  font-size: var(--ai-text-base);
+  color: var(--ai-color-text-secondary);
+  margin: 0;
+  line-height: var(--ai-line-height-normal);
+  font-weight: var(--ai-font-weight-normal);
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - MOBILE FIRST
+   ============================================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .headerContent {
+    padding: 0 var(--ai-space-md);
+    gap: var(--ai-space-md);
+  }
+
+  .iconWrapper {
+    width: 56px;
+    height: 56px;
+  }
+
+  .icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .title {
+    font-size: var(--ai-text-2xl);
+  }
+
+  .subtitle {
+    font-size: var(--ai-text-sm);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .headerContainer {
+    padding: var(--ai-space-lg) 0;
+  }
+
+  .headerContent {
+    padding: 0 var(--ai-space-sm);
+    flex-direction: column;
+    text-align: center;
+    gap: var(--ai-space-md);
+  }
+
+  .iconWrapper {
+    width: 48px;
+    height: 48px;
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .title {
+    font-size: var(--ai-text-xl);
+  }
+
+  .subtitle {
+    font-size: var(--ai-text-sm);
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .headerContainer {
+    padding: var(--ai-space-md) 0;
+  }
+
+  .headerContent {
+    padding: 0 var(--ai-space-xs);
+    gap: var(--ai-space-sm);
+  }
+
+  .iconWrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .title {
+    font-size: var(--ai-text-lg);
+  }
+
+  .subtitle {
+    font-size: var(--ai-text-xs);
+  }
+}
+
+/* ============================================================================
+   ACCESSIBILITY & MOTION
+   ============================================================================ */
+
+/* Dark Theme */
+@media (prefers-color-scheme: dark) {
+  .headerContainer {
+    background: var(--gray-800, #1f2937);
+    border-bottom: 1px solid var(--gray-700, #374151);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .iconWrapper {
+    background: rgba(59, 130, 246, 0.1);
+  }
+
+  .icon {
+    color: var(--primary-color, #3b82f6);
+  }
+
+  .title {
+    color: var(--gray-50, #f9fafb);
+  }
+
+  .subtitle {
+    color: var(--gray-300, #d1d5db);
+  }
+}
+
+/* High Contrast */
+@media (prefers-contrast: high) {
+  .headerContainer {
+    border-bottom-width: 2px;
+  }
+
+  .iconWrapper {
+    border: 2px solid var(--ai-color-primary);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .headerContainer {
+    background: transparent ;
+    box-shadow: none;
+    border-bottom: 2px solid #000;
+    padding: var(--ai-space-md) 0;
+  }
+
+  .iconWrapper {
+    background: transparent ;
+    border: 1px solid #000;
+  }
+
+  .icon {
+    color: #000 ;
+  }
+
+  .title {
+    color: #000 ;
+  }
+
+  .subtitle {
+    color: #333 ;
+  }
+} 

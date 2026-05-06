@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # Vector Database - Qdrant
+  qdrant:
+    image: qdrant/qdrant:v1.7.4
+    container_name: qdrant
+    ports:
+      - "6333:6333"  # REST API
+      - "6334:6334"  # gRPC API
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    environment:
+      QDRANT__SERVICE__HTTP_PORT: 6333
+      QDRANT__SERVICE__GRPC_PORT: 6334
+      QDRANT__LOG_LEVEL: INFO
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Vector Service
+  vector-service:
+    build:
+      context: .
+      dockerfile: cmd/service/Dockerfile
+    container_name: vector-service
+    ports:
+      - "50051:50051"  # gRPC port
+      - "8080:8080"    # HTTP gateway port
+    environment:
+      QDRANT_HOST: qdrant
+      QDRANT_PORT: 6334
+      QDRANT_HTTP_PORT: 6333
+      DATABASE_URL: postgresql://user:password@postgres:5432/vectordb
+      SERVICE_PORT: 50051
+      HTTP_PORT: 8080
+    depends_on:
+      qdrant:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # PostgreSQL for non-vector data
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: vectordb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: REDACTED
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+
+volumes:
+
+  postgres_data:
+    driver: local
+
+networks:
+  default:
+    driver: bridge 

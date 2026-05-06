@@ -1,0 +1,15 @@
+openapiOptions:
+  file:
+    - file: "mailerpb/api.proto"
+      option:
+        info:
+          title: Mailer Management
+          version: "1.0.0"
+        basePath: /
+  method:
+    - method: mailerpb.MailerService.CreateEmail
+      option:
+        operationId: createEmail
+        tags:
+          - Email
+        summary: Create a new mailer

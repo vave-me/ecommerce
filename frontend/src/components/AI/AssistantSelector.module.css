@@ -1,0 +1,1174 @@
+/* AssistantSelector.module.css - Compact Professional Design */
+
+.container {
+    width: 100%;
+    position: relative;
+}
+
+/* Main selector button - used by JSX */
+.selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  width: 100%;
+  min-height: 36px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.selector:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+  color: #111827;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transform: translateY(-0.5px);
+}
+
+.selector:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.selector:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.selector.open {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.selector.open .chevron {
+  transform: rotate(180deg);
+}
+
+/* Legacy selectorButton - keeping for compatibility */
+.selectorButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  width: 100%;
+  min-height: 36px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.selectorButton:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+  color: #111827;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transform: translateY(-0.5px);
+}
+
+.selectorButton:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.selectorButton:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.selectorButton.open {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.selectorButton.open .chevronIcon {
+  transform: rotate(180deg);
+}
+
+.buttonContent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.assistantIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: #f3f4f6;
+  border-radius: 6px;
+  color: #6b7280;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.assistantInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.assistantName {
+  font-weight: 500;
+  color: #111827;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.assistantCapability {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.chevronIcon,
+.chevron {
+  color: #6b7280;
+  transition: transform 0.15s ease;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.selectorButton.open .chevronIcon {
+    transform: rotate(180deg);
+}
+
+/* === DROPDOWN MENU - Elegant Design === */
+.dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(226, 232, 240, 0.6);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+    z-index: 100;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+    animation: dropdownSlide 0.15s ease;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+@keyframes dropdownSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* === DROPDOWN OPTIONS === */
+.optionsList {
+    list-style: none;
+    margin: 0;
+    padding: 8px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    position: relative;
+}
+
+.option:hover {
+    background: rgba(52, 152, 219, 0.08);
+    transform: translateX(2px);
+}
+
+.option.selected {
+    background: rgba(52, 152, 219, 0.12);
+    color: #2980b9;
+}
+
+.option.selected::after {
+    content: '✓';
+    position: absolute;
+    right: 16px;
+    color: #3498db;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.optionIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: rgba(52, 152, 219, 0.1);
+    border-radius: 8px;
+    color: #3498db;
+    font-size: 14px;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+}
+
+.option:hover .optionIcon {
+    background: rgba(52, 152, 219, 0.15);
+    transform: scale(1.05);
+}
+
+.option.selected .optionIcon {
+    background: rgba(52, 152, 219, 0.2);
+    color: #2980b9;
+}
+
+.optionContent {
+    flex: 1;
+    min-width: 0;
+}
+
+.optionName {
+    font-weight: 600;
+    color: #334155;
+    font-size: 14px;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    margin-bottom: 2px;
+}
+
+.optionDescription {
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 400;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.option.selected .optionName {
+    color: #2980b9;
+}
+
+/* === CAPABILITY BADGES === */
+.capabilityBadges {
+    display: flex;
+    gap: 4px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+}
+
+.capabilityBadge {
+    background: rgba(248, 250, 252, 0.8);
+    border: 1px solid rgba(226, 232, 240, 0.6);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 10px;
+    font-weight: 500;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.option:hover .capabilityBadge {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(203, 213, 225, 0.8);
+}
+
+.option.selected .capabilityBadge {
+    background: rgba(52, 152, 219, 0.1);
+    border-color: rgba(52, 152, 219, 0.3);
+    color: #2980b9;
+}
+
+/* === LOADING STATE === */
+.loadingOption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.loadingSpinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(52, 152, 219, 0.2);
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* === EMPTY STATE === */
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    color: #64748b;
+    text-align: center;
+}
+
+.emptyIcon {
+    width: 32px;
+    height: 32px;
+    color: #94a3b8;
+    margin-bottom: 8px;
+}
+
+.emptyTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 4px;
+}
+
+.emptyDescription {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+/* === SCROLLBAR STYLING === */
+.dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dropdown::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.dropdown::-webkit-scrollbar-thumb {
+    background: rgba(203, 213, 225, 0.6);
+    border-radius: 3px;
+}
+
+.dropdown::-webkit-scrollbar-thumb:hover {
+    background: rgba(203, 213, 225, 0.8);
+}
+
+/* === MOBILE COMPACT STYLES === */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 8px;
+    }
+
+    /* Compact mobile selector */
+    .selectorButton {
+        padding: 8px 12px;
+        border-radius: 8px;
+        min-height: 36px;
+        font-size: 13px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+    }
+
+    .selectorButton:hover {
+        transform: none;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+
+    .buttonContent {
+        gap: 8px;
+    }
+
+    /* Smaller icon on mobile */
+    .assistantIcon {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+        border-radius: 4px;
+    }
+
+    /* Hide capability text on mobile to save space */
+    .assistantCapability {
+        display: none;
+    }
+
+    /* Compact assistant name */
+    .assistantName {
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.2;
+        margin-bottom: 0;
+    }
+
+    /* Smaller chevron */
+    .chevronIcon {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* Compact dropdown */
+    .dropdown {
+        border-radius: 8px;
+        max-height: 200px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+
+    .optionsList {
+        padding: 4px;
+    }
+
+    .option {
+        padding: 8px 10px;
+        gap: 8px;
+    }
+
+    .optionIcon {
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
+        border-radius: 6px;
+    }
+
+    .option:hover {
+        transform: none;
+    }
+
+    .optionName {
+        font-size: 13px;
+        font-weight: 500;
+        margin-bottom: 1px;
+    }
+
+    .optionDescription {
+        font-size: 11px;
+        -webkit-line-clamp: 1;
+    }
+
+    .capabilityBadges {
+        display: none; /* Hide badges on mobile to save space */
+    }
+
+    .option.selected::after {
+        font-size: 12px;
+        right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 4px;
+    }
+
+    /* Extra compact for small screens */
+    .selectorButton {
+        padding: 6px 10px;
+        min-height: 32px;
+        font-size: 12px;
+        border-radius: 6px;
+    }
+
+    .buttonContent {
+        gap: 6px;
+    }
+
+    .assistantIcon {
+        width: 18px;
+        height: 18px;
+        font-size: 9px;
+    }
+
+    .assistantName {
+        font-size: 12px;
+    }
+
+    .chevronIcon {
+        width: 14px;
+        height: 14px;
+    }
+
+    .dropdown {
+        max-height: 160px;
+        border-radius: 6px;
+    }
+
+    .option {
+        padding: 6px 8px;
+        gap: 6px;
+    }
+
+    .optionIcon {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+    }
+
+    .optionName {
+        font-size: 12px;
+    }
+
+    .optionDescription {
+        font-size: 10px;
+    }
+
+    .option.selected::after {
+        font-size: 11px;
+        right: 8px;
+    }
+}
+
+/* === ACCESSIBILITY === */
+@media (prefers-reduced-motion: reduce) {
+    .selectorButton,
+    .option,
+    .optionIcon,
+    .chevronIcon,
+    .dropdown {
+        transition: none;
+        animation: none;
+    }
+
+    .loadingSpinner {
+        animation: none;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .selectorButton {
+        border-color: #000;
+        background: #fff;
+    }
+
+    .selectorButton:focus-visible {
+        border-color: #0066cc;
+        box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.3);
+    }
+
+    .dropdown {
+        border-color: #666;
+        background: #fff;
+    }
+
+    .option:hover {
+        background: #f0f0f0;
+        border: 1px solid #666;
+    }
+
+    .option.selected {
+        background: #e6f3ff;
+        border: 1px solid #0066cc;
+    }
+}
+
+/* ============================================================================
+   FILTER BUTTON
+   ============================================================================ */
+
+.filterButton {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    padding: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    position: relative;
+    min-width: 48px;
+    height: 48px;
+    color: #8E8E93;
+}
+
+.filterButton:hover:not(:disabled) {
+    border-color: #007AFF;
+    color: #007AFF;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 122, 255, 0.15);
+}
+
+.filterButton.active {
+    background: #007AFF;
+    border-color: #007AFF;
+    color: white;
+}
+
+.filterButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.filterCount {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: #FF3B30;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+}
+
+/* ============================================================================
+   FILTER PANEL
+   ============================================================================ */
+
+.filterPanel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    z-index: 10;
+    margin-top: 8px;
+    animation: slideDown 0.2s ease-out;
+}
+
+.filterHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    font-size: 13px;
+    font-weight: 600;
+    color: #1D1D1F;
+}
+
+.clearFilters {
+    background: none;
+    border: none;
+    color: #007AFF;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.clearFilters:hover {
+    background: rgba(0, 122, 255, 0.1);
+}
+
+.filterOptions {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.filterOption {
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #3C3C43;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    text-align: left;
+    width: 100%;
+}
+
+.filterOption:hover {
+    background: rgba(0, 122, 255, 0.05);
+    color: #007AFF;
+}
+
+.filterOption.active {
+    background: rgba(0, 122, 255, 0.1);
+    color: #007AFF;
+    font-weight: 500;
+}
+
+.filterOption span {
+    flex: 1;
+}
+
+/* ============================================================================
+   CAPABILITY BADGES
+   ============================================================================ */
+
+.capabilityBadge {
+    background: rgba(0, 122, 255, 0.1);
+    color: #007AFF;
+    border-radius: 6px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.capabilityBadge:hover {
+    background: rgba(0, 122, 255, 0.2);
+    opacity: 0.9;
+}
+
+/* ============================================================================
+   NO RESULTS STATE
+   ============================================================================ */
+
+.noResults {
+    padding: 20px;
+    text-align: center;
+    color: #8E8E93;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.clearFiltersButton {
+    background: #007AFF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.clearFiltersButton:hover {
+    background: #0056CC;
+}
+
+/* ============================================================================
+   EMPTY STATE
+   ============================================================================ */
+
+.emptyState {
+    text-align: center;
+    padding: 20px;
+    color: #8E8E93;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.emptyState span:first-of-type {
+    font-size: 14px;
+    font-weight: 500;
+    color: #3C3C43;
+}
+
+.emptyHint {
+    margin-top: 4px;
+}
+
+.emptyHint span {
+    font-size: 12px;
+    color: #8E8E93;
+    line-height: 1.4;
+}
+
+/* ============================================================================
+   CAPABILITY LEGEND
+   ============================================================================ */
+
+.capabilityLegend {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+    padding: 8px 12px;
+    background: rgba(0, 122, 255, 0.03);
+    border: 1px solid rgba(0, 122, 255, 0.1);
+    border-radius: 8px;
+    flex-wrap: wrap;
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #8E8E93;
+    font-weight: 500;
+}
+
+.legendItem svg {
+    color: #007AFF;
+}
+
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================ */
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ============================================================================
+   ACCESSIBILITY
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .selectorButton,
+    .option,
+    .optionIcon,
+    .chevronIcon,
+    .dropdown {
+        transition: none;
+        animation: none;
+    }
+
+    .loadingSpinner {
+        animation: none;
+    }
+    
+    .filterPanel,
+    .dropdown {
+        animation: none;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .selector,
+    .filterButton {
+        border: 2px solid #000;
+    }
+    
+    .filterPanel,
+    .dropdown {
+        border: 2px solid #000;
+    }
+    
+    .capabilityBadge {
+        border: 1px solid currentColor;
+    }
+}
+
+/* ============================================================================
+   DARK MODE SUPPORT
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+    /* ============= SELECTOR BUTTON ============= */
+    .selector,
+    .selectorButton {
+        background: #374151;
+        border-color: #4b5563;
+        color: #d1d5db;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .selector:hover,
+    .selectorButton:hover {
+        background: #4b5563;
+        border-color: #6b7280;
+        color: #f3f4f6;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    }
+
+    .selector:focus-visible,
+    .selectorButton:focus-visible {
+        outline-color: #3b82f6;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    .selector.open,
+    .selectorButton.open {
+        background: #4b5563;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    /* ============= BUTTON CONTENT ============= */
+    .assistantIcon {
+        background: #4b5563;
+        color: #9ca3af;
+    }
+
+    .assistantName {
+        color: #f3f4f6;
+    }
+
+    .assistantCapability {
+        color: #9ca3af;
+    }
+
+    .chevronIcon,
+    .chevron {
+        color: #9ca3af;
+    }
+
+    /* ============= DROPDOWN MENU ============= */
+    .dropdown {
+        background: var(--gray-800);
+        border-color: var(--gray-600);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ============= DROPDOWN OPTIONS ============= */
+    .option {
+        color: var(--gray-200);
+    }
+
+    .option:hover {
+        background: rgba(var(--primary-color-rgb, 59, 130, 246), 0.2);
+        color: var(--gray-50);
+    }
+
+    .option.selected {
+        background: rgba(var(--primary-color-rgb, 59, 130, 246), 0.3);
+        color: var(--primary-color);
+    }
+
+    .option.selected::after {
+        color: var(--primary-color);
+    }
+
+    .optionIcon {
+        background: rgba(var(--primary-color-rgb, 59, 130, 246), 0.2);
+        color: var(--primary-color);
+    }
+
+    .option:hover .optionIcon {
+        background: rgba(var(--primary-color-rgb, 59, 130, 246), 0.3);
+    }
+
+    .option.selected .optionIcon {
+        background: rgba(var(--primary-color-rgb, 59, 130, 246), 0.4);
+        color: var(--primary-color);
+    }
+
+    .optionName {
+        color: var(--gray-50);
+    }
+
+    .optionDescription {
+        color: var(--gray-400);
+    }
+
+    .option.selected .optionName {
+        color: var(--primary-color);
+    }
+
+    /* ============= CAPABILITY BADGES ============= */
+    .capabilityBadge {
+        background: var(--gray-700);
+        color: var(--gray-300);
+        border-color: var(--gray-600);
+    }
+
+    .option:hover .capabilityBadge {
+        background: var(--gray-600);
+        color: var(--gray-200);
+    }
+
+    .option.selected .capabilityBadge {
+        background: rgba(var(--primary-color-rgb, 59, 130, 246), 0.2);
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    /* ============= LOADING & EMPTY STATES ============= */
+    .loadingOption {
+        color: var(--gray-400);
+        background: var(--gray-800);
+    }
+
+    .emptyState {
+        color: var(--gray-400);
+        background: var(--gray-800);
+    }
+
+    .emptyIcon {
+        color: var(--gray-500);
+    }
+
+    .emptyTitle {
+        color: var(--gray-300);
+    }
+
+    .emptyDescription {
+        color: var(--gray-400);
+    }
+
+    /* ============= SCROLLBAR ============= */
+    .dropdown::-webkit-scrollbar-track {
+        background: var(--gray-700);
+    }
+
+    .dropdown::-webkit-scrollbar-thumb {
+        background: var(--gray-600);
+    }
+
+    .dropdown::-webkit-scrollbar-thumb:hover {
+        background: var(--gray-500);
+    }
+
+    /* ============= FILTER COMPONENTS ============= */
+    .filterButton {
+        background: var(--gray-800);
+        color: var(--gray-300);
+        border-color: var(--gray-600);
+    }
+
+    .filterButton:hover:not(:disabled) {
+        background: var(--gray-700);
+        color: var(--primary-color);
+        border-color: var(--gray-500);
+    }
+
+    .filterButton.active {
+        background: rgba(var(--primary-color-rgb, 59, 130, 246), 0.2);
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .filterButton:disabled {
+        background: var(--gray-900);
+        color: var(--gray-600);
+        border-color: var(--gray-700);
+    }
+
+    .filterCount {
+        background: var(--primary-color);
+        color: var(--gray-50);
+    }
+
+    /* ============= FILTER PANEL ============= */
+    .filterPanel {
+        background: var(--gray-800);
+        border-color: var(--gray-600);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .filterHeader {
+        color: var(--gray-50);
+        border-bottom-color: var(--gray-700);
+    }
+
+    .clearFilters {
+        color: var(--primary-color);
+    }
+
+    .clearFilters:hover {
+        color: var(--primary-color-hover);
+        background: rgba(var(--primary-color-rgb, 59, 130, 246), 0.1);
+    }
+
+    .filterOption {
+        color: var(--gray-300);
+    }
+
+    .filterOption:hover {
+        background: var(--gray-700);
+        color: var(--gray-50);
+    }
+
+    .filterOption.active {
+        background: rgba(var(--primary-color-rgb, 59, 130, 246), 0.2);
+        color: var(--primary-color);
+    }
+
+    .filterOption span {
+        color: var(--gray-400);
+    }
+
+    .clearFiltersButton {
+        background: var(--gray-700);
+        color: var(--gray-300);
+        border-color: var(--gray-600);
+    }
+
+    .clearFiltersButton:hover {
+        background: var(--gray-600);
+        color: var(--gray-50);
+    }
+
+    .noResults {
+        color: var(--gray-400);
+    }
+
+    /* ============= CAPABILITY LEGEND ============= */
+    .capabilityLegend {
+        background: var(--gray-800);
+        border-color: var(--gray-700);
+    }
+
+    .legendItem {
+        color: var(--gray-300);
+    }
+
+    .legendItem svg {
+        color: var(--primary-color);
+    }
+
+    /* ============= MOBILE RESPONSIVE OVERRIDES ============= */
+    @media (max-width: 768px) {
+        .selectorButton {
+            background: var(--gray-800);
+            border-color: var(--gray-600);
+        }
+
+        .dropdown {
+            background: var(--gray-800);
+            border-color: var(--gray-600);
+        }
+
+        .filterPanel {
+            background: var(--gray-800);
+            border-color: var(--gray-600);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .selectorButton {
+            background: var(--gray-800);
+            border-color: var(--gray-600);
+        }
+
+        .dropdown {
+            background: var(--gray-800);
+            border-color: var(--gray-600);
+        }
+    }
+}

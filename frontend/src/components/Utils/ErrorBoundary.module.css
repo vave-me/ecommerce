@@ -1,0 +1,248 @@
+/* src/components/ErrorBoundary.module.css */
+
+.fallbackContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    color: #555;
+    padding: 2rem;
+    background: #f9fafb;
+}
+
+/* ============================================================================
+   DARK THEME SUPPORT
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+    .fallbackContainer {
+        background: var(--gray-900, #111827);
+        color: var(--gray-300, #d1d5db);
+    }
+}
+
+/* ============================================================================
+   ENHANCED ERROR BOUNDARY STYLES
+   ============================================================================ */
+
+.errorIcon {
+    width: 64px;
+    height: 64px;
+    color: var(--red-500, #ef4444);
+    margin-bottom: 1rem;
+}
+
+.errorTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gray-900, #111827);
+    margin-bottom: 0.5rem;
+}
+
+.errorMessage {
+    font-size: 1rem;
+    color: var(--gray-600, #4b5563);
+    margin-bottom: 1.5rem;
+    max-width: 500px;
+    line-height: 1.6;
+}
+
+.errorActions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.retryButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--teal-600, #0d9488);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.retryButton:hover {
+    background: var(--teal-700, #0f766e);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.retryButton:focus-visible {
+    outline: 2px solid var(--teal-400, #2dd4bf);
+    outline-offset: 2px;
+}
+
+.retryButton:active {
+    transform: translateY(0);
+}
+
+.reportButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    color: var(--gray-700, #374151);
+    border: 1px solid var(--gray-300, #d1d5db);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.reportButton:hover {
+    background: var(--gray-50, #f9fafb);
+    border-color: var(--gray-400, #9ca3af);
+}
+
+@media (prefers-color-scheme: dark) {
+    .errorIcon {
+        color: var(--red-400, #f87171);
+    }
+
+    .errorTitle {
+        color: var(--gray-100, #f3f4f6);
+    }
+
+    .errorMessage {
+        color: var(--gray-400, #9ca3af);
+    }
+
+    .retryButton {
+        background: var(--teal-600, #0d9488);
+        border: 1px solid var(--teal-500, #14b8a6);
+    }
+
+    .retryButton:hover {
+        background: var(--teal-500, #14b8a6);
+        border-color: var(--teal-400, #2dd4bf);
+        box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+    }
+
+    .reportButton {
+        color: var(--gray-300, #d1d5db);
+        border-color: var(--gray-600, #4b5563);
+    }
+
+    .reportButton:hover {
+        background: var(--gray-800, #1f2937);
+        border-color: var(--gray-500, #6b7280);
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .fallbackContainer {
+        padding: 1.5rem;
+    }
+
+    .errorIcon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .errorTitle {
+        font-size: 1.25rem;
+    }
+
+    .errorMessage {
+        font-size: 0.875rem;
+        max-width: 400px;
+    }
+
+    .errorActions {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .retryButton,
+    .reportButton {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .fallbackContainer {
+        padding: 1rem;
+    }
+
+    .errorIcon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .errorTitle {
+        font-size: 1.125rem;
+    }
+
+    .errorMessage {
+        font-size: 0.8125rem;
+        max-width: 320px;
+    }
+
+    .retryButton,
+    .reportButton {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.8125rem;
+    }
+}
+
+/* ============================================================================
+   ACCESSIBILITY & MOTION
+   ============================================================================ */
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .retryButton,
+    .reportButton {
+        transition: none;
+    }
+
+    .retryButton:hover,
+    .reportButton:hover {
+        transform: none;
+    }
+}
+
+/* High Contrast */
+@media (prefers-contrast: high) {
+    .retryButton,
+    .reportButton {
+        border: 2px solid;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .errorTitle {
+            color: var(--gray-50, #f9fafb);
+        }
+
+        .errorMessage {
+            color: var(--gray-200, #e5e7eb);
+        }
+
+        .retryButton {
+            border-color: var(--teal-400, #2dd4bf);
+        }
+
+        .reportButton {
+            border-color: var(--gray-400, #9ca3af);
+        }
+    }
+}

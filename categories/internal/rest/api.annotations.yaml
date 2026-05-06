@@ -1,0 +1,76 @@
+type: google.api.Service
+config_version: 3
+name: categories.googleapis.com
+title: Categories Management API
+apis:
+  - name: categoriespb.CategoriesService
+http:
+  rules:
+    # Create a New Category
+    - selector: categoriespb.CategoriesService.AddCategory
+      post: /api/categories
+      body: "*"
+
+    # Retrieve a Specific Category
+    - selector: categoriespb.CategoriesService.GetCategory
+      get: /api/categories/{id}
+
+    # List All Categories for a User with Optional Filtering and Pagination
+    - selector: categoriespb.CategoriesService.GetCategories
+      get: /api/categories
+
+    # List All Categories for a User with Optional Filtering and Pagination
+    - selector: categoriespb.CategoriesService.GetMainCategories
+      get: /api/categories/main
+
+    # List All Categories for a User with Optional Filtering and Pagination
+    - selector: categoriespb.CategoriesService.GetAllMainCategories
+      get: /api/categories/all
+
+    # List All Categories for a User with Optional Filtering and Pagination
+    - selector: categoriespb.CategoriesService.GetSubCategories
+      get: /api/categories/subcategory
+
+
+    # Update a Category's Details
+    - selector: categoriespb.CategoriesService.UpdateCategory
+      patch: /api/categories/{id}
+      body: "*"
+
+    # Delete a Category
+    - selector: categoriespb.CategoriesService.RemoveCategory
+      delete: /api/categories/{id}
+
+    # Rebrand a Category
+    - selector: categoriespb.CategoriesService.RebrandCategory
+      patch: /api/categories/{id}/rebrand
+      body: "*"
+
+
+    # Archive a Category (mark it inactive)
+    - selector: categoriespb.CategoriesService.ArchiveCategory
+      patch: /api/categories/{id}/archive
+      body: "*"
+
+
+    - selector: categoriespb.CategoriesService.AddFilter
+      post: /api/categories/filters
+      body: "*"
+
+    # Retrieve a Single Filter by ID
+    - selector: categoriespb.CategoriesService.GetFilter
+      get: /api/categories/filters/{filter_id}
+
+    # List Filters (optionally filtered by category_id)
+    - selector: categoriespb.CategoriesService.GetFilters
+      get: /api/categories/{category_id}/filters
+
+
+    # Archive a Filter (mark it unavailable)
+    - selector: categoriespb.CategoriesService.ArchiveFilter
+      patch: /api/categories/filters/{filter_id}/archive
+      body: "*"
+
+    # Remove a Filter
+    - selector: categoriespb.CategoriesService.RemoveFilter
+      delete: /api/categories/filters/{filter_id}

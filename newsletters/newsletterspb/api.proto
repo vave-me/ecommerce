@@ -1,0 +1,376 @@
+syntax = "proto3";
+
+package newsletterspb;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+// NewslettersService provides functionalities for newsletter creation, subscription, and management
+service NewslettersService {
+  // Newsletter Management - Users can create their own newsletters
+  rpc CreateNewsletter(CreateNewsletterRequest) returns (CreateNewsletterResponse) {}
+  rpc UpdateNewsletter(UpdateNewsletterRequest) returns (UpdateNewsletterResponse) {}
+  rpc GetNewsletter(GetNewsletterRequest) returns (GetNewsletterResponse) {}
+  rpc ListNewsletters(ListNewslettersRequest) returns (ListNewslettersResponse) {}
+  rpc DeleteNewsletter(DeleteNewsletterRequest) returns (google.protobuf.Empty) {}
+  
+  // Subscription Management
+  rpc Subscribe(SubscribeRequest) returns (SubscribeResponse) {}
+  rpc Unsubscribe(UnsubscribeRequest) returns (google.protobuf.Empty) {}
+  rpc UpdateSubscription(UpdateSubscriptionRequest) returns (UpdateSubscriptionResponse) {}
+  rpc GetSubscription(GetSubscriptionRequest) returns (GetSubscriptionResponse) {}
+  rpc ListSubscriptions(ListSubscriptionsRequest) returns (ListSubscriptionsResponse) {}
+  
+  // Edition Management - Creating and sending newsletter content
+  rpc CreateEdition(CreateEditionRequest) returns (CreateEditionResponse) {}
+  rpc UpdateEdition(UpdateEditionRequest) returns (UpdateEditionResponse) {}
+  rpc GetEdition(GetEditionRequest) returns (GetEditionResponse) {}
+  rpc ListEditions(ListEditionsRequest) returns (ListEditionsResponse) {}
+  rpc ScheduleEdition(ScheduleEditionRequest) returns (ScheduleEditionResponse) {}
+  rpc SendEdition(SendEditionRequest) returns (SendEditionResponse) {}
+  rpc PreviewEdition(PreviewEditionRequest) returns (PreviewEditionResponse) {}
+  
+  // Template Management
+  rpc CreateTemplate(CreateTemplateRequest) returns (CreateTemplateResponse) {}
+  rpc UpdateTemplate(UpdateTemplateRequest) returns (UpdateTemplateResponse) {}
+  rpc GetTemplate(GetTemplateRequest) returns (GetTemplateResponse) {}
+  rpc ListTemplates(ListTemplatesRequest) returns (ListTemplatesResponse) {}
+  rpc DeleteTemplate(DeleteTemplateRequest) returns (google.protobuf.Empty) {}
+  
+  // Analytics
+  rpc GetNewsletterStats(GetNewsletterStatsRequest) returns (GetNewsletterStatsResponse) {}
+  rpc GetEditionStats(GetEditionStatsRequest) returns (GetEditionStatsResponse) {}
+}
+
+// Newsletter represents a newsletter created by a user
+message Newsletter {
+  string id = 1;
+  string user_id = 2;              // Owner of the newsletter
+  string name = 3;
+  string description = 4;
+  string frequency = 5;            // daily, weekly, monthly
+  string category = 6;
+  string template_id = 7;
+  bool is_active = 8;
+  google.protobuf.Timestamp created_at = 9;
+  google.protobuf.Timestamp updated_at = 10;
+  int32 subscriber_count = 11;     // Calculated field
+}
+
+// Subscription represents a user's subscription to a newsletter
+message Subscription {
+  string id = 1;
+  string user_id = 2;              // Subscriber
+  string newsletter_id = 3;
+  string status = 4;               // active, paused, unsubscribed
+  SubscriptionPreferences preferences = 5;
+  google.protobuf.Timestamp subscribed_at = 6;
+  google.protobuf.Timestamp unsubscribed_at = 7;
+  Newsletter newsletter = 8;       // Populated in queries
+}
+
+// SubscriptionPreferences for customizing subscription
+message SubscriptionPreferences {
+  string frequency_override = 1;   // Override newsletter frequency
+  repeated string topics = 2;      // Interested topics
+  string format = 3;               // html, text, both
+}
+
+// NewsletterEdition represents a single edition/issue of a newsletter
+message NewsletterEdition {
+  string id = 1;
+  string newsletter_id = 2;
+  string subject = 3;
+  string content_html = 4;
+  string content_text = 5;
+  map<string, string> template_data = 6;
+  google.protobuf.Timestamp scheduled_at = 7;
+  google.protobuf.Timestamp sent_at = 8;
+  string status = 9;               // draft, scheduled, sending, sent
+  string created_by = 10;
+  google.protobuf.Timestamp created_at = 11;
+  google.protobuf.Timestamp updated_at = 12;
+  int32 recipient_count = 13;      // Calculated field
+}
+
+// NewsletterTemplate for reusable newsletter designs
+message NewsletterTemplate {
+  string id = 1;
+  string user_id = 2;              // NULL for system templates
+  string name = 3;
+  string description = 4;
+  string html_template = 5;
+  string text_template = 6;
+  map<string, string> variables = 7;
+  map<string, string> preview_data = 8;
+  bool is_public = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp updated_at = 11;
+}
+
+// Newsletter Management Requests/Responses
+message CreateNewsletterRequest {
+  string name = 1;
+  string description = 2;
+  string frequency = 3;
+  string category = 4;
+  string template_id = 5;
+}
+
+message CreateNewsletterResponse {
+  Newsletter newsletter = 1;
+}
+
+message UpdateNewsletterRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string frequency = 4;
+  string category = 5;
+  string template_id = 6;
+  bool is_active = 7;
+}
+
+message UpdateNewsletterResponse {
+  Newsletter newsletter = 1;
+}
+
+message GetNewsletterRequest {
+  string id = 1;
+}
+
+message GetNewsletterResponse {
+  Newsletter newsletter = 1;
+}
+
+message ListNewslettersRequest {
+  string user_id = 1;              // Filter by owner
+  string category = 2;             // Filter by category
+  bool active_only = 3;
+  int32 page = 4;
+  int32 limit = 5;
+}
+
+message ListNewslettersResponse {
+  repeated Newsletter newsletters = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 limit = 4;
+}
+
+message DeleteNewsletterRequest {
+  string id = 1;
+}
+
+// Subscription Management Requests/Responses
+message SubscribeRequest {
+  string newsletter_id = 1;
+  SubscriptionPreferences preferences = 2;
+}
+
+message SubscribeResponse {
+  Subscription subscription = 1;
+}
+
+message UnsubscribeRequest {
+  string subscription_id = 1;
+  string reason = 2;               // Optional unsubscribe reason
+}
+
+message UpdateSubscriptionRequest {
+  string id = 1;
+  string status = 2;
+  SubscriptionPreferences preferences = 3;
+}
+
+message UpdateSubscriptionResponse {
+  Subscription subscription = 1;
+}
+
+message GetSubscriptionRequest {
+  string id = 1;
+}
+
+message GetSubscriptionResponse {
+  Subscription subscription = 1;
+}
+
+message ListSubscriptionsRequest {
+  string user_id = 1;              // Subscriber
+  string newsletter_id = 2;        // Filter by newsletter
+  string status = 3;               // Filter by status
+  int32 page = 4;
+  int32 limit = 5;
+}
+
+message ListSubscriptionsResponse {
+  repeated Subscription subscriptions = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 limit = 4;
+}
+
+// Edition Management Requests/Responses
+message CreateEditionRequest {
+  string newsletter_id = 1;
+  string subject = 2;
+  string content_html = 3;
+  string content_text = 4;
+  map<string, string> template_data = 5;
+  google.protobuf.Timestamp scheduled_at = 6;
+}
+
+message CreateEditionResponse {
+  NewsletterEdition edition = 1;
+}
+
+message UpdateEditionRequest {
+  string id = 1;
+  string subject = 2;
+  string content_html = 3;
+  string content_text = 4;
+  map<string, string> template_data = 5;
+  google.protobuf.Timestamp scheduled_at = 6;
+}
+
+message UpdateEditionResponse {
+  NewsletterEdition edition = 1;
+}
+
+message GetEditionRequest {
+  string id = 1;
+}
+
+message GetEditionResponse {
+  NewsletterEdition edition = 1;
+}
+
+message ListEditionsRequest {
+  string newsletter_id = 1;
+  string status = 2;               // Filter by status
+  int32 page = 3;
+  int32 limit = 4;
+}
+
+message ListEditionsResponse {
+  repeated NewsletterEdition editions = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 limit = 4;
+}
+
+message ScheduleEditionRequest {
+  string id = 1;
+  google.protobuf.Timestamp scheduled_at = 2;
+}
+
+message ScheduleEditionResponse {
+  NewsletterEdition edition = 1;
+}
+
+message SendEditionRequest {
+  string id = 1;
+  bool test_mode = 2;              // Send only to owner for testing
+}
+
+message SendEditionResponse {
+  string id = 1;
+  int32 recipients_queued = 2;
+}
+
+message PreviewEditionRequest {
+  string id = 1;
+  string email = 2;                // Send preview to this email
+}
+
+message PreviewEditionResponse {
+  string preview_html = 1;
+  string preview_text = 2;
+}
+
+// Template Management Requests/Responses
+message CreateTemplateRequest {
+  string name = 1;
+  string description = 2;
+  string html_template = 3;
+  string text_template = 4;
+  map<string, string> variables = 5;
+  map<string, string> preview_data = 6;
+  bool is_public = 7;
+}
+
+message CreateTemplateResponse {
+  NewsletterTemplate template = 1;
+}
+
+message UpdateTemplateRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string html_template = 4;
+  string text_template = 5;
+  map<string, string> variables = 6;
+  map<string, string> preview_data = 7;
+  bool is_public = 8;
+}
+
+message UpdateTemplateResponse {
+  NewsletterTemplate template = 1;
+}
+
+message GetTemplateRequest {
+  string id = 1;
+}
+
+message GetTemplateResponse {
+  NewsletterTemplate template = 1;
+}
+
+message ListTemplatesRequest {
+  string user_id = 1;              // Filter by owner (empty for system templates)
+  bool public_only = 2;
+  int32 page = 3;
+  int32 limit = 4;
+}
+
+message ListTemplatesResponse {
+  repeated NewsletterTemplate templates = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 limit = 4;
+}
+
+message DeleteTemplateRequest {
+  string id = 1;
+}
+
+// Analytics Requests/Responses
+message GetNewsletterStatsRequest {
+  string newsletter_id = 1;
+  google.protobuf.Timestamp start_date = 2;
+  google.protobuf.Timestamp end_date = 3;
+}
+
+message GetNewsletterStatsResponse {
+  int32 total_subscribers = 1;
+  int32 new_subscribers = 2;
+  int32 unsubscribes = 3;
+  int32 editions_sent = 4;
+  float average_open_rate = 5;
+  float average_click_rate = 6;
+}
+
+message GetEditionStatsRequest {
+  string edition_id = 1;
+}
+
+message GetEditionStatsResponse {
+  int32 recipients = 1;
+  int32 delivered = 2;
+  int32 opened = 3;
+  int32 clicked = 4;
+  int32 bounced = 5;
+  int32 complaints = 6;
+  float open_rate = 7;
+  float click_rate = 8;
+}

@@ -1,0 +1,138 @@
+// shipping_service.proto
+syntax = "proto3";
+
+package shippingService;
+
+import "google/protobuf/timestamp.proto";
+
+// Service definition for Shipping Management
+service ShippingService {
+  // Generates a pre-signed URL for uploading a new shipping file (image or video)
+  rpc GeneratePresignedUploadURL (GeneratePresignedUploadURLRequest) returns (GeneratePresignedUploadURLResponse);
+
+  // Retrieves a shipping file by its unique identifier
+  rpc GetShipping (GetShippingRequest) returns (GetShippingResponse);
+
+  // Lists shipping files with pagination
+  rpc ListShipping (ListShippingRequest) returns (ListShippingResponse);
+
+  // Updates metadata of a specific shipping file
+  rpc UpdateShipping (UpdateShippingRequest) returns (UpdateShippingResponse);
+
+  // Deletes a specific shipping file by its unique identifier
+  rpc DeleteShipping (DeleteShippingRequest) returns (DeleteShippingResponse);
+
+  // Retrieves all shipping files associated with a specific entity
+  rpc GetShippingByEntity (GetShippingByEntityRequest) returns (GetShippingByEntityResponse);
+
+  // Retrieves aggregated statistics related to shipping uploads
+  rpc GetShippingStatistics (GetShippingStatisticsRequest) returns (GetShippingStatisticsResponse);
+}
+
+// Message representing Shipping Metadata
+message ShippingMetadata {
+  string title = 1;                 // Title of the shipping
+  string description = 2;           // Description of the shipping
+  repeated string tags = 3;         // Tags associated with the shipping
+}
+
+// Request message for generating a pre-signed upload URL
+message GeneratePresignedUploadURLRequest {
+  string entity_type = 1;           // Type of the entity (e.g., product, user)
+  string entity_id = 2;             // Unique identifier of the entity
+  string shipping_type = 3;            // Type of shipping (image or video)
+  string file_name = 4;             // Name of the file to be uploaded
+}
+
+// Response message after generating a pre-signed upload URL
+message GeneratePresignedUploadURLResponse {
+  string shipping_id = 1;                       // Unique identifier for the shipping
+  string url = 2;                            // Pre-signed URL for uploading the shipping
+  google.protobuf.Timestamp created_at = 3;   // Timestamp of the shipping creation
+}
+
+// Request message for retrieving shipping by ID
+message GetShippingRequest {
+  string shipping_id = 1;                       // Unique identifier of the shipping to retrieve
+}
+
+// Response message containing shipping details
+message GetShippingResponse {
+  Shipping shipping = 1;                           // Details of the requested shipping
+}
+
+// Request message for listing shipping with pagination
+message ListShippingRequest {
+  int32 page = 1;                             // Current page number
+  int32 limit = 2;                            // Number of shipping items per page
+}
+
+// Response message containing a list of shipping
+message ListShippingResponse {
+  repeated Shipping shipping = 1;                  // List of shipping files
+  int32 total = 2;                            // Total number of shipping files
+  int32 page = 3;                             // Current page number
+  int32 limit = 4;                            // Number of shipping files per page
+}
+
+// Request message for updating shipping metadata
+message UpdateShippingRequest {
+  string shipping_id = 1;                        // Unique identifier of the shipping to update
+  ShippingMetadata metadata = 2;                 // Updated metadata for the shipping
+}
+
+// Response message after updating shipping metadata
+message UpdateShippingResponse {
+  Shipping shipping = 1;                            // Updated shipping details
+}
+
+// Request message for deleting shipping
+message DeleteShippingRequest {
+  string shipping_id = 1;                        // Unique identifier of the shipping to delete
+}
+
+// Empty response message for delete operation
+message DeleteShippingResponse {}
+
+// Request message for retrieving shipping by entity
+message GetShippingByEntityRequest {
+  string entity_type = 1;                 // Type of the entity (e.g., product, user)
+  string entity_id = 2;                   // Unique identifier of the entity
+  int32 page = 3;                         // Current page number
+  int32 limit = 4;                        // Number of shipping items per page
+}
+
+// Response message containing shipping associated with an entity
+message GetShippingByEntityResponse {
+  repeated Shipping shipping = 1;                   // List of shipping files associated with the entity
+  int32 total = 2;                            // Total number of shipping files
+  int32 page = 3;                             // Current page number
+  int32 limit = 4;                            // Number of shipping files per page
+}
+
+// Request message for retrieving shipping statistics
+message GetShippingStatisticsRequest {}
+
+// Response message containing shipping statistics
+message GetShippingStatisticsResponse {
+  int32 total_uploads = 1;                              // Total number of shipping uploads
+  ShippingTypeDistribution shipping_type_distribution = 2;     // Distribution of shipping types
+}
+
+// Message representing shipping statistics by type
+message ShippingTypeDistribution {
+  int32 images = 1;                                      // Number of image uploads
+  int32 videos = 2;                                      // Number of video uploads
+  int32 others = 3;                                      // Number of other shipping uploads
+}
+
+// Shipping entity representing a shipping file
+message Shipping {
+  string shipping_id = 1;                                   // Unique identifier of the shipping
+  string entity_type = 2;                                // Type of the entity the shipping is associated with
+  string entity_id = 3;                                  // Unique identifier of the entity
+  string shipping_type = 4;                                 // Type of shipping (image or video)
+  string url = 5;                                        // URL to access the shipping
+  ShippingMetadata metadata = 6;                            // Metadata associated with the shipping
+  bool is_public = 7;                                    // Indicates if the shipping is publicly accessible
+}

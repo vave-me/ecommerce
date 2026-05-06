@@ -1,0 +1,119 @@
+.container {
+  max-width: 32rem;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  text-align: center;
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.icon {
+  color: #10b981;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.message {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.primaryButton {
+  background-color: #3b82f6;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s;
+  text-decoration: none;
+}
+
+.primaryButton:hover {
+  background-color: #2563eb;
+}
+
+.secondaryButton {
+  background-color: #f3f4f6;
+  color: #333;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s;
+  text-decoration: none;
+}
+
+.secondaryButton:hover {
+  background-color: #e5e7eb;
+}
+
+@media (min-width: 640px) {
+  .buttonContainer {
+    flex-direction: row;
+  }
+}
+
+/* Dark Theme Support */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background-color: var(--gray-900);
+    color: var(--gray-50);
+  }
+
+  .card {
+    background-color: var(--gray-800);
+    border: 1px solid var(--gray-700);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .icon {
+    color: var(--success);
+  }
+
+  .title {
+    color: var(--gray-50);
+  }
+
+  .message {
+    color: var(--gray-400);
+  }
+
+  .primaryButton {
+    background-color: var(--primary-color);
+    color: var(--white);
+  }
+
+  .primaryButton:hover {
+    background-color: var(--primary-color-hover);
+  }
+
+  .secondaryButton {
+    background-color: var(--gray-700);
+    color: var(--gray-200);
+    border: 1px solid var(--gray-600);
+  }
+
+  .secondaryButton:hover {
+    background-color: var(--gray-600);
+    color: var(--gray-100);
+  }
+}

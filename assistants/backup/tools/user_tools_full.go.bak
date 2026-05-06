@@ -1,0 +1,417 @@
+package tools
+
+import ai2 "middleman/internal/ai"
+
+func createUserTools() []ai2.Tool {
+	return []ai2.Tool{
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "user_get_by_id",
+				Description: "Get a user by their ID",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the user to retrieve",
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "user_get_base_by_id",
+				Description: "Get basic user information by ID",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The ID of the user to retrieve",
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "user_get_multiple_by_ids",
+				Description: "Get multiple users by their IDs",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_ids": map[string]interface{}{
+							"type":        "array",
+							"description": "Array of user IDs to retrieve",
+							"items": map[string]interface{}{
+								"type": "string",
+							},
+						},
+					},
+					"required": []string{"user_ids"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "user_get_all_participating",
+				Description: "Get all participating users",
+				Parameters: map[string]interface{}{
+					"type":       "object",
+					"properties": map[string]interface{}{},
+					"required":   []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "user_create_new",
+				Description: "Create a new user account",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"email": map[string]interface{}{
+							"type":        "string",
+							"description": "User's email address",
+							"format":      "email",
+						},
+						"password": map[string]interface{}{
+							"type":        "string",
+							"description": "User's password (will be hashed)",
+							"minLength":   8,
+						},
+						"username": map[string]interface{}{
+							"type":        "string",
+							"description": "Unique username",
+							"pattern":     "^[a-zA-Z0-9_-]{3,30}$",
+						},
+						"first_name": map[string]interface{}{
+							"type":        "string",
+							"description": "User's first name",
+						},
+						"last_name": map[string]interface{}{
+							"type":        "string",
+							"description": "User's last name",
+						},
+						"location": map[string]interface{}{
+							"type":        "string",
+							"description": "User's location/address",
+						},
+						"lat": map[string]interface{}{
+							"type":        "number",
+							"description": "Latitude coordinate",
+							"minimum":     -90,
+							"maximum":     90,
+						},
+						"lng": map[string]interface{}{
+							"type":        "number",
+							"description": "Longitude coordinate",
+							"minimum":     -180,
+							"maximum":     180,
+						},
+						"thumbnail": map[string]interface{}{
+							"type":        "string",
+							"description": "URL to user's profile picture",
+							"format":      "uri",
+						},
+						"language": map[string]interface{}{
+							"type":        "string",
+							"description": "User's preferred language code",
+							"pattern":     "^[a-z]{2}(-[A-Z]{2})?$",
+							"default":     "en",
+						},
+					},
+					"required": []string{"email", "password", "username"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "user_update_profile",
+				Description: "Update user profile information",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"id": map[string]interface{}{
+							"type":        "string",
+							"description": "User ID",
+						},
+						"username": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated username",
+						},
+						"first_name": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated first name",
+						},
+						"last_name": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated last name",
+						},
+						"location": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated location",
+						},
+						"lat": map[string]interface{}{
+							"type":        "number",
+							"description": "Updated latitude",
+							"minimum":     -90,
+							"maximum":     90,
+						},
+						"lng": map[string]interface{}{
+							"type":        "number",
+							"description": "Updated longitude",
+							"minimum":     -180,
+							"maximum":     180,
+						},
+						"thumbnail": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated profile picture URL",
+						},
+					},
+					"required": []string{"id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "user_change_username",
+				Description: "Change a user's username",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"id": map[string]interface{}{
+							"type":        "string",
+							"description": "User ID",
+						},
+						"username": map[string]interface{}{
+							"type":        "string",
+							"description": "New username",
+							"pattern":     "^[a-zA-Z0-9_-]{3,30}$",
+						},
+					},
+					"required": []string{"id", "username"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "user_activate_account",
+				Description: "Activate a user account with verification token",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"id": map[string]interface{}{
+							"type":        "string",
+							"description": "User ID",
+						},
+						"verification_token": map[string]interface{}{
+							"type":        "string",
+							"description": "Email verification token",
+						},
+					},
+					"required": []string{"id", "verification_token"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "user_deactivate_account",
+				Description: "Deactivate a user account",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"id": map[string]interface{}{
+							"type":        "string",
+							"description": "User ID to deactivate",
+						},
+					},
+					"required": []string{"id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "user_authenticate",
+				Description: "Authenticate a user with email and password",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"email": map[string]interface{}{
+							"type":        "string",
+							"description": "User's email address",
+							"format":      "email",
+						},
+						"password": map[string]interface{}{
+							"type":        "string",
+							"description": "User's password",
+						},
+					},
+					"required": []string{"email", "password"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "user_authenticate_google_web",
+				Description: "Authenticate a user with Google (web)",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"id_token": map[string]interface{}{
+							"type":        "string",
+							"description": "Google ID token",
+						},
+					},
+					"required": []string{"id_token"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "user_authenticate_google_mobile",
+				Description: "Authenticate a user with Google (mobile)",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"id_token": map[string]interface{}{
+							"type":        "string",
+							"description": "Google ID token",
+						},
+					},
+					"required": []string{"id_token"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "user_logout",
+				Description: "Log out a user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"id": map[string]interface{}{
+							"type":        "string",
+							"description": "User ID",
+						},
+						"auth_token": map[string]interface{}{
+							"type":        "string",
+							"description": "Current auth token",
+						},
+						"refresh_token": map[string]interface{}{
+							"type":        "string",
+							"description": "Current refresh token",
+						},
+					},
+					"required": []string{"id", "auth_token", "refresh_token"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "user_refresh_auth_token",
+				Description: "Refresh a user's authentication token",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"refresh_token": map[string]interface{}{
+							"type":        "string",
+							"description": "Current refresh token",
+						},
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "User ID",
+						},
+					},
+					"required": []string{"refresh_token", "user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "user_revoke_tokens",
+				Description: "Revoke user authentication tokens",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "User ID",
+						},
+						"token_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Token ID to revoke",
+						},
+						"refresh_token": map[string]interface{}{
+							"type":        "string",
+							"description": "Refresh token to revoke",
+						},
+						"reason": map[string]interface{}{
+							"type":        "string",
+							"description": "Reason for revocation",
+						},
+					},
+					"required": []string{"user_id", "token_id", "refresh_token", "reason"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "user_send_password_reset_email",
+				Description: "Send password reset email to user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"email": map[string]interface{}{
+							"type":        "string",
+							"description": "User's email address",
+							"format":      "email",
+						},
+					},
+					"required": []string{"email"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "user_reset_password",
+				Description: "Reset user password with token",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"token": map[string]interface{}{
+							"type":        "string",
+							"description": "Password reset token",
+						},
+						"new_password": map[string]interface{}{
+							"type":        "string",
+							"description": "New password",
+							"minLength":   8,
+						},
+					},
+					"required": []string{"token", "new_password"},
+				},
+			},
+		},
+	}
+}

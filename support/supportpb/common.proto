@@ -1,0 +1,243 @@
+syntax = "proto3";
+
+package supportpb;
+
+import "google/protobuf/timestamp.proto";
+
+// Enums
+enum SupportChannelType {
+  GENERAL = 0;
+  TECHNICAL = 1;
+  BILLING = 2;
+  SALES = 3;
+  PRODUCT = 4;
+}
+
+enum TicketStatus {
+  DRAFT = 0;
+  SUBMITTED = 1;
+  ASSIGNED = 2;
+  IN_PROGRESS = 3;
+  PENDING_CUSTOMER = 4;
+  RESOLVED = 5;
+  CLOSED = 6;
+  ESCALATED = 7;
+  REOPENED = 8;
+}
+
+enum TicketPriority {
+  LOW = 0;
+  MEDIUM = 1;
+  HIGH = 2;
+  URGENT = 3;
+  CRITICAL = 4;
+}
+
+enum TicketCategory {
+  GENERAL_INQUIRY = 0;
+  TECHNICAL_ISSUE = 1;
+  BILLING_ISSUE = 2;
+  ACCOUNT_ISSUE = 3;
+  PRODUCT_QUESTION = 4;
+  FEATURE_REQUEST = 5;
+  COMPLAINT = 6;
+  REFUND_REQUEST = 7;
+  ORDER_ISSUE = 8;
+  SHIPPING_ISSUE = 9;
+}
+
+enum SupportTier {
+  TIER_1 = 0;
+  TIER_2 = 1;
+  TIER_3 = 2;
+  MANAGEMENT = 3;
+}
+
+enum AssigneeType {
+  HUMAN_AGENT = 0;
+  AI_ASSISTANT = 1;
+  TEAM = 2;
+}
+
+enum AuthorType {
+  CUSTOMER = 0;
+  AGENT = 1;
+  AI = 2;
+  SYSTEM = 3;
+}
+
+enum CustomerSatisfaction {
+  VERY_DISSATISFIED = 0;
+  DISSATISFIED = 1;
+  NEUTRAL = 2;
+  SATISFIED = 3;
+  VERY_SATISFIED = 4;
+}
+
+enum SuggestionType {
+  RESPONSE = 0;
+  KNOWLEDGE_ARTICLE = 1;
+  SIMILAR_TICKET = 2;
+  ESCALATION = 3;
+}
+
+// Common Messages
+message SupportChannel {
+  string id = 1;
+  string user_id = 2;
+  string business_id = 3;
+  SupportChannelType channel_type = 4;
+  bool active = 5;
+  SupportChannelSettings settings = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+  int32 open_tickets = 9;
+  int32 total_tickets = 10;
+}
+
+message SupportChannelSettings {
+  bool email_notifications = 1;
+  bool sms_notifications = 2;
+  bool auto_assign_tickets = 3;
+  string preferred_language = 4;
+  string timezone = 5;
+  repeated string notification_emails = 6;
+  SLASettings sla_settings = 7;
+}
+
+message SLASettings {
+  int32 first_response_minutes = 1;
+  int32 resolution_hours = 2;
+  map<string, int32> priority_response_times = 3;
+}
+
+message Ticket {
+  string id = 1;
+  string channel_id = 2;
+  string title = 3;
+  string description = 4;
+  TicketStatus status = 5;
+  TicketPriority priority = 6;
+  TicketCategory category = 7;
+  repeated string tags = 8;
+  map<string, string> metadata = 9;
+  string assignee_id = 10;
+  AssigneeType assignee_type = 11;
+  string created_by = 12;
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp updated_at = 14;
+  google.protobuf.Timestamp resolved_at = 15;
+  google.protobuf.Timestamp closed_at = 16;
+  google.protobuf.Timestamp first_response_at = 17;
+  int32 response_count = 18;
+  int32 reopen_count = 19;
+  SupportTier current_tier = 20;
+  repeated Attachment attachments = 21;
+  CustomerSatisfaction satisfaction_rating = 22;
+  repeated string linked_ticket_ids = 23;
+  repeated string merged_ticket_ids = 24;
+}
+
+message Attachment {
+  string id = 1;
+  string filename = 2;
+  string content_type = 3;
+  int64 size_bytes = 4;
+  string url = 5;
+  google.protobuf.Timestamp uploaded_at = 6;
+}
+
+message Communication {
+  string id = 1;
+  string ticket_id = 2;
+  string author_id = 3;
+  AuthorType author_type = 4;
+  string content = 5;
+  bool is_public = 6;
+  repeated Attachment attachments = 7;
+  google.protobuf.Timestamp created_at = 8;
+  repeated string mentioned_users = 9;
+  map<string, string> metadata = 10;
+}
+
+message AIConfiguration {
+  string assistant_id = 1;
+  repeated string allowed_actions = 2;
+  map<string, string> knowledge_base_access = 3;
+  SupportTier max_handling_tier = 4;
+  bool can_close_tickets = 5;
+  bool can_issue_refunds = 6;
+  double confidence_threshold = 7;
+  repeated string auto_response_categories = 8;
+  int32 max_tokens = 9;
+  double temperature = 10;
+}
+
+message AISuggestion {
+  string id = 1;
+  SuggestionType type = 2;
+  string content = 3;
+  double confidence = 4;
+  string reasoning = 5;
+  map<string, string> metadata = 6;
+}
+
+message KnowledgeArticle {
+  string id = 1;
+  string title = 2;
+  string content = 3;
+  repeated string categories = 4;
+  repeated string tags = 5;
+  bool public = 6;
+  int32 view_count = 7;
+  double average_rating = 8;
+  int32 rating_count = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp updated_at = 11;
+  string created_by = 12;
+  repeated string related_ticket_ids = 13;
+}
+
+message SupportMetrics {
+  int32 total_tickets = 1;
+  int32 open_tickets = 2;
+  int32 resolved_tickets = 3;
+  int32 escalated_tickets = 4;
+  double average_resolution_time_hours = 5;
+  double average_first_response_time_minutes = 6;
+  double customer_satisfaction_score = 7;
+  map<string, int32> tickets_by_category = 8;
+  map<string, int32> tickets_by_priority = 9;
+  map<string, int32> tickets_by_status = 10;
+  int32 ai_resolved_tickets = 11;
+  double ai_resolution_rate = 12;
+}
+
+message AgentPerformance {
+  string agent_id = 1;
+  string agent_name = 2;
+  int32 tickets_handled = 3;
+  int32 tickets_resolved = 4;
+  double average_resolution_time_hours = 5;
+  double average_first_response_time_minutes = 6;
+  double customer_satisfaction_score = 7;
+  int32 escalations_received = 8;
+  int32 escalations_sent = 9;
+  map<string, int32> tickets_by_category = 10;
+  google.protobuf.Timestamp period_start = 11;
+  google.protobuf.Timestamp period_end = 12;
+}
+
+message TicketAnalytics {
+  string ticket_id = 1;
+  double time_to_first_response_minutes = 2;
+  double total_resolution_time_hours = 3;
+  int32 total_communications = 4;
+  int32 agent_communications = 5;
+  int32 customer_communications = 6;
+  int32 ai_communications = 7;
+  int32 escalation_count = 8;
+  int32 reopen_count = 9;
+  repeated string agents_involved = 10;
+  map<string, double> time_in_status = 11;
+}

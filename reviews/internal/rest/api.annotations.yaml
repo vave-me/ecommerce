@@ -1,0 +1,49 @@
+type: google.api.Service
+config_version: 3
+name: reviews.googleapis.com
+title: Review Management API
+apis:
+  - name: reviewspb.ReviewsService
+http:
+  rules:
+    # Create a New Review
+    - selector: reviewspb.ReviewsService.AddReview
+      post: /api/reviews
+      body: "*"
+
+    # Approve a Review
+    - selector: reviewspb.ReviewsService.ApproveReview
+      put: /api/reviews/{id}/approve
+      body: "*"
+
+    # Reject a Review
+    - selector: reviewspb.ReviewsService.RejectReview
+      delete: /api/reviews/{id}/reject
+
+    # Edit a Review
+    - selector: reviewspb.ReviewsService.EditReview
+      put: /api/reviews/{id}
+      body: "*"
+
+    # Get All Reviews
+    - selector: reviewspb.ReviewsService.GetReviews
+      get: /api/reviews/{item_id}/all
+
+    - selector: reviewspb.ReviewsService.GetReviewsBySender
+      get: /api/reviews/sender/{sender_id}
+
+    # Get a Specific Review
+    - selector: reviewspb.ReviewsService.GetReview
+      get: /api/reviews/{id}
+
+    # Get Approved Reviews
+    - selector: reviewspb.ReviewsService.GetApprovedReviews
+      get: /api/reviews/approved
+
+    # Get a Specific Review
+    - selector: reviewspb.ReviewsService.GetMostReviewed
+      get: /api/reviews/most
+
+    # Get a Specific Review
+    - selector: reviewspb.ReviewsService.GetMostReviewedByCategory
+      get: /api/reviews/most/{category_id}

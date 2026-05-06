@@ -1,0 +1,54 @@
+type: google.api.Service
+config_version: 3
+name: messages.googleapis.com
+title: Messages Management API
+apis:
+  - name: messagespb.MessagesService
+http:
+  rules:
+    # Start a New Conversation
+    - selector: messagespb.MessagesService.StartConversation
+      post: /api/messages/conversations
+      body: "*"
+    
+    # Restore an Archived Conversation
+    - selector: messagespb.MessagesService.RestoreConversation
+      put: /api/messages/{id}/restore
+      body: "*"
+    
+    # Archive a Conversation
+    - selector: messagespb.MessagesService.ArchiveConversation
+      delete: /api/messages/conversations/{id}/archive
+    
+    # Get All Conversations
+    - selector: messagespb.MessagesService.GetConversations
+      get: /api/messages/conversations
+      # Support for Query Parameters can be added here if needed
+    
+    # Get a Specific Conversation
+    - selector: messagespb.MessagesService.GetConversationByRecipientAndItem
+      get: /api/messages/conversations/recipient/{recipient_id}/item/{item_id}
+
+    - selector: messagespb.MessagesService.GetConversation
+      get: /api/messages/conversations/{id}
+    
+    # Get Active Conversations
+    - selector: messagespb.MessagesService.GetActiveConversations
+      get: /api/messages/conversations/active
+    
+    # Send a Message in a Conversation
+    - selector: messagespb.MessagesService.SendMessage
+      post: /api/messages/conversations/{conversation_id}/messages
+      body: "*"
+    
+    # Delete a Specific Message
+    - selector: messagespb.MessagesService.DeleteMessage
+      delete: /api/messages/message/{id}
+    
+    # Get a Specific Message
+    - selector: messagespb.MessagesService.GetMessage
+      get: /api/messages/message/{id}
+    
+    # Get All Messages in a Conversation
+    - selector: messagespb.MessagesService.GetMessages
+      get: /api/messages/conversations/{conversation_id}/message

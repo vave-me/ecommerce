@@ -1,0 +1,499 @@
+/* ============================================================================
+   EXPANDABLE DESCRIPTION - MODERN SOCIAL MEDIA INSPIRED DESIGN
+   ============================================================================
+   
+   Design Philosophy:
+   - Typography inspired by Twitter/LinkedIn/Facebook standards
+   - Professional, clean, and highly readable
+   - Mobile-first responsive design
+   - Smooth, fast interactions
+   - Accessible and inclusive
+   
+   Typography Standards:
+   - Body text: 15px (Twitter standard for readability)
+   - Line height: 1.4 (optimal for reading comprehension)
+   - Font weight: 400 (readable, not too heavy)
+   - Letter spacing: -0.005em (subtle tightening for elegance)
+   ============================================================================ */
+
+/* ============================================================================
+   CONTAINER & LAYOUT
+   ============================================================================ */
+
+.container {
+    width: 100%;
+    position: relative;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "SF Pro Text", Roboto, "Helvetica Neue", Arial, sans-serif;
+    
+    /* Flex layout for button alignment */
+    display: flex;
+    flex-direction: column;
+    
+    /* Horizontal padding for proper text spacing */
+    padding-left: 12px;
+    padding-right: 12px;
+    
+    /* Ensure proper text rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1, "liga" 1;
+}
+
+.compact {
+    /* Tighter spacing for compact layouts */
+    --text-margin-bottom: 1px;
+    --button-margin-top: 0px;
+    
+    /* Reduced padding for compact mode */
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.compact .toggleButton {
+    /* Reduced bottom margin for compact mode */
+    margin-bottom: 4px;
+}
+
+/* ============================================================================
+   TYPOGRAPHY VARIANTS
+   ============================================================================ */
+
+.body {
+    --text-font-size: 15px;
+    --text-line-height: 1.4;
+    --text-font-weight: 400;
+    --button-font-size: 13px;
+}
+
+.small {
+    --text-font-size: 14px;
+    --text-line-height: 1.35;
+    --text-font-weight: 400;
+    --button-font-size: 12px;
+}
+
+.large {
+    --text-font-size: 16px;
+    --text-line-height: 1.45;
+    --text-font-weight: 400;
+    --button-font-size: 14px;
+}
+
+/* ============================================================================
+   TEXT CONTENT STYLING
+   ============================================================================ */
+
+.text {
+    /* Typography - Social Media Standard */
+    font-size: var(--text-font-size, 15px);
+    line-height: var(--text-line-height, 1.4);
+    font-weight: var(--text-font-weight, 400);
+    letter-spacing: -0.005em;
+    
+    /* Colors - Professional & Readable */
+    color: var(--text-primary, #1a1a1a);
+
+    /* Text handling */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    
+    /* Spacing */
+    margin: 0;
+    padding: 0;
+    margin-bottom: var(--text-margin-bottom, 2px);
+
+    /* Smooth transitions */
+    transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+    .text {
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+.collapsed {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* -webkit-line-clamp is set dynamically via inline styles */
+}
+
+.expanded {
+    display: block;
+    -webkit-line-clamp: none;
+    overflow: visible;
+}
+
+.calculating {
+    /* Prevent layout shift during calculation */
+    opacity: 0.95;
+}
+
+/* ============================================================================
+   TOGGLE BUTTON STYLING
+   ============================================================================ */
+
+.toggleButton {
+    /* Layout */
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    
+    /* Positioning - Align to the right */
+    align-self: flex-end;
+    
+    /* Spacing - Compact & Professional */
+    padding: 4px 8px;
+    margin-top: var(--button-margin-top, 1px);
+    margin-bottom: 8px;
+    
+    /* Typography - Subtle & Clean */
+    font-size: var(--button-font-size, 13px);
+    font-weight: 500;
+    font-family: inherit;
+    line-height: 1.2;
+    letter-spacing: -0.003em;
+    
+    /* Appearance */
+    background: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+    
+    /* Colors - LinkedIn/Twitter Inspired */
+    color: var(--text-secondary, #4a5568);
+
+    /* Smooth, fast interactions */
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Improve tap targets on mobile */
+    min-height: 32px;
+    min-width: 32px;
+    
+    /* Prevent text selection */
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+    .toggleButton {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.toggleButton:hover {
+    /* Subtle hover effect - Twitter/LinkedIn style */
+    color: var(--text-primary, #1a1a1a);
+    background-color: var(--surface-hover, rgba(26, 26, 26, 0.03));
+    
+    /* Subtle lift effect */
+    transform: translateY(-0.5px);
+}
+
+@media (prefers-color-scheme: dark) {
+    .toggleButton:hover {
+        color: var(--gray-200, #e5e7eb);
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+}
+
+.toggleButton:focus-visible {
+    /* Accessible focus state */
+    outline: 2px solid var(--focus-color, #1d9bf0);
+    outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .toggleButton:focus-visible {
+        outline-color: var(--teal-400, #2dd4bf);
+    }
+}
+
+.toggleButton:active {
+    /* Pressed state */
+    transform: translateY(0);
+    background-color: var(--surface-pressed, rgba(26, 26, 26, 0.06));
+}
+
+@media (prefers-color-scheme: dark) {
+    .toggleButton:active {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* ============================================================================
+   BUTTON CONTENT STYLING
+   ============================================================================ */
+
+.buttonText {
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    
+    /* Prevent text from wrapping */
+    white-space: nowrap;
+}
+
+.buttonIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    
+    /* Smooth icon animation */
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggleButton:hover .buttonIcon {
+    /* Subtle icon movement on hover */
+    transform: translateY(-0.5px);
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - MOBILE FIRST
+   ============================================================================ */
+
+/* Mobile devices (up to 480px) */
+@media (max-width: 480px) {
+    .container {
+        /* Slightly reduced padding on mobile */
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .compact {
+        /* Even tighter padding for compact mode on mobile */
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+    
+    .body {
+        --text-font-size: 14px;
+        --text-line-height: 1.35;
+        --button-font-size: 12px;
+    }
+
+    .small {
+        --text-font-size: 13px;
+        --text-line-height: 1.3;
+        --button-font-size: 11px;
+    }
+    
+    .large {
+        --text-font-size: 15px;
+        --text-line-height: 1.4;
+        --button-font-size: 13px;
+    }
+    
+    .toggleButton {
+        /* Larger tap targets on mobile */
+        min-height: 36px;
+        padding: 6px 10px;
+        gap: 5px;
+    }
+    
+    .text {
+        /* Tighter spacing on mobile */
+        margin-bottom: 2px;
+    }
+}
+
+/* Small mobile devices (up to 360px) */
+@media (max-width: 360px) {
+    .body {
+        --text-font-size: 13px;
+        --button-font-size: 11px;
+    }
+    
+    .small {
+        --text-font-size: 12px;
+        --button-font-size: 10px;
+    }
+    
+    .large {
+        --text-font-size: 14px;
+        --button-font-size: 12px;
+    }
+    
+    .toggleButton {
+        /* Even larger tap targets on very small screens */
+        min-height: 40px;
+        padding: 8px 12px;
+    }
+}
+
+/* Tablet and larger (768px+) */
+@media (min-width: 768px) {
+    .container {
+        /* More generous padding on larger screens */
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    
+    .compact {
+        /* Compact mode still uses reduced padding */
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    
+    .text {
+        /* Slightly more spacing on larger screens */
+        margin-bottom: 3px;
+    }
+    
+    .toggleButton {
+        /* Refined hover states on devices with precise pointing */
+        transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .toggleButton:hover {
+        /* More pronounced hover effect on desktop */
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+    
+    @media (prefers-color-scheme: dark) {
+        .toggleButton:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+    }
+}
+
+/* ============================================================================
+   ACCESSIBILITY & PREFERENCES
+   ============================================================================ */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .text {
+        color: #000000;
+    }
+    
+    .toggleButton {
+        color: #000000;
+        border: 1px solid #000000;
+    }
+
+    .toggleButton:hover {
+        background-color: #000000;
+        color: #ffffff;
+    }
+    
+    .toggleButton:focus-visible {
+        outline: 3px solid #000000;
+        outline-offset: 2px;
+    }
+}
+
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+    .text {
+        color: #ffffff;
+    }
+    
+    .toggleButton {
+        color: #ffffff;
+        border-color: #ffffff;
+    }
+
+    .toggleButton:hover {
+        background-color: #ffffff;
+        color: #000000;
+    }
+    
+    .toggleButton:focus-visible {
+        outline-color: #ffffff;
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .text,
+    .toggleButton,
+    .buttonIcon {
+        transition: none ;
+    }
+
+    .toggleButton:hover,
+    .toggleButton:hover .buttonIcon {
+        transform: none ;
+    }
+
+    .toggleButton:active {
+        transform: none ;
+    }
+}
+
+/* ============================================================================
+   DARK MODE SUPPORT (FUTURE-READY) - Currently disabled
+   ============================================================================ */
+
+/* Dark mode styles removed as requested - only light theme is used */
+
+/* ============================================================================
+   PRINT STYLES
+   ============================================================================ */
+
+/* ============================================================================
+   ADDITIONAL CONTENT STYLES
+   ============================================================================ */
+
+/* Additional content styling */
+.additionalContent {
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border-light, #f1f3f4);
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .additionalContent {
+        border-top-color: var(--border-dark, #374151);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .additionalContent {
+        animation: none;
+    }
+}
+
+@media print {
+    .text {
+        /* Always show full text when printing */
+        display: block ;
+        -webkit-line-clamp: none ;
+        overflow: visible ;
+        max-height: none ;
+    }
+    
+    .additionalContent {
+        /* Show additional content in print */
+        display: block ;
+        animation: none ;
+        border-top: none ;
+        margin-top: 8px ;
+        padding-top: 0 ;
+    }
+    
+    .toggleButton {
+        /* Hide toggle button in print */
+        display: none ;
+    }
+} 

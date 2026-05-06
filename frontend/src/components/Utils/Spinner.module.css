@@ -1,0 +1,206 @@
+/* File: src/components/Spinner.module.css */
+
+/* Keyframes to mimic the old bounce animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: scale(0.0);
+    }
+    50% {
+        transform: scale(1.0);
+    }
+}
+
+.spinnerContainer {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    margin: 0 auto;
+}
+
+/* Shared bounce styles for each circle */
+.bounce {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #ffffff;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: bounce 3.0s infinite ease; /* Reduced frequency and simplified easing for performance */
+}
+
+/* Extra class for the second circle with negative delay */
+.bounce2 {
+    animation-delay: -1.0s;
+}
+
+/* ============================================================================
+   DARK THEME SUPPORT
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+    .bounce {
+        background-color: var(--teal-400, #2dd4bf);
+        opacity: 0.8;
+    }
+}
+
+/* ============================================================================
+   ENHANCED SPINNER VARIANTS
+   ============================================================================ */
+
+.spinnerContainer.small {
+    width: 24px;
+    height: 24px;
+}
+
+.spinnerContainer.medium {
+    width: 40px;
+    height: 40px;
+}
+
+.spinnerContainer.large {
+    width: 64px;
+    height: 64px;
+}
+
+.spinnerContainer.primary .bounce {
+    background-color: var(--teal-500, #14b8a6);
+}
+
+.spinnerContainer.secondary .bounce {
+    background-color: var(--blue-500, #3b82f6);
+}
+
+.spinnerContainer.success .bounce {
+    background-color: var(--emerald-500, #10b981);
+}
+
+.spinnerContainer.warning .bounce {
+    background-color: var(--amber-500, #f59e0b);
+}
+
+.spinnerContainer.error .bounce {
+    background-color: var(--red-500, #ef4444);
+}
+
+@media (prefers-color-scheme: dark) {
+    .spinnerContainer.primary .bounce {
+        background-color: var(--teal-400, #2dd4bf);
+    }
+
+    .spinnerContainer.secondary .bounce {
+        background-color: var(--blue-400, #60a5fa);
+    }
+
+    .spinnerContainer.success .bounce {
+        background-color: var(--emerald-400, #34d399);
+    }
+
+    .spinnerContainer.warning .bounce {
+        background-color: var(--amber-400, #fbbf24);
+    }
+
+    .spinnerContainer.error .bounce {
+        background-color: var(--red-400, #f87171);
+    }
+}
+
+/* ============================================================================
+   ACCESSIBILITY & MOTION
+   ============================================================================ */
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .bounce {
+        animation: none;
+        opacity: 0.8;
+        transform: scale(0.8);
+    }
+
+    .bounce2 {
+        animation-delay: 0s;
+        opacity: 0.6;
+        transform: scale(0.6);
+    }
+}
+
+/* High Contrast */
+@media (prefers-contrast: high) {
+    .bounce {
+        opacity: 1;
+        border: 2px solid;
+        border-color: currentColor;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .bounce {
+            background-color: var(--teal-300, #5eead4);
+            border-color: var(--teal-200, #99f6e4);
+        }
+
+        .spinnerContainer.primary .bounce {
+            background-color: var(--teal-300, #5eead4);
+            border-color: var(--teal-200, #99f6e4);
+        }
+
+        .spinnerContainer.secondary .bounce {
+            background-color: var(--blue-300, #93c5fd);
+            border-color: var(--blue-200, #bfdbfe);
+        }
+
+        .spinnerContainer.success .bounce {
+            background-color: var(--emerald-300, #6ee7b7);
+            border-color: var(--emerald-200, #a7f3d0);
+        }
+
+        .spinnerContainer.warning .bounce {
+            background-color: var(--amber-300, #fcd34d);
+            border-color: var(--amber-200, #fde68a);
+        }
+
+        .spinnerContainer.error .bounce {
+            background-color: var(--red-300, #fca5a5);
+            border-color: var(--red-200, #fecaca);
+        }
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .spinnerContainer {
+        width: 32px;
+        height: 32px;
+    }
+
+    .spinnerContainer.small {
+        width: 20px;
+        height: 20px;
+    }
+
+    .spinnerContainer.large {
+        width: 56px;
+        height: 56px;
+    }
+}
+
+@media (max-width: 480px) {
+    .spinnerContainer {
+        width: 28px;
+        height: 28px;
+    }
+
+    .spinnerContainer.small {
+        width: 18px;
+        height: 18px;
+    }
+
+    .spinnerContainer.large {
+        width: 48px;
+        height: 48px;
+    }
+}

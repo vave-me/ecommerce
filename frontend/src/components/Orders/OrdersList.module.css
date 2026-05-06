@@ -1,0 +1,324 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.loadingWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 0;
+}
+
+.spinner {
+    width: 3rem;
+    height: 3rem;
+    border: 3px solid var(--gray-200);
+    border-top-color: var(--primary-500);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loadingText {
+    margin-top: 1rem;
+    color: var(--text-secondary);
+}
+
+.header {
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.errorAlert {
+    background-color: var(--danger-50);
+    color: var(--danger-700);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--danger-200);
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.closeButton {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--danger-700);
+    line-height: 1;
+    padding: 0.25rem;
+}
+
+.emptyState {
+    text-align: center;
+    padding: 3rem 1rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.emptyIcon {
+    color: var(--gray-400);
+    margin-bottom: 1.5rem;
+}
+
+.emptyTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+}
+
+.emptyText {
+    color: var(--text-secondary);
+    margin: 0 0 1.5rem 0;
+}
+
+.primaryButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: var(--primary-500);
+    color: white;
+}
+
+.primaryButton:hover:not(:disabled) {
+    background-color: var(--primary-600);
+}
+
+.tableCard {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.tableWrapper {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.table th {
+    font-weight: 600;
+    color: var(--text-primary);
+    background-color: var(--gray-50);
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.table tbody tr:hover {
+    background-color: var(--gray-50);
+}
+
+.orderId {
+    background-color: var(--gray-100);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.itemsCount {
+    background-color: var(--gray-100);
+    color: var(--gray-700);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.badgeprimary {
+    background-color: var(--primary-100);
+    color: var(--primary-700);
+}
+
+.badgesuccess {
+    background-color: var(--success-100);
+    color: var(--success-700);
+}
+
+.badgewarning {
+    background-color: var(--warning-100);
+    color: var(--warning-700);
+}
+
+.badgedanger {
+    background-color: var(--danger-100);
+    color: var(--danger-700);
+}
+
+.badgesecondary {
+    background-color: var(--gray-100);
+    color: var(--gray-700);
+}
+
+.viewButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary-500);
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: transparent;
+    color: var(--primary-500);
+}
+
+.viewButton:hover {
+    background-color: var(--primary-50);
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.pageButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding: 0 0.75rem;
+    border: 1px solid var(--gray-300);
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: white;
+    color: var(--text-primary);
+}
+
+.pageButton:hover:not(:disabled) {
+    background-color: var(--gray-50);
+    border-color: var(--gray-400);
+}
+
+.pageButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pageButton.activePage {
+    background-color: var(--primary-500);
+    color: white;
+    border-color: var(--primary-500);
+}
+
+.pageButton.activePage:hover {
+    background-color: var(--primary-600);
+    border-color: var(--primary-600);
+}
+
+/* Dark Theme Support */
+@media (prefers-color-scheme: dark) {
+    .emptyState,
+    .tableCard {
+        background-color: var(--gray-800);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .table th {
+        background-color: var(--gray-900);
+    }
+
+    .table th,
+    .table td {
+        border-bottom-color: var(--gray-700);
+    }
+
+    .table tbody tr:hover {
+        background-color: var(--gray-700);
+    }
+
+    .errorAlert {
+        background-color: var(--danger-900);
+        color: var(--danger-200);
+        border-color: var(--danger-700);
+    }
+
+    .closeButton {
+        color: var(--danger-200);
+    }
+
+    .orderId,
+    .itemsCount {
+        background-color: var(--gray-700);
+        color: var(--gray-200);
+    }
+
+    .viewButton {
+        border-color: var(--primary-400);
+        color: var(--primary-400);
+    }
+
+    .viewButton:hover {
+        background-color: var(--gray-700);
+    }
+
+    .pageButton {
+        background-color: var(--gray-800);
+        border-color: var(--gray-600);
+    }
+
+    .pageButton:hover:not(:disabled) {
+        background-color: var(--gray-700);
+        border-color: var(--gray-500);
+    }
+}

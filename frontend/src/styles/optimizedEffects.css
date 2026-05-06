@@ -1,0 +1,334 @@
+/**
+ * OPTIMIZED CSS EFFECTS
+ * Replaces heavy transform scale animations with performance-optimized alternatives
+ * - Opacity-based hover effects instead of transform scale
+ * - Hardware-accelerated transforms where necessary
+ * - Reduced motion support
+ * - Minimal reflow/repaint operations
+ */
+
+/* ==========================================
+   OPTIMIZED HOVER EFFECTS
+   ========================================== */
+
+/* Replace transform: scale() with optimized alternatives */
+.optimized-hover {
+  transition: opacity 0.2s ease, box-shadow 0.2s ease;
+}
+
+.optimized-hover:hover {
+  opacity: 0.9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Optimized button hover (replaces scale) */
+.optimized-button-hover {
+  transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.optimized-button-hover:hover {
+  opacity: 0.95;
+  filter: brightness(1.05);
+}
+
+/* Optimized card hover (replaces scale) */
+.optimized-card-hover {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.optimized-card-hover:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px); /* Lightweight Y translation instead of scale */
+}
+
+/* Icon hover optimization */
+.optimized-icon-hover {
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.optimized-icon-hover:hover {
+  opacity: 0.8;
+  filter: brightness(1.1);
+}
+
+/* ==========================================
+   OPTIMIZED ANIMATIONS
+   ========================================== */
+
+/* Optimized pulse animation (no scale) */
+@keyframes optimized-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.optimized-pulse {
+  animation: optimized-pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* Optimized loading spinner (GPU accelerated) */
+@keyframes optimized-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.optimized-spin {
+  animation: optimized-spin 1s linear infinite;
+  will-change: transform; /* GPU acceleration hint */
+}
+
+/* Optimized fade animations */
+@keyframes optimized-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes optimized-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.optimized-fade-in {
+  animation: optimized-fade-in 0.3s ease-out;
+}
+
+.optimized-slide-up {
+  animation: optimized-slide-up 0.3s ease-out;
+}
+
+/* ==========================================
+   REPLACE HEAVY EFFECTS
+   ========================================== */
+
+/* Replace backdrop-filter with optimized alternatives */
+.optimized-backdrop {
+  background: rgba(255, 255, 255, 0.9);
+  /* No backdrop-filter for better performance */
+}
+
+.optimized-backdrop-dark {
+  background: rgba(0, 0, 0, 0.8);
+  /* No backdrop-filter for better performance */
+}
+
+/* Replace complex box-shadows with simple ones */
+.optimized-shadow-sm {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.optimized-shadow-md {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.optimized-shadow-lg {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================
+   PERFORMANCE UTILITIES
+   ========================================== */
+
+/* Force GPU acceleration for specific elements */
+.gpu-accelerated {
+  will-change: transform;
+  transform: translateZ(0); /* Force layer creation */
+}
+
+/* Disable hardware acceleration when not needed */
+.cpu-optimized {
+  will-change: auto;
+  transform: none;
+}
+
+/* Container query optimizations */
+.container-optimized {
+  contain: layout style;
+}
+
+/* ==========================================
+   INTERACTION STATES
+   ========================================== */
+
+/* Optimized active states */
+.optimized-active:active {
+  transform: translateY(1px);
+  opacity: 0.95;
+}
+
+/* Optimized focus states */
+.optimized-focus:focus-visible {
+  outline: 2px solid var(--focus-color, #2563eb);
+  outline-offset: 2px;
+  /* No transform or heavy effects */
+}
+
+/* ==========================================
+   REDUCED MOTION SUPPORT
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .optimized-hover,
+  .optimized-button-hover,
+  .optimized-card-hover,
+  .optimized-icon-hover,
+  .optimized-active,
+  .optimized-pulse,
+  .optimized-spin,
+  .optimized-fade-in,
+  .optimized-slide-up {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* ==========================================
+   LEGACY REPLACEMENTS
+   ========================================== */
+
+/* Replace transform: scale(1.1) hover effects */
+.legacy-scale-hover {
+  transition: opacity 0.2s ease;
+}
+
+.legacy-scale-hover:hover {
+  opacity: 0.9;
+}
+
+/* Replace heavy gradient overlays */
+.legacy-gradient-overlay {
+  background: rgba(0, 0, 0, 0.3);
+  /* Simplified background instead of complex gradients */
+}
+
+/* Replace complex border-radius animations */
+.legacy-border-radius {
+  border-radius: 8px;
+  /* Static border-radius instead of animated */
+}
+
+/* ==========================================
+   ACCESSIBILITY ENHANCEMENTS
+   ========================================== */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .optimized-hover:hover,
+  .optimized-button-hover:hover,
+  .optimized-card-hover:hover {
+    outline: 2px solid;
+    outline-offset: 2px;
+  }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  .optimized-backdrop {
+    background: rgba(0, 0, 0, 0.9);
+  }
+  
+  .optimized-backdrop-dark {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* ==========================================
+   UTILITY CLASSES
+   ========================================== */
+
+/* Remove all animations */
+.no-animations {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Force enable animations (for dynamic control) */
+.force-animations {
+  animation-duration: revert !important;
+  transition-duration: revert !important;
+}
+
+/* Performance hints */
+.performance-optimized {
+  contain: layout style paint;
+  content-visibility: auto;
+}
+
+/* Memory leak prevention */
+.cleanup-transforms {
+  will-change: auto;
+  transform: none;
+}
+
+/* ==========================================
+   COMPONENT-SPECIFIC OPTIMIZATIONS
+   ========================================== */
+
+/* Card components */
+.optimized-card {
+  transition: box-shadow 0.2s ease;
+}
+
+.optimized-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Button components */
+.optimized-button {
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.optimized-button:hover {
+  filter: brightness(1.05);
+}
+
+/* Icon components */
+.optimized-icon {
+  transition: color 0.2s ease;
+}
+
+.optimized-icon:hover {
+  opacity: 0.8;
+}
+
+/* Form components */
+.optimized-input {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.optimized-input:focus {
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+/* ==========================================
+   PERFORMANCE MONITORING
+   ========================================== */
+
+/* Mark elements for performance monitoring */
+.perf-monitor {
+  /* Custom property for performance tracking */
+  --perf-optimized: true;
+}
+
+/* Mark heavy elements for optimization */
+.perf-heavy {
+  /* Custom property to identify elements needing optimization */
+  --perf-heavy: true;
+} 

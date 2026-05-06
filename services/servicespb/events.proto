@@ -1,0 +1,132 @@
+syntax = "proto3";
+
+package servicespb;
+
+import "servicespb/common.proto";
+
+message ServiceAdded {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string service_type = 4;
+  int64 base_price = 5;
+  repeated string pricing = 6;
+  string availability = 7;
+  string provider_name = 8;
+  string user_id = 9;
+  string  category_id = 10;
+  string  category_slug = 11;
+  string description_short = 12;
+  string description_long = 13;
+  repeated string qualifications = 14;
+  string contact = 15;
+  string faq = 16;
+  repeated string tags = 17;
+  string status = 18;
+  string user_type = 19;
+  int64 shipping_cost = 20;
+  bool has_variants = 21;
+  bool middleman_service = 22;
+  bool negotiable = 23;
+  repeated Attribute attributes = 24;
+  repeated Option options = 25;
+  string thumbnail = 26;
+  float lat = 27;
+  float lng = 28;
+}
+message ServiceUpdated {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string service_type = 4;
+  int64 base_price = 5;
+  repeated string pricing = 6;
+  string availability = 7;
+  string provider_name = 8;
+  string user_id = 9;
+  string  category_id = 10;
+  string  category_slug = 11;
+  string description_short = 12;
+  string description_long = 13;
+  repeated string qualifications = 14;
+  string contact = 15;
+  string faq = 16;
+  repeated string tags = 17;
+  string status = 18;
+  string user_type = 19;
+  int64 shipping_cost = 20;
+  bool has_variants = 21;
+  bool middleman_service = 22;
+  bool negotiable = 23;
+  repeated Attribute attributes = 24;
+  repeated Option options = 25;
+  string thumbnail = 26;
+  float lat = 27;
+  float lng = 28;
+}
+
+// Event when a service is rebranded (name/description changed)
+message ServiceRebranded {
+  string id = 1;     // Service ID (UUID)
+  string name = 2;
+  string description = 3;
+  repeated string qualifications = 4;
+  repeated string tags = 5;
+  string faq = 6;
+
+}
+// Event fired if the service is archived
+message ServiceArchived {
+  string id = 1;              // service ID
+  string user_id = 2;  // who archived it, if needed
+}
+// Event when a service price changes
+message ServicePriceIncreased {
+  string id = 1;     // Service ID (UUID)
+  int64 old_price = 2;   // The delta in price
+  int64 new_price = 3;   // The delta in price
+}
+message ServicePriceDecreased {
+  string id = 1;     // Service ID (UUID)
+  int64 old_price = 2;   // The delta in price
+  int64 new_price = 3;   // The delta in price
+}
+
+message ServiceStockAdjusted{
+  string id = 1;
+  int64 old_stock = 2;
+  int64 new_stock = 3;
+}
+
+
+message ServiceSold{
+  string id = 1;
+  string user_id = 2;
+  string buyer_id = 3;
+  string final_price = 4;
+}
+
+message ServiceLeased{
+  string id = 1; // service ID
+  string  user_id = 2;
+  string lease_id = 3;
+}
+
+message ServicePawned{
+  string id = 1; // service ID
+  string  user_id = 2;
+  string pawn_id = 3;
+}
+message ServiceNegotiableToggled{
+  string id = 1;
+  bool old_value = 2;
+  bool new_value = 3;
+
+}
+// Event when a service is removed
+message ServiceRemoved {
+  string id = 1;     // Service ID (UUID)
+}
+
+
+

@@ -1,0 +1,86 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"networking.k8s.io/v1","kind":"NetworkPolicy","metadata":{"annotations":{},"labels":{"app":"nats","app.kubernetes.io/component":"network-policy","app.kubernetes.io/part-of":"messaging-system","cluster":"nats-cluster"},"name":"nats-allow-traffic","namespace":"messaging"},"spec":{"egress":[{"ports":[{"port":53,"protocol":"UDP"},{"port":53,"protocol":"TCP"}],"to":[{"namespaceSelector":{},"podSelector":{"matchLabels":{"k8s-app":"kube-dns"}}}]},{"ports":[{"port":4222,"protocol":"TCP"},{"port":6222,"protocol":"TCP"}],"to":[{"podSelector":{"matchLabels":{"app":"nats"}}}]}],"ingress":[{"from":[{"namespaceSelector":{"matchLabels":{"kubernetes.io/metadata.name":"my-project"}}}],"ports":[{"port":4222,"protocol":"TCP"},{"port":9222,"protocol":"TCP"}]},{"from":[{"namespaceSelector":{"matchLabels":{"kubernetes.io/metadata.name":"messaging"}},"podSelector":{"matchLabels":{"app":"nats"}}}],"ports":[{"port":4222,"protocol":"TCP"},{"port":6222,"protocol":"TCP"},{"port":8222,"protocol":"TCP"}]},{"from":[{"namespaceSelector":{"matchLabels":{"kubernetes.io/metadata.name":"monitoring"}},"podSelector":{"matchLabels":{"app.kubernetes.io/name":"prometheus"}}}],"ports":[{"port":8222,"protocol":"TCP"}]}],"podSelector":{"matchLabels":{"app":"nats"}},"policyTypes":["Ingress","Egress"]}}
+  creationTimestamp: "2025-04-20T10:11:40Z"
+  generation: 1
+  labels:
+    app: nats
+    app.kubernetes.io/component: network-policy
+    app.kubernetes.io/part-of: messaging-system
+    cluster: nats-cluster
+  name: nats-allow-traffic
+  namespace: messaging
+  resourceVersion: "34588"
+  uid: 191338d0-de0a-466c-9a25-ee8b769bb6d7
+spec:
+  egress:
+    - ports:
+        - port: 53
+          protocol: UDP
+        - port: 53
+          protocol: TCP
+      to:
+        - namespaceSelector: { }
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+    - ports:
+        - port: 4222
+          protocol: TCP
+        - port: 6222
+          protocol: TCP
+      to:
+        - podSelector:
+            matchLabels:
+              app: nats
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: my-project
+      ports:
+        - port: 4222
+          protocol: TCP
+        - port: 9222
+          protocol: TCP
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: messaging
+          podSelector:
+            matchLabels:
+              app: nats
+      ports:
+        - port: 4222
+          protocol: TCP
+        - port: 6222
+          protocol: TCP
+        - port: 8222
+          protocol: TCP
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: monitoring
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: prometheus
+      ports:
+        - port: 8222
+          protocol: TCP
+    # --- THIS IS THE NEWLY ADDED RULE ---
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - protocol: TCP
+          port: 9222
+  podSelector:
+    matchLabels:
+      app: nats
+  policyTypes:
+    - Ingress
+    - Egress

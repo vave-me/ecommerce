@@ -1,0 +1,138 @@
+// media_service.proto
+syntax = "proto3";
+
+package mediaService;
+
+import "google/protobuf/timestamp.proto";
+
+// Service definition for Media Management
+service MediaService {
+  // Generates a pre-signed URL for uploading a new media file (image or video)
+  rpc GeneratePresignedUploadURL (GeneratePresignedUploadURLRequest) returns (GeneratePresignedUploadURLResponse);
+
+  // Retrieves a media file by its unique identifier
+  rpc GetMedia (GetMediaRequest) returns (GetMediaResponse);
+
+  // Lists media files with pagination
+  rpc ListMedia (ListMediaRequest) returns (ListMediaResponse);
+
+  // Updates metadata of a specific media file
+  rpc UpdateMedia (UpdateMediaRequest) returns (UpdateMediaResponse);
+
+  // Deletes a specific media file by its unique identifier
+  rpc DeleteMedia (DeleteMediaRequest) returns (DeleteMediaResponse);
+
+  // Retrieves all media files associated with a specific entity
+  rpc GetMediaByEntity (GetMediaByEntityRequest) returns (GetMediaByEntityResponse);
+
+  // Retrieves aggregated statistics related to media uploads
+  rpc GetMediaStatistics (GetMediaStatisticsRequest) returns (GetMediaStatisticsResponse);
+}
+
+// Message representing Media Metadata
+message MediaMetadata {
+  string title = 1;                 // Title of the media
+  string description = 2;           // Description of the media
+  repeated string tags = 3;         // Tags associated with the media
+}
+
+// Request message for generating a pre-signed upload URL
+message GeneratePresignedUploadURLRequest {
+  string entity_type = 1;           // Type of the entity (e.g., product, user)
+  string entity_id = 2;             // Unique identifier of the entity
+  string media_type = 3;            // Type of media (image or video)
+  string file_name = 4;             // Name of the file to be uploaded
+}
+
+// Response message after generating a pre-signed upload URL
+message GeneratePresignedUploadURLResponse {
+  string media_id = 1;                       // Unique identifier for the media
+  string url = 2;                            // Pre-signed URL for uploading the media
+  google.protobuf.Timestamp created_at = 3;   // Timestamp of the media creation
+}
+
+// Request message for retrieving media by ID
+message GetMediaRequest {
+  string media_id = 1;                       // Unique identifier of the media to retrieve
+}
+
+// Response message containing media details
+message GetMediaResponse {
+  Media media = 1;                           // Details of the requested media
+}
+
+// Request message for listing media with pagination
+message ListMediaRequest {
+  int32 page = 1;                             // Current page number
+  int32 limit = 2;                            // Number of media items per page
+}
+
+// Response message containing a list of media
+message ListMediaResponse {
+  repeated Media media = 1;                  // List of media files
+  int32 total = 2;                            // Total number of media files
+  int32 page = 3;                             // Current page number
+  int32 limit = 4;                            // Number of media files per page
+}
+
+// Request message for updating media metadata
+message UpdateMediaRequest {
+  string media_id = 1;                        // Unique identifier of the media to update
+  MediaMetadata metadata = 2;                 // Updated metadata for the media
+}
+
+// Response message after updating media metadata
+message UpdateMediaResponse {
+  Media media = 1;                            // Updated media details
+}
+
+// Request message for deleting media
+message DeleteMediaRequest {
+  string media_id = 1;                        // Unique identifier of the media to delete
+}
+
+// Empty response message for delete operation
+message DeleteMediaResponse {}
+
+// Request message for retrieving media by entity
+message GetMediaByEntityRequest {
+  string entity_type = 1;                 // Type of the entity (e.g., product, user)
+  string entity_id = 2;                   // Unique identifier of the entity
+  int32 page = 3;                         // Current page number
+  int32 limit = 4;                        // Number of media items per page
+}
+
+// Response message containing media associated with an entity
+message GetMediaByEntityResponse {
+  repeated Media media = 1;                   // List of media files associated with the entity
+  int32 total = 2;                            // Total number of media files
+  int32 page = 3;                             // Current page number
+  int32 limit = 4;                            // Number of media files per page
+}
+
+// Request message for retrieving media statistics
+message GetMediaStatisticsRequest {}
+
+// Response message containing media statistics
+message GetMediaStatisticsResponse {
+  int32 total_uploads = 1;                              // Total number of media uploads
+  MediaTypeDistribution media_type_distribution = 2;     // Distribution of media types
+}
+
+// Message representing media statistics by type
+message MediaTypeDistribution {
+  int32 images = 1;                                      // Number of image uploads
+  int32 videos = 2;                                      // Number of video uploads
+  int32 others = 3;                                      // Number of other media uploads
+}
+
+// Media entity representing a media file
+message Media {
+  string media_id = 1;                                   // Unique identifier of the media
+  string entity_type = 2;                                // Type of the entity the media is associated with
+  string entity_id = 3;                                  // Unique identifier of the entity
+  string media_type = 4;                                 // Type of media (image or video)
+  string url = 5;                                        // URL to access the media
+  MediaMetadata metadata = 6;                            // Metadata associated with the media
+  bool is_public = 7;                                    // Indicates if the media is publicly accessible
+}

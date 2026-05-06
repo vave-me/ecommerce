@@ -1,0 +1,490 @@
+syntax = "proto3";
+
+package offerspb;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+// OffersService manages Offer Aggregates and sub-aggregates (BuyNow, Lease, BuyBack)
+service OffersService {
+
+
+  rpc CreateOffer(CreateOfferRequest) returns (CreateOfferResponse) {}
+  rpc ActivateOffer(ActivateOfferRequest) returns (ActivateOfferResponse) {}
+  rpc CloseOffer(CloseOfferRequest) returns (CloseOfferResponse) {}
+  rpc AcceptOffer(AcceptOfferRequest) returns (AcceptOfferResponse) {}
+  rpc GetOffer(GetOfferRequest) returns (GetOfferResponse) {}
+  rpc ListOffers(ListOffersRequest) returns (ListOffersResponse) {}
+
+  rpc CreateBuyNow(CreateBuyNowRequest) returns (CreateBuyNowResponse) {}
+  rpc ConfirmBuyNow(ConfirmBuyNowRequest) returns (ConfirmBuyNowResponse) {}
+  rpc CancelBuyNow(CancelBuyNowRequest) returns (CancelBuyNowResponse) {}
+  rpc RequestBuyNowNegotiation(RequestBuyNowNegotiationRequest) returns (RequestBuyNowNegotiationResponse) {}
+  rpc AcceptBuyNowNegotiation(AcceptBuyNowNegotiationRequest) returns (AcceptBuyNowNegotiationResponse) {}
+  rpc DeclineBuyNowNegotiation(DeclineBuyNowNegotiationRequest) returns (DeclineBuyNowNegotiationResponse) {}
+
+  rpc CreateLease(CreateLeaseRequest) returns (CreateLeaseResponse) {}
+  rpc StartLease(StartLeaseRequest) returns (StartLeaseResponse) {}
+  rpc MakeLeasePayment(MakeLeasePaymentRequest) returns (MakeLeasePaymentResponse) {}
+  rpc ExecuteLeaseBuyout(ExecuteLeaseBuyoutRequest) returns (ExecuteLeaseBuyoutResponse) {}
+  rpc EndLease(EndLeaseRequest) returns (EndLeaseResponse) {}
+  rpc CancelLease(CancelLeaseRequest) returns (CancelLeaseResponse){}
+  rpc DefaultLease(DefaultLeaseRequest) returns (DefaultLeaseResponse) {}
+  rpc RequestLeaseNegotiation(RequestLeaseNegotiationRequest) returns (RequestLeaseNegotiationResponse) {}
+  rpc AcceptLeaseNegotiation(AcceptLeaseNegotiationRequest) returns (AcceptLeaseNegotiationResponse) {}
+  rpc DeclineLeaseNegotiation(DeclineLeaseNegotiationRequest) returns (DeclineLeaseNegotiationResponse) {}
+
+  rpc CreateBuyBack(CreateBuyBackRequest) returns (CreateBuyBackResponse) {}
+  rpc RedeemBuyBack(RedeemBuyBackRequest) returns (RedeemBuyBackResponse) {}
+  rpc ExpireBuyBack(ExpireBuyBackRequest) returns (ExpireBuyBackResponse) {}
+  rpc CancelBuyBack(CancelBuyBackRequest) returns (CancelBuyBackResponse) {}
+  rpc RequestBuyBackNegotiation(RequestBuyBackNegotiationRequest) returns (RequestBuyBackNegotiationResponse) {}
+  rpc AcceptBuyBackNegotiation(AcceptBuyBackNegotiationRequest) returns (AcceptBuyBackNegotiationResponse) {}
+  rpc DeclineBuyBackNegotiation(DeclineBuyBackNegotiationRequest) returns (DeclineBuyBackNegotiationResponse) {}
+
+  rpc CreateReservation(CreateReservationRequest) returns (CreateReservationResponse) {}
+  rpc RedeemReservation(RedeemReservationRequest) returns (RedeemReservationResponse) {}
+  rpc ExpireReservation(ExpireReservationRequest) returns (ExpireReservationResponse) {}
+  rpc CancelReservation(CancelReservationRequest) returns (CancelReservationResponse) {}
+  rpc RequestReservationNegotiation(RequestReservationNegotiationRequest) returns (RequestReservationNegotiationResponse) {}
+  rpc AcceptReservationNegotiation(AcceptReservationNegotiationRequest) returns (AcceptReservationNegotiationResponse) {}
+  rpc DeclineReservationNegotiation(DeclineReservationNegotiationRequest) returns (DeclineReservationNegotiationResponse) {}
+
+
+}
+
+
+message Offer {
+  string id = 1;
+  string user_seller_id = 2;      // ID of the seller
+  string user_customer_id = 3;    // ID of the buyer (once accepted)
+  string product_id = 4;          // Product being offered
+  int64 price = 5;                // Potential initial price
+  string offer_status = 6;        // e.g. "draft", "active", "accepted", "closed", ""
+}
+
+// 1.1 CreateOffer
+message CreateOfferRequest {
+  string user_seller_id = 1;
+  string product_id = 2;
+  int64 price = 3;
+}
+message CreateOfferResponse {
+  string id = 1;                             // ID of newly created offer
+  google.protobuf.Timestamp created_at = 2;  // When it was created
+}
+
+// 1.2 ActivateOffer
+message ActivateOfferRequest {
+  string offer_id = 1;
+}
+message ActivateOfferResponse {
+  string offer_id = 1;
+  string offer_status = 2; // now "active"
+}
+
+// 1.3 CloseOffer
+message CloseOfferRequest {
+  string offer_id = 1;
+  string reason = 2;        // Reason for closing
+}
+message CloseOfferResponse {
+  string offer_id = 1;
+  string offer_status = 2;  // now "closed"
+}
+
+// 1.4 AcceptOffer
+message AcceptOfferRequest {
+  string offer_id = 1;
+  string user_customer_id = 2;
+}
+message AcceptOfferResponse {
+  string offer_id = 1;
+  string offer_status = 2;  // "accepted"
+}
+
+// 1.5 RespondOffer
+message RespondOfferRequest {
+  string offer_id = 1;
+  string offer_response = 2;  // "accepted" / "rejected"
+  string message = 3;
+}
+message RespondOfferResponse {
+  string id = 1;                     // same as offer_id
+  string status = 2;                 // "accepted" / "rejected"
+  google.protobuf.Timestamp responded_at = 3;
+}
+
+// 1.6 NegotiateOffer
+message NegotiateOfferRequest {
+  string offer_id = 1;
+  int64 new_price = 2;               // new proposed price
+  string message = 3;                // optional negotiation message
+}
+message NegotiateOfferResponse {
+  string id = 1;                     // same as offer_id
+  string offer_status = 2;
+  int64 new_price = 3;
+}
+
+// 1.7 GetOffer
+message GetOfferRequest {
+  string offer_id = 1;
+}
+message GetOfferResponse {
+  Offer offer = 1;
+}
+
+// 1.8 ListOffers
+message ListOffersRequest {
+  string user_seller_id = 1;
+  string user_customer_id = 2;
+  string offer_status = 3;
+  int64 page = 4;
+  int64 limit = 5;
+}
+message ListOffersResponse {
+  repeated Offer offers = 1;
+  int64 total = 2;   // total # of offers matching filters
+  int64 page = 3;    // current page
+  int64 limit = 4;   // size per page
+}
+
+message RequestOfferNegotiationRequest {
+  string offer_id = 1;
+  int64 proposed_price = 2;
+  string message = 3;
+}
+message RequestOfferNegotiationResponse {
+  string offer_id = 1;
+  string negotiation_status = 2; // e.g. "initiated"
+}
+
+message AcceptOfferNegotiationRequest {
+  string offer_id = 1;
+  // possibly store which user accepted or final agreed price
+  int64 final_price = 2;
+}
+message AcceptOfferNegotiationResponse {
+  string offer_id = 1;
+  string negotiation_status = 2; // e.g. "accepted"
+}
+
+message DeclineOfferNegotiationRequest {
+  string offer_id = 1;
+  string reason = 2;
+}
+message DeclineOfferNegotiationResponse {
+  string offer_id = 1;
+  string negotiation_status = 2; // e.g. "declined"
+}
+
+message CreateBuyNowRequest {
+  string offer_id = 1;
+  int64 final_price = 2;    // immediate purchase price
+}
+message CreateBuyNowResponse {
+  string buy_now_id = 1;
+  google.protobuf.Timestamp created_at = 2;
+}
+
+message ConfirmBuyNowRequest {
+  string buy_now_id = 1;
+}
+message ConfirmBuyNowResponse {
+  string buy_now_id = 1;
+  string status = 2;
+  google.protobuf.Timestamp confirmed_at = 3;
+}
+
+message CancelBuyNowRequest {
+  string buy_now_id = 1;
+}
+message CancelBuyNowResponse {
+  string buy_now_id = 1;
+  string buy_now_status = 2;
+  google.protobuf.Timestamp canceled_at = 3;
+}
+
+message RequestBuyNowNegotiationRequest {
+  string buy_now_id = 1;
+  int64 new_price = 2;
+  string message = 3;
+}
+message RequestBuyNowNegotiationResponse {
+  string buy_now_id = 1;
+  string negotiation_status = 2; // "requested"
+}
+
+message AcceptBuyNowNegotiationRequest {
+  string buy_now_id = 1;
+  int64 final_price = 2;
+}
+message AcceptBuyNowNegotiationResponse {
+  string buy_now_id = 1;
+  string negotiation_status = 2; // "accepted"
+}
+
+message DeclineBuyNowNegotiationRequest {
+  string buy_now_id = 1;
+  string reason = 2;
+}
+message DeclineBuyNowNegotiationResponse {
+  string buy_now_id = 1;
+  string negotiation_status = 2; // "declined"
+}
+
+
+message CreateLeaseRequest {
+  string offer_id = 1;
+  int64 monthly_price = 2;
+  int64 lease_term_months = 3;
+  bool has_buyout = 4;
+  int64 buyout_price = 5;
+}
+message CreateLeaseResponse {
+  string lease_id = 1;
+  string lease_status = 2;
+  google.protobuf.Timestamp created_at = 3;
+}
+
+message StartLeaseRequest {
+  string lease_id = 1;
+}
+message StartLeaseResponse {
+  string lease_id = 1;
+  string lease_status = 2;
+  google.protobuf.Timestamp started_at = 3;
+  google.protobuf.Timestamp end_date = 4;
+}
+
+message MakeLeasePaymentRequest {
+  string lease_id = 1;
+  int64 amount = 2;
+}
+message MakeLeasePaymentResponse {
+  string lease_id = 1;
+  google.protobuf.Timestamp payment_date = 2;
+}
+
+message ExecuteLeaseBuyoutRequest {
+  string lease_id = 1;
+  int64 buyout_amount = 2;
+}
+message ExecuteLeaseBuyoutResponse {
+  string lease_id = 1;
+  string lease_status = 2;
+  google.protobuf.Timestamp executed_at = 3;
+}
+
+message EndLeaseRequest {
+  string lease_id = 1;
+}
+message EndLeaseResponse {
+  string lease_id = 1;
+  string lease_status = 2;
+  google.protobuf.Timestamp ended_at = 3;
+}
+
+message CancelLeaseRequest {
+  string lease_id = 1;
+}
+message CancelLeaseResponse {
+  string lease_id = 1;
+  string lease_status = 2;
+  google.protobuf.Timestamp canceled_at = 3;
+}
+
+message DefaultLeaseRequest {
+  string lease_id = 1;
+  string reason = 2;
+}
+message DefaultLeaseResponse {
+  string lease_id = 1;
+  string lease_status = 2;
+  google.protobuf.Timestamp defaulted_at = 3;
+}
+
+// Lease Negotiation
+message RequestLeaseNegotiationRequest {
+  string lease_id = 1;
+  int64 proposed_monthly_price = 2;
+  int64 proposed_term_months = 3;
+  string message = 4;
+}
+message RequestLeaseNegotiationResponse {
+  string lease_id = 1;
+  string negotiation_status = 2; // "requested"
+}
+
+message AcceptLeaseNegotiationRequest {
+  string lease_id = 1;
+  int64 final_monthly_price = 2;
+  int64 final_term_months = 3;
+}
+message AcceptLeaseNegotiationResponse {
+  string lease_id = 1;
+  string negotiation_status = 2; // "accepted"
+}
+
+message DeclineLeaseNegotiationRequest {
+  string lease_id = 1;
+  string reason = 2;
+}
+message DeclineLeaseNegotiationResponse {
+  string lease_id = 1;
+  string negotiation_status = 2; // "declined"
+}
+
+
+// ----------------------------------------------------
+//                BuyBack Messages
+// ----------------------------------------------------
+
+message CreateBuyBackRequest {
+  string offer_id = 1;
+  int64 locked_price = 2;
+  int64 redemption_fee = 3;
+  int32 lock_duration_days = 4;
+  string lock_buyer_id = 5;
+}
+message CreateBuyBackResponse {
+  string buyBack_id = 1;
+  string buyBack_status = 2;
+  google.protobuf.Timestamp created_at = 3;
+}
+
+message RedeemBuyBackRequest {
+  string buyBack_id = 1;
+}
+message RedeemBuyBackResponse {
+  string buyBack_id = 1;
+  string buyBack_status = 2;
+  google.protobuf.Timestamp redeemed_at = 3;
+}
+
+message ExpireBuyBackRequest {
+  string buyBack_id = 1;
+}
+message ExpireBuyBackResponse {
+  string buyBack_id = 1;
+  string buyBack_status = 2;
+  google.protobuf.Timestamp expired_at = 3;
+}
+
+message CancelBuyBackRequest {
+  string buyBack_id = 1;
+}
+message CancelBuyBackResponse {
+  string buyBack_id = 1;
+  string buyBack_status = 2;
+  google.protobuf.Timestamp canceled_at = 3;
+}
+
+// BuyBack Negotiation
+message RequestBuyBackNegotiationRequest {
+  string buyBack_id = 1;
+  int64 new_locked_price = 2;
+  int64 new_redemption_fee = 3;
+  string message = 4;
+}
+message RequestBuyBackNegotiationResponse {
+  string buyBack_id = 1;
+  string negotiation_status = 2; // "requested"
+}
+
+message AcceptBuyBackNegotiationRequest {
+  string buyBack_id = 1;
+  int64 agreed_locked_price = 2;
+  int64 agreed_redemption_fee = 3;
+}
+message AcceptBuyBackNegotiationResponse {
+  string buyBack_id = 1;
+  string negotiation_status = 2; // "accepted"
+}
+
+message DeclineBuyBackNegotiationRequest {
+  string buyBack_id = 1;
+  string reason = 2;
+}
+message DeclineBuyBackNegotiationResponse {
+  string buyBack_id = 1;
+  string negotiation_status = 2; // "declined"
+}
+
+
+// 1) CreateReservation
+message CreateReservationRequest {
+  string offer_id = 1;          // The offer we're reserving
+  int64 locked_price = 2;       // The price locked for potential purchase
+  int64 reservation_fee = 3;    // Fee for reserving the item (0 if 1-day free)
+  int32 lock_duration_days = 4; // how many days the lock lasts (1 => free)
+  string lock_buyer_id = 5;     // who is reserving
+}
+message CreateReservationResponse {
+  string reservation_id = 1;
+  string reservation_status = 2; // e.g. "ACTIVE"
+  google.protobuf.Timestamp created_at = 3;
+  bool is_free = 4;             // indicates if it's the 1-day free reservation
+}
+
+// 2) RedeemReservation
+message RedeemReservationRequest {
+  string reservation_id = 1;
+}
+message RedeemReservationResponse {
+  string reservation_id = 1;
+  string reservation_status = 2; // "REDEEMED"
+  google.protobuf.Timestamp redeemed_at = 3;
+}
+
+// 3) ExpireReservation
+message ExpireReservationRequest {
+  string reservation_id = 1;
+}
+message ExpireReservationResponse {
+  string reservation_id = 1;
+  string reservation_status = 2; // "EXPIRED"
+  google.protobuf.Timestamp expired_at = 3;
+}
+
+// 4) CancelReservation
+message CancelReservationRequest {
+  string reservation_id = 1;
+}
+message CancelReservationResponse {
+  string reservation_id = 1;
+  string reservation_status = 2; // "CANCELED"
+  google.protobuf.Timestamp canceled_at = 3;
+}
+
+// Reservation Negotiation
+message RequestReservationNegotiationRequest {
+  string reservation_id = 1;
+  int64 new_locked_price = 2;
+  int64 new_reservation_fee = 3;   // if the user wants to adjust the fee as well
+  string message = 4;
+}
+message RequestReservationNegotiationResponse {
+  string reservation_id = 1;
+  string negotiation_status = 2; // "requested"
+}
+
+message AcceptReservationNegotiationRequest {
+  string reservation_id = 1;
+  int64 agreed_locked_price = 2;
+  int64 agreed_reservation_fee = 3;
+}
+message AcceptReservationNegotiationResponse {
+  string reservation_id = 1;
+  string negotiation_status = 2; // "accepted"
+}
+
+message DeclineReservationNegotiationRequest {
+  string reservation_id = 1;
+  string reason = 2;
+}
+message DeclineReservationNegotiationResponse {
+  string reservation_id = 1;
+  string negotiation_status = 2; // "declined"
+}

@@ -1,0 +1,269 @@
+/* File: src/components/GlobalModals.module.css */
+
+/* Keyframe animations */
+@keyframes fadeInBackdrop {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Modal backdrop styles */
+.modalBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 9998;
+    animation: fadeInBackdrop 0.25s ease forwards;
+}
+
+/* Overlay container */
+.overlayContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 95%;
+    max-width: 600px;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border: 2px solid #2ec4b6;
+    border-radius: 6px;
+    padding: 20px;
+    z-index: 9999;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+    animation: fadeInModal 0.3s ease-out forwards;
+}
+
+/* Close button */
+.closeButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
+    color: #2ec4b6;
+    font-size: 1.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+    color: #279b90;
+    background: rgba(46, 196, 182, 0.1);
+}
+
+.closeButton:focus-visible {
+    outline: 2px solid #2ec4b6;
+    outline-offset: 2px;
+}
+
+.closeButton:active {
+    transform: scale(0.95);
+}
+
+/* ============================================================================
+   DARK THEME SUPPORT
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+    .modalBackdrop {
+        background: rgba(0, 0, 0, 0.65);
+    }
+
+    .overlayContainer {
+        background: var(--gray-800, #1f2937);
+        border-color: var(--teal-500, #14b8a6);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+    }
+
+    .closeButton {
+        color: var(--teal-400, #2dd4bf);
+    }
+
+    .closeButton:hover {
+        color: var(--teal-300, #5eead4);
+        background: rgba(45, 212, 191, 0.1);
+    }
+
+    .closeButton:focus-visible {
+        outline-color: var(--teal-400, #2dd4bf);
+    }
+}
+
+/* ============================================================================
+   ENHANCED MODAL VARIANTS
+   ============================================================================ */
+
+.overlayContainer.small {
+    max-width: 400px;
+    padding: 16px;
+}
+
+.overlayContainer.large {
+    max-width: 800px;
+    padding: 24px;
+}
+
+.overlayContainer.fullscreen {
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    border-radius: 0;
+    padding: 32px;
+}
+
+.overlayContainer.success {
+    border-color: var(--emerald-500, #10b981);
+}
+
+.overlayContainer.warning {
+    border-color: var(--amber-500, #f59e0b);
+}
+
+.overlayContainer.error {
+    border-color: var(--red-500, #ef4444);
+}
+
+@media (prefers-color-scheme: dark) {
+    .overlayContainer.success {
+        border-color: var(--emerald-400, #34d399);
+    }
+
+    .overlayContainer.warning {
+        border-color: var(--amber-400, #fbbf24);
+    }
+
+    .overlayContainer.error {
+        border-color: var(--red-400, #f87171);
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .overlayContainer {
+        width: 90%;
+        max-width: 500px;
+        padding: 16px;
+        border-radius: 8px;
+    }
+
+    .overlayContainer.small {
+        max-width: 350px;
+        padding: 12px;
+    }
+
+    .overlayContainer.large {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .overlayContainer.fullscreen {
+        padding: 24px;
+    }
+
+    .closeButton {
+        font-size: 1.25rem;
+        padding: 0.375rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .overlayContainer {
+        width: 95%;
+        padding: 12px;
+        border-radius: 6px;
+    }
+
+    .overlayContainer.small {
+        padding: 8px;
+    }
+
+    .overlayContainer.large {
+        padding: 16px;
+    }
+
+    .overlayContainer.fullscreen {
+        padding: 20px;
+    }
+
+    .closeButton {
+        font-size: 1.125rem;
+        padding: 0.25rem;
+    }
+}
+
+/* ============================================================================
+   ACCESSIBILITY & MOTION
+   ============================================================================ */
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .modalBackdrop {
+        animation: none;
+    }
+
+    .overlayContainer {
+        animation: none;
+    }
+
+    .closeButton:active {
+        transform: none;
+    }
+}
+
+/* High Contrast */
+@media (prefers-contrast: high) {
+    .overlayContainer {
+        border-width: 3px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .overlayContainer {
+            border-color: var(--teal-300, #5eead4);
+        }
+
+        .closeButton {
+            color: var(--teal-300, #5eead4);
+        }
+
+        .overlayContainer.success {
+            border-color: var(--emerald-300, #6ee7b7);
+        }
+
+        .overlayContainer.warning {
+            border-color: var(--amber-300, #fcd34d);
+        }
+
+        .overlayContainer.error {
+            border-color: var(--red-300, #fca5a5);
+        }
+    }
+}
+
+/* Focus trap for accessibility */
+.overlayContainer:focus {
+    outline: none;
+}

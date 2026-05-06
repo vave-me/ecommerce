@@ -1,0 +1,62 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.mainContent {
+    flex: 1;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.layoutGrid {
+    display: grid;
+    grid-template-areas: 'leftside contentarea rightside';
+    grid-template-columns: 0.5fr 3fr 0.5fr;
+    column-gap: 16px;
+    padding: 0 8px;
+}
+
+.contentArea {
+    grid-area: contentarea;
+    width: 100%;
+}
+
+/* =================================================================
+   DARK THEME SUPPORT
+   ================================================================= */
+
+@media (prefers-color-scheme: dark) {
+    .container {
+        background-color: #111827;
+        color: #f3f4f6;
+    }
+
+    .mainContent {
+        background-color: #111827;
+    }
+
+    .layoutGrid {
+        background-color: #111827;
+    }
+
+    .contentArea {
+        background-color: #111827;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .layoutGrid {
+        grid-template-areas: 'contentarea';
+        grid-template-columns: 1fr;
+        padding: 0 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 2px;
+    }
+}

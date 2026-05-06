@@ -1,0 +1,741 @@
+.sharedTypeBadge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 15;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: inherit;
+}
+
+/* Badge colors for different card types */
+.sharedTypeBadge.deals {
+    background: var(--danger); /* 🎯 DEALS - RED */
+}
+
+.sharedTypeBadge.marketplace,
+.sharedTypeBadge.classified {
+    background: var(--success); /* 🎯 MARKETPLACE/CLASSIFIED - GREEN */
+}
+
+.sharedTypeBadge.services {
+    background: #8b5cf6; /* 🎯 SERVICES - PURPLE */
+}
+
+.sharedTypeBadge.jobs {
+    background: #3b82f6; /* 🎯 JOBS - BLUE */
+}
+
+.sharedTypeBadge.properties {
+    background: var(--secondary-color); /* 🎯 PROPERTIES - ORANGE */
+}
+
+.sharedTypeBadge.vehicles {
+    background: #6366f1; /* 🎯 VEHICLES - INDIGO */
+}
+
+
+
+
+/* ============================================================================
+   MODERN PROFESSIONAL BADGE SYSTEM
+   ============================================================================
+   
+   Design Philosophy:
+   - Mobile-first compact design with intelligent responsive behavior
+   - Sophisticated color palette with subtle gradients and shadows
+   - Professional typography with optimal readability
+   - Smart priority-based badge visibility system
+   - Modern micro-interactions and accessibility
+   ============================================================================ */
+
+/* Badge Row Container - Flexible, Responsive Layout */
+.badgeRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 12px;
+    gap: 8px;
+    background: #fafbfc;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    min-height: 32px;
+    overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+    .badgeRow {
+        background: var(--gray-800, #1f2937);
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Primary Badge Container - Always Visible */
+.badgeRowPrimary {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+/* Secondary Badge Container - Responsive Visibility */
+.badgeRowSecondary {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+/* ============================================================================
+   BADGE BASE STYLES - Modern, Sophisticated Design
+   ============================================================================ */
+
+/* Base Badge Styles */
+.badgeRow span {
+    display: inline-flex;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1;
+    border-radius: 6px;
+    white-space: nowrap;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    flex-shrink: 0;
+}
+
+/* Badge Icons */
+.badgeIcon {
+    flex-shrink: 0;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+/* ============================================================================
+   TYPE BADGES - Primary Category Indicators
+   ============================================================================ */
+
+.typeBadge {
+    padding: 4px 8px;
+    gap: 3px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+    color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    .typeBadge {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.4);
+        border-color: rgba(255, 255, 255, 0.15);
+    }
+}
+
+/* Professional Type Colors - Solid, Clean */
+.typeBadge.deals {
+    background: #ef4444;
+    box-shadow: 0 1px 3px rgba(239, 68, 68, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .typeBadge.deals {
+        background: var(--red-600, #dc2626);
+        box-shadow: 0 1px 3px rgba(220, 38, 38, 0.4);
+    }
+}
+
+.typeBadge.classified {
+    background: #10b981;
+    box-shadow: 0 1px 3px rgba(16, 185, 129, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .typeBadge.classified {
+        background: var(--emerald-600, #059669);
+        box-shadow: 0 1px 3px rgba(5, 150, 105, 0.4);
+    }
+}
+
+.typeBadge.services {
+    background: #8b5cf6;
+    box-shadow: 0 1px 3px rgba(139, 92, 246, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .typeBadge.services {
+        background: var(--purple-600, #9333ea);
+        box-shadow: 0 1px 3px rgba(147, 51, 234, 0.4);
+    }
+}
+
+.typeBadge.jobs {
+    background: #3b82f6;
+    box-shadow: 0 1px 3px rgba(59, 130, 246, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .typeBadge.jobs {
+        background: var(--blue-600, #2563eb);
+        box-shadow: 0 1px 3px rgba(37, 99, 235, 0.4);
+    }
+}
+
+.typeBadge.properties {
+    background: #f59e0b;
+    box-shadow: 0 1px 3px rgba(245, 158, 11, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .typeBadge.properties {
+        background: var(--amber-600, #d97706);
+        box-shadow: 0 1px 3px rgba(217, 119, 6, 0.4);
+    }
+}
+
+.typeBadge.vehicles {
+    background: #6366f1;
+    box-shadow: 0 1px 3px rgba(99, 102, 241, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .typeBadge.vehicles {
+        background: var(--indigo-600, #4f46e5);
+        box-shadow: 0 1px 3px rgba(79, 70, 229, 0.4);
+    }
+}
+
+/* ============================================================================
+   HOT/POPULAR BADGE - Attention-Grabbing
+   ============================================================================ */
+
+.hotBadge {
+    padding: 3px 6px;
+    gap: 2px;
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid rgba(220, 38, 38, 0.1);
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+@media (prefers-color-scheme: dark) {
+    .hotBadge {
+        background: rgba(220, 38, 38, 0.2);
+        color: var(--red-400, #f87171);
+        border-color: rgba(248, 113, 113, 0.3);
+    }
+}
+
+.hotIcon {
+    animation: hotPulse 2s ease-in-out infinite;
+}
+
+.hotText {
+    font-size: 9px;
+    letter-spacing: 0.02em;
+}
+
+/* ============================================================================
+   VIEWS BADGE - Engagement Indicator
+   ============================================================================ */
+
+.viewsBadge {
+    padding: 3px 6px;
+    gap: 2px;
+    background: #f8fafc;
+    color: #475569;
+    border: 1px solid rgba(71, 85, 105, 0.1);
+    font-weight: 600;
+}
+
+@media (prefers-color-scheme: dark) {
+    .viewsBadge {
+        background: var(--gray-700, #374151);
+        color: var(--gray-300, #d1d5db);
+        border-color: rgba(209, 213, 219, 0.2);
+    }
+}
+
+.viewsBadge:hover {
+    background: #e2e8f0;
+    color: var(--text-secondary);
+    transform: translateY(-1px);
+}
+
+@media (prefers-color-scheme: dark) {
+    .viewsBadge:hover {
+        background: var(--gray-600, #4b5563);
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+/* ============================================================================
+   SECONDARY BADGES - Context Information
+   ============================================================================ */
+
+.categoryBadge {
+    padding: 3px 6px;
+    gap: 2px;
+    background: #f0f9ff;
+    color: #0369a1;
+    border: 1px solid rgba(3, 105, 161, 0.1);
+    font-weight: 600;
+}
+
+@media (prefers-color-scheme: dark) {
+    .categoryBadge {
+        background: rgba(3, 105, 161, 0.2);
+        color: var(--sky-400, #38bdf8);
+        border-color: rgba(56, 189, 248, 0.3);
+    }
+}
+
+/* Merchant Badge */
+.merchantBadge {
+    padding: 3px 6px;
+    gap: 2px;
+    background: #f0fdf4;
+    color: #166534;
+    border: 1px solid rgba(22, 101, 52, 0.1);
+    font-weight: 600;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (prefers-color-scheme: dark) {
+    .merchantBadge {
+        background: rgba(22, 101, 52, 0.2);
+        color: var(--green-400, #4ade80);
+        border-color: rgba(74, 222, 128, 0.3);
+    }
+}
+
+/* Time Badge */
+.timeBadge {
+    padding: 3px 6px;
+    gap: 2px;
+    background: #fefce8;
+    color: #a16207;
+    border: 1px solid rgba(161, 98, 7, 0.1);
+    font-weight: 600;
+    font-size: 9px;
+    letter-spacing: 0.02em;
+}
+
+@media (prefers-color-scheme: dark) {
+    .timeBadge {
+        background: rgba(161, 98, 7, 0.2);
+        color: var(--yellow-400, #facc15);
+        border-color: rgba(250, 204, 21, 0.3);
+    }
+}
+
+/* ============================================================================
+   ANIMATIONS AND MICRO-INTERACTIONS
+   ============================================================================ */
+
+@keyframes hotPulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.05);
+    }
+}
+
+/* Hover Effects for Interactive Badges */
+.typeBadge:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.hotBadge:hover {
+    transform: translateY(-1px);
+    background: #fee2e2;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - Mobile-First Approach
+   ============================================================================ */
+
+/* Mobile Optimization (≤480px) - Ultra Compact */
+@media (max-width: 480px) {
+    .badgeRow {
+        padding: 4px 8px;
+        gap: 4px;
+        min-height: 28px;
+    }
+    
+    .badgeRowPrimary {
+        gap: 4px;
+    }
+    
+    .badgeRowSecondary {
+        gap: 3px;
+    }
+    
+    .typeBadge {
+        padding: 3px 6px;
+        font-size: 9px;
+    }
+    
+    .hotBadge {
+        padding: 2px 4px;
+        font-size: 8px;
+    }
+    
+    .viewsBadge {
+        padding: 2px 4px;
+        font-size: 8px;
+    }
+    
+    /* Hide secondary badges on very small screens */
+    .merchantBadge,
+    .categoryBadge {
+        display: none;
+    }
+}
+
+/* Small Mobile (≤600px) - Compact */
+@media (max-width: 600px) {
+    .badgeRow {
+        padding: 5px 10px;
+        gap: 5px;
+    }
+    
+    .merchantBadge {
+        max-width: 60px;
+    }
+    
+    /* Hide time badge on mobile */
+    .timeBadge {
+        display: none;
+    }
+}
+
+/* Tablet (≤768px) - Balanced */
+@media (max-width: 768px) {
+    .badgeRowSecondary {
+        gap: 3px;
+    }
+    
+    .merchantBadge {
+        max-width: 70px;
+    }
+}
+
+/* Desktop (≥769px) - Full Features */
+@media (min-width: 769px) {
+    .badgeRow {
+        padding: 6px 14px;
+        gap: 10px;
+    }
+    
+    .badgeRowPrimary {
+        gap: 8px;
+    }
+    
+    .badgeRowSecondary {
+        gap: 6px;
+    }
+    
+    .typeBadge {
+        padding: 4px 10px;
+        font-size: 11px;
+    }
+    
+    .hotBadge,
+    .viewsBadge {
+        padding: 3px 7px;
+        font-size: 10px;
+    }
+    
+    .categoryBadge,
+    .merchantBadge {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+    
+    .timeBadge {
+        display: inline-flex; /* Show on desktop */
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+    
+    .merchantBadge {
+        max-width: 120px;
+    }
+}
+
+/* Large Desktop (≥1024px) - Spacious */
+@media (min-width: 1024px) {
+    .badgeRow {
+        padding: 8px 16px;
+        gap: 12px;
+    }
+    
+    .merchantBadge {
+        max-width: 150px;
+    }
+}
+
+
+
+/* Respect user's reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .hotIcon {
+    animation: none ;
+  }
+}
+
+/* ============= SHARED PRICE LOCATION ROW SECTION ============= */
+/* Professional, Compact Price and Location Display */
+
+/* Price Location Row Container */
+.sharedPriceLocationRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm); /* Compact gap: 6px */
+    padding: var(--space-xs) var(--card-padding-md); /* Minimal padding */
+    margin:0; /* Tight vertical spacing */
+    flex-wrap: nowrap; /* Keep items on same line for cleaner look */
+}
+
+/* Price Section Container */
+.priceSection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    flex-shrink: 0;
+}
+
+/* Price Display - Professional, Bold */
+.sharedPrice {
+    /* Professional typography */
+    font-size: var(--text-md); /* 15px - LinkedIn style */
+    font-weight: var(--weight-bold); /* 700 - strong emphasis */
+    font-family: var(--font-numeric); /* Optimized for numbers */
+    letter-spacing: var(--letter-tight); /* Slightly tighter */
+    line-height: var(--leading-none); /* 1 - compact line height */
+    color: var(--success); /* Professional success color */
+    flex-shrink: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+@media (prefers-color-scheme: dark) {
+    .sharedPrice {
+        color: var(--emerald-400, #34d399);
+    }
+}
+
+/* Original Price for Deals */
+.originalPrice {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    font-family: var(--font-numeric);
+    color: var(--text-tertiary);
+    text-decoration: line-through;
+    opacity: 0.8;
+}
+
+@media (prefers-color-scheme: dark) {
+    .originalPrice {
+        color: var(--gray-500, #6b7280);
+    }
+}
+
+/* Location Section - Subtle, Compact */
+.sharedLocationSection {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs); /* Tight gap: 4px */
+    font-size: var(--text-sm); /* 13px - compact but readable */
+    font-family: var(--font-primary);
+    font-weight: var(--weight-normal); /* 400 - subtle emphasis */
+    letter-spacing: var(--letter-normal);
+    line-height: var(--leading-none); /* 1 - compact line height */
+
+    /* Professional color */
+    color: var(--text-tertiary); /* Subtle gray */
+    flex-shrink: 1;
+    min-width: 0; /* Allow shrinking */
+    transition: color 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+    .sharedLocationSection {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+/* Clickable location section styling */
+.sharedLocationSection.clickable {
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+    .sharedLocationSection.clickable {
+        color: var(--teal-400, #2dd4bf);
+    }
+}
+
+.sharedLocationSection.clickable:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+@media (prefers-color-scheme: dark) {
+    .sharedLocationSection.clickable:hover {
+        color: var(--teal-300, #5eead4);
+    }
+}
+
+.sharedLocationIcon {
+    flex-shrink: 0;
+    opacity: 0.7; /* Slightly transparent for subtlety */
+    transition: opacity 0.2s ease;
+}
+
+.sharedLocationSection.clickable .sharedLocationIcon {
+    opacity: 1;
+}
+
+.sharedLocationText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px; /* Reasonable max width */
+}
+
+/* Three Icons Section - When merchant, URL, and location are all present */
+.sharedThreeIconsSection {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs); /* 4px gap between icons */
+    flex-shrink: 0;
+}
+
+/* Icon Buttons */
+.sharedIconButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--surface-secondary, #f8f9fa);
+    border: 1px solid var(--border, #e2e8f0);
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    color: var(--text-tertiary);
+}
+
+@media (prefers-color-scheme: dark) {
+    .sharedIconButton {
+        background-color: var(--gray-700, #374151);
+        border-color: var(--gray-600, #4b5563);
+        color: var(--gray-300, #d1d5db);
+    }
+}
+
+.sharedIconButton:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    .sharedIconButton:hover {
+        background-color: var(--teal-600, #0d9488);
+        border-color: var(--teal-600, #0d9488);
+        color: var(--gray-50, #f9fafb);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.sharedIconButton:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    .sharedIconButton:active {
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Mobile responsiveness - Ultra compact */
+@media (max-width: 768px) {
+    .sharedPriceLocationRow {
+        gap: var(--space-xs); /* Even tighter gap: 4px */
+        padding: var(--space-xs) var(--card-padding-sm); /* Smaller padding */
+    }
+    
+    .sharedPrice {
+        font-size: var(--text-base); /* 14px - compact mobile */
+    }
+    
+    .sharedLocationSection {
+        font-size: var(--text-xs); /* 12px - very compact mobile */
+    }
+    
+    .sharedLocationText {
+        max-width: 100px; /* Smaller max width on mobile */
+    }
+    
+    .sharedIconButton {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .sharedThreeIconsSection {
+        gap: 2px; /* Tighter gap on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .sharedPriceLocationRow {
+        gap: 2px; /* Ultra-tight gap */
+        padding: var(--space-xs) var(--card-padding-xs); /* Minimal padding */
+    }
+    
+    .sharedPrice {
+        font-size: var(--text-sm); /* 13px - very compact */
+    }
+    
+    .sharedLocationSection {
+        font-size: 11px; /* Extra small for tiny screens */
+    }
+    
+    .sharedLocationText {
+        max-width: 80px; /* Very limited space */
+    }
+    
+    .sharedIconButton {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* ============= END SHARED SECTIONS ============= */ 

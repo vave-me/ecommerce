@@ -1,0 +1,211 @@
+syntax = "proto3";
+
+package basketspb;
+
+import "google/protobuf/empty.proto";         // For empty responses
+import "google/protobuf/timestamp.proto";     // For timestamp fields
+
+// BasketService provides functionalities related to shopping basket management.
+service BasketService {
+
+  // Starts a new shopping basket.
+  rpc StartBasket(StartBasketRequest) returns (StartBasketResponse) {}
+
+  // Retrieves details of an existing basket.
+  rpc GetBasket(GetBasketRequest) returns (GetBasketResponse) {}
+
+  // Retrieves details of an existing basket.
+  rpc GetTotalBasket(GetTotalBasketAmountRequest) returns (GetTotalBasketAmountResponse) {}
+
+  // Retrieves details of an existing basket.
+  rpc GetCurrentBasket(GetCurrentBasketRequest) returns (GetCurrentBasketResponse) {}
+
+  // Cancels an existing basket.
+  rpc CancelBasket(CancelBasketRequest) returns (CancelBasketResponse) {}
+
+  // Checks out a basket.
+  rpc CheckoutBasket(CheckoutBasketRequest) returns (CheckoutBasketResponse) {}
+
+  // Adds an item to the basket.
+  rpc AddItem(AddItemRequest) returns (AddItemResponse) {}
+
+  // Removes an item from the basket.
+  rpc RemoveItem(RemoveItemRequest) returns (RemoveItemResponse) {}
+
+  // Updates the quantity of an item in the basket.
+  rpc UpdateItemQuantity(UpdateItemQuantityRequest) returns (UpdateItemQuantityResponse) {}
+
+  // Lists all baskets with optional filtering and pagination.
+  rpc ListBaskets(ListBasketsRequest) returns (ListBasketsResponse) {}
+
+  // Retrieves all active baskets.
+  rpc GetActiveBaskets(GetActiveBasketsRequest) returns (GetActiveBasketsResponse) {}
+
+  // Reopens a checked out basket after a failed checkout.
+  rpc ReopenBasket(ReopenBasketRequest) returns (ReopenBasketResponse) {}
+
+}
+message  CancelBasketResponse {}
+// Basket represents a shopping basket containing multiple items.
+message Basket {
+  string id = 1;                          // Unique identifier of the basket.
+  repeated Item items = 2;                // List of items in the basket.
+  string basket_status = 3;                // Current status of the basket.
+
+}
+
+// Item represents a product added to the basket.
+message Item {
+  string user_seller_id = 1;              // Unique identifier of the user-seller.
+  string product_id = 2;                  // Unique identifier of the product.
+  string user_seller_name = 3;            // Name of the user-seller.
+  string product_name = 4;                // Name of the product.
+  int64 product_price = 5;               // Price per unit of the product.
+  int64 quantity = 6;                     // Quantity of the product in the basket.
+
+
+}
+
+// Enumeration of possible basket statuses.
+enum BasketStatus {
+  ACTIVE = 0;                            // Basket is active and can be modified.
+  CANCELED = 1;                          // Basket has been canceled.
+  CHECKED_OUT = 2;                       // Basket has been checked out.
+}
+
+// Request message to start a new basket.
+message StartBasketRequest {
+  string user_id = 1;                     // Unique identifier of the user initiating the basket.
+}
+
+// Response message after starting a new basket.
+message StartBasketResponse {
+  string id = 1;                          // Unique identifier of the created basket.
+}
+
+// Request message to retrieve a basket.
+message GetTotalBasketAmountRequest {
+  string basket_id = 1;                   // Unique identifier of the basket to retrieve.
+}
+
+
+// Request message to retrieve a basket.
+message GetBasketRequest {
+  string basket_id = 1;                   // Unique identifier of the basket to retrieve.
+}
+// Response message for retrieving a basket.
+message GetBasketResponse {
+  Basket basket = 1;                      // Details of the requested basket.
+}
+
+message GetTotalBasketAmountResponse {
+  int64 amount = 1;                      // Details of the requested basket.
+}
+
+message GetCurrentBasketRequest {
+  string user_customer_id = 1;
+
+}
+
+// Response message for retrieving a basket.
+message GetCurrentBasketResponse {
+  string basket_id = 1;
+  string  basket_status = 2;// Unique identifier of the basket to retrieve.                // Details of the requested basket.
+}
+
+// Request message to cancel a basket.
+message CancelBasketRequest {
+  string basket_id = 1;                   // Unique identifier of the basket to cancel.
+  string reason = 2;                       // Reason for canceling the basket.
+}
+
+// Request message to checkout a basket.
+message CheckoutBasketRequest {
+  string basket_id = 1;                   // Unique identifier of the basket to checkout.
+  string user_customer_id = 2;            // Unique identifier of the customer.
+  string payment_intent_id = 3;           // Stripe payment intent ID for this checkout.
+}
+
+// Response message after checking out a basket.
+message CheckoutBasketResponse {
+  string basket_id = 1;                   // Unique identifier of the checked-out basket.
+}
+
+// Request message to add an item to the basket.
+message AddItemRequest {
+  string basket_id = 1;                   // Unique identifier of the basket.
+  string product_id = 2;                  // Unique identifier of the product to add.
+  int64 quantity = 3;                     // Quantity of the product to add.
+}
+
+// Response message after adding an item.
+message AddItemResponse {
+  string basket_id = 1;                   // Unique identifier of the basket.
+  string item_id = 2;                     // Unique identifier of the added item.
+
+}
+
+// Request message to remove an item from the basket.
+message RemoveItemRequest {
+  string basket_id = 1;                   // Unique identifier of the basket.
+  string item_id = 2;                     // Unique identifier of the item to remove.
+  int64 quantity = 3;                     // Quantity of the item to remove.
+}
+
+// Response message after removing an item.
+message RemoveItemResponse {
+  string basket_id = 1;                   // Unique identifier of the basket.
+  string item_id = 2;                     // Unique identifier of the removed item.
+
+}
+
+// Request message to update the quantity of an item.
+message UpdateItemQuantityRequest {
+  string basket_id = 1;                   // Unique identifier of the basket.
+  string item_id = 2;                     // Unique identifier of the item.
+  int64 new_quantity = 3;                 // New quantity for the item.
+}
+
+// Response message after updating item quantity.
+message UpdateItemQuantityResponse {
+  string basket_id = 1;                   // Unique identifier of the basket.
+  string item_id = 2;                     // Unique identifier of the item.
+  int64 new_quantity = 3;                 // Updated quantity of the item.
+
+}
+
+// Request message to list baskets with optional filtering and pagination.
+message ListBasketsRequest {
+  string user_id = 1;                     // Filter baskets by user ID.
+  string basket_status = 2;                // Filter baskets by status.
+  int64 page = 3;                         // Page number for pagination.
+  int64 limit = 4;                        // Number of baskets per page.
+}
+
+// Response message for listing baskets.
+message ListBasketsResponse {
+  repeated Basket baskets = 1;            // List of baskets.
+  int64 total = 2;                        // Total number of baskets available.
+  int64 page = 3;                         // Current page number.
+  int64 limit = 4;                        // Number of baskets per page.
+}
+
+// Request message to retrieve all active baskets.
+message GetActiveBasketsRequest {}
+
+// Response message for retrieving active baskets.
+message GetActiveBasketsResponse {
+  repeated Basket baskets = 1;
+}
+
+// Request message to reopen a basket after failed checkout.
+message ReopenBasketRequest {
+  string basket_id = 1;                     // ID of the basket to reopen.
+  string reason = 2;                        // Reason for reopening the basket.
+}
+
+// Response message for reopening a basket.
+message ReopenBasketResponse {
+  string basket_id = 1;                     // ID of the reopened basket.
+  string basket_status = 2;                 // New status of the basket.
+}

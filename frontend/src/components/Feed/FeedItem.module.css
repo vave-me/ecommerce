@@ -1,0 +1,438 @@
+.feedItem {
+    cursor: pointer;
+    box-sizing: border-box;
+    font-family: var(--font-primary);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 12px;
+}
+
+.userInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-weight: var(--weight-semibold);
+    font-family: var(--font-primary);
+    color: #1a1a1a;
+    margin-bottom: 2px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.timestamp {
+    font-size: var(--text-sm);
+    font-family: var(--font-primary);
+    color: #666;
+}
+
+.typeBadge {
+    background: #f0f0f0;
+    color: #666;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    font-family: var(--font-primary);
+}
+
+/* Post Card */
+.postCard {
+    margin-bottom: 16px;
+}
+
+.postContent {
+    line-height: var(--leading-normal);
+    font-family: var(--font-primary);
+    color: #333;
+    margin-bottom: 12px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* Product Card */
+.productCard {
+    margin-bottom: 16px;
+}
+
+.productHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.productHeader h3 {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    font-family: var(--font-primary);
+    color: #1a1a1a;
+    margin: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.productDetails {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.price {
+    color: #2563eb;
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-lg);
+    font-family: var(--font-numeric);
+}
+
+.category {
+    background: #f0f0f0;
+    color: #666;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: var(--text-sm);
+    font-family: var(--font-primary);
+}
+
+/* Service Card */
+.serviceCard {
+    margin-bottom: 16px;
+}
+
+.serviceHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.serviceHeader h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.serviceDetails {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+/* Job Card */
+.jobCard {
+    margin-bottom: 16px;
+}
+
+.jobHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.jobHeader h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.jobDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.company {
+    color: #666;
+    font-size: 0.95rem;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #666;
+    font-size: 0.9rem;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.salary {
+    color: #2563eb;
+    font-weight: 500;
+}
+
+/* Property Card */
+.propertyCard {
+    margin-bottom: 16px;
+}
+
+.propertyHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.propertyHeader h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.propertyDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.type {
+    background: #f0f0f0;
+    color: #666;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    align-self: flex-start;
+}
+
+/* Video Card */
+.videoCard {
+    margin-bottom: 16px;
+}
+
+.videoHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.videoHeader h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.description {
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.mediaContainer {
+    position: relative;
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 8px;
+    box-sizing: border-box;
+}
+
+.media {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+    box-sizing: border-box;
+    display: block;
+}
+
+.playButton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.playButton:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.typeIcon {
+    color: #2563eb;
+    font-size: 1.2rem;
+}
+
+.actions {
+    display: flex;
+    gap: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid #f0f0f0;
+}
+
+.actionButton {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #666;
+    transition: background-color 0.2s ease;
+}
+
+.actionButton:hover {
+    background-color: #f0f0f0;
+}
+
+.likeCount,
+.commentCount {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .feedItem {
+        box-sizing: border-box;
+    }
+
+    .mediaContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .actions {
+        gap: 12px;
+    }
+
+    .actionButton {
+        padding: 4px 8px;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .username {
+        color: var(--gray-50);
+    }
+
+    .timestamp {
+        color: var(--gray-400);
+    }
+
+    .typeBadge {
+        background: var(--gray-700);
+        color: var(--gray-300);
+    }
+
+    .postContent {
+        color: var(--gray-200);
+    }
+
+    .productHeader h3 {
+        color: var(--gray-50);
+    }
+
+    .price {
+        color: var(--primary-color);
+    }
+
+    .category {
+        background: var(--gray-700);
+        color: var(--gray-300);
+    }
+
+    .serviceHeader h3 {
+        color: var(--gray-50);
+    }
+
+    .jobHeader h3 {
+        color: var(--gray-50);
+    }
+
+    .company {
+        color: var(--gray-400);
+    }
+
+    .location {
+        color: var(--gray-400);
+    }
+
+    .salary {
+        color: var(--primary-color);
+    }
+
+    .propertyHeader h3 {
+        color: var(--gray-50);
+    }
+
+    .type {
+        background: var(--gray-700);
+        color: var(--gray-300);
+    }
+
+    .videoHeader h3 {
+        color: var(--gray-50);
+    }
+
+    .description {
+        color: var(--gray-300);
+    }
+
+    .typeIcon {
+        color: var(--primary-color);
+    }
+
+    .actions {
+        border-top-color: var(--gray-700);
+    }
+
+    .actionButton {
+        color: var(--gray-400);
+    }
+
+    .actionButton:hover {
+        background-color: var(--gray-800);
+    }
+
+    .likeCount,
+    .commentCount {
+        color: var(--gray-300);
+    }
+} 

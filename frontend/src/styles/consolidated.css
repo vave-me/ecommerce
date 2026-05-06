@@ -1,0 +1,608 @@
+/* Consolidated Common Selectors */
+
+/* Used in: tests/auth/tokenHandlingTest.module.css, features/Uploader/VideoUploader.module.css, features/Uploader/ImageUploader.module.css, components/UserFollowStats.module.css, components/UserFollowStats.module.css, components/Utils/LoadingPlaceholder.module.css, components/Utils/LoadingPlaceholder.module.css, components/Utils/LoadingPlaceholder.module.css, components/Utils/LoadingPlaceholder.module.css, components/Utils/ErrorPlaceholder.module.css, components/Utils/ErrorPlaceholder.module.css, components/Utils/ErrorPlaceholder.module.css, components/Utils/ErrorPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Shared/EmptyState.module.css, components/Settings/SubscriptionSettings.module.css, components/Settings/Settings.module.css, components/Settings/Settings.module.css, components/Settings/SecuritySettings.module.css, components/Settings/SecuritySettings.module.css, components/Settings/PrivacySettings.module.css, components/Settings/PrivacySettings.module.css, components/Settings/NotificationSettings.module.css, components/Settings/DisplaySettings.module.css, components/Settings/DisplaySettings.module.css, components/Settings/AccountSettings.module.css, components/Rightside/Rightside.module.css, components/Rightside/Rightside.module.css, components/Rightside/Rightside.module.css, components/Profile/PublicProfile.module.css, components/Offers/OffersList.module.css, components/Listings/ListingsPagination.module.css, components/Listings/ListingsPagination.module.css, components/Listings/ListingsPagination.module.css, components/Listings/ListingsPagination.module.css, components/Listings/ListingsPagination.module.css, components/Listings/ListingsFilters.module.css, components/Leftside/Leftside.module.css, components/Leftside/Leftside.module.css, components/Header/TagContainer.module.css, components/Header/TagContainer.module.css, components/Header/TagContainer.module.css, components/Header/SuggestionsList.module.css, components/Header/SuggestionsList.module.css, components/Header/SuggestionsList.module.css, components/Header/SearchBar.module.css, components/Header/Header.module.css, components/Header/Header.module.css, components/Header/Header.module.css, components/Header/Header.module.css, components/Category/CategoryTree.module.css, components/AI/PromptInput.module.css, components/AI/PromptInput.module.css, components/AI/EnhancedPromptInput.module.css, components/AI/EnhancedPromptInput.module.css, components/AI/ConversationSelector.module.css, components/AI/ConversationSelector.module.css, components/AI/AssistantSelector.module.css, components/AI/AssistantSelector.module.css, app/[locale]/wishlist/Wishlist.module.css, app/[locale]/wishlist/Wishlist.module.css, app/[locale]/wishlist/Wishlist.module.css, app/[locale]/wishlist/[wishlistId]/WishlistDetail.module.css, app/[locale]/wishlist/[wishlistId]/WishlistDetail.module.css, app/[locale]/wishlist/[wishlistId]/WishlistDetail.module.css, app/[locale]/verify/verify.module.css, app/[locale]/user/UserProfile.module.css, app/[locale]/terms/terms.module.css, app/[locale]/terms/terms.module.css, app/[locale]/support/Support.module.css, app/[locale]/social/Social.module.css, app/[locale]/settings/Settings.module.css, app/[locale]/settings/Settings.module.css, app/[locale]/search/SearchResults.module.css, app/[locale]/reviews/page.module.css, app/[locale]/reviews/page.module.css, app/[locale]/reviews/page.module.css, app/[locale]/reviews/Reviews.module.css, app/[locale]/reviews/Reviews.module.css, app/[locale]/reviews/Reviews.module.css, app/[locale]/profile/[username]/Profile.module.css, app/[locale]/products/ProductsPage.module.css, app/[locale]/privacy/page.module.css, app/[locale]/privacy/page.module.css, app/[locale]/posts/page.module.css, app/[locale]/orders/page.module.css, app/[locale]/orders/page.module.css, app/[locale]/offers/page.module.css, app/[locale]/offers/page.module.css, app/[locale]/offers/Offers.module.css, app/[locale]/notifications/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/notifications/Notifications.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/news/page.module.css, app/[locale]/help/help.module.css, app/[locale]/help/help.module.css, app/[locale]/following/[userId]/page.module.css, app/[locale]/following/[userId]/page.module.css, app/[locale]/following/[userId]/page.module.css, app/[locale]/followers/[userId]/page.module.css, app/[locale]/followers/[userId]/page.module.css, app/[locale]/followers/[userId]/page.module.css, app/[locale]/followers/[userId]/Followers.module.css, app/[locale]/followers/[userId]/Followers.module.css, app/[locale]/dashboard/page.module.css, app/[locale]/contact/contact.module.css, app/[locale]/contact/contact.module.css, app/[locale]/comments/comments.module.css, app/[locale]/comments/[slug]/commentDetail.module.css, app/[locale]/checkout/checkout.module.css, app/[locale]/checkout/success/success.module.css, app/[locale]/checkout/payment/payment.module.css, app/[locale]/catalog/CatalogPage.module.css, app/[locale]/catalog/components/CatalogSearchBar.module.css, app/[locale]/activity/page.module.css, app/[locale]/activity/page.module.css, app/[locale]/activity/Activity.module.css, app/[locale]/activity/Activity.module.css, app/[locale]/activity/Activity.module.css, app/[locale]/about/about.module.css, app/[locale]/about/about.module.css */
+.container {
+  /* Base container styles */
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  background-color: var(--bg-primary, #ffffff);
+  color: var(--text-primary, #1f2937);
+}
+
+/* Animation keyframes - used in various animation files */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Used in: features/Uploader/VideoUploader.module.css, components/wishlist/WishlistSelectorModal.module.css, components/shared/CardTitle.module.css, components/shared/CardTitle.module.css, components/shared/CardTitle.module.css, components/Utils/ErrorPlaceholder.module.css, components/Utils/ErrorPlaceholder.module.css, components/Utils/ErrorPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Trending/TrendingTags.module.css, components/Shared/EmptyState.module.css, components/Orders/OrderSuccess.module.css, components/Orders/OrderConfirmation.module.css, components/Notifications/NotificationItem.module.css, components/Newsletters/NewsletterItem.module.css, components/Newsletters/NewsletterItem.module.css, components/Location/LocationMap.module.css, components/Location/LocationMap.module.css, components/Listings/ListingListItem.module.css, components/Listings/ListingListItem.module.css, components/Listings/ListingListItem.module.css, components/Listings/ListingListItem.module.css, components/Listings/ListingCard.module.css, components/Listings/ListingCard.module.css, components/Listings/ListingCard.module.css, components/Listings/ListingCard.module.css, components/ListingManagement/ListingsHeader.module.css, components/ListingManagement/ListingsHeader.module.css, components/ListingManagement/ListingsHeader.module.css, components/ListingManagement/ListingsHeader.module.css, components/ListingManagement/ListingsHeader.module.css, components/Leftside/Leftside.module.css, components/Leftside/Leftside.module.css, components/Header/MobileNavMenu.module.css, components/Header/AddOptionsSheet.module.css, app/[locale]/terms/terms.module.css, app/[locale]/terms/terms.module.css, app/[locale]/search/SearchResults.module.css, app/[locale]/reviews/page.module.css, app/[locale]/reviews/page.module.css, app/[locale]/reviews/page.module.css, app/[locale]/reviews/Reviews.module.css, app/[locale]/reviews/Reviews.module.css, app/[locale]/reviews/Reviews.module.css, app/[locale]/reset-password/ResetPassword.module.css, app/[locale]/privacy/page.module.css, app/[locale]/privacy/page.module.css, app/[locale]/orders/page.module.css, app/[locale]/orders/page.module.css, app/[locale]/offers/page.module.css, app/[locale]/offers/page.module.css, app/[locale]/offers/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/notifications/Notifications.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/help/help.module.css, app/[locale]/help/help.module.css, app/[locale]/forgot-password/ForgotPassword.module.css, app/[locale]/following/[userId]/page.module.css, app/[locale]/following/[userId]/page.module.css, app/[locale]/following/[userId]/page.module.css, app/[locale]/followers/[userId]/page.module.css, app/[locale]/followers/[userId]/page.module.css, app/[locale]/followers/[userId]/page.module.css, app/[locale]/contact/contact.module.css, app/[locale]/contact/contact.module.css, app/[locale]/comments/comments.module.css, app/[locale]/comments/[slug]/commentDetail.module.css, app/[locale]/checkout/checkout.module.css, app/[locale]/checkout/success/success.module.css, app/[locale]/checkout/payment/payment.module.css, app/[locale]/catalog/CatalogPage.module.css, app/[locale]/catalog/CatalogPage.module.css, app/[locale]/catalog/CatalogPage.module.css, app/[locale]/catalog/CatalogPage.module.css, app/[locale]/activity/page.module.css, app/[locale]/activity/page.module.css, app/[locale]/activity/page.module.css, app/[locale]/activity/Activity.module.css, app/[locale]/activity/Activity.module.css, app/[locale]/activity/Activity.module.css, app/[locale]/about/about.module.css, app/[locale]/about/about.module.css */
+.title {
+  /* TODO: Merge styles from source files */
+}
+
+/* Animation utilities - used in various components */
+.fadeInAnimation {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.pulseAnimation {
+  animation: pulse 2s infinite;
+}
+
+/* Used in: tests/auth/tokenHandlingTest.module.css, features/shared/components/MediaUploadStep/MediaUploadStep.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/components/steps/OptionalSettingsStep/OptionalSettingsStep.module.css, features/CreatePropertyModal/components/steps/FinalizeStep/FinalizeStep.module.css, features/CreateProductModal/ProductModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreatePostModal/CreatePostModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateDealModal/DealModal.module.css, features/CreateDealModal/DealModal.module.css, components/wishlist/WishlistSelectorModal.module.css, components/services/ServiceCard.module.css, components/property/PropertyCard.module.css, components/jobs/JobCard.module.css, components/Settings/SubscriptionSettings.module.css, components/Settings/SecuritySettings.module.css, components/Settings/SecuritySettings.module.css, components/Settings/SecuritySettings.module.css, components/Settings/PrivacySettings.module.css, components/Settings/PrivacySettings.module.css, components/Settings/PrivacySettings.module.css, components/Settings/NotificationSettings.module.css, components/Settings/DisplaySettings.module.css, components/Settings/DisplaySettings.module.css, components/Settings/DisplaySettings.module.css, components/Settings/AccountSettings.module.css, components/Rightside/Rightside.module.css, components/Rightside/EnhancedRightside.module.css, components/Rightside/EnhancedRightside.module.css, components/Profile/PublicProfile.module.css, components/Header/SignOutMenu.module.css, components/Header/SignOutMenu.module.css, components/Header/SelectTopic.module.css, app/page.module.css, app/page.module.css, app/[locale]/user/UserProfile.module.css, app/[locale]/user/UserProfile.module.css, app/[locale]/terms/terms.module.css, app/[locale]/privacy/page.module.css, app/[locale]/offers/Offers.module.css, app/[locale]/offers/Offers.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/design/page.module.css, app/[locale]/contact/contact.module.css, app/[locale]/about/about.module.css */
+.sectionTitle {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/Comments/Comments.module.css, components/Utils/EmptyPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Support/SupportTicketItem.module.css, components/Profile/ContactInfo.module.css, components/Profile/ContactInfo.module.css, components/Notifications/NotificationItem.module.css, components/Newsletters/NewsletterItem.module.css, components/Location/LocationMap.module.css, components/Location/LocationMap.module.css, components/ListingManagement/ListingRow.module.css, components/ListingManagement/ListingRow.module.css, components/ListingManagement/ListingRow.module.css, components/ListingManagement/ListingRow.module.css, components/ListingManagement/ListingRow.module.css, components/Feed/FeedItem.module.css, components/Feed/FeedItem.module.css, app/[locale]/trending/[category]/[slug]/ProductCard.module.css, app/[locale]/reviews/page.module.css, app/[locale]/reviews/page.module.css, app/[locale]/reviews/page.module.css, app/[locale]/reviews/Reviews.module.css, app/[locale]/reviews/Reviews.module.css, app/[locale]/reviews/Reviews.module.css, app/[locale]/orders/page.module.css, app/[locale]/orders/page.module.css, app/[locale]/offers/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/followers/[userId]/page.module.css, app/[locale]/followers/[userId]/page.module.css, app/[locale]/followers/[userId]/page.module.css, app/[locale]/followers/[userId]/Followers.module.css, app/[locale]/explore/[category]/[slug]/ProductCard.module.css, app/[locale]/estate/[category]/[slug]/PropertyCard.module.css, app/[locale]/design/UserHeader.module.css, app/[locale]/design/UserHeader.module.css, app/[locale]/design/videos/page.module.css, app/[locale]/design/videos/page.module.css, app/[locale]/design/tweets/page.module.css, app/[locale]/design/tweets/page.module.css, app/[locale]/design/shortsSingle/page.module.css, app/[locale]/design/posts/page.module.css, app/[locale]/design/posts/page.module.css, app/[locale]/design/posts/page.module.css, app/[locale]/design/images/page.module.css, app/[locale]/activity/page.module.css */
+.actionButton {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: components/Settings/Settings.module.css, components/Settings/Settings.module.css, components/Settings/Settings.module.css, app/global.css, app/global.css, app/[locale]/videos/VideoPage.module.css, app/[locale]/vehicles/VehiclesPage.module.css, app/[locale]/vehicles/VehiclesPage.module.css, app/[locale]/trending/ProductsPage.module.css, app/[locale]/trending/ProductsPage.module.css, app/[locale]/social/Social.module.css, app/[locale]/settings/Settings.module.css, app/[locale]/settings/Settings.module.css, app/[locale]/services/ServicesPage.module.css, app/[locale]/services/ServicesPage.module.css, app/[locale]/services/ServicesPage.module.css, app/[locale]/properties/PropertiesPage.module.css, app/[locale]/properties/PropertiesPage.module.css, app/[locale]/properties/PropertiesPage.module.css, app/[locale]/products/ProductsPage.module.css, app/[locale]/posts/page.module.css, app/[locale]/posts/PostsPage.module.css, app/[locale]/posts/PostsPage.module.css, app/[locale]/posts/PostsPage.module.css, app/[locale]/news/page.module.css, app/[locale]/news/PostsPage.module.css, app/[locale]/news/PostsPage.module.css, app/[locale]/news/PostsPage.module.css, app/[locale]/news/PostsPage.module.css, app/[locale]/marketplace/MarketplacePage.module.css, app/[locale]/marketplace/MarketplacePage.module.css, app/[locale]/marketplace/MarketplacePage.module.css, app/[locale]/jobs/JobsPage.module.css, app/[locale]/jobs/JobsPage.module.css, app/[locale]/jobs/JobsPage.module.css, app/[locale]/filtered-feed/FilteredFeed.module.css, app/[locale]/explore/ProductsPage.module.css, app/[locale]/explore/ProductsPage.module.css, app/[locale]/estate/PropertyPage.module.css, app/[locale]/estate/PropertyPage.module.css, app/[locale]/estate/PropertyPage.module.css, app/[locale]/estate/EstatePage.module.css, app/[locale]/estate/EstatePage.module.css, app/[locale]/estate/EstatePage.module.css, app/[locale]/deals/DealsPage.module.css, app/[locale]/deals/DealsPage.module.css, app/[locale]/deals/DealsPage.module.css, app/[locale]/dashboard/page.module.css, app/[locale]/dashboard/DashboardPage.module.css, app/[locale]/dashboard/DashboardPage.module.css, app/[locale]/dashboard/DashboardPage.module.css, app/[locale]/cars/CarsPage.module.css, app/[locale]/cars/CarsPage.module.css */
+.mainContent {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/shared/CreateModal.base.module.css, features/shared/CreateModal.base.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreatePostModal/CreatePostModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateDealModal/DealModal.module.css, features/CreateDealModal/DealModal.module.css, components/wishlist/WishlistSelectorModal.module.css, components/wishlist/WishlistSelectorModal.module.css, components/Utils/LoadingPlaceholder.module.css, components/Utils/ErrorPlaceholder.module.css, components/Utils/ErrorPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Settings/Settings.module.css, components/Settings/Settings.module.css, components/Settings/Settings.module.css, components/Settings/Settings.module.css, components/Profile/PublicProfile.module.css, components/Notifications/NotificationItem.module.css, components/Newsletters/NewsletterItem.module.css, components/Listings/ListingListItem.module.css, components/Listings/ListingCard.module.css, components/Listings/ListingCard.module.css, components/Listings/ListingCard.module.css, components/Listings/ListingCard.module.css, components/Header/SuggestionsList.module.css, app/[locale]/user/UserProfile.module.css, app/[locale]/terms/terms.module.css, app/[locale]/settings/Settings.module.css, app/[locale]/privacy/page.module.css, app/[locale]/notifications/Notifications.module.css, app/[locale]/contact/contact.module.css, app/[locale]/comments/comments.module.css, app/[locale]/comments/[slug]/commentDetail.module.css, app/[locale]/checkout/checkout.module.css, app/[locale]/ai/AIResults.module.css, app/[locale]/about/about.module.css */
+.content {
+  /* TODO: Merge styles from source files */
+}
+
+/* Animation utilities - 50% keyframe used in pulse animations */
+.pulseHalf {
+  opacity: 0.5;
+}
+
+/* Used in: features/CommentsFull/CommentsFullHeader.module.css, components/wishlist/WishlistSelectorModal.module.css, components/wishlist/WishlistSelectorModal.module.css, components/Support/SupportTicketItem.module.css, components/Profile/ReviewItem.module.css, components/Profile/CommentItem.module.css, components/Notifications/NotificationItem.module.css, components/Newsletters/NewsletterItem.module.css, components/Listings/ListingListItem.module.css, components/Listings/ListingListItem.module.css, components/Leftside/Leftside.module.css, components/Header/MobileNavMenu.module.css, components/Header/AddOptionsSheet.module.css, components/Feed/FeedItem.module.css, app/[locale]/terms/terms.module.css, app/[locale]/terms/terms.module.css, app/[locale]/settings/Settings.module.css, app/[locale]/settings/Settings.module.css, app/[locale]/settings/Settings.module.css, app/[locale]/privacy/page.module.css, app/[locale]/privacy/page.module.css, app/[locale]/offers/page.module.css, app/[locale]/offers/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/notifications/Notifications.module.css, app/[locale]/help/help.module.css, app/[locale]/help/help.module.css, app/[locale]/contact/contact.module.css, app/[locale]/contact/contact.module.css, app/[locale]/comments/[slug]/commentDetail.module.css, app/[locale]/activity/page.module.css, app/[locale]/activity/page.module.css, app/[locale]/activity/Activity.module.css, app/[locale]/activity/Activity.module.css, app/[locale]/activity/Activity.module.css, app/[locale]/about/about.module.css, app/[locale]/about/about.module.css */
+.header {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/shared/CreateModal.base.module.css, features/shared/CreateModal.base.module.css, features/shared/CreateModal.base.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreatePostModal/CreatePostModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateDealModal/DealModal.module.css, features/CreateDealModal/DealModal.module.css, features/CreateDealModal/DealModal.module.css, components/Settings/Settings.module.css, components/Settings/Settings.module.css, components/Settings/Settings.module.css, components/Settings/Settings.module.css, app/page.module.css, app/[locale]/settings/Settings.module.css, app/[locale]/settings/Settings.module.css, app/[locale]/settings/Settings.module.css, app/[locale]/settings/Settings.module.css, app/[locale]/settings/Settings.module.css, app/[locale]/messages/Messaging.module.css */
+.sidebar {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: components/Settings/SecuritySettings.module.css, components/Settings/SecuritySettings.module.css, components/Settings/SecuritySettings.module.css, components/Settings/PrivacySettings.module.css, components/Settings/PrivacySettings.module.css, components/Settings/PrivacySettings.module.css, components/Settings/DisplaySettings.module.css, components/Settings/DisplaySettings.module.css, components/Settings/DisplaySettings.module.css, app/[locale]/wishlist/Wishlist.module.css, app/[locale]/wishlist/Wishlist.module.css, app/[locale]/wishlist/Wishlist.module.css, app/[locale]/wishlist/Wishlist.module.css, app/[locale]/wishlist/[wishlistId]/WishlistDetail.module.css, app/[locale]/wishlist/[wishlistId]/WishlistDetail.module.css, app/[locale]/wishlist/[wishlistId]/WishlistDetail.module.css, app/[locale]/settings/Settings.module.css, app/[locale]/settings/Settings.module.css, app/[locale]/settings/Settings.module.css, app/[locale]/settings/Settings.module.css, app/[locale]/jobs/JobsPage.module.css, app/[locale]/jobs/JobsPage.module.css, app/[locale]/followers/[userId]/Followers.module.css, app/[locale]/followers/[userId]/Followers.module.css, app/[locale]/filtered-feed/FilteredFeed.module.css, app/[locale]/filtered-feed/FilteredFeed.module.css, app/[locale]/filtered-feed/FilteredFeed.module.css, app/[locale]/estate/EstatePage.module.css, app/[locale]/estate/EstatePage.module.css, app/[locale]/estate/EstatePage.module.css, app/[locale]/dashboard/DashboardPage.module.css, app/[locale]/dashboard/DashboardPage.module.css, app/[locale]/dashboard/DashboardPage.module.css, app/[locale]/cars/CarsPage.module.css, app/[locale]/cars/CarsPage.module.css */
+.pageTitle {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: components/UserFollowStats.module.css, components/wishlist/WishlistItemCard.module.css, components/wishlist/WishlistItemCard.module.css, components/wishlist/WishlistItemCard.module.css, components/vehicles/AutomotiveCard.module.css, components/services/ServiceCard.module.css, components/property/PropertyCard.module.css, components/jobs/JobCard.module.css, components/deals/DealCard.module.css, components/classified/ClassifiedCard.module.css, components/Shared/LoadingState.module.css, components/Shared/EmptyState.module.css, components/Settings/SubscriptionSettings.module.css, components/Settings/SubscriptionSettings.module.css, components/Settings/SubscriptionSettings.module.css, components/Settings/PrivacySettings.module.css, components/Settings/PrivacySettings.module.css, components/Settings/NotificationSettings.module.css, components/Settings/NotificationSettings.module.css, components/Settings/NotificationSettings.module.css, components/Settings/AccountSettings.module.css, components/Settings/AccountSettings.module.css, components/Settings/AccountSettings.module.css, components/Rightside/Rightside.module.css, components/Rightside/Rightside.module.css, components/PerformanceMonitor/PerformanceDashboard.module.css, components/Listings/ListingCard.module.css, components/Listings/ListingCard.module.css, components/Header/ModeSwitcher.module.css, app/[locale]/verify/verify.module.css, app/[locale]/verify/verify.module.css, app/[locale]/design/posts/page.module.css, app/[locale]/checkout/success/success.module.css, app/[locale]/checkout/payment/payment.module.css */
+.card {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: components/Utils/ErrorPlaceholder.module.css, components/Utils/ErrorPlaceholder.module.css, components/Utils/ErrorPlaceholder.module.css, components/Utils/ErrorPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Support/SupportTicketItem.module.css, components/Support/SupportTicketItem.module.css, components/Profile/ContactInfo.module.css, components/Profile/ContactInfo.module.css, components/Orders/SuccesPage.module.css, components/Notifications/NotificationItem.module.css, components/ListingManagement/ListingsHeader.module.css, components/ListingManagement/ListingsHeader.module.css, components/ListingManagement/ListingsHeader.module.css, components/ListingManagement/ListingsHeader.module.css, components/ListingManagement/ListingsHeader.module.css, components/ListingManagement/Button.module.css, components/ListingManagement/Button.module.css, components/ListingManagement/Button.module.css, components/Header/MinNavItem.module.css, components/Header/AddOptionsSheet.module.css, app/[locale]/terms/terms.module.css, app/[locale]/privacy/page.module.css, app/[locale]/orders/page.module.css, app/[locale]/notifications/Notifications.module.css, app/[locale]/help/help.module.css, app/[locale]/contact/contact.module.css, app/[locale]/activity/Activity.module.css, app/[locale]/activity/Activity.module.css, app/[locale]/activity/Activity.module.css, app/[locale]/about/about.module.css */
+.iconWrapper {
+  /* TODO: Merge styles from source files */
+}
+
+/* Animation utilities - 0% and 100% keyframes used in pulse animations */
+.pulseStart, .pulseEnd {
+  opacity: 1;
+}
+
+/* Used in: features/CommentsFull/CommentsFull.module.css, features/Comments/Comments.module.css, components/services/ServiceCard.module.css, components/property/PropertyCard.module.css, components/jobs/JobCard.module.css, components/deals/DealCard.module.css, components/classified/ClassifiedCard.module.css, components/Support/SupportTicketForm.module.css, components/Shared/UXEnhancements.module.css, components/Rightside/EnhancedRightside.module.css, components/Profile/ItemList.module.css, components/PerformanceMonitor/PerformanceDashboard.module.css, components/ListingManagement/ListingForm.module.css, components/Header/SearchBar.module.css, components/Header/SearchBar.module.css, components/Category/CategoryTree.module.css, app/[locale]/wishlist/Wishlist.module.css, app/[locale]/trending/[category]/[slug]/page.module.css, app/[locale]/search/SearchResults.module.css, app/[locale]/reviews/page.module.css, app/[locale]/reviews/Reviews.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/jobs/JobsPage.module.css, app/[locale]/following/[userId]/page.module.css, app/[locale]/followers/[userId]/page.module.css, app/[locale]/explore/[category]/[slug]/page.module.css, app/[locale]/estate/[category]/[slug]/page.module.css, app/[locale]/design/posts/page.module.css, app/[locale]/cart/BasketPage.module.css, app/[locale]/cars/CarsPage.module.css */
+.errorMessage {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: components/Utils/UserAvatar.module.css, components/User/UserCard.module.css, components/User/UserCard.module.css, components/Shared/UserAvatar.module.css, components/Reviews/ReviewItem.module.css, components/Profile/ProfileHeader.module.css, components/Profile/ProfileHeader.module.css, components/Profile/ProfileHeader.module.css, components/Header/UserMenu.module.css, components/Header/SignOutMenu.module.css, components/Feed/FeedItem.module.css, components/Activity/ActivityItem.module.css, app/[locale]/posts/[category]/[slug]/PostCard.module.css, app/[locale]/posts/[category]/[slug]/PostCard.module.css, app/[locale]/news/[category]/[slug]/PostCard.module.css, app/[locale]/news/[category]/[slug]/PostCard.module.css, app/[locale]/design/UserHeader.module.css, app/[locale]/design/UserHeader.module.css, app/[locale]/design/videos/page.module.css, app/[locale]/design/videos/page.module.css, app/[locale]/design/tweetsBack/page.module.css, app/[locale]/design/tweetsBack/page.module.css, app/[locale]/design/tweets/page.module.css, app/[locale]/design/tweets/page.module.css, app/[locale]/design/shortsSingle/page.module.css, app/[locale]/design/shorts/page.module.css, app/[locale]/design/posts/page.module.css, app/[locale]/design/posts/page.module.css, app/[locale]/design/images/page.module.css, app/[locale]/dashboard/[category]/[slug]/PostCard.module.css, app/[locale]/dashboard/[category]/[slug]/PostCard.module.css */
+.avatar {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: app/[locale]/vehicles/VehiclesPage.module.css, app/[locale]/vehicles/VehiclesPage.module.css, app/[locale]/trending/ProductsPage.module.css, app/[locale]/trending/ProductsPage.module.css, app/[locale]/social/Social.module.css, app/[locale]/services/ServicesPage.module.css, app/[locale]/properties/PropertiesPage.module.css, app/[locale]/products/ProductsPage.module.css, app/[locale]/products/ProductsPage.module.css, app/[locale]/products/ProductsPage.module.css, app/[locale]/products/ProductsPage.module.css, app/[locale]/posts/page.module.css, app/[locale]/posts/PostsPage.module.css, app/[locale]/news/page.module.css, app/[locale]/news/PostsPage.module.css, app/[locale]/news/PostsPage.module.css, app/[locale]/news/PostsPage.module.css, app/[locale]/marketplace/MarketplacePage.module.css, app/[locale]/jobs/JobsPage.module.css, app/[locale]/filtered-feed/FilteredFeed.module.css, app/[locale]/explore/ProductsPage.module.css, app/[locale]/explore/ProductsPage.module.css, app/[locale]/estate/PropertyPage.module.css, app/[locale]/estate/EstatePage.module.css, app/[locale]/deals/DealsPage.module.css, app/[locale]/dashboard/page.module.css, app/[locale]/dashboard/DashboardPage.module.css, app/[locale]/cars/CarsPage.module.css, app/[locale]/cars/CarsPage.module.css */
+.layoutGrid {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/shared/CreateModal.forms.module.css, features/CreateVideoModal/VideoModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreatePostModal/CreatePostModal.module.css, features/CreatePostModal/CreatePostModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateDealModal/DealModal.module.css, features/CreateDealModal/DealModal.module.css, features/CreateDealModal/DealModal.module.css, components/Settings/PrivacySettings.module.css, components/Settings/PrivacySettings.module.css */
+.formRow {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/TextEditor.module.css/PostModal.module.css, features/CreateVideoModal/VideoModal.module.css, features/CommentsFull/CommentFullItem.module.css, components/Utils/EmptyPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Support/SupportTicketItem.module.css, components/Reviews/ReviewItem.module.css, components/Profile/ContactInfo.module.css, components/Notifications/NotificationItem.module.css, components/Newsletters/NewsletterItem.module.css, components/Location/LocationMap.module.css, components/ListingManagement/ListingRow.module.css, components/ListingManagement/ListingRow.module.css, components/Feed/FeedItem.module.css, components/Activity/ActivityItem.module.css, app/[locale]/trending/[category]/[slug]/ProductCard.module.css, app/[locale]/orders/page.module.css, app/[locale]/offers/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/explore/[category]/[slug]/ProductCard.module.css, app/[locale]/estate/[category]/[slug]/PropertyCard.module.css, app/[locale]/design/UserHeader.module.css, app/[locale]/design/videos/page.module.css, app/[locale]/design/tweets/page.module.css, app/[locale]/design/posts/page.module.css, app/[locale]/design/posts/page.module.css, app/[locale]/activity/page.module.css */
+.actionButton:hover {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/shared/CreateModal.base.module.css, features/TextEditor/TextEditor.module.css, features/Messages/MessageHeader.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreatePostModal/CreatePostModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateDealModal/DealModal.module.css, features/Comments/Comments.module.css, components/wishlist/WishlistSelectorModal.module.css, components/Shared/ShareComponent/ShareComponent.module.css, components/Newsletters/NewsletterForm.module.css, components/Location/LocationMap.module.css, components/Location/LocationMap.module.css, components/Listings/ListingsFilters.module.css, components/Header/TopicMenu.module.css, components/Header/SignOutMenu.module.css, components/Header/MobileNavMenu.module.css, app/[locale]/notifications/Notifications.module.css, app/[locale]/design/shortsSingle/page.module.css, app/[locale]/design/shorts/page.module.css, app/[locale]/design/images/page.module.css */
+.closeButton {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/shared/CreateModal.base.module.css, features/TextEditor.module.css/PostModal.module.css, features/TextEditor/TextEditor.module.css, features/Messages/MessageHeader.module.css, features/CreateVideoModal/VideoModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreatePostModal/CreatePostModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateDealModal/DealModal.module.css, features/CommentsFull/CommentsFullHeader.module.css, features/Comments/Comments.module.css, components/wishlist/WishlistSelectorModal.module.css, components/Utils/GlobalModals.module.css, components/Shared/ShareComponent/ShareComponent.module.css, components/Newsletters/NewsletterForm.module.css, components/Location/LocationMap.module.css, components/Listings/ListingsFilters.module.css, components/Header/SignOutMenu.module.css, app/[locale]/offers/page.module.css, app/[locale]/notifications/Notifications.module.css, app/[locale]/design/shorts/page.module.css */
+.closeButton:hover {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/shared/CreateModal.forms.module.css, features/shared/CreateModal.forms.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/components/steps/OptionalSettingsStep/OptionalSettingsStep.module.css, features/CreatePropertyModal/components/steps/FinalizeStep/FinalizeStep.module.css, features/CreateProductModal/ProductModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreatePostModal/CreatePostModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateDealModal/DealModal.module.css, features/CreateDealModal/DealModal.module.css, components/Settings/SecuritySettings.module.css, components/Settings/SecuritySettings.module.css, components/Newsletters/NewsletterForm.module.css, components/ListingManagement/ListingForm.module.css, app/[locale]/login/LoginForm.module.css */
+.form {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/CreateVideoModal/VideoModal.module.css, features/CommentsFull/CommentsFullList.module.css, features/Comments/CommentsList.module.css, features/Comments/Comments.module.css, components/wishlist/WishlistSelector.module.css, components/Shared/EmptyState.module.css, components/Shared/EmptyState.module.css, components/Profile/CommentsList.module.css, components/ListingManagement/ListingsTable.module.css, components/ListingManagement/ListingsTable.module.css, components/ListingManagement/ListingsTable.module.css, components/Header/SuggestionsList.module.css, components/Header/SearchBar.module.css, components/AI/ConversationSelector.module.css, components/AI/AssistantSelector.module.css, app/[locale]/reviews/page.module.css, app/[locale]/reviews/Reviews.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/following/[userId]/page.module.css, app/[locale]/followers/[userId]/page.module.css, app/[locale]/followers/[userId]/Followers.module.css, app/[locale]/design/posts/page.module.css, app/[locale]/dashboard/[category]/[slug]/PostCard.module.css */
+.emptyIcon {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: app/[locale]/vehicles/VehiclesPage.module.css, app/[locale]/vehicles/VehiclesPage.module.css, app/[locale]/vehicles/VehiclesPage.module.css, app/[locale]/trending/ProductsPage.module.css, app/[locale]/trending/ProductsPage.module.css, app/[locale]/trending/ProductsPage.module.css, app/[locale]/services/ServicesPage.module.css, app/[locale]/properties/PropertiesPage.module.css, app/[locale]/posts/PostsPage.module.css, app/[locale]/news/PostsPage.module.css, app/[locale]/news/PostsPage.module.css, app/[locale]/news/PostsPage.module.css, app/[locale]/marketplace/MarketplacePage.module.css, app/[locale]/jobs/JobsPage.module.css, app/[locale]/explore/ProductsPage.module.css, app/[locale]/explore/ProductsPage.module.css, app/[locale]/explore/ProductsPage.module.css, app/[locale]/estate/PropertyPage.module.css, app/[locale]/estate/EstatePage.module.css, app/[locale]/deals/DealsPage.module.css, app/[locale]/dashboard/DashboardPage.module.css, app/[locale]/cars/CarsPage.module.css, app/[locale]/cars/CarsPage.module.css, app/[locale]/cars/CarsPage.module.css */
+.layoutListGrid {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/shared/CreateModal.forms.module.css, features/shared/CreateModal.forms.module.css, features/shared/components/MediaUploadStep/MediaUploadStep.module.css, features/shared/components/MediaUploadStep/MediaUploadStep.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/components/steps/OptionalSettingsStep/OptionalSettingsStep.module.css, features/CreatePropertyModal/components/steps/FinalizeStep/FinalizeStep.module.css, features/CreateProductModal/ProductModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreatePostModal/CreatePostModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateDealModal/DealModal.module.css, features/CreateDealModal/DealModal.module.css, components/Support/SupportTicketForm.module.css */
+.formTitle {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: components/Utils/ErrorPlaceholder.module.css, components/Utils/ErrorPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Utils/EmptyPlaceholder.module.css, components/Settings/Dropdown.module.css, components/Settings/Dropdown.module.css, components/ListingManagement/ListingsHeader.module.css, components/ListingManagement/ListingsHeader.module.css, components/ListingManagement/ListingsHeader.module.css, components/ListingManagement/ListingsHeader.module.css, components/ListingManagement/ListingsHeader.module.css, components/Header/SuggestionsList.module.css, components/Header/ModeSwitcher.module.css, components/Header/ModeSwitcher.module.css, components/Header/MinNavItem.module.css, components/Header/MinNavItem.module.css, components/Header/MinNavItem.module.css, components/Header/FloatingAiButton.module.css, components/Header/FloatingAiButton.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/checkout/success/success.module.css */
+.icon {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: components/Profile/ItemList.module.css, components/Header/SearchBar.module.css, components/Category/CategoryTree.module.css, components/Category/CategoryTree.module.css, app/[locale]/wishlist/Wishlist.module.css, app/[locale]/wishlist/[wishlistId]/WishlistDetail.module.css, app/[locale]/reviews/page.module.css, app/[locale]/reviews/Reviews.module.css, app/[locale]/offers/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/help/help.module.css, app/[locale]/following/[userId]/page.module.css, app/[locale]/followers/[userId]/page.module.css, app/[locale]/followers/[userId]/Followers.module.css, app/[locale]/design/page.module.css, app/[locale]/catalog/CatalogPage.module.css, app/[locale]/catalog/CatalogPage.module.css, app/[locale]/catalog/CatalogPage.module.css, app/[locale]/catalog/components/CatalogSearchBar.module.css, app/[locale]/catalog/components/CatalogSearchBar.module.css, app/[locale]/activity/page.module.css */
+.searchInput {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: app/[locale]/reviews/page.module.css, app/[locale]/reviews/page.module.css, app/[locale]/reviews/Reviews.module.css, app/[locale]/reviews/Reviews.module.css, app/[locale]/offers/page.module.css, app/[locale]/offers/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/help/help.module.css, app/[locale]/following/[userId]/page.module.css, app/[locale]/following/[userId]/page.module.css, app/[locale]/followers/[userId]/page.module.css, app/[locale]/followers/[userId]/page.module.css, app/[locale]/followers/[userId]/Followers.module.css, app/[locale]/design/page.module.css, app/[locale]/catalog/CatalogPage.module.css, app/[locale]/catalog/CatalogPage.module.css, app/[locale]/activity/page.module.css, app/[locale]/activity/page.module.css */
+.searchContainer {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/CommentsFull/CommentsFullList.module.css, features/Comments/CommentsList.module.css, components/Settings/PrivacySettings.module.css, components/ListingManagement/ListingsTable.module.css, components/ListingManagement/ListingsTable.module.css, components/ListingManagement/ListingsTable.module.css, components/Header/SuggestionsList.module.css, components/Feed/Feed.module.css, app/[locale]/products/ProductsPage.module.css, app/[locale]/posts/PostsPage.module.css, app/[locale]/news/PostsPage.module.css, app/[locale]/marketplace/MarketplacePage.module.css, app/[locale]/jobs/JobsPage.module.css, app/[locale]/estate/PropertyPage.module.css, app/[locale]/estate/EstatePage.module.css, app/[locale]/deals/DealsPage.module.css, app/[locale]/dashboard/DashboardPage.module.css, app/[locale]/dashboard/[category]/[slug]/PostCard.module.css, app/[locale]/dashboard/[category]/[slug]/PostCard.module.css, app/[locale]/catalog/CatalogPage.module.css, app/[locale]/cars/CarsPage.module.css, app/[locale]/ai/AIResults.module.css */
+.emptyState {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: components/Utils/ErrorPlaceholder.module.css, components/Utils/ErrorPlaceholder.module.css, components/Utils/ErrorPlaceholder.module.css, components/Utils/ErrorPlaceholder.module.css, components/Settings/AccountSettings.module.css, components/Profile/ItemList.module.css, components/Category/CategoryTree.module.css, app/[locale]/reviews/page.module.css, app/[locale]/reviews/Reviews.module.css, app/[locale]/posts/PostsPage.module.css, app/[locale]/offers/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/news/PostsPage.module.css, app/[locale]/jobs/JobsPage.module.css, app/[locale]/following/[userId]/page.module.css, app/[locale]/followers/[userId]/page.module.css, app/[locale]/estate/EstatePage.module.css, app/[locale]/dashboard/DashboardPage.module.css, app/[locale]/cars/CarsPage.module.css, app/[locale]/activity/page.module.css */
+.retryButton {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/Uploader/ImageUploader.module.css, features/CreatePropertyModal/PropertyModal.module.css, components/Utils/LoadingPlaceholder.module.css, components/Utils/LoadingPlaceholder.module.css, components/Support/SupportTicketForm.module.css, components/Settings/ToggleSwitch.module.css, components/Settings/SecuritySettings.module.css, components/Settings/SecuritySettings.module.css, components/Settings/Dropdown.module.css, components/Settings/Dropdown.module.css, components/Settings/AccountSettings.module.css, components/Settings/AccountSettings.module.css, components/Profile/CommentItem.module.css, components/Profile/CommentItem.module.css, components/Notifications/NotificationSettings.module.css, components/Newsletters/NewsletterForm.module.css, components/Messaging/MessageList.module.css, components/ListingManagement/ListingForm.module.css, components/Header/MinNavItem.module.css, components/Header/MinNavItem.module.css, components/Header/MinNavItem.module.css */
+.label {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/Comments/Comments.module.css, features/Comments/CommentItem.module.css, components/shared/Engagement.module.css, components/Support/SupportTicketItem.module.css, components/Shared/EmptyState.module.css, components/Settings/SubscriptionSettings.module.css, components/Settings/SubscriptionSettings.module.css, components/Settings/PrivacySettings.module.css, components/Settings/NotificationSettings.module.css, components/Settings/NotificationSettings.module.css, components/Offers/OfferItem.module.css, components/Notifications/NotificationItem.module.css, components/Newsletters/NewsletterItem.module.css, components/Listings/ListingListItem.module.css, components/Listings/ListingListItem.module.css, components/Listings/ListingListItem.module.css, components/Feed/FeedItem.module.css, components/Feed/FeedItem.module.css, components/Activity/ActivityItem.module.css, components/Activity/ActivityItem.module.css, app/[locale]/design/posts/page.module.css */
+.actions {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: components/wishlist/WishlistButton.module.css, components/shared/CardImageContainer.module.css, components/Utils/LoadingSpinner.module.css, components/Utils/LoadingPlaceholder.module.css, components/Utils/LoadingPlaceholder.module.css, components/Utils/LoadingPlaceholder.module.css, components/Shared/LoadingState.module.css, components/Shared/LoadingState.module.css, components/Reviews/ReviewItem.module.css, components/Newsletters/NewsletterForm.module.css, components/Leftside/Leftside.module.css, components/Header/SuggestionsList.module.css, components/Header/SuggestionsList.module.css, components/Category/CategoryTree.module.css, app/page.module.css, app/[locale]/wishlist/Wishlist.module.css, app/[locale]/wishlist/[wishlistId]/WishlistDetail.module.css, app/[locale]/videos/VideoPage.module.css, app/[locale]/settings/Settings.module.css, app/[locale]/activity/Activity.module.css, app/[locale]/activity/Activity.module.css */
+.spinner {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: app/[locale]/vehicles/VehiclesPage.module.css, app/[locale]/vehicles/VehiclesPage.module.css, app/[locale]/vehicles/VehiclesPage.module.css, app/[locale]/trending/ProductsPage.module.css, app/[locale]/trending/ProductsPage.module.css, app/[locale]/services/ServicesPage.module.css, app/[locale]/properties/PropertiesPage.module.css, app/[locale]/posts/PostsPage.module.css, app/[locale]/news/PostsPage.module.css, app/[locale]/news/PostsPage.module.css, app/[locale]/marketplace/MarketplacePage.module.css, app/[locale]/jobs/JobsPage.module.css, app/[locale]/explore/ProductsPage.module.css, app/[locale]/explore/ProductsPage.module.css, app/[locale]/estate/PropertyPage.module.css, app/[locale]/estate/EstatePage.module.css, app/[locale]/deals/DealsPage.module.css, app/[locale]/dashboard/DashboardPage.module.css, app/[locale]/cars/CarsPage.module.css, app/[locale]/cars/CarsPage.module.css, app/[locale]/cars/CarsPage.module.css */
+.layoutGrid, .layoutListGrid {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/shared/CreateModal.forms.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreatePostModal/CreatePostModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateDealModal/DealModal.module.css, features/CreateDealModal/DealModal.module.css, components/Settings/AccountSettings.module.css, components/Newsletters/NewsletterForm.module.css, common/components/FormActions.module.css, app/[locale]/wishlist/Wishlist.module.css */
+.formActions {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/shared/CreateModal.base.module.css, features/shared/CreateModal.base.module.css, features/shared/CreateModal.base.module.css, features/TextEditor/TextEditor.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreatePostModal/CreatePostModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateDealModal/DealModal.module.css, features/CreateDealModal/DealModal.module.css */
+.modalContainer {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: components/Settings/SecuritySettings.module.css, components/Settings/SecuritySettings.module.css, components/Settings/PrivacySettings.module.css, components/Settings/PrivacySettings.module.css, components/Settings/DisplaySettings.module.css, components/Settings/DisplaySettings.module.css, components/Profile/PublicProfile.module.css, components/PerformanceMonitor/PerformanceDashboard.module.css, app/[locale]/user/UserProfile.module.css, app/[locale]/user/UserProfile.module.css, app/[locale]/terms/terms.module.css, app/[locale]/terms/terms.module.css, app/[locale]/privacy/page.module.css, app/[locale]/privacy/page.module.css, app/[locale]/offers/Offers.module.css, app/[locale]/login/LoginForm.module.css, app/[locale]/contact/contact.module.css, app/[locale]/contact/contact.module.css, app/[locale]/about/about.module.css, app/[locale]/about/about.module.css */
+.section {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: tests/auth/tokenHandlingTest.module.css, features/shared/CreateModal.forms.module.css, features/shared/CreateModal.forms.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, components/wishlist/WishlistButton.module.css, components/wishlist/WishlistButton.module.css, components/Shared/EmptyState.module.css, components/Shared/EmptyState.module.css, components/Shared/EmptyState.module.css, components/Shared/EmptyState.module.css, components/Settings/SubscriptionButton.module.css, components/Settings/SubscriptionButton.module.css, components/Settings/SubscriptionButton.module.css, components/Orders/SuccesPage.module.css, components/ListingManagement/Button.module.css, components/ListingManagement/Button.module.css, components/ListingManagement/Button.module.css, app/[locale]/verify/verify.module.css */
+.button {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/shared/CreateModal.forms.module.css, features/shared/components/MediaUploadStep/MediaUploadStep.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/components/steps/OptionalSettingsStep/OptionalSettingsStep.module.css, features/CreatePropertyModal/components/steps/FinalizeStep/FinalizeStep.module.css, features/CreateProductModal/ProductModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreatePostModal/CreatePostModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateDealModal/DealModal.module.css, features/CreateDealModal/DealModal.module.css */
+.formDescription {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/shared/CreateModal.base.module.css, features/shared/CreateModal.base.module.css, features/shared/CreateModal.base.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreatePostModal/CreatePostModal.module.css, features/CreatePostModal/CreatePostModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateDealModal/DealModal.module.css, features/CreateDealModal/DealModal.module.css */
+.stepNavItem {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/CreateVehicleModal/VehicleModal.module.css, components/wishlist/WishlistItemCard.module.css, components/wishlist/WishlistItemCard.module.css, components/shared/Engagement.module.css, components/Rightside/EnhancedRightside.module.css, components/Profile/ItemList.module.css, components/Leftside/Leftside.module.css, components/Leftside/Leftside.module.css, components/AI/ConversationSelector.module.css, components/AI/ConversationSelector.module.css, components/AI/AssistantSelector.module.css, components/AI/AssistantSelector.module.css, components/AI/AssistantSelector.module.css, app/[locale]/offers/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/catalog/components/CatalogSearchBar.module.css, app/[locale]/catalog/components/CatalogSearchBar.module.css, app/[locale]/catalog/components/CatalogSearchBar.module.css, app/[locale]/activity/page.module.css */
+.loadingSpinner {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/CommentsFull/CommentsFull.module.css, features/CommentsFull/CommentsFull.module.css, features/CommentsFull/CommentsFull.module.css, features/Comments/Comments.module.css, app/[locale]/reviews/page.module.css, app/[locale]/reviews/Reviews.module.css, app/[locale]/offers/page.module.css, app/[locale]/offers/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/following/[userId]/page.module.css, app/[locale]/followers/[userId]/page.module.css, app/[locale]/followers/[userId]/Followers.module.css, app/[locale]/design/posts/page.module.css, app/[locale]/activity/page.module.css, app/[locale]/activity/page.module.css */
+.filterBar {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: components/ListingManagement/ListingsHeader.module.css, components/ListingManagement/ListingsHeader.module.css, components/ListingManagement/ListingsHeader.module.css, components/ListingManagement/ListingsHeader.module.css, components/ListingManagement/ListingsHeader.module.css, app/[locale]/terms/terms.module.css, app/[locale]/privacy/page.module.css, app/[locale]/offers/page.module.css, app/[locale]/offers/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/help/help.module.css, app/[locale]/contact/contact.module.css, app/[locale]/catalog/CatalogPage.module.css, app/[locale]/catalog/CatalogPage.module.css, app/[locale]/catalog/CatalogPage.module.css, app/[locale]/activity/page.module.css, app/[locale]/activity/page.module.css, app/[locale]/about/about.module.css */
+.subtitle {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: components/Category/CategoryTree.module.css, components/Category/CategoryTree.module.css, app/[locale]/wishlist/Wishlist.module.css, app/[locale]/wishlist/[wishlistId]/WishlistDetail.module.css, app/[locale]/reviews/page.module.css, app/[locale]/reviews/Reviews.module.css, app/[locale]/offers/page.module.css, app/[locale]/notifications/page.module.css, app/[locale]/newsletters/page.module.css, app/[locale]/newsletters/Newsletters.module.css, app/[locale]/help/help.module.css, app/[locale]/following/[userId]/page.module.css, app/[locale]/followers/[userId]/page.module.css, app/[locale]/followers/[userId]/Followers.module.css, app/[locale]/design/page.module.css, app/[locale]/catalog/CatalogPage.module.css, app/[locale]/catalog/components/CatalogSearchBar.module.css, app/[locale]/catalog/components/CatalogSearchBar.module.css, app/[locale]/activity/page.module.css */
+.searchIcon {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: app/[locale]/vehicles/VehiclesPage.module.css, app/[locale]/vehicles/VehiclesPage.module.css, app/[locale]/trending/ProductsPage.module.css, app/[locale]/trending/ProductsPage.module.css, app/[locale]/services/ServicesPage.module.css, app/[locale]/properties/PropertiesPage.module.css, app/[locale]/posts/PostsPage.module.css, app/[locale]/news/PostsPage.module.css, app/[locale]/news/PostsPage.module.css, app/[locale]/marketplace/MarketplacePage.module.css, app/[locale]/jobs/JobsPage.module.css, app/[locale]/explore/ProductsPage.module.css, app/[locale]/explore/ProductsPage.module.css, app/[locale]/estate/PropertyPage.module.css, app/[locale]/estate/EstatePage.module.css, app/[locale]/deals/DealsPage.module.css, app/[locale]/dashboard/DashboardPage.module.css, app/[locale]/cars/CarsPage.module.css, app/[locale]/cars/CarsPage.module.css */
+.contentArea, .contentListArea {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/shared/CreateModal.base.module.css, features/shared/CreateModal.base.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreatePostModal/CreatePostModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateDealModal/DealModal.module.css, features/CreateDealModal/DealModal.module.css, app/[locale]/design/page.module.css */
+.logoContainer {
+  /* TODO: Merge styles from source files */
+}
+
+/* Used in: features/shared/CreateModal.base.module.css, features/shared/CreateModal.base.module.css, features/shared/CreateModal.base.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateVehicleModal/VehicleModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateTweetModal/CreatePostModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreateServiceModal/ServiceModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreatePropertyModal/PropertyModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreateProductModal/ProductModal.module.css, features/CreatePostModal/CreatePostModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateJobModal/JobModal.module.css, features/CreateDealModal/DealModal.module.css, features/CreateDealModal/DealModal.module.css */
+.stepNumCircle {
+  /* TODO: Merge styles from source files */
+}
+
+/* =================================================================
+   COMPREHENSIVE DARK THEME SUPPORT
+   ================================================================= */
+
+@media (prefers-color-scheme: dark) {
+  /* Container */
+  .container {
+    background-color: var(--gray-900, #111827);
+    color: var(--gray-50, #f9fafb);
+  }
+
+  /* Animation keyframes */
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  0%, 100% {
+    opacity: 1;
+  }
+
+  /* Typography */
+  .title {
+    color: var(--gray-50, #f9fafb);
+  }
+
+  .sectionTitle {
+    color: var(--gray-100, #f3f4f6);
+    border-bottom-color: var(--gray-700, #374151);
+  }
+
+  .subtitle {
+    color: var(--gray-300, #d1d5db);
+  }
+
+  .formDescription {
+    color: var(--gray-400, #9ca3af);
+  }
+
+  /* Buttons */
+  .actionButton {
+    background-color: var(--blue-600, #2563eb);
+    color: var(--gray-50, #f9fafb);
+    border-color: var(--blue-600, #2563eb);
+  }
+
+  .actionButton:hover {
+    background-color: var(--blue-500, #3b82f6);
+    border-color: var(--blue-500, #3b82f6);
+  }
+
+  .button {
+    background-color: var(--gray-700, #374151);
+    color: var(--gray-100, #f3f4f6);
+    border-color: var(--gray-600, #4b5563);
+  }
+
+  .button:hover {
+    background-color: var(--gray-600, #4b5563);
+    border-color: var(--gray-500, #6b7280);
+  }
+
+  .retryButton {
+    background-color: var(--red-600, #dc2626);
+    color: var(--gray-50, #f9fafb);
+    border-color: var(--red-600, #dc2626);
+  }
+
+  .retryButton:hover {
+    background-color: var(--red-500, #ef4444);
+    border-color: var(--red-500, #ef4444);
+  }
+
+  .closeButton {
+    background-color: var(--gray-700, #374151);
+    color: var(--gray-300, #d1d5db);
+    border-color: var(--gray-600, #4b5563);
+  }
+
+  .closeButton:hover {
+    background-color: var(--gray-600, #4b5563);
+    color: var(--gray-100, #f3f4f6);
+    border-color: var(--gray-500, #6b7280);
+  }
+
+  /* Layout */
+  .mainContent {
+    background-color: var(--gray-900, #111827);
+    color: var(--gray-50, #f9fafb);
+  }
+
+  .content {
+    background-color: var(--gray-800, #1f2937);
+    color: var(--gray-100, #f3f4f6);
+  }
+
+  .contentArea,
+  .contentListArea {
+    background-color: var(--gray-800, #1f2937);
+    border-color: var(--gray-700, #374151);
+  }
+
+  .sidebar {
+    background-color: var(--gray-800, #1f2937);
+    border-color: var(--gray-700, #374151);
+  }
+
+  .header {
+    background-color: var(--gray-800, #1f2937);
+    border-bottom-color: var(--gray-700, #374151);
+    color: var(--gray-100, #f3f4f6);
+  }
+
+  .section {
+    background-color: var(--gray-800, #1f2937);
+    border-color: var(--gray-700, #374151);
+  }
+
+  /* Cards */
+  .card {
+    background-color: var(--gray-800, #1f2937);
+    border-color: var(--gray-700, #374151);
+    color: var(--gray-100, #f3f4f6);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Forms */
+  .form {
+    background-color: var(--gray-800, #1f2937);
+    border-color: var(--gray-700, #374151);
+  }
+
+  .formRow {
+    border-bottom-color: var(--gray-700, #374151);
+  }
+
+  .formTitle {
+    color: var(--gray-100, #f3f4f6);
+  }
+
+  .formActions {
+    border-top-color: var(--gray-700, #374151);
+    background-color: var(--gray-750, #2d3748);
+  }
+
+  .label {
+    color: var(--gray-200, #e5e7eb);
+  }
+
+  /* Search */
+  .searchContainer {
+    background-color: var(--gray-800, #1f2937);
+    border-color: var(--gray-700, #374151);
+  }
+
+  .searchInput {
+    background-color: var(--gray-700, #374151);
+    border-color: var(--gray-600, #4b5563);
+    color: var(--gray-100, #f3f4f6);
+  }
+
+  .searchInput:focus {
+    border-color: var(--blue-500, #3b82f6);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+
+  .searchInput::placeholder {
+    color: var(--gray-400, #9ca3af);
+  }
+
+  .searchIcon {
+    color: var(--gray-400, #9ca3af);
+  }
+
+  /* Modals */
+  .modalContainer {
+    background-color: var(--gray-800, #1f2937);
+    border-color: var(--gray-700, #374151);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  }
+
+  .logoContainer {
+    background-color: var(--gray-800, #1f2937);
+    border-bottom-color: var(--gray-700, #374151);
+  }
+
+  /* Navigation */
+  .stepNavItem {
+    background-color: var(--gray-700, #374151);
+    border-color: var(--gray-600, #4b5563);
+    color: var(--gray-200, #e5e7eb);
+  }
+
+  .stepNavItem:hover {
+    background-color: var(--gray-600, #4b5563);
+    color: var(--gray-100, #f3f4f6);
+  }
+
+  .stepNavItem.active {
+    background-color: var(--blue-600, #2563eb);
+    border-color: var(--blue-600, #2563eb);
+    color: var(--gray-50, #f9fafb);
+  }
+
+  .stepNumCircle {
+    background-color: var(--gray-600, #4b5563);
+    color: var(--gray-100, #f3f4f6);
+  }
+
+  /* Grid layouts */
+  .layoutGrid,
+  .layoutListGrid {
+    background-color: var(--gray-900, #111827);
+  }
+
+  /* States */
+  .emptyState {
+    background-color: var(--gray-800, #1f2937);
+    border-color: var(--gray-700, #374151);
+    color: var(--gray-300, #d1d5db);
+  }
+
+  .emptyIcon {
+    color: var(--gray-500, #6b7280);
+  }
+
+  .errorMessage {
+    background-color: var(--red-900, #7f1d1d);
+    border-color: var(--red-700, #b91c1c);
+    color: var(--red-200, #fecaca);
+  }
+
+  .actions {
+    background-color: var(--gray-750, #2d3748);
+    border-top-color: var(--gray-700, #374151);
+  }
+
+  /* Loading states */
+  .spinner {
+    border-color: rgba(96, 165, 250, 0.2);
+    border-top-color: var(--blue-500, #3b82f6);
+  }
+
+  .loadingSpinner {
+    border-color: rgba(96, 165, 250, 0.2);
+    border-top-color: var(--blue-500, #3b82f6);
+  }
+
+  /* Utilities */
+  .icon {
+    color: var(--gray-400, #9ca3af);
+  }
+
+  .iconWrapper {
+    background-color: var(--gray-700, #374151);
+    border-color: var(--gray-600, #4b5563);
+  }
+
+  .avatar {
+    border-color: var(--gray-600, #4b5563);
+  }
+
+  .filterBar {
+    background-color: var(--gray-800, #1f2937);
+    border-color: var(--gray-700, #374151);
+  }
+
+  .pageTitle {
+    color: var(--gray-100, #f3f4f6);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+  .container,
+  .card,
+  .form,
+  .modalContainer,
+  .section {
+    border-width: 2px;
+    border-color: var(--gray-400, #9ca3af);
+  }
+
+  .actionButton,
+  .button,
+  .retryButton,
+  .closeButton {
+    border-width: 2px;
+    font-weight: 600;
+  }
+
+  .searchInput {
+    border-width: 2px;
+  }
+
+  .searchInput:focus {
+    border-width: 3px;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .actionButton,
+  .button,
+  .retryButton,
+  .closeButton,
+  .card,
+  .modalContainer,
+  .stepNavItem,
+  .searchInput,
+  .spinner,
+  .loadingSpinner {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+

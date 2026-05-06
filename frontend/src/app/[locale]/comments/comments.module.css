@@ -1,0 +1,46 @@
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.content {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+.message {
+  color: #666;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+/* Dark Theme Support */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background-color: var(--gray-900);
+    color: var(--gray-50);
+  }
+
+  .title {
+    color: var(--gray-50);
+  }
+
+  .content {
+    background-color: var(--gray-800);
+    border: 1px solid var(--gray-700);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .message {
+    color: var(--gray-400);
+  }
+}

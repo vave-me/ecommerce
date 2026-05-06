@@ -1,0 +1,1033 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Posts Management API",
+    "description": "API for managing posts for   including creating, retrieving, updating, deleting posts, bulk importing, and handling post-related files.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "PostsService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/posts": {
+      "get": {
+        "summary": "Retrieve all posts associated w",
+        "operationId": "getPosts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/postspbGetPostsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "description": "e.g. \"name\", \"created_at\", etc.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "description": "\"asc\" or \"desc\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Post"
+        ]
+      },
+      "post": {
+        "summary": "Add a New Post",
+        "operationId": "addPost",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/postspbAddPostResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/postspbAddPostRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Post"
+        ]
+      }
+    },
+    "/api/posts/categories/slug/{categorySlug}": {
+      "get": {
+        "summary": "Retrieve all posts associated w",
+        "operationId": "getPostsByCategorySlug",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/postspbGetPostsByCategorySlugResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categorySlug",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Post"
+        ]
+      }
+    },
+    "/api/posts/categories/{categoryId}": {
+      "get": {
+        "summary": "Retrieve all posts associated w",
+        "operationId": "getPostsByCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/postspbGetPostsByCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Post"
+        ]
+      }
+    },
+    "/api/posts/filters": {
+      "post": {
+        "summary": "Retrieve all posts associated w",
+        "operationId": "getPostsWithFilters",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/postspbGetPostsWithFiltersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/postspbGetPostsWithFiltersRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Post"
+        ]
+      }
+    },
+    "/api/posts/update": {
+      "post": {
+        "summary": "Update a Post",
+        "operationId": "updatePost",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/postspbUpdatePostResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/postspbUpdatePostRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Post"
+        ]
+      }
+    },
+    "/api/posts/users/{userId}": {
+      "get": {
+        "summary": "Retrieve all posts associated w",
+        "operationId": "getUserPosts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/postspbGetUserPostsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "description": "e.g. \"name\", \"created_at\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "description": "\"asc\" or \"desc\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Post"
+        ]
+      }
+    },
+    "/api/posts/{id}": {
+      "get": {
+        "summary": "Retrieve a Specific Post",
+        "operationId": "getPost",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/postspbGetPostResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Post"
+        ]
+      },
+      "delete": {
+        "summary": "Remove a Post",
+        "operationId": "removePost",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/postspbRemovePostResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Post"
+        ]
+      }
+    },
+    "/api/posts/{postId}/archive": {
+      "patch": {
+        "summary": "Archive a Post (mark as unavailable)",
+        "operationId": "archivePost",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/postspbArchivePostResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PostsServiceArchivePostBody"
+            }
+          }
+        ],
+        "tags": [
+          "Post"
+        ]
+      }
+    },
+    "/api/posts/{postId}/thumbnail/add": {
+      "post": {
+        "summary": "Add Post thumbnail",
+        "operationId": "addPostThumbnail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/postspbAddPostThumbnailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PostsServiceAddPostThumbnailBody"
+            }
+          }
+        ],
+        "tags": [
+          "Post"
+        ]
+      }
+    },
+    "/api/posts/{postId}/thumbnail/update": {
+      "post": {
+        "summary": "Update Post thumbnail",
+        "operationId": "updatePostThumbnail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/postspbUpdatePostThumbnailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PostsServiceUpdatePostThumbnailBody"
+            }
+          }
+        ],
+        "tags": [
+          "Post"
+        ]
+      }
+    },
+    "/api/posts/{userId}/catalog": {
+      "get": {
+        "summary": "Retrieve all posts associated with a user",
+        "operationId": "getPublicCatalog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/postspbGetPublicCatalogResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "description": "e.g. \"name\", \"created_at\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "description": "\"asc\" or \"desc\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Post"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "PostsServiceAddPostThumbnailBody": {
+      "type": "object",
+      "properties": {
+        "thumbnail": {
+          "type": "string",
+          "title": "true if successfully archived"
+        }
+      }
+    },
+    "PostsServiceArchivePostBody": {
+      "type": "object",
+      "title": "ArchivePost"
+    },
+    "PostsServiceUpdatePostThumbnailBody": {
+      "type": "object",
+      "properties": {
+        "thumbnail": {
+          "type": "string",
+          "title": "true if successfully archived"
+        }
+      }
+    },
+    "postspbAddPostRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "typeOfPost": {
+          "type": "string"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        }
+      },
+      "title": "AddPost"
+    },
+    "postspbAddPostResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "The newly created Post ID"
+        }
+      }
+    },
+    "postspbAddPostThumbnailResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "The newly created Post ID"
+        }
+      }
+    },
+    "postspbArchivePostResponse": {
+      "type": "object",
+      "properties": {
+        "postId": {
+          "type": "string"
+        },
+        "archived": {
+          "type": "boolean",
+          "title": "true if successfully archived"
+        }
+      }
+    },
+    "postspbGetPostResponse": {
+      "type": "object",
+      "properties": {
+        "post": {
+          "$ref": "#/definitions/postspbPost"
+        }
+      }
+    },
+    "postspbGetPostsByCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "posts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/postspbPost"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "postspbGetPostsByCategorySlugResponse": {
+      "type": "object",
+      "properties": {
+        "posts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/postspbPost"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "postspbGetPostsResponse": {
+      "type": "object",
+      "properties": {
+        "posts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/postspbPost"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "postspbGetPostsWithFiltersRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "typeOfPost": {
+          "type": "string"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "title": "e.g. \"DRAFT\", \"PUBLISHED\", \"ARCHIVED\""
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "radius": {
+          "type": "number",
+          "format": "float",
+          "title": "optional radius if you want location filtering"
+        },
+        "page": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pageSize": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sortBy": {
+          "type": "string"
+        },
+        "sortOrder": {
+          "type": "string"
+        }
+      }
+    },
+    "postspbGetPostsWithFiltersResponse": {
+      "type": "object",
+      "properties": {
+        "posts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/postspbPost"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "postspbGetPublicCatalogResponse": {
+      "type": "object",
+      "properties": {
+        "posts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/postspbPost"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "postspbGetUserPostsResponse": {
+      "type": "object",
+      "properties": {
+        "posts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/postspbPost"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "postspbPost": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "typeOfPost": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "title": "e.g. \"DRAFT\", \"PUBLISHED\", \"ARCHIVED\""
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "-------------------------------------------------------------\nPrimary Post message\n-------------------------------------------------------------"
+    },
+    "postspbRemovePostResponse": {
+      "type": "object",
+      "title": "-------------------------------------------------------------\nResponse / Acknowledgement messages\n-------------------------------------------------------------"
+    },
+    "postspbUpdatePostRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "typeOfPost": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        }
+      },
+      "title": "UpdatePost"
+    },
+    "postspbUpdatePostResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "The ID of the updated post"
+        }
+      }
+    },
+    "postspbUpdatePostThumbnailResponse": {
+      "type": "object"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

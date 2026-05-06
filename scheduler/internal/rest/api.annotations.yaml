@@ -1,0 +1,39 @@
+type: google.api.Service
+config_version: 3
+name: scheduler.googleapis.com
+title: Scheduler Management API
+apis:
+  - name: schedulerspb.SchedulerService
+http:
+  rules:
+    # Create a New Scheduler
+    - selector: schedulerspb.SchedulerService.CreateScheduler
+      post: /api/scheduler
+      body: "*"
+
+    # Retrieve an Existing Scheduler
+    - selector: schedulerspb.SchedulerService.GetScheduler
+      get: /api/scheduler/{user_id}
+
+    # List All Schedulers
+    - selector: schedulerspb.SchedulerService.GetSchedulers
+      get: /api/scheduler
+
+    # Add a New Action
+    - selector: schedulerspb.SchedulerService.AddAction
+      post: /api/scheduler/actions
+      body: "*"
+
+    # Retrieve a Specific Action
+    - selector: schedulerspb.SchedulerService.GetAction
+      get: /api/scheduler/actions/{id}
+
+    # List All Actions for a Scheduler
+    - selector: schedulerspb.SchedulerService.GetActions
+      get: /api/scheduler/{scheduler_id}/actions
+
+    # Remove an Action
+    - selector: schedulerspb.SchedulerService.RemoveAction
+      delete: /api/scheduler/actions/{id}
+
+

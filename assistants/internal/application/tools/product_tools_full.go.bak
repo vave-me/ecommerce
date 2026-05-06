@@ -1,0 +1,946 @@
+package tools
+
+import ai2 "middleman/internal/ai"
+
+func createProductTools() []ai2.Tool {
+	return []ai2.Tool{
+		// CRUCIAL PRODUCT TOOLS
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_get_by_id",
+				Description: "Retrieve detailed information about a specific product",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"product_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The unique identifier of the product",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"product_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_create",
+				Description: "Create a new product listing with comprehensive details",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"name": map[string]interface{}{
+							"type":        "string",
+							"description": "Product name",
+							"minLength":   1,
+							"maxLength":   200,
+						},
+						"description": map[string]interface{}{
+							"type":        "string",
+							"description": "Detailed product description",
+							"minLength":   1,
+							"maxLength":   5000,
+						},
+						"base_price": map[string]interface{}{
+							"type":        "integer",
+							"description": "Base price in cents",
+							"minimum":     0,
+						},
+						"category_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Category ID for the product",
+							"minLength":   1,
+						},
+						"category_slug": map[string]interface{}{
+							"type":        "string",
+							"description": "Category slug for URL-friendly category reference",
+						},
+						"brand": map[string]interface{}{
+							"type":        "string",
+							"description": "Product brand name",
+							"maxLength":   100,
+						},
+						"condition": map[string]interface{}{
+							"type":        "string",
+							"description": "Product condition",
+							"enum":        []string{"new", "like_new", "very_good", "good", "acceptable", "refurbished"},
+						},
+						"model": map[string]interface{}{
+							"type":        "string",
+							"description": "Product model number or name",
+							"maxLength":   100,
+						},
+						"tags": map[string]interface{}{
+							"type":        "array",
+							"description": "Product tags for categorization",
+							"items":       map[string]interface{}{"type": "string"},
+							"maxItems":    20,
+						},
+						"manage_stock": map[string]interface{}{
+							"type":        "boolean",
+							"description": "Whether to track inventory for this product",
+							"default":     true,
+						},
+						"stock": map[string]interface{}{
+							"type":        "integer",
+							"description": "Current stock quantity",
+							"minimum":     0,
+							"default":     0,
+						},
+						"sku": map[string]interface{}{
+							"type":        "string",
+							"description": "Stock Keeping Unit identifier",
+							"pattern":     "^[A-Za-z0-9-_]+$",
+							"maxLength":   50,
+						},
+						"attributes": map[string]interface{}{
+							"type":        "array",
+							"description": "Custom product attributes",
+							"items": map[string]interface{}{
+								"type": "object",
+								"properties": map[string]interface{}{
+									"name": map[string]interface{}{
+										"type": "string",
+									},
+									"value": map[string]interface{}{
+										"type": "string",
+									},
+								},
+								"required": []string{"name", "value"},
+							},
+						},
+						"weight": map[string]interface{}{
+							"type":        "integer",
+							"description": "Product weight in grams",
+							"minimum":     0,
+						},
+						"height": map[string]interface{}{
+							"type":        "integer",
+							"description": "Product height in millimeters",
+							"minimum":     0,
+						},
+						"width": map[string]interface{}{
+							"type":        "integer",
+							"description": "Product width in millimeters",
+							"minimum":     0,
+						},
+						"depth": map[string]interface{}{
+							"type":        "integer",
+							"description": "Product depth in millimeters",
+							"minimum":     0,
+						},
+						"status": map[string]interface{}{
+							"type":        "string",
+							"description": "Product listing status",
+							"enum":        []string{"active", "inactive", "draft", "sold", "archived"},
+							"default":     "active",
+						},
+						"negotiable": map[string]interface{}{
+							"type":        "boolean",
+							"description": "Whether price is negotiable",
+							"default":     false,
+						},
+						"user_type": map[string]interface{}{
+							"type":        "string",
+							"description": "Type of user selling the product",
+							"enum":        []string{"individual", "business", "verified_seller"},
+						},
+						"middleman_service": map[string]interface{}{
+							"type":        "boolean",
+							"description": "Whether to use middleman service for transaction",
+							"default":     false,
+						},
+						"shipping_cost": map[string]interface{}{
+							"type":        "integer",
+							"description": "Shipping cost in cents",
+							"minimum":     0,
+							"default":     0,
+						},
+						"has_variants": map[string]interface{}{
+							"type":        "boolean",
+							"description": "Whether product has variants",
+							"default":     false,
+						},
+						"options": map[string]interface{}{
+							"type":        "array",
+							"description": "Product variant options",
+							"items": map[string]interface{}{
+								"type": "object",
+								"properties": map[string]interface{}{
+									"name": map[string]interface{}{
+										"type": "string",
+									},
+									"values": map[string]interface{}{
+										"type":  "array",
+										"items": map[string]interface{}{"type": "string"},
+									},
+								},
+								"required": []string{"name", "values"},
+							},
+						},
+						"lat": map[string]interface{}{
+							"type":        "number",
+							"description": "Latitude for location-based products",
+							"minimum":     -90,
+							"maximum":     90,
+						},
+						"lng": map[string]interface{}{
+							"type":        "number",
+							"description": "Longitude for location-based products",
+							"minimum":     -180,
+							"maximum":     180,
+						},
+						"thumbnail": map[string]interface{}{
+							"type":        "string",
+							"description": "URL to product thumbnail image",
+							"format":      "uri",
+						},
+						"entity_type": map[string]interface{}{
+							"type":        "string",
+							"description": "Type of entity (product or service)",
+							"enum":        []string{"product", "service"},
+							"default":     "product",
+						},
+					},
+					"required": []string{"name", "description", "base_price", "category_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_update_details",
+				Description: "Update product information including name, description, price, and inventory",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"product_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The product ID to update",
+							"minLength":   1,
+						},
+						"name": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated product name",
+							"minLength":   1,
+							"maxLength":   200,
+						},
+						"description": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated product description",
+							"minLength":   1,
+							"maxLength":   5000,
+						},
+						"base_price": map[string]interface{}{
+							"type":        "integer",
+							"description": "Updated base price in cents",
+							"minimum":     0,
+						},
+						"stock": map[string]interface{}{
+							"type":        "integer",
+							"description": "Updated stock quantity",
+							"minimum":     0,
+						},
+						"sku": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated SKU",
+							"pattern":     "^[A-Za-z0-9-_]+$",
+							"maxLength":   50,
+						},
+						"category_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated category ID",
+						},
+						"status": map[string]interface{}{
+							"type":        "string",
+							"description": "Updated product status",
+							"enum":        []string{"active", "inactive", "draft", "sold", "archived"},
+						},
+					},
+					"required": []string{"product_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_update_base_price",
+				Description: "Update the base price of a product",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"product_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The product ID to update",
+							"minLength":   1,
+						},
+						"new_base_price": map[string]interface{}{
+							"type":        "integer",
+							"description": "New base price in cents",
+							"minimum":     0,
+						},
+					},
+					"required": []string{"product_id", "new_base_price"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_delete",
+				Description: "Delete a product from the catalog",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"product_id": map[string]interface{}{
+							"type":        "string",
+							"description": "The product ID to delete",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"product_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_search_by_name",
+				Description: "Search for products by name",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"name": map[string]interface{}{
+							"type":        "string",
+							"description": "Product name to search for",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"name"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_search_advanced",
+				Description: "Advanced product search with comprehensive filtering options",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"name": map[string]interface{}{
+							"type":        "string",
+							"description": "Search by product name",
+						},
+						"category_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Filter by category ID",
+						},
+						"category_slug": map[string]interface{}{
+							"type":        "string",
+							"description": "Filter by category slug",
+						},
+						"min_price": map[string]interface{}{
+							"type":        "integer",
+							"description": "Minimum price in cents",
+							"minimum":     0,
+						},
+						"max_price": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum price in cents",
+							"minimum":     0,
+						},
+						"brand": map[string]interface{}{
+							"type":        "string",
+							"description": "Filter by brand",
+						},
+						"condition": map[string]interface{}{
+							"type":        "string",
+							"description": "Filter by condition",
+							"enum":        []string{"new", "like_new", "very_good", "good", "acceptable", "refurbished"},
+						},
+						"model": map[string]interface{}{
+							"type":        "string",
+							"description": "Filter by model",
+						},
+						"tags": map[string]interface{}{
+							"type":        "array",
+							"description": "Filter by tags",
+							"items":       map[string]interface{}{"type": "string"},
+						},
+						"manage_stock": map[string]interface{}{
+							"type":        "boolean",
+							"description": "Filter by stock management",
+						},
+						"min_stock": map[string]interface{}{
+							"type":        "integer",
+							"description": "Minimum stock quantity",
+							"minimum":     0,
+						},
+						"max_stock": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum stock quantity",
+							"minimum":     0,
+						},
+						"sku": map[string]interface{}{
+							"type":        "string",
+							"description": "Filter by SKU",
+						},
+						"status": map[string]interface{}{
+							"type":        "string",
+							"description": "Filter by status",
+							"enum":        []string{"active", "inactive", "draft", "sold", "archived"},
+						},
+						"negotiable": map[string]interface{}{
+							"type":        "boolean",
+							"description": "Filter by negotiable price",
+						},
+						"user_type": map[string]interface{}{
+							"type":        "string",
+							"description": "Filter by user type",
+							"enum":        []string{"individual", "business", "verified_seller"},
+						},
+						"middleman_service": map[string]interface{}{
+							"type":        "boolean",
+							"description": "Filter by middleman service availability",
+						},
+						"has_variants": map[string]interface{}{
+							"type":        "boolean",
+							"description": "Filter by variant availability",
+						},
+						"shipping_cost": map[string]interface{}{
+							"type":        "integer",
+							"description": "Filter by exact shipping cost",
+							"minimum":     0,
+						},
+						"min_weight": map[string]interface{}{
+							"type":        "integer",
+							"description": "Minimum weight in grams",
+							"minimum":     0,
+						},
+						"max_weight": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum weight in grams",
+							"minimum":     0,
+						},
+						"min_height": map[string]interface{}{
+							"type":        "integer",
+							"description": "Minimum height in millimeters",
+							"minimum":     0,
+						},
+						"max_height": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum height in millimeters",
+							"minimum":     0,
+						},
+						"min_width": map[string]interface{}{
+							"type":        "integer",
+							"description": "Minimum width in millimeters",
+							"minimum":     0,
+						},
+						"max_width": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum width in millimeters",
+							"minimum":     0,
+						},
+						"min_depth": map[string]interface{}{
+							"type":        "integer",
+							"description": "Minimum depth in millimeters",
+							"minimum":     0,
+						},
+						"max_depth": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum depth in millimeters",
+							"minimum":     0,
+						},
+						"lat": map[string]interface{}{
+							"type":        "number",
+							"description": "Center latitude for location-based search",
+							"minimum":     -90,
+							"maximum":     90,
+						},
+						"lng": map[string]interface{}{
+							"type":        "number",
+							"description": "Center longitude for location-based search",
+							"minimum":     -180,
+							"maximum":     180,
+						},
+						"radius": map[string]interface{}{
+							"type":        "integer",
+							"description": "Search radius in kilometers",
+							"minimum":     1,
+							"maximum":     1000,
+							"default":     50,
+						},
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+						"sort_by": map[string]interface{}{
+							"type":        "string",
+							"description": "Sort field",
+							"enum":        []string{"price", "created_at", "updated_at", "name", "popularity", "distance"},
+							"default":     "created_at",
+						},
+						"sort_order": map[string]interface{}{
+							"type":        "string",
+							"description": "Sort direction",
+							"enum":        []string{"asc", "desc"},
+							"default":     "desc",
+						},
+					},
+					"required": []string{},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_get_suggestions",
+				Description: "Get product suggestions based on partial name",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"name": map[string]interface{}{
+							"type":        "string",
+							"description": "Partial product name for suggestions",
+							"minLength":   2,
+						},
+					},
+					"required": []string{"name"},
+				},
+			},
+		},
+		/* COMMENTED OUT - Non-crucial product tools
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_update_thumbnail",
+				Description: "Update product thumbnail image",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"product_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Product ID to update",
+							"minLength":   1,
+						},
+						"thumbnail": map[string]interface{}{
+							"type":        "string",
+							"description": "New thumbnail URL",
+							"format":      "uri",
+						},
+					},
+					"required": []string{"product_id", "thumbnail"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_get_by_category_slug",
+				Description: "Get products by category slug",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"category_slug": map[string]interface{}{
+							"type":        "string",
+							"description": "Category slug to filter by",
+							"minLength":   1,
+						},
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+						"sort_by": map[string]interface{}{
+							"type":        "string",
+							"description": "Sort field",
+							"enum":        []string{"price", "created_at", "updated_at", "name", "popularity"},
+							"default":     "created_at",
+						},
+						"sort_order": map[string]interface{}{
+							"type":        "string",
+							"description": "Sort direction",
+							"enum":        []string{"asc", "desc"},
+							"default":     "desc",
+						},
+					},
+					"required": []string{"category_slug"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_get_by_category_id",
+				Description: "Get products by category ID",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"category_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Category ID to filter by",
+							"minLength":   1,
+						},
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+						"sort_by": map[string]interface{}{
+							"type":        "string",
+							"description": "Sort field",
+							"enum":        []string{"price", "created_at", "updated_at", "name", "popularity"},
+							"default":     "created_at",
+						},
+						"sort_order": map[string]interface{}{
+							"type":        "string",
+							"description": "Sort direction",
+							"enum":        []string{"asc", "desc"},
+							"default":     "desc",
+						},
+					},
+					"required": []string{"category_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_get_user_catalog",
+				Description: "Get products from a specific user's catalog",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "User ID whose catalog to retrieve",
+							"minLength":   1,
+						},
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+						"sort_by": map[string]interface{}{
+							"type":        "string",
+							"description": "Sort field",
+							"enum":        []string{"price", "created_at", "updated_at", "name"},
+							"default":     "created_at",
+						},
+						"sort_order": map[string]interface{}{
+							"type":        "string",
+							"description": "Sort direction",
+							"enum":        []string{"asc", "desc"},
+							"default":     "desc",
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_get_public_catalog",
+				Description: "Get public product catalog for a user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "User ID whose public catalog to retrieve",
+							"minLength":   1,
+						},
+						"page": map[string]interface{}{
+							"type":        "integer",
+							"description": "Page number",
+							"minimum":     1,
+							"default":     1,
+						},
+						"page_size": map[string]interface{}{
+							"type":        "integer",
+							"description": "Results per page",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     20,
+						},
+						"sort_by": map[string]interface{}{
+							"type":        "string",
+							"description": "Sort field",
+							"enum":        []string{"price", "created_at", "updated_at", "name"},
+							"default":     "created_at",
+						},
+						"sort_order": map[string]interface{}{
+							"type":        "string",
+							"description": "Sort direction",
+							"enum":        []string{"asc", "desc"},
+							"default":     "desc",
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_update_price_for_user",
+				Description: "Update product price with old price tracking",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"product_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Product ID to update",
+							"minLength":   1,
+						},
+						"new_price": map[string]interface{}{
+							"type":        "integer",
+							"description": "New price in cents",
+							"minimum":     0,
+						},
+						"old_price": map[string]interface{}{
+							"type":        "integer",
+							"description": "Previous price in cents for tracking",
+							"minimum":     0,
+						},
+					},
+					"required": []string{"product_id", "new_price", "old_price"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_adjust_inventory",
+				Description: "Adjust product inventory stock level",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"product_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Product ID to adjust inventory for",
+							"minLength":   1,
+						},
+						"new_stock": map[string]interface{}{
+							"type":        "integer",
+							"description": "New stock quantity",
+							"minimum":     0,
+						},
+					},
+					"required": []string{"product_id", "new_stock"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_archive_user_product",
+				Description: "Archive a product for a specific user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "User ID who owns the product",
+							"minLength":   1,
+						},
+						"product_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Product ID to archive",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"user_id", "product_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_mark_as_sold",
+				Description: "Mark a product as sold",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"product_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Product ID to mark as sold",
+							"minLength":   1,
+						},
+					},
+					"required": []string{"product_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_mark_as_leased",
+				Description: "Mark a product as leased with lease terms",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"product_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Product ID to mark as leased",
+							"minLength":   1,
+						},
+						"monthly_price": map[string]interface{}{
+							"type":        "integer",
+							"description": "Monthly lease price in cents",
+							"minimum":     0,
+						},
+						"lease_term_months": map[string]interface{}{
+							"type":        "integer",
+							"description": "Lease term in months",
+							"minimum":     1,
+							"maximum":     60,
+						},
+					},
+					"required": []string{"product_id", "monthly_price", "lease_term_months"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_mark_as_pawned",
+				Description: "Mark a product as pawned with pawn terms",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "User ID who pawned the product",
+							"minLength":   1,
+						},
+						"product_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Product ID to mark as pawned",
+							"minLength":   1,
+						},
+						"locked_price": map[string]interface{}{
+							"type":        "integer",
+							"description": "Locked pawn price in cents",
+							"minimum":     0,
+						},
+						"redemption_fee": map[string]interface{}{
+							"type":        "integer",
+							"description": "Fee to redeem the pawned item in cents",
+							"minimum":     0,
+						},
+					},
+					"required": []string{"user_id", "product_id", "locked_price", "redemption_fee"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_increase_price_by",
+				Description: "Increase product price by a specific amount",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"product_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Product ID to increase price for",
+							"minLength":   1,
+						},
+						"increase_amount": map[string]interface{}{
+							"type":        "integer",
+							"description": "Amount to increase price by in cents",
+							"minimum":     1,
+						},
+					},
+					"required": []string{"product_id", "increase_amount"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_decrease_price_to",
+				Description: "Decrease product price to a specific amount",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"product_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Product ID to decrease price for",
+							"minLength":   1,
+						},
+						"new_price": map[string]interface{}{
+							"type":        "integer",
+							"description": "New lower price in cents",
+							"minimum":     0,
+						},
+					},
+					"required": []string{"product_id", "new_price"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "product_add_thumbnail",
+				Description: "Add or update thumbnail image for a product",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"product_id": map[string]interface{}{
+							"type":        "string",
+							"description": "Product ID to add thumbnail to",
+							"minLength":   1,
+						},
+						"thumbnail": map[string]interface{}{
+							"type":        "string",
+							"description": "Thumbnail image URL",
+							"format":      "uri",
+						},
+					},
+					"required": []string{"product_id", "thumbnail"},
+				},
+			},
+		},
+	}
+
+}

@@ -1,0 +1,10 @@
+syntax = "proto3";
+package message_type;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+message WebsocketMessageData {
+  bytes payload = 1;
+  google.protobuf.Timestamp occurred_at = 2;
+}

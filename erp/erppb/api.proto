@@ -1,0 +1,855 @@
+syntax = "proto3";
+
+package erppb;
+
+option go_package = "middleman/erp/erppb;erppb";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/empty.proto";
+
+// ERPService provides functionalities for ERP system integration and synchronization.
+service ERPService {
+  // ========== Connector Management ==========
+  
+  // RegisterConnector registers a new ERP connector with the system (deprecated - use AddConnector)
+  rpc RegisterConnector(RegisterConnectorRequest) returns (RegisterConnectorResponse) {}
+  
+  // AddConnector creates a new ERP connector with secure credential storage
+  rpc AddConnector(AddConnectorRequest) returns (AddConnectorResponse) {}
+  
+  // UpdateConnector updates an existing ERP connector configuration
+  rpc UpdateConnector(UpdateConnectorRequest) returns (UpdateConnectorResponse) {}
+  
+  // RemoveConnector removes an ERP connector and its associated data
+  rpc RemoveConnector(RemoveConnectorRequest) returns (RemoveConnectorResponse) {}
+  
+  // ToggleConnector activates or deactivates a connector
+  rpc ToggleConnector(ToggleConnectorRequest) returns (ToggleConnectorResponse) {}
+  
+  // ========== Synchronization Operations ==========
+  
+  // SyncProducts synchronizes products from the ERP system
+  rpc SyncProducts(SyncProductsRequest) returns (SyncProductsResponse) {}
+  rpc SyncStock(SyncStockRequest) returns (SyncStockResponse) {}
+  rpc SyncPrices(SyncPricesRequest) returns (SyncPricesResponse) {}
+  rpc SyncCustomers(SyncCustomersRequest) returns (SyncCustomersResponse) {}
+  rpc SendOrder(SendOrderRequest) returns (SendOrderResponse) {}
+  rpc ProcessWebhook(ProcessWebhookRequest) returns (ProcessWebhookResponse) {}
+  rpc CreateInvoice(CreateInvoiceRequest) returns (CreateInvoiceResponse) {}
+  rpc ApproveInvoice(ApproveInvoiceRequest) returns (ApproveInvoiceResponse) {}
+  rpc SendInvoice(SendInvoiceRequest) returns (SendInvoiceResponse) {}
+  rpc VoidInvoice(VoidInvoiceRequest) returns (VoidInvoiceResponse) {}
+  rpc RecordInvoicePayment(RecordInvoicePaymentRequest) returns (RecordInvoicePaymentResponse) {}
+  rpc SyncInvoiceToERP(SyncInvoiceToERPRequest) returns (SyncInvoiceToERPResponse) {}
+  rpc CreateReturn(CreateReturnRequest) returns (CreateReturnResponse) {}
+  rpc ApproveReturn(ApproveReturnRequest) returns (ApproveReturnResponse) {}
+  rpc RejectReturn(RejectReturnRequest) returns (RejectReturnResponse) {}
+  rpc ProcessReturnStart(ProcessReturnStartRequest) returns (ProcessReturnStartResponse) {}
+  rpc CompleteReturn(CompleteReturnRequest) returns (CompleteReturnResponse) {}
+  rpc RestockReturnItems(RestockReturnItemsRequest) returns (RestockReturnItemsResponse) {}
+  rpc SyncReturnToERP(SyncReturnToERPRequest) returns (SyncReturnToERPResponse) {}
+  rpc CreateInventoryReservation(CreateInventoryReservationRequest) returns (CreateInventoryReservationResponse) {}
+  rpc ReleaseInventoryReservation(ReleaseInventoryReservationRequest) returns (ReleaseInventoryReservationResponse) {}
+  rpc FulfillInventoryReservation(FulfillInventoryReservationRequest) returns (FulfillInventoryReservationResponse) {}
+  rpc TransferInventoryReservation(TransferInventoryReservationRequest) returns (TransferInventoryReservationResponse) {}
+  rpc GetConnectorStatus(GetConnectorStatusRequest) returns (GetConnectorStatusResponse) {}
+  rpc GetSyncHistory(GetSyncHistoryRequest) returns (GetSyncHistoryResponse) {}
+  rpc ListConnectors(ListConnectorsRequest) returns (ListConnectorsResponse) {}
+  rpc UpdateInventoryReservation(UpdateInventoryReservationRequest) returns (UpdateInventoryReservationResponse) {}
+}
+
+// ==========================================================================
+// Common Message Types
+// ==========================================================================
+message Connector {
+  string id = 1;
+  string name = 2;
+  string type = 3; // odoo, dynamics365, netsuite, sap, erpnext, frappe
+  string status = 4; // active, inactive, error, maintenance
+  string environment = 5; // production, staging, development, sandbox
+  string base_url = 6;
+  
+  // Webhook configuration
+  bool webhook_enabled = 7;
+  string webhook_url = 8;
+  repeated string webhook_events = 9;
+  
+  // Sync configuration
+  bool sync_enabled = 10;
+  int32 sync_interval_seconds = 11;
+  int32 batch_size = 12;
+  
+  // Health check
+  google.protobuf.Timestamp last_health_check_at = 13;
+  string last_health_check_status = 14;
+  string last_health_check_error = 15;
+  
+  // Metadata
+  google.protobuf.Timestamp created_at = 16;
+  google.protobuf.Timestamp updated_at = 17;
+  string created_by = 18;
+  string updated_by = 19;
+  int32 version = 20;
+}
+
+message SyncLog {
+  string id = 1;
+  string connector_id = 2;
+  string entity_type = 3;
+  google.protobuf.Timestamp started_at = 4;
+  google.protobuf.Timestamp completed_at = 5;
+  string status = 6;
+  int32 records_processed = 7;
+  int32 records_total = 8;
+  string error = 9;
+  google.protobuf.Struct metadata = 10;
+}
+
+message Invoice {
+  string id = 1;
+  string order_id = 2;
+  string customer_id = 3;
+  string invoice_number = 4;
+  int64 total_amount = 5;
+  string currency = 6;
+  string status = 7;
+  google.protobuf.Timestamp issue_date = 8;
+  google.protobuf.Timestamp due_date = 9;
+  repeated InvoiceItem items = 10;
+  google.protobuf.Struct metadata = 11;
+}
+
+message InvoiceItem {
+  string product_id = 1;
+  string sku = 2;
+  string description = 3;
+  int64 quantity = 4;
+  int64 unit_price = 5;
+  int64 total_price = 6;
+  float tax_rate = 7;
+  int64 tax_amount = 8;
+}
+
+message Order {
+  string id = 1;
+  string order_number = 2;
+  string customer_id = 3;
+  int64 total_amount = 4;
+  string currency = 5;
+  string status = 6;
+  google.protobuf.Timestamp created_at = 7;
+  repeated OrderItem items = 8;
+  ShippingInfo shipping_info = 9;
+  google.protobuf.Struct metadata = 10;
+}
+
+message OrderItem {
+  string product_id = 1;
+  string sku = 2;
+  string name = 3;
+  int64 quantity = 4;
+  int64 unit_price = 5;
+  int64 total_price = 6;
+}
+
+message ShippingInfo {
+  string recipient_name = 1;
+  string address_line1 = 2;
+  string address_line2 = 3;
+  string city = 4;
+  string state = 5;
+  string postal_code = 6;
+  string country = 7;
+  string phone = 8;
+  string email = 9;
+}
+
+message Product {
+  string id = 1;
+  string sku = 2;
+  string name = 3;
+  string description = 4;
+  int64 price = 5;
+  string currency = 6;
+  int64 stock = 7;
+  string category = 8;
+  google.protobuf.Struct attributes = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp updated_at = 11;
+}
+
+message Customer {
+  string id = 1;
+  string external_id = 2;
+  string email = 3;
+  string first_name = 4;
+  string last_name = 5;
+  string company = 6;
+  string phone = 7;
+  google.protobuf.Struct metadata = 8;
+  google.protobuf.Timestamp created_at = 9;
+  google.protobuf.Timestamp updated_at = 10;
+}
+
+// ==========================================================================
+// Command Request/Response Messages  
+// ==========================================================================
+
+// ========== Deprecated Messages ==========
+
+// ProcessInvoice - DEPRECATED: Use granular invoice commands instead
+message ProcessInvoiceRequest {
+  string connector_id = 1;
+  Invoice invoice = 2;
+  string action = 3; // create, update, approve, void, send
+}
+
+message ProcessInvoiceResponse {
+  string invoice_id = 1;
+  string external_id = 2;
+  string status = 3;
+  google.protobuf.Struct result = 4;
+}
+
+// ProcessReturn - DEPRECATED: Use granular return commands instead
+message ProcessReturnRequest {
+  string connector_id = 1;
+  string order_id = 2;
+  string return_reason = 3;
+  repeated ProcessReturnItem items = 4;
+  google.protobuf.Struct metadata = 5;
+}
+
+message ProcessReturnItem {
+  string product_id = 1;
+  string sku = 2;
+  int64 quantity = 3;
+  string reason = 4;
+  string condition = 5;
+}
+
+message ProcessReturnResponse {
+  string return_id = 1;
+  string external_id = 2;
+  string status = 3;
+  google.protobuf.Struct result = 4;
+}
+
+// ========== Webhook Processing ==========
+
+message ProcessWebhookRequest {
+  string connector_id = 1;
+  string event_type = 2;
+  google.protobuf.Struct headers = 3;
+  bytes payload = 4;
+  string signature = 5;
+}
+
+message ProcessWebhookResponse {
+  string event_id = 1;
+  bool processed = 2;
+  string status = 3;
+  google.protobuf.Struct result = 4;
+}
+
+// ========== Connector Management ==========
+
+message RegisterConnectorRequest {
+  string name = 1;
+  string type = 2; // sap, netsuite, odoo, dynamics365
+  google.protobuf.Struct config = 3;
+  bool enabled = 4;
+}
+
+message RegisterConnectorResponse {
+  string connector_id = 1;
+  Connector connector = 2;
+}
+
+// AddConnector messages
+message AddConnectorRequest {
+  string name = 1;
+  string type = 2; // odoo, dynamics365, netsuite, sap, erpnext, frappe
+  string environment = 3; // production, staging, development, sandbox
+  string base_url = 4;
+  
+  // Authentication configuration (will be encrypted)
+  string auth_type = 5; // basic, oauth2, apikey, token
+  google.protobuf.Struct auth_config = 6;
+  
+  // Webhook configuration
+  bool webhook_enabled = 7;
+  string webhook_secret = 8;
+  repeated string webhook_events = 9;
+  
+  // Sync configuration
+  bool sync_enabled = 10;
+  int32 sync_interval_seconds = 11;
+  int32 batch_size = 12;
+  repeated SyncEntityConfig sync_entities = 13;
+  
+  // Rate limiting
+  int32 rate_limit_requests_per_second = 14;
+  int32 rate_limit_burst = 15;
+  
+  // Retry configuration
+  int32 retry_max_attempts = 16;
+  int32 retry_initial_delay_ms = 17;
+  int32 retry_max_delay_ms = 18;
+  double retry_multiplier = 19;
+  
+  // Additional settings
+  map<string, string> custom_headers = 20;
+  int32 timeout_seconds = 21;
+}
+
+message SyncEntityConfig {
+  string entity_type = 1; // product, stock, price, customer, order, invoice, return
+  bool enabled = 2;
+  string sync_direction = 3; // inbound, outbound, bidirectional
+  google.protobuf.Struct filters = 4;
+  map<string, string> field_mapping = 5;
+}
+
+message AddConnectorResponse {
+  string connector_id = 1;
+  Connector connector = 2;
+}
+
+// UpdateConnector messages
+message UpdateConnectorRequest {
+  string connector_id = 1;
+  string name = 2;
+  string environment = 3;
+  string base_url = 4;
+  
+  // Optional auth update
+  google.protobuf.Struct auth_config = 5;
+  
+  // Webhook configuration
+  google.protobuf.Value webhook_enabled = 6; // wrapped to make optional
+  google.protobuf.Value webhook_secret = 7;
+  repeated string webhook_events = 8;
+  
+  // Sync configuration
+  google.protobuf.Value sync_enabled = 9;
+  google.protobuf.Value sync_interval_seconds = 10;
+  google.protobuf.Value batch_size = 11;
+  
+  // Rate limiting
+  google.protobuf.Value rate_limit_requests_per_second = 12;
+  google.protobuf.Value rate_limit_burst = 13;
+  
+  // Retry configuration
+  google.protobuf.Value retry_max_attempts = 14;
+  google.protobuf.Value retry_initial_delay_ms = 15;
+  google.protobuf.Value retry_max_delay_ms = 16;
+  google.protobuf.Value retry_multiplier = 17;
+  
+  // Additional settings
+  map<string, string> custom_headers = 18;
+  google.protobuf.Value timeout_seconds = 19;
+}
+
+message UpdateConnectorResponse {
+  Connector connector = 1;
+}
+
+// RemoveConnector messages
+message RemoveConnectorRequest {
+  string connector_id = 1;
+  bool force = 2; // Force removal even if there are active syncs
+}
+
+message RemoveConnectorResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+// ToggleConnector messages
+message ToggleConnectorRequest {
+  string connector_id = 1;
+  bool activate = 2; // true to activate, false to deactivate
+  string reason = 3; // Optional reason for the change
+}
+
+message ToggleConnectorResponse {
+  Connector connector = 1;
+  string previous_status = 2;
+  string new_status = 3;
+}
+
+// ========== Order Management ==========
+
+message SendOrderRequest {
+  string connector_id = 1;
+  Order order = 2;
+}
+
+message SendOrderResponse {
+  string order_id = 1;
+  string external_id = 2;
+  string status = 3;
+  google.protobuf.Struct result = 4;
+}
+
+// ========== Synchronization Operations ==========
+
+// SyncCustomers
+message SyncCustomersRequest {
+  string connector_id = 1;
+  int32 batch_size = 2;
+  google.protobuf.Timestamp since = 3;
+  google.protobuf.Struct filters = 4;
+}
+
+message SyncCustomersResponse {
+  string sync_id = 1;
+  int32 customers_synced = 2;
+  int32 customers_failed = 3;
+  repeated Customer customers = 4;
+  google.protobuf.Struct metadata = 5;
+}
+
+// SyncPrices
+message SyncPricesRequest {
+  string connector_id = 1;
+  int32 batch_size = 2;
+  repeated string product_ids = 3;
+  google.protobuf.Struct filters = 4;
+}
+
+message SyncPricesResponse {
+  string sync_id = 1;
+  int32 prices_synced = 2;
+  int32 prices_failed = 3;
+  repeated PriceUpdate price_updates = 4;
+  google.protobuf.Struct metadata = 5;
+}
+
+message PriceUpdate {
+  string product_id = 1;
+  string sku = 2;
+  int64 old_price = 3;
+  int64 new_price = 4;
+  string currency = 5;
+  google.protobuf.Timestamp effective_date = 6;
+}
+
+// SyncProducts
+message SyncProductsRequest {
+  string connector_id = 1;
+  int32 batch_size = 2;
+  google.protobuf.Timestamp since = 3;
+  google.protobuf.Struct filters = 4;
+}
+
+message SyncProductsResponse {
+  string sync_id = 1;
+  int32 products_synced = 2;
+  int32 products_failed = 3;
+  repeated Product products = 4;
+  google.protobuf.Struct metadata = 5;
+}
+
+// SyncStock
+message SyncStockRequest {
+  string connector_id = 1;
+  int32 batch_size = 2;
+  repeated string product_ids = 3;
+  google.protobuf.Struct filters = 4;
+}
+
+message SyncStockResponse {
+  string sync_id = 1;
+  int32 stock_synced = 2;
+  int32 stock_failed = 3;
+  repeated StockUpdate stock_updates = 4;
+  google.protobuf.Struct metadata = 5;
+}
+
+message StockUpdate {
+  string product_id = 1;
+  string sku = 2;
+  int64 old_stock = 3;
+  int64 new_stock = 4;
+  string location = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
+
+// UpdateInventoryReservation - DEPRECATED: Use granular inventory commands instead
+message UpdateInventoryReservationRequest {
+  string connector_id = 1;
+  string order_id = 2;
+  repeated ReservationItem items = 3;
+  string action = 4; // reserve, release, confirm
+}
+
+message ReservationItem {
+  string product_id = 1;
+  string sku = 2;
+  int64 quantity = 3;
+  string location = 4;
+}
+
+message UpdateInventoryReservationResponse {
+  string reservation_id = 1;
+  string status = 2;
+  repeated ReservationResult results = 3;
+}
+
+message ReservationResult {
+  string product_id = 1;
+  string sku = 2;
+  int64 quantity_reserved = 3;
+  int64 quantity_available = 4;
+  bool success = 5;
+  string error = 6;
+}
+
+// ==========================================================================
+// Query Request/Response Messages
+// ==========================================================================
+
+// GetConnectorStatus
+message GetConnectorStatusRequest {
+  string connector_id = 1;
+}
+
+message GetConnectorStatusResponse {
+  Connector connector = 1;
+  string health_status = 2;
+  google.protobuf.Timestamp last_sync = 3;
+  int64 pending_webhooks = 4;
+  repeated SyncStatus sync_statuses = 5;
+  google.protobuf.Struct metadata = 6;
+}
+
+message SyncStatus {
+  string entity_type = 1;
+  string status = 2;
+  google.protobuf.Timestamp last_synced_at = 3;
+  int32 records_synced = 4;
+  string error = 5;
+}
+
+// GetSyncHistory
+message GetSyncHistoryRequest {
+  string connector_id = 1;
+  string entity_type = 2;
+  google.protobuf.Timestamp since = 3;
+  google.protobuf.Timestamp until = 4;
+  int32 page = 5;
+  int32 page_size = 6;
+  string sort_by = 7;
+  string sort_order = 8;
+}
+
+message GetSyncHistoryResponse {
+  repeated SyncLog sync_logs = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+  google.protobuf.Struct summary = 5;
+}
+
+// ListConnectors
+message ListConnectorsRequest {
+  string type = 1;
+  string status = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+  string sort_by = 5;
+  string sort_order = 6;
+}
+
+message ListConnectorsResponse {
+  repeated Connector connectors = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+// ==========================================================================
+// Invoice Management Messages
+// ==========================================================================
+
+// CreateInvoice
+message CreateInvoiceRequest {
+  string invoice_id = 1;
+  string invoice_number = 2;
+  string order_id = 3;
+  string customer_id = 4;
+  string customer_name = 5;
+  string customer_email = 6;
+  string type = 7; // standard, credit
+  google.protobuf.Timestamp issue_date = 8;
+  google.protobuf.Timestamp due_date = 9;
+  string currency = 10;
+  repeated InvoiceLine lines = 11;
+  int64 sub_total = 12;
+  int64 tax_amount = 13;
+  int64 total_amount = 14;
+  string payment_terms = 15;
+  string notes = 16;
+  string connector_id = 17;
+}
+
+message InvoiceLine {
+  int32 line_number = 1;
+  string sku = 2;
+  string description = 3;
+  int32 quantity = 4;
+  int64 unit_price = 5;
+  int64 line_total = 6;
+}
+
+message CreateInvoiceResponse {
+  string invoice_id = 1;
+  string invoice_number = 2;
+  string status = 3;
+}
+
+// ApproveInvoice
+message ApproveInvoiceRequest {
+  string invoice_id = 1;
+  string approved_by = 2;
+}
+
+message ApproveInvoiceResponse {
+  string invoice_id = 1;
+  string status = 2;
+  google.protobuf.Timestamp approved_at = 3;
+}
+
+// SendInvoice
+message SendInvoiceRequest {
+  string invoice_id = 1;
+  string method = 2; // email, print, api
+  string recipient_email = 3;
+}
+
+message SendInvoiceResponse {
+  string invoice_id = 1;
+  string status = 2;
+  google.protobuf.Timestamp sent_at = 3;
+}
+
+// VoidInvoice
+message VoidInvoiceRequest {
+  string invoice_id = 1;
+  string reason = 2;
+  string voided_by = 3;
+}
+
+message VoidInvoiceResponse {
+  string invoice_id = 1;
+  string status = 2;
+  google.protobuf.Timestamp voided_at = 3;
+}
+
+// RecordInvoicePayment
+message RecordInvoicePaymentRequest {
+  string invoice_id = 1;
+  int64 amount = 2;
+  string payment_method = 3;
+  string transaction_id = 4;
+  google.protobuf.Timestamp payment_date = 5;
+}
+
+message RecordInvoicePaymentResponse {
+  string invoice_id = 1;
+  string payment_id = 2;
+  int64 remaining_balance = 3;
+  string payment_status = 4;
+}
+
+// SyncInvoiceToERP
+message SyncInvoiceToERPRequest {
+  string invoice_id = 1;
+  string connector_id = 2;
+}
+
+message SyncInvoiceToERPResponse {
+  string invoice_id = 1;
+  string external_id = 2;
+  string status = 3;
+  google.protobuf.Timestamp synced_at = 4;
+}
+
+// ==========================================================================
+// Return Management Messages
+// ==========================================================================
+
+// CreateReturn
+message CreateReturnRequest {
+  string return_id = 1;
+  string return_number = 2;
+  string original_order_id = 3;
+  string customer_id = 4;
+  string customer_name = 5;
+  string customer_email = 6;
+  string reason = 7;
+  repeated ReturnLineItem items = 8;
+  string refund_method = 9;
+  int64 refund_amount = 10;
+  string warehouse_id = 11;
+  string notes = 12;
+  string connector_id = 13;
+}
+
+message ReturnLineItem {
+  string sku = 1;
+  string product_name = 2;
+  int32 quantity = 3;
+  string condition = 4;
+  int64 restocking_fee = 5;
+  int64 refund_amount = 6;
+  string exchange_for_sku = 7;
+  repeated string serial_numbers = 8;
+  string inspection_notes = 9;
+}
+
+message CreateReturnResponse {
+  string return_id = 1;
+  string return_number = 2;
+  string status = 3;
+}
+
+// ApproveReturn
+message ApproveReturnRequest {
+  string return_id = 1;
+  string approved_by = 2;
+}
+
+message ApproveReturnResponse {
+  string return_id = 1;
+  string status = 2;
+  google.protobuf.Timestamp approved_at = 3;
+}
+
+// RejectReturn
+message RejectReturnRequest {
+  string return_id = 1;
+  string reason = 2;
+}
+
+message RejectReturnResponse {
+  string return_id = 1;
+  string status = 2;
+  google.protobuf.Timestamp rejected_at = 3;
+}
+
+// ProcessReturnStart
+message ProcessReturnStartRequest {
+  string return_id = 1;
+  string erp_return_id = 2; // optional if already exists
+}
+
+message ProcessReturnStartResponse {
+  string return_id = 1;
+  string status = 2;
+  google.protobuf.Timestamp processed_at = 3;
+}
+
+// CompleteReturn
+message CompleteReturnRequest {
+  string return_id = 1;
+  string refund_transaction_id = 2;
+}
+
+message CompleteReturnResponse {
+  string return_id = 1;
+  string status = 2;
+  google.protobuf.Timestamp completed_at = 3;
+}
+
+// RestockReturnItems
+message RestockReturnItemsRequest {
+  string return_id = 1;
+  repeated ApiRestockedItem items = 2;
+}
+
+message ApiRestockedItem {
+  string sku = 1;
+  int32 quantity = 2;
+  string location_id = 3;
+}
+
+message RestockReturnItemsResponse {
+  string return_id = 1;
+  int32 items_restocked = 2;
+  google.protobuf.Timestamp restocked_at = 3;
+}
+
+// SyncReturnToERP
+message SyncReturnToERPRequest {
+  string return_id = 1;
+  string connector_id = 2;
+}
+
+message SyncReturnToERPResponse {
+  string return_id = 1;
+  string external_id = 2;
+  string status = 3;
+  google.protobuf.Timestamp synced_at = 4;
+}
+
+// ==========================================================================
+// Inventory Management Messages
+// ==========================================================================
+
+// CreateInventoryReservation
+message CreateInventoryReservationRequest {
+  string reservation_id = 1;
+  string order_id = 2;
+  string sku = 3;
+  string warehouse_id = 4;
+  int32 quantity = 5;
+  google.protobuf.Timestamp expires_at = 6;
+  string connector_id = 7;
+}
+
+message CreateInventoryReservationResponse {
+  string reservation_id = 1;
+  string status = 2;
+  google.protobuf.Timestamp created_at = 3;
+}
+
+// ReleaseInventoryReservation
+message ReleaseInventoryReservationRequest {
+  string reservation_id = 1;
+  string reason = 2;
+}
+
+message ReleaseInventoryReservationResponse {
+  string reservation_id = 1;
+  string status = 2;
+  google.protobuf.Timestamp released_at = 3;
+}
+
+// FulfillInventoryReservation
+message FulfillInventoryReservationRequest {
+  string reservation_id = 1;
+}
+
+message FulfillInventoryReservationResponse {
+  string reservation_id = 1;
+  string status = 2;
+  google.protobuf.Timestamp fulfilled_at = 3;
+}
+
+// TransferInventoryReservation
+message TransferInventoryReservationRequest {
+  string reservation_id = 1;
+  string to_warehouse_id = 2;
+}
+
+message TransferInventoryReservationResponse {
+  string reservation_id = 1;
+  string from_warehouse_id = 2;
+  string to_warehouse_id = 3;
+  string status = 4;
+  google.protobuf.Timestamp transferred_at = 5;
+}

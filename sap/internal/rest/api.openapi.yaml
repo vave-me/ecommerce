@@ -1,0 +1,167 @@
+openapiOptions:
+  file:
+    - file: "productspb/api.proto"
+      option:
+        info:
+          title: Products Management API
+          version: "1.0.0"
+          description: "API for managing products for   including creating, retrieving, updating, deleting products, bulk importing, and handling product-related files."
+        basePath: /
+  method:
+    # Product Management Operations
+    - method: productspb.ProductsService.AddProduct
+      option:
+        operationId: addProduct
+        tags:
+          - Product
+        summary: Add a New Product
+
+
+    - method: productspb.ProductsService.GetProduct
+      option:
+        operationId: getProduct
+        tags:
+          - Product
+        summary: Retrieve a Specific Product
+
+    - method: productspb.ProductsService.RemoveProduct
+      option:
+        operationId: removeProduct
+        tags:
+          - Product
+        summary: Remove a Product
+
+    - method: productspb.ProductsService.AddProductThumbnail
+      option:
+        operationId: addProductThumbnail
+        tags:
+          - Product
+        summary: Add a product thumbnail
+
+    - method: productspb.ProductsService.UpdateProductThumbnail
+      option:
+        operationId: updateProductThumbnail
+        tags:
+          - Product
+        summary: Update a product thumbnail
+
+    - method: productspb.ProductsService.UpdateProduct
+      option:
+        operationId: updateProduct
+        tags:
+          - Product
+        summary: Update a product thumbnail
+
+    - method: productspb.ProductsService.RebrandProduct
+      option:
+        operationId: rebrandProduct
+        tags:
+          - Product
+        summary: Rebrand a Product
+
+    - method: productspb.ProductsService.GetProductsByCategory
+      option:
+        operationId: getProductsByCategory
+        tags:
+          - Product
+        summary: Retrieve all products with given category
+
+    - method: productspb.ProductsService.GetProductsByCategorySlug
+      option:
+        operationId: getProductsByCategorySlug
+        tags:
+          - Product
+        summary: Retrieve all products with given category
+
+
+    - method: productspb.ProductsService.GetProductsWithFilters
+      option:
+        operationId: getProductsWithFilters
+        tags:
+          - Product
+        summary: Retrieve all products with given category
+
+    - method: productspb.ProductsService.GetProducts
+      option:
+        operationId: getProducts
+        tags:
+          - Product
+        summary: Retrieve all products associated w
+
+
+    - method: productspb.ProductsService.GetCatalog
+      option:
+        operationId: getCatalog
+        tags:
+          - Product
+        summary: Retrieve all products associated with a user
+
+    - method: productspb.ProductsService.AddVariant
+      option:
+        operationId: addVariant
+        tags:
+          - Variant
+        summary: Create a new Variant referencing a Product
+
+    - method: productspb.ProductsService.GetVariant
+      option:
+        operationId: getVariant
+        tags:
+          - Variant
+        summary: Retrieve a specific Variant
+
+    - method: productspb.ProductsService.GetVariants
+      option:
+        operationId: getVariants
+        tags:
+          - Variant
+        summary: Retrieve multiple Variants with optional filters
+
+    - method: productspb.ProductsService.IncreaseVariantPrice
+      option:
+        operationId: increaseVariantPrice
+        tags:
+          - Variant
+        summary: Increase the price of a Variant
+
+    - method: productspb.ProductsService.DecreaseVariantPrice
+      option:
+        operationId: decreaseVariantPrice
+        tags:
+          - Variant
+        summary: Decrease the price of a Variant
+
+    - method: productspb.ProductsService.AdjustVariantStock
+      option:
+        operationId: adjustVariantStock
+        tags:
+          - Variant
+        summary: Adjust the stock level of a Variant
+
+    - method: productspb.ProductsService.ArchiveVariant
+      option:
+        operationId: archiveVariant
+        tags:
+          - Variant
+        summary: Archive a Variant (mark as unavailable)
+
+    - method: productspb.ProductsService.RemoveVariant
+      option:
+        operationId: removeVariant
+        tags:
+          - Variant
+        summary: Remove a Variant
+
+    - method: productspb.ProductsService.GetCatalog
+      option:
+        operationId: getCatalog
+        tags:
+          - Product
+        summary: Get user products
+
+    - method: productspb.ProductsService.GetPublicCatalog
+      option:
+        operationId: getPublicCatalog
+        tags:
+          - Product
+        summary: Get user products

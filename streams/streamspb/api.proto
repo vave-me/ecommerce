@@ -1,0 +1,383 @@
+syntax = "proto3";
+
+package streamspb;
+
+option go_package = "middleman/streams/streamspb";
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "streamspb/common.proto";
+import "streamspb/events.proto";
+
+service StreamsService {
+  // Stream Management
+  rpc CreateStream(CreateStreamRequest) returns (CreateStreamResponse) {
+    option (google.api.http) = {
+      post: "/api/streams"
+      body: "*"
+    };
+  }
+  
+  rpc GetStream(GetStreamRequest) returns (GetStreamResponse) {
+    option (google.api.http) = {
+      get: "/api/streams/{stream_id}"
+    };
+  }
+  
+  rpc UpdateStream(UpdateStreamRequest) returns (UpdateStreamResponse) {
+    option (google.api.http) = {
+      put: "/api/streams/{stream_id}"
+      body: "*"
+    };
+  }
+  
+  rpc PublishStream(PublishStreamRequest) returns (PublishStreamResponse) {
+    option (google.api.http) = {
+      post: "/api/streams/{stream_id}/publish"
+    };
+  }
+  
+  rpc ArchiveStream(ArchiveStreamRequest) returns (ArchiveStreamResponse) {
+    option (google.api.http) = {
+      post: "/api/streams/{stream_id}/archive"
+    };
+  }
+  
+  // Stream Pricing and Access
+  rpc SetStreamPricing(SetStreamPricingRequest) returns (SetStreamPricingResponse) {
+    option (google.api.http) = {
+      post: "/api/streams/{stream_id}/pricing"
+      body: "*"
+    };
+  }
+  
+  rpc GrantUserAccess(GrantUserAccessRequest) returns (GrantUserAccessResponse) {
+    option (google.api.http) = {
+      post: "/api/streams/{stream_id}/access"
+      body: "*"
+    };
+  }
+  
+  rpc RevokeUserAccess(RevokeUserAccessRequest) returns (RevokeUserAccessResponse) {
+    option (google.api.http) = {
+      delete: "/api/streams/{stream_id}/access/{user_id}"
+    };
+  }
+  
+  // User Interaction
+  rpc UpdateWatchProgress(UpdateWatchProgressRequest) returns (UpdateWatchProgressResponse) {
+    option (google.api.http) = {
+      post: "/api/streams/{stream_id}/progress"
+      body: "*"
+    };
+  }
+  
+  rpc RateStream(RateStreamRequest) returns (RateStreamResponse) {
+    option (google.api.http) = {
+      post: "/api/streams/{stream_id}/rate"
+      body: "*"
+    };
+  }
+  
+  // Stream Discovery
+  rpc GetCatalog(GetCatalogRequest) returns (GetCatalogResponse) {
+    option (google.api.http) = {
+      get: "/api/streams/catalog"
+    };
+  }
+  
+  rpc SearchStreams(SearchStreamsRequest) returns (SearchStreamsResponse) {
+    option (google.api.http) = {
+      get: "/api/streams/search"
+    };
+  }
+  
+  rpc GetUserStreams(GetUserStreamsRequest) returns (GetUserStreamsResponse) {
+    option (google.api.http) = {
+      get: "/api/users/{user_id}/streams"
+    };
+  }
+  
+  rpc GetContinueWatching(GetContinueWatchingRequest) returns (GetContinueWatchingResponse) {
+    option (google.api.http) = {
+      get: "/api/users/{user_id}/continue-watching"
+    };
+  }
+  
+  // Series Management
+  rpc CreateSeries(CreateSeriesRequest) returns (CreateSeriesResponse) {
+    option (google.api.http) = {
+      post: "/api/series"
+      body: "*"
+    };
+  }
+  
+  rpc GetSeries(GetSeriesRequest) returns (GetSeriesResponse) {
+    option (google.api.http) = {
+      get: "/api/series/{series_id}"
+    };
+  }
+  
+  rpc AddSeason(AddSeasonRequest) returns (AddSeasonResponse) {
+    option (google.api.http) = {
+      post: "/api/series/{series_id}/seasons"
+      body: "*"
+    };
+  }
+  
+  rpc AddEpisode(AddEpisodeRequest) returns (AddEpisodeResponse) {
+    option (google.api.http) = {
+      post: "/api/series/{series_id}/seasons/{season_number}/episodes"
+      body: "*"
+    };
+  }
+}
+
+// Stream Management Messages
+message CreateStreamRequest {
+  string title = 1;
+  string description = 2;
+  string synopsis = 3;
+  StreamType stream_type = 4;
+  string stream_url = 5;
+  string thumbnail_url = 6;
+  string trailer_url = 7;
+  int64 duration = 8;
+  ContentRating content_rating = 9;
+  AccessType access_type = 10;
+  repeated string genre = 11;
+  string language = 12;
+  string country = 13;
+  string studio = 14;
+  google.protobuf.Timestamp release_date = 15;
+}
+
+message CreateStreamResponse {
+  string stream_id = 1;
+}
+
+message GetStreamRequest {
+  string stream_id = 1;
+  string user_id = 2; // Optional - to check access
+}
+
+message GetStreamResponse {
+  Stream stream = 1;
+  bool has_access = 2;
+  int64 watch_progress = 3;
+}
+
+message UpdateStreamRequest {
+  string stream_id = 1;
+  string title = 2;
+  string description = 3;
+  string synopsis = 4;
+  string thumbnail_url = 5;
+  string trailer_url = 6;
+  ContentRating content_rating = 7;
+  repeated string genre = 8;
+  repeated string tags = 9;
+}
+
+message UpdateStreamResponse {
+  bool success = 1;
+}
+
+message PublishStreamRequest {
+  string stream_id = 1;
+}
+
+message PublishStreamResponse {
+  bool success = 1;
+  google.protobuf.Timestamp published_at = 2;
+}
+
+message ArchiveStreamRequest {
+  string stream_id = 1;
+}
+
+message ArchiveStreamResponse {
+  bool success = 1;
+}
+
+// Pricing and Access Messages
+message SetStreamPricingRequest {
+  string stream_id = 1;
+  int64 rental_price = 2;
+  int64 rental_duration = 3; // hours
+  int64 purchase_price = 4;
+  int64 ppv_price = 5;
+}
+
+message SetStreamPricingResponse {
+  bool success = 1;
+}
+
+message GrantUserAccessRequest {
+  string stream_id = 1;
+  string user_id = 2;
+  AccessType access_type = 3;
+  int64 duration = 4; // hours
+}
+
+message GrantUserAccessResponse {
+  bool success = 1;
+  google.protobuf.Timestamp expires_at = 2;
+}
+
+message RevokeUserAccessRequest {
+  string stream_id = 1;
+  string user_id = 2;
+}
+
+message RevokeUserAccessResponse {
+  bool success = 1;
+}
+
+// User Interaction Messages
+message UpdateWatchProgressRequest {
+  string stream_id = 1;
+  string user_id = 2;
+  int64 progress = 3; // seconds
+  bool completed = 4;
+}
+
+message UpdateWatchProgressResponse {
+  bool success = 1;
+}
+
+message RateStreamRequest {
+  string stream_id = 1;
+  string user_id = 2;
+  int32 rating = 3; // 1-5
+  bool is_like = 4;
+}
+
+message RateStreamResponse {
+  bool success = 1;
+}
+
+// Discovery Messages
+message GetCatalogRequest {
+  string user_id = 1; // Optional - for personalized catalog
+  int32 page = 2;
+  int32 page_size = 3;
+  CatalogFilters filters = 4;
+}
+
+message GetCatalogResponse {
+  repeated StreamSummary streams = 1;
+  int32 total_count = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+  bool has_more = 5;
+  repeated Category categories = 6;
+  repeated string featured_ids = 7;
+}
+
+message SearchStreamsRequest {
+  string query = 1;
+  StreamFilters filters = 2;
+}
+
+message SearchStreamsResponse {
+  repeated Stream streams = 1;
+  int32 total_count = 2;
+}
+
+message GetUserStreamsRequest {
+  string user_id = 1;
+}
+
+message GetUserStreamsResponse {
+  repeated Stream streams = 1;
+}
+
+message GetContinueWatchingRequest {
+  string user_id = 1;
+}
+
+message GetContinueWatchingResponse {
+  repeated ContinueWatchingItem items = 1;
+}
+
+message ContinueWatchingItem {
+  Stream stream = 1;
+  int64 watch_progress = 2;
+  google.protobuf.Timestamp last_watched_at = 3;
+}
+
+// Series Management Messages
+message CreateSeriesRequest {
+  string title = 1;
+  string description = 2;
+  string thumbnail_url = 3;
+  repeated string genre = 4;
+  string studio = 5;
+}
+
+message CreateSeriesResponse {
+  string series_id = 1;
+}
+
+message GetSeriesRequest {
+  string series_id = 1;
+}
+
+message GetSeriesResponse {
+  Series series = 1;
+}
+
+message AddSeasonRequest {
+  string series_id = 1;
+  int32 season_number = 2;
+  string title = 3;
+  string description = 4;
+  string thumbnail_url = 5;
+}
+
+message AddSeasonResponse {
+  string season_id = 1;
+}
+
+message AddEpisodeRequest {
+  string series_id = 1;
+  int32 season_number = 2;
+  int32 episode_number = 3;
+  string stream_id = 4;
+  string title = 5;
+  int64 duration = 6;
+  google.protobuf.Timestamp air_date = 7;
+}
+
+message AddEpisodeResponse {
+  string episode_id = 1;
+}
+
+// Filters
+message CatalogFilters {
+  int32 page = 1;
+  int32 page_size = 2;
+  StreamType stream_type = 3;
+  string genre = 4;
+  AccessType access_type = 5;
+  string sort_by = 6;
+  string search_query = 7;
+}
+
+message StreamFilters {
+  StreamType stream_type = 1;
+  int64 min_duration = 2;
+  int64 max_duration = 3;
+  repeated ContentRating content_rating = 4;
+  repeated string genre = 5;
+  string language = 6;
+  string country = 7;
+  string studio = 8;
+  AccessType access_type = 9;
+  double min_rating = 10;
+  string released_after = 11;
+  string released_before = 12;
+  string sort_by = 13;
+  string sort_order = 14;
+}

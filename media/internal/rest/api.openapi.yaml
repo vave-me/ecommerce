@@ -1,0 +1,146 @@
+openapiOptions:
+  file:
+    - file: "mediapb/api.proto"
+      option:
+        info:
+          title: Media Management
+          version: "1.0.0"
+        basePath: /
+  method:
+    - method: mediapb.MediaService.CreateMedia
+      option:
+        operationId: createMedia
+        tags:
+          - Media
+        summary: Create a new media
+    - method: mediapb.MediaService.UpdateMedia
+      option:
+        operationId: updateMedia
+        tags:
+          - Media
+        summary: Update a new media
+    - method: mediapb.MediaService.AddImage
+      option:
+        operationId: addImage
+        tags:
+          - Image
+        summary: Add Image
+    - method: mediapb.MediaService.AddVideo
+      option:
+        operationId: addVideo
+        tags:
+          - Video
+        summary: Add Video
+
+    - method: mediapb.MediaService.GetMedia
+      option:
+        operationId: getMedia
+        tags:
+          - Media
+        summary: Get Media
+    - method: mediapb.MediaService.GetMediaByItem
+      option:
+        operationId: getMediaByItem
+        tags:
+          - Media
+        summary: Get Media
+
+    - method: mediapb.MediaService.GetAllItemImages
+      option:
+        operationId: getAllItemImages
+        tags:
+          - Image
+        summary: Get all images belonging to the item
+
+    - method: mediapb.MediaService.GetAllItemVideos
+      option:
+        operationId: getAllItemVideos
+        tags:
+          - Video
+        summary: Get all videos belonging to the item
+
+    - method: mediapb.MediaService.GetAllMediaVideos
+      option:
+        operationId: getAllMediaVideos
+        tags:
+          - Video
+        summary: Get all videos belonging to the media
+    - method: mediapb.MediaService.GetAllVideos
+      option:
+        operationId: getAllVideos
+        tags:
+          - Video
+        summary: Get all videos
+
+    - method: mediapb.MediaService.GetAllMediaImages
+      option:
+        operationId: getAllMediaImages
+        tags:
+          - Image
+        summary: Get all images belonging to the media
+
+    - method: mediapb.MediaService.GetAllImagesByAuthor
+      option:
+        operationId: getAllImagesByAuthor
+        tags:
+          - Image
+        summary: Get all images belonging to one author
+
+    - method: mediapb.MediaService.GetAllVideosByAuthor
+      option:
+        operationId: getAllVideosByAuthor
+        tags:
+          - Video
+        summary: Get all videos belonging to one author
+
+
+    - method: mediapb.MediaService.RemoveImage
+      option:
+        operationId: removeImage
+        tags:
+          - Image
+        summary: remove Image
+
+
+    - method: mediapb.MediaService.RemoveVideo
+      option:
+        operationId: removeVideo
+        tags:
+          - Video
+        summary: remove Video
+
+    - method: mediapb.MediaService.RemoveMedia
+      option:
+        operationId: removeMedia
+        tags:
+          - Media
+        summary: remove Media
+        
+    # Bulk Import Methods
+    - method: mediapb.MediaService.StartBulkImport
+      option:
+        operationId: startBulkImport
+        tags:
+          - Import
+        summary: Start a bulk image import session
+        
+    - method: mediapb.MediaService.AddImportBatch
+      option:
+        operationId: addImportBatch
+        tags:
+          - Import
+        summary: Add a batch of items to import session
+        
+    - method: mediapb.MediaService.GetImportStatus
+      option:
+        operationId: getImportStatus
+        tags:
+          - Import
+        summary: Get import session status
+        
+    - method: mediapb.MediaService.CancelImport
+      option:
+        operationId: cancelImport
+        tags:
+          - Import
+        summary: Cancel an active import session

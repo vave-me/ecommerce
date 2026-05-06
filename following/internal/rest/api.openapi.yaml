@@ -1,0 +1,80 @@
+openapiOptions:
+  file:
+    - file: "followingpb/api.proto"
+      option:
+        info:
+          title: Follow Management API
+          version: "1.0.0"
+          description: "API for managing following and replies between users, including functionalities to add, approve, reject, edit, and retrieve following and their replies."
+        basePath: /
+  method:
+    # Follow Operations
+    - method: followingpb.FollowingService.AddFollow
+      option:
+        operationId: addFollow
+        tags:
+          - Follow
+        summary: Add a new follow
+
+    - method: followingpb.FollowingService.ApproveFollow
+      option:
+        operationId: approveFollow
+        tags:
+          - Follow
+        summary: Approve a follow
+
+    - method: followingpb.FollowingService.RejectFollow
+      option:
+        operationId: rejectFollow
+        tags:
+          - Follow
+        summary: Reject a follow
+
+    - method: followingpb.FollowingService.EditFollow
+      option:
+        operationId: editFollow
+        tags:
+          - Follow
+        summary: Edit a follow
+
+    - method: followingpb.FollowingService.GetFollow
+      option:
+        operationId: getFollow
+        tags:
+          - Follow
+        summary: Get a follow
+
+    - method: followingpb.FollowingService.GetFollowing
+      option:
+        operationId: getFollowing
+        tags:
+          - Follow
+        summary: Get a list of following
+
+    - method: followingpb.FollowingService.GetFollowingBySender
+      option:
+        operationId: getFollowingBySender
+        tags:
+          - Follow
+        summary: Get a list of following
+
+    - method: followingpb.FollowingService.GetApprovedFollowing
+      option:
+        operationId: getApprovedFollowing
+        tags:
+          - Follow
+        summary: Get approved following
+
+    - method: followingpb.FollowingService.GetMostFollowed
+      option:
+        operationId: getMostFollowed
+        tags:
+          - ItemFollowCount
+        summary: Get items count
+
+    - method: followingpb.FollowingService.GetMostFollowedByCategory
+      option:
+        operationId: getMostFollowedByCategory
+        tags:
+          - ItemFollowCount
+        summary: Get items count

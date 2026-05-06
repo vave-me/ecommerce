@@ -1,0 +1,187 @@
+syntax = "proto3";
+
+package activitypb;
+
+import "google/protobuf/timestamp.proto";     // For timestamp fields
+import "google/protobuf/empty.proto";         // For empty responses
+
+// ActivityService provides functionalities related to user activities and their interactions.
+service ActivityService {
+
+  // Creates a new activity for a user.
+  rpc CreateActivity(CreateActivityRequest) returns (CreateActivityResponse) {}
+
+  // Retrieves details of an existing activity by its ID.
+  rpc GetActivity(GetActivityRequest) returns (GetActivityResponse) {}
+
+  // Lists all activities with optional filtering and pagination.
+  rpc GetActivities(GetActivitiesRequest) returns (GetActivitiesResponse) {}
+
+  // Restores an archived activity.
+  rpc RestoreActivity(RestoreActivityRequest) returns (RestoreActivityResponse) {}
+
+  // Archives an existing activity.
+  rpc ArchiveActivity(ArchiveActivityRequest) returns (ArchiveActivityResponse) {}
+
+  // Adds a new interaction to an activity.
+  rpc AddInteraction(AddInteractionRequest) returns (AddInteractionResponse) {}
+
+  // Retrieves details of a specific interaction by its ID.
+  rpc GetInteraction(GetInteractionRequest) returns (GetInteractionResponse) {}
+
+  // Lists all interactions for a specific activity with optional filtering and pagination.
+  rpc GetInteractions(GetInteractionsRequest) returns (GetInteractionsResponse) {}
+
+  // Removes an existing interaction by its ID.
+  rpc RemoveInteraction(RemoveInteractionRequest) returns (RemoveInteractionResponse) {}
+
+  rpc GetMostLiked(GetMostLikedRequest) returns (GetMostLikedResponse){}
+
+  rpc GetMostDisliked(GetMostDislikedRequest) returns (GetMostDislikedResponse){}
+}
+
+message RemoveInteractionResponse{}
+// Activity represents a long-living aggregate associated with a user.
+message Activity {
+  string id = 1;                             // Unique identifier of the activity.
+  string user_id = 2;                        // Unique identifier of the user associated with the activity.
+  bool archived = 3;                         // Indicates whether the activity is archived.
+
+}
+
+// Interaction represents a short-living aggregate associated with an activity.
+message Interaction {
+  string id = 1;                             // Unique identifier of the interaction.
+  string activity_id = 2;                    // Unique identifier of the associated activity.
+  string item_id = 3;                        // Unique identifier of the item being interacted with.
+  string item_type = 4;                    // Type of the item.
+  string action_type = 5;                // Type of action (like or dislike).
+
+}
+
+message MostReactionResult {
+  string item_id = 1;
+  string item_type = 2;
+  string action = 3;
+  int64 count = 4;
+}
+
+message  GetMostLikedRequest{
+  string item_type = 1;
+  int64 limit = 2;
+}
+message GetMostLikedResponse{
+  repeated MostReactionResult results = 1;
+}
+
+message GetMostDislikedRequest{
+  string item_type = 1;
+  int64 limit = 2;
+}
+message GetMostDislikedResponse{
+  repeated MostReactionResult results = 1;
+}
+// Request message to create a new activity.
+message CreateActivityRequest {
+  string user_id = 1;                        // Unique identifier of the user creating the activity.
+}
+
+// Response message after creating a new activity.
+message CreateActivityResponse {
+  string id = 1;                             // Unique identifier of the created activity.
+  string user_id = 2;                        // Unique identifier of the user.
+
+}
+
+// Request message to retrieve an existing activity.
+message GetActivityRequest {
+  string user_id = 1;                             // Unique identifier of the activity to retrieve.
+}
+
+// Response message for retrieving an activity.
+message GetActivityResponse {
+  string activity_id = 1;
+  string user_id = 2;// Details of the requested activity.
+}
+
+// Request message to list all activities.
+message GetActivitiesRequest {
+  string user_id = 1;                        // Filter activities by user ID (optional).
+  // Number of activities per page (optional).
+}
+
+// Response message for listing activities.
+message GetActivitiesResponse {
+  repeated Activity activities = 1;           // List of activities.
+  int32 total = 2;                            // Total number of activities available.
+  // Number of activities per page.
+}
+
+// Request message to restore an archived activity.
+message RestoreActivityRequest {
+  string id = 1;                             // Unique identifier of the activity to restore.
+  string reason = 2;                         // Reason for restoring the activity.
+}
+
+// Response message after restoring an activity.
+message RestoreActivityResponse {
+  string id = 1;                             // Unique identifier of the restored activity.
+  bool archived = 2;                         // Indicates whether the activity is archived.
+
+}
+
+// Request message to archive an activity.
+message ArchiveActivityRequest {
+  string id = 1;                             // Unique identifier of the activity to archive.
+  string reason = 2;                         // Reason for archiving the activity.
+}
+
+// Response message after archiving an activity.
+message ArchiveActivityResponse {
+  string id = 1;                             // Unique identifier of the archived activity.
+  bool archived = 2;                         // Indicates whether the activity is archived.
+
+}
+
+// Request message to add a new interaction.
+message AddInteractionRequest {
+  string activity_id = 1;                    // Unique identifier of the associated activity.
+  string item_id = 2;                        // Unique identifier of the item being interacted with.
+  string item_type = 3;                    // Type of the item.
+  string action_type = 4;                // Type of action (like or dislike).
+}
+
+// Response message after adding a new interaction.
+message AddInteractionResponse {
+  string id = 1;                             // Unique identifier of the created interaction.
+}
+
+// Request message to retrieve a specific interaction.
+message GetInteractionRequest {
+  string id = 1;                             // Unique identifier of the interaction to retrieve.
+}
+
+// Response message for retrieving an interaction.
+message GetInteractionResponse {
+  Interaction interaction = 1;               // Details of the requested interaction.
+}
+
+// Request message to list interactions for an activity.
+message GetInteractionsRequest {
+  string activity_id = 1;                    // Unique identifier of the activity.
+  string action_type = 2;                // Filter interactions by action type (optional).
+  // Number of interactions per page (optional).
+}
+
+// Response message for listing interactions.
+message GetInteractionsResponse {
+  repeated Interaction interactions = 1;     // List of interactions.
+  // Number of interactions per page.
+}
+
+// Request message to remove an interaction.
+message RemoveInteractionRequest {
+  string id = 1;                             // Unique identifier of the interaction to remove.
+}
+
+// Note: RemoveInteractionResponse is replaced with google.protobuf.Empty

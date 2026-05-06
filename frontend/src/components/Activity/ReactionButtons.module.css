@@ -1,0 +1,99 @@
+/*
+  ReactionButtons.module.css
+  Styling for reaction buttons (like, love, etc.)
+*/
+
+.buttonsContainer {
+    display: flex;
+    gap: 8px;
+}
+
+.reactionButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--text-tertiary, #9ca3af);
+    transition: all 0.2s ease;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.reactionButton:hover {
+    color: var(--primary-color, #2980b9);
+    background-color: var(--primary-light, #e0e7ff);
+    transform: translateY(-2px);
+}
+
+/* Focus states for accessibility */
+.reactionButton:focus-visible {
+    outline: 2px solid var(--primary-color, #2980b9);
+    outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .reactionButton {
+        font-size: 16px;
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .reactionButton {
+        transition: none;
+    }
+
+    .reactionButton:hover {
+        transform: none;
+    }
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+    .reactionButton:hover {
+        border: 1px solid ButtonText;
+    }
+}
+
+/* ================================
+   DARK THEME SUPPORT
+================================ */
+
+@media (prefers-color-scheme: dark) {
+    /* ============= REACTION BUTTONS ============= */
+    .reactionButton {
+        color: var(--gray-400);
+        background-color: transparent;
+    }
+
+    .reactionButton:hover {
+        color: var(--primary-color);
+        background-color: rgba(var(--primary-color-rgb, 59, 130, 246), 0.2);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ============= FOCUS STATES ============= */
+    .reactionButton:focus-visible {
+        outline-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb, 59, 130, 246), 0.2);
+    }
+
+    /* ============= MOBILE RESPONSIVE OVERRIDES ============= */
+    @media (max-width: 480px) {
+        .reactionButton {
+            color: var(--gray-400);
+        }
+
+        .reactionButton:hover {
+            color: var(--primary-color);
+            background-color: rgba(var(--primary-color-rgb, 59, 130, 246), 0.2);
+        }
+    }
+}

@@ -1,0 +1,670 @@
+/* ===============================================================================
+   PROFESSIONAL ADD ADMIN INTERFACE - COMPACT & REFINED
+   Clean, efficient admin creation form with professional design patterns
+   =============================================================================== */
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--admin-space-6) var(--admin-space-5);
+  min-height: 100vh;
+  background: var(--admin-gray-50);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ===== HEADER SECTION ===== */
+.header {
+  background: var(--admin-white);
+  border-radius: var(--admin-radius-lg);
+  padding: var(--admin-space-5);
+  margin-bottom: var(--admin-space-6);
+  border: 1px solid var(--admin-gray-200);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-4);
+  flex: 1;
+}
+
+.backButton {
+  background: var(--admin-gray-100);
+  border: 1px solid var(--admin-gray-200);
+  border-radius: var(--admin-radius-md);
+  padding: var(--admin-space-3) var(--admin-space-4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-2);
+  color: var(--admin-gray-600);
+  font-size: var(--admin-font-sm);
+  font-weight: 500;
+  transition: background-color 0.15s ease;
+  text-decoration: none;
+}
+
+.backButton:hover {
+  background: var(--admin-gray-200);
+  color: var(--admin-gray-700);
+}
+
+.backButton:focus-visible {
+  outline: 2px solid var(--admin-primary);
+  outline-offset: 2px;
+}
+
+.headerContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--admin-font-xl);
+  font-weight: 600;
+  color: var(--admin-gray-900);
+  margin: 0 0 var(--admin-space-1) 0;
+  line-height: 1.25;
+}
+
+.subtitle {
+  font-size: var(--admin-font-sm);
+  color: var(--admin-gray-500);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.headerIcon {
+  color: var(--admin-primary);
+  padding: var(--admin-space-3);
+  background: var(--admin-primary-light);
+  border-radius: var(--admin-radius-md);
+}
+
+/* ===== CONTENT LAYOUT ===== */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--admin-space-6);
+}
+
+/* ===== ROLE SELECTION ===== */
+.roleSection {
+  background: var(--admin-white);
+  border-radius: var(--admin-radius-lg);
+  padding: var(--admin-space-5);
+  border: 1px solid var(--admin-gray-200);
+}
+
+.sectionTitle {
+  font-size: var(--admin-font-lg);
+  font-weight: 600;
+  color: var(--admin-gray-900);
+  margin: 0 0 var(--admin-space-4) 0;
+  padding-bottom: var(--admin-space-3);
+  border-bottom: 1px solid var(--admin-gray-200);
+}
+
+.roleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--admin-space-4);
+}
+
+.roleCard {
+  background: var(--admin-gray-50);
+  border: 2px solid var(--admin-gray-200);
+  border-radius: var(--admin-radius-lg);
+  padding: var(--admin-space-4);
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.roleCard:hover {
+  border-color: var(--admin-gray-300);
+}
+
+.roleCard.selected {
+  border-color: var(--admin-primary);
+  background: var(--admin-primary-light);
+}
+
+.roleCard:focus-visible {
+  outline: 2px solid var(--admin-primary);
+  outline-offset: 2px;
+}
+
+.roleHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-3);
+  margin-bottom: var(--admin-space-3);
+}
+
+.roleIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--admin-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--admin-white);
+  color: var(--admin-primary);
+  transition: background-color 0.15s ease;
+}
+
+.roleCard.selected .roleIcon {
+  background: var(--admin-primary);
+  color: white;
+}
+
+.roleContent {
+  flex: 1;
+}
+
+.roleLabel {
+  font-size: var(--admin-font-base);
+  font-weight: 600;
+  color: var(--admin-gray-900);
+  margin: 0 0 var(--admin-space-1) 0;
+  line-height: 1.25;
+}
+
+.roleDescription {
+  font-size: var(--admin-font-sm);
+  color: var(--admin-gray-500);
+  margin: 0 0 var(--admin-space-3) 0;
+  line-height: 1.5;
+}
+
+.rolePermissions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rolePermissions li {
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-2);
+  font-size: var(--admin-font-xs);
+  color: var(--admin-gray-500);
+  margin-bottom: var(--admin-space-1);
+  line-height: 1.4;
+}
+
+.rolePermissions li::before {
+  content: '✓';
+  color: var(--admin-success);
+  font-weight: 600;
+  font-size: var(--admin-font-sm);
+}
+
+.roleCard.selected .rolePermissions li {
+  color: var(--admin-gray-700);
+}
+
+/* ===== FORM SECTION ===== */
+.formSection {
+  background: var(--admin-white);
+  border-radius: var(--admin-radius-lg);
+  padding: var(--admin-space-5);
+  border: 1px solid var(--admin-gray-200);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--admin-space-4);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--admin-space-2);
+}
+
+.formLabel {
+  font-size: var(--admin-font-sm);
+  font-weight: 600;
+  color: var(--admin-gray-700);
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-1);
+}
+
+.required {
+  color: var(--admin-error);
+  font-size: var(--admin-font-xs);
+}
+
+.formInput {
+  width: 100%;
+  height: 40px;
+  padding: 0 var(--admin-space-3);
+  background: var(--admin-gray-50);
+  border: 2px solid var(--admin-gray-200);
+  border-radius: var(--admin-radius-md);
+  color: var(--admin-gray-900);
+  font-size: var(--admin-font-sm);
+  transition: border-color 0.15s ease;
+}
+
+.formInput::placeholder {
+  color: var(--admin-gray-400);
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: var(--admin-primary);
+  background: var(--admin-white);
+}
+
+.formInput:invalid {
+  border-color: var(--admin-error);
+}
+
+.inputWithIcon {
+  position: relative;
+}
+
+.inputIcon {
+  position: absolute;
+  left: var(--admin-space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--admin-gray-400);
+  pointer-events: none;
+}
+
+.inputWithIcon .formInput {
+  padding-left: 40px;
+}
+
+.passwordToggle {
+  position: absolute;
+  right: var(--admin-space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--admin-gray-400);
+  cursor: pointer;
+  padding: var(--admin-space-1);
+  border-radius: var(--admin-radius-sm);
+  transition: color 0.15s ease;
+}
+
+.passwordToggle:hover {
+  color: var(--admin-gray-600);
+}
+
+.passwordToggle:focus-visible {
+  outline: 2px solid var(--admin-primary);
+  outline-offset: 1px;
+}
+
+.formError {
+  font-size: var(--admin-font-xs);
+  color: var(--admin-error);
+  margin-top: var(--admin-space-1);
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-1);
+}
+
+.formSuccess {
+  font-size: var(--admin-font-xs);
+  color: var(--admin-success);
+  margin-top: var(--admin-space-1);
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-1);
+}
+
+.formHint {
+  font-size: var(--admin-font-xs);
+  color: var(--admin-gray-500);
+  margin-top: var(--admin-space-1);
+  line-height: 1.5;
+}
+
+/* ===== ACTION BUTTONS ===== */
+.actionsSection {
+  background: var(--admin-white);
+  border-radius: var(--admin-radius-lg);
+  padding: var(--admin-space-5);
+  border: 1px solid var(--admin-gray-200);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--admin-space-4);
+  position: sticky;
+  bottom: var(--admin-space-4);
+}
+
+.actionsLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-3);
+  flex: 1;
+}
+
+.actionsRight {
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-3);
+}
+
+.cancelButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--admin-space-2);
+  height: 40px;
+  padding: 0 var(--admin-space-4);
+  background: var(--admin-gray-100);
+  border: 1px solid var(--admin-gray-200);
+  border-radius: var(--admin-radius-md);
+  color: var(--admin-gray-600);
+  font-size: var(--admin-font-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  text-decoration: none;
+}
+
+.cancelButton:hover {
+  background: var(--admin-gray-200);
+  color: var(--admin-gray-700);
+}
+
+.cancelButton:focus-visible {
+  outline: 2px solid var(--admin-primary);
+  outline-offset: 2px;
+}
+
+.saveButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--admin-space-2);
+  height: 40px;
+  padding: 0 var(--admin-space-6);
+  background: var(--admin-primary);
+  border: 1px solid var(--admin-primary);
+  border-radius: var(--admin-radius-md);
+  color: white;
+  font-size: var(--admin-font-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.saveButton:hover {
+  background: var(--admin-primary-hover);
+}
+
+.saveButton:focus-visible {
+  outline: 2px solid var(--admin-primary);
+  outline-offset: 2px;
+}
+
+.saveButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--admin-gray-400);
+  border-color: var(--admin-gray-400);
+}
+
+.loadingSpinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== STATUS INDICATORS ===== */
+.statusMessage {
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-2);
+  padding: var(--admin-space-3) var(--admin-space-4);
+  border-radius: var(--admin-radius-md);
+  font-size: var(--admin-font-sm);
+  font-weight: 500;
+  border: 1px solid;
+}
+
+.statusMessage.success {
+  background: var(--admin-success-light);
+  border-color: var(--admin-success);
+  color: var(--admin-success);
+}
+
+.statusMessage.error {
+  background: var(--admin-error-light);
+  border-color: var(--admin-error);
+  color: var(--admin-error);
+}
+
+.statusMessage.warning {
+  background: var(--admin-warning-light);
+  border-color: var(--admin-warning);
+  color: var(--admin-warning);
+}
+
+/* ===== PROGRESS INDICATOR ===== */
+.progressContainer {
+  background: var(--admin-white);
+  border-radius: var(--admin-radius-lg);
+  padding: var(--admin-space-4);
+  border: 1px solid var(--admin-gray-200);
+  margin-bottom: var(--admin-space-6);
+}
+
+.progressBar {
+  width: 100%;
+  height: 6px;
+  background: var(--admin-gray-200);
+  border-radius: var(--admin-radius-full);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--admin-primary);
+  border-radius: var(--admin-radius-full);
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--admin-space-2);
+  font-size: var(--admin-font-xs);
+  color: var(--admin-gray-500);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+  .container {
+    padding: var(--admin-space-5) var(--admin-space-4);
+  }
+
+  .roleGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .actionsSection {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--admin-space-3);
+  }
+
+  .actionsLeft,
+  .actionsRight {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: var(--admin-space-4) var(--admin-space-3);
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--admin-space-4);
+  }
+
+  .headerLeft {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--admin-space-3);
+  }
+
+  .backButton {
+    align-self: flex-start;
+  }
+
+  .roleCard {
+    padding: var(--admin-space-4);
+  }
+
+  .roleHeader {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--admin-space-3);
+  }
+
+  .roleIcon {
+    align-self: center;
+  }
+
+  .actionsSection {
+    position: static;
+    margin-top: var(--admin-space-6);
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: var(--admin-space-4);
+  }
+
+  .title {
+    font-size: var(--admin-font-lg);
+  }
+
+  .roleSection,
+  .formSection,
+  .actionsSection {
+    padding: var(--admin-space-4);
+  }
+
+  .formInput {
+    height: 36px;
+  }
+
+  .saveButton,
+  .cancelButton {
+    height: 36px;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  .container,
+  .container * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .loadingSpinner {
+    animation: none;
+    border: 2px solid currentColor;
+    border-top: 2px solid transparent;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .roleCard,
+  .formInput,
+  .saveButton,
+  .cancelButton {
+    border-width: 2px;
+  }
+
+  .roleCard.selected {
+    border-width: 3px;
+  }
+
+  .statusMessage {
+    border-width: 2px;
+    font-weight: 600;
+  }
+}
+
+/* ===== FOCUS MANAGEMENT ===== */
+.roleCard:focus-visible,
+.formInput:focus,
+.saveButton:focus-visible,
+.cancelButton:focus-visible,
+.backButton:focus-visible,
+.passwordToggle:focus-visible {
+  outline: 2px solid var(--admin-primary);
+  outline-offset: 2px;
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  .container {
+    background: white;
+    max-width: none;
+    padding: 0;
+  }
+
+  .headerActions,
+  .actionsSection,
+  .progressContainer {
+    display: none !important;
+  }
+
+  .header,
+  .roleSection,
+  .formSection {
+    border: 1px solid #000;
+    break-inside: avoid;
+    margin-bottom: var(--admin-space-4);
+  }
+
+  .roleCard {
+    break-inside: avoid;
+    border: 1px solid #000;
+  }
+} 

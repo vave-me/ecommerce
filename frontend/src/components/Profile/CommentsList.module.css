@@ -1,0 +1,296 @@
+/* CommentsList.module.css */
+/* Modern, professional comments list styling */
+
+.listContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Loading state */
+.loading {
+    padding: 40px 20px;
+    text-align: center;
+    color: #64748b;
+    background-color: #f8fafc;
+    border-radius: 12px;
+    font-size: 15px;
+    animation: pulse 3s infinite ease; /* Reduced frequency and simplified timing for performance */
+}
+
+@media (prefers-color-scheme: dark) {
+    .loading {
+        color: var(--gray-400, #9ca3af);
+        background-color: var(--gray-800, #1f2937);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Error state */
+.error {
+    padding: 24px;
+    background-color: #fee2e2;
+    border-radius: 12px;
+    color: #b91c1c;
+    font-size: 15px;
+    text-align: center;
+    border: 1px solid #fecaca;
+}
+
+@media (prefers-color-scheme: dark) {
+    .error {
+        background-color: var(--red-900, #7f1d1d);
+        color: var(--red-400, #f87171);
+        border-color: var(--red-800, #991b1b);
+    }
+}
+
+/* Empty state */
+.empty {
+    padding: 32px 24px;
+    background-color: #f8fafc;
+    border-radius: 12px;
+    text-align: center;
+    color: #64748b;
+    border: 1px dashed #cbd5e1;
+}
+
+@media (prefers-color-scheme: dark) {
+    .empty {
+        background-color: var(--gray-800, #1f2937);
+        color: var(--gray-400, #9ca3af);
+        border-color: var(--gray-600, #4b5563);
+    }
+}
+
+.emptyIcon {
+    font-size: 36px;
+    margin-bottom: 16px;
+    color: #94a3b8;
+}
+
+@media (prefers-color-scheme: dark) {
+    .emptyIcon {
+        color: var(--gray-500, #6b7280);
+    }
+}
+
+.emptyText {
+    font-size: 15px;
+    margin: 0 0 8px 0;
+    color: #334155;
+}
+
+@media (prefers-color-scheme: dark) {
+    .emptyText {
+        color: var(--gray-300, #d1d5db);
+    }
+}
+
+.emptySubtext {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    .emptySubtext {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+/* Filter section */
+.filterSection {
+    display: flex;
+    gap: 8px;
+    padding: 16px 0;
+    margin-bottom: 8px;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.filterSection::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
+.filterButton {
+    padding: 6px 12px;
+    background-color: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+@media (prefers-color-scheme: dark) {
+    .filterButton {
+        background-color: var(--gray-700, #374151);
+        border-color: var(--gray-600, #4b5563);
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.filterButton:hover {
+    background-color: #e0f2fe;
+    color: #0ea5e9;
+    border-color: #bae6fd;
+}
+
+@media (prefers-color-scheme: dark) {
+    .filterButton:hover {
+        background-color: var(--gray-600, #4b5563);
+        color: var(--primary-color, #3b82f6);
+        border-color: var(--primary-color, #3b82f6);
+    }
+}
+
+.filterButtonActive {
+    background-color: #0ea5e9;
+    color: white;
+    border-color: #0ea5e9;
+}
+
+@media (prefers-color-scheme: dark) {
+    .filterButtonActive {
+        background-color: var(--primary-color, #3b82f6);
+        color: var(--gray-50, #f9fafb);
+        border-color: var(--primary-color, #3b82f6);
+    }
+}
+
+.filterButtonActive:hover {
+    background-color: #0284c7;
+    color: white;
+    border-color: #0284c7;
+}
+
+@media (prefers-color-scheme: dark) {
+    .filterButtonActive:hover {
+        background-color: var(--primary-hover, #60a5fa);
+        border-color: var(--primary-hover, #60a5fa);
+    }
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+}
+
+.pageButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #e2e8f0;
+    background-color: #ffffff;
+    color: #64748b;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+    .pageButton {
+        background-color: var(--gray-700, #374151);
+        border-color: var(--gray-600, #4b5563);
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.pageButton:hover {
+    background-color: #f1f5f9;
+    border-color: #cbd5e1;
+    color: #0f172a;
+}
+
+@media (prefers-color-scheme: dark) {
+    .pageButton:hover {
+        background-color: var(--gray-600, #4b5563);
+        border-color: var(--gray-500, #6b7280);
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+.pageButtonActive {
+    background-color: #0ea5e9;
+    color: white;
+    border-color: #0ea5e9;
+}
+
+@media (prefers-color-scheme: dark) {
+    .pageButtonActive {
+        background-color: var(--primary-color, #3b82f6);
+        color: var(--gray-50, #f9fafb);
+        border-color: var(--primary-color, #3b82f6);
+    }
+}
+
+.pageButtonActive:hover {
+    background-color: #0284c7;
+}
+
+@media (prefers-color-scheme: dark) {
+    .pageButtonActive:hover {
+        background-color: var(--primary-hover, #60a5fa);
+        border-color: var(--primary-hover, #60a5fa);
+    }
+}
+
+.pageButtonDisabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pageButtonDisabled:hover {
+    background-color: #ffffff;
+    border-color: #e2e8f0;
+    color: #64748b;
+}
+
+@media (prefers-color-scheme: dark) {
+    .pageButtonDisabled:hover {
+        background-color: var(--gray-700, #374151);
+        border-color: var(--gray-600, #4b5563);
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 640px) {
+    .listContainer {
+        gap: 12px;
+    }
+
+    .filterSection {
+        padding: 12px 0;
+    }
+
+    .filterButton {
+        padding: 4px 10px;
+        font-size: 13px;
+    }
+
+    .pageButton {
+        width: 32px;
+        height: 32px;
+        font-size: 13px;
+    }
+}

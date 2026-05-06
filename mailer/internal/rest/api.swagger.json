@@ -1,0 +1,120 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Mailer Management",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "MailerService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/mailer": {
+      "post": {
+        "summary": "Create a new mailer",
+        "operationId": "createEmail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mailerpbCreateEmailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/mailerpbCreateEmailRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Email"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "mailerpbCreateEmailRequest": {
+      "type": "object",
+      "properties": {
+        "senderId": {
+          "type": "string"
+        },
+        "recipient": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "mailerpbCreateEmailResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "mailerpbNotifyUserCreatedResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

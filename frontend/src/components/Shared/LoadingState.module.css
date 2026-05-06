@@ -1,0 +1,220 @@
+/**
+ * OPTIMIZED LOADING STATE STYLES
+ * Lightweight alternatives to heavy loading animations
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ai-space-md);
+  padding: var(--ai-space-xl);
+  color: var(--ai-color-text-secondary);
+  font-family: var(--ai-font-family);
+}
+
+@media (prefers-color-scheme: dark) {
+  .container {
+    color: var(--gray-400, #9ca3af);
+  }
+}
+
+/* Size variants */
+.small {
+  padding: var(--ai-space-md);
+  font-size: var(--ai-text-sm);
+  gap: var(--ai-space-sm);
+}
+
+.medium {
+  padding: var(--ai-space-xl);
+  font-size: var(--ai-text-base);
+  gap: var(--ai-space-md);
+}
+
+.large {
+  padding: var(--ai-space-3xl);
+  font-size: var(--ai-text-lg);
+  gap: var(--ai-space-lg);
+}
+
+/* Variant styles */
+.default {
+  background: transparent;
+}
+
+.card {
+  background: var(--ai-color-surface);
+  border: 1px solid var(--ai-color-border);
+  border-radius: var(--ai-radius-lg);
+  box-shadow: var(--shadow-optimized-sm);
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: var(--gray-800, #1f2937);
+    border-color: var(--gray-700, #374151);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  z-index: var(--ai-z-overlay);
+}
+
+@media (prefers-color-scheme: dark) {
+  .overlay {
+    background: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.fullScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--ai-color-background);
+  z-index: var(--ai-z-modal);
+}
+
+@media (prefers-color-scheme: dark) {
+  .fullScreen {
+    background: var(--gray-900, #111827);
+  }
+}
+
+/* Spinner container */
+.spinnerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Optimized spinner - simple rotation for 60fps */
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--ai-color-border);
+  border-top-color: var(--ai-color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-color-scheme: dark) {
+  .spinner {
+    border-color: var(--gray-600, #4b5563);
+    border-top-color: var(--teal-400, #2dd4bf);
+  }
+}
+
+.small .spinner {
+  width: 16px;
+  height: 16px;
+  border-width: 1.5px;
+}
+
+.large .spinner {
+  width: 32px;
+  height: 32px;
+  border-width: 3px;
+}
+
+/* Message styling */
+.message {
+  text-align: center;
+  line-height: var(--ai-line-height-normal);
+  margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .message {
+    color: var(--gray-300, #d1d5db);
+  }
+}
+
+/* Optimized animation - single property for performance */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+    border-top-color: var(--ai-color-primary);
+    opacity: 0.7;
+  }
+  
+  .spinner::after {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: var(--ai-color-primary);
+    border-radius: 50%;
+    margin: 2px auto;
+  }
+  
+  .small .spinner::after {
+    width: 6px;
+    height: 6px;
+    margin: 1px auto;
+  }
+  
+  .large .spinner::after {
+    width: 10px;
+    height: 10px;
+    margin: 6px auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) and (prefers-color-scheme: dark) {
+  .spinner {
+    border-top-color: var(--teal-400, #2dd4bf);
+  }
+  
+  .spinner::after {
+    background: var(--teal-400, #2dd4bf);
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .card {
+    border-width: 2px;
+  }
+  
+  .spinner {
+    border-width: 3px;
+  }
+  
+  .small .spinner {
+    border-width: 2px;
+  }
+  
+  .large .spinner {
+    border-width: 4px;
+  }
+}
+
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+  .card {
+    border-color: var(--gray-500, #6b7280);
+  }
+  
+  .spinner {
+    border-color: var(--gray-500, #6b7280);
+    border-top-color: var(--teal-300, #5eead4);
+  }
+} 

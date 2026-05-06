@@ -1,0 +1,259 @@
+/*
+  Activity.module.css
+  Main container styles for the activity feed component
+*/
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 40px auto 80px;
+    background-color: var(--surface);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--border-color-light);
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Decorative top border */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--color-brand-primary, #5b45d5);
+    z-index: 1;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    padding: 24px 30px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    position: relative;
+}
+
+.iconWrapper {
+    font-size: 24px;
+    margin-right: 15px;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.3px;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: var(--surface-secondary);
+    border-bottom: 1px solid var(--border-color-light);
+    gap: 12px;
+}
+
+.bulkActionButton {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.bulkActionButton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.bulkActionButton:hover {
+    background-color: var(--primary-color-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+.bulkActionButton:hover::after {
+    transform: translateX(0);
+}
+
+.loadingMessage, .emptyMessage {
+    padding: 32px 30px;
+    text-align: center;
+    color: var(--neutral-color);
+    font-size: 16px;
+}
+
+.loadingMessage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.spinner {
+    animation: spin 1.2s linear infinite;
+    color: var(--primary-color);
+    font-size: 24px;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Focus states for accessibility */
+.bulkActionButton:focus-visible {
+    outline: 2px solid rgba(91, 69, 213, 0.4);
+    outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        margin: 30px 20px 60px;
+    }
+
+    .header {
+        padding: 20px 20px 16px;
+    }
+
+    .iconWrapper {
+        font-size: 20px;
+    }
+
+    .title {
+        font-size: 22px;
+    }
+
+    .controls {
+        padding: 12px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .bulkActionButton {
+        margin-left: 0;
+        align-self: stretch;
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        margin: 20px 10px 40px;
+        border-radius: 8px;
+    }
+
+    .header {
+        padding: 16px 15px 12px;
+    }
+
+    .iconWrapper {
+        font-size: 18px;
+        margin-right: 10px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .loadingMessage, .emptyMessage {
+        padding: 24px 15px;
+        font-size: 14px;
+    }
+}
+
+/* Dark Theme Support */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background-color: var(--gray-900);
+        border: 1px solid var(--gray-700);
+    }
+
+    .header {
+        background-color: var(--primary-color);
+    }
+
+    .title {
+        color: var(--white);
+    }
+
+    .controls {
+        background-color: var(--gray-800);
+        border-bottom: 1px solid var(--gray-700);
+    }
+
+    .bulkActionButton {
+        background-color: var(--primary-color);
+        color: var(--white);
+    }
+
+    .bulkActionButton:hover {
+        background-color: var(--primary-color-hover);
+    }
+
+    .loadingMessage, .emptyMessage {
+        color: var(--gray-300);
+    }
+
+    .spinner {
+        color: var(--primary-color);
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .container {
+        animation: none;
+    }
+    
+    .spinner {
+        animation: spin 2s linear infinite;
+    }
+
+    .bulkActionButton:hover {
+        transform: none;
+    }
+}

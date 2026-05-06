@@ -1,0 +1,321 @@
+/* Selector Container */
+.selectorContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Search Bar */
+.searchBar {
+    padding: 8px 12px;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #2c3e50;
+    transition: border-color 0.2s ease;
+}
+
+/* Dark theme for search bar */
+@media (prefers-color-scheme: dark) {
+    .searchBar {
+        background-color: var(--gray-700, #374151);
+        border: 1px solid var(--gray-600, #4b5563);
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.searchBar:focus {
+    border-color: #1aa89e;
+    outline: none;
+}
+
+/* Dark theme for search bar focus */
+@media (prefers-color-scheme: dark) {
+    .searchBar:focus {
+        border-color: var(--primary-color, #3b82f6);
+    }
+}
+
+/* Available Items Section */
+.availableItems {
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+    padding: 8px;
+    background-color: #ffffff;
+    /* Custom scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+
+/* Dark theme for available items */
+@media (prefers-color-scheme: dark) {
+    .availableItems {
+        background-color: var(--gray-800, #1f2937);
+        border: 1px solid var(--gray-600, #4b5563);
+        scrollbar-color: var(--gray-600, #4b5563) transparent;
+    }
+}
+
+/* Custom scrollbar for webkit browsers */
+.availableItems::-webkit-scrollbar {
+    width: 6px;
+}
+
+.availableItems::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.availableItems::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 3px;
+}
+
+.availableItems::-webkit-scrollbar-thumb:hover {
+    background-color: #94a3b8;
+}
+
+/* Dark theme for available items scrollbar */
+@media (prefers-color-scheme: dark) {
+    .availableItems::-webkit-scrollbar-thumb {
+        background-color: var(--gray-600, #4b5563);
+    }
+
+    .availableItems::-webkit-scrollbar-thumb:hover {
+        background-color: var(--gray-500, #6b7280);
+    }
+}
+
+/* Individual Available Item */
+.availableItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.availableItem:hover {
+    background-color: #ecf0f1;
+}
+
+/* Dark theme for available item hover */
+@media (prefers-color-scheme: dark) {
+    .availableItem:hover {
+        background-color: var(--gray-700, #374151);
+    }
+}
+
+/* Item Information */
+.itemInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.itemInfo span {
+    font-size: 14px;
+    color: #2c3e50;
+}
+
+/* Dark theme for item info */
+@media (prefers-color-scheme: dark) {
+    .itemInfo span {
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+/* Add Button */
+.addButton {
+    background-color: #1aa89e;
+    color: #ffffff;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* Dark theme for add button */
+@media (prefers-color-scheme: dark) {
+    .addButton {
+        background-color: var(--success, #10b981);
+    }
+}
+
+.addButton:hover {
+    background-color: #178f7a;
+}
+
+/* Dark theme for add button hover */
+@media (prefers-color-scheme: dark) {
+    .addButton:hover {
+        background-color: var(--success, #059669);
+    }
+}
+
+.addButton:focus {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+/* Dark theme for add button focus */
+@media (prefers-color-scheme: dark) {
+    .addButton:focus {
+        outline: 2px solid var(--gray-400, #9ca3af);
+    }
+}
+
+.addButton svg {
+    font-size: 12px;
+}
+
+/* Selected Items Section */
+.selectedItems {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Selected Items Title */
+.selectedTitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+}
+
+/* Dark theme for selected title */
+@media (prefers-color-scheme: dark) {
+    .selectedTitle {
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+/* No Items Message */
+.noItemsMessage {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin: 0;
+}
+
+/* Dark theme for no items message */
+@media (prefers-color-scheme: dark) {
+    .noItemsMessage {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+/* Individual Selected Item */
+.selectedItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px;
+    background-color: #ecf0f1;
+    border-radius: 6px;
+}
+
+/* Dark theme for selected item */
+@media (prefers-color-scheme: dark) {
+    .selectedItem {
+        background-color: var(--gray-700, #374151);
+    }
+}
+
+/* Special Price Input */
+.specialPrice {
+    font-size: 14px;
+    color: #34495e;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Dark theme for special price */
+@media (prefers-color-scheme: dark) {
+    .specialPrice {
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+/* Price Input Field */
+.priceInput {
+    padding: 4px 8px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    width: 80px;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #2c3e50;
+    transition: border-color 0.2s ease;
+}
+
+/* Dark theme for price input */
+@media (prefers-color-scheme: dark) {
+    .priceInput {
+        background-color: var(--gray-600, #4b5563);
+        border: 1px solid var(--gray-500, #6b7280);
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.priceInput:focus {
+    border-color: #1aa89e;
+    outline: none;
+}
+
+/* Dark theme for price input focus */
+@media (prefers-color-scheme: dark) {
+    .priceInput:focus {
+        border-color: var(--primary-color, #3b82f6);
+    }
+}
+
+/* Remove Button */
+.removeButton {
+    background-color: #e74c3c;
+    color: #ffffff;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* Dark theme for remove button */
+@media (prefers-color-scheme: dark) {
+    .removeButton {
+        background-color: var(--danger, #ef4444);
+    }
+}
+
+.removeButton:hover {
+    background-color: #c0392b;
+}
+
+/* Dark theme for remove button hover */
+@media (prefers-color-scheme: dark) {
+    .removeButton:hover {
+        background-color: var(--danger, #dc2626);
+    }
+}
+
+.removeButton:focus {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+/* Dark theme for remove button focus */
+@media (prefers-color-scheme: dark) {
+    .removeButton:focus {
+        outline: 2px solid var(--gray-400, #9ca3af);
+    }
+}
+
+.removeButton svg {
+    font-size: 12px;
+}

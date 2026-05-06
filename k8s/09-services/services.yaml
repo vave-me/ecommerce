@@ -1,0 +1,145 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: services-secrets
+  namespace: my-project
+type: Opaque
+data:
+  SERVICES_PASS: REDACTED
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: services
+  namespace: my-project
+  labels:
+    app: services
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: services
+  template:
+    metadata:
+      labels:
+        app: services
+    spec:
+      initContainers:
+        - name: wait-for-db
+          image: postgres:16-alpine
+          env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: services-secrets
+                  key: SERVICES_PASS
+          command: [ 'sh', '-c' ]
+          args:
+            - |
+              set -e
+              echo "Waiting for postgres service (postgres.database.svc.cluster.local:5432) to accept connections for user services_user..."
+              until psql -h postgres.database.svc.cluster.local -U services_user -d services -c "SELECT 1;" > /dev/null 2>&1; do
+                echo "Postgres not ready yet for user services_user, sleeping for 2 seconds..."
+                sleep 2
+              done
+              echo "Postgres service is ready for user services_user!"
+          resources:
+            requests:
+              cpu: "25m"
+              memory: "32Mi"
+            limits:
+              cpu: "100m"
+              memory: "64Mi"
+        - name: wait-for-nats
+          image: busybox:1.36
+          command: [ 'sh', '-c', 'echo "Waiting for nats (nats.messaging.svc.cluster.local:4222)..."; until nc -zv nats.messaging.svc.cluster.local 4222; do sleep 2; done; echo "NATS ready!"' ]
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "16Mi"
+            limits:
+              cpu: "50m"
+              memory: "32Mi"
+      containers:
+        - name: services
+          image: registry.sfx-markt.de/services:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: http
+            - containerPort: 9000
+              name: grpc
+          envFrom:
+            - configMapRef:
+                name: common-config
+            - secretRef:
+                name: common-secrets
+          env:
+            - name: PG_CONN
+              value: "host=$(POSTGRES_HOST) port=$(POSTGRES_PORT) dbname=services user=services_user search_path=services,public sslmode=disable password=services_pass"
+            - name: PGHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: POSTGRES_HOST
+            - name: PGPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: POSTGRES_PORT
+            - name: PGDATABASE
+              value: "services"
+            - name: PGUSER
+              value: "services_user"
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: services-secrets
+                  key: SERVICES_PASS
+            - name: PGSSLMODE
+              value: "disable"
+            - name: RPC_SERVICES
+              value: "SERVICES=services.my-project.svc.cluster.local:9000"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: services
+  namespace: my-project
+  labels:
+    app: services
+spec:
+  selector:
+    app: services
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+    - name: grpc-internal
+      port: 9000
+      targetPort: grpc
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: services-external # External service name
+  namespace: my-project
+  labels:
+    app: services
+spec:
+  selector:
+    app: services
+  ports:
+    - name: grpc-external
+      protocol: TCP
+      port: 30021 # External port
+      targetPort: grpc
+  type: LoadBalancer

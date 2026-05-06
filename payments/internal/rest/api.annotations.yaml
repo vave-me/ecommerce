@@ -1,0 +1,37 @@
+type: google.api.Service
+config_version: 3
+http:
+  rules:
+    # Authorize a Payment
+    - selector: paymentspb.PaymentsService.AuthorizePayment
+      post: /api/payments/authorize
+      body: "*"
+
+    # Confirm a Payment
+    - selector: paymentspb.PaymentsService.ConfirmPayment
+      post: /api/payments/confirm
+      body: "*"
+
+    # Create an Invoice
+    - selector: paymentspb.PaymentsService.CreateInvoice
+      post: /api/payments/invoices
+      body: "*"
+
+    # Adjust an Invoice
+    - selector: paymentspb.PaymentsService.AdjustInvoice
+      patch: /api/invoices/{id}/adjust
+      body: "*"
+
+    # Pay an Invoice
+    - selector: paymentspb.PaymentsService.PayInvoice
+      put: /api/payments/invoices/{id}/pay
+      body: "*"
+
+    # Cancel an Invoice
+    - selector: paymentspb.PaymentsService.CancelInvoice
+      delete: /api/payments/invoices/{id}
+
+#    # Create an Invoice
+#    - selector: paymentspb.PaymentsService.HandleWebhook
+#      post: /api/payments/webhook
+#      body: "*"

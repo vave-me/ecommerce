@@ -1,0 +1,408 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Merchant Center Integration API",
+    "description": "API for managing Google Merchant Center product catalog synchronization.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "MerchantService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/merchant/products": {
+      "get": {
+        "summary": "List all synchronized products",
+        "description": "Lists all products that have been synchronized with Google Merchant Center with pagination support.",
+        "operationId": "listProducts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/merchantpbListProductsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Products"
+        ]
+      }
+    },
+    "/api/merchant/products/batch-sync": {
+      "post": {
+        "summary": "Sync multiple products to Google Merchant Center",
+        "description": "Synchronizes multiple products with Google Merchant Center in a single batch operation.",
+        "operationId": "batchSyncProducts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/merchantpbBatchSyncProductsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/merchantpbBatchSyncProductsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Products"
+        ]
+      }
+    },
+    "/api/merchant/products/sync": {
+      "post": {
+        "summary": "Sync a single product to Google Merchant Center",
+        "description": "Synchronizes a single product with Google Merchant Center. Creates new products or updates existing ones.",
+        "operationId": "syncProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/merchantpbSyncProductResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/merchantpbSyncProductRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Products"
+        ]
+      }
+    },
+    "/api/merchant/products/{productId}": {
+      "delete": {
+        "summary": "Remove a product from Google Merchant Center",
+        "description": "Removes a product from Google Merchant Center and updates local sync status.",
+        "operationId": "removeProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/merchantpbRemoveProductResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Products"
+        ]
+      }
+    },
+    "/api/merchant/products/{productId}/status": {
+      "get": {
+        "summary": "Get product synchronization status",
+        "description": "Retrieves the current synchronization status of a product including last sync time and any errors.",
+        "operationId": "getProductStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/merchantpbGetProductStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Products"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "merchantpbBatchSyncProductsRequest": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/merchantpbProduct"
+          },
+          "title": "List of products to sync"
+        }
+      }
+    },
+    "merchantpbBatchSyncProductsResponse": {
+      "type": "object",
+      "properties": {
+        "successCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "failedCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/merchantpbSyncResult"
+          }
+        }
+      }
+    },
+    "merchantpbGetProductStatusResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/merchantpbProductStatus"
+        },
+        "lastSyncedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "merchantpbListProductsResponse": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/merchantpbProduct"
+          },
+          "title": "List of synced products"
+        },
+        "nextPageToken": {
+          "type": "string"
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "merchantpbProduct": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Internal product ID"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "availability": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "googleProductCategory": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "stock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sku": {
+          "type": "string"
+        }
+      },
+      "title": "==========================================================================\nData models\n=========================================================================="
+    },
+    "merchantpbProductStatus": {
+      "type": "string",
+      "enum": [
+        "PRODUCT_STATUS_UNSPECIFIED",
+        "PRODUCT_STATUS_SYNCED",
+        "PRODUCT_STATUS_PENDING",
+        "PRODUCT_STATUS_FAILED",
+        "PRODUCT_STATUS_REMOVED"
+      ],
+      "default": "PRODUCT_STATUS_UNSPECIFIED"
+    },
+    "merchantpbRemoveProductResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "merchantpbSyncProductRequest": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "title": "Internal product ID"
+        },
+        "product": {
+          "$ref": "#/definitions/merchantpbProduct",
+          "title": "Product data to sync"
+        }
+      },
+      "title": "==========================================================================\nProduct sync messages\n=========================================================================="
+    },
+    "merchantpbSyncProductResponse": {
+      "type": "object",
+      "properties": {
+        "merchantProductId": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "merchantpbSyncResult": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com. As of May 2023, there are no widely used type server\nimplementations and no plans to implement one.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
+        }
+      },
+      "additionalProperties": {},
+      "description": "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(\u0026foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n    // or ...\n    if (any.isSameTypeAs(Foo.getDefaultInstance())) {\n      foo = any.unpack(Foo.getDefaultInstance());\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := \u0026pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := \u0026pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": \u003cstring\u003e,\n      \"lastName\": \u003cstring\u003e\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

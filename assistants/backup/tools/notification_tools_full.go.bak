@@ -1,0 +1,220 @@
+package tools
+
+import ai2 "middleman/internal/ai"
+
+func createNotificationTools() []ai2.Tool {
+	return []ai2.Tool{
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "notification_get_user_alerts_list",
+				Description: "Get list of alerts for a user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the user",
+						},
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of alerts to return",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     50,
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "notification_get_alerts_by_type",
+				Description: "Get user alerts by notification type",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the user",
+						},
+						"alert_type": map[string]interface{}{
+							"type":        "string",
+							"description": "Type of alert to filter by",
+							"enum":        []string{"info", "warning", "error", "success", "order", "payment", "shipping"},
+						},
+						"is_read": map[string]interface{}{
+							"type":        "boolean",
+							"description": "Filter by read status",
+							"default":     false,
+						},
+					},
+					"required": []string{"user_id", "alert_type"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "notification_get_alert_by_id",
+				Description: "Get a specific alert by its ID",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"alert_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the alert to retrieve",
+						},
+					},
+					"required": []string{"alert_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "notification_get_all_alerts_for_user",
+				Description: "Get all alerts for a user with limit",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the user",
+						},
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of alerts to return",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     50,
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "notification_get_unread_alerts",
+				Description: "Get unread alerts for a user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the user",
+						},
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of alerts to return",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     50,
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "notification_get_read_alerts",
+				Description: "Get read alerts for a user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the user",
+						},
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of alerts to return",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     50,
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "notification_search_alerts",
+				Description: "Search alerts by keyword",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the user",
+						},
+						"query": map[string]interface{}{
+							"type":        "string",
+							"description": "Search keyword",
+						},
+						"limit": map[string]interface{}{
+							"type":        "integer",
+							"description": "Maximum number of alerts to return",
+							"minimum":     1,
+							"maximum":     100,
+							"default":     50,
+						},
+					},
+					"required": []string{"user_id", "query"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "notification_get_alert_count",
+				Description: "Get count of alerts by type and status",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the user",
+						},
+						"alert_type": map[string]interface{}{
+							"type":        "string",
+							"description": "Type of alert to count",
+							"enum":        []string{"info", "warning", "error", "success", "order", "payment", "shipping"},
+						},
+						"is_read": map[string]interface{}{
+							"type":        "boolean",
+							"description": "Count read or unread alerts",
+							"default":     false,
+						},
+					},
+					"required": []string{"user_id", "alert_type"},
+				},
+			},
+		},
+		{
+			Type: "function",
+			Function: ai2.FunctionDef{
+				Name:        "notification_get_unread_count",
+				Description: "Get count of unread alerts for a user",
+				Parameters: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"user_id": map[string]interface{}{
+							"type":        "string",
+							"description": "ID of the user",
+						},
+					},
+					"required": []string{"user_id"},
+				},
+			},
+		},
+	}
+}

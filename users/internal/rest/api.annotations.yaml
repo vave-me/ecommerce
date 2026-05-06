@@ -1,0 +1,76 @@
+type: google.api.Service
+config_version: 3
+http:
+  rules:
+    # User Management
+    - selector: userspb.UsersService.CreateUser
+      post: /api/users
+      body: "*"
+
+    - selector: userspb.UsersService.GetUser
+      get: /api/users/{id}
+
+    - selector: userspb.UsersService.ResetPassword
+      post: /api/users/reset-password
+      body: "*"
+
+    - selector: userspb.UsersService.AddAdmin
+      post: /api/users/admin/add
+      body: "*"
+
+    - selector: userspb.UsersService.ForgotPassword
+      post: /api/users/forgot-password
+      body: "*"
+
+    - selector: userspb.UsersService.GetBaseUser
+      get: /api/users/{id}/base
+
+    - selector: userspb.UsersService.GetUsers
+      get: /api/users
+
+    - selector: userspb.UsersService.ListEnabledUsers
+      get: /api/users/enabled
+
+    - selector: userspb.UsersService.UpdateUser
+      patch: /api/users/{id}/update
+      body: "*"
+
+    # User Status Management
+    - selector: userspb.UsersService.EnableUser
+      patch: /api/users/{id}/enable
+      body: "*"
+
+    - selector: userspb.UsersService.DisableUser
+      patch: /api/users/{id}/disable
+      body: "*"
+
+    # User Rename
+    - selector: userspb.UsersService.RenameUser
+      patch: /api/users/{id}/name
+      body: "*"
+
+
+    - selector: userspb.UsersService.LoginUser
+      post: /api/users/login
+      body: "*"
+
+    - selector: userspb.UsersService.WebLoginWithGoogle
+      post: /api/users/google-login
+      body: "*"
+
+    - selector: userspb.UsersService.MobileLoginWithGoogle
+      post: /api/users/google-login/mobile
+      body: "*"
+
+    - selector: userspb.UsersService.LogUserOut
+      post: /api/users/logout
+      body: "*"
+
+    - selector: userspb.UsersService.RefreshAuthToken
+      post: /api/users/refresh-token
+      body: "*"
+      
+    # Token Management
+    - selector: userspb.UsersService.ClearTokens
+      post: /api/users/clear-tokens
+      body: "*"

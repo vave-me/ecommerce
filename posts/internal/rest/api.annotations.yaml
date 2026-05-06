@@ -1,0 +1,62 @@
+type: google.api.Service
+config_version: 3
+name: posts.googleapis.com
+title: Posts Management API
+apis:
+  - name: postspb.PostsService
+http:
+  rules:
+    # Create a New Post
+    - selector: postspb.PostsService.AddPost
+      post: /api/posts
+      body: "*"
+
+    # Retrieve a Specific Post
+    - selector: postspb.PostsService.GetPost
+      get: /api/posts/{id}
+
+    # List All Posts for a User with Optional Filtering and Pagination
+    - selector: postspb.PostsService.GetPosts
+      get: /api/posts
+
+    # List All Posts for a User with Optional Filtering and Pagination
+    - selector: postspb.PostsService.GetPostsWithFilters
+      post: /api/posts/filters
+      body: "*"
+
+    - selector: postspb.PostsService.GetUserPosts
+      get: /api/posts/users/{user_id}
+    - selector: postspb.PostsService.GetPostsByCategory
+      get: /api/posts/categories/{category_id}
+
+    - selector: postspb.PostsService.GetPostsByCategorySlug
+      get: /api/posts/categories/slug/{category_slug}
+    # Update a Post's Details
+    - selector: postspb.PostsService.UpdatePost
+      post: /api/posts/update
+      body: "*"
+    # Update a Post's Details
+    - selector: postspb.PostsService.AddPostThumbnail
+      post: /api/posts/{post_id}/thumbnail/add
+      body: "*"
+    - selector: postspb.PostsService.UpdatePostThumbnail
+      post: /api/posts/{post_id}/thumbnail/update
+      body: "*"
+    # Delete a Post
+    - selector: postspb.PostsService.RemovePost
+      delete: /api/posts/{id}
+
+
+    #    - selector: postspb.PostsService.GetPostsByCategory
+    #      get: /api/posts/categories/{category_id}
+
+    - selector: postspb.PostsService.GetPublicCatalog
+      get: /api/posts/{user_id}/catalog
+
+
+    # Archive a Post (mark it inactive)
+    - selector: postspb.PostsService.ArchivePost
+      patch: /api/posts/{post_id}/archive
+      body: "*"
+
+

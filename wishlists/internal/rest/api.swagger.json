@@ -1,0 +1,455 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Wishlist Management",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "WishlistService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/wishlists": {
+      "get": {
+        "summary": "Get a wishlists",
+        "operationId": "getWishlists",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/wishlistspbGetWishlistsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Wishlist"
+        ]
+      }
+    },
+    "/api/wishlists/create": {
+      "post": {
+        "summary": "Create a new wishlist",
+        "operationId": "createWishlist",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/wishlistspbCreateWishlistResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "CreateWishlistRequest is the request message for creating a wishlist.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/wishlistspbCreateWishlistRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Wishlist"
+        ]
+      }
+    },
+    "/api/wishlists/name/{name}": {
+      "get": {
+        "summary": "Get a wishlist",
+        "operationId": "getWishlist",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/wishlistspbGetWishlistResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Wishlist"
+        ]
+      }
+    },
+    "/api/wishlists/{id}": {
+      "delete": {
+        "operationId": "WishlistService_RemoveWishlist",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/wishlistspbRemoveWishlistResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier of the wishlist to delete.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "WishlistService"
+        ]
+      }
+    },
+    "/api/wishlists/{wishlistId}/items": {
+      "get": {
+        "summary": "Get a list of wishlists items",
+        "operationId": "getWishlistItems",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/wishlistspbGetWishlistItemsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "wishlistId",
+            "description": "Unique identifier of the wishlist.   // Unique identifier of the item to retrieve.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "WishlistItem"
+        ]
+      },
+      "post": {
+        "summary": "Add a wishlist wishlist item",
+        "operationId": "addWishlistItem",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/wishlistspbAddWishlistItemResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "wishlistId",
+            "description": "Unique identifier of the wishlist.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WishlistServiceAddWishlistItemBody"
+            }
+          }
+        ],
+        "tags": [
+          "WishlistItem"
+        ]
+      }
+    },
+    "/api/wishlists/{wishlistId}/items/{id}": {
+      "get": {
+        "summary": "Get a wishlist wishlist item",
+        "operationId": "getWishlistItem",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/wishlistspbGetWishlistItemResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "wishlistId",
+            "description": "Unique identifier of the wishlist.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemId",
+            "description": "Unique identifier of the item to retrieve.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "WishlistItem"
+        ]
+      },
+      "delete": {
+        "summary": "Remove a wishlist wishlist item",
+        "operationId": "removeWishlistItem",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/wishlistspbRemoveWishlistItemResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "wishlistId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "description": "Unique identifier of the item to remove.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "WishlistItem"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "WishlistServiceAddWishlistItemBody": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string",
+          "description": "Unique identifier of the product to add."
+        },
+        "entityType": {
+          "type": "string",
+          "description": "string notes = 3;                      // Optional notes or remarks about the product."
+        }
+      },
+      "description": "AddItemRequest is the request message for adding an item to a wishlist."
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "wishlistspbAddWishlistItemResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the added item."
+        }
+      },
+      "description": "AddItemResponse is the response message after adding an item to a wishlist."
+    },
+    "wishlistspbCreateWishlistRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "description": "CreateWishlistRequest is the request message for creating a wishlist."
+    },
+    "wishlistspbCreateWishlistResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the created wishlist."
+        }
+      },
+      "description": "CreateWishlistResponse is the response message after creating a wishlist."
+    },
+    "wishlistspbGetWishlistItemResponse": {
+      "type": "object",
+      "properties": {
+        "item": {
+          "$ref": "#/definitions/wishlistspbWishlistItem",
+          "description": "Details of the requested item."
+        }
+      },
+      "description": "GetItemResponse is the response message for retrieving an item from a wishlist."
+    },
+    "wishlistspbGetWishlistItemsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/wishlistspbWishlistItem"
+          },
+          "description": "Details of the requested item."
+        }
+      },
+      "description": "GetItemResponse is the response message for retrieving an item from a wishlist."
+    },
+    "wishlistspbGetWishlistResponse": {
+      "type": "object",
+      "properties": {
+        "wishlistId": {
+          "type": "string",
+          "description": "Details of the requested wishlist."
+        }
+      },
+      "description": "GetWishlistResponse is the response message for retrieving a wishlist."
+    },
+    "wishlistspbGetWishlistsResponse": {
+      "type": "object",
+      "properties": {
+        "wishlists": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/wishlistspbWishlist"
+          },
+          "description": "Details of the requested wishlist."
+        }
+      },
+      "description": "GetWishlistResponse is the response message for retrieving a wishlist."
+    },
+    "wishlistspbRemoveWishlistItemResponse": {
+      "type": "object"
+    },
+    "wishlistspbRemoveWishlistResponse": {
+      "type": "object"
+    },
+    "wishlistspbWishlist": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "wishlistspbWishlistItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "wishlistId": {
+          "type": "string"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

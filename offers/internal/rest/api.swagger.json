@@ -1,0 +1,1605 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Offer Management API",
+    "description": "API for managing offers between user-sellers and user-customers.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "OffersService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/offers": {
+      "get": {
+        "summary": "List offers",
+        "operationId": "listOffers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbListOffersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userSellerId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "userCustomerId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "offerStatus",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Offer"
+        ]
+      },
+      "post": {
+        "summary": "Create a new offer",
+        "operationId": "createOffer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbCreateOfferResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/offerspbCreateOfferRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Offer"
+        ]
+      }
+    },
+    "/api/offers/buyBack": {
+      "post": {
+        "summary": "Create a BuyBack aggregator for a chosen offer",
+        "operationId": "createBuyBack",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbCreateBuyBackResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/offerspbCreateBuyBackRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BuyBack"
+        ]
+      }
+    },
+    "/api/offers/buyBack/{buyBackId}/cancel": {
+      "post": {
+        "summary": "Cancel a BuyBack (if domain rules allow)",
+        "operationId": "cancelBuyBack",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbCancelBuyBackResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "buyBackId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OffersServiceCancelBuyBackBody"
+            }
+          }
+        ],
+        "tags": [
+          "BuyBack"
+        ]
+      }
+    },
+    "/api/offers/buyBack/{buyBackId}/expire": {
+      "post": {
+        "summary": "Expire a BuyBack (lock window ends, buyer obtains item)",
+        "operationId": "expireBuyBack",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbExpireBuyBackResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "buyBackId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OffersServiceExpireBuyBackBody"
+            }
+          }
+        ],
+        "tags": [
+          "BuyBack"
+        ]
+      }
+    },
+    "/api/offers/buyBack/{buyBackId}/redeem": {
+      "post": {
+        "summary": "Redeem a BuyBack before lock expires",
+        "operationId": "redeemBuyBack",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbRedeemBuyBackResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "buyBackId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OffersServiceRedeemBuyBackBody"
+            }
+          }
+        ],
+        "tags": [
+          "BuyBack"
+        ]
+      }
+    },
+    "/api/offers/buynow": {
+      "post": {
+        "summary": "Create a BuyNow aggregator for a chosen offer",
+        "operationId": "createBuyNow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbCreateBuyNowResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/offerspbCreateBuyNowRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BuyNow"
+        ]
+      }
+    },
+    "/api/offers/buynow/{buyNowId}/confirm": {
+      "post": {
+        "summary": "Confirm a BuyNow aggregator (final purchase)",
+        "operationId": "confirmBuyNow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbConfirmBuyNowResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "buyNowId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OffersServiceConfirmBuyNowBody"
+            }
+          }
+        ],
+        "tags": [
+          "BuyNow"
+        ]
+      }
+    },
+    "/api/offers/lease": {
+      "post": {
+        "summary": "Create a Lease aggregator for a chosen offer",
+        "operationId": "createLease",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbCreateLeaseResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/offerspbCreateLeaseRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Lease"
+        ]
+      }
+    },
+    "/api/offers/lease/{leaseId}/buyout": {
+      "post": {
+        "summary": "Execute a lease buyout if allowed",
+        "operationId": "executeLeaseBuyout",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbExecuteLeaseBuyoutResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leaseId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OffersServiceExecuteLeaseBuyoutBody"
+            }
+          }
+        ],
+        "tags": [
+          "Lease"
+        ]
+      }
+    },
+    "/api/offers/lease/{leaseId}/default": {
+      "post": {
+        "summary": "Default a lease for non-payment",
+        "operationId": "defaultLease",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbDefaultLeaseResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leaseId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OffersServiceDefaultLeaseBody"
+            }
+          }
+        ],
+        "tags": [
+          "Lease"
+        ]
+      }
+    },
+    "/api/offers/lease/{leaseId}/end": {
+      "post": {
+        "summary": "End a lease normally (e.g., completed)",
+        "operationId": "endLease",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbEndLeaseResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leaseId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OffersServiceEndLeaseBody"
+            }
+          }
+        ],
+        "tags": [
+          "Lease"
+        ]
+      }
+    },
+    "/api/offers/lease/{leaseId}/payment": {
+      "post": {
+        "summary": "Make a monthly payment for an active lease",
+        "operationId": "makeLeasePayment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbMakeLeasePaymentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leaseId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OffersServiceMakeLeasePaymentBody"
+            }
+          }
+        ],
+        "tags": [
+          "Lease"
+        ]
+      }
+    },
+    "/api/offers/lease/{leaseId}/start": {
+      "post": {
+        "summary": "Start a lease (transition from pending to active)",
+        "operationId": "startLease",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbStartLeaseResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "leaseId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OffersServiceStartLeaseBody"
+            }
+          }
+        ],
+        "tags": [
+          "Lease"
+        ]
+      }
+    },
+    "/api/offers/reservation": {
+      "post": {
+        "summary": "Create a Reservation aggregator for a chosen offer",
+        "operationId": "createReservation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbCreateReservationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/offerspbCreateReservationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Reservation"
+        ]
+      }
+    },
+    "/api/offers/reservation/{reservationId}/cancel": {
+      "post": {
+        "summary": "Cancel a Reservation (if domain rules allow)",
+        "operationId": "cancelReservation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbCancelReservationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "reservationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OffersServiceCancelReservationBody"
+            }
+          }
+        ],
+        "tags": [
+          "Reservation"
+        ]
+      }
+    },
+    "/api/offers/reservation/{reservationId}/expire": {
+      "post": {
+        "summary": "Expire a Reservation (lock window ends, buyer obtains item)",
+        "operationId": "expireReservation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbExpireReservationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "reservationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OffersServiceExpireReservationBody"
+            }
+          }
+        ],
+        "tags": [
+          "Reservation"
+        ]
+      }
+    },
+    "/api/offers/reservation/{reservationId}/redeem": {
+      "post": {
+        "summary": "Redeem a Reservation before lock expires",
+        "operationId": "redeemReservation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbRedeemReservationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "reservationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OffersServiceRedeemReservationBody"
+            }
+          }
+        ],
+        "tags": [
+          "Reservation"
+        ]
+      }
+    },
+    "/api/offers/{offerId}": {
+      "get": {
+        "summary": "Retrieve an offer",
+        "operationId": "getOffer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbGetOfferResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Offer"
+        ]
+      }
+    },
+    "/api/offers/{offerId}/accept": {
+      "post": {
+        "summary": "Accept an existing offer by a user-customer",
+        "operationId": "acceptOffer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbAcceptOfferResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OffersServiceAcceptOfferBody"
+            }
+          }
+        ],
+        "tags": [
+          "Offer"
+        ]
+      }
+    },
+    "/api/offers/{offerId}/activate": {
+      "post": {
+        "summary": "Activate an existing offer",
+        "operationId": "activateOffer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbActivateOfferResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OffersServiceActivateOfferBody"
+            }
+          }
+        ],
+        "tags": [
+          "Offer"
+        ]
+      }
+    },
+    "/api/offers/{offerId}/close": {
+      "post": {
+        "summary": "Close an existing offer",
+        "operationId": "closeOffer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/offerspbCloseOfferResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OffersServiceCloseOfferBody"
+            }
+          }
+        ],
+        "tags": [
+          "Offer"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "OffersServiceAcceptOfferBody": {
+      "type": "object",
+      "properties": {
+        "userCustomerId": {
+          "type": "string"
+        }
+      },
+      "title": "1.4 AcceptOffer"
+    },
+    "OffersServiceActivateOfferBody": {
+      "type": "object",
+      "title": "1.2 ActivateOffer"
+    },
+    "OffersServiceCancelBuyBackBody": {
+      "type": "object"
+    },
+    "OffersServiceCancelReservationBody": {
+      "type": "object",
+      "title": "4) CancelReservation"
+    },
+    "OffersServiceCloseOfferBody": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "title": "Reason for closing"
+        }
+      },
+      "title": "1.3 CloseOffer"
+    },
+    "OffersServiceConfirmBuyNowBody": {
+      "type": "object"
+    },
+    "OffersServiceDefaultLeaseBody": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "OffersServiceEndLeaseBody": {
+      "type": "object"
+    },
+    "OffersServiceExecuteLeaseBuyoutBody": {
+      "type": "object",
+      "properties": {
+        "buyoutAmount": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "OffersServiceExpireBuyBackBody": {
+      "type": "object"
+    },
+    "OffersServiceExpireReservationBody": {
+      "type": "object",
+      "title": "3) ExpireReservation"
+    },
+    "OffersServiceMakeLeasePaymentBody": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "OffersServiceRedeemBuyBackBody": {
+      "type": "object"
+    },
+    "OffersServiceRedeemReservationBody": {
+      "type": "object",
+      "title": "2) RedeemReservation"
+    },
+    "OffersServiceStartLeaseBody": {
+      "type": "object"
+    },
+    "offerspbAcceptBuyBackNegotiationResponse": {
+      "type": "object",
+      "properties": {
+        "buyBackId": {
+          "type": "string"
+        },
+        "negotiationStatus": {
+          "type": "string",
+          "title": "\"accepted\""
+        }
+      }
+    },
+    "offerspbAcceptBuyNowNegotiationResponse": {
+      "type": "object",
+      "properties": {
+        "buyNowId": {
+          "type": "string"
+        },
+        "negotiationStatus": {
+          "type": "string",
+          "title": "\"accepted\""
+        }
+      }
+    },
+    "offerspbAcceptLeaseNegotiationResponse": {
+      "type": "object",
+      "properties": {
+        "leaseId": {
+          "type": "string"
+        },
+        "negotiationStatus": {
+          "type": "string",
+          "title": "\"accepted\""
+        }
+      }
+    },
+    "offerspbAcceptOfferResponse": {
+      "type": "object",
+      "properties": {
+        "offerId": {
+          "type": "string"
+        },
+        "offerStatus": {
+          "type": "string",
+          "title": "\"accepted\""
+        }
+      }
+    },
+    "offerspbAcceptReservationNegotiationResponse": {
+      "type": "object",
+      "properties": {
+        "reservationId": {
+          "type": "string"
+        },
+        "negotiationStatus": {
+          "type": "string",
+          "title": "\"accepted\""
+        }
+      }
+    },
+    "offerspbActivateOfferResponse": {
+      "type": "object",
+      "properties": {
+        "offerId": {
+          "type": "string"
+        },
+        "offerStatus": {
+          "type": "string",
+          "title": "now \"active\""
+        }
+      }
+    },
+    "offerspbCancelBuyBackResponse": {
+      "type": "object",
+      "properties": {
+        "buyBackId": {
+          "type": "string"
+        },
+        "buyBackStatus": {
+          "type": "string"
+        },
+        "canceledAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "offerspbCancelBuyNowResponse": {
+      "type": "object",
+      "properties": {
+        "buyNowId": {
+          "type": "string"
+        },
+        "buyNowStatus": {
+          "type": "string"
+        },
+        "canceledAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "offerspbCancelLeaseResponse": {
+      "type": "object",
+      "properties": {
+        "leaseId": {
+          "type": "string"
+        },
+        "leaseStatus": {
+          "type": "string"
+        },
+        "canceledAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "offerspbCancelReservationResponse": {
+      "type": "object",
+      "properties": {
+        "reservationId": {
+          "type": "string"
+        },
+        "reservationStatus": {
+          "type": "string",
+          "title": "\"CANCELED\""
+        },
+        "canceledAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "offerspbCloseOfferResponse": {
+      "type": "object",
+      "properties": {
+        "offerId": {
+          "type": "string"
+        },
+        "offerStatus": {
+          "type": "string",
+          "title": "now \"closed\""
+        }
+      }
+    },
+    "offerspbConfirmBuyNowResponse": {
+      "type": "object",
+      "properties": {
+        "buyNowId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "confirmedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "offerspbCreateBuyBackRequest": {
+      "type": "object",
+      "properties": {
+        "offerId": {
+          "type": "string"
+        },
+        "lockedPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "redemptionFee": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lockDurationDays": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "lockBuyerId": {
+          "type": "string"
+        }
+      }
+    },
+    "offerspbCreateBuyBackResponse": {
+      "type": "object",
+      "properties": {
+        "buyBackId": {
+          "type": "string"
+        },
+        "buyBackStatus": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "offerspbCreateBuyNowRequest": {
+      "type": "object",
+      "properties": {
+        "offerId": {
+          "type": "string"
+        },
+        "finalPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "immediate purchase price"
+        }
+      }
+    },
+    "offerspbCreateBuyNowResponse": {
+      "type": "object",
+      "properties": {
+        "buyNowId": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "offerspbCreateLeaseRequest": {
+      "type": "object",
+      "properties": {
+        "offerId": {
+          "type": "string"
+        },
+        "monthlyPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "leaseTermMonths": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hasBuyout": {
+          "type": "boolean"
+        },
+        "buyoutPrice": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "offerspbCreateLeaseResponse": {
+      "type": "object",
+      "properties": {
+        "leaseId": {
+          "type": "string"
+        },
+        "leaseStatus": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "offerspbCreateOfferRequest": {
+      "type": "object",
+      "properties": {
+        "userSellerId": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "1.1 CreateOffer"
+    },
+    "offerspbCreateOfferResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "ID of newly created offer"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "When it was created"
+        }
+      }
+    },
+    "offerspbCreateReservationRequest": {
+      "type": "object",
+      "properties": {
+        "offerId": {
+          "type": "string",
+          "title": "The offer we're reserving"
+        },
+        "lockedPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "The price locked for potential purchase"
+        },
+        "reservationFee": {
+          "type": "string",
+          "format": "int64",
+          "title": "Fee for reserving the item (0 if 1-day free)"
+        },
+        "lockDurationDays": {
+          "type": "integer",
+          "format": "int32",
+          "title": "how many days the lock lasts (1 =\u003e free)"
+        },
+        "lockBuyerId": {
+          "type": "string",
+          "title": "who is reserving"
+        }
+      },
+      "title": "1) CreateReservation"
+    },
+    "offerspbCreateReservationResponse": {
+      "type": "object",
+      "properties": {
+        "reservationId": {
+          "type": "string"
+        },
+        "reservationStatus": {
+          "type": "string",
+          "title": "e.g. \"ACTIVE\""
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFree": {
+          "type": "boolean",
+          "title": "indicates if it's the 1-day free reservation"
+        }
+      }
+    },
+    "offerspbDeclineBuyBackNegotiationResponse": {
+      "type": "object",
+      "properties": {
+        "buyBackId": {
+          "type": "string"
+        },
+        "negotiationStatus": {
+          "type": "string",
+          "title": "\"declined\""
+        }
+      }
+    },
+    "offerspbDeclineBuyNowNegotiationResponse": {
+      "type": "object",
+      "properties": {
+        "buyNowId": {
+          "type": "string"
+        },
+        "negotiationStatus": {
+          "type": "string",
+          "title": "\"declined\""
+        }
+      }
+    },
+    "offerspbDeclineLeaseNegotiationResponse": {
+      "type": "object",
+      "properties": {
+        "leaseId": {
+          "type": "string"
+        },
+        "negotiationStatus": {
+          "type": "string",
+          "title": "\"declined\""
+        }
+      }
+    },
+    "offerspbDeclineReservationNegotiationResponse": {
+      "type": "object",
+      "properties": {
+        "reservationId": {
+          "type": "string"
+        },
+        "negotiationStatus": {
+          "type": "string",
+          "title": "\"declined\""
+        }
+      }
+    },
+    "offerspbDefaultLeaseResponse": {
+      "type": "object",
+      "properties": {
+        "leaseId": {
+          "type": "string"
+        },
+        "leaseStatus": {
+          "type": "string"
+        },
+        "defaultedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "offerspbEndLeaseResponse": {
+      "type": "object",
+      "properties": {
+        "leaseId": {
+          "type": "string"
+        },
+        "leaseStatus": {
+          "type": "string"
+        },
+        "endedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "offerspbExecuteLeaseBuyoutResponse": {
+      "type": "object",
+      "properties": {
+        "leaseId": {
+          "type": "string"
+        },
+        "leaseStatus": {
+          "type": "string"
+        },
+        "executedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "offerspbExpireBuyBackResponse": {
+      "type": "object",
+      "properties": {
+        "buyBackId": {
+          "type": "string"
+        },
+        "buyBackStatus": {
+          "type": "string"
+        },
+        "expiredAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "offerspbExpireReservationResponse": {
+      "type": "object",
+      "properties": {
+        "reservationId": {
+          "type": "string"
+        },
+        "reservationStatus": {
+          "type": "string",
+          "title": "\"EXPIRED\""
+        },
+        "expiredAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "offerspbGetOfferResponse": {
+      "type": "object",
+      "properties": {
+        "offer": {
+          "$ref": "#/definitions/offerspbOffer"
+        }
+      }
+    },
+    "offerspbListOffersResponse": {
+      "type": "object",
+      "properties": {
+        "offers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/offerspbOffer"
+          }
+        },
+        "total": {
+          "type": "string",
+          "format": "int64",
+          "title": "total # of offers matching filters"
+        },
+        "page": {
+          "type": "string",
+          "format": "int64",
+          "title": "current page"
+        },
+        "limit": {
+          "type": "string",
+          "format": "int64",
+          "title": "size per page"
+        }
+      }
+    },
+    "offerspbMakeLeasePaymentResponse": {
+      "type": "object",
+      "properties": {
+        "leaseId": {
+          "type": "string"
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "offerspbOffer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userSellerId": {
+          "type": "string",
+          "title": "ID of the seller"
+        },
+        "userCustomerId": {
+          "type": "string",
+          "title": "ID of the buyer (once accepted)"
+        },
+        "productId": {
+          "type": "string",
+          "title": "Product being offered"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64",
+          "title": "Potential initial price"
+        },
+        "offerStatus": {
+          "type": "string",
+          "title": "e.g. \"draft\", \"active\", \"accepted\", \"closed\", \"\""
+        }
+      }
+    },
+    "offerspbRedeemBuyBackResponse": {
+      "type": "object",
+      "properties": {
+        "buyBackId": {
+          "type": "string"
+        },
+        "buyBackStatus": {
+          "type": "string"
+        },
+        "redeemedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "offerspbRedeemReservationResponse": {
+      "type": "object",
+      "properties": {
+        "reservationId": {
+          "type": "string"
+        },
+        "reservationStatus": {
+          "type": "string",
+          "title": "\"REDEEMED\""
+        },
+        "redeemedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "offerspbRequestBuyBackNegotiationResponse": {
+      "type": "object",
+      "properties": {
+        "buyBackId": {
+          "type": "string"
+        },
+        "negotiationStatus": {
+          "type": "string",
+          "title": "\"requested\""
+        }
+      }
+    },
+    "offerspbRequestBuyNowNegotiationResponse": {
+      "type": "object",
+      "properties": {
+        "buyNowId": {
+          "type": "string"
+        },
+        "negotiationStatus": {
+          "type": "string",
+          "title": "\"requested\""
+        }
+      }
+    },
+    "offerspbRequestLeaseNegotiationResponse": {
+      "type": "object",
+      "properties": {
+        "leaseId": {
+          "type": "string"
+        },
+        "negotiationStatus": {
+          "type": "string",
+          "title": "\"requested\""
+        }
+      }
+    },
+    "offerspbRequestReservationNegotiationResponse": {
+      "type": "object",
+      "properties": {
+        "reservationId": {
+          "type": "string"
+        },
+        "negotiationStatus": {
+          "type": "string",
+          "title": "\"requested\""
+        }
+      }
+    },
+    "offerspbStartLeaseResponse": {
+      "type": "object",
+      "properties": {
+        "leaseId": {
+          "type": "string"
+        },
+        "leaseStatus": {
+          "type": "string"
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

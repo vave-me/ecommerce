@@ -1,0 +1,253 @@
+openapiOptions:
+  file:
+    - file: "erppb/api.proto"
+      option:
+        info:
+          title: ERP Integration API
+          version: "1.0.0"
+          description: "API for managing ERP system integrations, including connector management, data synchronization, and order processing."
+        basePath: /
+  method:
+    # Connector Management Operations
+    - method: erppb.ERPService.RegisterConnector
+      option:
+        operationId: registerConnector
+        tags:
+          - Connector
+        summary: Register a new ERP connector (deprecated)
+        description: Register and configure a new ERP system connector (deprecated - use AddConnector instead)
+    
+    - method: erppb.ERPService.AddConnector
+      option:
+        operationId: addConnector
+        tags:
+          - Connector
+        summary: Add a new ERP connector
+        description: Create a new ERP connector with secure credential storage (Odoo, Dynamics365, NetSuite, SAP, ERPNext, Frappe)
+    
+    - method: erppb.ERPService.UpdateConnector
+      option:
+        operationId: updateConnector
+        tags:
+          - Connector
+        summary: Update connector configuration
+        description: Update an existing ERP connector configuration including credentials, sync settings, and rate limits
+    
+    - method: erppb.ERPService.RemoveConnector
+      option:
+        operationId: removeConnector
+        tags:
+          - Connector
+        summary: Remove an ERP connector
+        description: Remove an ERP connector and its associated data. Use force option to remove even with active syncs
+    
+    - method: erppb.ERPService.ToggleConnector
+      option:
+        operationId: toggleConnector
+        tags:
+          - Connector
+        summary: Activate or deactivate connector
+        description: Toggle a connector between active and inactive states. Inactive connectors do not process syncs or webhooks
+    
+    - method: erppb.ERPService.ListConnectors
+      option:
+        operationId: listConnectors
+        tags:
+          - Connector
+        summary: List all ERP connectors
+        description: Retrieve a list of all registered ERP connectors with their status
+    
+    - method: erppb.ERPService.GetConnectorStatus
+      option:
+        operationId: getConnectorStatus
+        tags:
+          - Connector
+        summary: Get connector status
+        description: Retrieve detailed status information for a specific ERP connector
+    
+    # Sync Management Operations
+    - method: erppb.ERPService.GetSyncHistory
+      option:
+        operationId: getSyncHistory
+        tags:
+          - Sync
+        summary: Get sync history
+        description: Retrieve synchronization history for a specific connector
+    
+    - method: erppb.ERPService.SyncProducts
+      option:
+        operationId: syncProducts
+        tags:
+          - Sync
+        summary: Sync products from ERP
+        description: Trigger a manual synchronization of products from the ERP system
+    
+    - method: erppb.ERPService.SyncStock
+      option:
+        operationId: syncStock
+        tags:
+          - Sync
+        summary: Sync stock levels from ERP
+        description: Trigger a manual synchronization of stock levels from the ERP system
+    
+    - method: erppb.ERPService.SyncPrices
+      option:
+        operationId: syncPrices
+        tags:
+          - Sync
+        summary: Sync prices from ERP
+        description: Trigger a manual synchronization of product prices from the ERP system
+    
+    - method: erppb.ERPService.SyncCustomers
+      option:
+        operationId: syncCustomers
+        tags:
+          - Sync
+        summary: Sync customers from ERP
+        description: Trigger a manual synchronization of customers from the ERP system
+    
+    # Order Management Operations
+    - method: erppb.ERPService.SendOrder
+      option:
+        operationId: sendOrder
+        tags:
+          - Order
+        summary: Send order to ERP
+        description: Send an order to the connected ERP system for processing
+    
+
+    
+    # Invoice Granular Operations
+    - method: erppb.ERPService.CreateInvoice
+      option:
+        operationId: createInvoice
+        tags:
+          - Invoice
+        summary: Create a new invoice
+        description: Create a new invoice in the system
+    
+    - method: erppb.ERPService.ApproveInvoice
+      option:
+        operationId: approveInvoice
+        tags:
+          - Invoice
+        summary: Approve an invoice
+        description: Approve a pending invoice for processing
+    
+    - method: erppb.ERPService.SendInvoice
+      option:
+        operationId: sendInvoice
+        tags:
+          - Invoice
+        summary: Send an invoice
+        description: Send an invoice to customer via email or other method
+    
+    - method: erppb.ERPService.VoidInvoice
+      option:
+        operationId: voidInvoice
+        tags:
+          - Invoice
+        summary: Void an invoice
+        description: Void an existing invoice with reason
+    
+    - method: erppb.ERPService.RecordInvoicePayment
+      option:
+        operationId: recordInvoicePayment
+        tags:
+          - Invoice
+        summary: Record invoice payment
+        description: Record a payment against an invoice
+    
+
+    
+    # Return Granular Operations
+    - method: erppb.ERPService.CreateReturn
+      option:
+        operationId: createReturn
+        tags:
+          - Return
+        summary: Create a return request
+        description: Create a new return merchandise authorization (RMA)
+    
+    - method: erppb.ERPService.ApproveReturn
+      option:
+        operationId: approveReturn
+        tags:
+          - Return
+        summary: Approve a return
+        description: Approve a pending return request
+    
+    - method: erppb.ERPService.RejectReturn
+      option:
+        operationId: rejectReturn
+        tags:
+          - Return
+        summary: Reject a return
+        description: Reject a return request with reason
+    
+    - method: erppb.ERPService.ProcessReturnStart
+      option:
+        operationId: processReturnStart
+        tags:
+          - Return
+        summary: Start processing a return
+        description: Start processing an approved return
+    
+    - method: erppb.ERPService.CompleteReturn
+      option:
+        operationId: completeReturn
+        tags:
+          - Return
+        summary: Complete a return
+        description: Mark a return as completed after refund processing
+    
+    - method: erppb.ERPService.RestockReturnItems
+      option:
+        operationId: restockReturnItems
+        tags:
+          - Return
+        summary: Restock return items
+        description: Record items restocked to inventory from a return
+    
+    # Inventory Reservation Operations (Deprecated)
+    - method: erppb.ERPService.UpdateInventoryReservation
+      option:
+        operationId: updateInventoryReservation
+        tags:
+          - Inventory
+        summary: Update inventory reservation (Deprecated)
+        description: Update inventory reservations for order fulfillment - Use granular commands instead
+        deprecated: true
+    
+    # Inventory Reservation Granular Operations
+    - method: erppb.ERPService.CreateInventoryReservation
+      option:
+        operationId: createInventoryReservation
+        tags:
+          - Inventory
+        summary: Create inventory reservation
+        description: Create a new inventory reservation for an order
+    
+    - method: erppb.ERPService.ReleaseInventoryReservation
+      option:
+        operationId: releaseInventoryReservation
+        tags:
+          - Inventory
+        summary: Release inventory reservation
+        description: Release/cancel an existing inventory reservation
+    
+    - method: erppb.ERPService.FulfillInventoryReservation
+      option:
+        operationId: fulfillInventoryReservation
+        tags:
+          - Inventory
+        summary: Fulfill inventory reservation
+        description: Mark a reservation as fulfilled (items shipped)
+    
+    - method: erppb.ERPService.TransferInventoryReservation
+      option:
+        operationId: transferInventoryReservation
+        tags:
+          - Inventory
+        summary: Transfer inventory reservation
+        description: Transfer a reservation to another warehouse location

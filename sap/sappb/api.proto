@@ -1,0 +1,512 @@
+syntax = "proto3";
+
+package productspb;
+
+import "productspb/common.proto";
+import "google/protobuf/timestamp.proto";       // For timestamp fields
+
+service ProductsService {
+
+  rpc AddProduct(AddProductRequest) returns (AddProductResponse) {}
+  rpc GetProduct(GetProductRequest) returns (GetProductResponse) {}
+  rpc GetProducts(GetProductsRequest) returns (GetProductsResponse) {}
+  rpc GetProductsByCategory(GetProductsByCategoryRequest) returns (GetProductsByCategoryResponse) {}
+  rpc GetProductsByCategorySlug(GetProductsByCategorySlugRequest) returns (GetProductsByCategorySlugResponse) {}
+  rpc GetProductsWithFilters(GetProductsWithFiltersRequest) returns (GetProductsWithFiltersResponse) {}
+  rpc GetCatalog(GetCatalogRequest) returns (GetCatalogResponse) {}
+  rpc GetPublicCatalog(GetPublicCatalogRequest) returns (GetPublicCatalogResponse) {}
+  rpc RemoveProduct(RemoveProductRequest) returns (RemoveProductResponse) {}
+  rpc UpdateProductPrice(UpdateProductPriceRequest) returns (UpdateProductPriceResponse) {}
+  rpc RebrandProduct(RebrandProductRequest) returns (RebrandProductResponse) {}
+  rpc UpdateProduct(UpdateProductRequest) returns (UpdateProductResponse) {}
+  rpc AdjustProductStock(AdjustProductStockRequest) returns (AdjustProductStockResponse) {}
+  rpc ArchiveProduct(ArchiveProductRequest) returns (ArchiveProductResponse) {}
+  rpc MarkProductSold(MarkProductSoldRequest) returns (MarkProductSoldResponse) {}
+  rpc MarkProductLeased(MarkProductLeasedRequest) returns (MarkProductLeasedResponse) {}
+  rpc MarkProductPawned(MarkProductPawnedRequest) returns (MarkProductPawnedResponse) {}
+  rpc IncreaseProductPrice(IncreaseProductPriceRequest) returns (IncreaseProductPriceResponse) {}
+  rpc DecreaseProductPrice(DecreaseProductPriceRequest) returns (DecreaseProductPriceResponse) {}
+  rpc AddVariant(AddVariantRequest) returns (AddVariantResponse) {}
+  rpc GetVariant(GetVariantRequest) returns (GetVariantResponse) {}
+  rpc GetVariants(GetVariantsRequest) returns (GetVariantsResponse) {}
+  rpc IncreaseVariantPrice(IncreaseVariantPriceRequest) returns (IncreaseVariantPriceResponse) {}
+  rpc DecreaseVariantPrice(DecreaseVariantPriceRequest) returns (DecreaseVariantPriceResponse) {}
+  rpc AdjustVariantStock(AdjustVariantStockRequest) returns (AdjustVariantStockResponse) {}
+  rpc ArchiveVariant(ArchiveVariantRequest) returns (ArchiveVariantResponse) {}
+  rpc RemoveVariant(RemoveVariantRequest) returns (RemoveVariantResponse) {}
+  rpc AddProductThumbnail(AddProductThumbnailRequest) returns(AddProductThumbnailResponse){}
+  rpc UpdateProductThumbnail(UpdateProductThumbnailRequest) returns(UpdateProductThumbnailResponse){}
+}
+
+message  RebrandProductResponse{}
+message  UpdateProductPriceResponse{}
+message  RemoveProductResponse{}
+message UpdateProductResponse{
+  string id = 1;
+}
+
+message Product {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  int64 base_price = 4;
+  string user_seller_id = 5;
+  string  category_id = 6;
+  string  category_slug = 7;
+  string brand = 8;
+  string condition = 9;
+  string model = 10;
+  repeated string tags = 11;
+  bool manage_stocks = 12;
+  int64 stock = 13;
+  string sku = 14;
+  repeated Attribute attributes = 15;
+  int64 weight = 16;
+  int64 height = 17;
+  int64 width = 18;
+  int64 depth = 19;
+  string status = 20;
+  bool negotiable = 21;
+  bool middleman_service = 22;
+  string user_type = 23;
+  int64 shipping_cost = 24;
+  bool has_variants = 25;
+  repeated Option options = 26;
+  string thumbnail = 27;
+  float lat = 28;
+  float lng = 29;
+}
+
+
+message Variant {
+  string id = 1;
+  string product_id = 2;
+  string status = 3;
+  string sku = 4;
+  string barcode = 5;
+  int64 variant_price = 6;
+  string currency_code = 7;
+  int64 stock = 8;
+  int64 weight = 9;
+  int64 height = 10;
+  int64 width = 11;
+  int64 depth = 12;
+  repeated Attribute attributes = 13;
+  bool is_available = 14;
+  bool has_options = 15;
+  repeated Option options = 16;
+}
+
+message AddProductRequest {
+  string name = 1;
+  string description = 2;
+  int64 base_price = 3;
+  string  category_id = 4;
+  string  category_slug = 5;
+  string brand = 6;
+  string condition = 7;
+  string model = 8;
+  repeated string tags = 9;
+  bool manage_stocks = 10;
+  int64 stock = 11;
+  string sku = 12;
+  repeated Attribute attributes = 13;
+  int64 weight = 14;
+  int64 height = 15;
+  int64 width = 16;
+  int64 depth = 17;
+  string status = 18;
+  bool negotiable = 19;
+  bool middleman_service = 20;
+  string user_type = 21;
+  int64 shipping_cost = 22;
+  bool has_variants = 23;
+  repeated Option options = 24;
+  string thumbnail = 25;
+  float lat = 26;
+  float lng = 27;
+}
+
+message AddProductResponse {
+  string id = 1;
+}
+
+message GetProductsRequest{
+  int64 page = 1;
+  int64 page_size = 2;
+  string sort_by = 3;
+  string sort_order = 4;
+}
+
+message GetProductsResponse{
+  repeated Product products = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+message GetProductsByCategoryRequest{
+  string category_id = 1;
+  int64 page = 2;
+  int64 page_size = 3;
+  string sort_by = 4;
+  string sort_order = 5;
+}
+
+message GetProductsByCategoryResponse{
+  repeated Product products = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+message GetProductsByCategorySlugRequest{
+  string category_slug = 1;
+  int64 page = 2;
+  int64 page_size = 3;
+  string sort_by = 4;
+  string sort_order = 5;
+}
+message GetProductsByCategorySlugResponse{
+  repeated Product products = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+message GetProductsWithFiltersRequest{
+  string name = 1;
+  string category = 2;
+  int64 min_price = 3;
+  int64 max_price = 4;
+  string brand = 5;
+  string condition = 6;
+  string model = 7;
+  repeated string tags = 8;
+  bool manage_stock = 9;
+  int64 min_stock = 10;
+  int64 max_stock = 11;
+  string sku = 12;
+  string status = 13;
+  bool negotiable = 14;
+  string user_type = 15;
+  bool middleman_service = 16;
+  bool has_variants = 17;
+  int64 shipping_cost = 18;
+  int64 min_weight = 19;
+  int64 max_weight = 20;
+  int64 max_height = 21;
+  int64 min_height = 22;
+  int64 min_width = 23;
+  int64 max_width = 24;
+  int64 min_depth = 25;
+  int64 max_depth = 26;
+  int64 offset = 27;
+  int64 limit = 28;
+  float lat = 29;
+  float lng = 30;
+  float radius = 31;
+  int64 page = 32;
+  int64 page_size = 33;
+  string sort_by = 34;
+  string sort_order = 35;
+}
+message GetProductsWithFiltersResponse{
+  repeated Product products = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+message GetCatalogRequest {
+  string user_id = 1;
+  int64 page = 2;
+  int64 page_size = 3;
+  string sort_by = 4;
+  string sort_order = 5;
+
+}
+message GetPublicCatalogRequest {
+  string user_id = 1;
+  int64 page = 2;
+  int64 page_size = 3;
+  string sort_by = 4;
+  string sort_order = 5;
+
+}
+
+message RemoveProductRequest {
+  string id = 1;
+
+}
+
+message UpdateProductPriceRequest {
+  string id = 1;
+  int64 new_price = 2;
+  int64 old_price = 3;
+}
+
+message RebrandProductRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  int64 base_price = 4;
+  string  category_id =5;
+  string  category_slug =6;
+  string brand = 7;
+  string condition =8;
+  string model = 9;
+  repeated string tags = 10;
+  bool manage_stocks = 11;
+  int64 stock = 12;
+  string sku = 13;
+  repeated Attribute attributes = 14;
+  int64 weight = 15;
+  int64 height = 16;
+  int64 width = 17;
+  int64 depth = 18;
+  string status = 19;
+  bool negotiable = 20;
+  bool middleman_service = 21;
+  string user_type = 22;
+  int64 shipping_cost = 23;
+  bool has_variants = 24;
+  repeated Option options = 25;
+}
+
+message UpdateProductRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  int64 base_price = 4;
+  string  category_id = 5;
+  string  category_slug =6;
+  string brand = 7;
+  string condition = 8;
+  string model = 9;
+  repeated string tags = 10;
+  bool manage_stocks = 11;
+  int64 stock = 12;
+  string sku = 13;
+  repeated Attribute attributes = 14;
+  int64 weight = 15;
+  int64 height = 16;
+  int64 width = 17;
+  int64 depth = 18;
+  string status = 19;
+  bool negotiable = 20;
+  bool middleman_service = 21;
+  string user_type = 22;
+  int64 shipping_cost = 23;
+  bool has_variants = 24;
+  repeated Option options = 25;
+  string thumbnail = 26;
+  float lat = 27;
+  float lng = 28;
+}
+
+message GetProductRequest {
+  string id = 1;
+}
+
+message GetProductResponse {
+  Product product = 1;
+}
+
+message GetCatalogResponse {
+  repeated Product products = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+message GetPublicCatalogResponse {
+  repeated Product products = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+message AdjustProductStockRequest {
+  string product_id = 1;
+  int64 new_stock = 2;
+}
+
+message AdjustProductStockResponse {
+  string product_id = 1;
+  int64 old_stock = 2;
+  int64 new_stock = 3;
+}
+
+// Increase Product Price
+message IncreaseProductPriceRequest {
+  string product_id = 1;
+  int64 price = 2;
+
+}
+message IncreaseProductPriceResponse {
+  string product_id = 1;
+  int64 old_price = 2;
+  int64 new_price = 3;
+}
+
+// Decrease Product Price
+message DecreaseProductPriceRequest {
+  string product_id = 1;
+  int64 new_price = 2;
+}
+message DecreaseProductPriceResponse {
+  string product_id = 1;
+  int64 old_price = 2;
+  int64 new_price = 3;
+}
+message ArchiveProductRequest {
+  string product_id = 1;
+}
+
+message ArchiveProductResponse {
+  string product_id = 1;
+  bool archived = 2;  // e.g. true if success
+}
+
+message MarkProductSoldRequest {
+  string product_id = 1;
+
+}
+
+message MarkProductSoldResponse {
+  string product_id = 1;
+  string status = 2;
+}
+
+message MarkProductLeasedRequest {
+  string product_id = 1;
+  int64 monthly_price =2;
+  int64 lease_term_months = 3;
+}
+
+message MarkProductLeasedResponse {
+  string product_id = 1;
+  string status = 2;
+}
+
+message MarkProductPawnedRequest {
+  string product_id = 1;
+  int64 locked_price = 2;
+  int64 redemption_fee =3;
+
+}
+
+message MarkProductPawnedResponse {
+  string product_id = 1;
+  string status = 2;
+}
+
+message AddVariantRequest {
+  string product_id = 1;
+  string status = 2;
+  string sku = 3;
+  string barcode =4;
+  string condition = 5;
+  int64 variant_price = 6;
+  string currency_code = 7;
+  int64 stock = 8;
+  int64 weight = 9;
+  int64 height = 10;
+  int64 width = 11;
+  int64 depth = 12;
+  repeated Attribute attributes = 13;
+  bool is_available = 14;
+  bool has_options = 15;
+  repeated Option options = 16;
+}
+
+message AddVariantResponse {
+  string variant_id = 1;
+}
+
+message GetVariantRequest {
+  string variant_id = 1;
+}
+
+message GetVariantResponse {
+  Variant variant = 1;
+}
+
+message GetVariantsRequest {
+  string product_id = 1;
+  int64 page = 2;
+  int64 page_size = 3;
+  string sort_by = 4;
+  string sort_order =5;
+}
+
+message GetVariantsResponse {
+  repeated Variant variants = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+message IncreaseVariantPriceRequest {
+  string variant_id = 1;
+  int64 price =2;
+
+}
+
+message IncreaseVariantPriceResponse {
+  string variant_id = 1;
+  int64 old_price = 2;
+  int64 new_price = 3;
+}
+
+message DecreaseVariantPriceRequest {
+  string variant_id = 1;
+  int64 price = 2;
+}
+
+message AddProductThumbnailRequest{
+  string product_id = 1;
+  string thumbnail = 2;
+}
+message AddProductThumbnailResponse{
+
+}
+
+message UpdateProductThumbnailRequest{
+  string product_id = 1;
+  string thumbnail = 2;
+}
+message UpdateProductThumbnailResponse{
+
+}
+message DecreaseVariantPriceResponse {
+  string variant_id = 1;
+  int64 old_price = 2;
+  int64 new_price = 3;
+}
+
+message AdjustVariantStockRequest {
+  string variant_id = 1;
+  int64 new_stock = 2;
+}
+
+message AdjustVariantStockResponse {
+  string variant_id = 1;
+  int64 old_stock = 2;
+  int64 new_stock = 3;
+}
+
+message ArchiveVariantRequest {
+  string variant_id = 1;
+}
+
+message ArchiveVariantResponse {
+  string variant_id = 1;
+  bool archived = 2;
+}
+
+message RemoveVariantRequest {
+  string variant_id = 1;
+}
+
+message RemoveVariantResponse {
+  string variant_id = 1;
+}
+

@@ -1,0 +1,57 @@
+openapiOptions:
+  file:
+    - file: "wishlistspb/api.proto"
+      option:
+        info:
+          title: Wishlist Management
+          version: "1.0.0"
+        basePath: /
+  method:
+    - method: wishlistspb.WishlistService.CreateWishlist
+      option:
+        operationId: createWishlist
+        tags:
+          - Wishlist
+        summary: Create a new wishlist
+
+
+    - method: wishlistspb.WishlistService.GetWishlist
+      option:
+        operationId: getWishlist
+        tags:
+          - Wishlist
+        summary: Get a wishlist
+    - method: wishlistspb.WishlistService.GetWishlists
+      option:
+        operationId: getWishlists
+        tags:
+          - Wishlist
+        summary: Get a wishlists
+
+
+    - method: wishlistspb.WishlistService.GetWishlistItems
+      option:
+        operationId: getWishlistItems
+        tags:
+          - WishlistItem
+        summary: Get a list of wishlists items
+
+    - method: wishlistspb.WishlistService.AddWishlistItem
+      option:
+        operationId: addWishlistItem
+        tags:
+          - WishlistItem
+        summary: Add a wishlist wishlist item
+
+    - method: wishlistspb.WishlistService.RemoveWishlistItem
+      option:
+        operationId: removeWishlistItem
+        tags:
+          - WishlistItem
+        summary: Remove a wishlist wishlist item
+    - method: wishlistspb.WishlistService.GetWishlistItem
+      option:
+        operationId: getWishlistItem
+        tags:
+          - WishlistItem
+        summary: Get a wishlist wishlist item

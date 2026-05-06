@@ -1,0 +1,193 @@
+[0;32mStarting ERP Service API Tests[0m
+
+[0;32m1. Connector Management[0m
+
+[0;34m=== Testing: GET /connectors ===[0m
+{
+  "connectors": [
+    {
+      "id": "netsuite_2dbc3936",
+      "name": "netsuite_2dbc3936",
+      "type": "netsuite",
+      "status": "unhealthy",
+      "environment": "",
+      "baseUrl": "",
+      "webhookEnabled": false,
+      "webhookUrl": "",
+      "webhookEvents": [],
+      "syncEnabled": false,
+      "syncIntervalSeconds": 0,
+      "batchSize": 0,
+      "lastHealthCheckAt": null,
+      "lastHealthCheckStatus": "",
+      "lastHealthCheckError": "",
+      "createdAt": "2025-07-24T08:56:45.102646098Z",
+      "updatedAt": "2025-07-24T08:56:45.102646098Z",
+      "createdBy": "",
+      "updatedBy": "",
+      "version": 0
+    },
+    {
+      "id": "odoo_5bb6becf",
+      "name": "odoo_5bb6becf",
+      "type": "odoo",
+      "status": "unhealthy",
+      "environment": "",
+      "baseUrl": "",
+      "webhookEnabled": false,
+      "webhookUrl": "",
+      "webhookEvents": [],
+      "syncEnabled": false,
+      "syncIntervalSeconds": 0,
+      "batchSize": 0,
+      "lastHealthCheckAt": null,
+      "lastHealthCheckStatus": "",
+      "lastHealthCheckError": "",
+      "createdAt": "2025-07-24T08:56:57.396910305Z",
+      "updatedAt": "2025-07-24T08:56:57.396910305Z",
+      "createdBy": "",
+      "updatedBy": "",
+      "version": 0
+    }
+  ],
+  "totalCount": "2",
+  "totalPages": "1",
+  "currentPage": "1"
+}
+Response parsing failed
+
+[0;34mCreating NetSuite test connector...[0m
+
+[0;34mCreating Odoo test connector...[0m
+
+[0;34m=== Testing: POST /connectors/v2 ===[0m
+{
+  "code": 13,
+  "message": "failed to get connector status: getting connector: connector with ID Test Odoo Connector not found",
+  "details": []
+}
+Response parsing failed
+
+[0;34m=== Testing: GET /connectors?type=netsuite ===[0m
+{
+  "connectors": [
+    {
+      "id": "netsuite_2dbc3936",
+      "name": "netsuite_2dbc3936",
+      "type": "netsuite",
+      "status": "unhealthy",
+      "environment": "",
+      "baseUrl": "",
+      "webhookEnabled": false,
+      "webhookUrl": "",
+      "webhookEvents": [],
+      "syncEnabled": false,
+      "syncIntervalSeconds": 0,
+      "batchSize": 0,
+      "lastHealthCheckAt": null,
+      "lastHealthCheckStatus": "",
+      "lastHealthCheckError": "",
+      "createdAt": "2025-07-24T08:57:09.706102102Z",
+      "updatedAt": "2025-07-24T08:57:09.706102102Z",
+      "createdBy": "",
+      "updatedBy": "",
+      "version": 0
+    }
+  ],
+  "totalCount": "1",
+  "totalPages": "1",
+  "currentPage": "1"
+}
+Response parsing failed
+
+[0;34m=== Testing: GET /connectors?status=active ===[0m
+{
+  "connectors": [
+    {
+      "id": "netsuite_2dbc3936",
+      "name": "netsuite_2dbc3936",
+      "type": "netsuite",
+      "status": "unhealthy",
+      "environment": "",
+      "baseUrl": "",
+      "webhookEnabled": false,
+      "webhookUrl": "",
+      "webhookEvents": [],
+      "syncEnabled": false,
+      "syncIntervalSeconds": 0,
+      "batchSize": 0,
+      "lastHealthCheckAt": null,
+      "lastHealthCheckStatus": "",
+      "lastHealthCheckError": "",
+      "createdAt": "2025-07-24T08:57:09.710998110Z",
+      "updatedAt": "2025-07-24T08:57:09.710998110Z",
+      "createdBy": "",
+      "updatedBy": "",
+      "version": 0
+    },
+    {
+      "id": "odoo_5bb6becf",
+      "name": "odoo_5bb6becf",
+      "type": "odoo",
+      "status": "unhealthy",
+      "environment": "",
+      "baseUrl": "",
+      "webhookEnabled": false,
+      "webhookUrl": "",
+      "webhookEvents": [],
+      "syncEnabled": false,
+      "syncIntervalSeconds": 0,
+      "batchSize": 0,
+      "lastHealthCheckAt": null,
+      "lastHealthCheckStatus": "",
+      "lastHealthCheckError": "",
+      "createdAt": "2025-07-24T08:57:21.571753825Z",
+      "updatedAt": "2025-07-24T08:57:21.571753825Z",
+      "createdBy": "",
+      "updatedBy": "",
+      "version": 0
+    },
+    {
+      "id": "odoo_3393c2ff",
+      "name": "odoo_3393c2ff",
+      "type": "odoo",
+      "status": "unhealthy",
+      "environment": "",
+      "baseUrl": "",
+      "webhookEnabled": false,
+      "webhookUrl": "",
+      "webhookEvents": [],
+      "syncEnabled": false,
+      "syncIntervalSeconds": 0,
+      "batchSize": 0,
+      "lastHealthCheckAt": null,
+      "lastHealthCheckStatus": "",
+      "lastHealthCheckError": "",
+      "createdAt": "2025-07-24T08:57:33.616070878Z",
+      "updatedAt": "2025-07-24T08:57:33.616070878Z",
+      "createdBy": "",
+      "updatedBy": "",
+      "version": 0
+    }
+  ],
+  "totalCount": "3",
+  "totalPages": "1",
+  "currentPage": "1"
+}
+Response parsing failed
+
+[0;32m2. Synchronization Operations[0m
+
+[0;32m3. Invoice Management[0m
+
+[0;32m4. Return Management[0m
+
+[0;32m5. Inventory Management[0m
+
+[0;32m6. Webhook Endpoint Test[0m
+
+[0;32mCleanup (optional)[0m
+To remove test connectors, uncomment the following lines:
+# make_request DELETE "/connectors/?force=true"
+
+[0;32mERP Service API Tests Completed![0m

@@ -1,0 +1,153 @@
+/* MarketplacePage.module.css */
+/* Base styles (apply to all screen sizes) */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.mainContent {
+    flex: 1;
+    width: 100%;
+    padding: 0;
+}
+
+.layoutGrid, .layoutListGrid {
+    display: block;
+    width: 100%;
+}
+
+.contentArea, .contentListArea {
+    width: 100%;
+}
+
+.productList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+/* Mobile: Keep single column */
+@media (max-width: 767px) {
+    .productList li {
+        width: 100%;
+        margin-bottom: var(--space-sm);
+    }
+}
+
+/* Desktop: Masonry grid layout */
+@media (min-width: 768px) {
+    .productList {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 1px;
+        grid-auto-flow: row dense;
+        gap: 12px;
+        align-items: start;
+    }
+    
+    .productList li {
+        margin-bottom: 0;
+        width: 100%;
+        align-self: start;
+        height: auto;
+    }
+}
+
+/* Large desktop: 4 columns */
+@media (min-width: 1200px) {
+    .productList {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.emptyState {
+    text-align: center;
+    padding: 2rem;
+    font-weight: 500;
+    color: #666;
+}
+
+.errorState {
+    text-align: center;
+    padding: 2rem;
+    color: #d32f2f;
+}
+
+.errorState h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+    .mainContent {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 var(--space-md);
+    }
+
+    .layoutGrid {
+        display: grid;
+        grid-template-areas: 'leftside contentarea';
+        column-gap: 16px;
+    }
+
+    .layoutListGrid {
+        display: flex;
+        gap: 10px;
+    }
+
+    .contentArea {
+        grid-area: contentarea;
+    }
+
+    .contentListArea {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+}
+
+/* Small Mobile Optimizations */
+@media (max-width: 576px) {
+    .mainContent {
+        padding: 0;
+    }
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background: var(--gray-900);
+        color: var(--gray-50);
+    }
+
+    .emptyState {
+        color: var(--gray-400);
+        background: var(--gray-800);
+        border: 1px solid var(--gray-700);
+        border-radius: 8px;
+        margin: var(--space-md);
+    }
+
+    .emptyState h2 {
+        color: var(--gray-50);
+    }
+
+    .errorState {
+        color: var(--danger);
+        background: rgba(var(--danger-rgb), 0.1);
+        border: 1px solid rgba(var(--danger-rgb), 0.3);
+        border-radius: 8px;
+        margin: var(--space-md);
+    }
+
+    .errorState h2 {
+        color: var(--danger);
+    }
+}

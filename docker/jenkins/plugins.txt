@@ -1,0 +1,53 @@
+# Updated Jenkins Plugin List - July 2025
+# Based on latest available versions and compatibility requirements
+
+# Core Configuration and Pipeline Plugins
+configuration-as-code:1953.v148f87d74b_1e
+job-dsl:1.92
+
+# Updated Pipeline Core Components (FIXED - resolve all dependency conflicts)
+workflow-api:1373.v7b_813f10efa_b_
+workflow-step-api:704.ve4f0967e98fa_
+workflow-cps:4151.v5406e29e3c90
+workflow-job:1520.v56d65e3b_4566
+workflow-basic-steps:1079.vce64b_a_929c5a_
+workflow-durable-task-step:1405.v1fcd4a_d00096
+
+# Updated Pipeline Definition and Analysis
+pipeline-model-definition:2.2255.v56a_15e805f12
+pipeline-input-step:517.vf8e782ee645c
+pipeline-stage-step:322.vecffa_99f371c
+pipeline-graph-analysis:237.v2b_75640ca_888
+pipeline-rest-api:2.37
+
+# Updated Git Integration
+git:5.7.0
+git-client:6.1.3
+github-api:1.321-488.v9b_c0da_9533f8
+github-branch-source:1815.v9152b_2ff7a_1b_
+
+# Updated Docker Support
+docker-commons:451.vd12c371eeeb_3
+docker-workflow:611.v16e84da_6d3ff
+docker-plugin:1274.vc0203fdf2e74
+
+# Updated BlueOcean (all components to same version)
+blueocean:1.27.21
+blueocean-pipeline-api-impl:1.27.21
+blueocean-rest:1.27.21
+blueocean-web:1.27.21
+blueocean-commons:1.27.21
+
+# FIXED Security and Credentials (CRITICAL - resolve all conflicts)
+credentials:1415.v831096eb_5534
+credentials-binding:687.v619cb_15e923f
+ssh-credentials:355.v9b_e5b_cde5003
+plain-credentials:195.vb_906e9073dee
+
+# Updated Core Utilities
+matrix-auth:3.2.6
+authorize-project:2.0.0
+mailer:489.vd4b_25144138f
+structs:343.vdcf37b_a_c81d5
+script-security:1373.vb_b_4a_a_c26fa_00
+ws-cleanup:0.48

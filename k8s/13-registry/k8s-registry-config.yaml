@@ -1,0 +1,368 @@
+# ------------------------------------------------------------
+# Kubernetes Manifests for Docker Registry v2 + UI
+# Filename: k8s-registry-with-ui.yaml (FIXED & OPTIMIZED FOR LARGE PUSHES v2)
+# - Namespace: docker-registry
+# - Registry Storage: PVC using 'local-path'
+# - Registry Config: Via ConfigMap, delete enabled, CORS added, corrected http section
+# - Registry Auth: Optional via htpasswd (commented out)
+# - Registry Exposure: ClusterIP Service + Traefik Ingress (registry.sfx-markt.de)
+# - UI: joxit/docker-registry-ui deployment + service
+# - UI Exposure: Traefik Ingress (registry-ui.sfx-markt.de)
+# - TLS: Via cert-manager Certificate resources + Let's Encrypt
+# ------------------------------------------------------------
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: docker-registry
+---
+# ============================================================
+# REGISTRY CORE COMPONENTS
+# ============================================================
+
+# --- Persistent Storage (Registry Data) ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: registry-pvc
+  namespace: docker-registry
+spec:
+  accessModes:
+    - ReadWriteOnce
+  # WARNING: 'local-path' ties data to a single node. Use robust storage for production.
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 80Gi # Adjust size as needed
+---
+# --- Registry Configuration ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: registry-config
+  namespace: docker-registry
+data:
+  config.yml: |
+    version: 0.1
+    log:
+      level: info
+      formatter: json # Changed formatter to json for potentially easier parsing if needed
+      fields:
+        service: registry
+    storage:
+      filesystem:
+        rootdirectory: /var/lib/registry
+      delete:
+        enabled: true
+      cache:
+        blobdescriptor: inmemory
+      maintenance: # Optional: Configure background cleanup
+        uploadpurging:
+          enabled: true
+          age: 30m         # Purge incomplete uploads older than 1 week
+          interval: 1h       # Run purge check daily
+          dryrun: false
+    http:
+      addr: :5000
+      # Corrected Headers Section: Added required CORS headers for UI and kept X-Content-Type-Options
+      headers:
+        X-Content-Type-Options: [ nosniff ]
+        Access-Control-Allow-Origin: [ 'https://registry-ui.sfx-markt.de' ]
+        Access-Control-Allow-Methods: [ 'HEAD', 'GET', 'OPTIONS', 'DELETE' ]
+        Access-Control-Allow-Headers: [ 'Authorization', 'Accept', 'Content-Type', 'X-Requested-With' ] # Added X-Requested-With, sometimes sent by JS libs
+        Access-Control-Allow-Credentials: [ true ]
+      # Removed incorrect 'net:' section. If registry-level timeouts needed, use 'timeout:' section.
+      # timeout:
+      #   readtimeout: 15m # Example if needed
+      #   writetimeout: 15m # Example if needed
+      maxHeaderBytes: 1048576 # Allow larger headers (default is 1MB)
+    health:
+      storagedriver:
+        enabled: true
+        interval: 10s
+        threshold: 3
+    # auth: # Authentication is disabled by default
+    #   htpasswd:
+    #     realm: Registry Realm
+    #     path: /auth/htpasswd
+---
+# --- Registry Deployment ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-registry
+  namespace: docker-registry
+  labels:
+    app: docker-registry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docker-registry
+  strategy:
+    type: Recreate # Required for ReadWriteOnce PVC with filesystem storage
+  template:
+    metadata:
+      labels:
+        app: docker-registry
+    spec:
+      # Optional: Set security context if needed for volume permissions
+      # securityContext:
+      #   fsGroup: 1001
+      containers:
+        - name: registry
+          image: registry:3.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+              name: registry # Named port for Service/Probe reference
+          env:
+            - name: REGISTRY_CONFIGURATION_PATH
+              value: /etc/docker/registry/config.yml
+            # Added environment variables to potentially help with filesystem performance
+            - name: REGISTRY_STORAGE_FILESYSTEM_MAXTHREADS
+              value: "100"
+          readinessProbe:
+            httpGet:
+              path: /v2/
+              port: registry
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 3 # Keep probe timeouts short
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /v2/
+              port: registry
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            timeoutSeconds: 5 # Keep probe timeouts short
+            failureThreshold: 3
+          resources: # Increased resources from previous versions
+            requests:
+              cpu: "2"
+              memory: 2Gi
+            limits:
+              cpu: "4"
+              memory: 4Gi
+          volumeMounts:
+            - name: registry-storage
+              mountPath: /var/lib/registry # Mount persistent storage
+            - name: registry-config-volume
+              mountPath: /etc/docker/registry # Mount config file directory
+              readOnly: true
+            # - name: registry-auth-volume # Mount for htpasswd if auth enabled
+            #   mountPath: /auth
+            #   readOnly: true
+      volumes:
+        - name: registry-storage
+          persistentVolumeClaim:
+            claimName: registry-pvc
+        - name: registry-config-volume
+          configMap:
+            name: registry-config # References the ConfigMap above
+            items:
+              - key: config.yml
+                path: config.yml # Creates 'config.yml' file in the mountPath
+        # - name: registry-auth-volume # Define volume if auth enabled
+        #   secret:
+        #     secretName: registry-auth-secret
+---
+# --- Internal Service (Registry API) ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: docker-registry-service
+  namespace: docker-registry
+  labels:
+    app: docker-registry
+spec:
+  type: ClusterIP
+  ports:
+    - name: http # Name used by Ingress and UI config
+      port: 5000 # Service port
+      protocol: TCP
+      targetPort: registry # Target container port name (5000)
+  selector:
+    app: docker-registry # Selects the registry pods
+---
+# --- TLS Certificate Request (Registry API) ---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: registry-tls-certificate
+  namespace: docker-registry
+spec:
+  secretName: registry-tls # Secret name to store the cert/key
+  dnsNames:
+    - registry.sfx-markt.de # Domain for the registry API endpoint
+  issuerRef:
+    name: letsencrypt-production # Your cluster-wide issuer
+    kind: ClusterIssuer
+---
+# ============================================================
+# REGISTRY UI COMPONENTS (joxit/docker-registry-ui)
+# ============================================================
+
+# --- Registry UI Deployment ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-registry-ui
+  namespace: docker-registry
+  labels:
+    app: docker-registry-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docker-registry-ui
+  template:
+    metadata:
+      labels:
+        app: docker-registry-ui
+    spec:
+      containers:
+        - name: registry-ui
+          image: joxit/docker-registry-ui:main # Using specific tag
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80 # UI serves content on port 80
+              name: http-ui # Named port for Service/Probe reference
+          env:
+            # Configures the URL the UI *displays* and potentially uses for some client-side fetches
+            - name: REGISTRY_URL
+              value: "https://registry.sfx-markt.de"
+
+            # Configures the UI's internal Nginx proxy to talk to the backend registry service
+            - name: NGINX_PROXY_PASS_URL
+              value: "http://docker-registry-service:5000"
+
+            # --- Other UI Settings ---
+            - name: DELETE_IMAGES
+              value: "true" # Enable delete button in UI
+            - name: REGISTRY_TITLE
+              value: "SFX-Market Docker Registry" # Custom UI title
+            - name: NGINX_PROXY_PASS_BASIC_AUTH
+              value: "false" # Set true ONLY if registry uses htpasswd AND you want browser basic auth prompt
+
+            # Timeout for the UI's internal Nginx proxy (affects UI operations, not docker push)
+            - name: NGINX_PROXY_TIMEOUT
+              value: "900s" # 15 minutes
+          readinessProbe:
+            httpGet:
+              path: / # Check root path of UI
+              port: http-ui
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http-ui
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources: # Adjust based on usage
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+---
+# --- Internal Service (Registry UI) ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: docker-registry-ui-service
+  namespace: docker-registry
+  labels:
+    app: docker-registry-ui
+spec:
+  type: ClusterIP
+  ports:
+    - name: http # Name used by Ingress backend reference
+      port: 80 # Service listens on port 80
+      protocol: TCP
+      targetPort: http-ui # Forward to container port name 'http-ui' (80)
+  selector:
+    app: docker-registry-ui # Selects the UI pods
+---
+# --- TLS Certificate Request (Registry UI) ---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: registry-ui-tls-certificate
+  namespace: docker-registry
+spec:
+  secretName: registry-ui-tls # Secret name to store the cert/key
+  dnsNames:
+    - registry-ui.sfx-markt.de # Hostname for the UI
+  issuerRef:
+    name: letsencrypt-production # Your cluster-wide issuer
+    kind: ClusterIssuer
+---
+# ============================================================
+# SHARED INGRESS (Exposing Registry API and UI)
+# ============================================================
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: registry-ingress
+  namespace: docker-registry
+  annotations:
+    # Use HTTPS entrypoint + TLS
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+
+    # -------------------------------------------------------------------
+    # ALLOW UNLIMITED REQUEST BODY SIZE
+    # -------------------------------------------------------------------
+    traefik.ingress.kubernetes.io/proxy-body-size: "0"
+
+    # Increase server timeouts (this is how long Traefik waits for the registry to respond)
+    traefik.ingress.kubernetes.io/service.serverstimeout: "1800s" # 30 minutes
+
+    # -------------------------------------------------------------------
+    # OPTIONAL: Buffer settings for large uploads
+    # Set these to "0" for unlimited chunk size in memory + disk
+    # -------------------------------------------------------------------
+    traefik.ingress.kubernetes.io/buffering.maxrequestbodybytes: "0"  # unlimited
+    traefik.ingress.kubernetes.io/buffering.memrequestbodybytes: "0"  # unlimited in memory
+    traefik.ingress.kubernetes.io/buffering.retryexpression: "IsNetworkError() && Attempts() < 5"
+
+    # Additional performance setting: how frequently data is flushed back to the client
+    traefik.ingress.kubernetes.io/responseforwarding.flushinterval: "100ms"
+
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - registry.sfx-markt.de
+      secretName: registry-tls
+    - hosts:
+        - registry-ui.sfx-markt.de
+      secretName: registry-ui-tls
+  rules:
+    - host: registry.sfx-markt.de
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: docker-registry-service
+                port:
+                  name: http
+    - host: registry-ui.sfx-markt.de
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: docker-registry-ui-service
+                port:
+                  name: http

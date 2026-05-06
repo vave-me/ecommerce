@@ -1,0 +1,510 @@
+syntax = "proto3";
+
+package ticketspb;
+
+option go_package = "middleman/tickets/ticketspb";
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "ticketspb/common.proto";
+import "ticketspb/events.proto";
+
+service TicketsService {
+  // Match Management
+  rpc CreateMatch(CreateMatchRequest) returns (CreateMatchResponse) {
+    option (google.api.http) = {
+      post: "/api/matches"
+      body: "*"
+    };
+  }
+  
+  rpc GetMatch(GetMatchRequest) returns (GetMatchResponse) {
+    option (google.api.http) = {
+      get: "/api/matches/{match_id}"
+    };
+  }
+  
+  rpc UpdateMatch(UpdateMatchRequest) returns (UpdateMatchResponse) {
+    option (google.api.http) = {
+      put: "/api/matches/{match_id}"
+      body: "*"
+    };
+  }
+  
+  rpc OpenMatchSales(OpenMatchSalesRequest) returns (OpenMatchSalesResponse) {
+    option (google.api.http) = {
+      post: "/api/matches/{match_id}/open-sales"
+    };
+  }
+  
+  rpc CloseMatchSales(CloseMatchSalesRequest) returns (CloseMatchSalesResponse) {
+    option (google.api.http) = {
+      post: "/api/matches/{match_id}/close-sales"
+    };
+  }
+  
+  rpc CancelMatch(CancelMatchRequest) returns (CancelMatchResponse) {
+    option (google.api.http) = {
+      post: "/api/matches/{match_id}/cancel"
+      body: "*"
+    };
+  }
+  
+  rpc PostponeMatch(PostponeMatchRequest) returns (PostponeMatchResponse) {
+    option (google.api.http) = {
+      post: "/api/matches/{match_id}/postpone"
+      body: "*"
+    };
+  }
+  
+  // Sector Management
+  rpc UpdateSectorPricing(UpdateSectorPricingRequest) returns (UpdateSectorPricingResponse) {
+    option (google.api.http) = {
+      put: "/api/matches/{match_id}/sectors/{sector_id}/pricing"
+      body: "*"
+    };
+  }
+  
+  rpc GetSectorAvailability(GetSectorAvailabilityRequest) returns (GetSectorAvailabilityResponse) {
+    option (google.api.http) = {
+      get: "/api/matches/{match_id}/sectors/{sector_id}/availability"
+    };
+  }
+  
+  // Ticket Operations
+  rpc PurchaseTickets(PurchaseTicketsRequest) returns (PurchaseTicketsResponse) {
+    option (google.api.http) = {
+      post: "/api/tickets/purchase"
+      body: "*"
+    };
+  }
+  
+  rpc ReserveTickets(ReserveTicketsRequest) returns (ReserveTicketsResponse) {
+    option (google.api.http) = {
+      post: "/api/tickets/reserve"
+      body: "*"
+    };
+  }
+  
+  rpc GetTicket(GetTicketRequest) returns (GetTicketResponse) {
+    option (google.api.http) = {
+      get: "/api/tickets/{ticket_id}"
+    };
+  }
+  
+  rpc TransferTicket(TransferTicketRequest) returns (TransferTicketResponse) {
+    option (google.api.http) = {
+      post: "/api/tickets/{ticket_id}/transfer"
+      body: "*"
+    };
+  }
+  
+  rpc ValidateTicket(ValidateTicketRequest) returns (ValidateTicketResponse) {
+    option (google.api.http) = {
+      post: "/api/tickets/validate"
+      body: "*"
+    };
+  }
+  
+  rpc CancelTicket(CancelTicketRequest) returns (CancelTicketResponse) {
+    option (google.api.http) = {
+      post: "/api/tickets/{ticket_id}/cancel"
+      body: "*"
+    };
+  }
+  
+  rpc RefundTicket(RefundTicketRequest) returns (RefundTicketResponse) {
+    option (google.api.http) = {
+      post: "/api/tickets/{ticket_id}/refund"
+      body: "*"
+    };
+  }
+  
+  // User Tickets
+  rpc GetUserTickets(GetUserTicketsRequest) returns (GetUserTicketsResponse) {
+    option (google.api.http) = {
+      get: "/api/users/{user_id}/tickets"
+    };
+  }
+  
+  rpc GetUserUpcomingMatches(GetUserUpcomingMatchesRequest) returns (GetUserUpcomingMatchesResponse) {
+    option (google.api.http) = {
+      get: "/api/users/{user_id}/matches/upcoming"
+    };
+  }
+  
+  // Match Discovery
+  rpc GetUpcomingMatches(GetUpcomingMatchesRequest) returns (GetUpcomingMatchesResponse) {
+    option (google.api.http) = {
+      get: "/api/matches/upcoming"
+    };
+  }
+  
+  rpc SearchMatches(SearchMatchesRequest) returns (SearchMatchesResponse) {
+    option (google.api.http) = {
+      get: "/api/matches/search"
+    };
+  }
+  
+  // Season Tickets
+  rpc CreateSeasonTicket(CreateSeasonTicketRequest) returns (CreateSeasonTicketResponse) {
+    option (google.api.http) = {
+      post: "/api/season-tickets"
+      body: "*"
+    };
+  }
+  
+  rpc RenewSeasonTicket(RenewSeasonTicketRequest) returns (RenewSeasonTicketResponse) {
+    option (google.api.http) = {
+      post: "/api/season-tickets/{season_ticket_id}/renew"
+      body: "*"
+    };
+  }
+  
+  // Stadium Management
+  rpc CreateStadium(CreateStadiumRequest) returns (CreateStadiumResponse) {
+    option (google.api.http) = {
+      post: "/api/stadiums"
+      body: "*"
+    };
+  }
+  
+  rpc GetStadium(GetStadiumRequest) returns (GetStadiumResponse) {
+    option (google.api.http) = {
+      get: "/api/stadiums/{stadium_id}"
+    };
+  }
+}
+
+// Match Management Messages
+message CreateMatchRequest {
+  string home_team_id = 1;
+  string away_team_id = 2;
+  string stadium_id = 3;
+  google.protobuf.Timestamp match_date = 4;
+  CompetitionType competition_type = 5;
+  string competition_name = 6;
+  int32 round = 7;
+  string season = 8;
+  repeated SectorPricing sector_pricing = 9;
+}
+
+message CreateMatchResponse {
+  string match_id = 1;
+}
+
+message GetMatchRequest {
+  string match_id = 1;
+}
+
+message GetMatchResponse {
+  Match match = 1;
+}
+
+message UpdateMatchRequest {
+  string match_id = 1;
+  google.protobuf.Timestamp match_date = 2;
+  string referee = 3;
+  repeated string officials = 4;
+}
+
+message UpdateMatchResponse {
+  bool success = 1;
+}
+
+message OpenMatchSalesRequest {
+  string match_id = 1;
+  google.protobuf.Timestamp sales_start_at = 2;
+  google.protobuf.Timestamp sales_end_at = 3;
+}
+
+message OpenMatchSalesResponse {
+  bool success = 1;
+  int64 total_tickets = 2;
+}
+
+message CloseMatchSalesRequest {
+  string match_id = 1;
+}
+
+message CloseMatchSalesResponse {
+  bool success = 1;
+  int64 tickets_sold = 2;
+  int64 tickets_remaining = 3;
+}
+
+message CancelMatchRequest {
+  string match_id = 1;
+  string reason = 2;
+  bool issue_refunds = 3;
+}
+
+message CancelMatchResponse {
+  bool success = 1;
+  int32 tickets_affected = 2;
+}
+
+message PostponeMatchRequest {
+  string match_id = 1;
+  google.protobuf.Timestamp new_date = 2;
+  string reason = 3;
+}
+
+message PostponeMatchResponse {
+  bool success = 1;
+}
+
+// Sector Management Messages
+message UpdateSectorPricingRequest {
+  string match_id = 1;
+  string sector_id = 2;
+  int64 new_price = 3;
+  bool enable_dynamic_pricing = 4;
+}
+
+message UpdateSectorPricingResponse {
+  bool success = 1;
+  int64 old_price = 2;
+  int64 new_price = 3;
+}
+
+message GetSectorAvailabilityRequest {
+  string match_id = 1;
+  string sector_id = 2;
+}
+
+message GetSectorAvailabilityResponse {
+  string sector_id = 1;
+  int32 total_seats = 2;
+  int32 available_seats = 3;
+  repeated AvailableSeat available_seat_details = 4;
+}
+
+message AvailableSeat {
+  string row_number = 1;
+  int32 seat_number = 2;
+  int64 price = 3;
+  bool has_restricted_view = 4;
+  bool is_wheelchair_accessible = 5;
+}
+
+// Ticket Operations Messages
+message PurchaseTicketsRequest {
+  string match_id = 1;
+  string user_id = 2;
+  repeated SeatSelection seats = 3;
+  PaymentMethod payment_method = 4;
+  string promo_code = 5;
+}
+
+message PurchaseTicketsResponse {
+  bool success = 1;
+  repeated string ticket_ids = 2;
+  int64 total_amount = 3;
+  string payment_id = 4;
+}
+
+message ReserveTicketsRequest {
+  string match_id = 1;
+  string user_id = 2;
+  repeated SeatSelection seats = 3;
+  int32 reservation_duration_minutes = 4;
+}
+
+message ReserveTicketsResponse {
+  bool success = 1;
+  repeated string ticket_ids = 2;
+  google.protobuf.Timestamp expires_at = 3;
+}
+
+message GetTicketRequest {
+  string ticket_id = 1;
+  bool include_qr_code = 2;
+}
+
+message GetTicketResponse {
+  Ticket ticket = 1;
+  Match match_info = 2;
+}
+
+message TransferTicketRequest {
+  string ticket_id = 1;
+  string from_user_id = 2;
+  string to_user_id = 3;
+  string to_email = 4;
+  string reason = 5;
+}
+
+message TransferTicketResponse {
+  bool success = 1;
+  google.protobuf.Timestamp transferred_at = 2;
+}
+
+message ValidateTicketRequest {
+  string qr_code = 1;
+  string gate_number = 2;
+  string validator_id = 3;
+}
+
+message ValidateTicketResponse {
+  bool valid = 1;
+  string ticket_id = 2;
+  string sector = 3;
+  string row = 4;
+  int32 seat = 5;
+  string holder_name = 6;
+  string message = 7;
+}
+
+message CancelTicketRequest {
+  string ticket_id = 1;
+  string reason = 2;
+}
+
+message CancelTicketResponse {
+  bool success = 1;
+}
+
+message RefundTicketRequest {
+  string ticket_id = 1;
+  int64 refund_amount = 2;
+  string reason = 3;
+}
+
+message RefundTicketResponse {
+  bool success = 1;
+  int64 refund_amount = 2;
+  string refund_id = 3;
+}
+
+// User Tickets Messages
+message GetUserTicketsRequest {
+  string user_id = 1;
+  bool include_past = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message GetUserTicketsResponse {
+  repeated TicketSummary tickets = 1;
+  int32 total_count = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message GetUserUpcomingMatchesRequest {
+  string user_id = 1;
+}
+
+message GetUserUpcomingMatchesResponse {
+  repeated Match matches = 1;
+}
+
+// Match Discovery Messages
+message GetUpcomingMatchesRequest {
+  string team_id = 1;
+  string stadium_id = 2;
+  CompetitionType competition_type = 3;
+  int32 days_ahead = 4;
+  int32 page = 5;
+  int32 page_size = 6;
+}
+
+message GetUpcomingMatchesResponse {
+  repeated Match matches = 1;
+  int32 total_count = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message SearchMatchesRequest {
+  string query = 1;
+  MatchFilters filters = 2;
+}
+
+message SearchMatchesResponse {
+  repeated Match matches = 1;
+  int32 total_count = 2;
+}
+
+message MatchFilters {
+  repeated string team_ids = 1;
+  repeated string stadium_ids = 2;
+  CompetitionType competition_type = 3;
+  google.protobuf.Timestamp date_from = 4;
+  google.protobuf.Timestamp date_to = 5;
+  bool only_available = 6;
+  int64 max_price = 7;
+  string sort_by = 8;
+  string sort_order = 9;
+}
+
+// Season Ticket Messages
+message CreateSeasonTicketRequest {
+  string user_id = 1;
+  string team_id = 2;
+  string sector_id = 3;
+  string row_number = 4;
+  int32 seat_number = 5;
+  string season = 6;
+  repeated string included_competitions = 7;
+  int64 price = 8;
+}
+
+message CreateSeasonTicketResponse {
+  string season_ticket_id = 1;
+}
+
+message RenewSeasonTicketRequest {
+  string season_ticket_id = 1;
+  string new_season = 2;
+  PaymentMethod payment_method = 3;
+}
+
+message RenewSeasonTicketResponse {
+  bool success = 1;
+  int64 renewal_price = 2;
+  google.protobuf.Timestamp valid_until = 3;
+}
+
+// Stadium Management Messages
+message CreateStadiumRequest {
+  string name = 1;
+  string city = 2;
+  string country = 3;
+  int64 capacity = 4;
+  Location location = 5;
+  repeated StadiumSectionInput sections = 6;
+  string image_url = 7;
+  repeated string facilities = 8;
+}
+
+message CreateStadiumResponse {
+  string stadium_id = 1;
+}
+
+message GetStadiumRequest {
+  string stadium_id = 1;
+}
+
+message GetStadiumResponse {
+  Stadium stadium = 1;
+}
+
+message StadiumSectionInput {
+  string name = 1;
+  SectorType type = 2;
+  int32 capacity = 3;
+  repeated RowInput rows = 4;
+}
+
+message RowInput {
+  string number = 1;
+  int32 seat_count = 2;
+}
+
+message SectorPricing {
+  string sector_id = 1;
+  int64 base_price = 2;
+  bool dynamic_pricing = 3;
+}

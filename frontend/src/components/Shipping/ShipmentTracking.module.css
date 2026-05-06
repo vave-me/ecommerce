@@ -1,0 +1,313 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.searchForm {
+  margin-bottom: 2rem;
+}
+
+.searchInput {
+  display: flex;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.searchButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.searchButton:hover {
+  background: var(--primary-hover);
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem;
+  color: var(--text-secondary);
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 8px;
+  color: #ef4444;
+}
+
+.trackingInfo {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.shipmentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.trackingDetails h3 {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.trackingNumber {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: monospace;
+}
+
+.statusBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.shipmentDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.detailSection h4 {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.name {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.address {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.shipmentMeta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.metaLabel {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.metaValue {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.deliveryInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 8px;
+  color: #22c55e;
+  margin-bottom: 2rem;
+}
+
+.deliveryInfo h4 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.deliveryInfo p {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+.trackingEvents {
+  margin-top: 2rem;
+}
+
+.trackingEvents h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0.75rem;
+  top: 1.5rem;
+  bottom: 0;
+  width: 2px;
+  background: var(--border-color);
+}
+
+.timelineItem {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.timelineItem:last-child {
+  margin-bottom: 0;
+}
+
+.timelineDot {
+  position: absolute;
+  left: -1.625rem;
+  top: 0.125rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: var(--card-bg);
+  border: 2px solid var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timelineDot svg {
+  color: var(--primary-color);
+}
+
+.timelineContent {
+  background: var(--bg-secondary);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.eventTitle {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.eventLocation,
+.eventTime {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.eventLocation svg,
+.eventTime svg {
+  opacity: 0.5;
+}
+
+.noEvents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .shipmentDetails {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .shipmentHeader {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .searchInput {
+    flex-direction: column;
+  }
+
+  .searchButton {
+    width: 100%;
+    justify-content: center;
+  }
+}

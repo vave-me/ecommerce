@@ -1,0 +1,140 @@
+openapiOptions:
+  file:
+    - file: "streamspb/api.proto"
+      option:
+        info:
+          title: Video Streaming API
+          version: "1.0.0"
+          description: "API for managing video streams, user access, watch progress, and series management for a Netflix-like streaming platform."
+        basePath: /
+  method:
+    # Stream Management Operations
+    - method: streamspb.StreamsService.CreateStream
+      option:
+        operationId: createStream
+        tags:
+          - Streams
+        summary: Create a new video stream
+    
+    - method: streamspb.StreamsService.GetStream
+      option:
+        operationId: getStream
+        tags:
+          - Streams
+        summary: Get stream details
+    
+    - method: streamspb.StreamsService.UpdateStream
+      option:
+        operationId: updateStream
+        tags:
+          - Streams
+        summary: Update stream information
+    
+    - method: streamspb.StreamsService.PublishStream
+      option:
+        operationId: publishStream
+        tags:
+          - Streams
+        summary: Publish a stream
+    
+    - method: streamspb.StreamsService.ArchiveStream
+      option:
+        operationId: archiveStream
+        tags:
+          - Streams
+        summary: Archive a stream
+    
+    # Pricing and Access
+    - method: streamspb.StreamsService.SetStreamPricing
+      option:
+        operationId: setStreamPricing
+        tags:
+          - Pricing
+        summary: Set stream pricing
+    
+    - method: streamspb.StreamsService.GrantUserAccess
+      option:
+        operationId: grantUserAccess
+        tags:
+          - Access
+        summary: Grant user access to stream
+    
+    - method: streamspb.StreamsService.RevokeUserAccess
+      option:
+        operationId: revokeUserAccess
+        tags:
+          - Access
+        summary: Revoke user access to stream
+    
+    # User Interaction
+    - method: streamspb.StreamsService.UpdateWatchProgress
+      option:
+        operationId: updateWatchProgress
+        tags:
+          - User
+        summary: Update watch progress
+    
+    - method: streamspb.StreamsService.RateStream
+      option:
+        operationId: rateStream
+        tags:
+          - User
+        summary: Rate a stream
+    
+    # Discovery
+    - method: streamspb.StreamsService.GetCatalog
+      option:
+        operationId: getCatalog
+        tags:
+          - Discovery
+        summary: Get stream catalog
+    
+    - method: streamspb.StreamsService.SearchStreams
+      option:
+        operationId: searchStreams
+        tags:
+          - Discovery
+        summary: Search for streams
+    
+    - method: streamspb.StreamsService.GetUserStreams
+      option:
+        operationId: getUserStreams
+        tags:
+          - User
+        summary: Get user's accessible streams
+    
+    - method: streamspb.StreamsService.GetContinueWatching
+      option:
+        operationId: getContinueWatching
+        tags:
+          - User
+        summary: Get continue watching list
+    
+    # Series Management
+    - method: streamspb.StreamsService.CreateSeries
+      option:
+        operationId: createSeries
+        tags:
+          - Series
+        summary: Create a new series
+    
+    - method: streamspb.StreamsService.GetSeries
+      option:
+        operationId: getSeries
+        tags:
+          - Series
+        summary: Get series details
+    
+    - method: streamspb.StreamsService.AddSeason
+      option:
+        operationId: addSeason
+        tags:
+          - Series
+        summary: Add a season to series
+    
+    - method: streamspb.StreamsService.AddEpisode
+      option:
+        operationId: addEpisode
+        tags:
+          - Series
+        summary: Add an episode to season

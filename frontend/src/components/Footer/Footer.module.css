@@ -1,0 +1,159 @@
+.footer {
+    background-color: var(--color-background-secondary, #f8f9fa);
+    border-top: 1px solid var(--color-border, #e5e7eb);
+    padding: 2.5rem 0;
+    margin-top: auto;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+}
+
+/* Footer Links */
+.footerLinks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.footerLink {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+}
+
+.footerLink:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+    background-color: rgba(37, 99, 235, 0.05);
+}
+
+.separator {
+    color: #9ca3af;
+    font-size: 0.75rem;
+    user-select: none;
+}
+
+/* Copyright */
+.copyright {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+/* Powered By */
+.poweredBy {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: #9ca3af;
+}
+
+.poweredByText {
+    font-weight: 400;
+}
+
+.vaveLink {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+}
+
+.vaveLink:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+/* Dark theme */
+[data-theme="dark"] .footer {
+    background-color: #1f2937;
+    border-top-color: #374151;
+}
+
+[data-theme="dark"] .footerLink {
+    color: #60a5fa;
+}
+
+[data-theme="dark"] .footerLink:hover {
+    color: #93bbfc;
+    background-color: rgba(96, 165, 250, 0.1);
+}
+
+[data-theme="dark"] .separator {
+    color: #4b5563;
+}
+
+[data-theme="dark"] .copyright {
+    color: #9ca3af;
+}
+
+[data-theme="dark"] .poweredBy {
+    color: #6b7280;
+}
+
+[data-theme="dark"] .vaveLink {
+    color: #60a5fa;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .footer {
+        padding: 2rem 0;
+    }
+    
+    .content {
+        gap: 1rem;
+    }
+    
+    .footerLinks {
+        font-size: 0.8125rem;
+    }
+    
+    .separator {
+        margin: 0 0.25rem;
+    }
+    
+    .copyright {
+        font-size: 0.8125rem;
+    }
+    
+    .poweredBy {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 1.5rem 0;
+    }
+    
+    .footerLinks {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .separator {
+        display: none;
+    }
+    
+    .footerLink {
+        padding: 0.5rem 1rem;
+    }
+}

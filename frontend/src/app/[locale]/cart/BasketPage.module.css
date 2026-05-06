@@ -1,0 +1,813 @@
+/* ===== CART PAGE - PREMIUM MINIMAL DESIGN ===== */
+/* Aligned with notifications design - refined and elegant */
+/* Following WCAG 2.1 accessibility guidelines */
+
+/* ===== MAIN CONTAINER ===== */
+.basketContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    min-height: 100vh;
+    background: #ffffff;
+}
+
+/* ===== CLEAN HEADER SECTION ===== */
+.basketHeading {
+    font-size: 24px;
+    font-weight: 500;
+    color: #1a1f2e;
+    margin: 0 0 24px 0;
+    line-height: 1.2;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+}
+
+.offlineIndicator {
+    font-size: 12px;
+    font-weight: 400;
+    color: #8892a6;
+    background: #f8fafc;
+    padding: 4px 10px;
+    border-radius: 16px;
+    margin-left: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ===== OFFLINE NOTICE ===== */
+.offlineNotice {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    color: #6b7280;
+    font-size: 13px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.offlineNotice p {
+    margin: 0;
+}
+
+/* ===== CLEAN CART ITEMS CONTAINER ===== */
+.basketItems {
+    background: #ffffff;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e1e5e9;
+}
+
+/* ===== CLEAN CART ITEM ===== */
+.basketItem {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: #ffffff;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.basketItem:hover {
+    background: #f8fafc;
+}
+
+.basketItem::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background: #e1e5e9;
+}
+
+.basketItem:last-child::after {
+    display: none;
+}
+
+/* ===== ITEM IMAGE ===== */
+.itemImageWrapper {
+    flex-shrink: 0;
+    width: 72px;
+    height: 72px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e1e5e9;
+}
+
+.itemImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ===== ITEM DETAILS ===== */
+.itemDetails {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.itemName {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1a1f2e;
+    margin: 0;
+    line-height: 1.3;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.itemDescription {
+    font-size: 13px;
+    color: #8892a6;
+    line-height: 1.4;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.skuLabel {
+    font-size: 11px;
+    color: #8892a6;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ===== QUANTITY CONTROLS ===== */
+.itemQuantity {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #8892a6;
+    font-weight: 400;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.quantityInput {
+    width: 50px;
+    padding: 6px 8px;
+    border: 1px solid #e1e5e9;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+    background: #ffffff;
+    transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    color: #1a1f2e;
+}
+
+.quantityInput:focus {
+    outline: none;
+    border-color: #00CCBF;
+    box-shadow: 0 0 0 2px rgba(0, 204, 191, 0.15);
+}
+
+.quantityInput:hover {
+    border-color: #c7d2e7;
+}
+
+/* ===== ITEM PRICE ===== */
+.itemPrice {
+    flex-shrink: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1f2e;
+    text-align: right;
+    min-width: 80px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ===== REMOVE BUTTON ===== */
+.removeButton {
+    flex-shrink: 0;
+    background: transparent;
+    color: #8892a6;
+    border: none;
+    padding: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: underline;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.removeButton:hover {
+    color: #ef4444;
+    text-decoration: none;
+}
+
+.removeButton:focus {
+    outline: none;
+    color: #ef4444;
+}
+
+/* ===== CLEAN SUMMARY SECTION ===== */
+.summarySection {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    border: 1px solid #e1e5e9;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.rowLabel {
+    font-size: 14px;
+    color: #8892a6;
+    font-weight: 400;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.rowValue {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a1f2e;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #e1e5e9;
+    margin: 16px 0;
+}
+
+.totalLabel {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1f2e;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.totalPrice {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1f2e;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ===== CLEAN ACTIONS SECTION ===== */
+.actionsRow {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.baseButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.baseButton:focus {
+    outline: none;
+}
+
+.checkoutButton {
+    background: #1a1f2e;
+    color: #ffffff;
+}
+
+.checkoutButton:hover {
+    background: #0f1319;
+    transform: translateY(-0.5px);
+}
+
+.checkoutButton:focus {
+    box-shadow: 0 0 0 2px rgba(0, 204, 191, 0.15);
+}
+
+.refreshButton {
+    background: transparent;
+    color: #8892a6;
+    border: 1px solid #e1e5e9;
+}
+
+.refreshButton:hover {
+    background: #f8fafc;
+    border-color: #c7d2e7;
+}
+
+.refreshButton:focus {
+    border-color: #00CCBF;
+    box-shadow: 0 0 0 2px rgba(0, 204, 191, 0.15);
+}
+
+/* ===== LOADING STATE ===== */
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    padding: 40px 20px;
+    text-align: center;
+    color: #8892a6;
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.loadingContainer::before {
+    content: '';
+    width: 28px;
+    height: 28px;
+    border: 2px solid #e1e5e9;
+    border-top: 2px solid #00CCBF;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== ERROR STATE ===== */
+.errorMessage {
+    background: #fef2f2;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 20px 0;
+    color: #ef4444;
+    font-size: 14px;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ===== EMPTY CART STATE ===== */
+.emptyBasketContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    padding: 60px 20px;
+    text-align: center;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e1e5e9;
+}
+
+.emptyBasketIcon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.emptyBasketTitle {
+    font-size: 18px;
+    font-weight: 500;
+    color: #1a1f2e;
+    margin: 0 0 8px 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.emptyBasketDescription {
+    font-size: 14px;
+    color: #8892a6;
+    line-height: 1.5;
+    margin: 0 0 24px 0;
+    max-width: 400px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.continueShoppingButton {
+    background: #1a1f2e;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.continueShoppingButton:hover {
+    background: #0f1319;
+    transform: translateY(-0.5px);
+}
+
+.continueShoppingButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 204, 191, 0.15);
+}
+
+/* ===== UTILITY CLASSES ===== */
+.transitionAll {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+    .basketContainer {
+        padding: 16px;
+    }
+
+    .basketItems {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .basketItem {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .basketContainer {
+        padding: 12px;
+    }
+
+    .basketHeading {
+        padding: 16px;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .basketItems {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .basketItem {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .itemImageWrapper {
+        width: 56px;
+        height: 56px;
+        align-self: flex-start;
+    }
+
+    .itemName {
+        font-size: 14px;
+    }
+
+    .itemDescription {
+        font-size: 12px;
+    }
+
+    .itemPrice {
+        text-align: left;
+        font-size: 14px;
+    }
+
+    .itemQuantity {
+        order: 1;
+    }
+
+    .itemPrice {
+        order: 2;
+    }
+
+    .removeButton {
+        order: 3;
+        align-self: flex-start;
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+
+    .summarySection {
+        padding: 16px;
+    }
+
+    .row {
+        padding: 6px 0;
+    }
+
+    .totalLabel {
+        font-size: 15px;
+    }
+
+    .totalPrice {
+        font-size: 16px;
+    }
+
+    .actionsRow {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+    }
+
+    .baseButton {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 16px;
+    }
+
+    .emptyBasketContainer {
+        min-height: 300px;
+        padding: 40px 16px;
+    }
+
+    .emptyBasketIcon {
+        font-size: 40px;
+    }
+
+    .emptyBasketTitle {
+        font-size: 18px;
+    }
+
+    .emptyBasketDescription {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .basketContainer {
+        padding: 8px;
+    }
+
+    .basketHeading {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .basketItems,
+    .summarySection {
+        padding: 12px;
+    }
+
+    .basketItem {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .itemImageWrapper {
+        width: 48px;
+        height: 48px;
+    }
+
+    .quantityInput {
+        width: 50px;
+        padding: 4px 6px;
+        font-size: 13px;
+    }
+
+    .offlineIndicator {
+        display: block;
+        margin-left: 0;
+        margin-top: 4px;
+        text-align: center;
+    }
+
+    .loadingContainer {
+        min-height: 200px;
+        padding: 30px 16px;
+    }
+
+    .emptyBasketContainer {
+        min-height: 250px;
+        padding: 30px 12px;
+    }
+}
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+@media (prefers-reduced-motion: reduce) {
+    .basketItem,
+    .removeButton,
+    .baseButton,
+    .continueShoppingButton,
+    .quantityInput {
+        transition: none;
+    }
+
+    .checkoutButton:hover,
+    .continueShoppingButton:hover {
+        transform: none;
+    }
+
+    .loadingContainer::before {
+        animation: none;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .basketContainer,
+    .basketItems,
+    .summarySection,
+    .emptyBasketContainer {
+        border: 2px solid #000000;
+    }
+
+    .basketItem {
+        border: 2px solid #000000;
+    }
+
+    .removeButton,
+    .baseButton,
+    .continueShoppingButton,
+    .quantityInput {
+        border: 2px solid #000000;
+    }
+
+    .checkoutButton {
+        background: #000000;
+        color: #ffffff;
+    }
+}
+
+/* ===== FOCUS MANAGEMENT ===== */
+.basketItem:focus-within {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.removeButton:focus-visible,
+.baseButton:focus-visible,
+.continueShoppingButton:focus-visible,
+.quantityInput:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* ===== DARK THEME SUPPORT ===== */
+@media (prefers-color-scheme: dark) {
+    .basketContainer {
+        background: #0f1319;
+        color: #f3f4f6;
+    }
+
+    .basketHeading {
+        color: #f3f4f6;
+    }
+
+    .basketItems {
+        background: #1a1f2e;
+        border-color: #2a3142;
+    }
+
+    .basketItem {
+        background: #1a1f2e;
+    }
+
+    .basketItem:hover {
+        background: #212735;
+    }
+
+    .basketItem::after {
+        background: #2a3142;
+    }
+
+    .itemImageWrapper {
+        background: #0f1319;
+        border-color: #2a3142;
+    }
+
+    .itemName {
+        color: #f3f4f6;
+    }
+
+    .itemDescription,
+    .skuLabel {
+        color: #8892a6;
+    }
+
+    .itemQuantity {
+        color: #8892a6;
+    }
+
+    .quantityInput {
+        background: #0f1319;
+        border-color: #2a3142;
+        color: #f3f4f6;
+    }
+
+    .quantityInput:focus {
+        border-color: #00CCBF;
+        box-shadow: 0 0 0 2px rgba(0, 204, 191, 0.15);
+    }
+
+    .quantityInput:hover {
+        border-color: #3d4559;
+    }
+
+    .itemPrice {
+        color: #f3f4f6;
+    }
+
+    .removeButton {
+        color: #8892a6;
+    }
+
+    .removeButton:hover {
+        color: #ef4444;
+    }
+
+    .summarySection {
+        background: #1a1f2e;
+        border-color: #2a3142;
+    }
+
+    .rowLabel {
+        color: #8892a6;
+    }
+
+    .rowValue,
+    .totalLabel,
+    .totalPrice {
+        color: #f3f4f6;
+    }
+
+    .divider {
+        border-top-color: #2a3142;
+    }
+
+    .refreshButton {
+        background: transparent;
+        color: #8892a6;
+        border-color: #2a3142;
+    }
+
+    .refreshButton:hover {
+        background: #212735;
+        border-color: #3d4559;
+    }
+
+    .checkoutButton {
+        background: #00CCBF;
+        color: #0f1319;
+    }
+
+    .checkoutButton:hover {
+        background: #00b3a7;
+    }
+
+    .offlineNotice {
+        background: #212735;
+        color: #8892a6;
+    }
+
+    .offlineIndicator {
+        background: #212735;
+        color: #8892a6;
+    }
+
+    .errorMessage {
+        background: rgba(239, 68, 68, 0.1);
+        color: #ef4444;
+    }
+
+    .emptyBasketContainer {
+        background: #1a1f2e;
+        border-color: #2a3142;
+    }
+
+    .emptyBasketTitle {
+        color: #f3f4f6;
+    }
+
+    .emptyBasketDescription {
+        color: #8892a6;
+    }
+
+    .continueShoppingButton {
+        background: #00CCBF;
+        color: #0f1319;
+    }
+
+    .continueShoppingButton:hover {
+        background: #00b3a7;
+    }
+
+    .loadingContainer {
+        color: #8892a6;
+    }
+
+    .loadingContainer::before {
+        border-color: #2a3142;
+        border-top-color: #00CCBF;
+    }
+}

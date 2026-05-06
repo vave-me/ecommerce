@@ -1,0 +1,134 @@
+/* Dropdown.module.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.label {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+@media (prefers-color-scheme: dark) {
+    .label {
+        color: var(--gray-300, #d1d5db);
+    }
+}
+
+.selectWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    padding-right: 2.5rem;
+    font-size: 0.9375rem;
+    color: #1f2937;
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    appearance: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+    .select {
+        color: var(--gray-200, #e5e7eb);
+        background-color: var(--gray-750, #2d3748);
+        border-color: var(--gray-600, #4b5563);
+    }
+}
+
+.select:hover {
+    border-color: #9ca3af;
+}
+
+@media (prefers-color-scheme: dark) {
+    .select:hover {
+        border-color: var(--gray-500, #6b7280);
+    }
+}
+
+.select:focus {
+    outline: none;
+    border-color: #1aa89e;
+    box-shadow: 0 0 0 3px rgba(26, 168, 158, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .select:focus {
+        border-color: var(--teal-400, #2dd4bf);
+        box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.3);
+    }
+}
+
+.icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b7280;
+    pointer-events: none;
+    font-size: 0.875rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .icon {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 480px) {
+    .label {
+        font-size: 0.875rem;
+    }
+
+    .select {
+        padding: 0.625rem 0.875rem;
+        padding-right: 2.25rem;
+        font-size: 0.875rem;
+    }
+
+    .icon {
+        right: 0.875rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+    .select {
+        border: 1px solid ButtonText;
+    }
+
+    .select:focus {
+        border-color: Highlight;
+        outline: 1px solid Highlight;
+    }
+}
+
+/* Dark theme high contrast support */
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+    .select {
+        border: 2px solid var(--gray-500, #6b7280);
+    }
+
+    .select:focus {
+        border-color: var(--teal-400, #2dd4bf);
+        border-width: 2px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .select {
+        transition: none;
+    }
+}

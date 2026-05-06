@@ -1,0 +1,796 @@
+/* ===== NOTIFICATIONS PAGE - CLEAN MINIMAL DESIGN ===== */
+/* Aligned with Header and HorizontalFilters - no excessive borders/frames */
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 16px;
+    min-height: 100vh;
+    background: #f8fafc;
+}
+
+/* ===== CLEAN HEADER SECTION ===== */
+.header {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    color: #111827;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    line-height: 1.2;
+}
+
+.titleIcon {
+    width: 24px;
+    height: 24px;
+    color: #6b7280;
+    flex-shrink: 0;
+}
+
+.unreadBadge {
+    background: #ef4444;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    min-width: 18px;
+    text-align: center;
+    margin-left: 8px;
+}
+
+.headerActions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.refreshButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.refreshButton:hover:not(:disabled) {
+    background: #f8fafc;
+    border-color: #6b7280;
+}
+
+.refreshButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.markAllButton {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.markAllButton:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+}
+
+/* ===== MINIMAL FILTER BAR ===== */
+.filterBar {
+    background: #ffffff;
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.searchContainer {
+    flex: 1;
+    min-width: 280px;
+    max-width: 320px;
+}
+
+.searchInputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 12px;
+    width: 16px;
+    height: 16px;
+    color: #9ca3af;
+    z-index: 1;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #ffffff;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.searchInput::placeholder {
+    color: #9ca3af;
+}
+
+.filtersContainer {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filterGroup {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filterLabel {
+    font-size: 13px;
+    font-weight: 500;
+    color: #6b7280;
+    white-space: nowrap;
+}
+
+.filterSelect {
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #ffffff;
+    color: #111827;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 120px;
+}
+
+.filterSelect:hover {
+    border-color: #d1d5db;
+}
+
+.filterSelect:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.clearButton {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.clearButton:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+    color: #374151;
+}
+
+/* ===== ERROR BANNER ===== */
+.errorBanner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    color: #dc2626;
+    font-size: 14px;
+}
+
+/* ===== CLEAN NOTIFICATIONS LIST ===== */
+.notificationsList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ===== CLEAN NOTIFICATION ITEM ===== */
+.notificationItem {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.notificationItem:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: #d1d5db;
+    transform: translateY(-1px);
+}
+
+.notificationItem.read {
+    opacity: 0.7;
+}
+
+.notificationItem.unread {
+    border-left-width: 3px;
+    border-left-color: #3b82f6;
+}
+
+.statusBorder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    border-radius: 12px 0 0 12px;
+}
+
+.unreadIndicator {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 6px;
+    height: 6px;
+    background: #3b82f6;
+    border-radius: 50%;
+}
+
+.notificationIcon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: #f8fafc;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.typeIcon {
+    width: 16px;
+    height: 16px;
+    color: #6b7280;
+}
+
+.notificationContent {
+    flex: 1;
+    min-width: 0;
+}
+
+.notificationHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    gap: 12px;
+}
+
+.notificationTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.notificationTime {
+    font-size: 12px;
+    color: #9ca3af;
+    white-space: nowrap;
+}
+
+.notificationMessage {
+    font-size: 13px;
+    color: #6b7280;
+    line-height: 1.4;
+    margin: 0 0 8px 0;
+}
+
+.notificationMeta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+.notificationActions {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.actionButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background: transparent;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.actionButton:hover {
+    background: #f8fafc;
+    border-color: #d1d5db;
+}
+
+.actionButton.markAsRead:hover {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #3b82f6;
+}
+
+.actionButton.remove:hover {
+    background: #fef2f2;
+    border-color: #fca5a5;
+    color: #dc2626;
+}
+
+/* ===== CLEAN STATE COMPONENTS ===== */
+.centerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    padding: 40px 20px;
+}
+
+.emptyContainer,
+.errorContainer,
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 400px;
+}
+
+.emptyIcon,
+.errorIcon,
+.loginIcon {
+    width: 48px;
+    height: 48px;
+    color: #9ca3af;
+    margin-bottom: 16px;
+}
+
+.errorIcon {
+    color: #ef4444;
+}
+
+.emptyTitle,
+.errorTitle,
+.loginTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 8px 0;
+}
+
+.emptyMessage,
+.errorMessage,
+.loginMessage {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.5;
+    margin: 0 0 16px 0;
+}
+
+.clearFiltersButton,
+.retryButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.clearFiltersButton:hover,
+.retryButton:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+}
+
+/* ===== UTILITY ICONS ===== */
+.iconSmall {
+    width: 16px;
+    height: 16px;
+}
+
+.actionIcon {
+    width: 14px;
+    height: 14px;
+}
+
+.spinning {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+    .container {
+        padding: 16px;
+    }
+
+    .notificationsList {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 12px;
+    }
+
+    .header {
+        padding: 16px;
+        margin-bottom: 16px;
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .title {
+        font-size: 18px;
+        justify-content: center;
+    }
+
+    .headerActions {
+        justify-content: center;
+    }
+
+    .filterBar {
+        padding: 12px 16px;
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .searchContainer {
+        max-width: none;
+    }
+
+    .filtersContainer {
+        justify-content: center;
+    }
+
+    .notificationItem {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .notificationIcon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .typeIcon {
+        width: 14px;
+        height: 14px;
+    }
+
+    .notificationActions {
+        gap: 4px;
+        margin-top: 6px;
+    }
+
+    .actionButton {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 8px;
+    }
+
+    .header,
+    .filterBar {
+        padding: 12px;
+    }
+
+    .title {
+        font-size: 16px;
+    }
+
+    .refreshButton,
+    .markAllButton {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .notificationItem {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .notificationTitle {
+        font-size: 13px;
+    }
+
+    .notificationMessage {
+        font-size: 12px;
+    }
+
+    .centerContainer {
+        min-height: 200px;
+        padding: 30px 16px;
+    }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+    .refreshButton,
+    .markAllButton,
+    .clearButton,
+    .notificationItem,
+    .actionButton,
+    .clearFiltersButton,
+    .retryButton {
+        transition: none;
+    }
+
+    .notificationItem:hover {
+        transform: none;
+    }
+
+    .clearFiltersButton:hover,
+    .retryButton:hover {
+        transform: none;
+    }
+
+    .spinning {
+        animation: none;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .header,
+    .filterBar,
+    .notificationItem {
+        border: 2px solid #000000;
+    }
+
+    .refreshButton,
+    .markAllButton,
+    .clearButton,
+    .actionButton {
+        border: 2px solid #000000;
+    }
+
+    .clearFiltersButton,
+    .retryButton {
+        border: 2px solid #000000;
+    }
+}
+
+/* ===== FOCUS STATES ===== */
+.refreshButton:focus-visible,
+.markAllButton:focus-visible,
+.clearButton:focus-visible,
+.searchInput:focus-visible,
+.filterSelect:focus-visible,
+.actionButton:focus-visible,
+.clearFiltersButton:focus-visible,
+.retryButton:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* ===== DARK THEME SUPPORT ===== */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background: #111827;
+        color: #f3f4f6;
+    }
+
+    .header,
+    .filterBar,
+    .notificationItem {
+        background: #1f2937;
+        border-color: #374151;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .title {
+        color: #f3f4f6;
+    }
+
+    .titleIcon {
+        color: #9ca3af;
+    }
+
+    .refreshButton,
+    .markAllButton,
+    .clearButton {
+        background: #374151;
+        border-color: #4b5563;
+        color: #d1d5db;
+    }
+
+    .refreshButton:hover:not(:disabled),
+    .markAllButton:hover,
+    .clearButton:hover {
+        background: #4b5563;
+        border-color: #6b7280;
+    }
+
+    .searchInput,
+    .filterSelect {
+        background: #374151;
+        border-color: #4b5563;
+        color: #f3f4f6;
+    }
+
+    .searchInput:focus,
+    .filterSelect:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .searchInput::placeholder {
+        color: #9ca3af;
+    }
+
+    .searchIcon {
+        color: #9ca3af;
+    }
+
+    .filterLabel {
+        color: #9ca3af;
+    }
+
+    .notificationIcon {
+        background: #374151;
+    }
+
+    .typeIcon {
+        color: #9ca3af;
+    }
+
+    .notificationTitle {
+        color: #f3f4f6;
+    }
+
+    .notificationMessage {
+        color: #d1d5db;
+    }
+
+    .notificationTime,
+    .notificationMeta {
+        color: #9ca3af;
+    }
+
+    .actionButton {
+        background: #374151;
+        border-color: #4b5563;
+        color: #9ca3af;
+    }
+
+    .actionButton:hover {
+        background: #4b5563;
+        border-color: #6b7280;
+    }
+
+    .actionButton.markAsRead:hover {
+        background: rgba(59, 130, 246, 0.1);
+        border-color: #3b82f6;
+        color: #60a5fa;
+    }
+
+    .actionButton.remove:hover {
+        background: rgba(239, 68, 68, 0.1);
+        border-color: #f87171;
+        color: #f87171;
+    }
+
+    .emptyTitle,
+    .errorTitle,
+    .loginTitle {
+        color: #f3f4f6;
+    }
+
+    .emptyMessage,
+    .errorMessage,
+    .loginMessage {
+        color: #9ca3af;
+    }
+
+    .emptyIcon,
+    .loginIcon {
+        color: #6b7280;
+    }
+
+    .errorIcon {
+        color: #f87171;
+    }
+
+    .errorBanner {
+        background: rgba(239, 68, 68, 0.1);
+        border-color: #b91c1c;
+        color: #f87171;
+    }
+
+    .clearFiltersButton,
+    .retryButton {
+        background: #3b82f6;
+        color: #ffffff;
+    }
+
+    .clearFiltersButton:hover,
+    .retryButton:hover {
+        background: #2563eb;
+    }
+}

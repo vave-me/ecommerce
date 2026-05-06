@@ -1,0 +1,428 @@
+/* The main container for everything */
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* The "mobile only" top bar with back button */
+.mobileHeader {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .mobileHeader {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50px;
+        background-color: #fff;
+        border-bottom: 1px solid #ddd;
+        z-index: 999; /* Adjusted z-index to a more reasonable value */
+    }
+}
+
+.mobileHeaderContainer {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 16px;
+}
+
+.backButton {
+    background: none;
+    border: none;
+    color: #1aa89e;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Desktop Container: only visible ≥ 768px */
+.desktopContainer {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .desktopContainer {
+        display: block;
+    }
+}
+
+.mainContent {
+    flex: 1;
+    width: 100%;
+    margin-top: 8px;
+    padding: 16px;
+    /* add top margin if pinned global header is used; otherwise skip */
+}
+
+/* A simple grid for the desktop videos */
+.layoutGrid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+/* The desktop video card wrapper */
+.cardWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    background: #000;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+    /* Add for keyboard navigation */
+    outline: none;
+}
+
+.cardWrapper:hover,
+.cardWrapper:focus {
+    transform: scale(1.01);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.videoElement,
+.mobileVideoElement {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Consistent object-fit */
+    display: block; /* Remove potential inline spacing issues */
+}
+
+/* Overlay for both desktop and mobile */
+.overlayContainer,
+.mobileOverlayContainer {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.metadataOverlay, .mobileMetadataOverlay {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+}
+
+/* Video Controls (shared styles) */
+.videoControls {
+    position: absolute;
+    bottom: 10px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 4px 8px;
+    border-radius: 4px;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.2s ease-in-out;
+}
+
+.cardWrapper:hover .videoControls,
+.mobileVideoWrapper:active .videoControls,
+.videoControls:focus-within { /* Keep controls visible if focused */
+    opacity: 1;
+}
+
+.controlButton {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem; /* Adjust as needed */
+    padding: 0; /* Reset padding for consistent sizing */
+    line-height: 1; /* Prevent extra line height */
+    display: flex; /* For centering icons */
+    align-items: center;
+    justify-content: center;
+}
+
+.controlButton:hover {
+    color: #eee; /* Slightly lighter on hover */
+}
+
+/* Footer Overlay (shared) */
+.footerOverlay, .mobileFooterOverlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+.videoTitle, .mobileVideoTitle {
+    margin: 0 0 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.creatorName, .mobileCreatorName {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.muteButton {
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    border: none;
+    /* font-size: 0.75rem; Removed, using icons now */
+    padding: 6px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex; /* Use flex for icon centering */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mobile container: only visible <768px */
+.mobileContainer {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .mobileContainer {
+        display: none;
+        margin-top: 60px;
+    }
+}
+
+.mobileContainer {
+    background-color: #f2f2f2;
+    height: 90vh; /* Consider using 100dvh for better mobile behavior */
+    overflow: hidden;
+    margin-top: 50px;
+}
+
+/* The vertical snap container for each video */
+.snapScrollContainer {
+    flex: 1;
+    overflow-y: auto;
+    height: 100%;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+    /* will-change: transform;  Removed, test performance before adding */
+}
+
+.snapItem {
+    scroll-snap-align: start;
+    width: 100%;
+    height: 100vh; /* Consider 100dvh here as well */
+    position: relative;
+}
+
+/* Mobile video wrapper */
+.mobileVideoWrapper {
+    width: 100%;
+    height: 90%;
+    position: relative;
+    background: black;
+}
+
+
+/* Loading and Error Styles (shared) */
+.loadingOverlay, .errorOverlay, .bufferingOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 3; /* Above video, below overlays */
+    color: white;
+    font-size: 1.2rem;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Error/NoVideos states */
+.errorContainer, .noVideos {
+    margin: 60px auto;
+    max-width: 500px;
+    text-align: center;
+}
+
+.errorContainer h2 {
+    color: red;
+}
+
+.noVideos {
+    font-style: italic;
+}
+
+.videoError {
+    color: red
+}
+
+/* ===================== */
+/* Dark Theme Support */
+/* ===================== */
+@media (prefers-color-scheme: dark) {
+    /* Main container */
+    .container {
+        background-color: var(--gray-900);
+        color: var(--gray-50);
+    }
+
+    /* Mobile header */
+    .mobileHeader {
+        background-color: var(--gray-800);
+        border-bottom-color: var(--gray-700);
+    }
+
+    .backButton {
+        color: var(--primary-color);
+    }
+
+    /* Desktop container */
+    .desktopContainer {
+        background-color: var(--gray-900);
+        color: var(--gray-50);
+    }
+
+    /* Main content */
+    .mainContent {
+        background-color: var(--gray-900);
+        color: var(--gray-50);
+    }
+
+    /* Video card wrapper */
+    .cardWrapper {
+        background-color: var(--gray-800);
+        border: 1px solid var(--gray-700);
+    }
+
+    .cardWrapper:hover,
+    .cardWrapper:focus {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        border-color: var(--primary-color);
+    }
+
+    /* Video controls */
+    .videoControls {
+        background: rgba(0, 0, 0, 0.8);
+        border: 1px solid var(--gray-700);
+    }
+
+    .controlButton {
+        color: var(--gray-200);
+    }
+
+    .controlButton:hover {
+        color: var(--gray-50);
+    }
+
+    /* Footer overlay */
+    .footerOverlay, .mobileFooterOverlay {
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    }
+
+    .videoTitle, .mobileVideoTitle {
+        color: var(--gray-50);
+    }
+
+    .creatorName, .mobileCreatorName {
+        color: var(--gray-300);
+    }
+
+    /* Mute button */
+    .muteButton {
+        background: rgba(0, 0, 0, 0.7);
+        color: var(--gray-200);
+        border: 1px solid var(--gray-600);
+    }
+
+    .muteButton:hover {
+        background: rgba(0, 0, 0, 0.9);
+        color: var(--gray-50);
+    }
+
+    /* Mobile container */
+    .mobileContainer {
+        background-color: var(--gray-900);
+    }
+
+    /* Mobile video wrapper */
+    .mobileVideoWrapper {
+        background-color: var(--gray-900);
+    }
+
+    /* Loading and error overlays */
+    .loadingOverlay, .errorOverlay, .bufferingOverlay {
+        background: rgba(0, 0, 0, 0.8);
+        color: var(--gray-50);
+    }
+
+    .spinner {
+        border-color: var(--gray-600);
+        border-top-color: var(--primary-color);
+    }
+
+    /* Error states */
+    .errorContainer, .noVideos {
+        background-color: var(--gray-800);
+        color: var(--gray-300);
+        border-radius: 8px;
+        padding: 2rem;
+        border: 1px solid var(--gray-700);
+    }
+
+    .errorContainer h2 {
+        color: var(--danger);
+    }
+
+    .noVideos {
+        color: var(--gray-400);
+    }
+
+    .videoError {
+        color: var(--danger);
+    }
+
+    /* Mobile responsive adjustments */
+    @media (max-width: 767px) {
+        .mobileHeader {
+            background-color: var(--gray-800);
+            border-bottom-color: var(--gray-700);
+        }
+
+        .mobileContainer {
+            background-color: var(--gray-900);
+        }
+    }
+}

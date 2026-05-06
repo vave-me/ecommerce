@@ -1,0 +1,125 @@
+.feedContainer {
+  width: 100%;
+  max-width: 100%;
+}
+
+.feedItems {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  width: 100%;
+  align-items: start;
+  justify-items: center;
+  margin-top: 20px;
+}
+
+/* Desktop: 3 columns */
+@media (min-width: 1024px) {
+  .feedItems {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1020px;
+    margin: 20px auto 0;
+  }
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .feedItems {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 680px;
+    margin: 20px auto 0;
+  }
+}
+
+/* Mobile: 1 column */
+@media (max-width: 767px) {
+  .feedItems {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 16px;
+  }
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 16px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-color, #e2e8f0);
+  border-top-color: var(--primary-color, #1d9bf0);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loadMoreTrigger {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.loadMoreButton {
+  background: var(--primary-color, #1d9bf0);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.loadMoreButton:hover {
+  background: var(--primary-hover, #1a8cd8);
+  transform: translateY(-1px);
+}
+
+.endMessage {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary, #536471);
+}
+
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary, #536471);
+}
+
+.errorMessage {
+  background: var(--error-bg, #fee);
+  border: 1px solid var(--error-border, #fcc);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 20px;
+  text-align: center;
+  color: var(--error-text, #c00);
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .spinner {
+    border-color: var(--gray-700, #374151);
+    border-top-color: var(--primary-color, #1d9bf0);
+  }
+
+  .errorMessage {
+    background: rgba(220, 38, 38, 0.1);
+    border-color: rgba(220, 38, 38, 0.3);
+    color: #fca5a5;
+  }
+}

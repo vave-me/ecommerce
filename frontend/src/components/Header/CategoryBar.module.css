@@ -1,0 +1,321 @@
+/* CategoryBar.module.css - Horizontal Category Navigation */
+
+/* === CONTAINER === */
+.container {
+    width: 100%;
+    background: #ffffff;
+
+}
+
+.wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+}
+
+/* === SCROLL CONTAINER === */
+.scrollContainer {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    padding: 0 24px;
+}
+
+.scrollContainer::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+
+.categoryList {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 0;
+    white-space: nowrap;
+}
+
+/* === GROUP LABELS === */
+.groupLabel {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    border: none;
+    background: #f3f4f6;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    position: relative;
+    margin-right: 12px;
+}
+
+.groupLabel:hover {
+    background: #e5e7eb;
+    color: #111827;
+}
+
+.groupLabel.activeGroup {
+    background: #00A396;
+    color: white;
+}
+
+.groupLabel.activeGroup:hover {
+    background: #00897d;
+}
+
+.groupEndLabel {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    color: #6b7280;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    margin-left: 12px;
+    opacity: 0.7;
+    border-left: 2px solid #e5e7eb;
+    padding-left: 16px;
+}
+
+/* === CATEGORY LINKS === */
+.categoryLink {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 12px;
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    position: relative;
+}
+
+.categoryLink:hover {
+    color: #00A396;
+}
+
+.categoryLink.active {
+    color: #00A396;
+    font-weight: 600;
+    border-bottom-color: #00CCBF;
+}
+
+/* === SCROLL BUTTONS === */
+.scrollButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.scrollButton:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.scrollButton:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.scrollButtonLeft {
+    left: 4px;
+}
+
+.scrollButtonRight {
+    right: 4px;
+}
+
+.scrollIcon {
+    width: 20px;
+    height: 20px;
+    color: #6b7280;
+}
+
+/* === LOADING STATE === */
+.loadingState {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 24px;
+    overflow: hidden;
+}
+
+.skeletonItem {
+    height: 36px;
+    width: 100px;
+    background: #f3f4f6;
+    border-radius: 6px;
+    animation: shimmer 1.5s infinite;
+    flex-shrink: 0;
+}
+
+@keyframes shimmer {
+    0% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+    }
+}
+
+/* === MOBILE RESPONSIVE === */
+@media (max-width: 768px) {
+    .scrollContainer {
+        padding: 0 16px;
+    }
+    
+    .categoryList {
+        padding: 12px 0;
+        gap: 6px;
+    }
+    
+    .categoryLink {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+    
+    .groupLabel {
+        padding: 6px 12px;
+        font-size: 13px;
+        margin-right: 8px;
+    }
+    
+    .groupEndLabel {
+        padding: 6px 12px;
+        font-size: 12px;
+        margin-left: 8px;
+    }
+    
+    .scrollButton {
+        display: none; /* Hide scroll buttons on mobile */
+    }
+    
+    .skeletonItem {
+        height: 32px;
+        width: 80px;
+    }
+}
+
+/* === TABLET === */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .scrollContainer {
+        padding: 0 20px;
+    }
+}
+
+/* === DARK MODE SUPPORT === */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background: #1f2937;
+        border-bottom-color: #374151;
+    }
+    
+    .categoryLink {
+        color: #d1d5db;
+    }
+    
+    .categoryLink:hover {
+        color: #00CCBF;
+    }
+    
+    .categoryLink.active {
+        color: #00CCBF;
+    }
+    
+    .groupLabel {
+        color: #e5e7eb;
+        background: #374151;
+    }
+    
+    .groupLabel:hover {
+        background: #4b5563;
+        color: #f3f4f6;
+    }
+    
+    .groupLabel.activeGroup {
+        background: #00CCBF;
+        color: #1f2937;
+    }
+    
+    .groupLabel.activeGroup:hover {
+        background: #00A396;
+    }
+    
+    .groupEndLabel {
+        color: #9ca3af;
+        border-left-color: #4b5563;
+    }
+    
+    .scrollButton {
+        background: #374151;
+        border-color: #4b5563;
+    }
+    
+    .scrollButton:hover {
+        background: #4b5563;
+        border-color: #6b7280;
+    }
+    
+    .scrollIcon {
+        color: #d1d5db;
+    }
+    
+    .skeletonItem {
+        background: #374151;
+    }
+}
+
+/* === ACCESSIBILITY === */
+@media (prefers-reduced-motion: reduce) {
+    .scrollContainer {
+        scroll-behavior: auto;
+    }
+    
+    .categoryLink,
+    .scrollButton {
+        transition: none;
+    }
+    
+    .skeletonItem {
+        animation: none;
+        opacity: 0.7;
+    }
+}
+
+/* Focus styles */
+.categoryLink:focus-visible {
+    outline: 2px solid #00CCBF;
+    outline-offset: 2px;
+}
+
+.scrollButton:focus-visible {
+    outline: 2px solid #00CCBF;
+    outline-offset: 2px;
+}

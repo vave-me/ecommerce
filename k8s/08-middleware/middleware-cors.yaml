@@ -1,0 +1,26 @@
+# k8s/08-middleware/middleware-cors.yaml
+apiVersion: traefik.io/v1alpha1 # <<< CORRECT API VERSION HERE
+kind: Middleware
+metadata:
+  name: cors-headers
+  namespace: my-project
+spec:
+  headers:
+    accessControlAllowCredentials: true
+    accessControlAllowOriginList:
+      - "https://sfx-markt.de"
+      - "https://www.sfx-markt.de"
+    accessControlAllowMethods:
+      - "GET"
+      - "POST"
+      - "PUT"
+      - "DELETE"
+      - "OPTIONS"
+      - "PATCH"
+    accessControlAllowHeaders:
+      - "Content-Type"
+      - "Authorization"
+      - "X-Requested-With"
+      # Add any other custom headers your frontend sends
+    accessControlMaxAge: 86400
+    addVaryHeader: true

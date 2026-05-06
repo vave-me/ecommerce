@@ -1,0 +1,361 @@
+syntax = "proto3";
+
+package servicespb;
+
+import "servicespb/common.proto";
+import "google/protobuf/timestamp.proto";       // For timestamp fields
+
+service ServicesService {
+
+  rpc AddService(AddServiceRequest) returns (AddServiceResponse) {}
+  rpc GetService(GetServiceRequest) returns (GetServiceResponse) {}
+  rpc GetServices(GetServicesRequest) returns (GetServicesResponse) {}
+  rpc GetServicesByCategory(GetServicesByCategoryRequest) returns (GetServicesByCategoryResponse) {}
+  rpc GetServicesByCategorySlug(GetServicesByCategorySlugRequest) returns (GetServicesByCategorySlugResponse) {}
+  rpc GetServicesWithFilter(GetServicesWithFilterRequest) returns (GetServicesWithFilterResponse) {}
+  rpc GetCatalog(GetCatalogRequest) returns (GetCatalogResponse) {}
+  rpc GetPublicCatalog(GetPublicCatalogRequest) returns (GetPublicCatalogResponse) {}
+  rpc RemoveService(RemoveServiceRequest) returns (RemoveServiceResponse) {}
+  rpc UpdateServicePrice(UpdateServicePriceRequest) returns (UpdateServicePriceResponse) {}
+  rpc RebrandService(RebrandServiceRequest) returns (RebrandServiceResponse) {}
+  rpc UpdateService(UpdateServiceRequest) returns (UpdateServiceResponse) {}
+  rpc AdjustServiceStock(AdjustServiceStockRequest) returns (AdjustServiceStockResponse) {}
+  rpc ArchiveService(ArchiveServiceRequest) returns (ArchiveServiceResponse) {}
+  rpc MarkServiceSold(MarkServiceSoldRequest) returns (MarkServiceSoldResponse) {}
+  rpc MarkServiceLeased(MarkServiceLeasedRequest) returns (MarkServiceLeasedResponse) {}
+  rpc IncreaseServicePrice(IncreaseServicePriceRequest) returns (IncreaseServicePriceResponse) {}
+  rpc DecreaseServicePrice(DecreaseServicePriceRequest) returns (DecreaseServicePriceResponse) {}
+
+}
+
+message  RebrandServiceResponse{}
+message  UpdateServicePriceResponse{}
+message  RemoveServiceResponse{}
+message UpdateServiceResponse{
+  string id = 1;
+}
+
+message Service {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string service_type = 4;
+  int64 base_price = 5;
+  repeated string pricing = 6;
+  string availability = 7;
+  string provider_name = 8;
+  string user_id = 9;
+  string  category_id = 10;
+  string  category_slug = 11;
+  string description_short = 12;
+  string description_long = 13;
+  repeated string qualifications = 14;
+  string contact = 15;
+  string faq = 16;
+  repeated string tags = 17;
+  string status = 18;
+  string user_type = 19;
+  int64 shipping_cost = 20;
+  bool has_variants = 21;
+  bool middleman_service = 22;
+  bool negotiable = 23;
+  repeated Attribute attributes = 24;
+  repeated Option options = 25;
+  string thumbnail = 26;
+  float lat = 27;
+  float lng = 28;
+}
+
+
+
+
+message AddServiceRequest {
+  string name = 1;
+  string description = 2;
+  int64 base_price = 3;
+  string service_type = 4;
+  repeated string pricing = 5;
+  string availability = 6;
+  string provider_name = 7;
+  string  category_id = 8;
+  string  category_slug = 9;
+  string description_short = 10;
+  string description_long = 11;
+  repeated string qualifications = 12;
+  string contact = 13;
+  string faq = 14;
+  repeated string tags = 15;
+  string status = 16;
+  string user_type = 17;
+  int64 shipping_cost = 18;
+  bool has_variants = 19;
+  bool middleman_service = 20;
+  bool negotiable = 21;
+  repeated Attribute attributes = 22;
+  repeated Option options = 23;
+  string thumbnail = 24;
+  float lat = 25;
+  float lng = 26;
+}
+
+message AddServiceResponse {
+  string id = 1;
+}
+
+message GetServicesRequest{
+  int64 page = 1;
+  int64 page_size = 2;
+  string sort_by = 3;
+  string sort_order = 4;
+}
+
+message GetServicesResponse{
+  repeated Service services = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+message GetServicesByCategoryRequest{
+  string category_id = 1;
+  int64 page = 2;
+  int64 page_size = 3;
+  string sort_by = 4;
+  string sort_order = 5;
+}
+
+message GetServicesByCategoryResponse{
+  repeated Service services = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+message GetServicesByCategorySlugRequest{
+  string category_slug = 1;
+  int64 page = 2;
+  int64 page_size = 3;
+  string sort_by = 4;
+  string sort_order = 5;
+}
+
+message GetServicesByCategorySlugResponse{
+  repeated Service services = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+message GetServicesWithFilterRequest{
+  string category_id = 1;
+  string category_slug = 2;
+  string service_type = 3;
+  string user_id = 4;
+  string status = 5;
+  string search_text = 6;
+  int64 min_price = 7;
+  int64 max_price = 8;
+  int64 available_from = 9;
+  int64 available_to = 10;
+  bool has_variants = 11;
+  bool negotiable = 12;
+  bool middleman_service = 13;
+  string user_type = 14;
+  repeated string tags = 15;
+  repeated string qualifications = 16;
+  int64 page = 17;
+  int64 page_size = 18;
+  string sort_by = 19;
+  string sort_order = 20;
+  float lat = 21;
+  float lng = 22;
+  int64 radius = 23;
+}
+
+message GetServicesWithFilterResponse{
+  repeated Service services = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+message GetCatalogRequest {
+  string user_id = 1;
+  int64 page = 2;
+  int64 page_size = 3;
+  string sort_by = 4;
+  string sort_order = 5;
+
+}
+message GetPublicCatalogRequest {
+  string user_id = 1;
+  int64 page = 2;
+  int64 page_size = 3;
+  string sort_by = 4;
+  string sort_order = 5;
+
+}
+
+
+message RemoveServiceRequest {
+  string id = 1;
+
+}
+
+message UpdateServicePriceRequest {
+  string id = 1;
+  int64 new_price = 2;
+  int64 old_price = 3;
+}
+
+message RebrandServiceRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  int64 base_price = 4;
+  repeated string pricing = 5;
+  string availability = 6;
+  string provider_name = 7;
+  string  category_id = 8;
+  string  category_slug = 9;
+  string description_short = 10;
+  string description_long = 11;
+  repeated string qualifications = 12;
+  string contact = 13;
+  string faq = 14;
+  repeated string tags = 15;
+  string status = 16;
+  string user_type = 17;
+  int64 shipping_cost = 18;
+  bool has_variants = 19;
+  bool middleman_service = 20;
+  bool negotiable = 21;
+  repeated Attribute attributes = 22;
+  repeated Option options = 23;
+  string thumbnail = 24;
+  float lat = 25;
+  float lng = 26;
+}
+
+message UpdateServiceRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string service_type = 4;
+  int64 base_price = 5;
+  repeated string pricing = 6;
+  string availability = 7;
+  string provider_name = 8;
+  string  category_id = 9;
+  string  category_slug = 10;
+  string description_short = 11;
+  string description_long = 12;
+  repeated string qualifications = 13;
+  string contact = 14;
+  string faq = 15;
+  repeated string tags = 16;
+  string status = 17;
+  string user_type = 18;
+  int64 shipping_cost = 19;
+  bool has_variants = 20;
+  bool middleman_service = 21;
+  bool negotiable = 22;
+  repeated Attribute attributes = 23;
+  repeated Option options = 24;
+  string thumbnail = 25;;
+  float lat = 26;
+  float lng = 27;
+
+}
+
+message GetServiceRequest {
+  string id = 1;
+}
+
+message GetServiceResponse {
+  Service service = 1;
+}
+
+message GetCatalogResponse {
+  repeated Service services = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+message GetPublicCatalogResponse {
+  repeated Service services = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+message AdjustServiceStockRequest {
+  string service_id = 1;
+  int64 new_stock = 2;
+}
+
+message AdjustServiceStockResponse {
+  string service_id = 1;
+  int64 old_stock = 2;
+  int64 new_stock = 3;
+}
+
+// Increase Service Price
+message IncreaseServicePriceRequest {
+  string service_id = 1;
+  int64 price = 2;
+
+}
+message IncreaseServicePriceResponse {
+  string service_id = 1;
+  int64 old_price = 2;
+  int64 new_price = 3;
+}
+
+// Decrease Service Price
+message DecreaseServicePriceRequest {
+  string service_id = 1;
+  int64 new_price = 2;
+}
+message DecreaseServicePriceResponse {
+  string service_id = 1;
+  int64 old_price = 2;
+  int64 new_price = 3;
+}
+message ArchiveServiceRequest {
+  string service_id = 1;
+}
+
+message ArchiveServiceResponse {
+  string service_id = 1;
+  bool archived = 2;  // e.g. true if success
+}
+
+message MarkServiceSoldRequest {
+  string service_id = 1;
+
+}
+
+message MarkServiceSoldResponse {
+  string service_id = 1;
+  string status = 2;
+}
+
+message MarkServiceLeasedRequest {
+  string service_id = 1;
+  int64 monthly_price = 2;
+  int64 lease_term_months = 3;
+}
+
+message MarkServiceLeasedResponse {
+  string service_id = 1;
+  string status = 2;
+}
+
+message MarkServicePawnedRequest {
+  string service_id = 1;
+  int64 locked_price = 2;
+  int64 redemption_fee = 3;
+
+}
+
+

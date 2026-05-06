@@ -1,0 +1,88 @@
+.container {
+    display: grid;
+    grid-template-areas: "leftside contentarea rightside";
+    grid-template-columns: minmax(0, 5fr) minmax(0, 12fr) minmax(300px, 7fr);
+    column-gap: 25px;
+    row-gap: 25px;
+    margin: 0 auto;
+    margin-top: 25px;
+    width: 100%;
+    max-width: 1128px;
+}
+
+.title {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+@media (prefers-color-scheme: dark) {
+    .title {
+        color: var(--gray-200);
+    }
+}
+
+.productsWrapper {
+    gap: 24px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loadingContainer {
+    display: flex;
+    align-items: center;
+    color: #6c757d;
+    font-size: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .loadingContainer {
+        color: var(--gray-400);
+    }
+}
+
+.spinnerIcon {
+    margin-right: 8px;
+    width: 24px;
+    height: 24px;
+    border: 4px solid rgba(26, 168, 158, 0.2);
+    border-top-color: #1aa89e;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+    .spinnerIcon {
+        border: 4px solid rgba(59, 130, 246, 0.2);
+        border-top-color: var(--primary-color);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.errorMessage {
+    color: #dc3545;
+    font-size: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .errorMessage {
+        color: var(--danger);
+    }
+}
+
+.noResultsMessage {
+    color: #6c757d;
+    font-size: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .noResultsMessage {
+        color: var(--gray-400);
+    }
+}

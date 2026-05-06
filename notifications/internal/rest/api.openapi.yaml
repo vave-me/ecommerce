@@ -1,0 +1,25 @@
+openapiOptions:
+  file:
+    - file: "notificationspb/api.proto"
+      option:
+        info:
+          title: Notifications Management API
+          version: "1.0.0"
+          description: "API for managing notifications and notifications related to products, transactions, users, stores, and more."
+        basePath: /
+  method:
+
+    - method: notificationspb.NotificationsService.ListAlerts
+      option:
+        operationId: listAlerts
+        tags:
+          - Alert
+        summary: List All alerts for a user
+
+    - method: notificationspb.NotificationsService.GetAlertsByType
+      option:
+        operationId: getAlertsByType
+        tags:
+          - Alert
+        summary: Retrieve Alerts by Type for a User
+

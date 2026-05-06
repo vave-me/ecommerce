@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  # IMPORTANT: Create in the 'minio' namespace
+  name: minio-api-ingress
+  namespace: minio
+  annotations:
+    # Use the same issuer as your other certificates
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    # Consider adding CORS headers via middleware if needed for browser uploads
+    # traefik.ingress.kubernetes.io/router.middlewares: minio-cors-headers@kubernetescrd
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        # The NEW public hostname for the API
+        - minio-api.sfx-markt.de
+      # Cert-manager will create this secret using the specified issuer
+      secretName: minio-api-tls
+  rules:
+    - host: minio-api.sfx-markt.de # Match the NEW public hostname
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio # The existing MinIO service name
+                port:
+                  # Target the SERVICE port exposing the API (port 9096 named 'api')
+                  name: api

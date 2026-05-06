@@ -1,0 +1,146 @@
+# OpenTelemetry Collector Configuration v0.128.0 (2025)
+# Updated to use latest non-deprecated components
+
+extensions:
+  zpages:
+    endpoint: 0.0.0.0:55679
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  # Resource detection for environment
+  resourcedetection:
+    detectors: [env, system]
+    system:
+      hostname_sources: [os]
+      resource_attributes:
+        host.id:
+          enabled: true
+        host.name:
+          enabled: true
+        host.arch:
+          enabled: true
+        host.cpu.family:
+          enabled: true
+        host.cpu.model.id:
+          enabled: true
+        host.cpu.model.name:
+          enabled: true
+        host.cpu.vendor.id:
+          enabled: true
+        host.cpu.cache.l2.size:
+          enabled: true
+        os.description:
+          enabled: true
+        os.type:
+          enabled: true
+    timeout: 5s
+    override: false
+  
+  # Filter out unnecessary metrics
+  filter/metrics:
+    error_mode: ignore
+    metrics:
+      exclude:
+        match_type: regexp
+        metric_names:
+          - ".*_bucket"  # Exclude histogram buckets
+          - "go_memstats_.*_inuse_bytes"  # Exclude detailed memory stats
+          - "go_memstats_.*_alloc_bytes"
+          - "go_memstats_.*_sys_bytes"
+  
+  # Batch processing
+  batch:
+    timeout: 60s
+    send_batch_size: 1024
+    send_batch_max_size: 2048
+  
+  # Memory limiter
+  memory_limiter:
+    # 75% of maximum memory up to 2G
+    limit_mib: 1536
+    # 25% of limit up to 2G
+    spike_limit_mib: 512
+    check_interval: 5s
+
+exporters:
+  debug:
+    verbosity: normal
+    sampling_initial: 5
+    sampling_thereafter: 200
+  prometheus:
+    endpoint: 0.0.0.0:9464
+    namespace: otel
+    const_labels:
+      collector: "middleman"
+    resource_to_telemetry_conversion:
+      enabled: true
+  # Using OTLP exporter for Jaeger (recommended approach)
+  otlp/jaeger:
+    endpoint: jaeger:4317
+    tls:
+      insecure: true
+    compression: gzip
+    retry_on_failure:
+      enabled: true
+      initial_interval: 5s
+      max_interval: 30s
+      max_elapsed_time: 300s
+    sending_queue:
+      enabled: true
+      num_consumers: 10
+      queue_size: 1000
+    timeout: 30s
+
+connectors:
+  spanmetrics:
+    histogram:
+      explicit:
+        buckets: [2ms, 4ms, 6ms, 8ms, 10ms, 50ms, 100ms, 200ms, 400ms, 800ms, 1s, 1400ms, 2s, 5s, 10s, 15s]
+    dimensions:
+      - name: http.method
+        default: GET
+      - name: http.status_code
+    exemplars:
+      enabled: true
+      max_per_data_point: 5
+    aggregation_cardinality_limit: 1000
+    aggregation_temporality: "AGGREGATION_TEMPORALITY_CUMULATIVE"
+    metrics_flush_interval: 60s
+    metrics_expiration: 5m
+
+service:
+  telemetry:
+    logs:
+      level: info
+      output_paths: ["stdout"]
+    metrics:
+      level: detailed
+      readers:
+        - pull:
+            exporter:
+              prometheus:
+                host: 0.0.0.0
+                port: 8888
+
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, resourcedetection, batch]
+      exporters: [debug, spanmetrics, otlp/jaeger]
+    metrics:
+      receivers: [otlp, spanmetrics]
+      processors: [memory_limiter, resourcedetection, filter/metrics, batch]
+      exporters: [debug, prometheus]
+    logs:
+      receivers: [otlp]
+      processors: [memory_limiter, resourcedetection, batch]
+      exporters: [debug]
+
+  extensions: [zpages]

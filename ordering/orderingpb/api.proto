@@ -1,0 +1,211 @@
+syntax = "proto3";
+
+package orderingpb;
+
+import "google/protobuf/empty.proto";         // For empty responses
+import "google/protobuf/timestamp.proto";     // For timestamp fields
+
+// OrderingService provides functionalities related to order management.
+service OrderingService {
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse) {}
+  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse) {}
+  rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse) {}
+  rpc GetOrdersByCustomer(GetOrdersByCustomerRequest) returns (GetOrdersByCustomerResponse) {}
+  rpc GetOrdersByStatus(GetOrdersByStatusRequest) returns (GetOrdersByStatusResponse) {}
+  rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse) {}
+  rpc ReadyOrder(ReadyOrderRequest) returns (ReadyOrderResponse) {}
+  rpc CompleteOrder(CompleteOrderRequest) returns (CompleteOrderResponse) {}
+  rpc ApproveOrder(ApproveOrderRequest) returns (ApproveOrderResponse) {}
+  rpc RejectOrder(RejectOrderRequest) returns (RejectOrderResponse) {}
+  rpc ShipOrder(ShipOrderRequest) returns (ShipOrderResponse) {}
+  rpc DeliverOrder(DeliverOrderRequest) returns (DeliverOrderResponse) {}
+  rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse) {}
+}
+
+// -----------------------------
+// Order Management Messages
+// -----------------------------
+
+// Order represents an order placed by a customer.
+message Order {
+  string id = 1;
+  string user_customer_id = 2;
+  string payment_method_id = 3;
+  repeated Item items = 4;
+  string status = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
+
+
+message Item {
+  string user_seller_id = 1;
+  string product_id = 2;
+  string user_seller_name = 3;
+  string product_name = 4;
+  int64 price = 5;
+  int64 quantity = 6;
+}
+
+
+message CreateOrderRequest {
+  string id = 1;
+  repeated Item items = 2;
+  string user_customer_id = 3;
+  string basket_id = 4;
+  string payment_intent = 5;
+}
+
+message CreateOrderResponse {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+}
+
+
+message GetOrderRequest {
+  string id = 1;
+}
+
+message GetOrderResponse {
+  Order order = 1;
+}
+
+message CancelOrderRequest {
+  string id = 1;
+  string reason = 2;
+}
+
+message CancelOrderResponse {}
+
+
+message ReadyOrderRequest {
+  string id = 1;
+}
+
+message ReadyOrderResponse {
+  string id = 1;
+  string status = 2;
+  google.protobuf.Timestamp ready_at = 3;
+}
+
+message CompleteOrderRequest {
+  string id = 1;
+  string invoice_id = 2;
+}
+
+message CompleteOrderResponse {
+  string id = 1;
+  string status = 2;
+  google.protobuf.Timestamp completed_at = 3;
+}
+
+message ApproveOrderRequest {
+  string id = 1;
+  string shopping_id = 2;
+}
+
+message ApproveOrderResponse {
+  string id = 1;
+  string status = 2;
+  google.protobuf.Timestamp approved_at = 3;
+}
+
+
+message RejectOrderRequest {
+  string id = 1;
+}
+
+message RejectOrderResponse {
+  string id = 1;
+  string status = 2;
+  google.protobuf.Timestamp rejected_at = 3;
+}
+
+
+message ShipOrderRequest {
+  string id = 1;
+}
+
+message ShipOrderResponse {
+  string id = 1;
+  string status = 2;
+  google.protobuf.Timestamp shipped_at = 3;
+}
+
+
+message DeliverOrderRequest {
+  string id = 1;
+}
+
+message DeliverOrderResponse {
+  string id = 1;
+  string status = 2;
+  google.protobuf.Timestamp delivered_at = 3;
+}
+
+
+message ErrorResponse {
+  int64 code = 1;
+  string message = 2;
+  repeated string details = 3;
+}
+
+// ListOrders for pagination
+message ListOrdersRequest {
+  int64 page = 1;
+  int64 page_size = 2;
+  string sort_by = 3;     // created_at, updated_at, status
+  string sort_order = 4;  // asc, desc
+}
+
+message ListOrdersResponse {
+  repeated Order orders = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+// GetOrdersByCustomer
+message GetOrdersByCustomerRequest {
+  string user_customer_id = 1;
+  int64 page = 2;
+  int64 page_size = 3;
+  string sort_by = 4;
+  string sort_order = 5;
+}
+
+message GetOrdersByCustomerResponse {
+  repeated Order orders = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+// GetOrdersByStatus
+message GetOrdersByStatusRequest {
+  string status = 1;  // pending, approved, rejected, cancelled, ready, shipped, delivered, completed
+  int64 page = 2;
+  int64 page_size = 3;
+  string sort_by = 4;
+  string sort_order = 5;
+}
+
+message GetOrdersByStatusResponse {
+  repeated Order orders = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+// UpdateOrderStatus
+message UpdateOrderStatusRequest {
+  string id = 1;
+  string status = 2;
+  string reason = 3;  // optional reason for status change
+}
+
+message UpdateOrderStatusResponse {
+  string id = 1;
+  string status = 2;
+  google.protobuf.Timestamp updated_at = 3;
+}

@@ -1,0 +1,722 @@
+/* ===== MERCHANT SYNC - PROFESSIONAL DESIGN ===== */
+/* Product synchronization interface for Google Merchant Center */
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 16px;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+/* ===== HEADER SECTION ===== */
+.header {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 8px 0;
+  transition: color 0.2s ease;
+  width: fit-content;
+}
+
+.backButton:hover {
+  color: #374151;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.headerActions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.settingsButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.settingsButton:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+/* ===== CONTROLS PANEL ===== */
+.controlsPanel {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.controlsLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.syncModeSelector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.syncModeSelector label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.syncModeSelector select {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #374151;
+  font-size: 14px;
+  min-width: 140px;
+}
+
+.bulkSyncButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #3b82f6;
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bulkSyncButton:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.bulkSyncButton:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.controlsRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.searchBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchBox svg {
+  position: absolute;
+  left: 10px;
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.searchInput {
+  padding: 8px 12px 8px 34px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 200px;
+  background: #ffffff;
+}
+
+.filterSelect {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #374151;
+  font-size: 14px;
+  min-width: 120px;
+}
+
+/* ===== PROGRESS SECTION ===== */
+.progressSection {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+.progressInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #374151;
+}
+
+.progressBarContainer {
+  width: 100%;
+  height: 8px;
+  background: #f3f4f6;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* ===== STATS GRID ===== */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.statCard {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.2s ease;
+}
+
+.statCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.statIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.statContent {
+  flex: 1;
+}
+
+.statValue {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.statLabel {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* ===== PRODUCT LIST ===== */
+.productList {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+
+.listHeader {
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9fafb;
+}
+
+.selectAll {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.selectAll input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+.listStats {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.syncList {
+  display: flex;
+  flex-direction: column;
+}
+
+.syncItemContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.syncItemContainer:last-child {
+  border-bottom: none;
+}
+
+.productCheckbox {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.syncItem {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+}
+
+.productInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.productImage {
+  width: 48px;
+  height: 48px;
+  background: #f3f4f6;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.productImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.productDetails {
+  flex: 1;
+}
+
+.productName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+}
+
+.productId {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0 0 2px 0;
+}
+
+.productPrice {
+  font-size: 14px;
+  font-weight: 600;
+  color: #059669;
+  margin: 0;
+}
+
+.syncStatus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 120px;
+}
+
+.lastSync {
+  font-size: 11px;
+  color: #9ca3af;
+  text-align: center;
+}
+
+.syncProgress {
+  width: 140px;
+  display: flex;
+  justify-content: center;
+}
+
+.syncActions {
+  display: flex;
+  gap: 8px;
+}
+
+.syncButton {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  background: #3b82f6;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.syncButton:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.syncButton:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.viewButton,
+.menuButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 6px;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.viewButton:hover,
+.menuButton:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.progressFill {
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+  border-radius: 2px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ===== STATUS BADGES ===== */
+.statusBadge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statusSuccess {
+  background: rgba(34, 197, 94, 0.1);
+  color: #059669;
+}
+
+.statusPending,
+.statusQueued {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
+
+.statusError {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.statusUnknown {
+  background: rgba(107, 114, 128, 0.1);
+  color: #6b7280;
+}
+
+/* ===== EMPTY STATE ===== */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 60px 20px;
+  color: #6b7280;
+}
+
+.emptyState h3 {
+  margin: 16px 0 8px 0;
+  color: #374151;
+  font-size: 18px;
+}
+
+.emptyState p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* ===== LOADING STATE ===== */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 60px 20px;
+  color: #6b7280;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+.loadingContainer h2 {
+  margin: 16px 0 8px 0;
+  color: #374151;
+  font-size: 18px;
+}
+
+.loadingContainer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* ===== ERROR STATE ===== */
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 60px 20px;
+  color: #6b7280;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+.errorState h2 {
+  margin: 16px 0 8px 0;
+  color: #374151;
+  font-size: 18px;
+}
+
+.errorState p {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+}
+
+/* ===== ANIMATIONS ===== */
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .container {
+    padding: 12px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .headerActions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .controlsPanel {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .controlsLeft,
+  .controlsRight {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .syncItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .syncStatus {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .syncProgress {
+    width: 100%;
+  }
+
+  .syncActions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .listHeader {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .selectAll {
+    justify-content: center;
+  }
+} 
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+@media (prefers-reduced-motion: reduce) {
+  .container,
+  .container * {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .statCard:hover,
+  .actionButton:hover {
+    transform: none !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .statusBadge,
+  .actionButton {
+    border-width: var(--border-width-2);
+  }
+  
+  .container {
+    background: var(--bg-primary);
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  .container {
+    background: var(--bg-primary);
+    box-shadow: none;
+  }
+  
+  .headerActions,
+  .actionsCell,
+  .pagination,
+  .refreshButton,
+  .createButton,
+  .addButton,
+  .exportButton,
+  .actionButton {
+    display: none !important;
+  }
+  
+  .table {
+    break-inside: avoid;
+  }
+  
+  .header,
+  .statsGrid {
+    break-after: avoid;
+  }
+}

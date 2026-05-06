@@ -1,0 +1,304 @@
+# --- Grafana Deployment for Observability ---
+# Namespace is already defined in 15-jaeger/jaeger.yaml
+# ConfigMap for Grafana configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-config
+  namespace: observability
+data:
+  grafana.ini: |
+    [server]
+    protocol = http
+    http_port = 3000
+    domain = grafana.sfx-markt.de
+    root_url = https://grafana.sfx-markt.de/
+    serve_from_sub_path = false
+    
+    [analytics]
+    reporting_enabled = false
+    check_for_updates = false
+    
+    [users]
+    allow_sign_up = false
+    
+    [auth.anonymous]
+    enabled = false
+    org_role = Viewer
+    
+    [log]
+    mode = console
+    level = info
+    
+    [explore]
+    enabled = true
+    
+    [paths]
+    data = /var/lib/grafana
+    logs = /var/log/grafana
+    plugins = /var/lib/grafana/plugins
+    provisioning = /etc/grafana/provisioning
+---
+# ConfigMap for datasource provisioning
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasources
+  namespace: observability
+data:
+  datasources.yaml: |
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        access: proxy
+        url: http://prometheus.observability.svc.cluster.local:9090
+        isDefault: true
+        jsonData:
+          timeInterval: 15s
+          exemplarTraceIdDestinations:
+            - name: trace_id
+              datasourceUid: jaeger
+              urlDisplayLabel: "View in Jaeger"
+      - name: Jaeger
+        type: jaeger
+        access: proxy
+        url: http://jaeger-query.observability.svc.cluster.local:16686
+        uid: jaeger
+---
+# Secret for Grafana admin credentials
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-secret
+  namespace: observability
+type: Opaque
+data:
+  admin-user: YWRtaW4=  # admin
+  admin-password: a2xqYWtzZDk4YWFoc2RmYWxzanJhYWxramRmbGsyOTM3NDJhc2RmOThhNjM4OTRoZmpsYWZqa2lr  # grafana-admin echo -n 'kljaksd98aahsdfalsjraalkjdflk293742asdf98a63894hfjlafjkik' | base64
+
+---
+# Grafana Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: observability
+  labels:
+    app: grafana
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+      protocol: TCP
+  selector:
+    app: grafana
+---
+# Grafana Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: observability
+  labels:
+    app: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      securityContext:
+        fsGroup: 472
+        runAsUser: 472
+        runAsGroup: 472
+        runAsNonRoot: true
+      containers:
+        - name: grafana
+          image: grafana/grafana:11.4.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              name: http
+              protocol: TCP
+          env:
+            - name: GF_SECURITY_ADMIN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-secret
+                  key: admin-user
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-secret
+                  key: admin-password
+            - name: GF_INSTALL_PLUGINS
+              value: ""
+          volumeMounts:
+            - name: grafana-config
+              mountPath: /etc/grafana/grafana.ini
+              subPath: grafana.ini
+            - name: grafana-datasources
+              mountPath: /etc/grafana/provisioning/datasources
+            - name: grafana-dashboards-config
+              mountPath: /etc/grafana/provisioning/dashboards
+            - name: dashboard-business-kpi
+              mountPath: /var/lib/grafana/dashboards/business-kpi-dashboard.json
+              subPath: business-kpi-dashboard.json
+            - name: dashboard-executive
+              mountPath: /var/lib/grafana/dashboards/executive-analytics.json
+              subPath: executive-analytics.json
+            - name: dashboard-middleman
+              mountPath: /var/lib/grafana/dashboards/middleman.json
+              subPath: middleman.json
+            - name: dashboard-otel
+              mountPath: /var/lib/grafana/dashboards/opentelemetry-collector.json
+              subPath: opentelemetry-collector.json
+            - name: dashboard-red
+              mountPath: /var/lib/grafana/dashboards/red-metrics.json
+              subPath: red-metrics.json
+            - name: dashboard-sla-compliance
+              mountPath: /var/lib/grafana/dashboards/sla-compliance.json
+              subPath: sla-compliance.json
+            - name: dashboard-sla-monitoring
+              mountPath: /var/lib/grafana/dashboards/sla-slo-monitoring.json
+              subPath: sla-slo-monitoring.json
+            - name: dashboard-spanmetrics
+              mountPath: /var/lib/grafana/dashboards/spanmetrics.json
+              subPath: spanmetrics.json
+            - name: dashboard-technical
+              mountPath: /var/lib/grafana/dashboards/technical-operations.json
+              subPath: technical-operations.json
+            - name: grafana-storage
+              mountPath: /var/lib/grafana
+            - name: grafana-tmp
+              mountPath: /tmp
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+      volumes:
+        - name: grafana-config
+          configMap:
+            name: grafana-config
+        - name: grafana-datasources
+          configMap:
+            name: grafana-datasources
+        - name: grafana-dashboards-config
+          configMap:
+            name: grafana-dashboards-config
+        - name: dashboard-business-kpi
+          configMap:
+            name: grafana-dashboard-business-kpi-dashboard
+            optional: true
+        - name: dashboard-executive
+          configMap:
+            name: grafana-dashboard-executive-analytics
+            optional: true
+        - name: dashboard-middleman
+          configMap:
+            name: grafana-dashboard-middleman
+            optional: true
+        - name: dashboard-otel
+          configMap:
+            name: grafana-dashboard-opentelemetry-collector
+            optional: true
+        - name: dashboard-red
+          configMap:
+            name: grafana-dashboard-red-metrics
+            optional: true
+        - name: dashboard-sla-compliance
+          configMap:
+            name: grafana-dashboard-sla-compliance
+            optional: true
+        - name: dashboard-sla-monitoring
+          configMap:
+            name: grafana-dashboard-sla-slo-monitoring
+            optional: true
+        - name: dashboard-spanmetrics
+          configMap:
+            name: grafana-dashboard-spanmetrics
+            optional: true
+        - name: dashboard-technical
+          configMap:
+            name: grafana-dashboard-technical-operations
+            optional: true
+        - name: grafana-storage
+          emptyDir: {}
+        - name: grafana-tmp
+          emptyDir: {}
+---
+# ConfigMap for dashboard provisioning
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards-config
+  namespace: observability
+data:
+  dashboards.yaml: |
+    apiVersion: 1
+    providers:
+      - name: 'default'
+        orgId: 1
+        folder: 'Docker Import'
+        type: file
+        disableDeletion: false
+        updateIntervalSeconds: 10
+        allowUiUpdates: true
+        options:
+          path: /var/lib/grafana/dashboards
+---
+# Ingress for Grafana UI
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana-ingress
+  namespace: observability
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.middlewares: observability-strip-prefix@kubernetescrd
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - observability.sfx-markt.de
+      secretName: observability-tls
+  rules:
+    - host: observability.sfx-markt.de
+      http:
+        paths:
+          - path: /grafana
+            pathType: Prefix
+            backend:
+              service:
+                name: grafana
+                port:
+                  number: 3000

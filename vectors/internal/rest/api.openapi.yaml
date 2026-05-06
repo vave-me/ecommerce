@@ -1,0 +1,53 @@
+openapiOptions:
+  file:
+    - file: "vectorspb/api.proto"
+      option:
+        info:
+          title: Vector Search Service
+          description: "Pure vector-oriented API for LLM-powered semantic search across entities"
+          version: "2.0.0"
+          contact:
+            name: Vector Service API
+        basePath: /api/vectors
+
+  method:
+    # Core LLM-focused vector operations
+    - method: vectorspb.VectorService.SearchByVector
+      option:
+        operationId: searchByVector
+        tags:
+          - Vector Search
+        summary: Search entities using raw vector embeddings
+        description: "Accept raw float32 vectors from LLMs and perform semantic search across all entity types"
+
+    - method: vectorspb.VectorService.SearchSimilarEntities
+      option:
+        operationId: searchSimilarEntities
+        tags:
+          - Vector Search
+        summary: Find entities similar to a given entity
+        description: "Find entities that are vector-similar to a specific entity using cosine similarity"
+
+    - method: vectorspb.VectorService.GetEntityContext
+      option:
+        operationId: getEntityContext
+        tags:
+          - Entity Context
+        summary: Get contextual information about an entity
+        description: "Retrieve an entity with its vector-similar neighbors for contextual understanding"
+
+    - method: vectorspb.VectorService.GetRecommendations
+      option:
+        operationId: getRecommendations
+        tags:
+          - Recommendations
+        summary: Get personalized recommendations using user vectors
+        description: "Generate personalized recommendations based on user preference vectors from LLMs"
+
+    - method: vectorspb.VectorService.GetEntityById
+      option:
+        operationId: getEntityById
+        tags:
+          - Entity Retrieval
+        summary: Retrieve entity by ID with optional vector
+        description: "Get a specific entity by ID, optionally including its vector embedding"

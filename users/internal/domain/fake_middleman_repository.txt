@@ -1,0 +1,146 @@
+package domain
+
+import (
+	"context"
+	"errors"
+)
+
+type FakeMiddlemanRepository struct {
+	users map[string]*MiddlemanUser
+}
+
+var _ MiddlemanRepository = (*FakeMiddlemanRepository)(nil)
+
+func NewFakeMiddlemanRepository() *FakeMiddlemanRepository {
+	return &FakeMiddlemanRepository{
+		users: map[string]*MiddlemanUser{},
+	}
+}
+
+func (r *FakeMiddlemanRepository) AddUser(ctx context.Context, userID, email, username, firstname, lastname, googleID string, enabled bool, lat, lng float64, thumbnail string) error {
+	if _, exists := r.users[userID]; exists {
+		return errors.New("user already exists")
+	}
+	
+	r.users[userID] = &MiddlemanUser{
+		ID:        userID,
+		Email:     email,
+		Username:  username,
+		FirstName: firstname,
+		LastName:  lastname,
+		GoogleID:  googleID,
+		Enabled:   enabled,
+		Lat:       lat,
+		Lng:       lng,
+		Thumbnail: thumbnail,
+	}
+	
+	return nil
+}
+
+func (r *FakeMiddlemanRepository) EnableUser(ctx context.Context, userID string, enabled bool) error {
+	user, exists := r.users[userID]
+	if !exists {
+		return errors.New("user not found")
+	}
+	
+	user.Enabled = enabled
+	return nil
+}
+
+func (r *FakeMiddlemanRepository) RenameUser(ctx context.Context, userID string, newName string) error {
+	user, exists := r.users[userID]
+	if !exists {
+		return errors.New("user not found")
+	}
+	
+	user.Username = newName
+	return nil
+}
+
+func (r *FakeMiddlemanRepository) LogUserIn(ctx context.Context, userID string) error {
+	_, exists := r.users[userID]
+	if !exists {
+		return errors.New("user not found")
+	}
+	
+	// Just verify user exists, no actual state change needed for fake implementation
+	return nil
+}
+
+func (r *FakeMiddlemanRepository) LogUserOut(ctx context.Context, userID string) error {
+	_, exists := r.users[userID]
+	if !exists {
+		return errors.New("user not found")
+	}
+	
+	// Just verify user exists, no actual state change needed for fake implementation
+	return nil
+}
+
+func (r *FakeMiddlemanRepository) FindByEmail(ctx context.Context, email string) (*MiddlemanUser, error) {
+	for _, user := range r.users {
+		if user.Email == email {
+			return user, nil
+		}
+	}
+	
+	return nil, errors.New("user not found")
+}
+
+func (r *FakeMiddlemanRepository) FindByGoogleID(ctx context.Context, googleID string) (*MiddlemanUser, error) {
+	for _, user := range r.users {
+		if user.GoogleID == googleID {
+			return user, nil
+		}
+	}
+	
+	return nil, errors.New("user not found")
+}
+
+func (r *FakeMiddlemanRepository) Find(ctx context.Context, userID string) (*MiddlemanUser, error) {
+	user, exists := r.users[userID]
+	if !exists {
+		return nil, errors.New("user not found")
+	}
+	
+	return user, nil
+}
+
+func (r *FakeMiddlemanRepository) FindSimple(ctx context.Context, userID string) (*MiddlemanViewUser, error) {
+	user, exists := r.users[userID]
+	if !exists {
+		return nil, errors.New("user not found")
+	}
+	
+	return &MiddlemanViewUser{
+		ID:        user.ID,
+		Username:  user.Username,
+		Lat:       user.Lat,
+		Lng:       user.Lng,
+		Location:  "", // Location string not stored in fake repo
+		Thumbnail: user.Thumbnail,
+	}, nil
+}
+
+func (r *FakeMiddlemanRepository) All(ctx context.Context) ([]*MiddlemanUser, error) {
+	users := make([]*MiddlemanUser, 0, len(r.users))
+	
+	for _, user := range r.users {
+		users = append(users, user)
+	}
+	
+	return users, nil
+}
+
+func (r *FakeMiddlemanRepository) AllParticipating(ctx context.Context) ([]*MiddlemanUser, error) {
+	users := make([]*MiddlemanUser, 0)
+	
+	for _, user := range r.users {
+		if user.Enabled {
+			users = append(users, user)
+		}
+	}
+	
+	return users, nil
+}

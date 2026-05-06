@@ -1,0 +1,218 @@
+/* Minimalist engagement bar for product listings */
+.engagementBar {
+    display: flex;
+    margin-top: 8px;
+    padding: 0;
+    width: 100%;
+}
+
+/* Action buttons container with compact spacing */
+.actions {
+    display: flex;
+    width: 100%;
+    gap: 4px;
+}
+
+/* Base engagement button style - minimal and compact */
+.engagementButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    border-radius: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #71717a;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s ease;
+    flex: 1;
+    position: relative;
+}
+
+.engagementButton:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* Icon styling - slightly larger */
+.engagementIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #71717a;
+    transition: color 0.15s ease;
+}
+
+/* Count badge styling - red background with white text */
+.countBadge {
+    position: absolute;
+    top: 2px;
+    right: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+    background-color: #ef4444;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    transition: all 0.15s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.countBadge:empty {
+    display: none;
+}
+
+/* Filled icon styles for active states */
+.filledIcon {
+    fill: currentColor;
+}
+
+/* Action specific styles - more subtle */
+.heartIcon.active {
+    color: #f43f5e;
+}
+
+.commentIcon.active {
+    color: #2980b9;
+}
+
+.messageIcon.active {
+    color: #0ea5e9;
+}
+
+/* Removed colors for like/dislike in normal state */
+.likeIcon, .dislikeIcon {
+    color: #71717a;
+}
+
+/* Only active states have colors */
+.likeIcon.active {
+    color: #10b981;
+}
+
+.dislikeIcon.active {
+    color: #ef4444;
+}
+
+.shareIcon.active {
+    color: #8b5cf6;
+}
+
+/* Simple tooltip */
+.engagementButton::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    z-index: 10;
+    visibility: hidden;
+}
+
+.engagementButton:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Smaller breakpoint adjustments */
+@media (max-width: 480px) {
+    .engagementButton {
+        padding: 12px 8px;
+    }
+}
+
+/* For the specific product listing layout */
+.productEngagementBar {
+    border-top: 1px solid #f1f1f1;
+    padding-top: 8px;
+    margin-top: 12px;
+}
+
+.productEngagementButton {
+    background-color: #f9f9f9;
+    border-radius: 16px;
+}
+
+/* Dark Theme Support */
+@media (prefers-color-scheme: dark) {
+    .engagementBar {
+        background-color: var(--gray-800);
+    }
+
+    .engagementButton {
+        color: var(--gray-400);
+    }
+
+    .engagementButton:hover {
+        background-color: var(--gray-700);
+        color: var(--gray-200);
+    }
+
+    .engagementIcon {
+        color: var(--gray-400);
+    }
+
+    .countBadge {
+        background-color: var(--danger);
+        color: var(--gray-50);
+    }
+
+    .heartIcon.active {
+        color: var(--danger);
+    }
+
+    .commentIcon.active {
+        color: var(--primary-color);
+    }
+
+    .messageIcon.active {
+        color: var(--primary-color);
+    }
+
+    .likeIcon.active {
+        color: var(--success);
+    }
+
+    .dislikeIcon.active {
+        color: var(--danger);
+    }
+
+    .shareIcon.active {
+        color: var(--primary-color);
+    }
+
+    .engagementButton::after {
+        background-color: rgba(0, 0, 0, 0.9);
+        color: var(--gray-50);
+    }
+
+    .productEngagementBar {
+        border-top: 1px solid var(--gray-700);
+        background-color: var(--gray-800);
+    }
+
+    .productEngagementButton {
+        background-color: var(--gray-700);
+        color: var(--gray-300);
+    }
+
+    .productEngagementButton:hover {
+        background-color: var(--gray-600);
+        color: var(--gray-50);
+    }
+}

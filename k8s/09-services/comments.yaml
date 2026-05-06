@@ -1,0 +1,174 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: comments-secrets
+  namespace: my-project
+type: Opaque
+data:
+  COMMENTS_PASS: REDACTED
+  # Ensure these values are correct for your setup
+  WEBSOCKET: d3M6Ly9uYXRzLm1lc3NhZ2luZy5zdmMuY2x1c3Rlci5sb2NhbDo5MjIy # ws://nats.messaging.svc.cluster.local:9222
+  COMMENTS_STREAM: Y29tbWVudHM= # comments
+  COMMENTS_WEBSOCKET_SUBJECT: d3MuY29tbWVudHM= # ws.comments
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comments
+  namespace: my-project
+  labels:
+    app: comments
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: comments
+  template:
+    metadata:
+      labels:
+        app: comments
+    spec:
+      initContainers:
+        - name: wait-for-db
+          image: postgres:16-alpine
+          env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: comments-secrets
+                  key: COMMENTS_PASS
+          command: [ 'sh', '-c' ]
+          args:
+            - |
+              set -e
+              echo "Waiting for postgres service (postgres.database.svc.cluster.local:5432) to accept connections for user comments_user..."
+              until psql -h postgres.database.svc.cluster.local -U comments_user -d comments -c "SELECT 1;" > /dev/null 2>&1; do
+                echo "Postgres not ready yet for user comments_user, sleeping for 2 seconds..."
+                sleep 2
+              done
+              echo "Postgres service is ready for user comments_user!"
+          resources:
+            requests:
+              cpu: "25m"
+              memory: "32Mi"
+            limits:
+              cpu: "100m"
+              memory: "64Mi"
+        - name: wait-for-nats
+          image: busybox:1.36
+          command: [ 'sh', '-c', 'echo "Waiting for nats (nats.messaging.svc.cluster.local:4222)..."; until nc -zv nats.messaging.svc.cluster.local 4222; do sleep 2; done; echo "NATS ready!"' ]
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "16Mi"
+            limits:
+              cpu: "50m"
+              memory: "32Mi"
+      containers:
+        - name: comments
+          image: registry.sfx-markt.de/comments:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: http
+            - containerPort: 9000
+              name: grpc
+          envFrom:
+            - configMapRef:
+                name: common-config
+            - secretRef:
+                name: common-secrets
+          env:
+            - name: PG_CONN
+              value: "host=$(POSTGRES_HOST) port=$(POSTGRES_PORT) dbname=comments user=comments_user search_path=comments,public sslmode=disable password=comments_pass"
+            - name: PGHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: POSTGRES_HOST
+            - name: PGPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: POSTGRES_PORT
+            - name: PGDATABASE
+              value: "comments"
+            - name: PGUSER
+              value: "comments_user"
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: comments-secrets
+                  key: COMMENTS_PASS
+            - name: PGSSLMODE
+              value: "disable"
+            - name: RPC_SERVICES # Assuming comments service needs to call other RPC services? Adjust if needed.
+              value: "COMMENTS=comments.my-project.svc.cluster.local:9000" # Example, adjust as needed
+            - name: WEBSOCKET # Added
+              valueFrom:
+                secretKeyRef:
+                  name: comments-secrets
+                  key: WEBSOCKET
+            - name: COMMENTS_STREAM # Added
+              valueFrom:
+                secretKeyRef:
+                  name: comments-secrets
+                  key: COMMENTS_STREAM
+            - name: COMMENTS_WEBSOCKET_SUBJECT # Added
+              valueFrom:
+                secretKeyRef:
+                  name: comments-secrets
+                  key: COMMENTS_WEBSOCKET_SUBJECT
+            - name: OTEL_SERVICE_NAME
+              value: "comments"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://otel-collector.observability.svc.cluster.local:4317"
+            - name: OTEL_EXPORTER_OTLP_INSECURE
+              value: "true"
+            - name: OTEL_TRACES_EXPORTER
+              value: "otlp"
+            - name: OTEL_METRICS_EXPORTER
+              value: "otlp"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: comments
+  namespace: my-project
+  labels:
+    app: comments
+spec:
+  selector:
+    app: comments
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+    - name: grpc-internal
+      port: 9000
+      targetPort: grpc
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: comments-external # External service name
+  namespace: my-project
+  labels:
+    app: comments
+spec:
+  selector:
+    app: comments
+  ports:
+    - name: grpc-external
+      protocol: TCP
+      port: 30005 # External port
+      targetPort: grpc
+  type: LoadBalancer

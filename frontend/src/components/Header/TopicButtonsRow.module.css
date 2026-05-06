@@ -1,0 +1,78 @@
+/* TopicButtonsRow.module.css */
+
+/* The scrollable row */
+.scrollRow {
+    display: flex;
+    align-items: center;
+    gap: var(--ai-space-xxs, 2px);
+    padding: var(--ai-space-xxs, 2px) var(--ai-space-md, 12px);
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    min-height: 32px;
+}
+
+.scrollRow::-webkit-scrollbar {
+    display: none;
+}
+
+/* Enhanced scrollbar variant - shown when auto-scroll is disabled */
+.scrollRow.showScrollbar {
+    scrollbar-width: thin;
+}
+
+.scrollRow.showScrollbar::-webkit-scrollbar {
+    display: block;
+    height: 6px;
+}
+
+.scrollRow.showScrollbar::-webkit-scrollbar-track {
+    background: var(--ai-color-border, #e5e7eb);
+    border-radius: var(--ai-radius-sm, 4px);
+    margin: 0 var(--ai-space-lg, 16px);
+}
+
+.scrollRow.showScrollbar::-webkit-scrollbar-thumb {
+    background: var(--ai-color-text-muted, #6b7280);
+    border-radius: var(--ai-radius-sm, 4px);
+    transition: background-color var(--ai-transition-fast, 0.15s) ease;
+}
+
+.scrollRow.showScrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--ai-color-text-secondary, #374151);
+}
+
+/* Auto-scroll animation smoothness enhancement */
+.scrollRow.autoScrolling {
+    scroll-behavior: auto;
+}
+
+/* Scroll indicators for better UX when content overflows */
+.scrollRow::before,
+.scrollRow::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--ai-space-xl, 20px);
+    pointer-events: none;
+    transition: opacity var(--ai-transition-slow, 0.3s) ease;
+    opacity: 0;
+    z-index: 1;
+}
+
+.scrollRow.hasOverflow::before {
+    left: 0;
+    background: linear-gradient(to right, var(--ai-color-surface, #ffffff), transparent);
+    opacity: 1;
+}
+
+.scrollRow.hasOverflow::after {
+    right: 0;
+    background: linear-gradient(to left, var(--ai-color-surface, #ffffff), transparent);
+    opacity: 1;
+}

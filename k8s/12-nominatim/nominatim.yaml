@@ -1,0 +1,269 @@
+# --- Nominatim Geocoding Server Deployment ---
+# Deploys Nominatim using the mediagis/nominatim image as a StatefulSet.
+# Includes prerequisite Secrets/ConfigMaps, Services, and the StatefulSet with PVC template.
+# IMPORTANT: Nominatim requires significant resources (CPU, RAM, Disk) and a potentially
+#            lengthy initial data import triggered by the PBF_URL environment variable.
+#            Ensure the container has internet access during the first startup for data download.
+
+# --- Namespace (Assuming deployment in 'my-project') ---
+# Ensure this namespace exists before applying.
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   name:nominatim
+
+# --- Nominatim Specific Secrets ---
+# Contains sensitive environment variables needed by the Nominatim container/entrypoint.
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nominatim-secrets
+  namespace: nominatim # Deploy in the same namespace as the StatefulSet
+type: Opaque
+data:
+  # IMPORTANT: Replace placeholder values with your actual Base64 encoded secrets.
+  # Example command: echo -n 'your-secret-value' | base64
+
+  # Password for internal PostgreSQL user if Nominatim entrypoint uses it (check image docs)
+  NOMINATIM_PASSWORD: REDACTED
+  # Geocoding API keys if used directly by Nominatim image/scripts
+  #GEOCODING_API_KEY={geocoding_api_key}
+  #GEOCODING_TOKEN_SECRET= LIKASDf8lk-asdlfkjas/mklkhlkajs181791717pdl1dfkjaslkdjjs
+  GEOCODING_API_KEY: REDACTED
+  GEOCODING_TOKEN_SECRET: REDACTED
+  # Add other sensitive env vars from docker-compose if needed by the image:
+  # JWT_SECRET_KEY: YOUR_JWT_SECRET_KEY_BASE64
+  # API_KEY: YOUR_API_KEY_BASE64
+---
+# --- Nominatim Runtime Configuration ---
+# Contains non-sensitive environment variables used by the image's entrypoint/scripts.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nominatim-config
+  namespace: nominatim
+data:
+  # --- Data Import/Update URLs ---
+  # IMPORTANT: Set these URLs to your chosen OSM data source (e.g., Geofabrik)
+  # The image entrypoint likely uses PBF_URL to download data on first run if DB is empty.
+  PBF_URL: "http://download.geofabrik.de/europe/germany-latest.osm.pbf" # Example: Germany
+  # The entrypoint likely uses REPLICATION_URL for setting up continuous updates.
+  REPLICATION_URL: "http://download.geofabrik.de/europe/germany-updates/" # Example: Germany updates
+
+  # --- Import Options ---
+  IMPORT_WIKIPEDIA: "false" # Set to "true" to import Wikipedia importance data (increases import time/size)
+
+  # --- Internal PostgreSQL Tuning Parameters ---
+  # These are passed as environment variables which the mediagis/nominatim entrypoint
+  # likely uses to configure the internal PostgreSQL instance.
+  # Adjust these based on available resources and region size. Defaults shown are examples.
+  POSTGRES_SHARED_BUFFERS: "1GB"
+  POSTGRES_MAINTENANCE_WORK_MEM: "1GB"
+  POSTGRES_AUTOVACUUM_WORK_MEM: "-1" # Default allows auto-tuning
+  POSTGRES_WORK_MEM: "50MB"
+  POSTGRES_SYNCHRONOUS_COMMIT: "off" # Improves import speed
+  POSTGRES_MAX_WAL_SIZE: "1GB"
+  POSTGRES_CHECKPOINT_TIMEOUT: "10min"
+  POSTGRES_CHECKPOINT_COMPLETION_TARGET: "0.9"
+  # Set lower than container memory limit, e.g., 50-75% of (Container Memory Limit - Shared Buffers)
+  POSTGRES_EFFECTIVE_CACHE_SIZE: "3GB"
+
+  # Add other non-sensitive env vars from docker-compose if required by the image entrypoint:
+  # ENVIRONMENT: "production" # Likely from common-config if needed
+  # DOMAIN: "sfx-markt.de"     # Unlikely needed by Nominatim core
+---
+# --- Custom PostgreSQL Configuration File ---
+# ConfigMap holding the content of your custom postgresql.conf overrides.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nominatim-pgconf
+  namespace: nominatim
+data:
+  # This key should match the filename mounted into the conf.d directory
+  postgres-custom.conf: |
+    # Paste the content of your local ./docker/postgres/postgres-custom.conf file here
+    # Example:
+    # max_connections = 200
+    # shared_preload_libraries = 'pg_stat_statements'
+    # log_min_duration_statement = 1000 # Log queries longer than 1s
+    # Remove this line if you add actual content -> placeholder: "key: value"
+---
+# --- Headless Service ---
+# Provides stable network identifiers (DNS) for the StatefulSet pods (e.g., nominatim-0.nominatim-headless...)
+apiVersion: v1
+kind: Service
+metadata:
+  name: nominatim-headless
+  namespace: nominatim
+spec:
+  clusterIP: None # Defines it as headless
+  ports:
+    - port: 8080
+      name: http # Nominatim web server port
+  selector:
+    app: nominatim # Selects pods managed by the StatefulSet
+---
+# --- ClusterIP Service ---
+# Provides a stable internal DNS endpoint (nominatim.my-project.svc.cluster.local)
+# for other services to query the Nominatim API.
+apiVersion: v1
+kind: Service
+metadata:
+  name: nominatim
+  namespace: nominatim
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8080        # Service listens on 8080
+      targetPort: http  # Forwards to pod's port named 'http' (which is 8080)
+  selector:
+    app: nominatim # Selects pods managed by the StatefulSet
+---
+# --- Nominatim StatefulSet ---
+# Manages the Nominatim pod(s) and persistent storage for its internal database.
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nominatim
+  namespace: nominatim
+  labels:
+    app: nominatim
+spec:
+  serviceName: nominatim-headless # Links to the headless service
+  replicas: 1 # Start with one replica; scaling Nominatim requires careful planning
+  updateStrategy:
+    type: RollingUpdate # Or Recreate
+  selector:
+    matchLabels:
+      app: nominatim # Must match template labels
+  # --- Pod Template ---
+  template:
+    metadata:
+      labels:
+        app: nominatim
+    spec:
+      # IMPORTANT: Nominatim import is resource intensive. Ensure pod runs on node(s)
+      # with sufficient CPU, RAM, and fast Disk I/O (SSD recommended).
+      terminationGracePeriodSeconds: 60 # Allow time for graceful shutdown
+
+      # --- Volumes Definition ---
+      volumes:
+        # Volume for custom postgresql.conf settings from ConfigMap
+        - name: nominatim-pgconf-vol
+          configMap:
+            name: nominatim-pgconf
+        # Volume for shared memory (/dev/shm) using RAM-backed emptyDir
+        # Crucial for PostgreSQL performance. Match size to POSTGRES_SHARED_BUFFERS if possible.
+        - name: dshm
+          emptyDir:
+            medium: Memory
+            # NOTE: Setting sizeLimit here might require specific K8s features/config.
+            # Ensure node has enough allocatable memory. 4Gi matches docker-compose shm_size.
+            sizeLimit: 4Gi
+
+      # --- Nominatim Container ---
+      containers:
+        - name: nominatim
+          image: mediagis/nominatim:4.5 # Use the specific image version from compose
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              name: http # Web API port
+
+          # --- Environment Variables ---
+          # Load non-sensitive config from nominatim-config ConfigMap
+          envFrom:
+            - configMapRef:
+                name: nominatim-config
+            # Load sensitive config from nominatim-secrets Secret
+            - secretRef:
+                name: nominatim-secrets
+          # Optional: Load shared config/secrets if needed by image/scripts
+          # - configMapRef:
+          #     name: common-config
+          # - secretRef:
+          #     name: common-secrets
+
+          # --- Volume Mounts ---
+          volumeMounts:
+            # Mount persistent storage for internal PostgreSQL data
+            - name: nominatim-data # Matches volumeClaimTemplates.metadata.name
+              mountPath: /var/lib/postgresql/16/main # Standard path used by internal PG
+            # Mount custom postgresql config override into the expected include directory
+            - name: nominatim-pgconf-vol
+              mountPath: /etc/postgresql/16/main/conf.d/postgres-custom.conf # Path for PG config includes
+              subPath: postgres-custom.conf # Mount only the specific file
+              readOnly: true
+            # Mount emptyDir to /dev/shm for PostgreSQL performance enhancement
+            - name: dshm
+              mountPath: /dev/shm
+
+          resources:
+            requests:
+              memory: "8Gi" # High memory request is often crucial
+              cpu: "2"    # 2 CPU cores request
+            limits:
+              memory: "12Gi" # High memory limit
+              cpu: "4"     # 4 CPU cores limit
+
+  # --- Persistent Volume Claim Template ---
+  # Defines storage for the internal PostgreSQL database used by Nominatim.
+  volumeClaimTemplates:
+    - metadata:
+        name: nominatim-data # Matches volumeMount name
+      spec:
+        accessModes: [ "ReadWriteOnce" ] # Required for block storage / single pod access
+        # Ensure 'local-path' provides sufficient IOPS (SSD recommended) and reliability for PostgreSQL.
+        storageClassName: local-path
+        resources:
+          requests:
+            # Adjust based on the size of your OSM data import (DB size >> PBF size)
+            # Germany might need 100-200Gi+. Check Nominatim docs for estimates.
+            storage: 150Gi
+---
+# --- Nominatim Ingress ---
+# Exposes the internal Nominatim service externally at geo.sfx-markt.de
+# Handles TLS termination using a certificate automatically obtained via cert-manager.
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: geo-ingress # Or nominatim-ingress
+  namespace: nominatim # Must be in the same namespace as the target service ('nominatim')
+  annotations:
+    # Instruct cert-manager to issue a certificate using this ClusterIssuer
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    # Instruct Traefik to use the 'websecure' entrypoint (typically HTTPS/443)
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    # Instruct Traefik to enable TLS for this router
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    # Optional: Add other Traefik specific annotations if needed (e.g., timeouts, middlewares)
+    # traefik.ingress.kubernetes.io/router.middlewares:nominatim-nominatim-middleware@kubernetescrd
+spec:
+  # Specify the Ingress Controller managing this Ingress resource
+  ingressClassName: traefik
+  tls:
+    # Define hosts for which TLS should be enabled by cert-manager and Traefik
+    - hosts:
+        - geo.sfx-markt.de # Your desired public domain
+      # Specify the secret where cert-manager will store the certificate
+      # Cert-manager will create/manage this secret in the 'my-project' namespace
+      secretName: geo-tls
+  rules:
+    # Define routing rules based on the hostname
+    - host: geo.sfx-markt.de
+      http:
+        paths:
+          # Route all traffic for this host under the root path
+          - path: /
+            pathType: Prefix # Matches all paths starting with /
+            backend:
+              service:
+                # Target the internal Nominatim ClusterIP service
+                name: nominatim
+                port:
+                  # Reference the named port 'http' from the nominatim Service spec
+                  # (which targets container port 8080)
+                  name: http

@@ -1,0 +1,451 @@
+/* src/features/Payments/StripePaymentForm.module.css */
+
+.paymentForm {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+/* Dark theme for payment form */
+@media (prefers-color-scheme: dark) {
+    .paymentForm {
+        background-color: var(--gray-800, #1f2937);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.formHeader {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #f8f9fa;
+}
+
+/* Dark theme for form header */
+@media (prefers-color-scheme: dark) {
+    .formHeader {
+        border-bottom: 2px solid var(--gray-600, #4b5563);
+    }
+}
+
+.formTitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+}
+
+/* Dark theme for form title */
+@media (prefers-color-scheme: dark) {
+    .formTitle {
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.formSubtitle {
+    font-size: 14px;
+    color: #6c757d;
+    margin: 0;
+    font-weight: 400;
+}
+
+/* Dark theme for form subtitle */
+@media (prefers-color-scheme: dark) {
+    .formSubtitle {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.cardSection {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.cardLabel {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 8px;
+}
+
+/* Dark theme for card label */
+@media (prefers-color-scheme: dark) {
+    .cardLabel {
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+.cardElementContainer {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 16px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+/* Dark theme for card element container */
+@media (prefers-color-scheme: dark) {
+    .cardElementContainer {
+        background-color: var(--gray-700, #374151);
+        border: 1px solid var(--gray-600, #4b5563);
+    }
+}
+
+.cardElementContainer:focus-within {
+    border-color: #6772e5;
+    box-shadow: 0 0 0 3px rgba(103, 114, 229, 0.1);
+}
+
+/* Dark theme for card element container focus */
+@media (prefers-color-scheme: dark) {
+    .cardElementContainer:focus-within {
+        border-color: var(--primary-color, #3b82f6);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+}
+
+.cardElementContainer.error {
+    border-color: #dc3545;
+    background-color: #f8d7da;
+}
+
+/* Dark theme for card element error */
+@media (prefers-color-scheme: dark) {
+    .cardElementContainer.error {
+        border-color: var(--danger, #ef4444);
+        background-color: rgba(239, 68, 68, 0.1);
+    }
+}
+
+.cardElementContainer.complete {
+    border-color: #28a745;
+    background-color: #d4edda;
+}
+
+/* Dark theme for card element complete */
+@media (prefers-color-scheme: dark) {
+    .cardElementContainer.complete {
+        border-color: var(--success, #10b981);
+        background-color: rgba(16, 185, 129, 0.1);
+    }
+}
+
+.cardIcon {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 18px;
+    color: #6c757d;
+    transition: color 0.2s ease;
+}
+
+/* Dark theme for card icon */
+@media (prefers-color-scheme: dark) {
+    .cardIcon {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.cardElementContainer:focus-within .cardIcon {
+    color: #6772e5;
+}
+
+/* Dark theme for card icon focus */
+@media (prefers-color-scheme: dark) {
+    .cardElementContainer:focus-within .cardIcon {
+        color: var(--primary-color, #3b82f6);
+    }
+}
+
+.paymentButton {
+    padding: 15px 20px;
+    background-color: #6772e5;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.1em;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(103, 114, 229, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Dark theme for payment button */
+@media (prefers-color-scheme: dark) {
+    .paymentButton {
+        background-color: var(--primary-color, #3b82f6);
+        box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+    }
+}
+
+.paymentButton:hover {
+    background-color: #5469d4;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(103, 114, 229, 0.3);
+}
+
+/* Dark theme for payment button hover */
+@media (prefers-color-scheme: dark) {
+    .paymentButton:hover {
+        background-color: var(--primary-color, #2563eb);
+        box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+    }
+}
+
+.paymentButton:focus {
+    outline: 2px solid rgba(103, 114, 229, 0.3);
+    outline-offset: 2px;
+}
+
+/* Dark theme for payment button focus */
+@media (prefers-color-scheme: dark) {
+    .paymentButton:focus {
+        outline: 2px solid rgba(59, 130, 246, 0.3);
+    }
+}
+
+.paymentButton:active {
+    transform: translateY(0);
+}
+
+.paymentButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    background-color: #6c757d;
+}
+
+/* Dark theme for payment button disabled */
+@media (prefers-color-scheme: dark) {
+    .paymentButton:disabled {
+        background-color: var(--gray-600, #4b5563);
+    }
+}
+
+.paymentButton.loading {
+    color: transparent;
+}
+
+.paymentButton.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top: 2px solid #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.priceDisplay {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #28a745;
+    margin-bottom: 16px;
+    text-align: center;
+    padding: 12px;
+    background-color: #e8f5e8;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+}
+
+/* Dark theme for price display */
+@media (prefers-color-scheme: dark) {
+    .priceDisplay {
+        color: var(--success, #10b981);
+        background-color: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+}
+
+.errorMessage {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Dark theme for error message */
+@media (prefers-color-scheme: dark) {
+    .errorMessage {
+        color: var(--danger, #ef4444);
+        background-color: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+}
+
+.errorMessage::before {
+    content: '⚠️';
+    font-size: 16px;
+}
+
+.successMessage {
+    color: #155724;
+    font-size: 14px;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Dark theme for success message */
+@media (prefers-color-scheme: dark) {
+    .successMessage {
+        color: var(--success, #10b981);
+        background-color: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+}
+
+.successMessage::before {
+    content: '✅';
+    font-size: 16px;
+}
+
+.securityInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 8px 12px;
+    background-color: #e8f4fd;
+    border: 1px solid #b8daff;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #0c5460;
+}
+
+/* Dark theme for security info */
+@media (prefers-color-scheme: dark) {
+    .securityInfo {
+        background-color: rgba(59, 130, 246, 0.1);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        color: var(--primary-color, #60a5fa);
+    }
+}
+
+.securityInfo::before {
+    content: '🔒';
+    font-size: 14px;
+}
+
+.poweredByStripe {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 12px;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+/* Dark theme for powered by stripe */
+@media (prefers-color-scheme: dark) {
+    .poweredByStripe {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.stripeLink {
+    color: #6772e5;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+/* Dark theme for stripe link */
+@media (prefers-color-scheme: dark) {
+    .stripeLink {
+        color: var(--primary-color, #60a5fa);
+    }
+}
+
+.stripeLink:hover {
+    color: #5469d4;
+    text-decoration: underline;
+}
+
+/* Dark theme for stripe link hover */
+@media (prefers-color-scheme: dark) {
+    .stripeLink:hover {
+        color: var(--primary-color, #3b82f6);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .paymentForm {
+        padding: 20px;
+        margin: 16px;
+    }
+
+    .formTitle {
+        font-size: 18px;
+    }
+
+    .paymentButton {
+        padding: 12px 16px;
+        font-size: 1em;
+    }
+
+    .priceDisplay {
+        font-size: 1.1em;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .paymentForm {
+        padding: 16px;
+        margin: 12px;
+    }
+
+    .formTitle {
+        font-size: 16px;
+    }
+
+    .cardElementContainer {
+        padding: 12px;
+    }
+
+    .paymentButton {
+        padding: 10px 14px;
+        font-size: 0.95em;
+    }
+
+    .priceDisplay {
+        font-size: 1em;
+        padding: 8px;
+    }
+} 

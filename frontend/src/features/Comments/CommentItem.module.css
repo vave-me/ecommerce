@@ -1,0 +1,415 @@
+.commentContainer {
+    margin-left: calc(var(--depth, 0) * 20px);
+    border-left: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.commentContainer:hover {
+    border-left-color: var(--primary-color, #007bff);
+}
+
+.commentBox {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #f5f5f5;
+    border-radius: 0;
+    padding: 6px 10px;
+    margin-bottom: 0;
+    transition: background-color 0.15s ease;
+    box-shadow: none;
+}
+
+.commentBox:hover {
+    background-color: #fafafa;
+}
+
+/* Header */
+.commentHeader {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 3px;
+    flex-wrap: nowrap;
+}
+
+/* The user name text */
+.commentUser {
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 11px;
+    transition: color 0.2s ease;
+    min-width: 0;
+    flex: 0 0 auto;
+    letter-spacing: 0.01em;
+}
+
+.commentUser:hover {
+    color: var(--primary-color, #007bff);
+    cursor: pointer;
+}
+
+/* Loading state for user name */
+.commentUser:has-text("Loading...") {
+    color: #6c757d;
+    font-style: italic;
+    animation: pulse 3s ease infinite; /* Reduced frequency and simplified timing for performance */
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+/* The time text */
+.commentTime {
+    font-size: 10px;
+    color: #999999;
+    white-space: nowrap;
+    margin-left: auto;
+}
+
+/* The main comment content text */
+.commentContent {
+    color: #333;
+    line-height: 1.35;
+    margin-bottom: 4px;
+    word-wrap: break-word;
+    font-size: 12px;
+    letter-spacing: 0.01em;
+}
+
+.commentContent p {
+    margin: 0 0 8px 0;
+}
+
+.commentContent p:last-child {
+    margin-bottom: 0;
+}
+
+/* Actions row: reply, like, etc. */
+.actions {
+    display: flex;
+    gap: 3px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Base style for reply/like/dislike/share buttons */
+.replyButton {
+    background: none;
+    border: none;
+    color: #666666;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 1px 5px;
+    border-radius: 3px;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.replyButton:hover {
+    background-color: #f0f0f0;
+    color: var(--primary-color, #2980b9);
+}
+
+.replyButton:focus {
+    outline: 2px solid var(--primary-color, #007bff);
+    outline-offset: 2px;
+}
+
+/* Variation for action (like,dislike) buttons */
+.actionButton {
+    font-size: 10px;
+}
+
+/* Variation for view replies button */
+.viewRepliesButton {
+    color: var(--primary-color, #007bff);
+    font-weight: 600;
+}
+
+/* Wrapper for the reply input field */
+.replyInputWrapper {
+    margin-top: 3px;
+    padding: 4px;
+    background-color: #f9f9f9;
+    border-radius: 3px;
+    border: 1px solid #efefef;
+}
+
+/* Nested replies container */
+.repliesList {
+    margin-top: 2px;
+    padding-left: 10px;
+    border-left: 1px solid #f8f8f8;
+}
+
+/* Enhanced avatar styling */
+.commentHeader .avatarWrapper {
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #f1f3f4;
+    transition: border-color 0.2s ease;
+    width: 24px;
+    height: 24px;
+}
+
+.commentHeader:hover .avatarWrapper {
+    border-color: var(--primary-color, #007bff);
+}
+
+/* User info container for better layout */
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
+}
+
+.userMeta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Loading skeleton effect */
+.loadingSkeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 4px;
+    height: 1em;
+    min-width: 80px;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .commentContainer {
+        margin-left: calc(var(--depth, 0) * 12px);
+    }
+    
+    .commentBox {
+        padding: 12px;
+    }
+    
+    .commentHeader {
+        gap: 8px;
+    }
+    
+    .actions {
+        gap: 8px;
+    }
+    
+    .replyButton {
+        font-size: 12px;
+        padding: 6px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .commentContainer {
+        margin-left: calc(var(--depth, 0) * 8px);
+    }
+    
+    .commentBox {
+        padding: 10px;
+        border-radius: 8px;
+    }
+    
+    .commentHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+    
+    .userMeta {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .commentTime {
+        margin-left: 0;
+    }
+}
+
+/* Accessibility improvements */
+.replyButton:focus-visible {
+    outline: 2px solid var(--primary-color, #007bff);
+    outline-offset: 2px;
+}
+
+.commentUser[aria-busy="true"] {
+    position: relative;
+}
+
+.commentUser[aria-busy="true"]::after {
+    content: "";
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border: 2px solid #e1e5e9;
+    border-top: 2px solid var(--primary-color, #007bff);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* ===== DARK THEME SUPPORT ===== */
+@media (prefers-color-scheme: dark) {
+    .commentContainer:hover {
+        border-left-color: var(--teal-400, #2dd4bf);
+    }
+
+    .commentBox {
+        background: var(--gray-800, #1f2937);
+        border-color: var(--gray-700, #374151);
+        color: var(--gray-200, #e5e7eb);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .commentBox:hover {
+        border-color: var(--gray-600, #4b5563);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .commentUser {
+        color: var(--gray-100, #f3f4f6);
+    }
+
+    .commentUser:hover {
+        color: var(--teal-400, #2dd4bf);
+    }
+
+    .commentUser:has-text("Loading...") {
+        color: var(--gray-400, #9ca3af);
+    }
+
+    .commentTime {
+        color: var(--gray-400, #9ca3af);
+    }
+
+    .commentContent {
+        color: var(--gray-200, #e5e7eb);
+    }
+
+    .replyButton {
+        color: var(--gray-400, #9ca3af);
+    }
+
+    .replyButton:hover {
+        background-color: var(--gray-700, #374151);
+        color: var(--teal-400, #2dd4bf);
+    }
+
+    .replyButton:focus {
+        outline-color: var(--teal-400, #2dd4bf);
+    }
+
+    .viewRepliesButton {
+        color: var(--teal-400, #2dd4bf);
+    }
+
+    .replyInputWrapper {
+        background-color: var(--gray-750, #2d3748);
+        border-top-color: var(--gray-700, #374151);
+    }
+
+    .repliesList {
+        border-top-color: var(--gray-700, #374151);
+    }
+
+    .commentHeader .avatarWrapper {
+        border-color: var(--gray-700, #374151);
+    }
+
+    .commentHeader:hover .avatarWrapper {
+        border-color: var(--teal-400, #2dd4bf);
+    }
+
+    .loadingSkeleton {
+        background: linear-gradient(90deg, var(--gray-700, #374151) 25%, var(--gray-600, #4b5563) 50%, var(--gray-700, #374151) 75%);
+    }
+
+    .replyButton:focus-visible {
+        outline-color: var(--teal-400, #2dd4bf);
+    }
+
+    .commentUser[aria-busy="true"]::after {
+        border-color: var(--gray-600, #4b5563);
+        border-top-color: var(--teal-400, #2dd4bf);
+    }
+
+    /* Enhanced Dark Theme Features */
+    .commentBox.highlighted {
+        background: rgba(45, 212, 191, 0.1);
+        border-color: var(--teal-400, #2dd4bf);
+    }
+
+    .commentBox.pinned {
+        background: rgba(251, 191, 36, 0.1);
+        border-color: var(--amber-400, #fbbf24);
+    }
+
+    .commentBox.author {
+        background: rgba(139, 92, 246, 0.1);
+        border-color: var(--violet-400, #a78bfa);
+    }
+
+    .commentUser.verified {
+        color: var(--teal-400, #2dd4bf);
+    }
+
+    .commentUser.moderator {
+        color: var(--amber-400, #fbbf24);
+    }
+
+    .commentUser.admin {
+        color: var(--violet-400, #a78bfa);
+    }
+
+    .replyButton.liked {
+        background-color: var(--emerald-600, #059669);
+        color: white;
+    }
+
+    .replyButton.disliked {
+        background-color: var(--red-600, #dc2626);
+        color: white;
+    }
+
+    .actions.expanded {
+        background-color: var(--gray-750, #2d3748);
+        border-radius: 8px;
+        padding: 8px;
+        margin-top: 8px;
+    }
+
+    .commentContent.edited {
+        border-left: 3px solid var(--amber-400, #fbbf24);
+        padding-left: 12px;
+        background-color: rgba(251, 191, 36, 0.05);
+    }
+
+    .commentTime.edited::after {
+        content: " (edited)";
+        color: var(--amber-400, #fbbf24);
+        font-size: 11px;
+    }
+}

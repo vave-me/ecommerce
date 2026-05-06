@@ -1,0 +1,133 @@
+syntax = "proto3";
+
+package newsletterspb;
+
+import "google/protobuf/timestamp.proto";
+
+// Newsletter Events
+message NewsletterCreated {
+  string newsletter_id = 1;
+  string user_id = 2;
+  string name = 3;
+  string description = 4;
+  string frequency = 5;
+  string category = 6;
+  string template_id = 7;
+  google.protobuf.Timestamp created_at = 8;
+}
+
+message NewsletterUpdated {
+  string newsletter_id = 1;
+  string name = 2;
+  string description = 3;
+  string frequency = 4;
+  string category = 5;
+  string template_id = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
+
+message NewsletterActivated {
+  string newsletter_id = 1;
+  google.protobuf.Timestamp activated_at = 2;
+}
+
+message NewsletterDeactivated {
+  string newsletter_id = 1;
+  google.protobuf.Timestamp deactivated_at = 2;
+}
+
+message NewsletterDeleted {
+  string newsletter_id = 1;
+  google.protobuf.Timestamp deleted_at = 2;
+}
+
+// Subscription Events
+message UserSubscribed {
+  string subscription_id = 1;
+  string user_id = 2;
+  string newsletter_id = 3;
+  string frequency_override = 4;
+  repeated string topics = 5;
+  string format = 6;
+  google.protobuf.Timestamp subscribed_at = 7;
+}
+
+message UserUnsubscribed {
+  string subscription_id = 1;
+  string user_id = 2;
+  string newsletter_id = 3;
+  string reason = 4;
+  google.protobuf.Timestamp unsubscribed_at = 5;
+}
+
+message SubscriptionPreferencesUpdated {
+  string subscription_id = 1;
+  string frequency_override = 2;
+  repeated string topics = 3;
+  string format = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+message SubscriptionPaused {
+  string subscription_id = 1;
+  google.protobuf.Timestamp paused_at = 2;
+}
+
+message SubscriptionResumed {
+  string subscription_id = 1;
+  google.protobuf.Timestamp resumed_at = 2;
+}
+
+// Edition Events
+message EditionCreated {
+  string edition_id = 1;
+  string newsletter_id = 2;
+  string subject = 3;
+  string created_by = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+message EditionUpdated {
+  string edition_id = 1;
+  string subject = 2;
+  string content_html = 3;
+  string content_text = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+message EditionScheduled {
+  string edition_id = 1;
+  google.protobuf.Timestamp scheduled_at = 2;
+}
+
+message EditionSending {
+  string edition_id = 1;
+  google.protobuf.Timestamp started_at = 2;
+}
+
+message EditionSent {
+  string edition_id = 1;
+  int32 recipients_count = 2;
+  google.protobuf.Timestamp sent_at = 3;
+}
+
+// Template Events
+message TemplateCreated {
+  string template_id = 1;
+  string user_id = 2;
+  string name = 3;
+  bool is_public = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+message TemplateUpdated {
+  string template_id = 1;
+  string name = 2;
+  bool is_public = 3;
+  google.protobuf.Timestamp updated_at = 4;
+}
+
+message TemplateDeleted {
+  string template_id = 1;
+  google.protobuf.Timestamp deleted_at = 2;
+}

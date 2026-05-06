@@ -1,0 +1,1169 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Categories Management API",
+    "description": "API for managing categories for   including creating, retrieving, updating, deleting categories, bulk importing, and handling category-related files.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "CategoriesService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/categories": {
+      "get": {
+        "summary": "Retrieve all categories associated w",
+        "operationId": "getCategories",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoriespbGetCategoriesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "categoryType",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Category"
+        ]
+      },
+      "post": {
+        "summary": "Add a New Category",
+        "operationId": "addCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoriespbAddCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/categoriespbAddCategoryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Category"
+        ]
+      }
+    },
+    "/api/categories/all": {
+      "get": {
+        "summary": "Retrieve main categories associated w",
+        "operationId": "getAllMainCategories",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoriespbGetAllMainCategoriesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "description": "Maybe a user_id if needed",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Category"
+        ]
+      }
+    },
+    "/api/categories/filters": {
+      "post": {
+        "summary": "Create a new Filter referencing a Category",
+        "operationId": "addFilter",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoriespbAddFilterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/categoriespbAddFilterRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Filter"
+        ]
+      }
+    },
+    "/api/categories/filters/{filterId}": {
+      "get": {
+        "summary": "Retrieve a specific Filter",
+        "operationId": "getFilter",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoriespbGetFilterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filterId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "description": "optional",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Filter"
+        ]
+      },
+      "delete": {
+        "summary": "Remove a Filter",
+        "operationId": "removeFilter",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoriespbRemoveFilterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filterId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Filter"
+        ]
+      }
+    },
+    "/api/categories/filters/{filterId}/archive": {
+      "patch": {
+        "summary": "Archive a Filter (mark as unavailable)",
+        "operationId": "archiveFilter",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoriespbArchiveFilterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filterId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CategoriesServiceArchiveFilterBody"
+            }
+          }
+        ],
+        "tags": [
+          "Filter"
+        ]
+      }
+    },
+    "/api/categories/main": {
+      "get": {
+        "summary": "Retrieve main categories associated w",
+        "operationId": "getMainCategories",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoriespbGetMainCategoriesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "categoryType",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "description": "Maybe a user_id if needed",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Category"
+        ]
+      }
+    },
+    "/api/categories/subcategory": {
+      "get": {
+        "summary": "Retrieve all categories associated w",
+        "operationId": "getSubCategories",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoriespbGetSubCategoriesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "parentCategoryId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "description": "Maybe a user_id if needed",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Category"
+        ]
+      }
+    },
+    "/api/categories/{categoryId}/filters": {
+      "get": {
+        "summary": "Retrieve multiple Filters with optional filters",
+        "operationId": "getFilters",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoriespbGetFiltersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categoryId",
+            "description": "filters by category or pass empty",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "description": "optional",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Filter"
+        ]
+      }
+    },
+    "/api/categories/{id}": {
+      "get": {
+        "summary": "Retrieve a Specific Category",
+        "operationId": "getCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoriespbGetCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "which category do we fetch",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "description": "optional if your service logic needs user context",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Category"
+        ]
+      },
+      "delete": {
+        "summary": "Remove a Category",
+        "operationId": "removeCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoriespbRemoveCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "category ID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "description": "who removes it",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Category"
+        ]
+      },
+      "patch": {
+        "operationId": "CategoriesService_UpdateCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoriespbUpdateCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CategoriesServiceUpdateCategoryBody"
+            }
+          }
+        ],
+        "tags": [
+          "CategoriesService"
+        ]
+      }
+    },
+    "/api/categories/{id}/archive": {
+      "patch": {
+        "operationId": "CategoriesService_ArchiveCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoriespbArchiveCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CategoriesServiceArchiveCategoryBody"
+            }
+          }
+        ],
+        "tags": [
+          "CategoriesService"
+        ]
+      }
+    },
+    "/api/categories/{id}/rebrand": {
+      "patch": {
+        "summary": "Rebrand a Category",
+        "operationId": "rebrandCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoriespbRebrandCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CategoriesServiceRebrandCategoryBody"
+            }
+          }
+        ],
+        "tags": [
+          "Category"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CategoriesServiceArchiveCategoryBody": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "CategoriesServiceArchiveFilterBody": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "CategoriesServiceRebrandCategoryBody": {
+      "type": "object",
+      "properties": {
+        "newSlug": {
+          "type": "string"
+        },
+        "newDesc": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string",
+          "title": "optional"
+        }
+      }
+    },
+    "CategoriesServiceUpdateCategoryBody": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "googleCategoryId": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "slug": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "seoTitle": {
+          "type": "string"
+        },
+        "seoKeywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "seoDesc": {
+          "type": "string"
+        },
+        "categoryType": {
+          "type": "string"
+        },
+        "lang": {
+          "type": "string"
+        }
+      }
+    },
+    "categoriespbAddCategoryRequest": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "googleCategoryId": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "slug": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "seoTitle": {
+          "type": "string"
+        },
+        "seoKeywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "seoDesc": {
+          "type": "string"
+        },
+        "categoryType": {
+          "type": "string"
+        },
+        "lang": {
+          "type": "string"
+        }
+      },
+      "title": "Request to create a new category"
+    },
+    "categoriespbAddCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "newly created category ID"
+        }
+      }
+    },
+    "categoriespbAddFilterRequest": {
+      "type": "object",
+      "properties": {
+        "categoryId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "filterType": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "userId": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        }
+      }
+    },
+    "categoriespbAddFilterResponse": {
+      "type": "object",
+      "properties": {
+        "filterId": {
+          "type": "string"
+        }
+      }
+    },
+    "categoriespbArchiveCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "categoryId": {
+          "type": "string"
+        },
+        "archived": {
+          "type": "boolean"
+        }
+      }
+    },
+    "categoriespbArchiveFilterResponse": {
+      "type": "object",
+      "properties": {
+        "filterId": {
+          "type": "string"
+        },
+        "archived": {
+          "type": "boolean"
+        }
+      }
+    },
+    "categoriespbCategory": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "googleCategoryId": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "slug": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "seoTitle": {
+          "type": "string"
+        },
+        "seoKeywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "seoDesc": {
+          "type": "string"
+        },
+        "categoryType": {
+          "type": "string"
+        },
+        "lang": {
+          "type": "string"
+        }
+      },
+      "title": "The Category “view” or “DTO” for responses"
+    },
+    "categoriespbFilter": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "filterType": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "enumerated options if filter_type=SELECT"
+        },
+        "isActive": {
+          "type": "boolean"
+        }
+      }
+    },
+    "categoriespbGetAllMainCategoriesResponse": {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/categoriespbCategory"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "categoriespbGetCategoriesResponse": {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/categoriespbCategory"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "categoriespbGetCategoryBySlugResponse": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/categoriespbCategory"
+        }
+      }
+    },
+    "categoriespbGetCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/categoriespbCategory"
+        }
+      }
+    },
+    "categoriespbGetFilterResponse": {
+      "type": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/definitions/categoriespbFilter"
+        }
+      }
+    },
+    "categoriespbGetFiltersResponse": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/categoriespbFilter"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "categoriespbGetMainCategoriesResponse": {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/categoriespbCategory"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "categoriespbGetSubCategoriesResponse": {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/categoriespbCategory"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "categoriespbRebrandCategoryResponse": {
+      "type": "object"
+    },
+    "categoriespbRemoveCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "removed category ID"
+        }
+      }
+    },
+    "categoriespbRemoveFilterResponse": {
+      "type": "object",
+      "properties": {
+        "filterId": {
+          "type": "string"
+        }
+      }
+    },
+    "categoriespbUpdateCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,771 @@
+syntax = "proto3";
+
+package searchpb;
+
+import "google/protobuf/timestamp.proto";
+
+// ------------------------------
+// SearchService Definition
+// ------------------------------
+service SearchService {
+  // Unified search and feed
+  rpc UnifiedSearch(UnifiedSearchRequest) returns (UnifiedSearchResponse) {}
+  rpc UnifiedFeed(UnifiedFeedRequest) returns (UnifiedFeedResponse) {}
+  rpc GetCatalog(GetCatalogRequest) returns (UnifiedFeedResponse) {}
+  rpc StreamingUnifiedFeed(UnifiedFeedRequest) returns (stream UnifiedFeedChunk) {}
+  rpc BatchUnifiedFeed(BatchUnifiedFeedRequest) returns (BatchUnifiedFeedResponse) {}
+  rpc UnifiedFeedMetrics(UnifiedFeedMetricsRequest) returns (UnifiedFeedMetricsResponse) {}
+
+  // orders
+  rpc SearchOrders(SearchOrdersRequest) returns (SearchOrdersResponse) {}
+  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse) {}
+  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse) {}
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {}
+
+  //products
+  rpc SearchProductsWithFilters(SearchProductsWithFiltersRequest) returns (SearchProductsWithFiltersResponse) {}
+  rpc SearchProductsWithCategorySlug(SearchProductsWithCategorySlugRequest) returns (SearchProductsWithCategorySlugResponse) {}
+  rpc SearchProductsWithCategory(SearchProductsWithCategoryRequest) returns (SearchProductsWithCategoryResponse) {}
+  rpc SearchProductsWithTerm(SearchProductsWithTermRequest) returns (SearchProductsWithTermResponse) {}
+  rpc GetProduct(GetProductRequest) returns (GetProductResponse) {}
+  rpc SuggestProducts(SuggestProductsRequest) returns (SuggestProductsResponse);
+
+  //services
+  rpc GetService(GetServiceRequest) returns (GetServiceResponse) {}
+  rpc SearchServicesWithFilters(SearchServicesWithFiltersRequest) returns (SearchServicesWithFiltersResponse) {}
+  rpc SearchServicesWithTerm(SearchServicesWithTermRequest) returns (SearchServicesWithTermResponse) {}
+  rpc SearchServicesWithCategorySlug(SearchServicesWithCategorySlugRequest) returns (SearchServicesWithCategorySlugResponse) {}
+  rpc SearchServicesWithCategory(SearchServicesWithCategoryRequest) returns (SearchServicesWithCategoryResponse) {}
+  rpc SuggestServices(SuggestServicesRequest) returns (SuggestServicesResponse);
+  //posts
+  rpc GetPost(GetPostRequest) returns (GetPostResponse) {}
+  rpc SearchPostsWithFilters(SearchPostsWithFiltersRequest) returns (SearchPostsWithFiltersResponse) {}
+  rpc SearchPostsWithTerm(SearchPostsWithTermRequest) returns (SearchPostsWithTermResponse) {}
+  rpc SearchPostsWithCategorySlug(SearchPostsWithCategorySlugRequest) returns (SearchPostsWithCategorySlugResponse) {}
+  rpc SearchPostsWithCategory(SearchPostsWithCategoryRequest) returns (SearchPostsWithCategoryResponse) {}
+  rpc SuggestPosts(SuggestPostsRequest) returns (SuggestPostsResponse);
+
+
+}
+
+// ------------------------------
+// Unified Search Messages
+// ------------------------------
+message UnifiedSearchRequest {
+  string search_term = 1;
+  repeated string entity_types = 2; // Filter by type: "product", "post", etc.
+  int64 page = 3;
+  int64 page_size = 4;
+  float lat = 5;
+  float lng = 6;
+  int64 radius = 7;
+  string sort_by = 8;
+  string sort_order = 9;
+  // Common filters across entity types
+  int64 min_price = 10;
+  int64 max_price = 11;
+  string category_slug = 12;
+  string user_type = 13;
+  bool negotiable = 14;
+  // Additional filters
+  string category_id = 15;
+  string brand = 16;
+  string condition = 17;
+  string model = 18;
+  repeated string tags = 19;
+  bool has_variants = 20;
+  bool middleman_service = 21;
+  string status = 22;
+  string service_type = 23;
+}
+
+message UnifiedSearchResult {
+  oneof item {
+    Product product = 1;
+    Post post = 2;
+    Service service = 3;
+  }
+  string entity_type = 8;
+  float relevance_score = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp updated_at = 11;
+}
+
+message UnifiedSearchResponse {
+  repeated UnifiedSearchResult results = 1;
+  int64 total_count = 2;
+  int64 page = 3;
+  int64 page_size = 4;
+  map<string, int64> counts_by_type = 5;
+  bool has_more = 6; // Whether there are more results available
+  int64 total_pages = 7; // Total number of pages
+  string next_cursor = 8; // Cursor for next page (for cursor-based pagination)
+}
+
+message UnifiedFeedRequest {
+  repeated string entity_types = 1;
+  string feed_type = 2; // "latest", "trending", "recommended"
+  int64 page = 3;
+  int64 page_size = 4;
+  float lat = 5;
+  float lng = 6;
+  int64 radius = 7;
+  string user_id = 8; // For personalized feeds
+  string search_filter = 9; // Basic search term to filter results (prevents empty searches)
+  bool apply_entity_filter = 10; // Ensures entity_type filtering is applied at the database level
+  int64 max_items_per_entity = 11; // Limits number of items per entity type
+  string sort_field = 12; // Field to sort by (defaults to creation date if empty)
+  bool sort_descending = 13; // Sort direction
+  int64 timeout_ms = 14; // Custom timeout in milliseconds (defaults to 3000)
+  repeated string included_statuses = 15; // Only include items with these statuses
+  int32 cache_ttl_seconds = 16; // How long to cache this feed result
+  bool streaming_response = 17; // Whether to stream results as they come in instead of waiting for all
+  bool preload_metadata = 18; // Whether to preload related metadata
+  SearchContext context = 19; // Context for this request (request ID, client ID, etc.)
+  CommonFilters filters = 20; // Common filters to apply across entity types
+  FeedOptions feed_options = 21; // Options specific to feeds
+}
+
+message GetCatalogRequest {
+  string user_id = 1;
+  repeated string entity_types = 2;
+  string feed_type = 3; // "latest", "trending", "recommended"
+  int64 page = 4;
+  int64 page_size = 5;
+  float lat = 6;
+  float lng = 7;
+  int64 radius = 8;
+  string search_filter = 9; // Basic search term to filter results (prevents empty searches)
+  bool apply_entity_filter = 10; // Ensures entity_type filtering is applied at the database level
+  int64 max_items_per_entity = 11; // Limits number of items per entity type
+  string sort_field = 12; // Field to sort by (defaults to creation date if empty)
+  bool sort_descending = 13; // Sort direction
+  int64 timeout_ms = 14; // Custom timeout in milliseconds (defaults to 3000)
+  repeated string included_statuses = 15; // Only include items with these statuses
+  int32 cache_ttl_seconds = 16; // How long to cache this feed result
+  bool streaming_response = 17; // Whether to stream results as they come in instead of waiting for all
+  bool preload_metadata = 18; // Whether to preload related metadata
+  SearchContext context = 19; // Context for this request (request ID, client ID, etc.)
+  CommonFilters filters = 20; // Common filters to apply across entity types
+  FeedOptions feed_options = 21; // Options specific to feeds
+}
+
+message UnifiedFeedResponse {
+  repeated UnifiedSearchResult items = 1;
+  bool has_more = 2; // Whether there are more results available
+  int64 total_count = 3; // Total number of results available
+  int64 current_page = 4; // Current page number
+  int64 total_pages = 5; // Total number of pages
+  string next_cursor = 6; // Cursor for next page (for cursor-based pagination)
+}
+
+// New messages for optimized feed implementations
+message UnifiedFeedChunk {
+  repeated UnifiedSearchResult items = 1;
+  string entity_type = 2; // Type of entities in this chunk
+  bool is_last_chunk = 3; // Whether this is the last chunk
+}
+
+message BatchUnifiedFeedRequest {
+  repeated UnifiedFeedRequest requests = 1;
+  bool parallel = 2; // Whether to process requests in parallel
+}
+
+message BatchUnifiedFeedResponse {
+  repeated UnifiedFeedResponse responses = 1;
+  int64 total_query_time_ms = 2; // Total time taken for all requests
+}
+
+message UnifiedFeedMetricsRequest {
+  string feed_id = 1; // Optional ID to retrieve metrics for a specific feed
+  int64 time_range_seconds = 2; // Time range for metrics (from now - range to now)
+}
+
+message UnifiedFeedMetricsResponse {
+  int64 avg_query_time_ms = 1;
+  float cache_hit_ratio = 2;
+  int64 total_requests = 3;
+  map<string, int64> requests_by_entity_type = 4;
+  map<string, int64> avg_items_returned = 5;
+  map<string, int64> error_counts = 6;
+}
+
+// ------------------------------
+// Primary Messages
+// ------------------------------
+message Product {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  int64 base_price = 4;
+  string user_seller_id = 5;
+  string category_id = 6;
+  string category_slug = 7;
+  string brand = 8;
+  string condition = 9;
+  string model = 10;
+  repeated string tags = 11;
+  bool manage_stocks = 12;
+  int64 stock = 13;
+  string sku = 14;
+  repeated Attribute attributes = 15;
+  int64 weight = 16;
+  int64 height = 17;
+  int64 width = 18;
+  int64 depth = 19;
+  string status = 20;
+  bool negotiable = 21;
+  bool middleman_service = 22;
+  string user_type = 23;
+  int64 shipping_cost = 24;
+  bool has_variants = 25;
+  repeated Option options = 26;
+  float lat = 27;
+  float lng = 28;
+  string thumbnail = 29;
+  string entity_type = 30;
+  ItemMetric metrics = 31;
+  google.protobuf.Timestamp created_at = 32;
+  google.protobuf.Timestamp updated_at = 33;
+}
+message Service {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string service_type = 4;
+  int64 base_price = 5;
+  repeated string pricing = 6;
+  string availability = 7;
+  string provider_name = 8;
+  string user_id = 9;
+  string  category_id = 10;
+  string  category_slug = 11;
+  string description_short = 12;
+  string description_long = 13;
+  repeated string qualifications = 14;
+  string contact = 15;
+  string faq = 16;
+  repeated string tags = 17;
+  string status = 18;
+  string user_type = 19;
+  int64 shipping_cost = 20;
+  bool has_variants = 21;
+  bool middleman_service = 22;
+  bool negotiable = 23;
+  repeated Attribute attributes = 24;
+  repeated Option options = 25;
+  string thumbnail = 26;
+  float lat = 27;
+  float lng = 28;
+  string entity_type = 29;
+  ItemMetric metrics = 30;
+  google.protobuf.Timestamp created_at = 31;
+  google.protobuf.Timestamp updated_at = 32;
+}
+
+message Post {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string type_of_post = 4;
+  string user_id = 5;
+  string user_type = 6;
+  string category_id = 7;
+  string category_slug = 8;
+  repeated string tags = 9;
+  string status = 10;        // e.g. "DRAFT", "PUBLISHED", "ARCHIVED"
+  string thumbnail = 11;
+  float lat = 12;
+  float lng = 13;
+  string entity_type = 14;
+  ItemMetric metrics = 20;
+  google.protobuf.Timestamp created_at = 21;
+  google.protobuf.Timestamp updated_at = 22;
+}
+
+message Order {
+  message Item {
+    string product_id = 1;
+    string user_seller_id = 2;
+    string product_name = 3;
+    string user_seller_name = 4;
+    int64 price = 5;
+    int64 quantity = 6;
+  }
+  string order_id = 1;
+  string user_customer_id = 2;
+  string user_customer_name = 3;
+  repeated Item items = 4;
+  int64 total = 5;
+  string status = 6;
+}
+
+message Variant {
+  string id = 1;
+  string product_id = 2;
+  string status = 3;
+  string sku = 4;
+  string barcode = 5;
+  int64 variant_price = 6;
+  string currency_code = 7;
+  int64 stock = 8;
+  int64 weight = 9;
+  int64 height = 10;
+  int64 width = 11;
+  int64 depth = 12;
+  repeated Attribute attributes = 13;
+  bool is_available = 14;
+  bool has_options = 15;
+  repeated Option options = 16;
+}
+
+message Option {
+  string name = 1;
+  string value = 2;
+  int64 price = 3;
+}
+
+message Attribute {
+  string key = 1;
+  string value = 2;
+}
+
+message User {
+  string name = 1;
+  float lat = 2;
+  float lng = 3;
+}
+
+// ------------------------------
+// Orders
+// ------------------------------
+message SearchOrdersRequest {
+  string user_customer_id = 1;
+  google.protobuf.Timestamp after = 2;
+  google.protobuf.Timestamp before = 3;
+  repeated string user_seller_ids = 4;
+  repeated string product_ids = 5;
+  int64 min_total = 6;
+  int64 max_total = 7;
+  string status = 8;
+  string next = 9; // e.g. for pagination token
+  int64 limit = 10;
+}
+
+message SearchOrdersResponse {
+  repeated Order orders = 1;
+  string next = 2; // pagination token if needed
+}
+
+message GetOrderRequest {
+  string id = 1;
+}
+
+message GetOrderResponse {
+  Order order = 1;
+}
+
+// ------------------------------
+// Products
+// ------------------------------
+message SearchProductsWithFiltersRequest {
+  string name = 1;
+  string category_id = 2;
+  string category_slug = 3;
+  int64 min_price = 4;
+  int64 max_price = 5;
+  string brand = 6;
+  string condition = 7;
+  string model = 8;
+  repeated string tags = 9;
+  bool manage_stock = 10;
+  int64 min_stock = 11;
+  int64 max_stock = 12;
+  string sku = 13;
+  string status = 14;
+  bool negotiable = 15;
+  string user_type = 16;
+  bool middleman_service = 17;
+  bool has_variants = 18;
+  int64 shipping_cost = 19;
+  int64 min_weight = 20;
+  int64 max_weight = 21;
+  int64 max_height = 22;
+  int64 min_height = 23;
+  int64 min_width = 24;
+  int64 max_width = 25;
+  int64 min_depth = 26;
+  int64 max_depth = 27;
+  int64 offset = 28;
+  int64 limit = 29;
+  float lat = 30;
+  float lng = 31;
+  float radius = 32;    // in kilometers
+  int64 page = 33;
+  int64 page_size = 34;
+  string sort_by = 35;
+  string sort_order = 36;
+}
+
+message SearchProductsWithFiltersResponse {
+  repeated Product products = 1;
+  int64 total_count = 2;   // total # of matched
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+message SearchProductsWithCategorySlugRequest {
+  string category_slug = 1;
+  int64 offset = 2;
+  int64 limit = 3;
+  float lat = 4;
+  float lng = 5;
+  int64 radius = 6;
+  int64 page = 7;
+  int64 page_size = 8;
+  string sort_by = 9;
+  string sort_order = 10;
+}
+
+message SearchProductsWithCategorySlugResponse {
+  repeated Product products = 1;
+  int64 total_count = 2;   // total # of matched
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+message SearchProductsWithCategoryRequest {
+  string category_id = 1;
+  int64 offset = 2;
+  int64 limit = 3;
+  float lat = 4;
+  float lng = 5;
+  int64 radius = 6;
+  int64 page = 7;
+  int64 page_size = 8;
+  string sort_by = 9;
+  string sort_order = 10;
+}
+
+message SearchProductsWithCategoryResponse {
+  repeated Product products = 1;
+  int64 total_count = 2;   // total # of matched
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+message SearchProductsWithTermRequest {
+  string name = 1;
+}
+
+message SearchProductsWithTermResponse {
+  repeated Product products = 1;
+  string next = 2; // pagination token
+}
+
+message GetProductRequest {
+  string id = 1;
+}
+
+message GetProductResponse {
+  Product product = 1;
+}
+
+message SuggestProductsRequest {
+  string name = 1;
+}
+
+message SuggestProductsResponse {
+  repeated Product suggestions = 1;
+}
+
+// ------------------------------
+// Posts (FIXED / ADDED FIELDS)
+// ------------------------------
+message SearchPostsWithFiltersRequest {
+  string name = 1;
+  string description = 2;
+  string post_type = 3;
+  string user_type = 4;
+  string category_id = 5;
+  string category_slug = 6;
+  repeated string tags = 7;
+  string status = 8;  // e.g. "DRAFT", "PUBLISHED", "ARCHIVED"
+  string thumbnail = 9;
+  float lat = 10;
+  float lng = 11;
+  float radius = 12;   // optional radius if you want location filtering
+  int64 page = 13;
+  int64 page_size = 14;
+  string sort_by = 15;
+  string sort_order = 16;
+}
+
+message SearchPostsWithFiltersResponse {
+  repeated Post posts = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+message SearchPostsWithCategorySlugRequest {
+  string category_slug = 1;
+  int64 offset = 2;
+  int64 limit = 3;
+  float lat = 4;
+  float lng = 5;
+  int64 radius = 6;
+  int64 page = 7;
+  int64 page_size = 8;
+  string sort_by = 9;
+  string sort_order = 10;
+}
+
+message SearchPostsWithCategorySlugResponse {
+  repeated Post posts = 1;
+  int64 total_count = 2;   // total # of matched
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+message SearchPostsWithCategoryRequest {
+  string category_id = 1;
+  int64 offset = 2;
+  int64 limit = 3;
+  float lat = 4;
+  float lng = 5;
+  int64 radius = 6;
+  int64 page = 7;
+  int64 page_size = 8;
+  string sort_by = 9;
+  string sort_order = 10;
+}
+
+message SearchPostsWithCategoryResponse {
+  repeated Post posts = 1;
+  int64 total_count = 2;   // total # of matched
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+message SearchPostsWithTermRequest {
+  string name = 1;
+}
+
+message SearchPostsWithTermResponse {
+  repeated Post posts = 1;
+  string next = 2; // pagination token
+}
+
+message GetPostRequest {
+  string id = 1;
+}
+
+message GetPostResponse {
+  Post post = 1;
+}
+
+message SuggestPostsRequest {
+  string name = 1;
+}
+
+message SuggestPostsResponse {
+  repeated Post suggestions = 1;
+}
+
+message SearchUsersRequest {
+  string name = 1;
+  string email = 2;
+  string next = 3;
+  int64 limit = 4;
+}
+
+message SearchUsersResponse {
+  repeated User users = 1;
+  string next = 2; // pagination token
+}
+
+message GetUserRequest {
+  string id = 1;
+}
+
+message GetUserResponse {
+  User user = 1;
+}
+// Services
+
+message SearchServicesWithFiltersRequest {
+  string category_id = 1;
+  string category_slug = 2;
+  string service_type = 3;
+  string user_id = 4;
+  string status = 5;
+  string search_text = 6;
+  int64 min_price = 7;
+  int64 max_price = 8;
+  int64 available_from = 9;
+  int64 available_to = 10;
+  bool has_variants = 11;
+  bool negotiable = 12;
+  bool middleman_service = 13;
+  string user_type = 14;
+  repeated string tags = 15;
+  repeated string qualifications = 16;
+  int64 page = 17;
+  int64 page_size = 18;
+  string sort_by = 19;
+  string sort_order = 20;
+  float lat = 21;
+  float lng = 22;
+  int64 radius = 23;
+}
+
+message SearchServicesWithFiltersResponse {
+  repeated Service services = 1;
+  int64 total_count = 2;
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+message SearchServicesWithCategorySlugRequest {
+  string category_slug = 1;
+  int64 offset = 2;
+  int64 limit = 3;
+  float lat = 4;
+  float lng = 5;
+  int64 radius = 6;
+  int64 page = 7;
+  int64 page_size = 8;
+  string sort_by = 9;
+  string sort_order = 10;
+}
+
+message SearchServicesWithCategorySlugResponse {
+  repeated Service services = 1;
+  int64 total_count = 2;   // total # of matched
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+
+message SearchServicesWithCategoryRequest {
+  string category_id = 1;
+  int64 offset = 2;
+  int64 limit = 3;
+  float lat = 4;
+  float lng = 5;
+  int64 radius = 6;
+  int64 page = 7;
+  int64 page_size = 8;
+  string sort_by = 9;
+  string sort_order = 10;
+}
+
+message SearchServicesWithCategoryResponse {
+  repeated Service services = 1;
+  int64 total_count = 2;   // total # of matched
+  int64 total_pages = 3;
+  int64 current_page = 4;
+}
+message SearchServicesWithTermRequest {
+  string name = 1;
+}
+
+message SearchServicesWithTermResponse {
+  repeated Service services = 1;
+  string next = 2; // pagination token
+}
+
+message GetServiceRequest {
+  string id = 1;
+}
+
+message GetServiceResponse {
+  Service service = 1;
+}
+
+message SuggestServicesRequest {
+  string name = 1;
+}
+
+message SuggestServicesResponse {
+  repeated Service suggestions = 1;
+}
+
+//Common search parameters and metadata for optimizing the search architecture
+message SearchContext {
+  string request_id = 1; // Unique ID for the request (for tracking and caching)
+  string client_id = 2; // ID of the client making the request
+  int64 timestamp_ms = 3; // Request timestamp
+  bool bypass_cache = 4; // Whether to bypass cache for this request
+  map<string, string> metadata = 5; // Additional metadata
+  SearchPerformanceSettings performance_settings = 6; // Performance tweaks
+}
+
+message SearchPerformanceSettings {
+  int32 timeout_ms = 1; // Timeout for this search
+  int32 max_concurrent_queries = 2; // Maximum number of concurrent queries
+  bool enable_early_termination = 3; // Whether to return partial results if some entity searches time out
+  bool optimize_for_speed = 4; // Prioritize speed over completeness
+  int32 query_cache_ttl_seconds = 5; // How long to cache this query's results
+  bool use_query_expansion = 6; // Whether to expand the query for better recall
+  int32 max_retries = 7; // Maximum number of retries for fallback operations
+}
+
+message CommonFilters {
+  repeated string statuses = 1; // Status filters applicable to any entity
+  repeated string entity_types = 2; // Entity types to include
+  int64 created_after_timestamp = 3; // Filter by creation date (Unix timestamp)
+  int64 created_before_timestamp = 4; // Filter by creation date (Unix timestamp)
+  repeated string user_ids = 5; // Filter by user IDs
+  repeated string category_ids = 6; // Filter by category IDs
+  repeated string tags = 7; // Filter by tags
+  float min_price = 8; // Minimum price
+  float max_price = 9; // Maximum price
+  GeoFilter geo_filter = 10; // Geolocation filter
+}
+
+message GeoFilter {
+  float lat = 1;
+  float lng = 2;
+  float radius_km = 3;
+  string country_code = 4;
+  string region = 5;
+  string city = 6;
+  string postal_code = 7;
+}
+
+//Feed-specific options
+message FeedOptions {
+  string algorithm = 1; // Algorithm to use for ranking feed items: "recency", "popularity", "relevance", "hybrid"
+  bool personalized = 2; // Whether to personalize the feed for the user
+  int32 freshness_hours = 3; // Only include items created within this many hours
+  bool deduplicate = 4; // Whether to deduplicate items (useful when showing feeds from multiple sources)
+  bool include_pinned = 5; // Whether to include pinned items at the top
+  int32 pinned_items_count = 6; // Maximum number of pinned items to include
+  string experiment_id = 7; // For A/B testing different feed implementations
+  int32 min_score = 8; // Minimum relevance/quality score for items to include
+  bool use_extended_fallback = 9; // Whether to use extended fallback strategy for feed generation
+}
+
+// Cache control and performance metrics
+
+// Adding ItemMetric message
+message ItemMetric {
+  string id = 1;
+  string entity_type = 2;
+  int64 likes_count = 3;
+  int64 dislikes_count = 4;
+  int64 comments_count = 5;
+  int64 shared_count = 6;
+  int64 added_to_wishlist_count = 7;
+  int64 added_to_basket_count = 8;
+  int64 visited_count = 9;
+  int64 reported_count = 10;
+  int64 follower_count = 11;
+  int64 reviews_count = 12;
+  int64 rating_count = 13;
+  int64 videos_count = 14;
+  int64 images_count = 15;
+  int64 rating = 16;
+  string category = 17;
+  string category_id = 18;
+  string category_slug = 19;
+}

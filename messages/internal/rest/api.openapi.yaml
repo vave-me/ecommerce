@@ -1,0 +1,92 @@
+openapiOptions:
+  file:
+    - file: "messagespb/api.proto"
+      option:
+        info:
+          title: Messages Management API
+          version: "1.0.0"
+          description: "API for managing conversations and messages between user-sellers and user-customers."
+        basePath: /
+  method:
+    # Conversation Operations
+    - method: messagespb.MessagesService.StartConversation
+      option:
+        operationId: startConversation
+        tags:
+          - Conversations
+        summary: Start a new conversation
+
+    - method: messagespb.MessagesService.RestoreConversation
+      option:
+        operationId: restoreConversation
+        tags:
+          - Conversations
+        summary: Restore an archived conversation
+
+    - method: messagespb.MessagesService.ArchiveConversation
+      option:
+        operationId: archiveConversation
+        tags:
+          - Conversations
+        summary: Archive a conversation
+
+    - method: messagespb.MessagesService.GetConversation
+      option:
+        operationId: getConversation
+        tags:
+          - Conversations
+        summary: Retrieve a specific conversation
+    - method: messagespb.MessagesService.GetConversationByRecipientAndItem
+      option:
+        operationId: getConversationByRecipientAndItem
+        tags:
+          - Conversations
+        summary: Retrieve a specific conversation
+
+    - method: messagespb.MessagesService.GetConversations
+      option:
+        operationId: getConversations
+        tags:
+          - Conversations
+        summary: Retrieve a list of conversations
+
+    - method: messagespb.MessagesService.GetActiveConversations
+      option:
+        operationId: getActiveConversations
+        tags:
+          - Conversations
+        summary: Retrieve active conversations
+
+    # Message Operations
+    - method: messagespb.MessagesService.SendMessage
+      option:
+        operationId: sendMessage
+        tags:
+          - Messages
+        summary: Send a message in a conversation
+
+
+    - method: messagespb.MessagesService.DeleteMessage
+      option:
+        operationId: deleteMessage
+        tags:
+          - Messages
+        summary: Delete a message
+
+
+    - method: messagespb.MessagesService.GetMessage
+      option:
+        operationId: getMessage
+        tags:
+          - Messages
+        summary: Retrieve a specific message
+
+
+    - method: messagespb.MessagesService.GetMessages
+      option:
+        operationId: getMessages
+        tags:
+          - Messages
+        summary: Retrieve messages in a conversation
+
+

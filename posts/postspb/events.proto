@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package postspb;
+import "google/protobuf/timestamp.proto";       // For timestamp fields
+// Domain Event: PostAdded
+message PostAdded {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string type_of_post = 4;
+  string user_id = 5;
+  string user_type =6;
+  string category_id = 7;
+  string category_slug = 8;
+  repeated string tags = 9;
+  string status = 10;     // e.g. "DRAFT", "PUBLISHED"
+  string thumbnail = 11;
+  float lat = 12;
+  float lng = 13;
+  google.protobuf.Timestamp created_at = 14;
+  google.protobuf.Timestamp updated_at = 15;
+}
+
+// Domain Event: PostUpdated
+// (This is effectively the "rebrand" or "description updated" logic)
+message PostUpdated {
+  string id = 1;         // Post ID
+  string name = 2;
+  string description = 3;
+  string type_of_post = 4;
+  string category_id = 5;
+  string category_slug = 6;
+  repeated string tags = 7;
+  string status = 8;
+  string thumbnail = 9;
+
+}
+
+// Domain Event: PostArchived
+message PostArchived {
+  string id = 1;         // Post ID
+  string user_id = 2;    // user who archived
+}
+
+// Domain Event: PostRemoved
+message PostRemoved {
+  string id = 1;         // Post ID
+  string user_id = 2;    // user who removed
+}
+
+message PostThumbnailAdded {
+  string id = 1;         // Post ID
+  string thumbnail = 2;    // user who archived
+}
+
+message PostThumbnailUpdated {
+  string id = 1;         // Post ID
+  string thumbnail = 2;    // user who archived
+}

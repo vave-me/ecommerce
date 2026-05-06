@@ -1,0 +1,851 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Vector Search Service",
+    "description": "Pure vector-oriented API for LLM-powered semantic search across entities",
+    "version": "2.0.0",
+    "contact": {
+      "name": "Vector Service API"
+    }
+  },
+  "tags": [
+    {
+      "name": "VectorService"
+    }
+  ],
+  "basePath": "/api/vectors",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/vector/context": {
+      "post": {
+        "summary": "Get contextual information about an entity",
+        "description": "Retrieve an entity with its vector-similar neighbors for contextual understanding",
+        "operationId": "getEntityContext",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/vectorspbGetEntityContextResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/vectorspbGetEntityContextRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Entity Context"
+        ]
+      }
+    },
+    "/api/vector/entity": {
+      "post": {
+        "summary": "Retrieve entity by ID with optional vector",
+        "description": "Get a specific entity by ID, optionally including its vector embedding",
+        "operationId": "getEntityById",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/vectorspbGetEntityByIdResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/vectorspbGetEntityByIdRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Entity Retrieval"
+        ]
+      }
+    },
+    "/api/vector/entity/{entityId}": {
+      "get": {
+        "summary": "Retrieve entity by ID with optional vector",
+        "description": "Get a specific entity by ID, optionally including its vector embedding",
+        "operationId": "getEntityById",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/vectorspbGetEntityByIdResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityType",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "withVector",
+            "description": "Include vector embedding",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "withMetadata",
+            "description": "Include full metadata",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "Entity Retrieval"
+        ]
+      }
+    },
+    "/api/vector/recommendations": {
+      "post": {
+        "summary": "Get personalized recommendations using user vectors",
+        "description": "Generate personalized recommendations based on user preference vectors from LLMs",
+        "operationId": "getRecommendations",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/vectorspbGetRecommendationsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/vectorspbGetRecommendationsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Recommendations"
+        ]
+      }
+    },
+    "/api/vector/search": {
+      "post": {
+        "summary": "Search entities using raw vector embeddings",
+        "description": "Accept raw float32 vectors from LLMs and perform semantic search across all entity types",
+        "operationId": "searchByVector",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/vectorspbSearchByVectorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/vectorspbSearchByVectorRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Vector Search"
+        ]
+      }
+    },
+    "/api/vector/similar": {
+      "post": {
+        "summary": "Find entities similar to a given entity",
+        "description": "Find entities that are vector-similar to a specific entity using cosine similarity",
+        "operationId": "searchSimilarEntities",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/vectorspbSearchSimilarEntitiesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/vectorspbSearchSimilarEntitiesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Vector Search"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "vectorspbEntity": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "\"product\", \"post\", \"deal\", etc."
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "All entity-specific fields"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "location": {
+          "$ref": "#/definitions/vectorspbEntityLocation",
+          "title": "Geographic information"
+        },
+        "pricing": {
+          "$ref": "#/definitions/vectorspbEntityPricing",
+          "title": "Price information"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Entity tags"
+        },
+        "status": {
+          "type": "string",
+          "title": "Entity status"
+        },
+        "thumbnail": {
+          "type": "string",
+          "title": "Image thumbnail"
+        }
+      },
+      "title": "Unified entity representation"
+    },
+    "vectorspbEntityLocation": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "address": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        }
+      },
+      "title": "Entity location information"
+    },
+    "vectorspbEntityMetrics": {
+      "type": "object",
+      "properties": {
+        "viewCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "interactionCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "popularityScore": {
+          "type": "number",
+          "format": "float"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "customMetrics": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      },
+      "title": "Entity metrics and statistics"
+    },
+    "vectorspbEntityPricing": {
+      "type": "object",
+      "properties": {
+        "basePrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "salePrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "priceRange": {
+          "$ref": "#/definitions/vectorspbPriceRange"
+        }
+      },
+      "title": "Entity pricing information"
+    },
+    "vectorspbGeoFilter": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "radiusKm": {
+          "type": "number",
+          "format": "double",
+          "title": "Search radius in kilometers"
+        },
+        "country": {
+          "type": "string",
+          "title": "Country filter"
+        },
+        "city": {
+          "type": "string",
+          "title": "City filter"
+        }
+      },
+      "title": "Geographic filtering"
+    },
+    "vectorspbGetEntityByIdRequest": {
+      "type": "object",
+      "properties": {
+        "entityId": {
+          "type": "string"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "withVector": {
+          "type": "boolean",
+          "title": "Include vector embedding"
+        },
+        "withMetadata": {
+          "type": "boolean",
+          "title": "Include full metadata"
+        }
+      },
+      "title": "Get entity by ID with optional vector"
+    },
+    "vectorspbGetEntityByIdResponse": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "$ref": "#/definitions/vectorspbEntity"
+        },
+        "vector": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "title": "Vector embedding if requested"
+        },
+        "metrics": {
+          "$ref": "#/definitions/vectorspbEntityMetrics",
+          "title": "Entity metrics"
+        }
+      }
+    },
+    "vectorspbGetEntityContextRequest": {
+      "type": "object",
+      "properties": {
+        "entityId": {
+          "type": "string"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "includeSimilar": {
+          "type": "boolean",
+          "title": "Include vector-similar entities"
+        },
+        "contextSize": {
+          "type": "string",
+          "format": "int64",
+          "title": "Number of context items"
+        }
+      },
+      "title": "Get contextual information about an entity"
+    },
+    "vectorspbGetEntityContextResponse": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "$ref": "#/definitions/vectorspbEntity",
+          "title": "Main entity"
+        },
+        "similar": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/vectorspbVectorSearchResult"
+          },
+          "title": "Vector-similar entities"
+        },
+        "metrics": {
+          "$ref": "#/definitions/vectorspbEntityMetrics",
+          "title": "Entity metrics/stats"
+        }
+      }
+    },
+    "vectorspbGetRecommendationsRequest": {
+      "type": "object",
+      "properties": {
+        "userVector": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "title": "User preference vector (REQUIRED)"
+        },
+        "entityTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Types to recommend"
+        },
+        "topK": {
+          "type": "string",
+          "format": "int64",
+          "title": "Number of recommendations"
+        },
+        "diversityLevel": {
+          "type": "number",
+          "format": "float",
+          "title": "Recommendation diversity (0-1)"
+        },
+        "filters": {
+          "$ref": "#/definitions/vectorspbVectorFilters",
+          "title": "Vector-oriented filters"
+        },
+        "excludeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Exclude these entity IDs"
+        }
+      },
+      "title": "Get vector-based personalized recommendations"
+    },
+    "vectorspbGetRecommendationsResponse": {
+      "type": "object",
+      "properties": {
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/vectorspbVectorSearchResult"
+          }
+        },
+        "diversityScore": {
+          "type": "number",
+          "format": "float",
+          "title": "Achieved diversity score"
+        },
+        "stats": {
+          "$ref": "#/definitions/vectorspbVectorScoreStats"
+        }
+      }
+    },
+    "vectorspbPriceRange": {
+      "type": "object",
+      "properties": {
+        "minPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxPrice": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "Price range for filtering"
+    },
+    "vectorspbSearchByVectorRequest": {
+      "type": "object",
+      "properties": {
+        "vector": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "title": "Raw vector from LLM (REQUIRED)"
+        },
+        "entityTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Filter by types: \"product\", \"post\", etc."
+        },
+        "topK": {
+          "type": "string",
+          "format": "int64",
+          "title": "Number of results"
+        },
+        "scoreThreshold": {
+          "type": "number",
+          "format": "float",
+          "title": "Minimum similarity score"
+        },
+        "filters": {
+          "$ref": "#/definitions/vectorspbVectorFilters",
+          "title": "Vector-oriented filters only"
+        },
+        "withVectors": {
+          "type": "boolean",
+          "title": "Include vectors in response"
+        }
+      },
+      "title": "LLM sends raw vector for semantic search"
+    },
+    "vectorspbSearchByVectorResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/vectorspbVectorSearchResult"
+          }
+        },
+        "stats": {
+          "$ref": "#/definitions/vectorspbVectorScoreStats"
+        },
+        "totalFound": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxScore": {
+          "type": "number",
+          "format": "float"
+        },
+        "minScore": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "vectorspbSearchSimilarEntitiesRequest": {
+      "type": "object",
+      "properties": {
+        "entityId": {
+          "type": "string",
+          "title": "Source entity ID"
+        },
+        "entityType": {
+          "type": "string",
+          "title": "Source entity type"
+        },
+        "topK": {
+          "type": "string",
+          "format": "int64",
+          "title": "Number of similar entities"
+        },
+        "excludeSelf": {
+          "type": "boolean",
+          "title": "Exclude the source entity"
+        },
+        "filters": {
+          "$ref": "#/definitions/vectorspbVectorFilters",
+          "title": "Vector-oriented filters"
+        },
+        "targetEntityTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Limit search to these types"
+        }
+      },
+      "title": "Find entities similar to a given entity using vector similarity"
+    },
+    "vectorspbSearchSimilarEntitiesResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/vectorspbVectorSearchResult"
+          }
+        },
+        "sourceEntityId": {
+          "type": "string"
+        },
+        "stats": {
+          "$ref": "#/definitions/vectorspbVectorScoreStats"
+        }
+      }
+    },
+    "vectorspbTimeRange": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "Time range filtering"
+    },
+    "vectorspbVectorFilters": {
+      "type": "object",
+      "properties": {
+        "entityTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Filter by entity types"
+        },
+        "priceRange": {
+          "$ref": "#/definitions/vectorspbPriceRange",
+          "title": "Price filtering"
+        },
+        "geoFilter": {
+          "$ref": "#/definitions/vectorspbGeoFilter",
+          "title": "Location filtering"
+        },
+        "statuses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Status filtering"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Category filtering"
+        },
+        "negotiableOnly": {
+          "type": "boolean",
+          "title": "Only negotiable items"
+        },
+        "timeRange": {
+          "$ref": "#/definitions/vectorspbTimeRange",
+          "title": "Creation/update time range"
+        },
+        "userType": {
+          "type": "string",
+          "title": "User type filter"
+        },
+        "metadataFilters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Exact metadata matches only"
+        }
+      },
+      "title": "Vector-oriented filters (no string search)"
+    },
+    "vectorspbVectorScoreStats": {
+      "type": "object",
+      "properties": {
+        "maxScore": {
+          "type": "number",
+          "format": "float"
+        },
+        "minScore": {
+          "type": "number",
+          "format": "float"
+        },
+        "avgScore": {
+          "type": "number",
+          "format": "float"
+        },
+        "medianScore": {
+          "type": "number",
+          "format": "float"
+        },
+        "totalComparisons": {
+          "type": "string",
+          "format": "int64"
+        },
+        "vectorDimensions": {
+          "type": "string",
+          "format": "int64",
+          "title": "Embedding dimensions"
+        },
+        "similarityMetric": {
+          "type": "string",
+          "description": "\"cosine\", \"euclidean\", etc."
+        }
+      },
+      "title": "Vector similarity score statistics"
+    },
+    "vectorspbVectorSearchResult": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "$ref": "#/definitions/vectorspbEntity",
+          "title": "The found entity"
+        },
+        "score": {
+          "type": "number",
+          "format": "float",
+          "title": "Vector similarity score"
+        },
+        "vector": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "title": "Vector embedding (optional)"
+        },
+        "featureScores": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "format": "float"
+          },
+          "title": "Individual feature scores"
+        },
+        "rank": {
+          "type": "string",
+          "format": "int64",
+          "title": "Result ranking"
+        }
+      },
+      "title": "Vector search result with similarity scoring"
+    }
+  }
+}

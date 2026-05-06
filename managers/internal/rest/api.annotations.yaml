@@ -1,0 +1,104 @@
+type: google.api.Service
+config_version: 3
+http:
+  rules:
+    # ===========================================
+    # CHAT WITH CONVERSATION
+    # ===========================================
+    - selector: managerspb.ManagersService.ChatWithConversation
+      post: /api/managers/conversations/chat
+      body: "*"
+
+    # ===========================================
+    # INPUT PROCESSING ENDPOINTS
+    # ===========================================
+    - selector: managerspb.ManagersService.ProcessUserInput
+      post: /api/managers/input/text
+      body: "*"
+
+    - selector: managerspb.ManagersService.ProcessSpeechInput
+      post: /api/managers/input/speech
+      body: "*"
+
+    - selector: managerspb.ManagersService.ProcessImageInput
+      post: /api/managers/input/image
+      body: "*"
+
+    - selector: managerspb.ManagersService.ProcessDocumentInput
+      post: /api/managers/input/document
+      body: "*"
+
+
+    - selector: managerspb.ManagersService.ProcessManagerRequest
+      post: /api/managers/process
+      body: "*"
+
+    # ===========================================
+    # ASSISTANT MANAGEMENT (RESTful)
+    # ===========================================
+    - selector: managerspb.ManagersService.CreateManager
+      post: /api/managers
+      body: "*"
+
+    - selector: managerspb.ManagersService.GetManagers
+      post: /api/managers/all
+      body: "*"
+
+    - selector: managerspb.ManagersService.GetManager
+      post: /api/managers/manager
+      body: "*"
+
+
+    - selector: managerspb.ManagersService.UpdateManagerConfiguration
+      put: /api/managers
+      body: "*"
+
+    - selector: managerspb.ManagersService.ActivateManager
+      post: /api/managers/activate
+      body: "*"
+
+    - selector: managerspb.ManagersService.DeactivateManager
+      post: /api/managers/deactivate
+      body: "*"
+
+
+    - selector: managerspb.ManagersService.CreateConversation
+      post: /api/managers/conversations/create
+      body: "*"
+
+    - selector: managerspb.ManagersService.GetConversation
+      post: /api/managers/conversations
+      body: "*"
+
+    - selector: managerspb.ManagersService.GetUserConversations
+      post: /api/managers/conversations/user
+      body: "*"
+
+    - selector: managerspb.ManagersService.GetConversationMessages
+      post: /api/managers/conversations/messages
+      body: "*"
+
+    - selector: managerspb.ManagersService.GetConversationStats
+      get: /api/managers/stats
+
+    - selector: managerspb.ManagersService.UpdateConversation
+      put: /api/managers/conversations/{conversation_id}
+      body: "*"
+
+    - selector: managerspb.ManagersService.UpdateConversationContext
+      put: /api/managers/conversations/context
+      body: "*"
+
+    - selector: managerspb.ManagersService.DeleteConversation
+      delete: /api/managers/conversations/{conversation_id}
+
+    - selector: managerspb.ManagersService.ArchiveConversation
+      post: /api/managers/conversations/archive
+      body: "*"
+
+    # ===========================================
+    # MESSAGE MANAGEMENT (RESTful)
+    # ===========================================
+    - selector: managerspb.ManagersService.AddMessageToConversation
+      post: /api/managers/conversations/messages/add
+      body: "*"

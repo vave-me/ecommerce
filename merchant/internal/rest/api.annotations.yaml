@@ -1,0 +1,24 @@
+type: google.api.Service
+config_version: 3
+name: merchant.googleapis.com
+title: Merchant API
+apis:
+  - name: merchantpb.MerchantService
+http:
+  rules:
+    - selector: merchantpb.MerchantService.SyncProduct
+      post: /api/merchant/products/sync
+      body: "*"
+    
+    - selector: merchantpb.MerchantService.BatchSyncProducts
+      post: /api/merchant/products/batch-sync
+      body: "*"
+    
+    - selector: merchantpb.MerchantService.RemoveProduct
+      delete: /api/merchant/products/{product_id}
+    
+    - selector: merchantpb.MerchantService.GetProductStatus
+      get: /api/merchant/products/{product_id}/status
+    
+    - selector: merchantpb.MerchantService.ListProducts
+      get: /api/merchant/products

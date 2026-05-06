@@ -1,0 +1,80 @@
+openapiOptions:
+  file:
+    - file: "reviewspb/api.proto"
+      option:
+        info:
+          title: Review Management API
+          version: "1.0.0"
+          description: "API for managing reviews and replies between users, including functionalities to add, approve, reject, edit, and retrieve reviews and their replies."
+        basePath: /
+  method:
+    # Review Operations
+    - method: reviewspb.ReviewsService.AddReview
+      option:
+        operationId: addReview
+        tags:
+          - Review
+        summary: Add a new review
+
+    - method: reviewspb.ReviewsService.ApproveReview
+      option:
+        operationId: approveReview
+        tags:
+          - Review
+        summary: Approve a review
+
+    - method: reviewspb.ReviewsService.RejectReview
+      option:
+        operationId: rejectReview
+        tags:
+          - Review
+        summary: Reject a review
+
+    - method: reviewspb.ReviewsService.EditReview
+      option:
+        operationId: editReview
+        tags:
+          - Review
+        summary: Edit a review
+
+    - method: reviewspb.ReviewsService.GetReview
+      option:
+        operationId: getReview
+        tags:
+          - Review
+        summary: Get a review
+
+    - method: reviewspb.ReviewsService.GetReviews
+      option:
+        operationId: getReviews
+        tags:
+          - Review
+        summary: Get a list of reviews
+
+    - method: reviewspb.ReviewsService.GetReviewsBySender
+      option:
+        operationId: getReviewsBySender
+        tags:
+          - Review
+        summary: Get a list of reviews
+
+    - method: reviewspb.ReviewsService.GetApprovedReviews
+      option:
+        operationId: getApprovedReviews
+        tags:
+          - Review
+        summary: Get approved reviews
+
+    - method: reviewspb.ReviewsService.GetMostReviewed
+      option:
+        operationId: getMostReviewed
+        tags:
+          - ItemReviewCount
+        summary: Get items count
+
+    - method: reviewspb.ReviewsService.GetMostReviewedByCategory
+      option:
+        operationId: getMostReviewedByCategory
+        tags:
+          - ItemReviewCount
+        summary: Get items count

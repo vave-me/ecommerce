@@ -1,0 +1,60 @@
+type: google.api.Service
+config_version: 3
+name: baskets.googleapis.com
+title: Shopping Basket API
+apis:
+  - name: basketspb.BasketService
+http:
+  rules:
+    # Create a New Basket
+    - selector: basketspb.BasketService.StartBasket
+      post: /api/baskets
+      body: "*"
+    
+    # Retrieve an Existing Basket
+    - selector: basketspb.BasketService.GetBasket
+      get: /api/baskets/{basket_id}
+
+    - selector: basketspb.BasketService.GetTotalBasket
+      get: /api/baskets/{basket_id}/total
+
+    # Retrieve an Existing Basket
+    - selector: basketspb.BasketService.GetCurrentBasket
+      get: /api/baskets/current
+    
+    # Cancel an Existing Basket
+    - selector: basketspb.BasketService.CancelBasket
+      delete: /api/baskets/{basket_id}
+    
+    # Checkout a Basket
+    - selector: basketspb.BasketService.CheckoutBasket
+      post: /api/baskets/{basket_id}/checkout
+      body: "*"
+    
+    # Add an Item to the Basket
+    - selector: basketspb.BasketService.AddItem
+      post: /api/baskets/{basket_id}/addItem
+      body: "*"
+    
+    # Remove an Item from the Basket
+    - selector: basketspb.BasketService.RemoveItem
+      delete: /api/baskets/{basket_id}/removeItem
+    
+    # Update Item Quantity in the Basket
+    - selector: basketspb.BasketService.UpdateItemQuantity
+      patch: /api/baskets/{basket_id}/items/{item_id}
+      body: "*"
+    
+    # List All Baskets
+    - selector: basketspb.BasketService.ListBaskets
+      get: /api/baskets
+
+    # Get Active Baskets
+    - selector: basketspb.BasketService.GetActiveBaskets
+      get: /api/baskets/active
+    
+    # Reopen a Basket after Failed Checkout
+    - selector: basketspb.BasketService.ReopenBasket
+      post: /api/baskets/{basket_id}/reopen
+      body: "*"
+

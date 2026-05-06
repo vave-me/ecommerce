@@ -1,0 +1,1339 @@
+/* ClassifiedCard.module.css - Premium Minimalist Design */
+
+/* Import shared styles */
+@import '../shared/CardShared.module.css';
+@import '../shared/CardBase.module.css';
+@import '../shared/MediaContainer.module.css';
+@import '../shared/ButtonStyles.module.css';
+@import '../shared/LoadingStates.module.css';
+@import '../shared/Utilities.module.css';
+
+/* Main Card Container - Mobile First */
+.card {
+  composes: cardBase from '../shared/CardBase.module.css';
+  position: relative;
+  width: 100%;
+  background: var(--surface-primary);
+  border-radius: 0;
+  overflow: hidden; /* CRITICAL: Prevent any overflow */
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  font-family: var(--font-family-primary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-primary);
+  border-left: none;
+  border-right: none;
+  box-sizing: border-box;
+  margin-bottom: 1px;
+  contain: layout style paint;
+  height: auto; /* Dynamic height */
+  min-height: auto; /* Remove minimum height constraints */
+}
+
+/* Ensure cards never exceed viewport width on mobile */
+@media (max-width: 768px) {
+  .card {
+    max-width: 100vw;
+    width: 100%;
+  }
+}
+
+/* Subtle hover lift */
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-neutral-200);
+  }
+}
+
+/* Media Container - Compose from shared */
+.mediaContainer {
+  composes: mediaContainer aspectRatio16x9 mobileMaxHeight from '../shared/MediaContainer.module.css';
+}
+
+.mediaCarousel {
+  composes: mediaCarousel from '../shared/MediaContainer.module.css';
+}
+
+.mediaItem {
+  composes: mediaItem from '../shared/MediaContainer.module.css';
+}
+
+.mediaItem svg {
+  color: var(--color-neutral-300);
+}
+
+/* Media Navigation - Compose from shared */
+.mediaNav {
+  composes: mediaNav from '../shared/MediaContainer.module.css';
+}
+
+.mediaNavButton {
+  composes: mediaNavButton from '../shared/MediaContainer.module.css';
+}
+
+/* Pagination - Compose from shared */
+.mediaPagination {
+  composes: mediaPagination from '../shared/MediaContainer.module.css';
+}
+
+.paginationDot {
+  composes: paginationDot from '../shared/MediaContainer.module.css';
+}
+
+
+/* Status Badge - Compact */
+.statusIndicators {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  z-index: 2;
+  display: flex;
+  gap: 3px;
+}
+
+.badge {
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.badge svg {
+  width: 12px;
+  height: 12px;
+}
+
+.newBadge {
+  background: var(--color-primary-50);
+  color: var(--color-primary-700);
+  border-color: var(--color-primary-200);
+}
+
+.featuredBadge {
+  background: var(--color-warning-50);
+  color: var(--color-warning-700);
+  border-color: var(--color-warning-200);
+}
+
+/* Content Section - Compact */
+.content {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+  height: auto; /* Dynamic height */
+}
+
+/* Category Label */
+.categoryLabel {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  background: var(--surface-tertiary);
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+  align-self: flex-start; /* Prevent stretching to full width */
+}
+
+/* Title Link - Clickable area */
+.titleLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.titleLink:hover .title {
+  color: var(--color-primary-600);
+}
+
+/* Title - Mobile Optimized */
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  align-self: stretch; /* Take full width of parent, not viewport */
+  cursor: pointer;
+}
+
+/* Review Indicators */
+.reviewIndicators {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  margin-bottom: 4px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.ratingStars {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.starFilled {
+  color: #FFB800;
+  fill: #FFB800;
+}
+
+.starEmpty {
+  color: var(--color-neutral-300);
+  fill: var(--color-neutral-300);
+}
+
+.ratingValue {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-left: 2px;
+}
+
+.reviewCount {
+  color: var(--text-secondary);
+  font-size: 10px;
+}
+
+/* Price and Cart Section - Mobile Layout */
+.priceSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  margin: 0;
+  flex-wrap: nowrap; /* Prevent wrapping on mobile */
+  box-sizing: border-box;
+}
+
+.priceWrapper {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  flex-shrink: 1; /* Allow price to shrink if needed */
+  min-width: 0; /* Enable text truncation */
+}
+
+.price {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px; /* Limit price width on mobile */
+}
+
+@media (min-width: 768px) {
+  .price {
+    font-size: 16px;
+    max-width: none; /* No limit on desktop */
+  }
+}
+
+.originalPrice {
+  font-size: var(--font-size-base);
+  color: var(--color-neutral-400);
+  text-decoration: line-through;
+  font-weight: var(--font-weight-normal);
+}
+
+.purchaseControls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0; /* Prevent controls from shrinking */
+  height: 36px; /* Ensure consistent height */
+}
+
+/* Product Info */
+.productInfo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.infoItem {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  background: var(--color-neutral-100);
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-neutral-600);
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.infoItem svg {
+  width: 12px;
+  height: 12px;
+  color: var(--color-neutral-500);
+  flex-shrink: 0;
+}
+
+/* Description - Visible on mobile with up to 6 lines */
+.description {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  margin: 0;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 6 !important;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  max-height: calc(1.4em * 6); /* Fallback for browsers that don't support line-clamp */
+}
+
+/* Meta Information */
+.metaInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-500);
+  margin-bottom: var(--space-4);
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.metaItem svg {
+  width: 14px;
+  height: 14px;
+  color: var(--color-neutral-400);
+}
+
+/* Social Proof */
+.socialProof {
+  display: flex;
+  gap: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-neutral-100);
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-600);
+}
+
+.socialProofItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.socialProofItem svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-neutral-400);
+}
+
+
+/* Engagement Bar - Improved Mobile Spacing */
+.engagementBar {
+  padding: 8px 4px;
+  background: var(--surface-secondary);
+  border-top: 1px solid var(--border-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 3;
+}
+
+/* Engagement Actions - Better Spacing */
+.engagementActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 0;
+  width: 100%;
+  max-width: 360px; /* Prevent too much spreading on tablets */
+}
+
+.actionButton {
+  composes: actionButton from '../shared/ButtonStyles.module.css';
+}
+
+.actionButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Action Count Badge */
+.actionCount {
+  composes: actionCount from '../shared/ButtonStyles.module.css';
+}
+
+/* Cart Section - Now removed as it's integrated into priceSection */
+.cartSection {
+  display: none;
+}
+
+/* Quantity Selector - Visible on mobile */
+.quantitySelector {
+  display: flex;
+  align-items: center;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  height: 36px;
+}
+
+.quantityButton {
+  background: none;
+  border: none;
+  width: 22px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-neutral-600);
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.quantityButton:hover:not(:disabled) {
+  background: var(--color-neutral-100);
+  color: var(--color-neutral-900);
+}
+
+.quantityButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.quantityButton svg {
+  width: 14px;
+  height: 14px;
+}
+
+.quantityDisplay {
+  min-width: 20px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-900);
+  padding: 0 2px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addToCartButton {
+  background: var(--color-primary-600, #2c5aa0);
+  background-color: var(--color-primary-600, #2c5aa0);
+  color: var(--text-inverse, #ffffff);
+  border: 1px solid var(--color-primary-600, #2c5aa0);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  white-space: nowrap;
+  height: 36px;
+  min-height: 36px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+  /* Ensure proper contrast in bright theme */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.addToCartButton:hover {
+  background: var(--color-primary-700, #1e3a8a);
+  background-color: var(--color-primary-700, #1e3a8a);
+  border-color: var(--color-primary-700, #1e3a8a);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md, 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1));
+}
+
+.addToCartButton:disabled {
+  background: var(--color-neutral-300);
+  border-color: var(--color-neutral-300);
+  color: var(--color-neutral-500);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.addToCartButton svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Social proof is always hidden since engagement bar is always shown */
+.socialProof {
+  display: none;
+}
+
+
+/* Quick Stats - Hidden by default */
+.quickStats {
+  display: none;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-neutral-50);
+  border-top: 1px solid var(--color-neutral-100);
+  gap: var(--space-4);
+  font-size: var(--font-size-xs);
+  color: var(--color-neutral-600);
+  flex-wrap: wrap;
+}
+
+@media (hover: hover) {
+  .card:hover .quickStats {
+    display: flex;
+  }
+}
+
+.quickStat {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.quickStat svg {
+  width: 14px;
+  height: 14px;
+  color: var(--color-neutral-400);
+}
+
+/* Loading State */
+.card.isLoading .mediaContainer,
+.card.isLoading .title,
+.card.isLoading .price,
+.card.isLoading .description {
+  background: var(--color-neutral-100);
+  animation: pulse 1.5s ease-in-out infinite;
+  color: transparent;
+  border-radius: var(--radius-base);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* Spinner */
+.spinner {
+  composes: spinner spinnerSm from '../shared/LoadingStates.module.css';
+}
+
+/* Comments Wrapper - Desktop inline comments */
+.commentsWrapper {
+  /* Desktop styles - inline within card */
+  padding: 0;
+  margin: 0;
+  background: transparent;
+}
+
+/* Stock Indicators */
+.stockIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.available { color: var(--color-success-600); }
+.lowStock { color: var(--color-warning-600); }
+.outOfStock { color: var(--color-error-600); }
+
+/* Mobile/Desktop text variants */
+.shippingText,
+.verifiedText {
+  display: inline;
+}
+
+.shippingTextMobile,
+.verifiedTextMobile {
+  display: none;
+}
+
+/* Show mobile text on small screens */
+@media (max-width: 767px) {
+  .shippingText,
+  .verifiedText {
+    display: none;
+  }
+  
+  .shippingTextMobile,
+  .verifiedTextMobile {
+    display: inline;
+  }
+}
+
+/* Mobile-specific styles */
+@media (max-width: 767px) {
+  /* Content section reset */
+  .content {
+    padding: 8px ;
+  }
+  
+  /* Hide negotiable badge on mobile to save space */
+  .priceWrapper .badge {
+    display: none;
+  }
+  
+  /* Enhanced mobile engagement bar */
+  .engagementBar {
+    padding: 6px 2px !important;
+    background: var(--surface-primary) !important;
+    border-top: 1px solid var(--border-secondary) !important;
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+  }
+  
+  /* Better action button spacing on mobile */
+  .actionButton {
+    flex: 1;
+    max-width: 60px;
+    min-width: 48px !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    border-radius: 8px;
+    position: relative;
+  }
+  
+  .actionButton:active {
+    background: var(--color-neutral-100);
+    transform: scale(0.95);
+  }
+  
+  .actionButton svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+  
+  /* Action count positioning for mobile */
+  .actionCount {
+    top: 4px !important;
+    right: 4px !important;
+    font-size: 9px !important;
+    min-width: 16px !important;
+    height: 16px !important;
+    padding: 0 4px !important;
+  }
+  
+  /* Make price section more compact on mobile - FORCE single row */
+  .priceSection {
+    display: flex ;
+    flex-wrap: nowrap ;
+    align-items: center ;
+    justify-content: space-between ;
+    gap: 8px ;
+    margin: 0 ;
+    padding: 0 ;
+    height: auto ;
+    min-height: 32px ;
+    overflow: visible ;
+    position: relative ;
+  }
+  
+  /* Price wrapper - takes only needed space */
+  .priceWrapper {
+    display: flex ;
+    align-items: center ;
+    min-width: 60px ;
+    max-width: 100px ;
+    overflow: hidden ;
+  }
+  
+  /* Price text */
+  .price {
+    font-size: 14px ;
+    font-weight: 600 ;
+    white-space: nowrap ;
+    overflow: hidden ;
+    text-overflow: ellipsis ;
+    display: inline-block ;
+  }
+  
+  /* Purchase controls - compact layout */
+  .purchaseControls {
+    display: flex ;
+
+    flex-wrap: nowrap ;
+    align-items: center ;
+    gap: 4px ;
+    height: 32px ;
+    overflow: visible ;
+  }
+  
+  /* Compact quantity selector on mobile */
+  .quantitySelector {
+    display: flex ;
+    align-items: center ;
+    height: 32px ;
+    flex: 0 0 auto ;
+    min-width: 60px ;
+    max-width: 60px ;
+    width: 60px ;
+    background: var(--surface-primary) ;
+    border: 1px solid var(--border-primary) ;
+    border-radius: 6px ;
+    overflow: hidden ;
+  }
+  
+  .quantityButton {
+    flex: 0 0 20px ;
+    width: 20px ;
+    min-width: 20px ;
+    max-width: 20px ;
+    height: 32px ;
+    padding: 0 ;
+    display: flex ;
+    align-items: center ;
+    justify-content: center ;
+  }
+  
+  .quantityDisplay {
+    min-width: 20px ;
+    text-align: center ;
+    font-size: 11px ;
+    font-weight: 500 ;
+    height: 32px ;
+    padding: 0 ;
+    display: flex ;
+    align-items: center ;
+    justify-content: center ;
+  }
+  
+  /* Compact add to cart button on mobile - icon only */
+  .addToCartButton {
+    min-height: 32px ;
+    height: 32px ;
+    width: 32px ;
+    min-width: 32px ;
+    max-width: 32px ;
+    padding: 0 ;
+    border-radius: 6px ;
+    background: var(--color-primary-600) !important;
+    background-color: var(--color-primary-600) !important;
+    color: var(--text-inverse) !important;
+    border: 1px solid var(--color-primary-600) !important;
+    cursor: pointer ;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .addToCartButton span {
+    display: none ; /* Hide text, show only icon */
+  }
+  
+  .addToCartButton svg {
+    width: 16px ;
+    height: 16px ;
+    flex-shrink: 0 ;
+  }
+  
+  /* Ensure description is visible */
+  .description {
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    font-size: 12px ;
+    margin-top: 4px ;
+  }
+  
+  /* Keep category label visible but compact on mobile */
+  .categoryLabel {
+    font-size: 9px ;
+    padding: 2px 4px ;
+    margin-bottom: 2px ;
+  }
+  
+  /* Product info items compact on mobile - FORCE single row */
+  .productInfo {
+    display: flex ;
+    flex-wrap: nowrap ;  /* NEVER wrap */
+    gap: 4px ;
+    margin-top: 2px ;
+    margin-bottom: 2px ;
+    overflow-x: auto ;  /* Allow horizontal scroll if needed */
+    -webkit-overflow-scrolling: touch ;
+    scrollbar-width: none ;  /* Hide scrollbar */
+    -ms-overflow-style: none ;  /* Hide scrollbar IE/Edge */
+  }
+  
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .productInfo::-webkit-scrollbar {
+    display: none ;
+  }
+  
+  .infoItem {
+    flex: 0 0 auto ;  /* Don't grow or shrink */
+    display: inline-flex ;
+    align-items: center ;
+    padding: 2px 4px ;
+    font-size: 9px ;
+    gap: 2px ;
+    min-width: 0 ;
+    background: var(--color-neutral-50) ;
+    border: 1px solid var(--color-neutral-200) ;
+    border-radius: 10px ;
+    line-height: 1 ;
+    white-space: nowrap ;  /* Prevent text wrapping */
+  }
+  
+  .infoItem svg {
+    width: 10px ;
+    height: 10px ;
+    flex-shrink: 0 ;
+  }
+}
+
+/* Tablet and Desktop Adjustments - More Compact */
+@media (min-width: 768px) {
+  .card {
+    max-width: 340px; /* Reduced from 320px */
+    border-radius: var(--radius-lg); /* Reduced from xl */
+    margin: 0;
+    border: 1px solid var(--border-primary);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  /* Desktop hover effects */
+  .card:hover {
+    transform: translateY(-1px); /* Reduced from -2px */
+    box-shadow: var(--shadow-md); /* Reduced from lg */
+  }
+  
+  /* Restore desktop media container */
+  .mediaContainer {
+    padding-top: 66.67%; /* 3:2 ratio - more compact than 4:3 */
+    max-height: none;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+  
+  /* Compact content padding */
+  .content {
+    padding: 10px; /* Reduced from var(--space-4) which is 16px */
+    gap: 6px; /* Reduced from var(--space-3) which is 12px */
+  }
+  
+  /* Compact title */
+  .title {
+    font-size: 15px; /* Reduced from var(--font-size-lg) */
+    margin-bottom: 4px; /* Reduced from var(--space-2) */
+    line-height: 1.3;
+  }
+  
+  /* Desktop review indicators */
+  .reviewIndicators {
+    font-size: 12px;
+    margin-top: 3px;
+    margin-bottom: 6px;
+    gap: 6px;
+  }
+  
+  .ratingStars {
+    gap: 2px;
+  }
+  
+  .ratingValue {
+    font-size: 12px;
+  }
+  
+  .reviewCount {
+    font-size: 11px;
+  }
+  
+  /* Compact description */
+  .description {
+    display: block;
+    font-size: 13px; /* Reduced from var(--font-size-sm) */
+    -webkit-line-clamp: 6; /* Keep 6 lines on tablet */
+    line-height: 1.4;
+  }
+  
+  /* Compact price section */
+  .priceSection {
+    margin-bottom: 6px; /* Reduced from var(--space-3) */
+    gap: 8px; /* Reduced from var(--space-3) */
+    flex-wrap: nowrap; /* Prevent wrapping for compactness */
+  }
+  
+  .price {
+    font-size: 18px; /* Reduced from var(--font-size-2xl) */
+    font-weight: 600;
+  }
+  
+  /* Show product info */
+  .productInfo {
+    display: flex;
+    gap: 4px; /* Compact gap */
+    margin-top: 4px;
+  }
+  
+  /* Compact category label */
+  .categoryLabel {
+    padding: 2px 6px; /* Reduced from 4px 8px */
+    font-size: 10px; /* Reduced from 11px */
+    margin-bottom: 4px; /* Reduced from 8px */
+  }
+  
+  /* Compact quantity selector */
+  .quantitySelector {
+    display: flex;
+    align-items: center;
+    background: var(--surface-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: 6px; /* Reduced from var(--radius-lg) */
+    overflow: hidden;
+    height: 32px; /* Reduced from 36px */
+  }
+  
+  .quantityButton {
+    width: 24px; /* Reduced from 28px */
+    height: 32px;
+  }
+  
+  .quantityDisplay {
+    min-width: 28px; /* Reduced from 32px */
+    font-size: 12px; /* Reduced */
+    padding: 0 4px; /* Reduced from var(--space-2) */
+  }
+  
+  .addToCartButton {
+    padding: 6px 10px; /* Reduced from 8px 12px */
+    font-size: 12px; /* Reduced from 13px */
+    min-height: 32px; /* Reduced from 44px */
+    height: 32px;
+  }
+  
+  .addToCartButton span {
+    display: inline; /* Show text on desktop */
+  }
+  
+  .addToCartButton svg {
+    width: 14px; /* Reduced from 16px */
+    height: 14px;
+  }
+  
+  /* Show negotiable badge on desktop */
+  .priceWrapper .badge {
+    display: inline-flex;
+    padding: 1px 4px; /* More compact */
+    font-size: 10px;
+  }
+  
+  /* Media navigation handled by shared styles */
+  
+  /* Compact desktop badges */
+  .badge {
+    padding: 2px 6px; /* Reduced padding */
+    font-size: 10px; /* Reduced from var(--font-size-xs) */
+    background: white;
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
+    backdrop-filter: none;
+  }
+  
+  /* Compact engagement bar */
+  .engagementBar {
+    padding: 6px 8px; /* Reduced from var(--space-3) var(--space-4) */
+  }
+  
+  /* Compact action buttons */
+  .actionButton {
+    width: 36px; /* Reduced from 40px */
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+  }
+  
+  .actionButton svg {
+    width: 18px; /* Reduced from default */
+    height: 18px;
+  }
+  
+  /* Compact info items */
+  .infoItem {
+    padding: 2px 6px; /* Compact padding */
+    font-size: 10px; /* Small font */
+    gap: 3px;
+  }
+  
+  .infoItem svg {
+    width: 11px;
+    height: 11px;
+  }
+  
+  /* Desktop comments wrapper - inline below card content */
+  .commentsWrapper {
+    position: relative;
+    padding: 0;
+    background: transparent;
+    border-top: none;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    overflow: hidden;
+  }
+}
+
+/* Override desktop styles for mobile - MUST come after desktop media query */
+@media (max-width: 767px) {
+  /* Force mobile price section layout - override desktop gap */
+  .priceSection {
+    gap: 8px ;
+    margin-bottom: 0 ;
+    flex-wrap: nowrap ;
+    padding: 0 ;
+  }
+}
+
+/* Very Small Mobile Adjustments */
+@media (max-width: 375px) {
+  .content {
+    padding: 6px ;
+  }
+  
+  .title {
+    font-size: 13px;
+  }
+  
+  .priceWrapper {
+    min-width: 50px ;
+    max-width: 80px ;
+  }
+  
+  .price {
+    font-size: 13px ;
+  }
+  
+  .priceSection {
+    gap: 4px ;
+  }
+  
+  .purchaseControls {
+    gap: 3px ;
+  }
+  
+  .quantitySelector {
+    min-width: 54px ;
+    max-width: 54px ;
+    width: 54px ;
+    height: 28px ;
+  }
+  
+  .quantityButton {
+    flex: 0 0 18px ;
+    width: 18px ;
+    height: 28px ;
+  }
+  
+  .quantityDisplay {
+    font-size: 10px ;
+    height: 28px ;
+  }
+  
+  .addToCartButton {
+    flex: 0 0 28px ;
+    width: 28px ;
+    height: 28px ;
+    min-height: 28px ;
+  }
+  
+  .addToCartButton svg {
+    width: 14px ;
+    height: 14px ;
+  }
+  
+  /* Even more compact on very small screens */
+  .categoryLabel {
+    font-size: 8px ;
+    padding: 1px 3px ;
+  }
+  
+  .productInfo {
+    gap: 2px ;
+    flex-wrap: nowrap ;  /* Ensure single row on tiny screens too */
+  }
+  
+  .infoItem {
+    padding: 1px 3px ;
+    font-size: 8px ;
+  }
+  
+  .infoItem svg {
+    width: 8px ;
+    height: 8px ;
+  }
+}
+
+/* Focus States */
+.actionButton:focus-visible,
+.quantityButton:focus-visible,
+.addToCartButton:focus-visible,
+.mediaNavButton:focus-visible,
+.paginationDot:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .mediaCarousel,
+  .actionButton,
+  .addToCartButton,
+  .mediaNavButton {
+    transition: none;
+  }
+  
+  .card.isLoading .mediaContainer,
+  .card.isLoading .title,
+  .card.isLoading .price,
+  .card.isLoading .description,
+  .spinner {
+    animation: none;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .card {
+    border: 2px solid var(--color-neutral-900);
+  }
+  
+  .badge,
+  .actionButton,
+  .quantitySelector,
+  .addToCartButton {
+    border: 1px solid currentColor;
+  }
+}
+
+/* Dark Mode Support - Enhanced */
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: var(--surface-primary);
+    border-color: var(--border-primary);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .card:hover {
+    border-color: var(--border-secondary);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .mediaContainer {
+    background: var(--surface-secondary);
+  }
+  
+  .mediaNavButton {
+    background: var(--surface-primary);
+    border-color: var(--border-primary);
+  }
+  
+  .mediaNavButton:hover {
+    background: var(--surface-tertiary);
+  }
+  
+  .mediaNavButton svg {
+    color: var(--text-secondary);
+  }
+  
+  .mediaPagination {
+    background: var(--surface-overlay);
+    border-color: var(--border-primary);
+  }
+  
+  .paginationDot {
+    background: var(--color-neutral-400);
+  }
+  
+  .paginationDot.active {
+    background: var(--color-neutral-700);
+  }
+  
+  .statusIndicators .badge {
+    background: var(--surface-overlay);
+    border-color: var(--border-primary);
+  }
+  
+  .newBadge {
+    background: var(--color-primary-100);
+    color: var(--color-primary-700);
+    border-color: var(--color-primary-200);
+  }
+  
+  .featuredBadge {
+    background: var(--color-warning-100);
+    color: var(--color-warning-600);
+    border-color: var(--color-warning-200);
+  }
+  
+  .content {
+    color: var(--text-primary);
+  }
+  
+  .categoryLabel {
+    background: var(--surface-tertiary);
+    color: var(--text-secondary);
+  }
+  
+  .title {
+    color: var(--text-primary);
+  }
+  
+  .price {
+    color: var(--text-primary);
+  }
+  
+  .productInfo {
+    color: var(--text-secondary);
+  }
+  
+  .infoItem {
+    background: var(--surface-tertiary);
+    color: var(--text-secondary);
+  }
+  
+  .infoItem svg {
+    color: var(--text-tertiary);
+  }
+  
+  .description {
+    color: var(--text-secondary);
+  }
+  
+  .metaInfo,
+  .socialProof {
+    color: var(--text-tertiary);
+  }
+  
+  .engagementBar {
+    background: var(--surface-secondary);
+    border-color: var(--border-primary);
+  }
+  
+  .actionButton {
+    color: var(--text-tertiary);
+  }
+  
+  .actionButton:hover {
+    background: var(--surface-tertiary);
+    color: var(--text-primary);
+  }
+  
+  .actionButton.active {
+    background: var(--color-primary-100);
+    color: var(--color-primary-700);
+  }
+  
+  .actionCount {
+    background: var(--color-primary-600);
+    color: var(--text-inverse);
+  }
+  
+  .quantitySelector {
+    background: var(--surface-primary);
+    border-color: var(--border-primary);
+  }
+  
+  .quantityButton {
+    color: var(--text-secondary);
+  }
+  
+  .quantityButton:hover:not(:disabled) {
+    background: var(--surface-tertiary);
+    color: var(--text-primary);
+  }
+  
+  .quantityDisplay {
+    color: var(--text-primary);
+  }
+  
+  .addToCartButton {
+    background: var(--button-primary-bg);
+    color: var(--button-primary-text);
+  }
+  
+  .addToCartButton:hover {
+    background: var(--button-primary-bg-hover);
+  }
+  
+  .addToCartButton:disabled {
+    background: var(--surface-tertiary);
+    color: var(--text-disabled);
+  }
+  
+  .commentsWrapper {
+    background: var(--surface-primary);
+    border-color: var(--border-primary);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  /* Loading states in dark mode */
+  .card.isLoading .mediaContainer,
+  .card.isLoading .title,
+  .card.isLoading .price,
+  .card.isLoading .description {
+    background: var(--surface-tertiary);
+  }
+  
+  .spinner {
+    border-color: var(--border-primary);
+    border-top-color: var(--color-primary-500);
+  }
+  
+  /* Review indicators in dark mode */
+  .reviewIndicators {
+    color: var(--text-secondary);
+  }
+  
+  .ratingValue {
+    color: var(--text-primary);
+  }
+  
+  .reviewCount {
+    color: var(--text-tertiary);
+  }
+  
+  .starFilled {
+    color: #FFB800;
+    fill: #FFB800;
+  }
+  
+  .starEmpty {
+    color: var(--color-neutral-600);
+    fill: var(--color-neutral-600);
+  }
+}

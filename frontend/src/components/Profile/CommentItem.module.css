@@ -1,0 +1,155 @@
+.commentContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    background-color: #ffffff;
+    border: 1px solid #ecf0f1;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+    .commentContainer {
+        background-color: var(--gray-800, #1f2937);
+        border-color: var(--gray-700, #374151);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+}
+
+@media (max-width: 480px) {
+    .commentContainer {
+        padding: 14px;
+        gap: 10px;
+        border-radius: 8px;
+    }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.commenterName {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    .commenterName {
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+@media (max-width: 480px) {
+    .commenterName {
+        font-size: 14px;
+    }
+}
+
+.commentDate {
+    font-size: 12px;
+    color: #95a5a6;
+}
+
+@media (prefers-color-scheme: dark) {
+    .commentDate {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+@media (max-width: 480px) {
+    .commentDate {
+        font-size: 11px;
+    }
+}
+
+.ratingWrapper {
+    align-self: flex-start;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.commentRow {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+@media (prefers-color-scheme: dark) {
+    .label {
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+@media (max-width: 480px) {
+    .label {
+        font-size: 13px;
+    }
+}
+
+.commentContent {
+    font-size: 14px;
+    color: #7f8c8d;
+}
+
+@media (prefers-color-scheme: dark) {
+    .commentContent {
+        color: var(--gray-300, #d1d5db);
+    }
+}
+
+@media (max-width: 480px) {
+    .commentContent {
+        font-size: 13px;
+    }
+}
+
+.commentId {
+    font-size: 14px;
+    color: #2980b9;
+    font-weight: 500;
+}
+
+@media (prefers-color-scheme: dark) {
+    .commentId {
+        color: var(--primary-color, #3b82f6);
+    }
+}
+
+@media (max-width: 480px) {
+    .commentId {
+        font-size: 13px;
+    }
+}
+
+.commentType {
+    font-size: 14px;
+    color: #16a085;
+    font-weight: 500;
+}
+
+@media (prefers-color-scheme: dark) {
+    .commentType {
+        color: var(--teal-400, #14b8a6);
+    }
+}
+
+@media (max-width: 480px) {
+    .commentType {
+        font-size: 13px;
+    }
+}

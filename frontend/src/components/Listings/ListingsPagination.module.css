@@ -1,0 +1,381 @@
+/* ============================================================================
+   LISTINGS PAGINATION - ATOMIC DESIGN SYSTEM
+   ============================================================================ */
+
+/* Uses Global Design Tokens from design-tokens.css */
+
+/* ============================================================================
+   CONTAINER - ORGANISM
+   ============================================================================ */
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ai-space-lg);
+  padding: var(--ai-space-lg);
+  background: var(--ai-color-surface);
+  border: 1px solid var(--ai-color-border);
+  border-radius: var(--ai-radius-lg);
+  margin-top: var(--ai-space-lg);
+}
+
+/* ============================================================================
+   INFO SECTION - MOLECULE
+   ============================================================================ */
+
+.info {
+  display: flex;
+  align-items: center;
+}
+
+.infoText {
+  font-size: var(--ai-text-sm);
+  color: var(--ai-color-text-secondary);
+  font-weight: var(--ai-font-weight-medium);
+}
+
+/* ============================================================================
+   PAGINATION CONTROLS - MOLECULE
+   ============================================================================ */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: var(--ai-space-sm);
+}
+
+.pageNumbers {
+  display: flex;
+  align-items: center;
+  gap: var(--ai-space-xs);
+}
+
+/* ============================================================================
+   PAGE BUTTONS - ATOMS
+   ============================================================================ */
+
+.pageButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: var(--ai-space-sm);
+  background: var(--ai-color-surface);
+  border: 1px solid var(--ai-color-border);
+  border-radius: var(--ai-radius-md);
+  color: var(--ai-color-text-primary);
+  font-size: var(--ai-text-sm);
+  font-weight: var(--ai-font-weight-medium);
+  cursor: pointer;
+  transition: var(--ai-transition-colors);
+  text-decoration: none;
+}
+
+.pageButton:hover:not(:disabled) {
+  background: var(--ai-color-secondary-light);
+  border-color: var(--ai-color-border-hover);
+  color: var(--ai-color-text-primary);
+}
+
+.pageButton:focus-visible {
+  outline: none;
+  box-shadow: var(--ai-shadow-focus);
+}
+
+.pageButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pageButton.active {
+  background: var(--ai-color-primary);
+  border-color: var(--ai-color-primary);
+  color: var(--ai-color-surface);
+}
+
+.pageButton.active:hover {
+  background: var(--ai-color-primary-hover);
+  border-color: var(--ai-color-primary-hover);
+}
+
+.pageButton.dots {
+  cursor: default;
+  border: none;
+  background: transparent;
+}
+
+.pageButton.dots:hover {
+  background: transparent;
+  border: none;
+}
+
+/* ============================================================================
+   NAVIGATION BUTTONS - ATOMS
+   ============================================================================ */
+
+.navButton {
+  gap: var(--ai-space-xs);
+  padding: var(--ai-space-sm) var(--ai-space-md);
+  min-width: auto;
+}
+
+.navText {
+  font-size: var(--ai-text-sm);
+  font-weight: var(--ai-font-weight-medium);
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.disabled:hover {
+  background: var(--ai-color-surface);
+  border-color: var(--ai-color-border);
+  color: var(--ai-color-text-primary);
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - MOBILE FIRST
+   ============================================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .container {
+    padding: var(--ai-space-md);
+    gap: var(--ai-space-md);
+  }
+
+  .pageButton {
+    min-width: 36px;
+    height: 36px;
+    padding: var(--ai-space-xs);
+  }
+
+  .navButton {
+    padding: var(--ai-space-xs) var(--ai-space-sm);
+  }
+
+  .infoText {
+    font-size: var(--ai-text-xs);
+  }
+
+  .navText {
+    font-size: var(--ai-text-xs);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: var(--ai-space-sm);
+    padding: var(--ai-space-sm);
+  }
+
+  .info {
+    order: 2;
+  }
+
+  .pagination {
+    order: 1;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .pageNumbers {
+    gap: 2px;
+  }
+
+  .pageButton {
+    min-width: 32px;
+    height: 32px;
+    font-size: var(--ai-text-xs);
+  }
+
+  .navButton {
+    padding: var(--ai-space-xs);
+  }
+
+  .navText {
+    display: none;
+  }
+
+  .infoText {
+    font-size: 10px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .container {
+    padding: var(--ai-space-xs);
+  }
+
+  .pagination {
+    gap: var(--ai-space-xs);
+  }
+
+  .pageNumbers {
+    gap: 1px;
+  }
+
+  .pageButton {
+    min-width: 28px;
+    height: 28px;
+    font-size: 10px;
+  }
+
+  .navButton {
+    min-width: 28px;
+    padding: var(--ai-space-xs);
+  }
+
+  /* Hide some page numbers on very small screens */
+  .pageNumbers .pageButton:nth-child(n+6):nth-last-child(n+6) {
+    display: none;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 360px) {
+  .pageNumbers .pageButton:nth-child(n+4):nth-last-child(n+4) {
+    display: none;
+  }
+
+  .infoText {
+    font-size: 9px;
+  }
+}
+
+/* ============================================================================
+   ACCESSIBILITY & MOTION
+   ============================================================================ */
+
+/* Dark Theme */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: var(--gray-800, #1f2937);
+    border: 1px solid var(--gray-700, #374151);
+  }
+
+  .infoText {
+    color: var(--gray-300, #d1d5db);
+  }
+
+  .pageButton {
+    background: var(--gray-700, #374151);
+    border: 1px solid var(--gray-600, #4b5563);
+    color: var(--gray-200, #e5e7eb);
+  }
+
+  .pageButton:hover:not(:disabled) {
+    background: var(--gray-600, #4b5563);
+    border-color: var(--gray-500, #6b7280);
+    color: var(--gray-50, #f9fafb);
+  }
+
+  .pageButton:disabled {
+    background: var(--gray-800, #1f2937);
+    color: var(--gray-500, #6b7280);
+    border-color: var(--gray-700, #374151);
+  }
+
+  .pageButton.active {
+    background: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color, #3b82f6);
+    color: white;
+  }
+
+  .pageButton.active:hover {
+    background: rgba(37, 99, 235, 0.9);
+    border-color: rgba(37, 99, 235, 0.9);
+  }
+
+  .pageButton.dots {
+    background: transparent;
+    border: none;
+    color: var(--gray-400, #9ca3af);
+  }
+
+  .pageButton.dots:hover {
+    background: transparent;
+    border: none;
+  }
+
+  .disabled:hover {
+    background: var(--gray-800, #1f2937);
+    border-color: var(--gray-700, #374151);
+    color: var(--gray-500, #6b7280);
+  }
+
+  .container.loading .pageButton:not(.active) {
+    background: var(--gray-700, #374151);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .pageButton {
+    transition: none;
+  }
+}
+
+/* High Contrast */
+@media (prefers-contrast: high) {
+  .container {
+    border-width: 2px;
+  }
+
+  .pageButton {
+    border-width: 2px;
+  }
+
+  .pageButton.active {
+    border-width: 3px;
+  }
+}
+
+/* Focus Styles for Keyboard Navigation */
+.pageButton:focus-visible {
+  outline: 2px solid var(--ai-color-primary);
+  outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+  .container {
+    display: none;
+  }
+}
+
+/* ============================================================================
+   LOADING STATE
+   ============================================================================ */
+
+.container.loading .pageButton {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.container.loading .pageButton:not(.active) {
+  background: var(--ai-color-secondary-light);
+}
+
+/* ============================================================================
+   RTL SUPPORT
+   ============================================================================ */
+
+[dir="rtl"] .navButton {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .pagination {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .pageNumbers {
+  flex-direction: row-reverse;
+} 

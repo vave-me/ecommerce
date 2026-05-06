@@ -1,0 +1,342 @@
+# --- OpenTelemetry Collector Deployment ---
+# Namespace is already defined in 15-jaeger/jaeger.yaml
+# ConfigMap for OpenTelemetry Collector configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-collector-config
+  namespace: observability
+data:
+  config.yaml: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+      
+      # Prometheus receiver for scraping metrics
+      prometheus:
+        config:
+          scrape_configs:
+            - job_name: 'otel-collector'
+              scrape_interval: 30s
+              static_configs:
+                - targets: ['localhost:8888']
+
+    processors:
+      batch:
+        timeout: 60s
+        send_batch_size: 8192
+        send_batch_max_size: 16384
+      
+      memory_limiter:
+        check_interval: 1s
+        limit_mib: 512
+        spike_limit_mib: 128
+      
+      resource:
+        attributes:
+          - key: service.namespace
+            value: observability
+            action: insert
+          - key: deployment.environment
+            from_attribute: env
+            action: insert
+          - key: k8s.cluster.name
+            value: production
+            action: insert
+      
+      filter/metrics:
+        error_mode: ignore
+        metrics:
+          metric:
+            - 'name == "otel.process.runtime.go.mem.heap_idle_sys"'
+            - 'name == "otel.process.runtime.go.mem.heap_inuse_sys"'
+            - 'name == "otel.process.runtime.go.mem.heap_released_sys"'
+
+    exporters:
+      debug:
+        verbosity: detailed
+        sampling_initial: 5
+        sampling_thereafter: 200
+      
+      otlp/jaeger:
+        endpoint: jaeger-collector.observability.svc.cluster.local:4317
+        tls:
+          insecure: true
+        retry_on_failure:
+          enabled: true
+          initial_interval: 5s
+          max_interval: 30s
+          max_elapsed_time: 300s
+      
+      prometheus:
+        endpoint: "0.0.0.0:8889"
+        enable_open_metrics: true
+        add_metric_suffixes: false
+        send_timestamps: true
+        metric_expiration: 5m
+        resource_to_telemetry_conversion:
+          enabled: true
+
+    connectors:
+      spanmetrics:
+        histogram:
+          explicit:
+            buckets: [2ms, 4ms, 6ms, 8ms, 10ms, 50ms, 100ms, 200ms, 400ms, 800ms, 1s, 1400ms, 2s, 5s, 10s, 15s]
+        exemplars:
+          enabled: true
+          max_per_data_point: 5
+        metrics_flush_interval: 60s
+        metrics_expiration: 5m
+        resource_metrics_key_attributes:
+          - service.name
+          - service.namespace
+          - k8s.deployment.name
+          - k8s.pod.name
+
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [memory_limiter, batch, resource]
+          exporters: [otlp/jaeger, spanmetrics]
+        
+        metrics:
+          receivers: [otlp, spanmetrics, prometheus]
+          processors: [memory_limiter, batch, resource, filter/metrics]
+          exporters: [prometheus]
+        
+        logs:
+          receivers: [otlp]
+          processors: [memory_limiter, batch, resource]
+          exporters: [debug]
+      
+      telemetry:
+        logs:
+          level: info
+          initial_fields:
+            service: otel-collector
+        metrics:
+          level: detailed
+          readers:
+            - pull:
+                exporter:
+                  prometheus:
+                    host: 0.0.0.0
+                    port: 8888
+      
+      extensions: [health_check, pprof, zpages]
+
+    extensions:
+      health_check:
+        endpoint: 0.0.0.0:13133
+        path: "/health"
+      pprof:
+        endpoint: 0.0.0.0:1777
+      zpages:
+        endpoint: 0.0.0.0:55679
+---
+# Service for OpenTelemetry Collector
+apiVersion: v1
+kind: Service
+metadata:
+  name: otel-collector
+  namespace: observability
+  labels:
+    app: otel-collector
+spec:
+  type: ClusterIP
+  ports:
+    - name: grpc-otlp
+      port: 4317
+      targetPort: 4317
+      protocol: TCP
+    - name: http-otlp
+      port: 4318
+      targetPort: 4318
+      protocol: TCP
+    - name: metrics
+      port: 8889
+      targetPort: 8889
+      protocol: TCP
+    - name: telemetry
+      port: 8888
+      targetPort: 8888
+      protocol: TCP
+    - name: health
+      port: 13133
+      targetPort: 13133
+      protocol: TCP
+  selector:
+    app: otel-collector
+---
+# Deployment for OpenTelemetry Collector
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otel-collector
+  namespace: observability
+  labels:
+    app: otel-collector
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: otel-collector
+  template:
+    metadata:
+      labels:
+        app: otel-collector
+    spec:
+      serviceAccountName: otel-collector
+      containers:
+        - name: otel-collector
+          image: otel/opentelemetry-collector-contrib:0.128.0
+          imagePullPolicy: IfNotPresent
+          command:
+            - "/otelcol-contrib"
+            - "--config=/conf/config.yaml"
+          ports:
+            - containerPort: 4317
+              name: grpc-otlp
+              protocol: TCP
+            - containerPort: 4318
+              name: http-otlp
+              protocol: TCP
+            - containerPort: 8889
+              name: metrics
+              protocol: TCP
+            - containerPort: 8888
+              name: telemetry
+              protocol: TCP
+            - containerPort: 13133
+              name: health
+              protocol: TCP
+            - containerPort: 1777
+              name: pprof
+              protocol: TCP
+            - containerPort: 55679
+              name: zpages
+              protocol: TCP
+          env:
+            - name: GOMEMLIMIT
+              value: "400MiB"
+            - name: K8S_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: K8S_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: K8S_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: K8S_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: K8S_POD_UID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.uid
+          volumeMounts:
+            - name: otel-collector-config
+              mountPath: /conf
+              readOnly: true
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 13133
+            initialDelaySeconds: 30
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 13133
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+      volumes:
+        - name: otel-collector-config
+          configMap:
+            name: otel-collector-config
+---
+# ServiceAccount for OpenTelemetry Collector
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: otel-collector
+  namespace: observability
+---
+# ClusterRole for OpenTelemetry Collector
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: otel-collector
+rules:
+  - apiGroups: [""]
+    resources:
+      - nodes
+      - nodes/metrics
+      - services
+      - endpoints
+      - pods
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["extensions", "networking.k8s.io"]
+    resources:
+      - ingresses
+    verbs: ["get", "list", "watch"]
+  - nonResourceURLs: ["/metrics", "/metrics/cadvisor"]
+    verbs: ["get"]
+---
+# ClusterRoleBinding for OpenTelemetry Collector
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: otel-collector
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: otel-collector
+subjects:
+  - kind: ServiceAccount
+    name: otel-collector
+    namespace: observability
+---
+# HorizontalPodAutoscaler for OpenTelemetry Collector
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: otel-collector
+  namespace: observability
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: otel-collector
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80

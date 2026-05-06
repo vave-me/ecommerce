@@ -1,0 +1,77 @@
+{
+  "heroTitle": "Talk to Our Enterprise Sales Team",
+  "heroSubtitle": "Discover how our platform can transform your business with custom solutions tailored to your needs",
+  
+  "formTitle": "Request a Demo",
+  "formSubtitle": "Fill out the form below and our team will contact you shortly",
+  
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "email": "Business Email",
+  "phone": "Phone Number",
+  "company": "Company Name",
+  "title": "Job Title",
+  "companySize": "Company Size",
+  "industry": "Industry",
+  "country": "Country",
+  "interests": "Areas of Interest",
+  "message": "Tell us about your project",
+  "messagePlaceholder": "Please describe your business needs and goals...",
+  
+  "selectSize": "Select company size",
+  "selectIndustry": "Select industry",
+  "employees": "employees",
+  
+  "retail": "Retail & E-commerce",
+  "manufacturing": "Manufacturing",
+  "technology": "Technology",
+  "healthcare": "Healthcare",
+  "finance": "Finance",
+  "energy": "Energy & Utilities",
+  "other": "Other",
+  
+  "platformdevelopment": "Platform Development",
+  "apiintegration": "API Integration",
+  "customsolutions": "Custom Solutions",
+  "ai/mlfeatures": "AI/ML Features",
+  "security&compliance": "Security & Compliance",
+  "migrationservices": "Migration Services",
+  
+  "submit": "Request Demo",
+  "submitting": "Submitting...",
+  
+  "successTitle": "Thank You for Your Interest!",
+  "successMessage": "Our enterprise sales team will contact you within 24 hours.",
+  "downloadWhitepaper": "Download Whitepaper",
+  
+  "whyChooseUs": "Why Choose Our Platform",
+  "benefit1Title": "Lightning Fast Implementation",
+  "benefit1Desc": "Get up and running in weeks, not months",
+  "benefit2Title": "Enterprise Security",
+  "benefit2Desc": "Bank-grade security with SOC2 compliance",
+  "benefit3Title": "Global Scale",
+  "benefit3Desc": "Infrastructure that grows with your business",
+  "benefit4Title": "Dedicated Support",
+  "benefit4Desc": "24/7 technical support with SLA guarantees",
+  
+  "contactInfo": "Direct Contact",
+  "callUs": "Call Us",
+  "emailUs": "Email Us",
+  "businessHours": "Business Hours",
+  "hours": "Mon-Fri 9:00-18:00 CET",
+  
+  "scheduleCall": "Schedule a Call",
+  "scheduleDesc": "Book a 30-minute consultation with our experts",
+  "bookMeeting": "Book Meeting",
+  
+  "officesTitle": "Our Offices",
+  "office1Location": "Berlin, Germany",
+  "office1Address": "Friedrichstraße 123, 10117 Berlin",
+  "office1Phone": "+49 30 1234 5678",
+  "office2Location": "Milan, Italy",
+  "office2Address": "Via Monte Napoleone 8, 20121 Milano",
+  "office2Phone": "+39 02 1234 5678",
+  "office3Location": "Warsaw, Poland",
+  "office3Address": "ul. Marszałkowska 111, 00-102 Warszawa",
+  "office3Phone": "+48 22 1234 5678"
+}

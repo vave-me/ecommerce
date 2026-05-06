@@ -1,0 +1,210 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: media-secrets
+  namespace: my-project
+type: Opaque
+data:
+  MEDIA_PASS: REDACTED
+  # Replace placeholders below with YOUR actual base64 encoded values
+  AWS_REGION: VVNFQVNUMQ== # Example: echo -n 'us-east-1' | base64
+  S3_BUCKET_NAME: WW91ck1lZGlhQnVja2V0 # Example: echo -n 'YourMediaBucket' | base64
+  MINIO_ENDPOINT: bWluaW8tYXBpLnNmeC1tYXJrdC5kZQ== # Example: echo -n 'minio-api.sfx-markt.de' | base64
+  MINIO_ACCESS_KEY_ID: SDZkMGZHN3lqRkw0ZDBuUWZTMUg= # Example: echo -n 'H6d0fG7yjFL4d0nQfS1H' | base64
+  MINIO_SECRET_ACCESS_KEY: REDACTED
+  MINIO_USE_SSL: dHJ1ZQ== # Example:
+  MINIO_BUCKET: Y2xhc3NpZmllZA== # Example: echo -n 'classified' | base64
+  S3_USER_ARN: QVJOU0FtcGxlVXNlckFSTg== # Example: echo -n 'ARNSampleUserARN' | base64 (If needed)
+  MEDIA_VIEW_URL_BASE: aHR0cHM6Ly9taW5pby52YXZlbWUuY29t
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: media
+  namespace: my-project
+  labels:
+    app: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: media
+  template:
+    metadata:
+      labels:
+        app: media
+    spec:
+      initContainers:
+        - name: wait-for-db
+          image: postgres:16-alpine
+          env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: media-secrets
+                  key: MEDIA_PASS
+          command: [ 'sh', '-c' ]
+          args:
+            - |
+              set -e
+              echo "Waiting for postgres service (postgres.database.svc.cluster.local:5432) to accept connections for user media_user..."
+              until psql -h postgres.database.svc.cluster.local -U media_user -d media -c "SELECT 1;" > /dev/null 2>&1; do
+                echo "Postgres not ready yet for user media_user, sleeping for 2 seconds..."
+                sleep 2
+              done
+              echo "Postgres service is ready for user media_user!"
+          resources:
+            requests:
+              cpu: "25m"
+              memory: "32Mi"
+            limits:
+              cpu: "100m"
+              memory: "64Mi"
+        - name: wait-for-nats
+          image: busybox:1.36
+          command: [ 'sh', '-c', 'echo "Waiting for nats (nats.messaging.svc.cluster.local:4222)..."; until nc -zv nats.messaging.svc.cluster.local 4222; do sleep 2; done; echo "NATS ready!"' ]
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "16Mi"
+            limits:
+              cpu: "50m"
+              memory: "32Mi"
+      containers:
+        - name: media
+          image: registry.sfx-markt.de/media:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: http
+            - containerPort: 9000
+              name: grpc
+          envFrom:
+            - configMapRef:
+                name: common-config
+            - secretRef:
+                name: common-secrets
+          env:
+            - name: PG_CONN
+              value: "host=$(POSTGRES_HOST) port=$(POSTGRES_PORT) dbname=media user=media_user search_path=media,public sslmode=disable password=media_pass"
+            - name: PGHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: POSTGRES_HOST
+            - name: PGPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: POSTGRES_PORT
+            - name: PGDATABASE
+              value: "media"
+            - name: PGUSER
+              value: "media_user"
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: media-secrets
+                  key: MEDIA_PASS
+            - name: PGSSLMODE
+              value: "disable"
+            - name: RPC_SERVICES
+              value: "MEDIA=media.my-project.svc.cluster.local:9000"
+            - name: OTEL_SERVICE_NAME
+              value: "media"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://otel-collector.observability.svc.cluster.local:4317"
+            - name: OTEL_EXPORTER_OTLP_INSECURE
+              value: "true"
+            - name: OTEL_TRACES_EXPORTER
+              value: "otlp"
+            - name: OTEL_METRICS_EXPORTER
+              value: "otlp"
+            - name: AWS_REGION # Added
+              valueFrom:
+                secretKeyRef:
+                  name: media-secrets
+                  key: AWS_REGION
+            - name: S3_BUCKET_NAME # Added
+              valueFrom:
+                secretKeyRef:
+                  name: media-secrets
+                  key: S3_BUCKET_NAME
+            - name: MINIO_ENDPOINT # Added
+              valueFrom:
+                secretKeyRef:
+                  name: media-secrets
+                  key: MINIO_ENDPOINT
+            - name: MINIO_ACCESS_KEY_ID # Added
+              valueFrom:
+                secretKeyRef:
+                  name: media-secrets
+                  key: MINIO_ACCESS_KEY_ID
+            - name: MINIO_SECRET_ACCESS_KEY # Added
+              valueFrom:
+                secretKeyRef:
+                  name: media-secrets
+                  key: MINIO_SECRET_ACCESS_KEY
+            - name: MINIO_USE_SSL # Added
+              valueFrom:
+                secretKeyRef:
+                  name: media-secrets
+                  key: MINIO_USE_SSL
+            - name: MINIO_BUCKET # Added
+              valueFrom:
+                secretKeyRef:
+                  name: media-secrets
+                  key: MINIO_BUCKET
+            - name: S3_USER_ARN # Added (If used by your app)
+              valueFrom:
+                secretKeyRef:
+                  name: media-secrets
+                  key: S3_USER_ARN
+            - name: MEDIA_VIEW_URL_BASE # Added
+              valueFrom:
+                secretKeyRef:
+                  name: media-secrets
+                  key: MEDIA_VIEW_URL_BASE
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: media
+  namespace: my-project
+  labels:
+    app: media
+spec:
+  selector:
+    app: media
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+    - name: grpc-internal
+      port: 9000
+      targetPort: grpc
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: media-external # External service name
+  namespace: my-project
+  labels:
+    app: media
+spec:
+  selector:
+    app: media
+  ports:
+    - name: grpc-external
+      protocol: TCP
+      port: 30010 # External port
+      targetPort: grpc
+  type: LoadBalancer

@@ -1,0 +1,2365 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "streamspb/common.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "StreamsService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/streams": {
+      "get": {
+        "summary": "Retrieve all streams associated w",
+        "operationId": "getStreams",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbGetStreamsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Stream"
+        ]
+      },
+      "post": {
+        "summary": "Add a New Stream",
+        "operationId": "addStream",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbAddStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/streamspbAddStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Stream"
+        ]
+      }
+    },
+    "/api/streams/catalog": {
+      "get": {
+        "summary": "Get user streams",
+        "operationId": "getCatalog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbGetCatalogResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Stream"
+        ]
+      }
+    },
+    "/api/streams/catalog/public": {
+      "get": {
+        "summary": "Get user streams",
+        "operationId": "getPublicCatalog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbGetPublicCatalogResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Stream"
+        ]
+      }
+    },
+    "/api/streams/categories/slug/{categorySlug}": {
+      "get": {
+        "summary": "Retrieve all streams with given category",
+        "operationId": "getStreamsByCategorySlug",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbGetStreamsByCategorySlugResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categorySlug",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Stream"
+        ]
+      }
+    },
+    "/api/streams/categories/{categoryId}": {
+      "get": {
+        "summary": "Retrieve all streams with given category",
+        "operationId": "getStreamsByCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbGetStreamsByCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Stream"
+        ]
+      }
+    },
+    "/api/streams/filters": {
+      "post": {
+        "summary": "Retrieve all streams with given category",
+        "operationId": "getStreamsWithFilters",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbGetStreamsWithFiltersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/streamspbGetStreamsWithFiltersRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Stream"
+        ]
+      }
+    },
+    "/api/streams/variants": {
+      "post": {
+        "summary": "Create a new Variant referencing a Stream",
+        "operationId": "addVariant",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbAddVariantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/streamspbAddVariantRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Variant"
+        ]
+      }
+    },
+    "/api/streams/variants/{variantId}": {
+      "get": {
+        "summary": "Retrieve a specific Variant",
+        "operationId": "getVariant",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbGetVariantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Variant"
+        ]
+      },
+      "delete": {
+        "summary": "Remove a Variant",
+        "operationId": "removeVariant",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbRemoveVariantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Variant"
+        ]
+      }
+    },
+    "/api/streams/variants/{variantId}/archive": {
+      "patch": {
+        "summary": "Archive a Variant (mark as unavailable)",
+        "operationId": "archiveVariant",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbArchiveVariantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StreamsServiceArchiveVariantBody"
+            }
+          }
+        ],
+        "tags": [
+          "Variant"
+        ]
+      }
+    },
+    "/api/streams/variants/{variantId}/decreasePrice": {
+      "patch": {
+        "summary": "Decrease the price of a Variant",
+        "operationId": "decreaseVariantPrice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbDecreaseVariantPriceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StreamsServiceDecreaseVariantPriceBody"
+            }
+          }
+        ],
+        "tags": [
+          "Variant"
+        ]
+      }
+    },
+    "/api/streams/variants/{variantId}/increasePrice": {
+      "patch": {
+        "summary": "Increase the price of a Variant",
+        "operationId": "increaseVariantPrice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbIncreaseVariantPriceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StreamsServiceIncreaseVariantPriceBody"
+            }
+          }
+        ],
+        "tags": [
+          "Variant"
+        ]
+      }
+    },
+    "/api/streams/variants/{variantId}/stock": {
+      "patch": {
+        "summary": "Adjust the stock level of a Variant",
+        "operationId": "adjustVariantStock",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbAdjustVariantStockResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StreamsServiceAdjustVariantStockBody"
+            }
+          }
+        ],
+        "tags": [
+          "Variant"
+        ]
+      }
+    },
+    "/api/streams/{id}": {
+      "get": {
+        "summary": "Retrieve a Specific Stream",
+        "operationId": "getStream",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbGetStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Stream"
+        ]
+      },
+      "delete": {
+        "summary": "Remove a Stream",
+        "operationId": "removeStream",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbRemoveStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Stream"
+        ]
+      },
+      "post": {
+        "summary": "Update a product thumbnail",
+        "operationId": "updateStream",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbUpdateStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StreamsServiceUpdateStreamBody"
+            }
+          }
+        ],
+        "tags": [
+          "Stream"
+        ]
+      }
+    },
+    "/api/streams/{id}/price": {
+      "patch": {
+        "operationId": "StreamsService_UpdateStreamPrice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbUpdateStreamPriceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StreamsServiceUpdateStreamPriceBody"
+            }
+          }
+        ],
+        "tags": [
+          "StreamsService"
+        ]
+      }
+    },
+    "/api/streams/{id}/rebrand": {
+      "patch": {
+        "summary": "Rebrand a Stream",
+        "operationId": "rebrandStream",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbRebrandStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StreamsServiceRebrandStreamBody"
+            }
+          }
+        ],
+        "tags": [
+          "Stream"
+        ]
+      }
+    },
+    "/api/streams/{productId}/archive": {
+      "patch": {
+        "operationId": "StreamsService_ArchiveStream",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbArchiveStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StreamsServiceArchiveStreamBody"
+            }
+          }
+        ],
+        "tags": [
+          "StreamsService"
+        ]
+      }
+    },
+    "/api/streams/{productId}/lease": {
+      "patch": {
+        "operationId": "StreamsService_MarkStreamLeased",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbMarkStreamLeasedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StreamsServiceMarkStreamLeasedBody"
+            }
+          }
+        ],
+        "tags": [
+          "StreamsService"
+        ]
+      }
+    },
+    "/api/streams/{productId}/pawn": {
+      "patch": {
+        "operationId": "StreamsService_MarkStreamPawned",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbMarkStreamPawnedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StreamsServiceMarkStreamPawnedBody"
+            }
+          }
+        ],
+        "tags": [
+          "StreamsService"
+        ]
+      }
+    },
+    "/api/streams/{productId}/sold": {
+      "patch": {
+        "operationId": "StreamsService_MarkStreamSold",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbMarkStreamSoldResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StreamsServiceMarkStreamSoldBody"
+            }
+          }
+        ],
+        "tags": [
+          "StreamsService"
+        ]
+      }
+    },
+    "/api/streams/{productId}/stock": {
+      "patch": {
+        "operationId": "StreamsService_AdjustStreamStock",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbAdjustStreamStockResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StreamsServiceAdjustStreamStockBody"
+            }
+          }
+        ],
+        "tags": [
+          "StreamsService"
+        ]
+      }
+    },
+    "/api/streams/{productId}/thumbnail/add": {
+      "post": {
+        "summary": "Add a product thumbnail",
+        "operationId": "addStreamThumbnail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbAddStreamThumbnailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StreamsServiceAddStreamThumbnailBody"
+            }
+          }
+        ],
+        "tags": [
+          "Stream"
+        ]
+      }
+    },
+    "/api/streams/{productId}/thumbnail/update": {
+      "post": {
+        "summary": "Update a product thumbnail",
+        "operationId": "updateStreamThumbnail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbUpdateStreamThumbnailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StreamsServiceUpdateStreamThumbnailBody"
+            }
+          }
+        ],
+        "tags": [
+          "Stream"
+        ]
+      }
+    },
+    "/api/streams/{productId}/variants": {
+      "get": {
+        "summary": "Retrieve multiple Variants with optional filters",
+        "operationId": "getVariants",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/streamspbGetVariantsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Variant"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "StreamsServiceAddStreamThumbnailBody": {
+      "type": "object",
+      "properties": {
+        "thumbnail": {
+          "type": "string"
+        }
+      }
+    },
+    "StreamsServiceAdjustStreamStockBody": {
+      "type": "object",
+      "properties": {
+        "newStock": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "StreamsServiceAdjustVariantStockBody": {
+      "type": "object",
+      "properties": {
+        "newStock": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "StreamsServiceArchiveStreamBody": {
+      "type": "object"
+    },
+    "StreamsServiceArchiveVariantBody": {
+      "type": "object"
+    },
+    "StreamsServiceDecreaseVariantPriceBody": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "StreamsServiceIncreaseVariantPriceBody": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "StreamsServiceMarkStreamLeasedBody": {
+      "type": "object",
+      "properties": {
+        "monthlyPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "leaseTermMonths": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "StreamsServiceMarkStreamPawnedBody": {
+      "type": "object",
+      "properties": {
+        "lockedPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "redemptionFee": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "StreamsServiceMarkStreamSoldBody": {
+      "type": "object"
+    },
+    "StreamsServiceRebrandStreamBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "basePrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manageStocks": {
+          "type": "boolean"
+        },
+        "stock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbAttribute"
+          }
+        },
+        "weight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "height": {
+          "type": "string",
+          "format": "int64"
+        },
+        "width": {
+          "type": "string",
+          "format": "int64"
+        },
+        "depth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "shippingCost": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbOption"
+          }
+        }
+      }
+    },
+    "StreamsServiceUpdateStreamBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "basePrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manageStocks": {
+          "type": "boolean"
+        },
+        "stock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbAttribute"
+          }
+        },
+        "weight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "height": {
+          "type": "string",
+          "format": "int64"
+        },
+        "width": {
+          "type": "string",
+          "format": "int64"
+        },
+        "depth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "shippingCost": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbOption"
+          }
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "StreamsServiceUpdateStreamPriceBody": {
+      "type": "object",
+      "properties": {
+        "newPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "oldPrice": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "StreamsServiceUpdateStreamThumbnailBody": {
+      "type": "object",
+      "properties": {
+        "thumbnail": {
+          "type": "string"
+        }
+      }
+    },
+    "streamspbAddStreamRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "basePrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manageStocks": {
+          "type": "boolean"
+        },
+        "stock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbAttribute"
+          }
+        },
+        "weight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "height": {
+          "type": "string",
+          "format": "int64"
+        },
+        "width": {
+          "type": "string",
+          "format": "int64"
+        },
+        "depth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "shippingCost": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbOption"
+          }
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "streamspbAddStreamResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "streamspbAddStreamThumbnailResponse": {
+      "type": "object"
+    },
+    "streamspbAddVariantRequest": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "barcode": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "variantPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "stock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "weight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "height": {
+          "type": "string",
+          "format": "int64"
+        },
+        "width": {
+          "type": "string",
+          "format": "int64"
+        },
+        "depth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbAttribute"
+          }
+        },
+        "isAvailable": {
+          "type": "boolean"
+        },
+        "hasOptions": {
+          "type": "boolean"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbOption"
+          }
+        }
+      }
+    },
+    "streamspbAddVariantResponse": {
+      "type": "object",
+      "properties": {
+        "variantId": {
+          "type": "string"
+        }
+      }
+    },
+    "streamspbAdjustStreamStockResponse": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string"
+        },
+        "oldStock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "newStock": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "streamspbAdjustVariantStockResponse": {
+      "type": "object",
+      "properties": {
+        "variantId": {
+          "type": "string"
+        },
+        "oldStock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "newStock": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "streamspbArchiveStreamResponse": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string"
+        },
+        "archived": {
+          "type": "boolean",
+          "title": "e.g. true if success"
+        }
+      }
+    },
+    "streamspbArchiveVariantResponse": {
+      "type": "object",
+      "properties": {
+        "variantId": {
+          "type": "string"
+        },
+        "archived": {
+          "type": "boolean"
+        }
+      }
+    },
+    "streamspbAttribute": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "streamspbDecreaseStreamPriceResponse": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string"
+        },
+        "oldPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "newPrice": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "streamspbDecreaseVariantPriceResponse": {
+      "type": "object",
+      "properties": {
+        "variantId": {
+          "type": "string"
+        },
+        "oldPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "newPrice": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "streamspbGetCatalogResponse": {
+      "type": "object",
+      "properties": {
+        "streams": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbStream"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "streamspbGetStreamBySKUResponse": {
+      "type": "object",
+      "properties": {
+        "product": {
+          "$ref": "#/definitions/streamspbStream"
+        }
+      }
+    },
+    "streamspbGetStreamResponse": {
+      "type": "object",
+      "properties": {
+        "product": {
+          "$ref": "#/definitions/streamspbStream"
+        }
+      }
+    },
+    "streamspbGetStreamsByCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "streams": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbStream"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "streamspbGetStreamsByCategorySlugResponse": {
+      "type": "object",
+      "properties": {
+        "streams": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbStream"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "streamspbGetStreamsBySKUsResponse": {
+      "type": "object",
+      "properties": {
+        "streams": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbStream"
+          }
+        },
+        "notFoundSkus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "streamspbGetStreamsResponse": {
+      "type": "object",
+      "properties": {
+        "streams": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbStream"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "streamspbGetStreamsWithFiltersRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "minPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manageStock": {
+          "type": "boolean"
+        },
+        "minStock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxStock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "shippingCost": {
+          "type": "string",
+          "format": "int64"
+        },
+        "minWeight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxWeight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxHeight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "minHeight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "minWidth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxWidth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "minDepth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "maxDepth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "offset": {
+          "type": "string",
+          "format": "int64"
+        },
+        "limit": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        },
+        "radius": {
+          "type": "number",
+          "format": "float"
+        },
+        "page": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pageSize": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sortBy": {
+          "type": "string"
+        },
+        "sortOrder": {
+          "type": "string"
+        }
+      }
+    },
+    "streamspbGetStreamsWithFiltersResponse": {
+      "type": "object",
+      "properties": {
+        "streams": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbStream"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "streamspbGetPublicCatalogResponse": {
+      "type": "object",
+      "properties": {
+        "streams": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbStream"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "streamspbGetVariantResponse": {
+      "type": "object",
+      "properties": {
+        "variant": {
+          "$ref": "#/definitions/streamspbVariant"
+        }
+      }
+    },
+    "streamspbGetVariantsResponse": {
+      "type": "object",
+      "properties": {
+        "variants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbVariant"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currentPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "streamspbIncreaseStreamPriceResponse": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string"
+        },
+        "oldPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "newPrice": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "streamspbIncreaseVariantPriceResponse": {
+      "type": "object",
+      "properties": {
+        "variantId": {
+          "type": "string"
+        },
+        "oldPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "newPrice": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "streamspbMarkStreamLeasedResponse": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "streamspbMarkStreamPawnedResponse": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "streamspbMarkStreamSoldResponse": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "streamspbOption": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "streamspbStream": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "basePrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userSellerId": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "categorySlug": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manageStocks": {
+          "type": "boolean"
+        },
+        "stock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbAttribute"
+          }
+        },
+        "weight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "height": {
+          "type": "string",
+          "format": "int64"
+        },
+        "width": {
+          "type": "string",
+          "format": "int64"
+        },
+        "depth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string"
+        },
+        "negotiable": {
+          "type": "boolean"
+        },
+        "middlemanService": {
+          "type": "boolean"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "shippingCost": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hasVariants": {
+          "type": "boolean"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbOption"
+          }
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "lng": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "streamspbRebrandStreamResponse": {
+      "type": "object"
+    },
+    "streamspbRemoveStreamResponse": {
+      "type": "object"
+    },
+    "streamspbRemoveVariantResponse": {
+      "type": "object",
+      "properties": {
+        "variantId": {
+          "type": "string"
+        }
+      }
+    },
+    "streamspbUpdateStreamPriceResponse": {
+      "type": "object"
+    },
+    "streamspbUpdateStreamResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "streamspbUpdateStreamThumbnailResponse": {
+      "type": "object"
+    },
+    "streamspbVariant": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "barcode": {
+          "type": "string"
+        },
+        "variantPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "stock": {
+          "type": "string",
+          "format": "int64"
+        },
+        "weight": {
+          "type": "string",
+          "format": "int64"
+        },
+        "height": {
+          "type": "string",
+          "format": "int64"
+        },
+        "width": {
+          "type": "string",
+          "format": "int64"
+        },
+        "depth": {
+          "type": "string",
+          "format": "int64"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbAttribute"
+          }
+        },
+        "isAvailable": {
+          "type": "boolean"
+        },
+        "hasOptions": {
+          "type": "boolean"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/streamspbOption"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

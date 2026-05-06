@@ -1,0 +1,320 @@
+/* ===============================================================================
+   REFINED OFFERS MANAGEMENT - PREMIUM & ACCESSIBLE
+   Clean, sophisticated offers management interface using refined design tokens
+   =============================================================================== */
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-5);
+  background: var(--bg-secondary);
+  min-height: 100vh;
+  font-family: var(--font-display);
+}
+
+/* ===== HEADER SECTION ===== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: var(--bg-primary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-lg);
+  margin-bottom: var(--space-6);
+  padding: var(--space-6);
+  gap: var(--space-6);
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.025em;
+  line-height: var(--leading-tight);
+}
+
+.subtitle {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: var(--leading-relaxed);
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+/* ===== REFINED BUTTONS ===== */
+.createButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: var(--button-height-lg);
+  padding: 0 var(--space-6);
+  background: var(--enterprise-primary);
+  border: var(--border-width) solid var(--enterprise-primary);
+  border-radius: var(--border-radius-lg);
+  color: white;
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  cursor: pointer;
+  transition: var(--transition-all);
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.createButton:hover {
+  background: var(--enterprise-primary-hover);
+  border-color: var(--enterprise-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.refreshButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--button-height-lg);
+  height: var(--button-height-lg);
+  background: var(--bg-primary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  color: var(--text-secondary);
+  transition: var(--transition-all);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+.refreshButton:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--border-color-hover);
+  color: var(--text-primary);
+}
+
+/* ===== OFFERS CARDS ===== */
+.offersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.offerCard {
+  background: var(--bg-primary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-all);
+}
+
+.offerCard:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-color-hover);
+}
+
+.offerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-3);
+}
+
+.offerTitle {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin: 0;
+  line-height: var(--leading-tight);
+}
+
+.offerStatus {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--border-radius);
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.offerStatus.active {
+  background: var(--enterprise-success-light);
+  color: var(--enterprise-success);
+}
+
+.offerStatus.inactive {
+  background: var(--enterprise-error-light);
+  color: var(--enterprise-error);
+}
+
+.offerStatus.expired {
+  background: var(--bg-tertiary);
+  color: var(--text-tertiary);
+}
+
+.offerDescription {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-3);
+}
+
+.offerMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--space-3);
+  border-top: var(--border-width) solid var(--border-color);
+}
+
+.offerDiscount {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--enterprise-primary);
+  font-family: var(--font-mono);
+}
+
+.offerActions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--bg-secondary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  color: var(--text-secondary);
+  transition: var(--transition-all);
+  cursor: pointer;
+}
+
+.actionButton:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-color: var(--border-color-hover);
+}
+
+.editButton:hover {
+  background: var(--enterprise-info-light);
+  color: var(--enterprise-info);
+  border-color: var(--enterprise-info);
+}
+
+.deleteButton:hover {
+  background: var(--enterprise-error-light);
+  color: var(--enterprise-error);
+  border-color: var(--enterprise-error);
+}
+
+/* ===== LOADING & EMPTY STATES ===== */
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  background: var(--bg-primary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12);
+  text-align: center;
+  background: var(--bg-primary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.emptyState svg {
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-4);
+}
+
+.emptyState h3 {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-2);
+}
+
+.emptyState p {
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: var(--leading-normal);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .headerActions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .offersGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .actionButton {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  .offerCard,
+  .actionButton {
+    transition: none;
+  }
+
+  .offerCard:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .offerStatus {
+    border: var(--border-width) solid currentColor;
+  }
+} 

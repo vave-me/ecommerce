@@ -1,0 +1,521 @@
+/* LocationInput CSS Module */
+
+.locationInputContainer {
+    position: relative;
+    width: 100%;
+}
+
+/* Label Styles */
+.label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+.label.required::after {
+    content: " *";
+    color: #ef4444;
+}
+
+/* Input Container */
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Input Styles */
+.input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    padding-left: 2.5rem; /* Space for icon */
+    padding-right: 2.5rem; /* Space for clear button */
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #374151;
+    background-color: #ffffff;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #2980b9;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.input:disabled {
+    background-color: #f9fafb;
+    color: #6b7280;
+    cursor: not-allowed;
+}
+
+.input::placeholder {
+    color: #9ca3af;
+}
+
+/* Input States */
+.inputError {
+    border-color: #ef4444;
+}
+
+.inputError:focus {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.inputSuccess {
+    border-color: #10b981;
+}
+
+.inputSuccess:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* Input Icon */
+.inputIcon {
+    position: absolute;
+    left: 0.75rem;
+    color: #6b7280;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Loading Icon */
+.loadingIcon {
+    position: absolute;
+    right: 0.75rem;
+    color: #6b7280;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Clear Button */
+.clearButton {
+    position: absolute;
+    right: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: none;
+    border: none;
+    border-radius: 0.25rem;
+    color: #6b7280;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.clearButton:hover {
+    color: #374151;
+    background-color: #f3f4f6;
+}
+
+.clearButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.5);
+}
+
+/* Action Buttons */
+.actionButtons {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.locationButton,
+.clearLocationButton {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    border: 1px solid #d1d5db;
+    background-color: #ffffff;
+    color: #374151;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.locationButton:hover:not(:disabled) {
+    background-color: #f9fafb;
+    border-color: #9ca3af;
+}
+
+.locationButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.5);
+}
+
+.locationButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.activeLocationButton {
+    background-color: #dbeafe;
+    border-color: #3b82f6;
+    color: #1d4ed8;
+}
+
+.activeLocationButton:hover:not(:disabled) {
+    background-color: #bfdbfe;
+    border-color: #2563eb;
+}
+
+.clearLocationButton {
+    color: #dc2626;
+    border-color: #fecaca;
+}
+
+.clearLocationButton:hover:not(:disabled) {
+    background-color: #fee2e2;
+    border-color: #fca5a5;
+}
+
+/* Error Message */
+.errorMessage {
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-left: 3px solid #ef4444;
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border-radius: 0 0.25rem 0.25rem 0;
+    font-size: 0.875rem;
+}
+
+/* Location Confirmation */
+.locationConfirmation {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background-color: #d1fae5;
+    border: 1px solid #a7f3d0;
+    border-radius: 0.375rem;
+    color: #047857;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Suggestions List */
+.suggestionsList {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    margin-top: 0.25rem;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.suggestionItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.suggestionItem:last-child {
+    border-bottom: none;
+}
+
+.suggestionItem:hover,
+.suggestionActive {
+    background-color: #f3f4f6;
+}
+
+.suggestionIcon {
+    color: #9ca3af;
+    flex-shrink: 0;
+}
+
+.suggestionContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.suggestionCity {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.suggestionCoords {
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+    .actionButtons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .locationButton,
+    .clearLocationButton {
+        justify-content: center;
+    }
+    
+    .input {
+        padding: 0.625rem 0.875rem;
+        padding-left: 2.25rem;
+        padding-right: 2.25rem;
+        font-size: 0.9375rem;
+    }
+    
+    .inputIcon {
+        left: 0.675rem;
+    }
+    
+    .loadingIcon,
+    .clearButton {
+        right: 0.675rem;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .input {
+        border-width: 2px;
+    }
+    
+    .suggestionItem:hover,
+    .suggestionActive {
+        background-color: #e5e7eb;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .input,
+    .locationButton,
+    .clearLocationButton,
+    .suggestionItem {
+        transition: none;
+    }
+    
+    .loadingIcon {
+        animation: none;
+    }
+}
+
+/* =================================================================
+   DARK THEME SUPPORT
+   ================================================================= */
+
+@media (prefers-color-scheme: dark) {
+    .label {
+        color: #f3f4f6;
+    }
+
+    .label.required::after {
+        color: #ef4444;
+    }
+
+    .input {
+        background-color: #374151;
+        border-color: #4b5563;
+        color: #f3f4f6;
+    }
+
+    .input:focus {
+        border-color: #60a5fa;
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+    }
+
+    .input:disabled {
+        background-color: #1f2937;
+        color: #9ca3af;
+    }
+
+    .input::placeholder {
+        color: #6b7280;
+    }
+
+    .inputError {
+        border-color: #ef4444;
+    }
+
+    .inputError:focus {
+        border-color: #ef4444;
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+    }
+
+    .inputSuccess {
+        border-color: #10b981;
+    }
+
+    .inputSuccess:focus {
+        border-color: #10b981;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+
+    .inputIcon {
+        color: #9ca3af;
+    }
+
+    .loadingIcon {
+        color: #9ca3af;
+    }
+
+    .clearButton {
+        color: #9ca3af;
+    }
+
+    .clearButton:hover {
+        color: #f3f4f6;
+        background-color: #4b5563;
+    }
+
+    .clearButton:focus {
+        box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.5);
+    }
+
+    .locationButton,
+    .clearLocationButton {
+        background-color: #374151;
+        border-color: #4b5563;
+        color: #f3f4f6;
+    }
+
+    .locationButton:hover:not(:disabled) {
+        background-color: #4b5563;
+        border-color: #6b7280;
+    }
+
+    .locationButton:focus {
+        box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.5);
+    }
+
+    .activeLocationButton {
+        background-color: rgba(59, 130, 246, 0.2);
+        border-color: #60a5fa;
+        color: #60a5fa;
+    }
+
+    .activeLocationButton:hover:not(:disabled) {
+        background-color: rgba(59, 130, 246, 0.3);
+        border-color: #3b82f6;
+    }
+
+    .clearLocationButton {
+        color: #ef4444;
+        border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    .clearLocationButton:hover:not(:disabled) {
+        background-color: rgba(239, 68, 68, 0.1);
+        border-color: rgba(239, 68, 68, 0.5);
+    }
+
+    .errorMessage {
+        background-color: rgba(239, 68, 68, 0.1);
+        border-left-color: #ef4444;
+        color: #ef4444;
+    }
+
+    .locationConfirmation {
+        background-color: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.3);
+        color: #10b981;
+    }
+
+    .suggestionsList {
+        background-color: #374151;
+        border-color: #4b5563;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    }
+
+    .suggestionItem {
+        border-bottom-color: #4b5563;
+    }
+
+    .suggestionItem:hover,
+    .suggestionActive {
+        background-color: #4b5563;
+    }
+
+    .suggestionIcon {
+        color: #9ca3af;
+    }
+
+    .suggestionCity {
+        color: #f3f4f6;
+    }
+
+    .suggestionCoords {
+        color: #9ca3af;
+    }
+}
+
+/* =================================================================
+   ENHANCED HIGH CONTRAST MODE FOR DARK THEME
+   ================================================================= */
+
+@media (prefers-color-scheme: dark) and (prefers-contrast: high) {
+    .input {
+        border-width: 2px;
+        border-color: #6b7280;
+    }
+
+    .input:focus {
+        border-color: #60a5fa;
+        border-width: 3px;
+    }
+
+    .locationButton,
+    .clearLocationButton {
+        border-width: 2px;
+    }
+
+    .suggestionItem:hover,
+    .suggestionActive {
+        background-color: #6b7280;
+    }
+
+    .errorMessage {
+        border-left-width: 4px;
+    }
+
+    .locationConfirmation {
+        border-width: 2px;
+    }
+} 

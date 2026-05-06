@@ -1,0 +1,288 @@
+/*
+  TopicMenu.module.css
+  Styled to match DealSocial design
+*/
+
+.topicMenuContainer {
+    position: relative;
+    z-index: 1020;
+}
+
+/* Menu toggle button */
+.topicButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--neutral-gray-600, #4B5563);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Dark theme for topic button */
+@media (prefers-color-scheme: dark) {
+    .topicButton {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.topicButton:hover,
+.topicButton:focus {
+    background-color: var(--neutral-gray-100, #F3F4F6);
+    color: var(--primary-color, #6366F1);
+}
+
+/* Dark theme for topic button hover */
+@media (prefers-color-scheme: dark) {
+    .topicButton:hover,
+    .topicButton:focus {
+        background-color: var(--gray-700, #374151);
+        color: var(--primary-color, #60a5fa);
+    }
+}
+
+/* Active state */
+.topicButton.active {
+    background-color: var(--neutral-gray-100, #F3F4F6);
+    color: var(--primary-color, #6366F1);
+}
+
+/* Dark theme for topic button active */
+@media (prefers-color-scheme: dark) {
+    .topicButton.active {
+        background-color: var(--gray-700, #374151);
+        color: var(--primary-color, #60a5fa);
+    }
+}
+
+/* Menu dropdown */
+.menuDropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 220px;
+    background-color: white;
+    border-radius: var(--radius-lg, 12px);
+    box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
+    z-index: 1030;
+    overflow: hidden;
+    animation: menuFadeIn 0.2s ease forwards;
+    border: 1px solid var(--neutral-gray-200, #E5E7EB);
+}
+
+/* Dark theme for menu dropdown */
+@media (prefers-color-scheme: dark) {
+    .menuDropdown {
+        background-color: var(--gray-800, #1f2937);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--gray-700, #374151);
+    }
+}
+
+@keyframes menuFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Menu header */
+.menuHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--neutral-gray-200, #E5E7EB);
+}
+
+/* Dark theme for menu header */
+@media (prefers-color-scheme: dark) {
+    .menuHeader {
+        border-bottom: 1px solid var(--gray-700, #374151);
+    }
+}
+
+.menuTitle {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--neutral-gray-800, #1F2937);
+}
+
+/* Dark theme for menu title */
+@media (prefers-color-scheme: dark) {
+    .menuTitle {
+        color: var(--gray-50, #f9fafb);
+    }
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    color: var(--neutral-gray-600, #4B5563);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Dark theme for close button */
+@media (prefers-color-scheme: dark) {
+    .closeButton {
+        color: var(--gray-400, #9ca3af);
+    }
+}
+
+.closeButton:hover,
+.closeButton:focus {
+    background-color: var(--neutral-gray-100, #F3F4F6);
+    color: var(--primary-color, #6366F1);
+}
+
+/* Dark theme for close button hover */
+@media (prefers-color-scheme: dark) {
+    .closeButton:hover,
+    .closeButton:focus {
+        background-color: var(--gray-700, #374151);
+        color: var(--primary-color, #60a5fa);
+    }
+}
+
+/* Category list */
+.categoryList {
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+}
+
+.categoryButton {
+    display: block;
+    width: 100%;
+    padding: 10px 16px;
+    text-align: left;
+    background: none;
+    border: none;
+    color: var(--neutral-gray-800, #1F2937);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* Dark theme for category button */
+@media (prefers-color-scheme: dark) {
+    .categoryButton {
+        color: var(--gray-200, #e5e7eb);
+    }
+}
+
+.categoryButton:hover,
+.categoryButton:focus {
+    background-color: var(--primary-light, #EEF2FF);
+    color: var(--primary-color, #6366F1);
+}
+
+/* Dark theme for category button hover */
+@media (prefers-color-scheme: dark) {
+    .categoryButton:hover,
+    .categoryButton:focus {
+        background-color: var(--gray-700, #374151);
+        color: var(--primary-color, #60a5fa);
+    }
+}
+
+/* Mobile overlay */
+.menuOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1025;
+    animation: fadeIn 0.2s ease forwards;
+}
+
+/* Dark theme for menu overlay */
+@media (prefers-color-scheme: dark) {
+    .menuOverlay {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Focus styles for accessibility */
+.topicButton:focus-visible,
+.closeButton:focus-visible,
+.categoryButton:focus-visible {
+    outline: 2px solid var(--primary-color, #6366F1);
+    outline-offset: 2px;
+}
+
+/* Dark theme for focus styles */
+@media (prefers-color-scheme: dark) {
+    .topicButton:focus-visible,
+    .closeButton:focus-visible,
+    .categoryButton:focus-visible {
+        outline: 2px solid var(--primary-color, #60a5fa);
+    }
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .menuDropdown {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-height: 80vh;
+        overflow-y: auto;
+        border-radius: 16px 16px 0 0;
+        animation: slideUp 0.3s ease forwards;
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(100%);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+
+    .menuHeader {
+        position: sticky;
+        top: 0;
+        background-color: white;
+        z-index: 2;
+    }
+
+    /* Dark theme for mobile menu header */
+    @media (prefers-color-scheme: dark) {
+        .menuHeader {
+            background-color: var(--gray-800, #1f2937);
+        }
+    }
+}

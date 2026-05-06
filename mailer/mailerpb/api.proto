@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package mailerpb;
+
+
+service MailerService {
+  rpc NotifyUserCreated(NotifyUserCreatedRequest) returns (NotifyUserCreatedResponse) {};
+  rpc CreateEmail(CreateEmailRequest) returns (CreateEmailResponse) {};
+}
+
+message Email{
+  string  id = 1;
+  string  sender_id = 2;
+  string  recipient = 3;
+  string subject = 4;
+  string body = 5;
+  string status = 6;
+}
+
+
+message CreateEmailRequest{
+  string  sender_id = 1;
+  string  recipient = 2;
+  string subject = 3;
+  string body = 4;
+  string status = 5;
+}
+
+message CreateEmailResponse{
+  string id = 1;
+}
+
+message NotifyUserCreatedRequest{
+  string  user_id = 1;
+  string  username = 2;
+  string  firstname = 3;
+  string  lastname = 4;
+  string email = 5;
+  bool enabled = 6;
+  string subject = 7;
+  string body = 8;
+  string status = 9;
+}
+
+message NotifyUserCreatedResponse{
+  string id = 1;
+}
+

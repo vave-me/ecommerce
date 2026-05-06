@@ -1,0 +1,934 @@
+/* PromptInput.module.css - Compact Professional Design */
+
+.container {
+  width: 100%;
+  position: relative;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 10px 14px;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.inputWrapper:focus-within {
+  border-color: #00A396;
+  box-shadow: 0 0 0 2px rgba(0, 163, 150, 0.1);
+  background: #ffffff;
+}
+
+.inputWrapper:hover:not(:focus-within) {
+  border-color: #d1d5db;
+  background: #ffffff;
+}
+
+.textarea {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #111827;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 2px 0;
+  resize: none;
+  overflow: hidden;
+  min-height: 20px;
+  max-height: 120px;
+  font-family: inherit;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.textarea::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+.textarea::-webkit-scrollbar {
+  width: 4px;
+}
+
+.textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.textarea::-webkit-scrollbar-thumb {
+  background: rgba(203, 213, 225, 0.6);
+  border-radius: 2px;
+}
+
+.actionButtons {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0;
+}
+
+.iconButton:hover:not(:disabled) {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.iconButton:focus-visible {
+  outline: 2px solid #00A396;
+  outline-offset: 2px;
+}
+
+.iconButton:disabled {
+  color: #94a3b8;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.iconButton:disabled:hover {
+  transform: none;
+  background: transparent;
+}
+
+.iconButton.recording {
+  color: #ef4444;
+  background: #fee2e2;
+}
+
+.iconButton.recording:hover {
+  background: #fecaca;
+  color: #dc2626;
+}
+
+.sendButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 6px;
+  background: #00A396;
+  color: white;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+  font-size: 0;
+}
+
+.sendButton:hover:not(:disabled) {
+  background: #2980b9;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(52, 152, 219, 0.20);
+}
+
+.sendButton:focus-visible {
+  outline: 2px solid rgba(52, 152, 219, 0.6);
+  outline-offset: 2px;
+}
+
+.sendButton:disabled {
+  background: #94a3b8;
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.sendButton:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* === LOADING ANIMATION === */
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* === OPTIMISTIC UPDATE === */
+.sendButton.optimistic {
+  background: #3498db;
+  animation: optimisticPulse 2s ease-in-out infinite;
+}
+
+@keyframes optimisticPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* === COMPACT HELPER TEXT === */
+.compactHelperText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.compactHelperText span:nth-child(even) {
+  color: #94a3b8;
+  font-weight: 300;
+}
+
+/* === ATTACHMENTS PREVIEW === */
+.attachmentsPreview {
+  background: rgba(248, 250, 252, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+
+.attachmentsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.attachmentsCount {
+  font-size: 12px;
+  font-weight: 500;
+  color: #475569;
+}
+
+.attachmentsSize {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.attachmentsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.attachmentItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  border-radius: 8px;
+  transition: all 0.15s ease;
+  max-width: 200px;
+}
+
+.attachmentItem:hover {
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(203, 213, 225, 0.8);
+  transform: translateY(-1px);
+}
+
+.attachmentImage {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.attachmentIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: rgba(52, 152, 219, 0.1);
+  border-radius: 4px;
+  color: #3498db;
+  font-size: 12px;
+}
+
+.attachmentInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.attachmentName {
+  font-size: 12px;
+  font-weight: 500;
+  color: #334155;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.attachmentMeta {
+  font-size: 10px;
+  color: #64748b;
+}
+
+.removeAttachment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.removeAttachment:hover {
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+}
+
+/* === DRAG & DROP === */
+.dragOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(52, 152, 219, 0.08);
+  border: 2px dashed rgba(52, 152, 219, 0.4);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  color: #3498db;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.dragOver .inputWrapper {
+  border-color: rgba(52, 152, 219, 0.6);
+  background: rgba(52, 152, 219, 0.04);
+}
+
+/* === HIDDEN INPUT === */
+.hiddenInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* === ERROR STATE === */
+.error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: rgba(254, 242, 242, 0.9);
+  border: 1px solid rgba(252, 165, 165, 0.6);
+  border-radius: 8px;
+  color: #dc2626;
+  font-size: 12px;
+  font-weight: 500;
+  animation: slideInError 0.2s ease;
+}
+
+.error svg {
+  flex-shrink: 0;
+  color: #dc2626;
+}
+
+.retryInfo {
+  font-size: 11px;
+  color: #7f1d1d;
+  margin-left: auto;
+}
+
+.dismissButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: #dc2626;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.dismissButton:hover {
+  background: rgba(220, 38, 38, 0.1);
+  color: #b91c1c;
+}
+
+/* === SUCCESS STATE === */
+.success {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: rgba(240, 253, 244, 0.9);
+  border: 1px solid rgba(167, 243, 208, 0.6);
+  border-radius: 8px;
+  color: #059669;
+  font-size: 12px;
+  font-weight: 500;
+  animation: slideInSuccess 0.2s ease;
+}
+
+.success svg {
+  flex-shrink: 0;
+  color: #059669;
+}
+
+/* === LOGIN PROMPT === */
+.loginPrompt {
+  text-align: center;
+  padding: 24px;
+  color: #64748b;
+}
+
+.loginPrompt p {
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.loginButton {
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.loginButton:hover {
+  background: #2980b9;
+  transform: translateY(-1px);
+}
+
+/* === RECORDING INTERFACE === */
+.recordingBar {
+  background: rgba(248, 250, 252, 0.98);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: slideDown 0.2s ease;
+}
+
+.recordingIndicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recordingPulse {
+  width: 8px;
+  height: 8px;
+  background: #dc2626;
+  border-radius: 50%;
+  animation: recordPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes recordPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.recordingLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: #334155;
+}
+
+.recordingTimer {
+  font-size: 12px;
+  font-weight: 600;
+  color: #dc2626;
+  font-variant-numeric: tabular-nums;
+  min-width: 40px;
+}
+
+.waveformDisplay {
+  flex: 1;
+  height: 24px;
+  background: rgba(226, 232, 240, 0.4);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.waveformCanvas {
+  width: 100%;
+  height: 100%;
+}
+
+.recordingActions {
+  display: flex;
+  gap: 8px;
+}
+
+.stopRecordingBtn,
+.cancelRecordingBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 0;
+}
+
+.stopRecordingBtn {
+  background: #dc2626;
+  color: white;
+}
+
+.stopRecordingBtn:hover {
+  background: #b91c1c;
+  transform: translateY(-1px);
+}
+
+.cancelRecordingBtn {
+  background: rgba(226, 232, 240, 0.6);
+  color: #64748b;
+}
+
+.cancelRecordingBtn:hover {
+  background: rgba(203, 213, 225, 0.8);
+  color: #475569;
+}
+
+/* === ANIMATIONS === */
+@keyframes slideInError {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInSuccess {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === MOBILE RESPONSIVE === */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .inputWrapper {
+    border-radius: 14px;
+    padding: 10px 14px;
+    min-height: 44px;
+  }
+
+  .textarea {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+
+  .actionButtons {
+    gap: 2px;
+  }
+
+  .iconButton,
+  .sendButton {
+    width: 28px;
+    height: 28px;
+  }
+
+  .attachmentImage,
+  .attachmentIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .attachmentsPreview {
+    padding: 10px;
+  }
+
+  .recordingBar {
+    padding: 10px 12px;
+  }
+
+  .stopRecordingBtn,
+  .cancelRecordingBtn {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 8px;
+  }
+
+  .inputWrapper {
+    padding: 8px 12px;
+    gap: 6px;
+  }
+
+  .compactHelperText {
+    font-size: 10px;
+  }
+}
+
+/* === ACCESSIBILITY === */
+@media (prefers-reduced-motion: reduce) {
+  .inputWrapper,
+  .iconButton,
+  .sendButton,
+  .attachmentItem,
+  .error,
+  .success {
+    transition: none;
+    animation: none;
+  }
+
+  .spinner,
+  .recordingPulse {
+    animation: none;
+  }
+
+  .sendButton.optimistic {
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .inputWrapper {
+    border-color: #000;
+    background: #fff;
+  }
+
+  .inputWrapper:focus-within {
+    border-color: #0066cc;
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.3);
+  }
+
+  .iconButton:hover,
+  .sendButton:hover {
+    border: 2px solid currentColor;
+  }
+}
+
+/* ================================
+   DARK THEME SUPPORT
+================================ */
+
+@media (prefers-color-scheme: dark) {
+    /* ============= INPUT WRAPPER ============= */
+    .inputWrapper {
+        background: var(--gray-800);
+        border-color: var(--gray-600);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .inputWrapper:focus-within {
+        border-color: var(--primary-color);
+        box-shadow: 0 2px 8px rgba(var(--primary-color-rgb, 59, 130, 246), 0.2), 0 1px 3px rgba(0, 0, 0, 0.3);
+        background: var(--gray-700);
+    }
+
+    .inputWrapper:hover:not(:focus-within) {
+        border-color: var(--gray-500);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    /* ============= TEXTAREA ============= */
+    .textarea {
+        color: var(--gray-50);
+    }
+
+    .textarea::placeholder {
+        color: var(--gray-400);
+    }
+
+    .textarea::-webkit-scrollbar-track {
+        background: var(--gray-700);
+    }
+
+    .textarea::-webkit-scrollbar-thumb {
+        background: var(--gray-600);
+    }
+
+    /* ============= ACTION BUTTONS ============= */
+    .iconButton {
+        color: var(--gray-400);
+    }
+
+    .iconButton:hover:not(:disabled) {
+        background: rgba(var(--primary-color-rgb, 59, 130, 246), 0.2);
+        color: var(--primary-color);
+    }
+
+    .iconButton:focus-visible {
+        outline-color: var(--primary-color);
+    }
+
+    .iconButton:disabled {
+        color: var(--gray-600);
+    }
+
+    .iconButton.recording {
+        color: #ef4444;
+        background: rgba(239, 68, 68, 0.2);
+    }
+
+    .iconButton.recording:hover {
+        background: rgba(239, 68, 68, 0.3);
+        color: #dc2626;
+    }
+
+    /* ============= SEND BUTTON ============= */
+    .sendButton {
+        background: var(--primary-color);
+        color: var(--gray-50);
+    }
+
+    .sendButton:hover:not(:disabled) {
+        background: var(--primary-color-hover);
+        box-shadow: 0 3px 8px rgba(var(--primary-color-rgb, 59, 130, 246), 0.4);
+    }
+
+    .sendButton:focus-visible {
+        outline-color: var(--primary-color);
+    }
+
+    .sendButton:disabled {
+        background: var(--gray-600);
+        color: var(--gray-400);
+    }
+
+    .sendButton.optimistic {
+        background: var(--primary-color);
+    }
+
+    /* ============= COMPACT HELPER TEXT ============= */
+    .compactHelperText {
+        color: var(--gray-400);
+    }
+
+    /* ============= ATTACHMENTS PREVIEW ============= */
+    .attachmentsPreview {
+        background: var(--gray-800);
+        border-color: var(--gray-600);
+    }
+
+    .attachmentsCount {
+        background: var(--gray-700);
+        color: var(--gray-300);
+    }
+
+    .attachmentItem {
+        background: var(--gray-700);
+        border-color: var(--gray-600);
+    }
+
+    .attachmentItem:hover {
+        background: var(--gray-600);
+        border-color: var(--gray-500);
+    }
+
+    .attachmentIcon {
+        background: rgba(var(--primary-color-rgb, 59, 130, 246), 0.2);
+        color: var(--primary-color);
+    }
+
+    .attachmentName {
+        color: var(--gray-50);
+    }
+
+    .attachmentMeta {
+        color: var(--gray-400);
+    }
+
+    .removeAttachment {
+        color: var(--gray-400);
+    }
+
+    .removeAttachment:hover {
+        background: rgba(220, 38, 38, 0.2);
+        color: #ef4444;
+    }
+
+    /* ============= DRAG OVERLAY ============= */
+    .dragOverlay {
+        background: rgba(var(--primary-color-rgb, 59, 130, 246), 0.1);
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+    }
+
+    .dragOver .inputWrapper {
+        border-color: var(--primary-color);
+        background: rgba(var(--primary-color-rgb, 59, 130, 246), 0.1);
+    }
+
+    /* ============= STATUS MESSAGES ============= */
+    .error {
+        background: rgba(239, 68, 68, 0.1);
+        border-color: #ef4444;
+        color: #ef4444;
+    }
+
+    .retryInfo {
+        color: var(--gray-400);
+    }
+
+    .dismissButton {
+        color: var(--gray-400);
+    }
+
+    .dismissButton:hover {
+        color: var(--gray-300);
+        background: var(--gray-700);
+    }
+
+    .success {
+        background: rgba(34, 197, 94, 0.1);
+        border-color: #22c55e;
+        color: #22c55e;
+    }
+
+    /* ============= LOGIN PROMPT ============= */
+    .loginPrompt {
+        background: var(--gray-800);
+        border-color: var(--gray-600);
+        color: var(--gray-300);
+    }
+
+    .loginPrompt p {
+        color: var(--gray-300);
+    }
+
+    .loginButton {
+        background: var(--primary-color);
+        color: var(--gray-50);
+    }
+
+    .loginButton:hover {
+        background: var(--primary-color-hover);
+    }
+
+    /* ============= RECORDING BAR ============= */
+    .recordingBar {
+        background: var(--gray-800);
+        border-color: var(--gray-600);
+    }
+
+    .recordingLabel {
+        color: var(--gray-300);
+    }
+
+    .recordingTimer {
+        color: #ef4444;
+    }
+
+    .waveformDisplay {
+        background: var(--gray-700);
+    }
+
+    .stopRecordingBtn {
+        background: #ef4444;
+        color: var(--gray-50);
+    }
+
+    .stopRecordingBtn:hover {
+        background: #dc2626;
+    }
+
+    .cancelRecordingBtn {
+        background: var(--gray-700);
+        color: var(--gray-300);
+    }
+
+    .cancelRecordingBtn:hover {
+        background: var(--gray-600);
+        color: var(--gray-50);
+    }
+
+    /* ============= MOBILE RESPONSIVE OVERRIDES ============= */
+    @media (max-width: 768px) {
+        .inputWrapper {
+            background: var(--gray-800);
+            border-color: var(--gray-600);
+        }
+
+        .attachmentsPreview {
+            background: var(--gray-800);
+            border-color: var(--gray-600);
+        }
+
+        .recordingBar {
+            background: var(--gray-800);
+            border-color: var(--gray-600);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .inputWrapper {
+            background: var(--gray-800);
+            border-color: var(--gray-600);
+        }
+
+        .compactHelperText {
+            color: var(--gray-400);
+        }
+    }
+} 

@@ -1,0 +1,105 @@
+openapiOptions:
+  file:
+    - file: "categoriespb/api.proto"
+      option:
+        info:
+          title: Categories Management API
+          version: "1.0.0"
+          description: "API for managing categories for   including creating, retrieving, updating, deleting categories, bulk importing, and handling category-related files."
+        basePath: /
+  method:
+    # Category Management Operations
+    - method: categoriespb.CategoriesService.AddCategory
+      option:
+        operationId: addCategory
+        tags:
+          - Category
+        summary: Add a New Category
+
+
+    - method: categoriespb.CategoriesService.GetCategory
+      option:
+        operationId: getCategory
+        tags:
+          - Category
+        summary: Retrieve a Specific Category
+
+    - method: categoriespb.CategoriesService.RemoveCategory
+      option:
+        operationId: removeCategory
+        tags:
+          - Category
+        summary: Remove a Category
+
+
+    - method: categoriespb.CategoriesService.RebrandCategory
+      option:
+        operationId: rebrandCategory
+        tags:
+          - Category
+        summary: Rebrand a Category
+
+
+    - method: categoriespb.CategoriesService.GetCategories
+      option:
+        operationId: getCategories
+        tags:
+          - Category
+        summary: Retrieve all categories associated w
+
+    - method: categoriespb.CategoriesService.GetMainCategories
+      option:
+        operationId: getMainCategories
+        tags:
+          - Category
+        summary: Retrieve main categories associated w
+    - method: categoriespb.CategoriesService.GetAllMainCategories
+      option:
+        operationId: getAllMainCategories
+        tags:
+          - Category
+        summary: Retrieve main categories associated w
+
+
+    - method: categoriespb.CategoriesService.GetSubCategories
+      option:
+        operationId: getSubCategories
+        tags:
+          - Category
+        summary: Retrieve all categories associated w
+
+    - method: categoriespb.CategoriesService.AddFilter
+      option:
+        operationId: addFilter
+        tags:
+          - Filter
+        summary: Create a new Filter referencing a Category
+
+    - method: categoriespb.CategoriesService.GetFilter
+      option:
+        operationId: getFilter
+        tags:
+          - Filter
+        summary: Retrieve a specific Filter
+
+    - method: categoriespb.CategoriesService.GetFilters
+      option:
+        operationId: getFilters
+        tags:
+          - Filter
+        summary: Retrieve multiple Filters with optional filters
+
+
+    - method: categoriespb.CategoriesService.ArchiveFilter
+      option:
+        operationId: archiveFilter
+        tags:
+          - Filter
+        summary: Archive a Filter (mark as unavailable)
+
+    - method: categoriespb.CategoriesService.RemoveFilter
+      option:
+        operationId: removeFilter
+        tags:
+          - Filter
+        summary: Remove a Filter

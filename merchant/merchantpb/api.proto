@@ -1,0 +1,139 @@
+syntax = "proto3";
+
+package merchantpb;
+
+
+import "google/protobuf/any.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+
+// ==========================================================================
+// MerchantService
+// --------------------------------------------------------------------------
+// Provides functionalities for Google Merchant Center product catalog
+// synchronization and management.
+// ==========================================================================
+service MerchantService {
+  // Sync a single product to Google Merchant Center
+  rpc SyncProduct(SyncProductRequest) returns (SyncProductResponse) {
+  }
+
+  // Sync multiple products in batch to Google Merchant Center
+  rpc BatchSyncProducts(BatchSyncProductsRequest) returns (BatchSyncProductsResponse) {
+  }
+
+  // Remove a product from Google Merchant Center
+  rpc RemoveProduct(RemoveProductRequest) returns (RemoveProductResponse) {
+  }
+
+  // Get product sync status from Google Merchant Center
+  rpc GetProductStatus(GetProductStatusRequest) returns (GetProductStatusResponse) {
+  }
+
+  // List all synced products
+  rpc ListProducts(ListProductsRequest) returns (ListProductsResponse) {
+  }
+}
+
+// ==========================================================================
+// Product sync messages
+// ==========================================================================
+message SyncProductRequest {
+  // Internal product ID
+  string product_id = 1;
+  
+  // Product data to sync
+  Product product = 2;
+}
+
+message SyncProductResponse {
+  string merchant_product_id = 1;
+  bool success = 2;
+  string error_message = 3;
+}
+
+message BatchSyncProductsRequest {
+  // List of products to sync
+  repeated Product products = 1;
+}
+
+message BatchSyncProductsResponse {
+
+  int32 success_count = 1;
+  int32 failed_count = 2;
+  repeated SyncResult results = 3;
+}
+
+message RemoveProductRequest {
+
+  string product_id = 1;
+}
+
+message RemoveProductResponse {
+
+  bool success = 1;
+  string error_message = 2;
+}
+
+message GetProductStatusRequest {
+  string product_id = 1;
+}
+
+message GetProductStatusResponse {
+  ProductStatus status = 1;
+  google.protobuf.Timestamp last_synced_at = 2;
+  repeated string warnings = 3;
+}
+
+message ListProductsRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+
+message ListProductsResponse {
+  // List of synced products
+  repeated Product products = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+// ==========================================================================
+// Data models
+// ==========================================================================
+message Product {
+  // Internal product ID
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  int64 price = 4;
+  string currency = 5;
+  string availability = 6;
+  string condition = 7;
+  string brand = 8;
+  string google_product_category = 9;
+  string image_url = 10;
+  string link = 11;
+  int64 stock = 12;
+  string sku = 13;
+}
+
+message SyncResult {
+  string product_id = 1;
+  bool success = 2;
+  string error_message = 3;
+}
+
+enum ProductStatus {
+  PRODUCT_STATUS_UNSPECIFIED = 0;
+  PRODUCT_STATUS_SYNCED = 1;
+  PRODUCT_STATUS_PENDING = 2;
+  PRODUCT_STATUS_FAILED = 3;
+  PRODUCT_STATUS_REMOVED = 4;
+}
+
+message ErrorResponse {
+  int32 code = 1;
+  string message = 2;
+  repeated string details = 3;
+}

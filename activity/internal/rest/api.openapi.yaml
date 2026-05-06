@@ -1,0 +1,91 @@
+openapiOptions:
+  file:
+    - file: "activitypb/api.proto"
+      option:
+        info:
+          title: Activity Management API
+          version: "1.0.0"
+          description: "API for managing user activities and interactions within the system."
+        basePath: /
+  method:
+    # Activity Operations
+    - method: activitypb.ActivityService.CreateActivity
+      option:
+        operationId: createActivity
+        tags:
+          - Activity
+        summary: Create a new activity
+
+    - method: activitypb.ActivityService.GetActivity
+      option:
+        operationId: getActivity
+        tags:
+          - Activity
+        summary: Retrieve an activity
+
+
+    - method: activitypb.ActivityService.GetActivities
+      option:
+        operationId: listActivities
+        tags:
+          - Activity
+        summary: List all activities
+
+
+    - method: activitypb.ActivityService.RestoreActivity
+      option:
+        operationId: restoreActivity
+        tags:
+          - Activity
+        summary: Restore an archived activity
+
+    - method: activitypb.ActivityService.ArchiveActivity
+      option:
+        operationId: archiveActivity
+        tags:
+          - Activity
+        summary: Archive an activity
+
+    # Interaction Operations
+    - method: activitypb.ActivityService.AddInteraction
+      option:
+        operationId: addInteraction
+        tags:
+          - Interaction
+        summary: Add a new interaction
+
+    - method: activitypb.ActivityService.GetInteraction
+      option:
+        operationId: getInteraction
+        tags:
+          - Interaction
+        summary: Retrieve an interaction
+
+    - method: activitypb.ActivityService.GetInteractions
+      option:
+        operationId: listInteractions
+        tags:
+          - Interaction
+        summary: List all interactions for an activity
+
+    - method: activitypb.ActivityService.GetMostLiked
+      option:
+        operationId: getMostLiked
+        tags:
+          - ItemInteractionCount
+        summary: List most liked items by them type
+
+    - method: activitypb.ActivityService.GetMostDisliked
+      option:
+        operationId: getMostDisliked
+        tags:
+          - ItemInteractionCount
+        summary: List most disliked items by them type
+
+    - method: activitypb.ActivityService.RemoveInteraction
+      option:
+        operationId: removeInteraction
+        tags:
+          - Interaction
+        summary: Remove an interaction
+

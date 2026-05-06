@@ -1,0 +1,1231 @@
+version: "3.9"
+
+# ------------------------------------------------------------
+# Common anchors for microservices
+# ------------------------------------------------------------
+x-micro-build: &micro-build
+  context: .
+  dockerfile: docker/Dockerfile.microservices
+
+x-micro-env: &micro-env
+  ENVIRONMENT: ${ENVIRONMENT}
+  NATS_URL: ${NATS_URL}
+  JWT_ISSUER: "users_service"
+  JWT_SECRET_KEY: REDACTED
+  JWT_AUDIENCE: "www.example.com"
+  COOKIE_DOMAIN: "localhost"
+  DOMAIN: ${DOMAIN}
+  API_KEY: REDACTED
+  VERSION_TAG: ${VERSION_TAG}
+  BUILD_NUMBER: ${BUILD_NUMBER}
+
+services:
+  ####################################################################
+  # MICROSERVICES
+  ####################################################################
+
+  activity:
+    container_name: activity
+    hostname: activity
+    image: ${ACTIVITY_IMAGE:-middleman-activity}
+    build:
+      <<: *micro-build
+      args:
+        service: activity
+    ports:
+      - "9005:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=activity user=activity_user password=${ACTIVITY_PASS} search_path=activity,public"
+      RPC_SERVICES: "USERS=users:9000"
+      OTEL_SERVICE_NAME: activity
+      OTEL_EXPORTER_OTLP_ENDPOINT: collector:4317
+      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: http://collector:4317
+      OTEL_TRACES_EXPORTER: otlp
+      OTEL_EXPORTER_OTLP_INSECURE: "true"
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - activity
+  assistants:
+    container_name: assistants
+    hostname: assistants
+    image: ${ASSISTANTS_IMAGE:-middleman-assistants}
+    build:
+      <<: *micro-build
+      args:
+        service: assistants
+    ports:
+      - "9035:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=assistants user=assistants_user password=${ASSISTANTS_PASS} search_path=assistants,public"
+      ANTHROPIC_API_KEY: REDACTED
+      ANTHROPIC_BASE_URL: ${ANTHROPIC_BASE_URL}
+      ANTHROPIC_MODEL: ${ANTHROPIC_MODEL}
+      OPENAI_API_KEY: REDACTED
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL}
+      OPENAI_BASE_MODEL: ${OPENAI_BASE_MODEL}
+      DEEPSEEK_API_KEY: REDACTED
+      DEEPSEEK_BASE_URL: ${DEEPSEEK_BASE_URL}
+      DEEPSEEK_DEFAULT_MODEL: ${DEEPSEEK_DEFAULT_MODEL}
+      GOOGLE_AI_API_KEY: REDACTED
+      GOOGLE_AI_BASE_URL: ${GOOGLE_AI_BASE_URL}
+      GOOGLE_AI_DEFAULT_MODEL: ${GOOGLE_AI_DEFAULT_MODEL}
+      RPC_SERVICES: "ACTIVITY=activity:9000, BASKETS=baskets:9000, CATEGORIES=categories:9000, COMMENTS=comments:9000, FOLLOWING=following:9000, GEOCODING=geocoding:9000, MAILER=mailer:9000, MANAGERS=managers:9000, MEDIA=media:9000, MERCHANT=merchant:9000, MESSAGES=messages:9000, METRICS=metrics:9000, NEWSLETTERS=newsletters:9000, NOTIFICATIONS=notifications:9000, OFFERS=offers:9000, ORDERING=ordering:9000, PAYMENTS=payments:9000, POSTS=posts:9000, PRODUCTS=products:9000, REVIEWS=reviews:9000, SCHEDULER=scheduler:9000, SEARCH=search:9000, SERVICES=services:9000, SHIPPING=shipping:9000,ERP=erp:9000, SUPPORT=support:9000, USERS=users:9000"
+      OTEL_SERVICE_NAME: assistants
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - assistants
+  managers:
+    container_name: managers
+    hostname: managers
+    image: ${MANAGERS_IMAGE:-middleman-managers}
+    build:
+      <<: *micro-build
+      args:
+        service: managers
+    ports:
+      - "9045:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=managers user=managers_user password=${MANAGERS_PASS} search_path=managers,public"
+      ANTHROPIC_API_KEY: REDACTED
+      ANTHROPIC_BASE_URL: ${ANTHROPIC_BASE_URL}
+      ANTHROPIC_MODEL: ${ANTHROPIC_MODEL}
+      OPENAI_API_KEY: REDACTED
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL}
+      OPENAI_BASE_MODEL: ${OPENAI_BASE_MODEL}
+      DEEPSEEK_API_KEY: REDACTED
+      DEEPSEEK_BASE_URL: ${DEEPSEEK_BASE_URL}
+      DEEPSEEK_DEFAULT_MODEL: ${DEEPSEEK_DEFAULT_MODEL}
+      GOOGLE_AI_API_KEY: REDACTED
+      GOOGLE_AI_BASE_URL: ${GOOGLE_AI_BASE_URL}
+      GOOGLE_AI_DEFAULT_MODEL: ${GOOGLE_AI_DEFAULT_MODEL}
+      RPC_SERVICES: "ACTIVITY=activity:9000, BASKETS=baskets:9000, CATEGORIES=categories:9000, COMMENTS=comments:9000, FOLLOWING=following:9000, GEOCODING=geocoding:9000, MAILER=mailer:9000, MANAGERS=managers:9000, MEDIA=media:9000, MERCHANT=merchant:9000, MESSAGES=messages:9000, METRICS=metrics:9000, NEWSLETTERS=newsletters:9000, NOTIFICATIONS=notifications:9000, OFFERS=offers:9000, ORDERING=ordering:9000, PAYMENTS=payments:9000, POSTS=posts:9000, PRODUCTS=products:9000, REVIEWS=reviews:9000, SCHEDULER=scheduler:9000, SEARCH=search:9000, SERVICES=services:9000, SHIPPING=shipping:9000, ERP=erp:9000, SUPPORT=support:9000, USERS=users:9000"
+      OTEL_SERVICE_NAME: managers
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - managers
+  vectors:
+    container_name: vectors
+    hostname: vectors
+    image: ${VECTORS_IMAGE:-middleman-vectors}
+    build:
+      <<: *micro-build
+      args:
+        service: vectors
+    ports:
+      - "9036:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+
+      ANTHROPIC_API_KEY: REDACTED
+      ANTHROPIC_BASE_URL: ${ANTHROPIC_BASE_URL}
+      ANTHROPIC_MODEL: ${ANTHROPIC_MODEL}
+      OPENAI_API_KEY: REDACTED
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL}
+      OPENAI_BASE_MODEL: ${OPENAI_BASE_MODEL}
+      DEEPSEEK_API_KEY: REDACTED
+      DEEPSEEK_BASE_URL: ${DEEPSEEK_BASE_URL}
+      DEEPSEEK_DEFAULT_MODEL: ${DEEPSEEK_DEFAULT_MODEL}
+      GOOGLE_AI_API_KEY: REDACTED
+      GOOGLE_AI_BASE_URL: ${GOOGLE_AI_BASE_URL}
+      GOOGLE_AI_DEFAULT_MODEL: ${GOOGLE_AI_DEFAULT_MODEL}
+      QDRANT_HOST: qdrant
+      QDRANT_PORT: 6334
+      RPC_SERVICES: "USERS=users:9000, PRODUCTS=products:9000, POSTS=posts:9000, SERVICES=services:9000, JOBS=jobs:9000, PROPERTIES=properties:9000, VEHICLES=vehicles:9000, DEALS=deals:9000, METRICS=metrics:9000, COMMENTS=comments:9000, MESSAGES=messages:9000, ACTIVITY=activity:9000, WISHLISTS=wishlists:9000, SEARCH=search:9000, SUPPORT=support:9000, FOLLOWING=following:9000, REVIEWS=reviews:9000"
+      OTEL_SERVICE_NAME: vectors
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - qdrant
+    command: [ "/middleman/service" ]
+    profiles:
+      - microservices
+      - vectors
+
+  baskets:
+    container_name: baskets
+    hostname: baskets
+    image: ${BASKETS_IMAGE:-middleman-baskets}
+    build:
+      <<: *micro-build
+      args:
+        service: baskets
+    ports:
+      - "9003:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=baskets user=baskets_user password=${BASKETS_PASS} search_path=baskets,public"
+      RPC_SERVICES: "USERS=users:9000,PRODUCTS=products:9000"
+      OTEL_SERVICE_NAME: baskets
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - baskets
+
+  categories:
+    container_name: categories
+    hostname: categories
+    image: ${CATEGORIES_IMAGE:-middleman-categories}
+    build:
+      <<: *micro-build
+      args:
+        service: categories
+    ports:
+      - "9017:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=categories user=categories_user password=${CATEGORIES_PASS} search_path=categories,public"
+      RPC_SERVICES: "USERS=users:9000"
+      OTEL_SERVICE_NAME: categories
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - categories
+
+  comments:
+    container_name: comments
+    hostname: comments
+    image: ${COMMENTS_IMAGE:-middleman-comments}
+    build:
+      <<: *micro-build
+      args:
+        service: comments
+    ports:
+      - "9008:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=comments user=comments_user password=${COMMENTS_PASS} search_path=comments,public"
+      RPC_SERVICES: "USERS=users:9000"
+      OTEL_SERVICE_NAME: comments
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - websocket
+      - comments
+
+  geocoding:
+    container_name: geocoding
+    hostname: geocoding
+    image: ${GEOCODING_IMAGE:-middleman-geocoding}
+    build:
+      <<: *micro-build
+      args:
+        service: geocoding
+    ports:
+      - "9015:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=geocoding user=geocoding_user password=${GEOCODING_PASS} search_path=geocoding,public"
+      RPC_SERVICES: "USERS=users:9000"
+      GEOCODING_API_KEY: REDACTED
+      GEOCODING_TOKEN_SECRET: REDACTED
+      OTEL_SERVICE_NAME: services
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - payments
+      - geocoding
+
+  mailer:
+    container_name: mailer
+    hostname: mailer
+    image: ${MAILER_IMAGE:-middleman-mailer}
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.mailer
+      args:
+        service: mailer
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      RPC_SERVICES: "USERS=users:9000"
+      PG_CONN: "host=postgres dbname=mailer user=mailer_user password=${MAILER_PASS} search_path=mailer,public"
+      AWS_REGION: ${AWS_REGION}
+      AWS_MAILER_ACCESS_KEY_ID: ${AWS_MAILER_ACCESS_KEY_ID}
+      AWS_MAILER_SECRET_ACCESS_KEY: REDACTED
+      S3_BUCKET_NAME: ${S3_BUCKET_NAME}
+      S3_USER_ARN: ${SES_USER_ARN}
+      SES_FROM_EMAIL: ${SES_FROM_EMAIL}
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_USERNAME: ${SMTP_USERNAME}
+      SMTP_PASSWORD: REDACTED
+      DEFAULT_SMTP_SENDER: ${DEFAULT_SMTP_SENDER}
+      SERVER_SMTP_ADDRESS: ${SERVER_SMTP_ADDRESS}
+      OTEL_SERVICE_NAME: mailer
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - mailer
+
+  media:
+    container_name: media
+    hostname: media
+    image: ${MEDIA_IMAGE:-middleman-media}
+    build:
+      <<: *micro-build
+      args:
+        service: media
+    ports:
+      - "9007:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      RPC_SERVICES: "MEDIA=media:9000"
+      PG_CONN: "host=postgres dbname=media user=media_user password=${MEDIA_PASS} search_path=media,public"
+      AWS_REGION: ${AWS_REGION}
+      S3_BUCKET_NAME: ${S3_BUCKET_NAME}
+      MEDIA_VIEW_URL_BASE: ${MEDIA_VIEW_URL_BASE}
+      MINIO_ENDPOINT: ${MINIO_ENDPOINT}
+      MINIO_ACCESS_KEY_ID: ${MINIO_ACCESS_KEY_ID}
+      MINIO_SECRET_ACCESS_KEY: REDACTED
+      MINIO_USE_SSL: ${MINIO_USE_SSL}
+      MINIO_BUCKET: ${MINIO_BUCKET}
+      S3_USER_ARN: ${S3_USER_ARN}
+      OTEL_SERVICE_NAME: media
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - messages
+      - media
+
+  messages:
+    container_name: messages
+    hostname: messages
+    image: ${MESSAGES_IMAGE:-middleman-messages}
+    build:
+      <<: *micro-build
+      args:
+        service: messages
+    ports:
+      - "9006:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      RPC_SERVICES: "MESSAGES=messages:9000"
+      PG_CONN: "host=postgres dbname=messages user=messages_user password=${MESSAGES_PASS} search_path=messages,public"
+      OTEL_SERVICE_NAME: messages
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - messages
+      - websocket
+
+  newsletters:
+    container_name: newsletters
+    hostname: newsletters
+    image: ${NEWSLETTERS_IMAGE:-middleman-newsletters}
+    build:
+      <<: *micro-build
+      args:
+        service: newsletters
+    ports:
+      - "9012:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=newsletters user=newsletters_user password=${NEWSLETTERS_PASS} search_path=newsletters,public"
+      RPC_SERVICES: "USERS=users:9000"
+      OTEL_SERVICE_NAME: newsletters
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - newsletters
+
+  notifications:
+    container_name: notifications
+    hostname: notifications
+    image: ${NOTIFICATIONS_IMAGE:-middleman-notifications}
+    build:
+      <<: *micro-build
+      args:
+        service: notifications
+    ports:
+      - "9004:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=notifications user=notifications_user password=${NOTIFICATIONS_PASS} search_path=notifications,public"
+      RPC_SERVICES: "USERS=users:9000,PRODUCTS=products:9000"
+      OTEL_SERVICE_NAME: notifications
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - notifications
+
+  offers:
+    container_name: offers
+    hostname: offers
+    image: ${OFFERS_IMAGE:-middleman-offers}
+    build:
+      <<: *micro-build
+      args:
+        service: offers
+    ports:
+      - "9011:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=offers user=offers_user password=${OFFERS_PASS} search_path=offers,public"
+      RPC_SERVICES: "USERS=users:9000"
+      OTEL_SERVICE_NAME: offers
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - offers
+  merchant:
+    container_name: merchant
+    hostname: merchant
+    image: ${MERCHANT_IMAGE:-middleman-merchant}
+    build:
+      <<: *micro-build
+      args:
+        service: merchant
+    ports:
+      - "9042:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=merchant user=merchant_user password=${MERCHANT_PASS} search_path=merchant,public"
+      RPC_SERVICES: "USERS=users:9000"
+      OTEL_SERVICE_NAME: merchant
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+      MERCHANT_ID: ${MERCHANT_ID}
+      MERCHANT_API_KEY: REDACTED
+      SERVICE_ACCOUNT_JSON_PATH: ${SERVICE_ACCOUNT_JSON_PATH}
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - merchant
+
+  ordering:
+    container_name: ordering
+    hostname: ordering
+    image: ${ORDERING_IMAGE:-middleman-ordering}
+    build:
+      <<: *micro-build
+      args:
+        service: ordering
+    ports:
+      - "9009:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=ordering user=ordering_user password=${ORDERING_PASS} search_path=ordering,public"
+      RPC_SERVICES: "USERS=users:9000"
+      OTEL_SERVICE_NAME: ordering
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - ordering
+
+  erp:
+    container_name: erp
+    hostname: erp
+    image: ${erp_IMAGE:-middleman-erp}
+    build:
+      <<: *micro-build
+      args:
+        service: erp
+    ports:
+      - "9039:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=erp user=erp_user password=${ERP_PASS} search_path=erp,public"
+      RPC_SERVICES: "USERS=users:9000, PRODUCTS=products:9000"
+      OTEL_SERVICE_NAME: erp
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - erp
+
+  payments:
+    container_name: payments
+    hostname: payments
+    image: ${PAYMENTS_IMAGE:-middleman-payments}
+    build:
+      <<: *micro-build
+      args:
+        service: payments
+    ports:
+      - "9010:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=payments user=payments_user password=${PAYMENTS_PASS} search_path=payments,public"
+      RPC_SERVICES: "USERS=users:9000"
+      STRIPE_KEY: REDACTED
+      STRIPE_SECRET: REDACTED
+      STRIPE_WEBHOOK_SECRET: REDACTED
+      OTEL_SERVICE_NAME: payments
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - payments
+
+  search:
+    container_name: search
+    hostname: search
+    image: ${SEARCH_IMAGE:-middleman-search}
+    build:
+      <<: *micro-build
+      args:
+        service: search
+    ports:
+      - "9001:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=search user=search_user password=${SEARCH_PASS} search_path=search,public"
+      RPC_SERVICES: "USERS=users:9000, PRODUCTS=products:9000, POSTS=posts:9000, SERVICES=services:9000, METRICS=metrics:9000 "
+      OTEL_SERVICE_NAME: search
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - search
+
+  metrics:
+    container_name: metrics
+    hostname: metrics
+    image: ${METRICS_IMAGE:-middleman-metrics}
+    build:
+      <<: *micro-build
+      args:
+        service: metrics
+    ports:
+      - "9033:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=metrics user=metrics_user password=${METRICS_PASS} search_path=metrics,public"
+      RPC_SERVICES: "USERS=users:9000"
+      OTEL_SERVICE_NAME: metrics
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - metrics
+
+  posts:
+    container_name: posts
+    hostname: posts
+    image: ${POSTS_IMAGE:-middleman-posts}
+    build:
+      <<: *micro-build
+      args:
+        service: posts
+    ports:
+      - "9016:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=posts user=posts_user password=${POSTS_PASS} search_path=posts,public"
+      RPC_SERVICES: "USERS=users:9000"
+      OTEL_SERVICE_NAME: posts
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - posts
+  services:
+    container_name: services
+    hostname: services
+    image: ${SERVICES_IMAGE:-middleman-services}
+    build:
+      <<: *micro-build
+      args:
+        service: services
+    ports:
+      - "9023:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=services user=services_user password=${SERVICES_PASS} search_path=services,public"
+      RPC_SERVICES: "USERS=users:9000"
+      OTEL_SERVICE_NAME: services
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+      - collector
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - services
+
+  cosec:
+    container_name: cosec
+    hostname: cosec
+    image: ${COSEC_IMAGE:-middleman-cosec}
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.microservices
+      args:
+        service: cosec
+    expose:
+      - '9000'
+    environment:
+      <<: *micro-env
+      RPC_SERVICES: 'USERS=users:9000,PRODUCTS=products:9000'
+      PG_CONN: host=postgres dbname=cosec user=cosec_user password=cosec_pass search_path=cosec,public
+      OTEL_SERVICE_NAME: cosec
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+      - collector
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+
+  products:
+    container_name: products
+    hostname: products
+    image: ${PRODUCTS_IMAGE:-middleman-products}
+    build:
+      <<: *micro-build
+      args:
+        service: products
+    ports:
+      - "9002:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=products user=products_user password=${PRODUCTS_PASS} search_path=products,public"
+      RPC_SERVICES: "USERS=users:9000"
+      OTEL_SERVICE_NAME: products
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - products
+
+  following:
+    container_name: following
+    hostname: following
+    image: ${FOLLOWING_IMAGE:-middleman-following}
+    build:
+      <<: *micro-build
+      args:
+        service: following
+    ports:
+      - "9031:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=following user=following_user password=${FOLLOWING_PASS} search_path=following,public"
+      RPC_SERVICES: "USERS=users:9000"
+      OTEL_SERVICE_NAME: following
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - following
+
+  reviews:
+    container_name: reviews
+    hostname: reviews
+    image: ${REVIEWS_IMAGE:-middleman-reviews}
+    build:
+      <<: *micro-build
+      args:
+        service: reviews
+    ports:
+      - "9032:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=reviews user=reviews_user password=${REVIEWS_PASS} search_path=reviews,public"
+      RPC_SERVICES: "USERS=users:9000"
+      OTEL_SERVICE_NAME: reviews
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - reviews
+
+  shipping:
+    container_name: shipping
+    hostname: shipping
+    image: ${SHIPPING_IMAGE:-middleman-shipping}
+    build:
+      <<: *micro-build
+      args:
+        service: shipping
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=shipping user=shipping_user password=${SHIPPING_PASS} search_path=shipping,public"
+      RPC_SERVICES: "USERS=users:9000"
+      DHL_API_KEY: REDACTED
+      CLIENT_ID: ${CLIENT_ID}
+      CLIENT_SECRET: REDACTED
+      ACCESS_TOKEN: REDACTED
+      API_ENDPOINT: ${API_ENDPOINT}
+      OTEL_SERVICE_NAME: shipping
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - shipping
+
+  support:
+    container_name: support
+    hostname: support
+    image: ${SUPPORT_IMAGE:-middleman-support}
+    build:
+      <<: *micro-build
+      args:
+        service: support
+    ports:
+      - "9013:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=support user=support_user password=${SUPPORT_PASS} search_path=support,public"
+      RPC_SERVICES: "USERS=users:9000"
+      OTEL_SERVICE_NAME: support
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - support
+  scheduler:
+    container_name: scheduler
+    hostname: scheduler
+    image: ${SCHEDULER_IMAGE:-middleman-scheduler}
+    build:
+      <<: *micro-build
+      args:
+        service: scheduler
+    ports:
+      - "9038:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=scheduler user=scheduler_user password=${SCHEDULER_PASS} search_path=SCHEDULER,public"
+      RPC_SERVICES: "USERS=users:9000"
+      OTEL_SERVICE_NAME: scheduler
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+      - collector
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+
+
+  users:
+    container_name: users
+    hostname: users
+    image: ${USERS_IMAGE:-middleman-users}
+    build:
+      <<: *micro-build
+      args:
+        service: users
+    ports:
+      - "9000:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=users user=users_user password=${USERS_PASS} search_path=users,public"
+      RPC_SERVICES: "USERS=users:9000"
+      MOBILE_GOOGLE_OAUTH_CLIENT_ID: ${MOBILE_GOOGLE_OAUTH_CLIENT_ID}
+      WEB_GOOGLE_OAUTH_CLIENT_ID: ${WEB_GOOGLE_OAUTH_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: REDACTED
+      GOOGLE_AUTH_URI: ${GOOGLE_AUTH_URI}
+      GOOGLE_PROJECT_ID: ${GOOGLE_PROJECT_ID}
+      GOOGLE_ISSUER : ${GOOGLE_ISSUER}
+      OTEL_SERVICE_NAME: users
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - users
+
+  wishlists:
+    container_name: wishlists
+    hostname: wishlists
+    image: ${WISHLISTS_IMAGE:-middleman-wishlists}
+    build:
+      <<: *micro-build
+      args:
+        service: wishlists
+    ports:
+      - "9014:9000"
+    expose:
+      - "9000"
+    env_file:
+      - ./docker/.env
+    environment:
+      <<: *micro-env
+      PG_CONN: "host=postgres dbname=wishlists user=wishlists_user password=${WISHLISTS_PASS} search_path=wishlists,public"
+      RPC_SERVICES: "USERS=users:9000"
+      OTEL_SERVICE_NAME: wishlists
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
+    depends_on:
+      - nats
+      - postgres
+    command: [ "./wait-for", "postgres:5432", "--", "/middleman/service" ]
+    profiles:
+      - microservices
+      - wishlists
+
+  reverse-proxy:
+    container_name: proxy
+    hostname: proxy
+    image: ${REVERSE_PROXY_IMAGE:-nginx:alpine}
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./docker/nginx.conf:/etc/nginx/nginx.conf:ro"
+    env_file:
+      - ./docker/.env
+    profiles:
+      - microservices
+
+  ####################################################################
+  # DATA STORES / INFRA
+  ####################################################################
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    command: [ "redis-server", "--requirepass", "${REDIS_PASSWORD}", "--loadmodule", "/usr/lib/redis/modules/redisearch.so" ]
+    env_file:
+      - ./docker/.env
+    environment:
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_PASSWORD: REDACTED
+    volumes:
+      - redis_data:/data
+      - redisearch_module:/usr/lib/redis/modules
+    restart: unless-stopped
+    profiles:
+      - microservices
+
+
+  redisearch_setup:
+    image: redislabs/redisearch:latest
+    container_name: redisearch_setup
+    command: [ "sleep", "infinity" ]
+    volumes:
+      - redisearch_module:/usr/lib/redis/modules
+    profiles:
+      - microservices
+
+
+  postgres:
+    container_name: postgres
+    hostname: postgres
+    image: postgis/postgis:16-3.5-alpine
+    restart: always
+    env_file:
+      - ./docker/.env
+    environment:
+      POSTGRES_PASSWORD: REDACTED
+    ports:
+      - "5432:5432"
+    volumes:
+      - "pgdata:/var/lib/postgresql/data"
+      - "./docker/database:/docker-entrypoint-initdb.d"
+    profiles:
+      - microservices
+
+
+  nats:
+    container_name: nats
+    hostname: nats
+    image: nats:2.10-alpine
+    ports:
+      - "4222:4222"
+      - "9222:9222"
+    command:
+      - -js
+      - -sd
+      - /var/lib/nats/data
+      - -c
+      - /etc/nats/server.conf
+    volumes:
+      - "./docker/nats/:/etc/nats/"
+      - "jsdata:/var/lib/nats/data"
+    depends_on:
+      - reverse-proxy
+    profiles:
+      - microservices
+
+
+  nominatim:
+    container_name: nominatim
+    shm_size: 4g
+    hostname: nominatim
+    image: mediagis/nominatim:4.5
+    ports:
+      - "7070:8080"
+      - "5435:5432"
+    expose:
+      - "7070"
+    env_file:
+      - ./docker/.env
+    environment:
+      ENVIRONMENT: ${ENVIRONMENT}
+      RPC_SERVICES: "USERS=users:9000"
+      NATS_URL: ${NATS_URL}
+      JWT_ISSUER: "users_service"
+      JWT_SECRET_KEY: REDACTED
+      JWT_AUDIENCE: "www.example.com"
+      COOKIE_DOMAIN: "localhost"
+      DOMAIN: ${DOMAIN}
+      API_KEY: REDACTED
+      GEOCODING_API_KEY: REDACTED
+      GEOCODING_TOKEN_SECRET: REDACTED
+      PBF_URL: ${PBF_URL}
+      REPLICATION_URL: ${REPLICATION_URL}
+      IMPORT_WIKIPEDIA: ${IMPORT_WIKIPEDIA}
+      POSTGRES_SHARED_BUFFERS: ${POSTGRES_SHARED_BUFFERS}
+      POSTGRES_MAINTENANCE_WORK_MEM: ${POSTGRES_MAINTENANCE_WORK_MEM}
+      POSTGRES_AUTOVACUUM_WORK_MEM: ${POSTGRES_AUTOVACUUM_WORK_MEM}
+      POSTGRES_WORK_MEM: ${POSTGRES_WORK_MEM}
+      POSTGRES_SYNCHRONOUS_COMMIT: ${POSTGRES_SYNCHRONOUS_COMMIT}
+      POSTGRES_MAX_WAL_SIZE: ${POSTGRES_MAX_WAL_SIZE}
+      POSTGRES_CHECKPOINT_TIMEOUT: ${POSTGRES_CHECKPOINT_TIMEOUT}
+      POSTGRES_CHECKPOINT_COMPLETION_TARGET: ${POSTGRES_CHECKPOINT_COMPLETION_TARGET}
+      POSTGRES_EFFECTIVE_CACHE_SIZE: ${POSTGRES_EFFECTIVE_CACHE_SIZE}
+      NOMINATIM_PASSWORD: REDACTED
+    volumes:
+      - "./docker/nominatim/:/data:ro"
+      - nominatim_data:/var/lib/postgresql/16/main
+      - "./docker/postgres/postgres-custom.conf:/etc/postgresql/16/main/conf.d/postgres-custom.conf:ro"
+    profiles:
+      - microservices
+
+  ####################################################################
+  # OBSERVABILITY
+  ####################################################################
+  collector:
+    container_name: collector
+    hostname: collector
+    image: otel/opentelemetry-collector-contrib:0.128.0
+    command: [ "--config=/etc/otel-config.yml" ]
+    volumes:
+      - "./docker/otel/otel-config.yml:/etc/otel-config.yml:ro"
+    ports:
+      - "1888:1888"   # pprof extension
+      - "8888:8888"   # Prometheus metrics exposed by the collector
+      - "8889:8889"   # Prometheus exporter metrics
+      - "13133:13133" # health_check extension
+      - "4317:4317"   # OTLP gRPC receiver
+      - "4318:4318"   # OTLP http receiver
+      - "9464:9464"   # Prometheus exporter
+    depends_on:
+      - jaeger
+    profiles:
+      - microservices
+
+
+  jaeger:
+    container_name: jaeger
+    hostname: jaeger
+    image: jaegertracing/all-in-one:latest
+    ports:
+    - "8081:16686"
+    - "14250"
+    - "4317"
+    environment:
+      COLLECTOR_ZIPKIN_HOST_PORT: ":9411"
+      COLLECTOR_OTLP_ENABLED: "true"
+
+  prometheus:
+    container_name: prometheus
+    hostname: prometheus
+    image: prom/prometheus:v2.54.1
+    command: [ "--config.file=/etc/prometheus/prometheus-config.yml" ]
+    volumes:
+      - "./docker/prometheus/prometheus-config.yml:/etc/prometheus/prometheus-config.yml:ro"
+    ports:
+      - "9090:9090"
+
+  qdrant:
+    image: qdrant/qdrant:v1.14.1
+    container_name: qdrant
+    ports:
+      - "6333:6333"  # REST API
+      - "6334:6334"  # gRPC API
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    environment:
+      QDRANT__SERVICE__HTTP_PORT: 6333
+      QDRANT__SERVICE__GRPC_PORT: 6334
+      QDRANT__LOG_LEVEL: INFO
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:6333/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  grafana:
+    container_name: grafana
+    hostname: grafana
+    image: grafana/grafana:12.0.2
+    volumes:
+      - ./docker/grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./docker/grafana/provisioning/:/etc/grafana/provisioning/
+    ports:
+      - "3030:3000"
+
+
+  registry:
+    image: registry:2
+    container_name: docker-registry
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:
+      - registry-data:/var/lib/registry
+    profiles:
+      - ci
+
+  ####################################################################
+  # MINIO
+  ####################################################################
+  minio:
+    image: minio/minio:RELEASE.2025-02-18T16-25-55Z
+    container_name: minio-standalone
+    env_file:
+      - ./docker/.env
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: REDACTED
+    command:
+      - "server"
+      - "/data"
+      - "--address"
+      - ":9096"
+      - "--console-address"
+      - ":9099"
+    ports:
+      - "9096:9096"
+      - "9099:9099"
+    volumes:
+      - "minio-data:/data"
+    profiles:
+      - microservices
+
+####################################################################
+# VOLUMES
+####################################################################
+volumes:
+  minio-data:
+  pgdata:
+  jsdata:
+  qdrant_storage:
+    driver: local
+  nominatim_data: { }
+  traefik-data:
+    driver: local
+  redis_data:
+    driver: local
+  redisearch_module:
+    driver: local
+  registry-data:
+
